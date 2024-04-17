@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+:root{
+  font-size: 62.5%;
+
+  /* light theme */
+  --primary-bg-light-color1: #fff;
+  --primary-bg-light-color2: #000;
+
+  --primary-text-light-color1: #fff;
+  --primary-text-light-color2: #000;
+}
+
+h1,h2,h3,h4,h5,p{
+  color: var(--primary-text-light-color2);
+}
+
+@media((min-width:0px) and (max-width:576px)){
+  :root{
+    font-size: 42%;
+  }
+}
+
+@media((min-width:576px) and (max-width:768px)){
+  :root{
+    font-size: 48%;
+  }
+}
+
+@media((min-width:768px) and (max-width:992px)){
+  :root{
+    font-size: 55%;
+  }
+}
+
+@media((min-width:992px) and (max-width:1200px)){
+  :root{
+    font-size: 62.5%;
+  }
+}
