@@ -14,8 +14,14 @@
   --primary-bg-light-color1: #fff;
   --primary-bg-light-color2: #000;
 
+  --bg-color3:#EEEDED;
+
   --primary-text-light-color1: #fff;
   --primary-text-light-color2: #000;
+
+  --text-color-3: #D9D9D9;
+
+  --border-color-1: #000;
 }
 
 h1,h2,h3,h4,h5,p{
@@ -24,7 +30,8 @@ h1,h2,h3,h4,h5,p{
 
 @media((min-width:0px) and (max-width:576px)){
   :root{
-    font-size: 42%;
+    /* font-size: 42%; */
+    font-size: 55%;
   }
 }
 

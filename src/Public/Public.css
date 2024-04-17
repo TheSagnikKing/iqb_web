@@ -83,6 +83,10 @@
         width: 100%;
     }
 
+    /* .public_main_content>div:nth-child(2)>h1 {
+        font-size: 4.5rem;
+    } */
+
     .public_main_content>div:nth-child(3)>div a{
         width: 20rem;
     }
