@@ -81,18 +81,29 @@
 @media((min-width:0px) and (max-width:576px)) {
     .public_main_content{
         width: 100%;
+        height: 100vh;
     }
 
-    /* .public_main_content>div:nth-child(2)>h1 {
-        font-size: 4.5rem;
-    } */
-
-    .public_main_content>div:nth-child(3)>div a{
-        width: 20rem;
+    .public_main_content>div:nth-child(2)>h1 {
+        font-size: 3rem;
     }
 
     .public_main_content>div:nth-child(3)>div {
-        width: 75%;
+        width: 90%;
+    }
+
+    .public_main_content>div:nth-child(3)>div{
+        margin-top: 0rem;
+    }
+
+    .public_main_content>div:nth-child(1)>div{
+        width: 100%;
+        height: 100%;
+    }
+
+    .public_main_content>div:nth-child(1)>div>img{
+        width: 100%;
+        height: 100%;
     }
 }
 
