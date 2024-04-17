@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import './Signin.css'
+import './Signup.css'
 import { Link } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 
-const Signin = () => {
+const Signup = () => {
 
   const responseMessage = () => {
 
@@ -31,7 +31,7 @@ const Signin = () => {
   const [visibleeye, setVisibleeye] = useState(false)
 
   return (
-    <main className='admin_signin_container'>
+    <main className='admin_signup_container'>
       <div>
         <div>
           <img src="./adminsignin.png" alt="" />
@@ -40,7 +40,7 @@ const Signin = () => {
 
       <div>
         <div>
-          <h1>Sign In to your Admin Account</h1>
+          <h1>Sign Up to your Admin Account</h1>
           <p>Welcome back Admin! please enter your details</p>
 
           <input
@@ -78,11 +78,11 @@ const Signin = () => {
             text='continue_with'
           />
 
-          <p>Don't you have an account ? <Link to="/adminsignup">Sign up</Link></p>
+          <p>Already a member ? <Link to="/adminsignin">Log In</Link></p>
         </div>
       </div>
     </main>
   )
 }
 
-export default Signin
+export default Signup
