@@ -1,0 +1,8 @@
+.admin_header{
+    height: 6rem;
+    width: 100%;
+    /* background-color: beige; */
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+}

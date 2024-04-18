@@ -3,6 +3,7 @@ import './Sidebar.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { LeftArrow, RightArrow } from '../../../icons'
+import Header from '../Header/Header.jsx'
 
 const Sidebar = () => {
 
@@ -45,7 +46,10 @@ const Sidebar = () => {
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
       <div className='content'>
-        <div><Outlet /></div>
+        <div>
+          <Header/>
+          <div><Outlet /></div>
+        </div>
       </div>
     </main>
   )

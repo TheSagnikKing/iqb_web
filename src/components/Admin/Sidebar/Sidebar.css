@@ -147,20 +147,46 @@
   height: 100vh;
   width: 100%;
   /* background-color: var(--primary-bg-light-color1); */
-  background-color: #efefef;
+  /* background-color: #efefef; */
   color: var(--primary-text-light-color2);
   padding-inline: 3rem;
   font-weight: 500;
 }
 
-.content>div{
-  height: 100%;
+.content>div>div:nth-child(2){
+  height: calc(100vh - 6rem);
   width: 100%;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: var(--primary-bg-light-color1);
   font-size: 2rem;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 1rem;
+  height: 1.2rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar:vertical{
+  width: 0px !important;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 @media((min-width:0px) and (max-width:576px)) {
   .show {
