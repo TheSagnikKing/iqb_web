@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Signin.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 
@@ -29,6 +29,12 @@ const Signin = () => {
   }, [])
 
   const [visibleeye, setVisibleeye] = useState(false)
+
+  const navigate = useNavigate()
+
+  const signinClicked = () => {
+    navigate("/admin-dashboard")
+  }
 
   return (
     <main className='admin_signin_container'>
@@ -60,7 +66,7 @@ const Signin = () => {
             <p>Forgot Password ?</p>
           </div>
 
-          <button>Signin</button>
+          <button onClick={signinClicked}>Signin</button>
 
           <div>
             <div />
