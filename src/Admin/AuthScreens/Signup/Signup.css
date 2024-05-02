@@ -115,7 +115,7 @@ iframe{
 .admin_signup_container>div:nth-child(2)>div>button:nth-child(6){
     height: 4rem;
     width: 100%;
-    background-color: var(--primary-bg-light-color2);
+    background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
     border-radius: 5.5rem;
     border: none;

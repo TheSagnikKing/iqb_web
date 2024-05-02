@@ -60,7 +60,7 @@
 .public_main_content>div:nth-child(3)>div a {
     height: 4rem;
     width: 14.5rem;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--primary-bg-color3);
     border-radius: 5.5rem;
     cursor: pointer;
     font-size: 1.6rem;
@@ -69,8 +69,8 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: var(--primary-text-light-color2);
-    border: 1px solid var(--primary-text-light-color2);
+    color: var(--primary-text-light-color1);
+    border: 1px solid var(--primary-text-light-color1);
 }
 
 .public_main_content>div:nth-child(3)>div a:hover {

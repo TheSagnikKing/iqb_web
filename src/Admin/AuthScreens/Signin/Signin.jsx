@@ -40,7 +40,7 @@ const Signin = () => {
     <main className='admin_signin_container'>
       <div>
         <div>
-          <img src="./adminsignin.png" alt="" />
+          <img src="./signin.png" alt="admin_Signin" />
         </div>
       </div>
 

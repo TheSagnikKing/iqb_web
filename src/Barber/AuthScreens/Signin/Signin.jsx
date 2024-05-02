@@ -34,7 +34,7 @@ const Signin = () => {
     <main className='barber_signin_container'>
       <div>
         <div>
-          <img src="./barbersignin.png" alt="" />
+          <img src="./signin.png" alt="barber_signin" />
         </div>
       </div>
 

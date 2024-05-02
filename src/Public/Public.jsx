@@ -8,7 +8,7 @@ const Public = () => {
             <div className='public_main_content'>
                 <div>
                     <div>
-                        <img src="./public_img1.png" alt="" />
+                        <img src="./public_img.png" alt="public_image" />
                     </div>
                 </div>
                 <div>
