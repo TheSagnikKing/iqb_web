@@ -4,6 +4,7 @@ import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { LeftArrow, RightArrow } from '../../../icons'
 import Header from '../Header/Header.jsx'
+import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 
 const Sidebar = () => {
 
@@ -12,7 +13,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location)
+  console.log(location?.pathname)
 
   return (
     <main className='container'>
@@ -46,9 +47,13 @@ const Sidebar = () => {
 
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
-      <div className='content'>
+      <div className='content'
+        style={{
+          width: showSidebar ? "calc(100% - 21rem)" : "100%"
+        }}
+      >
         <div>
-          <Header />
+          {location?.pathname === "/admin-dashboard" ? <DashboardHeader /> : <Header />}
           <div><Outlet /></div>
         </div>
       </div>

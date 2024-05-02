@@ -9,6 +9,12 @@ import { BiSolidLike } from "react-icons/bi";
 import { TbReportSearch } from "react-icons/tb";
 import { RiAdvertisementFill } from "react-icons/ri";
 
+import { IoMdNotifications } from "react-icons/io";
+import { IoSettingsSharp } from "react-icons/io5";
+
+import { RiMoonClearFill } from "react-icons/ri";
+import { RiSunFill } from "react-icons/ri";
+
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
 export const Notvisibleeye = FaRegEyeSlash
@@ -22,3 +28,9 @@ export const Adminqueueicon = FaUserGroup
 export const Adminadvertisementicon = RiAdvertisementFill
 export const Adminappointmenticon = BiSolidLike
 export const Adminreporticon = TbReportSearch
+
+export const Notificationicon = IoMdNotifications
+export const Settingsicon = IoSettingsSharp
+
+export const Sunicon = RiSunFill
+export const MoonIcon = RiMoonClearFill
