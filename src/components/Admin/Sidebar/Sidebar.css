@@ -163,7 +163,7 @@
 .content>div>div:nth-child(2) {
   height: calc(100vh - 6rem);
   width: 100%;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background-color: var(--primary-bg-light-color1);
   font-size: 2rem;
 }
