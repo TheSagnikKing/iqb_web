@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import './Dashboard.css'
 import { Link } from 'react-router-dom'
+import { Carousel } from 'react-responsive-carousel';
 
 const Dashboard = () => {
 
@@ -57,7 +58,48 @@ const Dashboard = () => {
           <Link to="#">See All</Link>
         </div>
       </div>
-      <div>Div 3</div>
+
+      <div
+        style={{ boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)" }}
+      >
+        {
+          loading ?
+            <div className='admin_dashboard_carousel_loading'>
+              <Skeleton count={1}
+                height={"100%"}
+                width={"100%"}
+                style={{
+                  borderRadius: "1.5rem"
+                }}
+              />
+            </div> :
+            <div className='admin_dashboard_carousel'>
+              <Carousel
+                showThumbs={false}
+                infiniteLoop={true}
+                autoPlay={true}
+                interval={6000}
+                showStatus={false}
+                showArrows={false}
+                stopOnHover={false}
+              >
+                <div className='admin_dashboard_carousel_item'>
+                  <img src="https://images.fresha.com/lead-images/placeholders/barbershop-77.jpg?class=venue-gallery-large" />
+                </div>
+
+                <div className='admin_dashboard_carousel_item'>
+                  <img src="https://img.freepik.com/free-photo/handsome-man-barber-shop-styling-hair_1303-20978.jpg" />
+                </div>
+
+                <div className='admin_dashboard_carousel_item'>
+                  <img src="https://media.istockphoto.com/id/872361244/photo/man-getting-his-beard-trimmed-with-electric-razor.jpg?s=612x612&w=0&k=20&c=_IjZcrY0Gp-2z6AWTQederZCA9BLdl-iqWkH0hGMTgg=" />
+                </div>
+
+              </Carousel>
+            </div>
+        }
+
+      </div>
       <div>Div 4</div>
       <div>Div 5</div>
     </div>

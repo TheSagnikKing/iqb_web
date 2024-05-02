@@ -182,3 +182,37 @@
    text-decoration: none;
    color: var(--primary-text-light-color2);
 }
+
+/* Carousel Div Css start from here */
+
+.admin_dashboard_carousel_loading{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+.admin_dashboard_carousel{
+    height: 100%;
+    width: 100%;
+}
+
+.admin_dashboard_carousel_item{
+    height: 21rem;
+    width: 100%;
+}
+
+.admin_dashboard_carousel_item>img{
+    height: 21rem;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+}
