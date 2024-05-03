@@ -5,6 +5,7 @@ import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-d
 import { LeftArrow, RightArrow } from '../../../icons'
 import Header from '../Header/Header.jsx'
 import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
+import Skeleton from 'react-loading-skeleton'
 
 const Sidebar = () => {
 
@@ -15,17 +16,26 @@ const Sidebar = () => {
 
   console.log(location?.pathname)
 
+  const [loading, setLoading] = useState(false)
+
   return (
     <main className='container'>
       <div className={`sidebar ${showSidebar ? "show" : "hide"}`}>
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
-            {showSidebar ? <><div className='sidebar_top_salon'>
-              <div>
-                <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
-              </div>
-              <p>IQB</p>
-            </div></> : ""}
+            {showSidebar ? <div className='sidebar_top_salon'>
+              {
+                loading ?
+                  <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
+                  <>
+                    <div>
+                      <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
+                    </div>
+                    <p>IQB</p>
+                  </>
+              }
+
+            </div> : ""}
           </p>
         </div>
 

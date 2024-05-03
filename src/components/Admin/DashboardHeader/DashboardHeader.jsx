@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./DashboardHeader.css"
+import Skeleton from 'react-loading-skeleton'
 import { DropdownIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
 
 const DashboardHeader = () => {
@@ -10,14 +11,16 @@ const DashboardHeader = () => {
         setTogglecheck((prev) => !prev)
     }
 
+    const [loading, setLoading] = useState(false)
+
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
                 <p>Choose Salon</p>
                 <div onClick={() => setSalonlistdrop((prev) => !prev)}>
                     <p>Classic touch</p>
-                    <div><DropdownIcon/></div>
-                   { salonlistdrop && <div className='dashboard_salon_list_dropdown'>List of salon</div> } 
+                    <div><DropdownIcon /></div>
+                    {salonlistdrop && <div className='dashboard_salon_list_dropdown'>List of salon</div>}
                 </div>
                 <button>Apply</button>
             </div>
@@ -36,7 +39,18 @@ const DashboardHeader = () => {
 
                 <div><Notificationicon /></div>
                 <div><Settingsicon /></div>
-                <div><img src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" /></div>
+                {
+                    loading ?
+                        <Skeleton count={1}
+                            height={"4.5rem"}
+                            width={"4.5rem"}
+                            style={{
+                                borderRadius: "50%"
+                            }}
+                        /> :
+                        <div><img src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" /></div>
+                }
+
             </div>
         </div>
     )

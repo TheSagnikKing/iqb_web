@@ -15,6 +15,10 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { RiMoonClearFill } from "react-icons/ri";
 import { RiSunFill } from "react-icons/ri";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { FaChartBar } from "react-icons/fa";
+import { FaChartPie } from "react-icons/fa";
+import { FaChartSimple } from "react-icons/fa6";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -36,3 +40,9 @@ export const Settingsicon = IoSettingsSharp
 export const Sunicon = RiSunFill
 export const MoonIcon = RiMoonClearFill
 export const DropdownIcon = IoMdArrowDropdownCircle
+export const UserIcon = FaUser
+
+export const ChartIcon1 = FaChartBar
+export const ChartIcon2 = FaChartPie
+export const ChartIcon3 = FaChartSimple
+export const Threeverticaldots = BsThreeDotsVertical
