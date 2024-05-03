@@ -180,7 +180,7 @@ const Dashboard = () => {
           <div>
             <p>Queue List</p>
             <div>
-              <button>
+              <button onClick={() => setLoading((prev) => !prev)}>
                 <div><UserIcon /></div>
                 <p>Add Customer</p>
               </button>
@@ -193,9 +193,9 @@ const Dashboard = () => {
           {
             loading ?
               <div>
-                <Skeleton count={1} height={"3rem"} style={{ borderRadius: "5px" }} />
-                <Skeleton count={1} height={"3rem"} style={{ borderRadius: "5px" }} />
-                <Skeleton count={1} height={"3rem"} style={{ borderRadius: "5px" }} />
+                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
               </div> :
               <div>
                 <div>queue item</div>
