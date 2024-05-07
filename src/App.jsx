@@ -18,6 +18,10 @@ const AdminForgotPassword = React.lazy(() => import("./Admin/AuthScreens/ForgotP
 const AdminCheckEmail = React.lazy(() => import("./Admin/AuthScreens/CheckEmail/CheckEmail"))
 const AdminChangePassword = React.lazy(() => import("./Admin/AuthScreens/ChangePassword/ChangePassword"))
 const AdminPasswordReset = React.lazy(() => import("./Admin/AuthScreens/PasswordReset/PasswordReset"))
+const BarberForgotPassword = React.lazy(() => import("./Barber/AuthScreens/ForgotPassword/ForgotPassword"))
+const BarberCheckEmail = React.lazy(() => import("./Barber/AuthScreens/CheckEmail/CheckEmail"))
+const BarberChangePassword = React.lazy(() => import("./Barber/AuthScreens/ChangePassword/ChangePassword"))
+const BarberPasswordReset = React.lazy(() => import("./Barber/AuthScreens/PasswordReset/PasswordReset"))
 
 const App = () => {
 
@@ -49,6 +53,10 @@ const App = () => {
           {/* Barber Auth Screens */}
           <Route path="/barbersignin" element={<BarberSignin />} />
           <Route path="/barbersignup" element={<BarberSignup />} />
+          <Route path="/barberforgotpassword" element={<BarberForgotPassword/>}/>
+          <Route path="/barbercheckemail" element={<BarberCheckEmail/>}/>
+          <Route path="/barberchangepassword" element={<BarberChangePassword/>}/>
+          <Route path="/barberpasswordreset" element={<BarberPasswordReset/>}/>
 
         </Routes>
       </React.Suspense>

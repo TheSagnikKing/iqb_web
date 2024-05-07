@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Signin.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 
@@ -30,6 +30,12 @@ const Signin = () => {
 
   const [visibleeye, setVisibleeye] = useState(false)
 
+  const navigate = useNavigate()
+
+  const forgotClicked = () => {
+    navigate("/barberforgotpassword")
+  }
+
   return (
     <main className='barber_signin_container'>
       <div>
@@ -57,7 +63,7 @@ const Signin = () => {
           </div>
 
           <div>
-            <p>Forgot Password ?</p>
+            <p onClick={forgotClicked}>Forgot Password ?</p>
           </div>
 
           <button>Signin</button>
