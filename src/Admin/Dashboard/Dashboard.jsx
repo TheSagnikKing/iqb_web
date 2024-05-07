@@ -321,9 +321,9 @@ const Dashboard = () => {
                   height={"80%"}
                   width={"100%"}
                 /> :
-                <ResponsiveContainer width="100%" height="100%" style={{ margin: "auto" }}>
+                <ResponsiveContainer width="70%" height="100%" style={{ margin: "auto" }}>
                   <LineChart width={300} height={100} data={data}>
-                    <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
+                    <Line type="" dataKey="pv" stroke="#000" strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
             }
