@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./DashboardHeader.css"
 import Skeleton from 'react-loading-skeleton'
 import { DropdownIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
@@ -13,14 +13,72 @@ const DashboardHeader = () => {
 
     const [loading, setLoading] = useState(false)
 
+    const salonlistRef = useRef()
+
+    useEffect(() => {
+        let salondropHandler = (e) => {
+            if (salonlistRef.current && !salonlistRef.current.contains(e.target) ) {
+                console.log(salonlistRef.current.contains(e.target))
+                setSalonlistdrop(false)
+            }
+        }
+
+        document.addEventListener('mousedown', salondropHandler)
+
+        return () => {
+            document.removeEventListener('mousedown', salondropHandler)
+        }
+    }, [])
+
+    const salonListNames = [
+        {
+            id:1,
+            salonName: "classicTouch",
+            salonId: 1
+        },
+        {
+            id:2,
+            salonName: "Couture",
+            salonId: 2
+        },{
+            id:3,
+            salonName: "Bella Vida",
+            salonId: 3
+        },
+        {
+            id:4,
+            salonName: "Couture",
+            salonId: 4
+        },{
+            id:5,
+            salonName: "Bella Vida",
+            salonId: 5
+        }
+    ]
+
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
                 <p>Choose Salon</p>
-                <div onClick={() => setSalonlistdrop((prev) => !prev)}>
+                <div>
                     <p>Classic touch</p>
-                    <div><DropdownIcon /></div>
-                    {salonlistdrop && <div className='dashboard_salon_list_dropdown'>List of salon</div>}
+                    <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
+                    <div
+                        className='dashboard_salon_list_dropdown'
+                        ref={salonlistRef}
+                        style={{
+                            opacity: salonlistdrop ? "1" : "0",
+                            zIndex: salonlistdrop ? "2" : "-1",
+                            transition: "300ms ease",
+                            height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
+                        }}
+                    >
+                        {
+                            salonListNames.map((s) => (
+                                <p key={s.id}>{s.salonName}</p>
+                            ))
+                        }
+                    </div>
                 </div>
                 <button>Apply</button>
             </div>

@@ -36,6 +36,10 @@ const Signin = () => {
     navigate("/admin-dashboard")
   }
 
+  const forgotClicked = () => {
+    navigate("/adminforgotpassword")
+  }
+
   return (
     <main className='admin_signin_container'>
       <div>
@@ -63,7 +67,7 @@ const Signin = () => {
           </div>
 
           <div>
-            <p>Forgot Password ?</p>
+            <p onClick={forgotClicked}>Forgot Password ?</p>
           </div>
 
           <button onClick={signinClicked}>Signin</button>

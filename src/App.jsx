@@ -14,6 +14,10 @@ const AdminAdvertisement = React.lazy(() => import("./Admin/Advertisement/Advert
 const AdminQueue = React.lazy(() => import("./Admin/Queue/Queue"))
 const AdminAppointment = React.lazy(() => import("./Admin/Appointment/Appointment"))
 const AdminReport = React.lazy(() => import("./Admin/Report/Report"))
+const AdminForgotPassword = React.lazy(() => import("./Admin/AuthScreens/ForgotPassword/ForgotPassword"))
+const AdminCheckEmail = React.lazy(() => import("./Admin/AuthScreens/CheckEmail/CheckEmail"))
+const AdminChangePassword = React.lazy(() => import("./Admin/AuthScreens/ChangePassword/ChangePassword"))
+const AdminPasswordReset = React.lazy(() => import("./Admin/AuthScreens/PasswordReset/PasswordReset"))
 
 const App = () => {
 
@@ -26,6 +30,10 @@ const App = () => {
           {/* Admin Auth Screens */}
           <Route path="/adminsignin" element={<AdminSignin />} />
           <Route path="/adminsignup" element={<AdminSignup />} />
+          <Route path="/adminforgotpassword" element={<AdminForgotPassword/>}/>
+          <Route path="/admincheckemail" element={<AdminCheckEmail/>}/>
+          <Route path="/adminchangepassword" element={<AdminChangePassword/>}/>
+          <Route path="/adminpasswordreset" element={<AdminPasswordReset/>}/>
 
           {/* Admin Main Pages  */}
           <Route element={<AdminSidebar />}>

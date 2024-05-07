@@ -14,8 +14,6 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location?.pathname)
-
   const [loading, setLoading] = useState(false)
 
   return (

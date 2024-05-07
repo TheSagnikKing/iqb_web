@@ -105,14 +105,8 @@ iframe{
     justify-content: flex-end;
 }
 
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(5)>p{
-    color: var(--text-color-3);
-    font-size: 1.6rem;
-    cursor: pointer;
-    font-weight: bold;
-}
 
-.barber_signup_container>div:nth-child(2)>div>button:nth-child(6){
+.barber_signup_container>div:nth-child(2)>div>button:nth-child(5){
     height: 4rem;
     width: 100%;
     background-color: var(--primary-bg-color3);
@@ -128,7 +122,7 @@ iframe{
     font-weight: bold;
 }
 
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(7){
+.barber_signup_container>div:nth-child(2)>div>div:nth-child(6){
     height: 2.1rem;
     width: 100%;
     /* background-color: rgba(128, 128, 128, 0.425); */
@@ -139,23 +133,23 @@ iframe{
     gap: 1rem;
 }
 
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(7)>div{
+.barber_signup_container>div:nth-child(2)>div>div:nth-child(6)>div{
     height: 1px;
     width: 100%;
     background-color: var(--primary-bg-light-color2);
 }
 
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(7)>p{
+.barber_signup_container>div:nth-child(2)>div>div:nth-child(6)>p{
     font-size: 1.4rem;
     font-weight: 500;
 }
 
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(8){
+.barber_signup_container>div:nth-child(2)>div>div:nth-child(7){
     /* For google button */
 }
 
 
-.barber_signup_container>div:nth-child(2)>div>p:nth-child(9){
+.barber_signup_container>div:nth-child(2)>div>p:nth-child(8){
     font-size: 1.6rem;
     font-weight: bold;
     text-align: center;

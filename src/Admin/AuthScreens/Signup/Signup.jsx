@@ -56,10 +56,6 @@ const Signup = () => {
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>
 
-          <div>
-            <p>Forgot Password ?</p>
-          </div>
-
           <button>Signin</button>
 
           <div>

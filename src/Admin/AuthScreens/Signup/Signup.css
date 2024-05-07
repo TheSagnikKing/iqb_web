@@ -105,14 +105,14 @@ iframe{
     justify-content: flex-end;
 }
 
-.admin_signup_container>div:nth-child(2)>div>div:nth-child(5)>p{
+/* .admin_signup_container>div:nth-child(2)>div>div:nth-child(5)>p{
     color: var(--text-color-3);
     font-size: 1.6rem;
     cursor: pointer;
     font-weight: bold;
-}
+} */
 
-.admin_signup_container>div:nth-child(2)>div>button:nth-child(6){
+.admin_signup_container>div:nth-child(2)>div>button:nth-child(5){
     height: 4rem;
     width: 100%;
     background-color: var(--primary-bg-color3);
@@ -128,7 +128,7 @@ iframe{
     font-weight: bold;
 }
 
-.admin_signup_container>div:nth-child(2)>div>div:nth-child(7){
+.admin_signup_container>div:nth-child(2)>div>div:nth-child(6){
     height: 2.1rem;
     width: 100%;
     /* background-color: rgba(128, 128, 128, 0.425); */
@@ -139,23 +139,23 @@ iframe{
     gap: 1rem;
 }
 
-.admin_signup_container>div:nth-child(2)>div>div:nth-child(7)>div{
+.admin_signup_container>div:nth-child(2)>div>div:nth-child(6)>div{
     height: 1px;
     width: 100%;
     background-color: var(--primary-bg-light-color2);
 }
 
-.admin_signup_container>div:nth-child(2)>div>div:nth-child(7)>p{
+.admin_signup_container>div:nth-child(2)>div>div:nth-child(6)>p{
     font-size: 1.4rem;
     font-weight: 500;
 }
 
-.admin_signup_container>div:nth-child(2)>div>div:nth-child(8){
+.admin_signup_container>div:nth-child(2)>div>div:nth-child(7){
     /* For google button */
 }
 
 
-.admin_signup_container>div:nth-child(2)>div>p:nth-child(9){
+.admin_signup_container>div:nth-child(2)>div>p:nth-child(8){
     font-size: 1.6rem;
     font-weight: bold;
     text-align: center;

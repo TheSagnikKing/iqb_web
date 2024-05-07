@@ -152,7 +152,6 @@
     top: 3.5rem;
     left: 0rem;
     right: 0rem;
-    height: 15rem;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -163,6 +162,30 @@
     border: 1px solid #000;
     z-index: 100;
     background-color: var(--primary-bg-light-color1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.dashboard_salon_list_dropdown>p{
+    min-height: 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.dashboard_salon_list_dropdown>p:hover{
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+    cursor: pointer;
+    font-weight: 500;
 }
 
 .choose_salon_div>button:nth-child(3){
