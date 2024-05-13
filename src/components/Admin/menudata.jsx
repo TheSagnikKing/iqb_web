@@ -11,13 +11,13 @@ export const menudata = [
         id: 2,
         title: "Salons",
         icon: <Adminsalonicon />,
-        url: "/admin-salon"
+        url: "/admin-salonlist"
     },
     {
         id: 3,
         title: "Barbers",
         icon: <Adminbarbericon />,
-        url: "/admin-barber"
+        url: "/admin-barberlist"
     },
     {
         id: 4,

@@ -8,6 +8,8 @@ import { FaUserGroup } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
 import { TbReportSearch } from "react-icons/tb";
 import { RiAdvertisementFill } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 import { IoMdNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -46,3 +48,6 @@ export const ChartIcon1 = FaChartBar
 export const ChartIcon2 = FaChartPie
 export const ChartIcon3 = FaChartSimple
 export const Threeverticaldots = BsThreeDotsVertical
+
+export const EditIcon = FaEdit
+export const DeleteIcon = RiDeleteBin5Fill

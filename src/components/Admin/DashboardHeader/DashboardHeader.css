@@ -169,7 +169,7 @@
 }
 
 .dashboard_salon_list_dropdown::-webkit-scrollbar {
-    width: 8px !important;
+    width: 6px !important;
 }
 
 .dashboard_salon_list_dropdown::-webkit-scrollbar-track {
