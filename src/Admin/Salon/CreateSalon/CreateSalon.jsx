@@ -163,12 +163,12 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>Interval Time</p>
+              <p>End Time</p>
               <input type="text" />
             </div>
 
             <div>
-              <p>Time Zone</p>
+              <p>Interval Time</p>
               <input type="text" />
             </div>
           </div>
@@ -229,6 +229,81 @@ const CreateSalon = () => {
 
           <div>
             <button>Add Service</button>
+          </div>
+
+          <div className='service_container'>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+            <div className='service_container_item'>
+              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
+              <p>Hair cut</p>
+              <p>ladies hair cut of any length</p>
+              <p>$20</p>
+              <p>30min</p>
+              <div>+</div>
+            </div>
+          </div>
+
+          <div>
+            <p>Web Link</p>
+            <input type="text" />
+          </div>
+
+          <div>
+            <p>Facebook Link</p>
+            <input type="text" />
+          </div>
+
+          <div>
+            <p>Instagram Link</p>
+            <input type="text" />
+          </div>
+
+          <div>
+            <p>Twitter Link</p>
+            <input type="text" />
+          </div>
+
+          <div>
+            <button>Submit</button>
           </div>
 
         </div>
