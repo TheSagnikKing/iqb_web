@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./CreateSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { DropdownIcon } from '../../../icons';
 
 const CreateSalon = () => {
 
@@ -81,6 +82,13 @@ const CreateSalon = () => {
 
   const logoselectHandler = (item) => {
     setSelectedLogo(item)
+  }
+
+  const [salonType, setSalonType] = useState("Regular")
+  const [salonTypeDrop, setSalonTypeDrop] = useState(false)
+
+  const salonTypeDropHandler = () => {
+    setSalonTypeDrop((prev) => !prev)
   }
 
   return (
@@ -174,6 +182,18 @@ const CreateSalon = () => {
           </div>
 
           <div>
+            <p>Salon Type : <b>{salonType}</b></p>
+            <div onClick={() => salonTypeDropHandler()}><DropdownIcon/></div>
+
+            {
+              salonTypeDrop && <div>
+              <p onClick={() => setSalonType("Regular")}>Regular</p>
+              <p onClick={() => setSalonType("Vip")}>Vip</p>
+            </div>
+            }
+          </div>
+
+          <div>
             <p>Contact Tel.</p>
             <input type="text" />
           </div>
@@ -214,6 +234,11 @@ const CreateSalon = () => {
             <input 
             type="text" />
           </div>
+          
+          {/* <div>
+            <p>Service Type</p>
+            <div>ico</div>
+          </div> */}
 
           <div>
             <div>
@@ -236,6 +261,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
@@ -244,6 +270,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
@@ -252,6 +279,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
@@ -260,6 +288,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
@@ -268,6 +297,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
@@ -276,6 +306,7 @@ const CreateSalon = () => {
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
               <p>ladies hair cut of any length</p>
+              <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
