@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./CreateSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { DropdownIcon } from '../../../icons';
+import Skeleton from 'react-loading-skeleton'
 
 const CreateSalon = () => {
 
@@ -91,6 +92,170 @@ const CreateSalon = () => {
     setSalonTypeDrop((prev) => !prev)
   }
 
+  const salonTypeHandler = (value) => {
+    setSalonType(value)
+    setSalonTypeDrop(false)
+  }
+
+  const [serviceType, setServiceType] = useState("Regular")
+  const [serviceTypeDrop, setServiceTypeDrop] = useState(false)
+
+  const serviceTypeDropHandler = () => {
+    setServiceTypeDrop((prev) => !prev)
+  }
+
+  const serviceTypeHandler = (value) => {
+    setServiceType(value)
+    setServiceTypeDrop(false)
+  }
+
+  const [country, setCountry] = useState("")
+  const [countryDrop, setCountryDrop] = useState(false)
+
+  const countryDropHandler = () => {
+    setCountryDrop((prev) => !prev)
+  }
+
+  const setCountryHandler = (value) => {
+    setCountry(value)
+    setCountryDrop(false)
+  }
+
+  const countryinputRef = useRef()
+  const countryDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickCountryOutside = (event) => {
+      if (
+        countryinputRef.current &&
+        countryDropRef.current &&
+        !countryinputRef.current.contains(event.target) &&
+        !countryDropRef.current.contains(event.target)
+      ) {
+        setCountryDrop(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickCountryOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickCountryOutside);
+    };
+  }, []);
+
+
+  const [city, setCity] = useState("")
+  const [cityDrop, setCityDrop] = useState(false)
+
+  const cityDropHandler = () => {
+    setCityDrop((prev) => !prev)
+  }
+
+  const setCityHandler = (value) => {
+    setCity(value)
+    setCityDrop(false)
+  }
+
+  const cityinputRef = useRef()
+  const cityDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickCityOutside = (event) => {
+      if (
+        cityinputRef.current &&
+        cityDropRef.current &&
+        !cityinputRef.current.contains(event.target) &&
+        !cityDropRef.current.contains(event.target)
+      ) {
+        setCityDrop(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickCityOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickCityOutside);
+    };
+  }, []);
+
+
+  const [timezone, setTimezone] = useState("")
+  const [timezoneDrop, setTimezoneDrop] = useState(false)
+
+  const timezoneDropHandler = () => {
+    setTimezoneDrop((prev) => !prev)
+  }
+
+  const setTimezoneHandler = (value) => {
+    setTimezone(value)
+    setTimezoneDrop(false)
+  }
+
+  const timezoneinputRef = useRef()
+  const timezoneDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickTimezoneOutside = (event) => {
+      if (
+        timezoneinputRef.current &&
+        timezoneDropRef.current &&
+        !timezoneinputRef.current.contains(event.target) &&
+        !timezoneDropRef.current.contains(event.target)
+      ) {
+        setTimezoneDrop(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickTimezoneOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickTimezoneOutside);
+    };
+  }, []);
+
+
+  const salonTypeIconRef = useRef()
+  const salonTypeDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickSalonTypeOutside = (event) => {
+      if (
+        salonTypeIconRef.current &&
+        salonTypeDropRef.current &&
+        !salonTypeIconRef.current.contains(event.target) &&
+        !salonTypeDropRef.current.contains(event.target)
+      ) {
+        setSalonTypeDrop(false)
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickSalonTypeOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickSalonTypeOutside);
+    };
+  }, []);
+
+  const serviceTypeIconRef = useRef()
+  const serviceTypeDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickServiceTypeOutside = (event) => {
+      if (
+        serviceTypeIconRef.current &&
+        serviceTypeDropRef.current &&
+        !serviceTypeIconRef.current.contains(event.target) &&
+        !serviceTypeDropRef.current.contains(event.target)
+      ) {
+        setServiceTypeDrop(false)
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickServiceTypeOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickServiceTypeOutside);
+    };
+  }, []);
+
+
+  const [loading, setLoading] = useState(false)
+
   return (
     <div className='create_salon_wrapper'>
       <p>Create Salon</p>
@@ -143,19 +308,59 @@ const CreateSalon = () => {
           <div>
             <div>
               <p>Country</p>
-              <input type="text" />
+              <input
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                onClick={() => countryDropHandler()}
+                ref={countryinputRef}
+              />
+
+              {countryDrop && <div ref={countryDropRef}>
+                <p onClick={() => setCountryHandler("India")}>India</p>
+                <p onClick={() => setCountryHandler("USA")}>USA</p>
+                <p onClick={() => setCountryHandler("China")}>China</p>
+                <p onClick={() => setCountryHandler("Japan")}>Japan</p>
+              </div>}
+
             </div>
 
             <div>
               <p>City</p>
-              <input type="text" />
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                onClick={() => cityDropHandler()}
+                ref={cityinputRef}
+              />
+
+              {cityDrop && <div ref={cityDropRef}>
+                <p onClick={() => setCityHandler("Alexander City")}>Alexander City</p>
+                <p onClick={() => setCityHandler("Andalusia")}>Andalusia</p>
+                <p onClick={() => setCityHandler("Anniston")}>Anniston</p>
+                <p onClick={() => setCityHandler("Athens")}>Athens</p>
+              </div>}
             </div>
           </div>
 
           <div>
             <div>
               <p>Time Zone</p>
-              <input type="text" />
+              <input
+                type="text"
+                value={timezone}
+                onChange={(e) => setTimezone(e.target.value)}
+                onClick={() => timezoneDropHandler()}
+                ref={timezoneinputRef}
+              />
+
+              {timezoneDrop && <div ref={timezoneDropRef}>
+                <p onClick={() => setTimezoneHandler("Timezone 1")}>Timezone 1</p>
+                <p onClick={() => setTimezoneHandler("Timezone 2")}>Timezone 2</p>
+                <p onClick={() => setTimezoneHandler("Timezone 3")}>Timezone 3</p>
+                <p onClick={() => setTimezoneHandler("Timezone 4")}>Timezone 4</p>
+              </div>}
             </div>
 
             <div>
@@ -183,13 +388,16 @@ const CreateSalon = () => {
 
           <div>
             <p>Salon Type : <b>{salonType}</b></p>
-            <div onClick={() => salonTypeDropHandler()}><DropdownIcon/></div>
+            <div
+              onClick={() => salonTypeDropHandler()}
+              ref={salonTypeIconRef}
+            ><DropdownIcon /></div>
 
             {
-              salonTypeDrop && <div>
-              <p onClick={() => setSalonType("Regular")}>Regular</p>
-              <p onClick={() => setSalonType("Vip")}>Vip</p>
-            </div>
+              salonTypeDrop && <div ref={salonTypeDropRef}>
+                <p onClick={() => salonTypeHandler("Regular")}>Regular</p>
+                <p onClick={() => salonTypeHandler("Vip")}>Vip</p>
+              </div>
             }
           </div>
 
@@ -203,42 +411,107 @@ const CreateSalon = () => {
           <p>Choose your service icon:</p>
           <div>
             <div>
-              <Carousel 
-              responsive={responsive} 
-              draggable={false}
-              swipeable={false}
-              >
-                {
-                  slidedata.map((s) => (
-                    <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s.item)}
-                    style={{
-                      border: selectedLogo === s.item ? "3px solid var(--primary-bg-color3)" : "1px solid black"
-                    }}
-                    >
-                      <img src={s.item} alt="" />
-                    </div>
-                  ))
-                }
-              </Carousel>
+              {
+                loading ?
+                  <div className='create_salon_carousel_loader'>
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"9rem"}
+                      width={"9rem"}
+                      style={{
+                        borderRadius: "1rem"
+                      }}
+                    />
+                  </div> :
+                  <Carousel
+                    responsive={responsive}
+                    draggable={false}
+                    swipeable={false}
+                  >
+                    {
+                      slidedata.map((s) => (
+                        <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s.item)}
+                          style={{
+                            border: selectedLogo === s.item ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                          }}
+                        >
+                          <img src={s.item} alt="" />
+                        </div>
+                      ))
+                    }
+                  </Carousel>
+              }
+
             </div>
           </div>
 
           <div>
             <p>Service Name</p>
-            <input 
-            type="text" />
+            <input
+              type="text" />
           </div>
 
           <div>
             <p>Service Desc</p>
-            <input 
-            type="text" />
+            <input
+              type="text" />
           </div>
-          
-          {/* <div>
-            <p>Service Type</p>
-            <div>ico</div>
-          </div> */}
+
+          <div>
+            <p>Service Type : <b>{serviceType}</b></p>
+            <div
+              onClick={() => serviceTypeDropHandler()}
+              ref={serviceTypeIconRef}
+            ><DropdownIcon /></div>
+
+            {
+              serviceTypeDrop && <div ref={serviceTypeDropRef}>
+                <p onClick={() => serviceTypeHandler("Regular")}>Regular</p>
+                <p onClick={() => serviceTypeHandler("Vip")}>Vip</p>
+              </div>
+            }
+          </div>
 
           <div>
             <div>
@@ -345,92 +618,59 @@ const CreateSalon = () => {
 
 export default CreateSalon
 
+
+
 // import React from 'react'
-// import Carousel from "react-multi-carousel";
-// import "react-multi-carousel/lib/styles.css";
+// import "./CreateSalon.css"
+// import { useState } from 'react'
+// import { useRef } from 'react'
+// import { useEffect } from 'react'
 
 // const CreateSalon = () => {
 
-  // const responsive = {
-  //   superLargeDesktop: {
-  //     // the naming can be any, depends on you.
-  //     breakpoint: { max: 4000, min: 3000 },
-  //     items: 5
-  //   },
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 1024 },
-  //     items: 6
-  //   },
-  //   tablet: {
-  //     breakpoint: { max: 1024, min: 464 },
-  //     items: 2
-  //   },
-  //   mobile: {
-  //     breakpoint: { max: 464, min: 0 },
-  //     items: 1
-  //   }
-  // };
+//   const [dropState, setDropState] = useState(false)
 
-// const slidedata = [
-//   {
-//     _id:1,
-//     item:1
-//   },
-//   {
-//     _id:2,
-//     item:2
-//   },
-//   {
-//     _id:3,
-//     item:3
-//   },
-//   {
-//     _id:4,
-//     item:4
-//   },
-//   {
-//     _id:5,
-//     item:5
-//   },
-//   {
-//     _id:6,
-//     item:6
-//   },
-//   {
-//     _id:7,
-//     item:7
-//   },
-//   {
-//     _id:8,
-//     item:8
-//   },
-//   {
-//     _id:9,
-//     item:9
-//   },
-//   {
-//     _id:10,
-//     item:10
-//   },
-//   {
-//     _id:11,
-//     item:11
-//   },
-//   {
-//     _id:12,
-//     item:12
-//   },
-// ]
+//   const dropHandler = () => {
+//     setDropState((prev) => !prev)
+//   }
+
+//   const menuRef = useRef()
+//   const imgRef = useRef()
+
+// useEffect(() => {
+//   const handleClickOutside = (event) => {
+//     if (
+//       menuRef.current &&
+//       !menuRef.current.contains(event.target) &&
+//       !imgRef.current.contains(event.target)
+//     ) {
+//       setDropState(false);
+//     }
+//   };
+
+//   document.addEventListener('mousedown', handleClickOutside);
+//   return () => {
+//     document.removeEventListener('mousedown', handleClickOutside);
+//   };
+// }, []);
 
 //   return (
-//     <div style={{ width: "60%" }}>
-// <Carousel responsive={responsive}>
-//   {slidedata.map((s) => (
-//     <div key={s._id} style={{width:"95%",height:"7rem",border:"2px solid black"}}>{s.item}</div>
-//   ))}
-// </Carousel>
+//     <div>
+//         <div
+//         className='profile_pic'
+//         onClick={() => dropHandler()}
+//         ref={imgRef}
+//         >img</div>
+
+//         {
+//           dropState && <div
+//           className='dropdown_list'
+//           ref={menuRef}
+//           >DROPDOWN LIST</div>
+//         }
 //     </div>
 //   )
 // }
 
 // export default CreateSalon
+
