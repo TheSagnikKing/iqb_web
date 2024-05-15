@@ -112,7 +112,10 @@ const SalonList = () => {
 
       <div className='salon_content_wrapper'>
         <div className='salon_content_body'
-        style={{overflow:loading === true ? "hidden" : "auto"}}
+        style={{
+          overflow: loading === true ? "hidden" : "auto",
+
+        }}
         >
           <div>
             <p>Salon ID</p>

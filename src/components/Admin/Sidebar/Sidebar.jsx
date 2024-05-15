@@ -55,9 +55,21 @@ const Sidebar = () => {
 
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
+
       <div className='content'
         style={{
           width: showSidebar ? "calc(100% - 21rem)" : "100%"
+        }}
+      >
+        <div>
+          {location?.pathname === "/admin-dashboard" ? <DashboardHeader /> : <Header />}
+          <div><Outlet /></div>
+        </div>
+      </div>
+
+      <div className='mobile_content'
+        style={{
+          width: "100%"
         }}
       >
         <div>

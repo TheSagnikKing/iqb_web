@@ -162,3 +162,10 @@
     align-items: center;
     cursor: pointer;
 }
+
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .salon_content_wrapper{
+        display: none;
+    }
+}

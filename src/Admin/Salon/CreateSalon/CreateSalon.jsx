@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./CreateSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { DropdownIcon } from '../../../icons';
+import { CameraIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 
 const CreateSalon = () => {
@@ -256,21 +256,113 @@ const CreateSalon = () => {
 
   const [loading, setLoading] = useState(false)
 
+  const [salonLogo, setSalonLogo] = useState("")
+
+
+  const fileInputRef = useRef(null);
+
+  const handleSalonLogoButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleSalonFileInputChange = async (e) => {
+    const uploadImage = e.target.files[0]; // Get the uploaded file
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+    if (!allowedTypes.includes(uploadImage.type)) {
+      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
+
+    const imageUrl = URL.createObjectURL(uploadImage);
+
+    setSalonLogo(imageUrl);
+
+  };
+
+  const [salonImages, setSalonImages] = useState([])
+
+  const salonImagefileInputRef = useRef(null);
+
+  const handleSalonImageButtonClick = () => {
+    salonImagefileInputRef.current.click();
+  };
+
+  const handleSalonImageFileInputChange = async (e) => {
+    const uploadedFiles = e.target.files;
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+    // Iterate over each uploaded file
+    const urls = Array.from(uploadedFiles).map((file) => {
+      // Check if the file type is allowed
+      if (!allowedTypes.includes(file.type)) {
+        alert("Please upload only valid image files (JPEG, WebP, PNG).");
+        return null;
+      }
+      // Create a URL representing the file content
+      return URL.createObjectURL(file);
+    });
+
+    // Filter out null values (in case of invalid files) and update the state with valid URLs
+    setSalonImages(urls.filter((url) => url !== null));
+  };
+
+
+  console.log(salonImages)
+
+
   return (
     <div className='create_salon_wrapper'>
       <p>Create Salon</p>
       <div className='create_salon_content_wrapper'>
         <div>
           <div>
-            <div>tp</div>
-            <div>logo</div>
-            <div>down</div>
+            <div><img src={salonImages[0]} alt="" /></div>
+            <div>
+              <img src={`${salonLogo}`} alt="" />
+              <div>
+                <button onClick={() => handleSalonLogoButtonClick()}><CameraIcon /></button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleSalonFileInputChange}
+                />
+              </div>
+            </div>
+
+            <div>
+              <p>Salon Name: Classic Touch</p>
+              <p>City: Athens</p>
+              <p>Country: United States of America</p>
+            </div>
           </div>
+
           <div>
-            <div>Bx1</div>
-            <div>Bx2</div>
-            <div>Bx3</div>
+            {
+              salonImages.map((s, index) => (
+                <div key={index}><img src={s} alt="" /></div>
+              ))
+            }
           </div>
+
+          <button
+            className='salon_upload_button'
+            onClick={() => handleSalonImageButtonClick()}
+          >
+            <div><Uploadicon /></div>
+            <p>Salon Images</p>
+
+            <input
+              type="file"
+              ref={salonImagefileInputRef}
+              style={{ display: 'none' }}
+              multiple
+              onChange={handleSalonImageFileInputChange}
+            />
+          </button>
+
         </div>
 
         <div>

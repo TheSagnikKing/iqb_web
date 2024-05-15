@@ -21,6 +21,10 @@ import { FaChartBar } from "react-icons/fa";
 import { FaChartPie } from "react-icons/fa";
 import { FaChartSimple } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdOutlineCameraAlt } from "react-icons/md";
+import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineMenu } from "react-icons/ai";
+import { RxCross1 } from "react-icons/rx";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -51,3 +55,8 @@ export const Threeverticaldots = BsThreeDotsVertical
 
 export const EditIcon = FaEdit
 export const DeleteIcon = RiDeleteBin5Fill
+
+export const CameraIcon = MdOutlineCameraAlt
+export const Uploadicon = AiOutlineCloudUpload
+export const MobileMenuIcon = AiOutlineMenu
+export const MobileCrossIcon = RxCross1
