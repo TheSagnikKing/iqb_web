@@ -114,7 +114,6 @@ const SalonList = () => {
         <div className='salon_content_body'
         style={{
           overflow: loading === true ? "hidden" : "auto",
-
         }}
         >
           <div>

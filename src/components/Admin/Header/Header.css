@@ -210,27 +210,14 @@
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div:hover {
-        background-color: var(--sidebar-bg-color);
-        border-right: 6px solid var(--primary-bg-color3);
-    }
-
-    .mobile_sidebar_container>div:hover div {
-        color: var(--primary-bg-color3);
-    }
-
     .mobile_sidebar_container>div p{
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div p:hover{
-        color: var(--primary-bg-color3);
-    }
-
-    .menu_item_active {
-        background-color: var(--sidebar-bg-color);
+    .mobile_menu_item_active {
+        background-color: var(--sidebar-bg-color) !important;
         border-right: 6px solid var(--primary-bg-color3);
-      }
+    }
 }
 
 
@@ -320,25 +307,12 @@
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div:hover {
-        background-color: var(--sidebar-bg-color);
-        border-right: 6px solid var(--primary-bg-color3);
-    }
-
-    .mobile_sidebar_container>div:hover div {
-        color: var(--primary-bg-color3);
-    }
-
     .mobile_sidebar_container>div p{
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div p:hover{
-        color: var(--primary-bg-color3);
-    }
-
-    .menu_item_active {
-        background-color: var(--sidebar-bg-color);
+    .mobile_menu_item_active {
+        background-color: var(--sidebar-bg-color) !important;
         border-right: 6px solid var(--primary-bg-color3);
-      }
+    }
 }

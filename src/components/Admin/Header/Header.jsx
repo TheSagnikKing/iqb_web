@@ -83,10 +83,9 @@ const Header = () => {
           menudata.map((m) => (
             <div 
             key={m.id}
-            className={`${m.url === location?.pathname && "menu_item_active"}`}
+            className={`${m.url === location?.pathname && "mobile_menu_item_active"}`}
             onClick={() => navigate(m?.url)}
             >
-              {console.log(m.url)}
               <div style={{
                 color: m.url === location?.pathname && " var(--primary-bg-color3)"
               }}>{m.icon}</div>
