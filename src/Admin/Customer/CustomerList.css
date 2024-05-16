@@ -1,0 +1,192 @@
+.customer_wrapper{
+    height: calc(100vh - 6rem);
+    width: 100%;
+    padding-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.customer_wrapper>div:nth-child(1){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+}
+
+.customer_wrapper>div:nth-child(1)>p{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.customer_wrapper>div:nth-child(1)>button{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 9rem;
+    height: 100%;
+    gap: 0rem;
+    background-color: var(--primary-bg-light-color1);
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.customer_wrapper>div:nth-child(1)>button>p{
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.customer_wrapper>div:nth-child(1)>button>div{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.customer_content_wrapper{
+    width: 100%;
+    height: 100%;
+    border-radius: 1.7rem;
+    -webkit-border-radius: 1.7rem;
+    -moz-border-radius: 1.7rem;
+    -ms-border-radius: 1.7rem;
+    -o-border-radius: 1.7rem;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+}
+
+.customer_content_body{
+    height: calc(88vh - 6rem);
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.customer_content_body::-webkit-scrollbar {
+    width: 6px !important;
+    height: 7px;
+}
+
+.customer_content_body::-webkit-scrollbar-track {
+    background-color: #fff !important;
+}
+
+.customer_content_body::-webkit-scrollbar-thumb {
+    background: var(--primary-bg-color3) !important;
+}
+
+.customer_content_body::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 98, 255) !important;
+}
+
+.customer_content_body>div{
+    min-height: 6rem;
+    min-width:100%;
+    max-width: 100rem;
+    background-color: #efefef;
+    display: grid;
+    grid-template-columns: 0.4fr 0.5fr 0.8fr 0.4fr 0.5fr 0.4fr 0.4fr 0.4fr;
+    place-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.customer_content_body>div:nth-child(1){
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: var(--primary-bg-color3);
+    border-top-left-radius: 1.7rem;
+}
+
+.customer_content_body>div:nth-child(1)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.customer_content_body>div>p:nth-child(1){
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.customer_content_body>div:not(:nth-child(1))>p:nth-child(1){
+    background-color: #efefef;
+}
+
+.customer_content_body>div:nth-child(1)>p:nth-child(1){
+    background-color: var(--primary-bg-color3);
+    border-top-left-radius: 1.7rem;
+}
+
+.customer_content_body>div:nth-child(2){
+    margin-top: 1rem;
+}
+.customer_content_body>div>p{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.customer_content_body>div>div:nth-child(5),
+.customer_content_body>div>div:nth-child(6),
+.customer_content_body>div>div:nth-child(7)
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customer_content_body>div>div:nth-child(5)>div,
+.customer_content_body>div>div:nth-child(6)>div,
+.customer_content_body>div>div:nth-child(7)>div{
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: var(--primary-bg-light-color1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.customer_content_body>div>div:nth-child(5)>div{
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+}
+
+.customer_content_body>div>div:nth-child(6)>div{
+    background-color: red;
+    color: var(--primary-text-light-color1);
+}
+
+.customer_content_body>div>div:nth-child(7)>div{
+    background-color: #720455;
+    color: var(--primary-text-light-color1);
+}
+
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .customer_content_wrapper{
+        width: calc(100vw - 4rem);
+    }
+}
+
+@media screen and (min-width:430px) and (max-width:768px){
+    .customer_content_wrapper{
+        width: calc(100vw - 4rem);
+    }
+}

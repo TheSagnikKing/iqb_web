@@ -23,6 +23,7 @@ const BarberCheckEmail = React.lazy(() => import("./Barber/AuthScreens/CheckEmai
 const BarberChangePassword = React.lazy(() => import("./Barber/AuthScreens/ChangePassword/ChangePassword"))
 const BarberPasswordReset = React.lazy(() => import("./Barber/AuthScreens/PasswordReset/PasswordReset"))
 const AdminCreateSalon = React.lazy(() => import("./Admin/Salon/CreateSalon/CreateSalon"))
+const AdminCustomerList = React.lazy(() => import("./Admin/Customer/CustomerList"))
 
 const App = () => {
 
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/admin-salonlist" element={<AdminSalonList />} />
             <Route path="/admin-createsalon" element={<AdminCreateSalon/>}/>
             <Route path="/admin-barberlist" element={<AdminBarberList />} />
+            <Route path="/admin-customerlist" element={<AdminCustomerList />} />
             <Route path="/admin-advertisemt" element={<AdminAdvertisement />} />
             <Route path="/admin-queue" element={<AdminQueue />} />
             <Route path="/admin-appointment" element={<AdminAppointment />} />

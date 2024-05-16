@@ -25,6 +25,7 @@ import { MdOutlineCameraAlt } from "react-icons/md";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { AiOutlineMenu } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import { IoPersonCircle } from "react-icons/io5";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -35,6 +36,7 @@ export const RightArrow = MdKeyboardArrowRight
 export const Admindashboardicon = MdDashboard
 export const Adminsalonicon = RiScissors2Fill
 export const Adminbarbericon = FaUser
+export const Admincustomericon =IoPersonCircle
 export const Adminqueueicon = FaUserGroup
 export const Adminadvertisementicon = RiAdvertisementFill
 export const Adminappointmenticon = BiSolidLike

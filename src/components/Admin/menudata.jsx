@@ -1,4 +1,4 @@
-import { Admindashboardicon, Adminsalonicon, Adminbarbericon, Adminadvertisementicon, Adminqueueicon, Adminappointmenticon, Adminreporticon } from "../../icons";
+import { Admindashboardicon, Adminsalonicon, Adminbarbericon, Admincustomericon, Adminadvertisementicon, Adminqueueicon, Adminappointmenticon, Adminreporticon } from "../../icons";
 
 export const menudata = [
     {
@@ -21,24 +21,30 @@ export const menudata = [
     },
     {
         id: 4,
+        title: "Customers",
+        icon: <Admincustomericon />,
+        url: "/admin-customerlist"
+    },
+    {
+        id: 5,
         title: "Advertisements",
         icon: <Adminadvertisementicon />,
         url: "/admin-advertisemt"
     },
     {
-        id: 5,
+        id: 6,
         title: "Queuings",
         icon: <Adminqueueicon />,
         url: "/admin-queue"
     },
     {
-        id: 6,
+        id: 7,
         title: "Appointments",
         icon: <Adminappointmenticon />,
         url: "/admin-appointment"
     },
     {
-        id: 7,
+        id: 8,
         title: "Reports",
         icon: <Adminreporticon />,
         url: "/admin-report"
