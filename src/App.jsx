@@ -9,7 +9,7 @@ const BarberSignup = React.lazy(() => import("./Barber/AuthScreens/Signup/Signup
 const AdminDashboard = React.lazy(() => import("./Admin/Dashboard/Dashboard"))
 const AdminSalonList = React.lazy(() => import("./Admin/Salon/SalonList/SalonList"))
 const AdminSidebar = React.lazy(() => import("./components/Admin/Sidebar/Sidebar"))
-const AdminBarberList = React.lazy(() => import("./Admin/Barber/BarberList"))
+const AdminBarberList = React.lazy(() => import("./Admin/Barber/BarberList/BarberList"))
 const AdminAdvertisement = React.lazy(() => import("./Admin/Advertisement/Advertisement"))
 const AdminQueue = React.lazy(() => import("./Admin/Queue/Queue"))
 const AdminAppointment = React.lazy(() => import("./Admin/Appointment/Appointment"))
@@ -24,6 +24,9 @@ const BarberChangePassword = React.lazy(() => import("./Barber/AuthScreens/Chang
 const BarberPasswordReset = React.lazy(() => import("./Barber/AuthScreens/PasswordReset/PasswordReset"))
 const AdminCreateSalon = React.lazy(() => import("./Admin/Salon/CreateSalon/CreateSalon"))
 const AdminCustomerList = React.lazy(() => import("./Admin/Customer/CustomerList"))
+const AdminCreateBarber = React.lazy(() => import("./Admin/Barber/CreateBarber/CreateBarber"))
+const AdminEditSalon = React.lazy(() => import("./Admin/Salon/EditSalon/EditSalon"))
+const AdminEditBarber = React.lazy(() => import("./Admin/Barber/EditBarber/EditBarber"))
 
 const App = () => {
 
@@ -46,7 +49,10 @@ const App = () => {
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/admin-salonlist" element={<AdminSalonList />} />
             <Route path="/admin-createsalon" element={<AdminCreateSalon/>}/>
+            <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon/>}/>
             <Route path="/admin-barberlist" element={<AdminBarberList />} />
+            <Route path="/admin-createbarber" element={<AdminCreateBarber />} />
+            <Route path="/admin-editbarber/:salonid" element={<AdminEditBarber />} />
             <Route path="/admin-customerlist" element={<AdminCustomerList />} />
             <Route path="/admin-advertisemt" element={<AdminAdvertisement />} />
             <Route path="/admin-queue" element={<AdminQueue />} />

@@ -97,19 +97,21 @@ const CustomerList = () => {
     },
   ]
 
+  const [searchState, setSearchState] = useState(false)
+
   return (
     <div className='customer_wrapper'>
       <div>
         <p>Customer List</p>
         <div className='customer_search'>
-          <input 
-          type="text" 
-          placeholder='Search Customer'
+          <input
+            type="text"
+            placeholder='Search Customer'
           />
           <div><SearchIcon /></div>
         </div>
 
-        {/* <div className='mobile_customer_search'><SearchIcon /></div> */}
+        <div className='mobile_customer_search'><SearchIcon /></div>
       </div>
 
       <div className='customer_content_wrapper'>
@@ -156,8 +158,8 @@ const CustomerList = () => {
 
       <div className='customer_pagination_wrapper'>
         <div>
-          <div><LeftArrow/></div>
-          <div><RightArrow/></div>
+          <div><LeftArrow /></div>
+          <div><RightArrow /></div>
         </div>
       </div>
     </div>

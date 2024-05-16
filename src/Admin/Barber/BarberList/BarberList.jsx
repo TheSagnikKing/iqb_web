@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./BarberList.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, Notificationicon, Settingsicon } from '../../icons'
+import { DeleteIcon, EditIcon, Notificationicon, Settingsicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 
 const BarberList = () => {
@@ -99,6 +99,11 @@ const BarberList = () => {
       isOnline: true
     },
   ]
+
+  const editButtonClicked = (salonid) => {
+    navigate(`/admin-editbarber/${salonid}`)
+  }
+  
   return (
     <div className='admin_barber_wrapper'>
       <div>
@@ -153,7 +158,7 @@ const BarberList = () => {
 
                   <button>Approve</button>
                   <div>
-                    <div><EditIcon /></div>
+                    <div onClick={() => editButtonClicked(b.salonId)}><EditIcon /></div>
                   </div>
                   <div>
                     <div><Settingsicon /></div>

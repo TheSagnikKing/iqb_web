@@ -100,6 +100,10 @@ const SalonList = () => {
     },
   ]
 
+  const editButtonClicked = (salonid) => {
+    navigate(`/admin-editsalon/${salonid}`)
+  }
+
   return (
     <div className='salon_wrapper'>
       <div>
@@ -135,7 +139,7 @@ const SalonList = () => {
                   <p>{s.address}</p>
                   <p>{s.city}</p>
                   <div>
-                    <div><EditIcon /></div>
+                    <div onClick={() => editButtonClicked(s.salonId)}><EditIcon /></div>
                   </div>
                   <div>
                     <div><DeleteIcon /></div>
