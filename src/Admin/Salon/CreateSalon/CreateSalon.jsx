@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./CreateSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, DropdownIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 
 const CreateSalon = () => {
@@ -14,8 +14,12 @@ const CreateSalon = () => {
       items: 8
     },
     desktop: {
-      breakpoint: { max: 3000, min: 768 },
+      breakpoint: { max: 3000, min: 1250 },
       items: 7
+    },
+    laptop: {
+      breakpoint: { max: 1250, min: 768 },
+      items: 6
     },
     tablet: {
       breakpoint: { max: 768, min: 430 },
@@ -329,7 +333,7 @@ const CreateSalon = () => {
   };
 
 
-  const [mobilesalonimages, setMobileSalonimages] = useState("")
+  const [mobilesalonimagesnames, setMobileSalonimagesnames] = useState("")
 
   const mobileSalonImageInputRef = useRef(null);
 
@@ -346,16 +350,16 @@ const CreateSalon = () => {
     const names = Array.from(uploadedFiles).map((file) => {
       if (!allowedTypes.includes(file.type)) {
         alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null; 
+        return null;
       }
 
-      return file.name; 
+      return file.name;
     }).filter(Boolean);
 
-    setMobileSalonimages((prevImages) => [...prevImages, ...names]);
+    setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
   };
 
-  console.log(mobilesalonimages)
+  console.log(mobilesalonimagesnames)
 
   return (
     <div className='create_salon_wrapper'>
@@ -518,7 +522,7 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>Interval Time</p>
+              <p>Intvl Tm</p>
               <input type="text" />
             </div>
           </div>
@@ -657,7 +661,7 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>Estimated Waiting Time(mins)</p>
+              <p>Est Wait Tm(mins)</p>
               <input type="text" />
             </div>
           </div>
@@ -674,7 +678,7 @@ const CreateSalon = () => {
               <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
@@ -683,7 +687,7 @@ const CreateSalon = () => {
               <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
@@ -692,7 +696,7 @@ const CreateSalon = () => {
               <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
@@ -701,7 +705,7 @@ const CreateSalon = () => {
               <p>Regular</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
@@ -710,7 +714,7 @@ const CreateSalon = () => {
               <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
@@ -719,7 +723,7 @@ const CreateSalon = () => {
               <p>Vip</p>
               <p>$20</p>
               <p>30min</p>
-              <div>+</div>
+              <div><DeleteIcon/></div>
             </div>
           </div>
 
@@ -743,8 +747,9 @@ const CreateSalon = () => {
 
 
           <div className='salon_images_wrapper'>
-            <p>Select Salon Images</p>
             <div>
+              <p>Select Salon Images</p>
+
               <button onClick={() => handleMobileSalonImageButtonClick()}>
                 Upload
                 <input
@@ -755,8 +760,10 @@ const CreateSalon = () => {
                   multiple
                 />
               </button>
+            </div>
 
-              <div>{mobilesalonimages}</div>
+            <div>
+              <p>{mobilesalonimagesnames && mobilesalonimagesnames.join(',  ')}</p>
             </div>
           </div>
 

@@ -884,7 +884,8 @@
 
 .service_container_item {
     min-height: 5.5rem;
-    width: 100%;
+    min-width: 78rem;
+    max-width: 100%;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -926,8 +927,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    background-color: var(--primary-bg-color3);
+    font-size: 1.6rem;
+    background-color: red;
     color: var(--primary-text-light-color1);
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -938,13 +939,13 @@
     cursor: pointer;
 }
 
-.create_salon_content_wrapper>div:nth-child(2)>div:nth-child(24) {
+.create_salon_content_wrapper>div:nth-child(2)>div:nth-child(26) {
     width: 100%;
     margin-inline: auto;
     margin-top: 2rem;
 }
 
-.create_salon_content_wrapper>div:nth-child(2)>div:nth-child(24)>button {
+.create_salon_content_wrapper>div:nth-child(2)>div:nth-child(26)>button {
     width: 40%;
     height: 4.5rem;
     font-size: 1.6rem;
@@ -969,7 +970,8 @@
     gap: 2rem;
 }
 
-.salon_logo_wrapper {
+.salon_logo_wrapper,
+.salon_images_wrapper {
     display: none !important;
 }
 
@@ -984,6 +986,132 @@
 
     .create_salon_content_wrapper {
         grid-template-columns: 1fr;
+    }
+
+    .salon_logo_wrapper {
+        display: flex !important;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .salon_logo_wrapper>div {
+        min-height: 4rem;
+        background-color: var(--bg-color3);
+        border: none;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        padding-right: 1rem;
+        font-size: 1.6rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .salon_logo_wrapper>div>button {
+        width: 25%;
+        height: 100%;
+        min-height: 4rem;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-bg-color3);
+        box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_logo_wrapper>div>div {
+        width: calc(100% - 25% - 2rem);
+        min-height: 4rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .salon_images_wrapper {
+        margin-top: 2rem;
+        display: flex !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(1) {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>p {
+        font-size: 1.6rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>button {
+        height: 4rem;
+        width: 25%;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-bg-color3);
+        color: var(--primary-text-light-color1);
+        box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    .salon_images_wrapper>div:nth-child(2) {
+        min-height: 10rem !important;
+        max-height: 10rem;
+        width: 100%;
+        background-color: green;
+        background-color: var(--bg-color3);
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        padding: 1rem;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar {
+        width: 6px !important;
+        height: 7px;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-track {
+        background-color: #fff !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb {
+        background: var(--primary-bg-color3) !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255) !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)>p{
+        font-size: 1.6rem;
+        line-height: 3rem;
+    }
+
+    .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(5)>button{
+        width: 60%;
     }
 }
 
@@ -1041,7 +1169,7 @@
         color: var(--primary-text-light-color1);
     }
 
-    .salon_logo_wrapper>div>div{
+    .salon_logo_wrapper>div>div {
         width: calc(100% - 25% - 2rem);
         min-height: 4rem;
         display: flex;
@@ -1049,6 +1177,94 @@
     }
 
     .salon_images_wrapper {
+        margin-top: 2rem;
+        display: flex !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(1) {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>p {
+        font-size: 1.6rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>button {
+        height: 4rem;
+        width: 25%;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-bg-color3);
+        color: var(--primary-text-light-color1);
+        box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    .salon_images_wrapper>div:nth-child(2) {
+        min-height: 10rem !important;
+        max-height: 10rem;
+        width: 100%;
+        background-color: green;
+        background-color: var(--bg-color3);
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        padding: 1rem;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar {
+        width: 6px !important;
+        height: 7px;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-track {
+        background-color: #fff !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb {
+        background: var(--primary-bg-color3) !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255) !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)>p{
+        font-size: 1.6rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width:1250px) {
+    .create_salon_content_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .create_salon_content_wrapper>div:nth-child(2) {
+        width: 100%;
+    }
+
+    .create_salon_content_wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .salon_logo_wrapper {
         display: flex !important;
         flex-direction: column;
         gap: 1rem;
@@ -1056,7 +1272,7 @@
         margin-bottom: 1rem;
     }
 
-    .salon_images_wrapper>div {
+    .salon_logo_wrapper>div {
         min-height: 4rem;
         background-color: var(--bg-color3);
         border: none;
@@ -1073,7 +1289,7 @@
         gap: 2rem;
     }
 
-    .salon_images_wrapper>div>button {
+    .salon_logo_wrapper>div>button {
         width: 25%;
         height: 100%;
         min-height: 4rem;
@@ -1089,18 +1305,87 @@
         color: var(--primary-text-light-color1);
     }
 
-    .salon_images_wrapper>div>div{
-        width: 30rem;
+    .salon_logo_wrapper>div>div {
+        width: calc(100% - 25% - 2rem);
         min-height: 4rem;
-        max-height: 4rem;
         display: flex;
         align-items: center;
-        flex-wrap: nowrap;
-        /* background-color: rgba(255, 0, 0, 0.358);
-        overflow-x: auto; */
+    }
+
+    .salon_images_wrapper {
+        margin-top: 2rem;
+        display: flex !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(1) {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>p {
+        font-size: 1.6rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(1)>button {
+        height: 4rem;
+        width: 25%;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-bg-color3);
+        color: var(--primary-text-light-color1);
+        box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    .salon_images_wrapper>div:nth-child(2) {
+        min-height: 10rem !important;
+        max-height: 10rem;
+        width: 100%;
+        background-color: green;
+        background-color: var(--bg-color3);
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        padding: 1rem;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar {
+        width: 6px !important;
+        height: 7px;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-track {
+        background-color: #fff !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb {
+        background: var(--primary-bg-color3) !important;
+    }
+    
+    .salon_images_wrapper>div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255) !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)>p{
+        font-size: 1.6rem;
+        line-height: 3rem;
     }
 }
-
 
 @media screen and (min-width: 1250px) and (max-width: 1440px) {
     .create_salon_content_wrapper>div:nth-child(1)>div:nth-child(2) {
