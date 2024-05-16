@@ -11,19 +11,19 @@ const CreateSalon = () => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 8
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 768 },
       items: 7
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
+      breakpoint: { max: 768, min: 430 },
+      items: 5
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
+      breakpoint: { max: 430, min: 0 },
+      items: 3
     }
   };
 
@@ -308,9 +308,54 @@ const CreateSalon = () => {
     setSalonImages(urls.filter((url) => url !== null));
   };
 
+  const [mobilesalonlogo, setMobileSalonlogo] = useState("")
 
-  console.log(salonImages)
+  const mobileSalonInputRef = useRef(null);
 
+  const handleMobileSalonLogoButtonClick = () => {
+    mobileSalonInputRef.current.click();
+  };
+
+  const handleMobileSalonFileInputChange = async (e) => {
+    const uploadImage = e.target.files[0]; // Get the uploaded file
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+    if (!allowedTypes.includes(uploadImage.type)) {
+      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
+
+    setMobileSalonlogo(uploadImage.name)
+  };
+
+
+  const [mobilesalonimages, setMobileSalonimages] = useState("")
+
+  const mobileSalonImageInputRef = useRef(null);
+
+  const handleMobileSalonImageButtonClick = () => {
+    mobileSalonImageInputRef.current.click();
+  };
+
+  const handleMobileSalonImageFileInputChange = async (e) => {
+    const uploadedFiles = e.target.files;
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+    // Iterate over each uploaded file
+    const names = Array.from(uploadedFiles).map((file) => {
+      if (!allowedTypes.includes(file.type)) {
+        alert("Please upload only valid image files (JPEG, WebP, PNG).");
+        return null; 
+      }
+
+      return file.name; 
+    }).filter(Boolean);
+
+    setMobileSalonimages((prevImages) => [...prevImages, ...names]);
+  };
+
+  console.log(mobilesalonimages)
 
   return (
     <div className='create_salon_wrapper'>
@@ -675,6 +720,43 @@ const CreateSalon = () => {
               <p>$20</p>
               <p>30min</p>
               <div>+</div>
+            </div>
+          </div>
+
+
+          <div className='salon_logo_wrapper'>
+            <p>Select Salon Logo</p>
+            <div>
+              <button onClick={() => handleMobileSalonLogoButtonClick()}>
+                Upload
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={mobileSalonInputRef}
+                  onChange={handleMobileSalonFileInputChange}
+                />
+              </button>
+
+              <div>{mobilesalonlogo}</div>
+            </div>
+          </div>
+
+
+          <div className='salon_images_wrapper'>
+            <p>Select Salon Images</p>
+            <div>
+              <button onClick={() => handleMobileSalonImageButtonClick()}>
+                Upload
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={mobileSalonImageInputRef}
+                  onChange={handleMobileSalonImageFileInputChange}
+                  multiple
+                />
+              </button>
+
+              <div>{mobilesalonimages}</div>
             </div>
           </div>
 
