@@ -87,7 +87,7 @@
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: 0.3fr 0.8fr 1fr 1fr 0.4fr 0.4fr 0.4fr;
+    grid-template-columns: 0.4fr 0.8fr 1fr 1fr 0.4fr 0.4fr 0.4fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
@@ -149,18 +149,33 @@
 .salon_content_body>div>div:nth-child(6)>div,
 .salon_content_body>div>div:nth-child(7)>div{
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
-    width: 40%;
-    height: 55%;
-    border-radius: 6px;
+    width: 4.5rem;
+    height: 4.5rem;
     background-color: var(--primary-bg-light-color1);
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.salon_content_body>div>div:nth-child(5)>div{
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+}
+
+.salon_content_body>div>div:nth-child(6)>div{
+    background-color: red;
+    color: var(--primary-text-light-color1);
+}
+
+.salon_content_body>div>div:nth-child(7)>div{
+    background-color: #720455;
+    color: var(--primary-text-light-color1);
 }
 
 
