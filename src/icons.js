@@ -26,6 +26,9 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { AiOutlineMenu } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { IoPersonCircle } from "react-icons/io5";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { MdOutlineMessage } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -62,3 +65,6 @@ export const CameraIcon = MdOutlineCameraAlt
 export const Uploadicon = AiOutlineCloudUpload
 export const MobileMenuIcon = AiOutlineMenu
 export const MobileCrossIcon = RxCross1
+export const EmailIcon = MdOutlineMailOutline
+export const MessageIcon = MdOutlineMessage
+export const SearchIcon = IoSearch

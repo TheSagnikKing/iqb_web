@@ -19,14 +19,13 @@
     font-weight: bold;
 }
 
-.customer_wrapper>div:nth-child(1)>button{
+.customer_wrapper>div:nth-child(1)>div{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 9rem;
+    width: 32rem;
     height: 100%;
-    gap: 0rem;
-    background-color: var(--primary-bg-light-color1);
+    /* background-color: var(--primary-bg-light-color1); */
     border: none;
     border-radius: 6px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
@@ -37,19 +36,37 @@
     -o-border-radius: 6px;
 }
 
-.customer_wrapper>div:nth-child(1)>button>p{
-    font-weight: 500;
-    font-size: 1.4rem;
+.customer_wrapper>div:nth-child(1)>div>input{
+    height: 100%;
+    width: calc(100% - 4rem);
+    border: none;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    padding-inline: 1rem;
+    font-size: 1.6rem;
 }
 
-.customer_wrapper>div:nth-child(1)>button>div{
+.customer_wrapper>div:nth-child(1)>div>input:focus{
+    outline: none;
+}
+
+.customer_wrapper>div:nth-child(1)>div>div{
+    width: 4rem;
+    height:4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     font-size: 2rem;
-    font-weight: 500;
+    cursor: pointer;
 }
 
 .customer_content_wrapper{
     width: 100%;
-    height: 100%;
+    height: 85%;
     border-radius: 1.7rem;
     -webkit-border-radius: 1.7rem;
     -moz-border-radius: 1.7rem;
@@ -59,7 +76,7 @@
 }
 
 .customer_content_body{
-    height: calc(88vh - 6rem);
+    height: 98%;
     width: 100%;
     overflow-y: scroll;
 }
@@ -83,8 +100,8 @@
 
 .customer_content_body>div{
     min-height: 6rem;
-    min-width:100%;
-    max-width: 100rem;
+    min-width:100rem;
+    max-width: 100%;
     background-color: #efefef;
     display: grid;
     grid-template-columns: 0.4fr 0.5fr 0.8fr 0.4fr 0.5fr 0.4fr 0.4fr 0.4fr;
@@ -134,9 +151,9 @@
     text-overflow: ellipsis;
 }
 
-.customer_content_body>div>div:nth-child(5),
 .customer_content_body>div>div:nth-child(6),
-.customer_content_body>div>div:nth-child(7)
+.customer_content_body>div>div:nth-child(7),
+.customer_content_body>div>div:nth-child(8)
 {
     height: 100%;
     width: 100%;
@@ -145,9 +162,9 @@
     align-items: center;
 }
 
-.customer_content_body>div>div:nth-child(5)>div,
 .customer_content_body>div>div:nth-child(6)>div,
-.customer_content_body>div>div:nth-child(7)>div{
+.customer_content_body>div>div:nth-child(7)>div,
+.customer_content_body>div>div:nth-child(8)>div{
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     width: 4.5rem;
     height: 4.5rem;
@@ -163,30 +180,70 @@
     -o-border-radius: 50%;
 }
 
-.customer_content_body>div>div:nth-child(5)>div{
+.customer_content_body>div>div:nth-child(6)>div{
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
 }
 
-.customer_content_body>div>div:nth-child(6)>div{
-    background-color: red;
+.customer_content_body>div>div:nth-child(7)>div{
+    background-color: #FC6736;
     color: var(--primary-text-light-color1);
 }
 
-.customer_content_body>div>div:nth-child(7)>div{
+.customer_content_body>div>div:nth-child(8)>div{
     background-color: #720455;
     color: var(--primary-text-light-color1);
 }
 
+.customer_pagination_wrapper{
+    width: 100%;
+    height: 4rem;
+}
+
+.customer_pagination_wrapper>div{
+    width: 10rem;
+    height: 4rem;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.customer_pagination_wrapper>div>div{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+    font-size: 2rem;
+    box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .customer_content_wrapper{
+        width: calc(100vw - 4rem);
+    }
+
+    .customer_pagination_wrapper{
         width: calc(100vw - 4rem);
     }
 }
 
 @media screen and (min-width:430px) and (max-width:768px){
     .customer_content_wrapper{
+        width: calc(100vw - 4rem);
+    }
+
+    .customer_pagination_wrapper{
         width: calc(100vw - 4rem);
     }
 }
