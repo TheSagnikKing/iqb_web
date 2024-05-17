@@ -96,25 +96,23 @@ const DashboardHeader = () => {
                         <button onClick={() => setMobileDrop(false)}>X</button>
                         <p>Choose Salon</p>
                         <div>
-                            <div>
-                                <p>Classic touch</p>
-                            </div>
-                            <div
-                                className='mobile_dashboard_salon_list_dropdown'
-                                ref={salonlistRef}
-                                style={{
-                                    opacity: 1,
-                                    zIndex: 2,
-                                    transition: "300ms ease",
-                                    height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "20rem"
-                                }}
-                            >
-                                {
-                                    salonListNames.map((s) => (
-                                        <p key={s.id}>{s.salonName}</p>
-                                    ))
-                                }
-                            </div>
+                            <p>Classic touch</p>
+                        </div>
+                        <div
+                            className='mobile_dashboard_salon_list_dropdown'
+                            ref={salonlistRef}
+                            style={{
+                                opacity: 1,
+                                zIndex: 2,
+                                transition: "300ms ease",
+                                height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "20rem"
+                            }}
+                        >
+                            {
+                                salonListNames.map((s) => (
+                                    <p key={s.id}>{s.salonName}</p>
+                                ))
+                            }
                         </div>
                         <button>Apply</button>
                     </div>
