@@ -96,16 +96,6 @@ const Header = () => {
             </div>
           ))
         }
-
-        {/* <div>
-          <div>icon</div>
-          <p>Menu Title</p>
-        </div>
-
-        <div>
-          <div>icon</div>
-          <p>Menu Title</p>
-        </div> */}
       </div>
     </header>
   )

@@ -17,7 +17,7 @@ const DashboardHeader = () => {
 
     useEffect(() => {
         let salondropHandler = (e) => {
-            if (salonlistRef.current && !salonlistRef.current.contains(e.target) ) {
+            if (salonlistRef.current && !salonlistRef.current.contains(e.target)) {
                 console.log(salonlistRef.current.contains(e.target))
                 setSalonlistdrop(false)
             }
@@ -32,29 +32,33 @@ const DashboardHeader = () => {
 
     const salonListNames = [
         {
-            id:1,
+            id: 1,
             salonName: "classicTouch",
             salonId: 1
         },
         {
-            id:2,
+            id: 2,
             salonName: "Couture",
             salonId: 2
-        },{
-            id:3,
+        }, {
+            id: 3,
             salonName: "Bella Vida",
             salonId: 3
         },
         {
-            id:4,
+            id: 4,
             salonName: "Couture",
             salonId: 4
-        },{
-            id:5,
+        }, {
+            id: 5,
             salonName: "Bella Vida",
             salonId: 5
         }
     ]
+
+    const [mobiledrop, setMobileDrop] = useState(false)
+
+    console.log("Mobile Drop ", mobiledrop)
 
     return (
         <div className='admin_dashboard_header_wrapper'>
@@ -82,6 +86,41 @@ const DashboardHeader = () => {
                 </div>
                 <button>Apply</button>
             </div>
+
+            <div className='mobile_choose_salon_div'>
+                <button onClick={() => setMobileDrop((prev) => !prev)}>mobileico</button>
+            </div>
+            {
+                mobiledrop && <section className='chooseSalon_modal'>
+                    <div className="chooseSalon_model_content">
+                        <button>X</button>
+                        <p>Choose Salon</p>
+                        <div>
+                            <div>
+                                <p>Classic touch</p>
+                                <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
+                            </div>
+                            <div
+                                className='mobile_dashboard_salon_list_dropdown'
+                                ref={salonlistRef}
+                                style={{
+                                    opacity: salonlistdrop ? "1" : "0",
+                                    zIndex: salonlistdrop ? "2" : "-1",
+                                    transition: "300ms ease",
+                                    height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
+                                }}
+                            >
+                                {
+                                    salonListNames.map((s) => (
+                                        <p key={s.id}>{s.salonName}</p>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <button>Apply</button>
+                    </div>
+                </section>
+            }
             <div className='profile_wrapper'>
                 <div
                     style={{
