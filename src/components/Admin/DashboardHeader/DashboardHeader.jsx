@@ -88,26 +88,25 @@ const DashboardHeader = () => {
             </div>
 
             <div className='mobile_choose_salon_div'>
-                <button onClick={() => setMobileDrop((prev) => !prev)}>mobileico</button>
+                <button onClick={() => setMobileDrop((prev) => !prev)}>Select Salon</button>
             </div>
             {
                 mobiledrop && <section className='chooseSalon_modal'>
                     <div className="chooseSalon_model_content">
-                        <button>X</button>
+                        <button onClick={() => setMobileDrop(false)}>X</button>
                         <p>Choose Salon</p>
                         <div>
                             <div>
                                 <p>Classic touch</p>
-                                <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
                             </div>
                             <div
                                 className='mobile_dashboard_salon_list_dropdown'
                                 ref={salonlistRef}
                                 style={{
-                                    opacity: salonlistdrop ? "1" : "0",
-                                    zIndex: salonlistdrop ? "2" : "-1",
+                                    opacity: 1,
+                                    zIndex: 2,
                                     transition: "300ms ease",
-                                    height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
+                                    height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "20rem"
                                 }}
                             >
                                 {
