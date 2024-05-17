@@ -7,11 +7,11 @@
 }
 .calender-header{
     display: grid;
-    grid-template-columns: repeat(7,50px);
+    grid-template-columns: repeat(7,5rem);
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 5px;
+    gap: 0.5rem;
     font-size: 1.3rem;
 }
 .calender-header>div{
