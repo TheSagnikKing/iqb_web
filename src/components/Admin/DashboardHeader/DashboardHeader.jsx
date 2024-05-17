@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./DashboardHeader.css"
 import Skeleton from 'react-loading-skeleton'
-import { DropdownIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
+import { DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
+import { menudata } from '../menudata'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const DashboardHeader = () => {
     const [salonlistdrop, setSalonlistdrop] = useState(false)
@@ -57,6 +59,28 @@ const DashboardHeader = () => {
     ]
 
     const [mobiledrop, setMobileDrop] = useState(false)
+    const [sidebarToggle, setSidebarToggle] = useState(false)
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const MobileIconDropRef = useRef()
+
+    useEffect(() => {
+      const handleClickMobileIconOutside = (event) => {
+        if (
+          MobileIconDropRef.current &&
+          !MobileIconDropRef.current.contains(event.target)
+        ) {
+          setSidebarToggle(false)
+        }
+      };
+  
+      document.addEventListener('mousedown', handleClickMobileIconOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickMobileIconOutside);
+      };
+    }, []);
 
     console.log("Mobile Drop ", mobiledrop)
 
@@ -144,7 +168,50 @@ const DashboardHeader = () => {
                         /> :
                         <div><img src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" /></div>
                 }
+                <div onClick={() => setSidebarToggle(true)}
+                    className='dashboard_mobile_menu'
+                ><MobileMenuIcon /></div>
+            </div>
 
+
+            <div
+                className={`dashboard_mobile_sidebar_container ${sidebarToggle ? "dashboard_mobile_sidebar_active" : "dashboard_mobile_sidebar_inactive"}`}
+                ref={MobileIconDropRef}
+            >
+                <button onClick={() => setSidebarToggle(false)}><MobileCrossIcon /></button>
+
+                {
+                    menudata.map((m) => (
+                        <div
+                            key={m.id}
+                            className={`${m.url === location?.pathname && "dashboard_mobile_menu_item_active"}`}
+                            onClick={() => navigate(m?.url)}
+                        >
+                            <div style={{
+                                color: m.url === location?.pathname && "var(--primary-bg-color3)"
+                            }}>{m.icon}</div>
+                            <p
+                                style={{
+                                    color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                                }}>{m.title}</p>
+                        </div>
+                    ))
+                }
+
+                <div className='dashboard_theme_container'>
+                    <p>Theme</p>
+                    <div
+                        style={{
+                            background: togglecheck ? "#FF8A08" : "#000"
+                        }}
+                    >
+                        <p className={`toggle_btn_text ${togglecheck ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{togglecheck ? <Sunicon /> : <MoonIcon />}</p>
+                        <button
+                            className={`toggle_btn ${togglecheck ? 'toggle_active' : 'toggle_inactive'}`}
+                            onClick={toggleHandler}
+                        ></button>
+                    </div>
+                </div>
             </div>
         </div>
     )

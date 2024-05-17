@@ -133,6 +133,7 @@
         align-content: center;
         font-size: 2.2rem;
         cursor: pointer;
+        font-weight: bold;
     }
 
     .admin_header_wrapper {
@@ -221,7 +222,7 @@
 }
 
 
-@media screen and (min-width:430px) and (max-width:768px) {
+@media screen and (min-width:430px) and (max-width:1140px) {
     .profile_header_wrapper>div:nth-child(4) {
         height: 2.2rem;
         width: 2.2rem;

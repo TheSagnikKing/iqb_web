@@ -816,9 +816,3 @@
         margin-left: 0.5%;
     }
 }
-
-/* @media screen and (min-height:800px) and (max-height:1300px){
-    .admin_dashboard_page_container {
-        grid-template-rows: auto;
-    }
-} */

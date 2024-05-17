@@ -266,7 +266,7 @@
     }
 }
 
-@media screen and (min-width:430px) and (max-width:768px){
+@media screen and (min-width:430px) and (max-width:1140px){
     .admin_barber_content_wrapper{
         width: calc(100vw - 4rem);
     }

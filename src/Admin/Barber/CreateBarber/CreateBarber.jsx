@@ -30,14 +30,14 @@ const CreateBarber = () => {
 
         <div>
           <div>
-            <p>Barber Mobile Number</p>
+            <p>Mobile No.</p>
             <input
               type='text'
             />
           </div>
 
           <div>
-            <p>Barber Date of Birth</p>
+            <p>Date of Birth</p>
             <input
               type='date'
               placeholder='dd/mm/yy'
