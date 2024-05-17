@@ -251,6 +251,7 @@
         -ms-transition: 300ms ease-in;
         -o-transition: 300ms ease-in;
         padding: 2rem;
+        overflow-y: scroll;
     }
 
     .mobile_sidebar_active {
