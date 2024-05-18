@@ -238,11 +238,11 @@
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .customer_content_wrapper {
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 
     .customer_pagination_wrapper {
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 
     .customer_search {
@@ -273,11 +273,11 @@
 
 @media screen and (min-width:431px) and (max-width:1140px) {
     .customer_content_wrapper {
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 
     .customer_pagination_wrapper {
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 
     .customer_search {

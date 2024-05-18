@@ -181,12 +181,12 @@
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .salon_content_wrapper{
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 }
 
 @media screen and (min-width:431px) and (max-width:1140px){
     .salon_content_wrapper{
-        width: calc(100vw - 4rem);
+        width: calc(100vw - 2rem);
     }
 }
