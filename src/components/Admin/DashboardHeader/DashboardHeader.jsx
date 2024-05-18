@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./DashboardHeader.css"
 import Skeleton from 'react-loading-skeleton'
-import { DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
+import { Adminqueueicon, DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
 import { menudata } from '../menudata'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -67,22 +67,26 @@ const DashboardHeader = () => {
     const MobileIconDropRef = useRef()
 
     useEffect(() => {
-      const handleClickMobileIconOutside = (event) => {
-        if (
-          MobileIconDropRef.current &&
-          !MobileIconDropRef.current.contains(event.target)
-        ) {
-          setSidebarToggle(false)
-        }
-      };
-  
-      document.addEventListener('mousedown', handleClickMobileIconOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickMobileIconOutside);
-      };
+        const handleClickMobileIconOutside = (event) => {
+            if (
+                MobileIconDropRef.current &&
+                !MobileIconDropRef.current.contains(event.target)
+            ) {
+                setSidebarToggle(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickMobileIconOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickMobileIconOutside);
+        };
     }, []);
 
     console.log("Mobile Drop ", mobiledrop)
+
+    const handleExternalNavigation = () => {
+        window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
+    };
 
     return (
         <div className='admin_dashboard_header_wrapper'>
@@ -197,6 +201,11 @@ const DashboardHeader = () => {
                         </div>
                     ))
                 }
+
+                <div onClick={handleExternalNavigation}>
+                    <p><Adminqueueicon /></p>
+                    <p>Queueing</p>
+                </div>
 
                 <div className='dashboard_theme_container'>
                     <p>Theme</p>

@@ -56,9 +56,7 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className={`menu_item`}  onClick={handleExternalNavigation}
-
-          >
+          <div className={`menu_item`}  onClick={handleExternalNavigation}>
             <p><Adminqueueicon/></p>
             <p>Queueing</p>
           </div>

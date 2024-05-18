@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Header.css"
-import { MobileCrossIcon, MobileMenuIcon, Notificationicon, Settingsicon } from '../../../icons'
+import { Adminqueueicon, MobileCrossIcon, MobileMenuIcon, Notificationicon, Settingsicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { menudata } from '../menudata.jsx'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -38,6 +38,10 @@ const Header = () => {
   }, []);
 
   console.log(location.pathname)
+
+  const handleExternalNavigation = () => {
+    window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
+  };
 
   return (
     <header className='admin_header_wrapper'>
@@ -81,21 +85,29 @@ const Header = () => {
 
         {
           menudata.map((m) => (
-            <div 
-            key={m.id}
-            className={`${m.url === location?.pathname && "mobile_menu_item_active"}`}
-            onClick={() => navigate(m?.url)}
+            <div
+              key={m.id}
+              className={`${m.url === location?.pathname && "mobile_menu_item_active"}`}
+              onClick={() => {
+                navigate(m?.url)
+                setSidebarToggle(false)
+              }}
             >
               <div style={{
                 color: m.url === location?.pathname && " var(--primary-bg-color3)"
               }}>{m.icon}</div>
-              <p 
-              style={{
-                color: m.url === location?.pathname && " var(--primary-bg-color3)"
-              }}>{m.title}</p>
+              <p
+                style={{
+                  color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                }}>{m.title}</p>
             </div>
           ))
         }
+
+        <div onClick={handleExternalNavigation}>
+          <p><Adminqueueicon /></p>
+          <p>Queueing</p>
+        </div>
       </div>
     </header>
   )
