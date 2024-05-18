@@ -1156,6 +1156,11 @@
     .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(5)>button{
         width: 60%;
     }
+
+    .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(8)>div>div{
+        padding-block: 1rem;
+        padding-inline: 0rem;
+    }
 }
 
 @media screen and (min-width: 431px) and (max-width:768px) {
