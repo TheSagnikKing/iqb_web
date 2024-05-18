@@ -31,22 +31,22 @@ export const menudata = [
         icon: <Adminadvertisementicon />,
         url: "/admin-advertisemt"
     },
-    {
-        id: 6,
-        title: "Queuings",
-        icon: <Adminqueueicon />,
-        url: "/admin-queue"
-    },
-    {
-        id: 7,
-        title: "Appointments",
-        icon: <Adminappointmenticon />,
-        url: "/admin-appointment"
-    },
-    {
-        id: 8,
-        title: "Reports",
-        icon: <Adminreporticon />,
-        url: "/admin-report"
-    },
+    // {
+    //     id: 6,
+    //     title: "Queuings",
+    //     icon: <Adminqueueicon />,
+    //     url: "/admin-queue"
+    // },
+    // {
+    //     id: 7,
+    //     title: "Appointments",
+    //     icon: <Adminappointmenticon />,
+    //     url: "/admin-appointment"
+    // },
+    // {
+    //     id: 8,
+    //     title: "Reports",
+    //     icon: <Adminreporticon />,
+    //     url: "/admin-report"
+    // },
 ]

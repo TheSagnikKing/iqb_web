@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Sidebar.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { LeftArrow, RightArrow } from '../../../icons'
+import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons'
 import Header from '../Header/Header.jsx'
 import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 import Skeleton from 'react-loading-skeleton'
@@ -15,6 +15,10 @@ const Sidebar = () => {
   const location = useLocation()
 
   const [loading, setLoading] = useState(false)
+
+  const handleExternalNavigation = () => {
+    window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
+  };
 
   return (
     <main className='container'>
@@ -51,6 +55,13 @@ const Sidebar = () => {
               }}>{m.title}</p>
             </div>
           ))}
+
+          <div className={`menu_item`}  onClick={handleExternalNavigation}
+
+          >
+            <p><Adminqueueicon/></p>
+            <p>Queueing</p>
+          </div>
         </div>
 
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
