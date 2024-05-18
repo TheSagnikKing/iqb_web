@@ -31,26 +31,28 @@ const EditProfile = () => {
 
     const [otp, setOtp] = useState(["", "", "", ""]);
     const otpinputRef = useRef([]);
-  
+
     const handleOtpInputChange = (index, value) => {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-  
-      if (value && index < otp.length - 1) {
-        otpinputRef.current[index + 1].focus();
-      }
-  
-      setOtp(newOtp);
-    };
-  
-    const handleKeyDown = (index, e) => {
-      if (e.key === "Backspace" && index > 0 && !otp[index]) {
         const newOtp = [...otp];
-        newOtp[index - 1] = "";
-        otpinputRef.current[index - 1].focus();
+        newOtp[index] = value;
+
+        if (value && index < otp.length - 1) {
+            otpinputRef.current[index + 1].focus();
+        }
+
         setOtp(newOtp);
-      }
     };
+
+    const handleKeyDown = (index, e) => {
+        if (e.key === "Backspace" && index > 0 && !otp[index]) {
+            const newOtp = [...otp];
+            newOtp[index - 1] = "";
+            otpinputRef.current[index - 1].focus();
+            setOtp(newOtp);
+        }
+    };
+
+    console.log(otp)
 
     return (
         <div className='admin_edit_profile'>
@@ -72,15 +74,8 @@ const EditProfile = () => {
                 </div>
 
                 <div>
-                    <div>
-                        <p>First Name</p>
-                        <input type="text" />
-                    </div>
-
-                    <div>
-                        <p>last Name</p>
-                        <input type="text" />
-                    </div>
+                    <p>Name</p>
+                    <input type="text" />
                 </div>
 
                 <div>
@@ -147,8 +142,8 @@ const EditProfile = () => {
                                                 value={digit}
                                                 autoFocus={index === 0}
                                                 ref={(ref) => (otpinputRef.current[index] = ref)}
-                                                onChange={(e) => handleOtpInputChange(index,e.target.value)}
-                                                onKeyDown={(e) => handleKeyDown(index,e)}
+                                                onChange={(e) => handleOtpInputChange(index, e.target.value)}
+                                                onKeyDown={(e) => handleKeyDown(index, e)}
                                             ></input>
                                         ))
                                     }

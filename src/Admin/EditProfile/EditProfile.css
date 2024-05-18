@@ -81,6 +81,34 @@
     color: var(--primary-text-light-color1);
 }
 
+.admin_edit_profile_content_wrapper>div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin_edit_profile_content_wrapper>div:nth-child(2)>p{
+    font-size: 1.6rem;
+}
+
+.admin_edit_profile_content_wrapper>div:nth-child(2)>input{
+    min-height: 4rem;
+    width: 100%;
+    background-color: var(--bg-color3);
+    border: none;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    padding-inline: 1rem;
+    font-size: 1.6rem;
+}
+
+.admin_edit_profile_content_wrapper>div:nth-child(2)>input:focus{
+    outline: 2px solid var(--primary-bg-color3);
+}
+
 .admin_edit_profile_content_wrapper>div>div {
     display: flex;
     flex-direction: column;
