@@ -1115,7 +1115,7 @@
     }
 }
 
-@media screen and (min-width: 430px) and (max-width:768px) {
+@media screen and (min-width: 431px) and (max-width:768px) {
     .edit_salon_content_wrapper>div:nth-child(1) {
         display: none;
     }
@@ -1251,7 +1251,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width:1250px) {
+@media screen and (min-width: 769px) and (max-width:1250px) {
     .edit_salon_content_wrapper>div:nth-child(1) {
         display: none;
     }
@@ -1387,7 +1387,7 @@
     }
 }
 
-@media screen and (min-width: 1250px) and (max-width: 1440px) {
+@media screen and (min-width: 1251px) and (max-width: 1440px) {
     .edit_salon_content_wrapper>div:nth-child(1)>div:nth-child(2) {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);

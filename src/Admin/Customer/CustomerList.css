@@ -271,7 +271,7 @@
     }
 }
 
-@media screen and (min-width:430px) and (max-width:1140px) {
+@media screen and (min-width:431px) and (max-width:1140px) {
     .customer_content_wrapper {
         width: calc(100vw - 4rem);
     }

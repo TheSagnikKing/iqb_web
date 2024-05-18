@@ -563,26 +563,9 @@
 .admin_dashboard_page_container{
         grid-template-columns: 1fr;
         grid-template-rows: 25rem 25rem 27rem 27rem 1fr;
-        overflow-y: scroll;
+        overflow-y: auto;
         gap: 1rem;
         padding-block: 0.5rem;
-    }
-
-    .admin_dashboard_page_container::-webkit-scrollbar {
-        width: 6px !important;
-        height: 7px;
-    }
-
-    .admin_dashboard_page_container::-webkit-scrollbar-track {
-        background-color: #fff !important;
-    }
-
-    .admin_dashboard_page_container::-webkit-scrollbar-thumb {
-        background: var(--primary-bg-color3) !important;
-    }
-
-    .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255) !important;
     }
 
     .admin_dashboard_page_container>div:nth-child(2)>div:nth-child(1){
@@ -618,8 +601,8 @@
     }
 
     .admin_dashboard_page_container>div {
-        width: 99%;
-        margin-left: 1%;
+        width: 98%;
+        margin-inline: 1%;
     }
 
     .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(1)>div:nth-child(2){
@@ -627,7 +610,7 @@
     }
 
     .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div{
-        width: calc(100vw - 7rem);
+        width: calc(100vw - 5rem);
     }
 
     .admin_dashboard_page_container>div:nth-child(1)>div>h1{
@@ -639,7 +622,7 @@
     }
 }
 
-@media screen and (min-width:1140px) and (max-width:1250px) {
+/* @media screen and (min-width:1140px) and (max-width:1250px) {
     .admin_dashboard_page_container {
         overflow-y: scroll;
     }
@@ -675,9 +658,9 @@
         width: 99.5%;
         margin-left: 0.5%;
     }
-}
+} */
 
-@media screen and (min-width:430px) and (max-width:1140px) {
+@media screen and (min-width:431px) and (max-width:1140px) {
     .admin_dashboard_page_container{
         grid-template-columns: 1fr;
         grid-template-rows: 25rem 25rem 27rem 27rem 1fr;
@@ -741,7 +724,7 @@
     }
 }
 
-@media screen and (min-width:1140px) and (max-width:1250px) {
+@media screen and (min-width:1141px) and (max-width:1250px) {
     .admin_dashboard_page_container {
         overflow-y: scroll;
     }
@@ -779,7 +762,7 @@
     }
 }
 
-@media screen and (min-width:1250px) and (max-width:1440px) {
+@media screen and (min-width:1251px) and (max-width:1440px) {
     .admin_dashboard_page_container {
         overflow-y: scroll;
     }

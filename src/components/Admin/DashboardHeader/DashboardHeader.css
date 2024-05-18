@@ -266,8 +266,8 @@
     .chooseSalon_modal {
         position: absolute;
         top: 0px;
-        left: -2rem;
-        right: -2rem;
+        left: -1rem;
+        right: -1rem;
         bottom: 0px;
         width: 100vw;
         height: 100vh;
@@ -553,7 +553,7 @@
     }
 }
 
-@media screen and (min-width:430px) and (max-width:1140px) {
+@media screen and (min-width:431px) and (max-width:1140px) {
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
@@ -588,8 +588,8 @@
     .chooseSalon_modal {
         position: absolute;
         top: 0px;
-        left: -2rem;
-        right: -2rem;
+        left: -1rem;
+        right: -1rem;
         bottom: 0px;
         width: 100vw;
         height: 100vh;

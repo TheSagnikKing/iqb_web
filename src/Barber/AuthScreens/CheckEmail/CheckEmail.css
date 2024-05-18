@@ -91,7 +91,7 @@
     }
 }
 
-@media((min-width:576px) and (max-width:768px)) {
+@media((min-width:577px) and (max-width:768px)) {
     .check_email_container{
         grid-template-columns: 1fr;
     }
@@ -101,7 +101,7 @@
     }
 }
 
-@media((min-width:768px) and (max-width:992px)) {
+@media((min-width:769px) and (max-width:992px)) {
     .check_email_container{
         grid-template-columns: 1fr;
     }
@@ -111,7 +111,7 @@
     }
 }
 
-@media((min-width:992px) and (max-width:1200px)) {
+@media((min-width:993px) and (max-width:1200px)) {
     .check_email_container{
         grid-template-columns: 0.9fr 1fr;
     }

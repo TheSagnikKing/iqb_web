@@ -170,7 +170,7 @@ iframe{
     }
 }
 
-@media((min-width:576px) and (max-width:768px)) {
+@media((min-width:577px) and (max-width:768px)) {
     .barber_signup_container{
         grid-template-columns: 1fr;
     }
@@ -180,7 +180,7 @@ iframe{
     }
 }
 
-@media((min-width:768px) and (max-width:992px)) {
+@media((min-width:769px) and (max-width:992px)) {
     .barber_signup_container{
         grid-template-columns: 1fr;
     }
@@ -190,7 +190,7 @@ iframe{
     }
 }
 
-@media((min-width:992px) and (max-width:1200px)) {
+@media((min-width:993px) and (max-width:1200px)) {
     .barber_signup_container{
         grid-template-columns: 0.9fr 1fr;
     }

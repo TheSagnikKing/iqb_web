@@ -176,7 +176,7 @@ iframe{
     }
 }
 
-@media((min-width:576px) and (max-width:768px)) {
+@media((min-width:577px) and (max-width:768px)) {
     .barber_signin_container{
         grid-template-columns: 1fr;
     }
@@ -186,7 +186,7 @@ iframe{
     }
 }
 
-@media((min-width:768px) and (max-width:992px)) {
+@media((min-width:769px) and (max-width:992px)) {
     .barber_signin_container{
         grid-template-columns: 1fr;
     }
