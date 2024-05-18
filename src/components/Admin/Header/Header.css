@@ -104,6 +104,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+    position: relative;
 }
 
 .profile_header_wrapper>div:nth-child(3)>img {
@@ -122,6 +123,47 @@
 
 .mobile_sidebar_container{
     display: none;
+}
+
+.profile_drop_container{
+    position: absolute;
+    top: 5rem;
+    right: 0rem;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    background-color: var(--primary-bg-light-color1);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 15rem;
+}
+
+.profile_drop_container>p{
+    min-height: 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.profile_drop_container>p:hover{
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

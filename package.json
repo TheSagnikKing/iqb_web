@@ -12,9 +12,12 @@
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
     "date-fns": "^3.6.0",
+    "i": "^0.3.7",
     "normalize.css": "^8.0.1",
+    "npm": "^10.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^5.1.0",
     "react-loading-skeleton": "^3.4.0",
     "react-multi-carousel": "^2.8.5",
