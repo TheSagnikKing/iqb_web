@@ -29,6 +29,8 @@ import { IoPersonCircle } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineMessage } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
+
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -68,3 +70,4 @@ export const MobileCrossIcon = RxCross1
 export const EmailIcon = MdOutlineMailOutline
 export const MessageIcon = MdOutlineMessage
 export const SearchIcon = IoSearch
+export const CheckIcon = FaCheck

@@ -88,6 +88,34 @@ const DashboardHeader = () => {
         window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
     };
 
+ 
+    const [adminEditDrop, setAdminEditDrop] = useState(false)
+  
+    const adminEditDropHandler = () => {
+        setAdminEditDrop((prev) => !prev)
+    }
+  
+    const adminEditIconRef = useRef()
+    const adminEditDropRef = useRef()
+  
+    useEffect(() => {
+      const handleClickProfileOutside = (event) => {
+        if (
+            adminEditIconRef.current &&
+            adminEditDropRef.current &&
+          !adminEditIconRef.current.contains(event.target) &&
+          !adminEditDropRef.current.contains(event.target)
+        ) {
+            setAdminEditDrop(false);
+        }
+      };
+  
+      document.addEventListener('mousedown', handleClickProfileOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickProfileOutside);
+      };
+    }, []);
+
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
@@ -170,7 +198,22 @@ const DashboardHeader = () => {
                                 borderRadius: "50%"
                             }}
                         /> :
-                        <div><img src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" /></div>
+                        <div>
+                            <img 
+                            src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" 
+                            onClick={() => setAdminEditDrop((prev) => !prev)}
+                            ref={adminEditIconRef}
+                            />
+
+                            {
+                                adminEditDrop && <div ref={adminEditDropRef}
+                                className="profile_drop_container"
+                                >
+                                    <p onClick={() => navigate("/admin-editprofile")}>My Profile</p>
+                                    <p>Logout</p>
+                                </div>
+                            }
+                        </div>
                 }
                 <div onClick={() => setSidebarToggle(true)}
                     className='dashboard_mobile_menu'

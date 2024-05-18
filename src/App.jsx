@@ -27,6 +27,7 @@ const AdminCustomerList = React.lazy(() => import("./Admin/Customer/CustomerList
 const AdminCreateBarber = React.lazy(() => import("./Admin/Barber/CreateBarber/CreateBarber"))
 const AdminEditSalon = React.lazy(() => import("./Admin/Salon/EditSalon/EditSalon"))
 const AdminEditBarber = React.lazy(() => import("./Admin/Barber/EditBarber/EditBarber"))
+const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfile"))
 
 const App = () => {
 
@@ -47,6 +48,7 @@ const App = () => {
           {/* Admin Main Pages  */}
           <Route element={<AdminSidebar />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/admin-editprofile" element={<AdminEditProfile />} />
             <Route path="/admin-salonlist" element={<AdminSalonList />} />
             <Route path="/admin-createsalon" element={<AdminCreateSalon/>}/>
             <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon/>}/>
