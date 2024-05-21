@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
 
 const Public = React.lazy(() => import("./Public/Public"))
 const AdminSignin = React.lazy(() => import("./Admin/AuthScreens/Signin/Signin"))
@@ -28,51 +29,71 @@ const AdminCreateBarber = React.lazy(() => import("./Admin/Barber/CreateBarber/C
 const AdminEditSalon = React.lazy(() => import("./Admin/Salon/EditSalon/EditSalon"))
 const AdminEditBarber = React.lazy(() => import("./Admin/Barber/EditBarber/EditBarber"))
 const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfile"))
+const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
+
+import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
+import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
+import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
+import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Public />} />
+    <>
+      <Toaster />
+      <BrowserRouter>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Public />} />
 
-          {/* Admin Auth Screens */}
-          <Route path="/adminsignin" element={<AdminSignin />} />
-          <Route path="/adminsignup" element={<AdminSignup />} />
-          <Route path="/adminforgotpassword" element={<AdminForgotPassword/>}/>
-          <Route path="/admincheckemail" element={<AdminCheckEmail/>}/>
-          <Route path="/adminchangepassword" element={<AdminChangePassword/>}/>
-          <Route path="/adminpasswordreset" element={<AdminPasswordReset/>}/>
+            {/* Admin Auth Screens */}
+            <Route element={<ProtectedAdminAuthRoute />}>
+              <Route path="/adminsignin" element={<AdminSignin />} />
+              <Route path="/adminsignup" element={<AdminSignup />} />
+              <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
+              <Route path="/admincheckemail" element={<AdminCheckEmail />} />
+              <Route path="/adminchangepassword" element={<AdminChangePassword />} />
+              <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
+            </Route>
 
-          {/* Admin Main Pages  */}
-          <Route element={<AdminSidebar />}>
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/admin-editprofile" element={<AdminEditProfile />} />
-            <Route path="/admin-salonlist" element={<AdminSalonList />} />
-            <Route path="/admin-createsalon" element={<AdminCreateSalon/>}/>
-            <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon/>}/>
-            <Route path="/admin-barberlist" element={<AdminBarberList />} />
-            <Route path="/admin-createbarber" element={<AdminCreateBarber />} />
-            <Route path="/admin-editbarber/:salonid" element={<AdminEditBarber />} />
-            <Route path="/admin-customerlist" element={<AdminCustomerList />} />
-            <Route path="/admin-advertisemt" element={<AdminAdvertisement />} />
-            <Route path="/admin-queue" element={<AdminQueue />} />
-            <Route path="/admin-appointment" element={<AdminAppointment />} />
-            <Route path="/admin-report" element={<AdminReport />} />
-          </Route>
+            {/* Admin Main Pages  */}
+            <Route element={<ProtectedAdminRoute />}>
+              <Route element={<AdminSidebar />}>
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                <Route path="/admin-editprofile" element={<AdminEditProfile />} />
+                <Route path="/admin-salonlist" element={<AdminSalonList />} />
+                <Route path="/admin-createsalon" element={<AdminCreateSalon />} />
+                <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon />} />
+                <Route path="/admin-barberlist" element={<AdminBarberList />} />
+                <Route path="/admin-createbarber" element={<AdminCreateBarber />} />
+                <Route path="/admin-editbarber/:salonid" element={<AdminEditBarber />} />
+                <Route path="/admin-customerlist" element={<AdminCustomerList />} />
+                <Route path="/admin-advertisemt" element={<AdminAdvertisement />} />
+                <Route path="/admin-queue" element={<AdminQueue />} />
+                <Route path="/admin-appointment" element={<AdminAppointment />} />
+                <Route path="/admin-report" element={<AdminReport />} />
+              </Route>
+            </Route>
 
-          {/* Barber Auth Screens */}
-          <Route path="/barbersignin" element={<BarberSignin />} />
-          <Route path="/barbersignup" element={<BarberSignup />} />
-          <Route path="/barberforgotpassword" element={<BarberForgotPassword/>}/>
-          <Route path="/barbercheckemail" element={<BarberCheckEmail/>}/>
-          <Route path="/barberchangepassword" element={<BarberChangePassword/>}/>
-          <Route path="/barberpasswordreset" element={<BarberPasswordReset/>}/>
+            {/* Barber Auth Screens */}
+            <Route element={<ProtectedBarberAuthRoute />}>
+              <Route path="/barbersignin" element={<BarberSignin />} />
+              <Route path="/barbersignup" element={<BarberSignup />} />
+              <Route path="/barberforgotpassword" element={<BarberForgotPassword />} />
+              <Route path="/barbercheckemail" element={<BarberCheckEmail />} />
+              <Route path="/barberchangepassword" element={<BarberChangePassword />} />
+              <Route path="/barberpasswordreset" element={<BarberPasswordReset />} />
+            </Route>
 
-        </Routes>
-      </React.Suspense>
-    </BrowserRouter>
+            <Route element={<ProtectedBarberRoute />}>
+              <Route path="/barber-dashboard" element={<BarberDashboard />} />
+            </Route>
+
+
+          </Routes>
+        </React.Suspense>
+      </BrowserRouter>
+    </>
   )
 }
 

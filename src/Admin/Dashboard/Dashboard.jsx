@@ -7,7 +7,13 @@ import { ChartIcon1, ChartIcon2, ChartIcon3, Threeverticaldots, UserIcon } from 
 import { ResponsiveContainer, LineChart, Line } from 'recharts'
 import Calender from '../../components/Admin/Calender/Calender'
 
+import { useSelector } from 'react-redux';
+
 const Dashboard = () => {
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const adminName = useSelector(state => state.AdminLoggedInMiddleware.adminName)
 
   const [loading, setLoading] = useState(false)
 
@@ -135,6 +141,9 @@ const Dashboard = () => {
 
   const [currentDate, setCurrentDate] = useState(new Date())
 
+  console.log("Admin SalonId ",salonId)
+  console.log("Admin Email ",email)
+  
   return (
     <div className='admin_dashboard_page_container'>
       <div>
@@ -142,7 +151,7 @@ const Dashboard = () => {
           loading ?
             <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
             <div>
-              <h1>Welcome Back Sagnik,</h1>
+              <h1>Welcome Back {adminName},</h1>
               <div
                 style={{
                   background: togglecheck ? "limegreen" : "#000"

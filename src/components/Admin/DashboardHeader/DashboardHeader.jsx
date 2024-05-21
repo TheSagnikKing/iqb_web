@@ -4,6 +4,8 @@ import Skeleton from 'react-loading-skeleton'
 import { Adminqueueicon, DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
 import { menudata } from '../menudata'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
+import { useDispatch } from 'react-redux'
 
 const DashboardHeader = () => {
     const [salonlistdrop, setSalonlistdrop] = useState(false)
@@ -61,6 +63,7 @@ const DashboardHeader = () => {
     const [mobiledrop, setMobileDrop] = useState(false)
     const [sidebarToggle, setSidebarToggle] = useState(false)
 
+    const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -82,8 +85,7 @@ const DashboardHeader = () => {
         };
     }, []);
 
-    console.log("Mobile Drop ", mobiledrop)
-
+    
     const handleExternalNavigation = () => {
         window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
     };
@@ -115,6 +117,10 @@ const DashboardHeader = () => {
         document.removeEventListener('mousedown', handleClickProfileOutside);
       };
     }, []);
+
+    const logoutHandler = async () => {
+        dispatch(AdminLogoutAction(navigate))
+      }
 
     return (
         <div className='admin_dashboard_header_wrapper'>
@@ -210,7 +216,7 @@ const DashboardHeader = () => {
                                 className="profile_drop_container"
                                 >
                                     <p onClick={() => navigate("/admin-editprofile")}>My Profile</p>
-                                    <p>Logout</p>
+                                    <p onClick={logoutHandler}>Logout</p>
                                 </div>
                             }
                         </div>

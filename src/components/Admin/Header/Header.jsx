@@ -4,12 +4,15 @@ import { Adminqueueicon, MobileCrossIcon, MobileMenuIcon, Notificationicon, Sett
 import Skeleton from 'react-loading-skeleton'
 import { menudata } from '../menudata.jsx'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction.js'
 
 const Header = () => {
 
   const [loading, setLoading] = useState(false)
-
   const [togglecheck, setTogglecheck] = useState(false)
+
+  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -73,6 +76,13 @@ const Header = () => {
     };
   }, []);
 
+  
+  const logoutHandler = async () => {
+    // dispatch(AdminLogoutAction(navigate))
+    alert("logout")
+  }
+
+
   return (
     <header className='admin_header_wrapper'>
       <div>
@@ -114,7 +124,7 @@ const Header = () => {
                   className="profile_drop_container"
                 >
                   <p onClick={() => navigate("/admin-editprofile")}>My Profile</p>
-                  <p>Logout</p>
+                  <p onClick={() => logoutHandler()}>Logout</p>
                 </div>
               }
             </div>

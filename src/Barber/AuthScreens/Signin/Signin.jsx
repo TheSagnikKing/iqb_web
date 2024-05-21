@@ -3,11 +3,19 @@ import './Signin.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
+import { useDispatch } from 'react-redux'
+import {BarberGoogleloginAction} from "../../../Redux/Barber/Actions/AuthAction"
 
 const Signin = () => {
 
-  const responseMessage = () => {
+  const [email,setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const responseMessage = (response) => {
+    dispatch(BarberGoogleloginAction(response.credential, navigate))
   }
 
   const errorMessage = () => {
@@ -30,8 +38,6 @@ const Signin = () => {
 
   const [visibleeye, setVisibleeye] = useState(false)
 
-  const navigate = useNavigate()
-
   const forgotClicked = () => {
     navigate("/barberforgotpassword")
   }
@@ -52,12 +58,16 @@ const Signin = () => {
           <input
             type="email"
             placeholder='Enter Your Email ID'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <div>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>
