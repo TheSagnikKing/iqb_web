@@ -6,7 +6,7 @@ export const AdminLoggedInMiddlewareReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                adminSalonId: action.payload.user[0].salonId,
+                adminSalonId: Number(action.payload.user[0].salonId),
                 adminEmail: action.payload.user[0].email,
                 adminName: action.payload.user[0].name,
                 entiredata: action.payload

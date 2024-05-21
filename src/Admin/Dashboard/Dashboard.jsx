@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import './Dashboard.css'
 import { Link } from 'react-router-dom'
@@ -7,9 +7,13 @@ import { ChartIcon1, ChartIcon2, ChartIcon3, Threeverticaldots, UserIcon } from 
 import { ResponsiveContainer, LineChart, Line } from 'recharts'
 import Calender from '../../components/Admin/Calender/Calender'
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import api from "../../Redux/api/Api"
+import { getAllAdvertisementAction, getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction';
 
 const Dashboard = () => {
+
+  const dispatch = useDispatch()
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
@@ -141,9 +145,55 @@ const Dashboard = () => {
 
   const [currentDate, setCurrentDate] = useState(new Date())
 
-  console.log("Admin SalonId ",salonId)
-  console.log("Admin Email ",email)
-  
+
+  const advertisementcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    advertisementcontrollerRef.current = controller;
+
+    dispatch(getAllAdvertisementAction(salonId, controller.signal));
+
+    return () => {
+      if (advertisementcontrollerRef.current) {
+        advertisementcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+
+  const getAllAdvertisement = useSelector(state => state.getAllAdvertisement)
+
+  const {
+    loading: getAllAdvertisementLoading,
+    resolve: getAllAdvertisementResolve,
+    advertisements
+  } = getAllAdvertisement
+
+
+  const queuelistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    queuelistcontrollerRef.current = controller;
+
+    dispatch(getAllQueueListAction(salonId, controller.signal));
+
+    return () => {
+      if (queuelistcontrollerRef.current) {
+        queuelistcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAllQueueList = useSelector(state => state.getAllQueueList)
+
+  const {
+    loading: getAllQueueListLoading,
+    resolve: getAllQueueListResolve,
+    response: queuelist
+  } = getAllQueueList
+
   return (
     <div className='admin_dashboard_page_container'>
       <div>
@@ -151,7 +201,7 @@ const Dashboard = () => {
           loading ?
             <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
             <div>
-              <h1>Welcome Back {adminName},</h1>
+              <h1>Welcome Back,</h1>
               <div
                 style={{
                   background: togglecheck ? "limegreen" : "#000"
@@ -200,30 +250,52 @@ const Dashboard = () => {
             </div>
           </div>
           {
-            loading ?
+            getAllQueueListLoading && !getAllQueueListResolve ?
               <div>
                 <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
                 <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
                 <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
               </div> :
-              <div>
-                <div>queue item</div>
-                <div>queue item</div>
-                <div>queue item</div>
-                <div>queue item</div>
-              </div>
+              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
+                <div>
+                  <div style={{
+                    background:"var(--primary-bg-color3)"
+                  }}>
+                    <p style={{color:"var(--primary-text-light-color1)"}}>Customer Name</p>
+                    <p style={{color:"var(--primary-text-light-color1)"}}>Barber Name</p>
+                    <p style={{color:"var(--primary-text-light-color1)"}}>Q Position</p>
+                    <p style={{color:"var(--primary-text-light-color1)"}}>Services</p>
+                  </div>
+
+                  {
+                    queuelist?.map((q) => (
+                      <div key={q._id}>
+                        <p>{q.name}</p>
+                        <p>{q.barberName}</p>
+                        <p>{q.qPosition}</p>
+                        <p>{q.services.map((s) => s.serviceName)}</p>
+                      </div>
+                    ))
+                  }
+                </div> :
+
+                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
+                  <div><p>No QueueList </p></div> :
+
+                  !getAllQueueListLoading && !getAllQueueListResolve &&
+                  <div><p>No QueueList </p></div>
           }
           <Link to="#">See All</Link>
         </div>
       </div>
 
       <div
-        style={{ 
+        style={{
           boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
         }}
       >
         {
-          loading ?
+          getAllAdvertisementLoading && !getAllAdvertisementResolve ?
             <div className='admin_dashboard_carousel_loading'>
               <Skeleton count={1}
                 height={"100%"}
@@ -233,31 +305,35 @@ const Dashboard = () => {
                 }}
               />
             </div> :
-            <div className='admin_dashboard_carousel'>
-              <Carousel
-                showThumbs={false}
-                infiniteLoop={true}
-                autoPlay={true}
-                interval={6000}
-                showStatus={false}
-                showArrows={false}
-                stopOnHover={false}
-                swipeable={false}
-              >
-                <div className='admin_dashboard_carousel_item'>
-                  <img src="https://images.fresha.com/lead-images/placeholders/barbershop-77.jpg?class=venue-gallery-large" />
+            !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
+              <div className='admin_dashboard_carousel'>
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop={true}
+                  autoPlay={true}
+                  interval={6000}
+                  showStatus={false}
+                  showArrows={false}
+                  stopOnHover={false}
+                  swipeable={false}
+                >
+                  {
+                    advertisements?.map((ad) => (
+                      <div className='admin_dashboard_carousel_item' key={ad._id}>
+                        <img src={ad.url} />
+                      </div>
+                    ))
+                  }
+                </Carousel>
+              </div> :
+              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
+                <div className='admin_dashboard_carousel error'>
+                  <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                </div> :
+                !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
+                <div className='admin_dashboard_carousel error'>
+                  <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
                 </div>
-
-                <div className='admin_dashboard_carousel_item'>
-                  <img src="https://img.freepik.com/free-photo/handsome-man-barber-shop-styling-hair_1303-20978.jpg" />
-                </div>
-
-                <div className='admin_dashboard_carousel_item'>
-                  <img src="https://media.istockphoto.com/id/872361244/photo/man-getting-his-beard-trimmed-with-electric-razor.jpg?s=612x612&w=0&k=20&c=_IjZcrY0Gp-2z6AWTQederZCA9BLdl-iqWkH0hGMTgg=" />
-                </div>
-
-              </Carousel>
-            </div>
         }
 
       </div>

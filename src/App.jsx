@@ -73,6 +73,7 @@ const App = () => {
                 <Route path="/admin-appointment" element={<AdminAppointment />} />
                 <Route path="/admin-report" element={<AdminReport />} />
               </Route>
+
             </Route>
 
             {/* Barber Auth Screens */}

@@ -1,9 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutReducer } from "./Admin/Reducers/AuthReducer"
 import { BarberGoogleLoginReducer, BarberLoggedInMiddlewareReducer } from "./Barber/Reducers/AuthReducer"
-import { getAllAdvertisementReducer } from "./Admin/Reducers/DashboardReducer"
-
-
+import { getAllAdvertisementReducer, getAllQueueListReducer } from "./Admin/Reducers/DashboardReducer"
 
 const rootReducer = combineReducers({
 
@@ -12,6 +10,7 @@ const rootReducer = combineReducers({
   AdminGoogleLogin: AdminGoogleLoginReducer,
   AdminLogout: AdminLogoutReducer,
   getAllAdvertisement:getAllAdvertisementReducer,
+  getAllQueueList:getAllQueueListReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,
