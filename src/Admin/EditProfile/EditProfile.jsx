@@ -1,6 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./EditProfile.css"
 import { CameraIcon, CheckIcon } from '../../icons';
+
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 const EditProfile = () => {
 
@@ -52,7 +55,73 @@ const EditProfile = () => {
         }
     };
 
-    console.log(otp)
+    const [gender, setGender] = useState("")
+    const [genderDrop, setGenderDrop] = useState(false)
+
+    const genderDropHandler = () => {
+        setGenderDrop((prev) => !prev)
+    }
+
+    const setGenderHandler = (value) => {
+        setGender(value)
+        setGenderDrop(false)
+    }
+
+    const genderinputRef = useRef()
+    const genderDropRef = useRef()
+
+    useEffect(() => {
+        const handleClickGenderOutside = (event) => {
+            if (
+                genderinputRef.current &&
+                genderDropRef.current &&
+                !genderinputRef.current.contains(event.target) &&
+                !genderDropRef.current.contains(event.target)
+            ) {
+                setGenderDrop(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickGenderOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickGenderOutside);
+        };
+    }, []);
+
+
+
+    const [mobileNumber, setMobileNumber] = useState("")
+    const [mobileNumberDrop, setMobileNumberDrop] = useState(false)
+
+    const mobileNumberDropHandler = () => {
+        setMobileNumberDrop((prev) => !prev)
+    }
+
+    const setMobileNumberHandler = (value) => {
+        setMobileNumber(value)
+        setMobileNumberDrop(false)
+    }
+
+    const mobileNumberinputRef = useRef()
+    const mobileNumberDropRef = useRef()
+
+    useEffect(() => {
+        const handleClickMobileNumberOutside = (event) => {
+            if (
+                mobileNumberinputRef.current &&
+                mobileNumberDropRef.current &&
+                !mobileNumberinputRef.current.contains(event.target) &&
+                !mobileNumberDropRef.current.contains(event.target)
+            ) {
+                setMobileNumberDrop(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickMobileNumberOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickMobileNumberOutside);
+        };
+    }, []);
 
     return (
         <div className='admin_edit_profile'>
@@ -89,9 +158,31 @@ const EditProfile = () => {
                         </div>
                     </div>
 
+                    {/* <div>
+                        <p>Mobile Number</p>
+                        <input
+                            type="text"
+                            value={`${mobileNumber ? `${mobileNumber}` : ''}`}
+                            onChange={(e) => setMobileNumber(e.target.value)}
+                            onClick={() => mobileNumberDropHandler()}
+                            ref={mobileNumberinputRef}
+                        />
+
+                        {mobileNumberDrop && <div ref={mobileNumberDropRef}>
+                            <p onClick={() => setMobileNumberHandler("Mobile 1")}>Mobile 1</p>
+                            <p onClick={() => setMobileNumberHandler("Mobile 2")}>Mobile 2</p>
+                            <p onClick={() => setMobileNumberHandler("Mobile 3")}>Mobile 3</p>
+                        </div>}
+                    </div> */}
+
                     <div>
                         <p>Mobile Number</p>
-                        <input type="email" />
+                        <PhoneInput
+                            forceDialCode={true}
+                            defaultCountry="gb"
+                            value={mobileNumber}
+                            onChange={(phone) => setMobileNumber(phone)}
+                        />
                     </div>
                 </div>
 
@@ -103,7 +194,19 @@ const EditProfile = () => {
 
                     <div>
                         <p>Gender</p>
-                        <input type="text" />
+                        <input
+                            type="text"
+                            value={`${gender ? `${gender}` : ''}`}
+                            onChange={(e) => setGender(e.target.value)}
+                            onClick={() => genderDropHandler()}
+                            ref={genderinputRef}
+                        />
+
+                        {genderDrop && <div ref={genderDropRef}>
+                            <p onClick={() => setGenderHandler("Male")}>Male</p>
+                            <p onClick={() => setGenderHandler("Female")}>Female</p>
+                            <p onClick={() => setGenderHandler("Other")}>Other</p>
+                        </div>}
                     </div>
                 </div>
 
