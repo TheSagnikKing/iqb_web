@@ -5,7 +5,12 @@ import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 
-const CreateSalon = () => {
+const EditSalon = () => {
+
+  const [serviceName, setServiceName] = useState("")
+  const [serviceDesc, setServiceDesc] = useState("")
+  const [servicePrice, setServicePrice] = useState("")
+  const [serviceEWT, setServiceEWT] = useState("")
 
   const responsive = {
     superLargeDesktop: {
@@ -89,7 +94,7 @@ const CreateSalon = () => {
     setSelectedLogo(item)
   }
 
-  const [salonType, setSalonType] = useState("Regular")
+  const [salonType, setSalonType] = useState("")
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
   const salonTypeDropHandler = () => {
@@ -503,6 +508,23 @@ const CreateSalon = () => {
     setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
   };
 
+
+  const [selectedServices, setSelectedServices] = useState([])
+
+  const addServiceHandler = () => {
+    const service = {
+      selectedLogo,
+      serviceName,
+      servicePrice,
+      serviceDesc,
+      serviceEWT
+    }
+
+
+  }
+
+  console.log(selectedServices)
+
   return (
     <div className='edit_salon_wrapper'>
       <p>Edit Salon</p>
@@ -712,18 +734,19 @@ const CreateSalon = () => {
           </div>
 
           <div>
-            <p>Salon Type : <b>{salonType}</b></p>
-            <div
+            <p>Salon Type</p>
+            <input
+              type="text"
+              value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               ref={salonTypeIconRef}
-            ><DropdownIcon /></div>
+            />
 
-            {
-              salonTypeDrop && <div ref={salonTypeDropRef}>
-                <p onClick={() => salonTypeHandler("Regular")}>Regular</p>
-                <p onClick={() => salonTypeHandler("Vip")}>Vip</p>
-              </div>
-            }
+            {salonTypeDrop && <div ref={salonTypeDropRef}>
+              <p onClick={() => salonTypeHandler("Salon Type 1")}>Salon Type 1</p>
+              <p onClick={() => salonTypeHandler("Salon Type 2")}>Salon Type 2</p>
+              <p onClick={() => salonTypeHandler("Salon Type 3")}>Salon Type 3</p>
+            </div>}
           </div>
 
           <div>
@@ -814,47 +837,64 @@ const CreateSalon = () => {
           <div>
             <p>Service Name</p>
             <input
-              type="text" />
+              type="text"
+              value={serviceName}
+              onChange={(e) => setServiceName(e.target.value)}
+              />
           </div>
 
           <div>
             <p>Service Desc</p>
             <input
-              type="text" />
+              type="text" 
+              value={serviceDesc}
+              onChange={(e) => setServiceDesc(e.target.value)}
+              />
           </div>
 
           <div>
-            <p>Service Type : <b>{serviceType}</b></p>
-            <div
+            <p>Service Type</p>
+            <input
+              type="text"
+              value={`${serviceType ? `${serviceType}` : ''}`}
               onClick={() => serviceTypeDropHandler()}
               ref={serviceTypeIconRef}
-            ><DropdownIcon /></div>
+            />
 
-            {
-              serviceTypeDrop && <div ref={serviceTypeDropRef}>
-                <p onClick={() => serviceTypeHandler("Regular")}>Regular</p>
-                <p onClick={() => serviceTypeHandler("Vip")}>Vip</p>
-              </div>
-            }
+            {serviceTypeDrop && <div ref={serviceTypeDropRef}>
+              <p onClick={() => serviceTypeHandler("Regular")}>Regular</p>
+              <p onClick={() => serviceTypeHandler("Vip")}>Vip</p>
+            </div>}
           </div>
 
           <div>
             <div>
               <p>Service Price</p>
-              <input type="text" />
+              <input 
+              type="text" 
+              value={servicePrice}
+              onChange={(e) => setServicePrice(e.target.value)}
+              />
             </div>
 
             <div>
               <p>Est Wait Tm(mins)</p>
-              <input type="text" />
+              <input 
+              type="text" 
+              value={serviceEWT}
+              onChange={(e) => setServiceEWT(e.target.value)}
+              />
             </div>
           </div>
 
           <div>
-            <button>Add Service</button>
+            <button onClick={addServiceHandler}>Add Service</button>
           </div>
 
           <div className='service_container'>
+            {/* {
+              selectedServices.map((s) => ())
+            } */}
             <div className='service_container_item'>
               <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
               <p>Hair cut</p>
@@ -864,51 +904,7 @@ const CreateSalon = () => {
               <p>30min</p>
               <div><DeleteIcon /></div>
             </div>
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Regular</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Vip</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Regular</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Vip</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Vip</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
+
           </div>
 
 
@@ -981,6 +977,6 @@ const CreateSalon = () => {
   )
 }
 
-export default CreateSalon
+export default EditSalon
 
 

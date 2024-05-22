@@ -159,16 +159,23 @@ const EditProfile = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='admin_profile_mobile_container'>
                         <p>Mobile Number</p>
-                        <PhoneInput
-                            forceDialCode={true}
-                            defaultCountry="gb"
-                            value={mobileNumber}
-                            onChange={(phone) => setMobileNumber(phone)}
-                        />
+                        <div>
+                            <div>
+                                <PhoneInput
+                                    forceDialCode={true}
+                                    defaultCountry="gb"
+                                    value={mobileNumber}
+                                    onChange={(phone) => setMobileNumber(phone)}
+                                />
+                            </div>
+                            <button onClick={() => {}}>
+                                <p>Verified</p>
+                                <div><CheckIcon /></div>
+                            </button>
+                        </div>
 
-                       
                     </div>
                 </div>
 

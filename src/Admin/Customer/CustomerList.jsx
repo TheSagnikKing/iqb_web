@@ -121,6 +121,10 @@ const CustomerList = () => {
           }}
         >
           <div>
+            <input
+              type="checkbox"
+              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+            />
             <p>Salon ID</p>
             <p>Name</p>
             <p>Email</p>
@@ -135,6 +139,10 @@ const CustomerList = () => {
               </> :
               customerlistdata.map((s) => (
                 <div key={s._id}>
+                  <input 
+                  type="checkbox" 
+                  style={{accentColor:"red",height:"1.6rem",width:"1.6rem"}}
+                  />
                   <p>{s.salonId}</p>
                   <p>{s.customerName}</p>
                   <p>{s.customerEmail}</p>

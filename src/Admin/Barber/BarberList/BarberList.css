@@ -92,6 +92,7 @@
     background: rgb(0, 98, 255) !important;
 }
 
+
 .admin_barber_content_body>div{
     min-height: 6rem;
     min-width: 100rem;
@@ -192,7 +193,7 @@
 }
 
 .admin_barber_content_body_item>div:nth-child(8)>div{
-    background-color: #720455;
+    background-color: red;
     color: var(--primary-text-light-color1);
 }
 

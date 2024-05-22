@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./BarberList.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, Notificationicon, Settingsicon } from '../../../icons'
+import { DeleteIcon, EditIcon, Notificationicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 
 const BarberList = () => {
@@ -103,13 +103,13 @@ const BarberList = () => {
   const editButtonClicked = (salonid) => {
     navigate(`/admin-editbarber/${salonid}`)
   }
-  
+
   return (
     <div className='admin_barber_wrapper'>
       <div>
         <p>Barber List</p>
         <div>
-          <button onClick={() => {}}>
+          <button onClick={() => { }}>
             <p>Send</p>
             <div><Notificationicon /></div>
           </button>
@@ -124,7 +124,10 @@ const BarberList = () => {
       <div className='admin_barber_content_wrapper'>
         <div className='admin_barber_content_body'>
           <div>
-            <div></div>
+            <input 
+            type="checkbox" 
+            style={{accentColor:"red",height:"1.6rem",width:"1.6rem"}}
+            />
             <p>Salon ID</p>
             <p>Barber Name</p>
             <p>Email</p>
@@ -138,7 +141,10 @@ const BarberList = () => {
               </> :
               barberlistdata.map((b) => (
                 <div className='admin_barber_content_body_item' key={b._id}>
-                  <input type="checkbox" />
+                  <input 
+                  type="checkbox" 
+                  style={{accentColor:"red",height:"1.6rem",width:"1.6rem"}}
+                  />
                   <p>{b.salonId}</p>
                   <p>{b.barberName}</p>
                   <p>{b.email}</p>
@@ -161,7 +167,7 @@ const BarberList = () => {
                     <div onClick={() => editButtonClicked(b.salonId)}><EditIcon /></div>
                   </div>
                   <div>
-                    <div><Settingsicon /></div>
+                    <div><DeleteIcon /></div>
                   </div>
                 </div>
               ))

@@ -30,6 +30,7 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineMessage } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
+import { RiExpandRightLine } from "react-icons/ri";
 
 
 // Make sure the icon first letter is capital
@@ -71,3 +72,4 @@ export const EmailIcon = MdOutlineMailOutline
 export const MessageIcon = MdOutlineMessage
 export const SearchIcon = IoSearch
 export const CheckIcon = FaCheck
+export const ServeIcon = RiExpandRightLine

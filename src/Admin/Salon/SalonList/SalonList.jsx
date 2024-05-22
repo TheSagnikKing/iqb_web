@@ -121,7 +121,6 @@ const SalonList = () => {
         }}
         >
           <div>
-            <p>Salon ID</p>
             <p>Salon Name</p>
             <p>Address</p>
             <p>City</p>
@@ -134,7 +133,6 @@ const SalonList = () => {
               </> :
               salonlistdata.map((s) => (
                 <div key={s._id}>
-                  <p>{s.salonId}</p>
                   <p>{s.salonName}</p>
                   <p>{s.address}</p>
                   <p>{s.city}</p>

@@ -43,7 +43,7 @@ const Signin = () => {
   const signinClicked = () => {
     const adminsignindata = { email, password}
     console.log(adminsignindata)
-    // navigate("/admin-dashboard")
+    navigate("/admin-dashboard")
   }
 
   const forgotClicked = () => {
