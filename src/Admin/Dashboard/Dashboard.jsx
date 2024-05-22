@@ -239,14 +239,14 @@ const Dashboard = () => {
           <div>
             <p>Queue List</p>
             <div>
-              <button onClick={() => setLoading((prev) => !prev)}>
+              {/* <button onClick={() => setLoading((prev) => !prev)}>
                 <div><UserIcon /></div>
                 <p>Add Customer</p>
               </button>
               <button>
                 <div><UserIcon /></div>
                 <p>Join Queue</p>
-              </button>
+              </button> */}
             </div>
           </div>
           {
@@ -285,7 +285,7 @@ const Dashboard = () => {
                   !getAllQueueListLoading && !getAllQueueListResolve &&
                   <div><p>No QueueList </p></div>
           }
-          <Link to="#">See All</Link>
+          <Link to="/admin-queuelist">See All</Link>
         </div>
       </div>
 

@@ -29,14 +29,14 @@ export const menudata = [
         id: 5,
         title: "Advertisements",
         icon: <Adminadvertisementicon />,
-        url: "/admin-advertisemt"
+        url: "/admin-salonadvertise"
     },
-    // {
-    //     id: 6,
-    //     title: "Queuings",
-    //     icon: <Adminqueueicon />,
-    //     url: "/admin-queue"
-    // },
+    {
+        id: 6,
+        title: "Queuings",
+        icon: <Adminqueueicon />,
+        url: "/admin-queuelist"
+    },
     // {
     //     id: 7,
     //     title: "Appointments",

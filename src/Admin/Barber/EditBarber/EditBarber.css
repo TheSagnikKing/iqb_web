@@ -14,8 +14,9 @@
 
 .admin_edit_barber_wrapper_container {
     width: 100%;
-    height: 95%;
+    height: auto;
     margin: auto;
+    margin-top: 0rem;
     border-radius: 1.7rem;
     -webkit-border-radius: 1.7rem;
     -moz-border-radius: 1.7rem;
@@ -114,7 +115,7 @@
 }
 
 .admin_barber_services_container {
-    height: 15rem;
+    height: 30rem;
     width: 100%;
     padding: 2rem;
     border-radius: 1rem;
@@ -245,7 +246,4 @@
         width: calc(100vw - 4rem);
     }
 
-    .admin_barber_services_container{
-        height: 18rem;
-    }
 }

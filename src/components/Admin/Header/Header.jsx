@@ -42,12 +42,6 @@ const Header = () => {
 
   console.log(location.pathname)
 
-  const handleExternalNavigation = () => {
-    window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
-  };
-
-
-   
   const [adminEditDrop, setAdminEditDrop] = useState(false)
   
   const adminEditDropHandler = () => {
@@ -159,11 +153,6 @@ const Header = () => {
             </div>
           ))
         }
-
-        <div onClick={handleExternalNavigation}>
-          <p><Adminqueueicon /></p>
-          <p>Queueing</p>
-        </div>
       </div>
     </header>
   )

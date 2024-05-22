@@ -16,10 +16,6 @@ const Sidebar = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const handleExternalNavigation = () => {
-    window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
-  };
-
   return (
     <main className='container'>
       <div className={`sidebar ${showSidebar ? "show" : "hide"}`}>
@@ -56,10 +52,6 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className={`menu_item`}  onClick={handleExternalNavigation}>
-            <p><Adminqueueicon/></p>
-            <p>Queueing</p>
-          </div>
         </div>
 
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>

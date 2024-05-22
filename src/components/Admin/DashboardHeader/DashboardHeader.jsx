@@ -85,12 +85,6 @@ const DashboardHeader = () => {
         };
     }, []);
 
-    
-    const handleExternalNavigation = () => {
-        window.location.href = 'https://iqb-kiyosk-final.netlify.app'; // external URL
-    };
-
- 
     const [adminEditDrop, setAdminEditDrop] = useState(false)
   
     const adminEditDropHandler = () => {
@@ -250,11 +244,6 @@ const DashboardHeader = () => {
                         </div>
                     ))
                 }
-
-                <div onClick={handleExternalNavigation}>
-                    <p><Adminqueueicon /></p>
-                    <p>Queueing</p>
-                </div>
 
                 <div className='dashboard_theme_container'>
                     <p>Theme</p>

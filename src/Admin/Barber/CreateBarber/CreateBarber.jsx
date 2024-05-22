@@ -1,8 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./CreateBarber.css"
 import { DeleteIcon } from '../../../icons'
 
 const CreateBarber = () => {
+
+  const servicesList = [
+    {
+      _id: 1,
+      serviceId: 101,
+      serviceName: "Service 11",
+      EWT: 30,
+    },
+    {
+      _id: 2,
+      serviceId: 102,
+      serviceName: "Service 21",
+      EWT: 34,
+    },
+    {
+      _id: 3,
+      serviceId: 111,
+      serviceName: "Service 15",
+      EWT: 48,
+    },
+    {
+      _id: 4,
+      serviceId: 130,
+      serviceName: "Service 26",
+      EWT: 40,
+    },
+    {
+      _id: 5,
+      serviceId: 206,
+      serviceName: "Service 87",
+      EWT: 69,
+    }
+  ]
+
+  const [chooseServices, setChooseServices] = useState([])
+
+  const chooseServiceHandler = (service) => {
+      setChooseServices([...chooseServices, service])
+  }
+
+  const deleteServiceHandler = (service) => {
+    setChooseServices(chooseServices.filter((f) => f._id !== service._id))
+  }
+
+  console.log(chooseServices)
+
   return (
     <div className='admin_create_barber_wrapper'>
       <p>Create Barber</p>
@@ -48,255 +94,51 @@ const CreateBarber = () => {
         <p>Add Services</p>
 
         <div className='admin_barber_services_container'
-        style={{
-          marginBottom:"4rem"
-        }}
+          style={{
+            marginBottom: "3rem"
+          }}
         >
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
+          {
+            servicesList.map((s) => (
+              <div className='admin_barber_services_container_item' key={s._id}>
+                <div>
+                  <p>Service ID</p>
+                  <p>{s.serviceId}</p>
+                </div>
 
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
+                <div>
+                  <p>Service Name</p>
+                  <p>{s.serviceName}</p>
+                </div>
 
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
+                <div>
+                  <p>Est Wait Tm(mins)</p>
+                  <input
+                    type="text"
+                    value={s.EWT}
+                  />
+                </div>
+                {
+                  chooseServices.find((c) => c._id === s._id) ?
+                    <div
+                      style={{
+                        background: "red"
+                      }}
+                      onClick={() => deleteServiceHandler(s)}
+                    ><DeleteIcon/></div> :
+                    <div
+                      style={{
+                        background: "var(--primary-bg-color3)"
+                      }}
+                      onClick={() => chooseServiceHandler(s)}
+                    >+</div>
+                }
 
-            <div
-              style={{
-                background: "var(--primary-bg-color3)"
-              }}
-            >+</div>
 
-          </div>
+              </div>
+            ))
+          }
 
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "var(--primary-bg-color3)"
-              }}
-            >+</div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "var(--primary-bg-color3)"
-              }}
-            >+</div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "var(--primary-bg-color3)"
-              }}
-            >+</div>
-
-          </div>
-
-        </div>
-
-        <div className='admin_barber_services_container'>
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "red"
-              }}
-            ><DeleteIcon /></div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "red"
-              }}
-            ><DeleteIcon /></div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "red"
-              }}
-            ><DeleteIcon /></div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "red"
-              }}
-            ><DeleteIcon /></div>
-
-          </div>
-
-          <div className='admin_barber_services_container_item'>
-            <div>
-              <p>Service ID</p>
-              <p>205</p>
-            </div>
-
-            <div>
-              <p>Service Name</p>
-              <p>ladies haircut of any length</p>
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={32}
-              />
-            </div>
-
-            <div
-              style={{
-                background: "red"
-              }}
-            ><DeleteIcon /></div>
-
-          </div>
         </div>
 
         <div>

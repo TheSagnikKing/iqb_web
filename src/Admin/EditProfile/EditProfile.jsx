@@ -150,30 +150,14 @@ const EditProfile = () => {
                 <div>
                     <div>
                         <p>Email</p>
-                        <input type="email" />
-
-                        <div onClick={() => setVerifyEmailButtonClicked((prev) => !prev)}>
-                            <p>Verified Email</p>
-                            <div><CheckIcon /></div>
+                        <div>
+                            <input type="email" />
+                            <button onClick={() => setVerifyEmailButtonClicked((prev) => !prev)}>
+                                <p>Verified</p>
+                                <div><CheckIcon /></div>
+                            </button>
                         </div>
                     </div>
-
-                    {/* <div>
-                        <p>Mobile Number</p>
-                        <input
-                            type="text"
-                            value={`${mobileNumber ? `${mobileNumber}` : ''}`}
-                            onChange={(e) => setMobileNumber(e.target.value)}
-                            onClick={() => mobileNumberDropHandler()}
-                            ref={mobileNumberinputRef}
-                        />
-
-                        {mobileNumberDrop && <div ref={mobileNumberDropRef}>
-                            <p onClick={() => setMobileNumberHandler("Mobile 1")}>Mobile 1</p>
-                            <p onClick={() => setMobileNumberHandler("Mobile 2")}>Mobile 2</p>
-                            <p onClick={() => setMobileNumberHandler("Mobile 3")}>Mobile 3</p>
-                        </div>}
-                    </div> */}
 
                     <div>
                         <p>Mobile Number</p>
@@ -183,6 +167,8 @@ const EditProfile = () => {
                             value={mobileNumber}
                             onChange={(phone) => setMobileNumber(phone)}
                         />
+
+                       
                     </div>
                 </div>
 
@@ -227,33 +213,35 @@ const EditProfile = () => {
                                 <img src="./email_verification.png" alt="" />
                             </div>
                             <div>
-                                <p>Check Your Email</p>
-                                <p>An email with a verification code was just sent to your email address</p>
-
                                 <div>
-                                    <p>arghy@gmail.com</p>
-                                    <button>change</button>
-                                </div>
+                                    <p>Check Your Email</p>
+                                    <p>An email with a verification code was just sent to your email address</p>
 
-                                <div>
-                                    {
-                                        otp.map((digit, index) => (
-                                            <input
-                                                type="text"
-                                                key={index}
-                                                maxLength={1}
-                                                value={digit}
-                                                autoFocus={index === 0}
-                                                ref={(ref) => (otpinputRef.current[index] = ref)}
-                                                onChange={(e) => handleOtpInputChange(index, e.target.value)}
-                                                onKeyDown={(e) => handleKeyDown(index, e)}
-                                            ></input>
-                                        ))
-                                    }
-                                </div>
+                                    <div>
+                                        <p>arghy@gmail.com</p>
+                                        <button>change</button>
+                                    </div>
 
-                                <div>
-                                    <button>Verify</button>
+                                    <div>
+                                        {
+                                            otp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (otpinputRef.current[index] = ref)}
+                                                    onChange={(e) => handleOtpInputChange(index, e.target.value)}
+                                                    onKeyDown={(e) => handleKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <div>
+                                        <button>Verify</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
