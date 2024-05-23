@@ -26,8 +26,8 @@ const BarberList = () => {
     navigate("/admin-createbarber")
   }
 
-  const editButtonClicked = (salonid) => {
-    navigate(`/admin-editbarber/${salonid}`)
+  const editButtonClicked = (barber) => {
+    navigate(`/admin-editbarber/${barber.salonId}`,{state:barber})
   }
 
 
@@ -194,7 +194,7 @@ const BarberList = () => {
                     </button>
 
                     <div>
-                      <div onClick={() => editButtonClicked(b.salonId)}><EditIcon /></div>
+                      <div onClick={() => editButtonClicked(b)}><EditIcon /></div>
                     </div>
                     <div>
                       <div><DeleteIcon /></div>
