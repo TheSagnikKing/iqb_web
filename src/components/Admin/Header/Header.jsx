@@ -40,7 +40,7 @@ const Header = () => {
     };
   }, []);
 
-  console.log(location.pathname)
+  // console.log(location.pathname)
 
   const [adminEditDrop, setAdminEditDrop] = useState(false)
   
