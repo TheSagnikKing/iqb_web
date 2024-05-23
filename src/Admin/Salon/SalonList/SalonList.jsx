@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./SalonList.css"
 import { DeleteIcon, EditIcon, Settingsicon } from '../../../icons'
 import { useNavigate } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 
 const SalonList = () => {
+
+  const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const createSalonClicked = () => {
@@ -99,6 +105,22 @@ const SalonList = () => {
       city: "Washington D.C"
     },
   ]
+
+
+  const SalonListControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonListControllerRef.current = controller;
+
+    dispatch(getAdminSalonListAction(email, controller.signal));
+
+    return () => {
+      if (SalonListControllerRef.current) {
+        SalonListControllerRef.current.abort();
+      }
+    };
+  }, [email, dispatch]);
 
   const editButtonClicked = (salonid) => {
     navigate(`/admin-editsalon/${salonid}`)

@@ -47,17 +47,17 @@ const App = () => {
             <Route path="/" element={<Public />} />
 
             {/* Admin Auth Screens */}
-            {/* <Route element={<ProtectedAdminAuthRoute />}> */}
+            <Route element={<ProtectedAdminAuthRoute />}>
               <Route path="/adminsignin" element={<AdminSignin />} />
               <Route path="/adminsignup" element={<AdminSignup />} />
               <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
               <Route path="/admincheckemail" element={<AdminCheckEmail />} />
               <Route path="/adminchangepassword" element={<AdminChangePassword />} />
               <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
-            {/* </Route> */}
+            </Route>
 
             {/* Admin Main Pages  */}
-            {/* <Route element={<ProtectedAdminRoute />}> */}
+            <Route element={<ProtectedAdminRoute />}>
               <Route element={<AdminSidebar />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/admin-editprofile" element={<AdminEditProfile />} />
@@ -74,7 +74,7 @@ const App = () => {
                 <Route path="/admin-report" element={<AdminReport />} />
               </Route>
 
-            {/* </Route> */}
+            </Route>
 
             {/* Barber Auth Screens */}
             <Route element={<ProtectedBarberAuthRoute />}>

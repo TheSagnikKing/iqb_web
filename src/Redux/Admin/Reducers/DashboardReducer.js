@@ -1,4 +1,4 @@
-import { GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS } from "../Constants/constants";
+import { GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS } from "../Constants/constants";
 
 export const getAllAdvertisementReducer = (state = {}, action) => {
     switch (action.type) {
@@ -54,3 +54,29 @@ export const getAllQueueListReducer = (state = {}, action) => {
     }
 };
 
+export const getDashboardAppointmentListReducer = (state = {}, action) => {
+    switch (action.type) {
+        case GET_DASHBOARD_APPOINTMENT_LIST_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case GET_DASHBOARD_APPOINTMENT_LIST_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}

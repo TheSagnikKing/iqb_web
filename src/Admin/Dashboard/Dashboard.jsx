@@ -9,7 +9,7 @@ import Calender from '../../components/Admin/Calender/Calender'
 
 import { useDispatch, useSelector } from 'react-redux';
 import api from "../../Redux/api/Api"
-import { getAllAdvertisementAction, getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction';
+import { getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
 
 const Dashboard = () => {
 
@@ -92,58 +92,6 @@ const Dashboard = () => {
     },
   ];
 
-  const appointmentdata = [
-    {
-      id: 1,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 2,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 3,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 4,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 5,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 6,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 7,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-    {
-      id: 8,
-      customerId: "BH1387687357",
-      firstName: "Rob",
-      lastName: "Lee"
-    },
-  ]
-
-  const [currentDate, setCurrentDate] = useState(new Date())
 
 
   const advertisementcontrollerRef = useRef(new AbortController());
@@ -193,6 +141,38 @@ const Dashboard = () => {
     resolve: getAllQueueListResolve,
     response: queuelist
   } = getAllQueueList
+
+  const [currentDate, setCurrentDate] = useState(new Date())
+
+  console.log(currentDate?.toISOString())
+
+  const appointmentlistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    if (currentDate) {
+      const formattedDate = currentDate?.toISOString()
+
+      const controller = new AbortController();
+      appointmentlistcontrollerRef.current = controller;
+
+      dispatch(getDashboardAppointmentListAction(salonId, formattedDate, controller.signal));
+
+      return () => {
+        if (appointmentlistcontrollerRef.current) {
+          appointmentlistcontrollerRef.current.abort();
+        }
+      };
+    }
+  }, [salonId, dispatch, currentDate])
+
+
+  const getDashboardAppointmentList = useSelector(state => state.getDashboardAppointmentList)
+
+  const {
+    loading: getDashboardAppointmentListLoading,
+    resolve: getDashboardAppointmentListResolve,
+    response: appointmentList
+  } = getDashboardAppointmentList
 
   return (
     <div className='admin_dashboard_page_container'>
@@ -259,12 +239,12 @@ const Dashboard = () => {
               !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
                 <div>
                   <div style={{
-                    background:"var(--primary-bg-color3)"
+                    background: "var(--primary-bg-color3)"
                   }}>
-                    <p style={{color:"var(--primary-text-light-color1)"}}>Customer Name</p>
-                    <p style={{color:"var(--primary-text-light-color1)"}}>Barber Name</p>
-                    <p style={{color:"var(--primary-text-light-color1)"}}>Q Position</p>
-                    <p style={{color:"var(--primary-text-light-color1)"}}>Services</p>
+                    <p style={{ color: "var(--primary-text-light-color1)" }}>Customer Name</p>
+                    <p style={{ color: "var(--primary-text-light-color1)" }}>Barber Name</p>
+                    <p style={{ color: "var(--primary-text-light-color1)" }}>Q Position</p>
+                    <p style={{ color: "var(--primary-text-light-color1)" }}>Services</p>
                   </div>
 
                   {
@@ -445,7 +425,7 @@ const Dashboard = () => {
                 <p>Last Name</p>
               </div>
               <div>
-                {
+                {/* {
                   loading ?
                     <Skeleton count={4}
                       className='dashboard_appointment_loader'
@@ -460,6 +440,27 @@ const Dashboard = () => {
                         <div><Threeverticaldots /></div>
                       </div>
                     ))
+                } */}
+
+                {
+                  getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
+                    <Skeleton count={4}
+                      className='dashboard_appointment_loader'
+                    /> :
+                    !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
+                      appointmentList.map((a) => (
+                        <div key={a.id}>
+                          <p>{a.customerId}</p>
+                          <p>{a.firstName}</p>
+                          <p>{a.lastName}</p>
+                          <button>Follow Up</button>
+                          <div><Threeverticaldots /></div>
+                        </div>
+                      )) :
+                      !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length == 0 ?
+                        <p>No Appointment</p> :
+                        !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
+                        <p>No Appointment</p>
                 }
               </div>
             </div>
