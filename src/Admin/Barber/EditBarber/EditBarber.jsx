@@ -31,7 +31,7 @@ const EditBarber = () => {
   const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth);
   const [chooseServices, setChooseServices] = useState([]);
   const [serviceEWTValues, setServiceEWTValues] = useState({});
-  
+
   // Fetch all salon services on component mount
   useEffect(() => {
     dispatch(adminAllSalonServicesAction(salonId));
@@ -84,7 +84,7 @@ const EditBarber = () => {
     console.log(barberdata)
 
     // Dispatch action to create or update barber
-    dispatch(adminUpdateBarberAction(barberdata,navigate));
+    dispatch(adminUpdateBarberAction(barberdata, navigate));
   };
 
   // Redux selectors

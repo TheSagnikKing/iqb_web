@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { DeleteIcon, EditIcon, Notificationicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminApproveBarberAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
+import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 
 const BarberList = () => {
 
@@ -27,9 +27,15 @@ const BarberList = () => {
   }
 
   const editButtonClicked = (barber) => {
-    navigate(`/admin-editbarber/${barber.salonId}`,{state:barber})
+    navigate(`/admin-editbarber/${barber.salonId}`, { state: barber })
   }
 
+  const deleteButtonClicked = (barber) => {
+    const confirm = window.confirm("Are you sure ?")
+    if (confirm) {
+      dispatch(adminDeleteBarberAction(barber.salonId, barber.email))
+    }
+  }
 
   const [checkMap, setCheckMap] = useState(new Map());
 
@@ -79,7 +85,7 @@ const BarberList = () => {
       }
     };
   }, [salonId, dispatch]);
-  
+
 
 
   const [approveBarberMap, setApproveBarberMap] = useState(new Map());
@@ -94,7 +100,7 @@ const BarberList = () => {
       setApproveBarberMap(initialCheckMap);
     }
   }, [BarberList]);
-  
+
   const approveHandler = (b) => {
 
     setApproveBarberMap((prevCheckMap) => {
@@ -184,11 +190,11 @@ const BarberList = () => {
                     </div>
 
                     <button
-                    style={{
-                      background: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "gray" : "white",
-                      color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
-                    }}
-                    onClick={() => approveHandler(b)}
+                      style={{
+                        background: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "gray" : "white",
+                        color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
+                      }}
+                      onClick={() => approveHandler(b)}
                     >
                       {approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}
                     </button>
@@ -197,7 +203,7 @@ const BarberList = () => {
                       <div onClick={() => editButtonClicked(b)}><EditIcon /></div>
                     </div>
                     <div>
-                      <div><DeleteIcon /></div>
+                      <div onClick={() => deleteButtonClicked(b)}><DeleteIcon /></div>
                     </div>
                   </div>
                 )) :
