@@ -3,7 +3,7 @@ import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutRed
 import { BarberGoogleLoginReducer, BarberLoggedInMiddlewareReducer } from "./Barber/Reducers/AuthReducer"
 import { getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
 import { getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
-import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer } from "./Admin/Reducers/BarberReducer"
+import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer } from "./Admin/Reducers/BarberReducer"
 
 const rootReducer = combineReducers({
 
@@ -20,6 +20,7 @@ const rootReducer = combineReducers({
   adminApproveBarber:adminApproveBarberReducer,
   adminAllSalonServices:adminAllSalonServicesReducer,
   adminCreateBarber:adminCreateBarberReducer,
+  adminUpdateBarber:adminUpdateBarberReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,
