@@ -192,7 +192,7 @@ export const adminDeleteBarberAction = (salonId,email) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_DELETE_BARBER_REQ })
 
-        const { data } = await api.post(`/api/barber/deleteBarberByEmail?salonId=${salonId}`, {email:email})
+        const { data } = await api.post(`/api/barber/deleteBarberByEmail`, {salonId,email})
 
         dispatch({
             type: ADMIN_DELETE_BARBER_SUCCESS,

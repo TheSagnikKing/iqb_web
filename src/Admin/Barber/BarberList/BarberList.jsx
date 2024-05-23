@@ -33,8 +33,15 @@ const BarberList = () => {
   const deleteButtonClicked = (barber) => {
     const confirm = window.confirm("Are you sure ?")
     if (confirm) {
-      dispatch(adminDeleteBarberAction(barber.salonId, barber.email))
+      // dispatch(adminDeleteBarberAction(barber.salonId, barber.email))
+
+      dispatch({
+        type:"FILTER_BARBERLIST",
+        payload:barber.email
+      })
     }
+
+
   }
 
   const [checkMap, setCheckMap] = useState(new Map());

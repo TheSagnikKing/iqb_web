@@ -22,6 +22,15 @@ export const getAdminBarberListReducer = (state = {}, action) => {
                 resolve: false,
                 error: action.payload
             };
+        case "FILTER_BARBERLIST":
+            
+            const filteredBarbers = state.getAllBarbers.filter((b) => b.email !== action.payload);
+
+            return {
+                ...state,
+                getAllBarbers: filteredBarbers
+            };
+
         default:
             return state;
     }
