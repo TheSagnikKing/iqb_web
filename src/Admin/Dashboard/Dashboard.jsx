@@ -420,39 +420,22 @@ const Dashboard = () => {
           <div>
             <div>
               <div>
-                <p>Customer Id</p>
-                <p>First Name</p>
-                <p>Last Name</p>
+                <p>Timeslots</p>
+                <p>Customer Name</p>
+                <p>Barber Name</p>
               </div>
               <div>
-                {/* {
-                  loading ?
-                    <Skeleton count={4}
-                      className='dashboard_appointment_loader'
-                    /> :
-
-                    appointmentdata.map((a) => (
-                      <div key={a.id}>
-                        <p>{a.customerId}</p>
-                        <p>{a.firstName}</p>
-                        <p>{a.lastName}</p>
-                        <button>Follow Up</button>
-                        <div><Threeverticaldots /></div>
-                      </div>
-                    ))
-                } */}
-
                 {
                   getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
                     <Skeleton count={4}
                       className='dashboard_appointment_loader'
                     /> :
                     !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
-                      appointmentList.map((a) => (
-                        <div key={a.id}>
-                          <p>{a.customerId}</p>
-                          <p>{a.firstName}</p>
-                          <p>{a.lastName}</p>
+                      appointmentList.map((a,index) => (
+                        <div key={index}>
+                          <p>{a.timeSlots}</p>
+                          <p>{a.customerName}</p>
+                          <p>{a.barberName}</p>
                           <button>Follow Up</button>
                           <div><Threeverticaldots /></div>
                         </div>

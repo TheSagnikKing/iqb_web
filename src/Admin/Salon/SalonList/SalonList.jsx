@@ -17,96 +17,6 @@ const SalonList = () => {
     navigate("/admin-createsalon")
   }
 
-  const [loading, setLoading] = useState(false)
-
-  const salonlistdata = [
-    {
-      _id: 1,
-      salonId: 10,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 2,
-      salonId: 11,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 3,
-      salonId: 12,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 4,
-      salonId: 13,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 5,
-      salonId: 14,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 6,
-      salonId: 15,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 7,
-      salonId: 16,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 8,
-      salonId: 17,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 9,
-      salonId: 18,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 10,
-      salonId: 19,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 11,
-      salonId: 20,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-    {
-      _id: 12,
-      salonId: 21,
-      salonName: "Classic Touch",
-      address: "New York",
-      city: "Washington D.C"
-    },
-  ]
-
-
   const SalonListControllerRef = useRef(new AbortController());
 
   useEffect(() => {
@@ -121,6 +31,15 @@ const SalonList = () => {
       }
     };
   }, [email, dispatch]);
+
+  const getAdminSalonList = useSelector(state => state.getAdminSalonList)
+
+  const {
+    loading: getAdminSalonListLoading,
+    resolve: getAdminSalonListResolve,
+    salons: SalonList
+  } = getAdminSalonList
+
 
   const editButtonClicked = (salonid) => {
     navigate(`/admin-editsalon/${salonid}`)
@@ -137,11 +56,7 @@ const SalonList = () => {
       </div>
 
       <div className='salon_content_wrapper'>
-        <div className='salon_content_body'
-        style={{
-          overflow: loading === true ? "hidden" : "auto",
-        }}
-        >
+        <div className='salon_content_body'>
           <div>
             <p>Salon Name</p>
             <p>Address</p>
@@ -149,26 +64,31 @@ const SalonList = () => {
           </div>
 
           {
-            loading ?
+            getAdminSalonListLoading && !getAdminSalonListResolve ?
               <>
-              <Skeleton count={9} height={"6rem"} style={{marginBottom:"1rem"}}/>
+                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
               </> :
-              salonlistdata.map((s) => (
-                <div key={s._id}>
-                  <p>{s.salonName}</p>
-                  <p>{s.address}</p>
-                  <p>{s.city}</p>
-                  <div>
-                    <div onClick={() => editButtonClicked(s.salonId)}><EditIcon /></div>
+              !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
+                SalonList.map((s) => (
+                  <div key={s?._id}>
+                    <p>{s?.salonName}</p>
+                    <p>{s?.address}</p>
+                    <p>{s?.city}</p>
+                    <div>
+                      <div onClick={() => editButtonClicked(s?.salonId)}><EditIcon /></div>
+                    </div>
+                    <div>
+                      <div><DeleteIcon /></div>
+                    </div>
+                    <div>
+                      <div><Settingsicon /></div>
+                    </div>
                   </div>
-                  <div>
-                    <div><DeleteIcon /></div>
-                  </div>
-                  <div>
-                    <div><Settingsicon /></div>
-                  </div>
-                </div>
-              ))
+                )) :
+                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? 
+                <p>No Salon List</p> :
+                !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                <p>No Salon List</p>
           }
 
         </div>
