@@ -5,10 +5,11 @@ import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 
 const CreateSalon = () => {
 
+  const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const dispatch = useDispatch()
 
   const SalonIconControllerRef = useRef(new AbortController());
@@ -682,8 +683,11 @@ const CreateSalon = () => {
     setSelectedServices(updatedServices);
   }
 
+  const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
+
   const createSalonHandler = () => {
     const salondata = {
+      adminEmail:email,
       salonEmail,
       salonName,
       address,
@@ -705,10 +709,12 @@ const CreateSalon = () => {
       instraLink,
       twitterLink,
       appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
-      services: selectedServices
+      services: selectedServices,
+      image:image2
     }
 
     console.log(salondata)
+    dispatch(adminCreateSalonAction(salondata))
   }
 
   return (

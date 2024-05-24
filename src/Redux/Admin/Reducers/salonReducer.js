@@ -1,4 +1,4 @@
-import { ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants";
+import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants";
 
 export const getAdminSalonListReducer = (state = {}, action) => {
     switch (action.type) {
@@ -21,6 +21,14 @@ export const getAdminSalonListReducer = (state = {}, action) => {
                 loading: false,
                 resolve: false,
                 error: action.payload
+            };
+        case "FILTER_SALONLIST":
+
+            const filteredSalons = state.salons.filter((b) => b._id !== action.payload);
+
+            return {
+                ...state,
+                salons: filteredSalons
             };
         default:
             return state;
@@ -124,6 +132,60 @@ export const getAdminAllTimezoneReducer = (state = {}, action) => {
                 ...action.payload
             };
         case ADMIN_GET_ALL_TIMEZONES_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const adminDeleteSalonReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_DELETE_SALON_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_DELETE_SALON_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_DELETE_SALON_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const adminCreateSalonReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_CREATE_SALON_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_CREATE_SALON_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_CREATE_SALON_FAIL:
             return {
                 ...state,
                 loading: false,

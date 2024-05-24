@@ -4,11 +4,12 @@ import { DeleteIcon, EditIcon, Settingsicon } from '../../../icons'
 import { useNavigate } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
+import { adminDeleteSalonAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 
 const SalonList = () => {
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -45,6 +46,18 @@ const SalonList = () => {
     navigate(`/admin-editsalon/${salonid}`)
   }
 
+  const deleteSalonHandler = (salonId, id) => {
+    if (currentsalonId == salonId) {
+      alert("You are currently in this salon")
+    } else {
+      const confirm = window.confirm("Are you sure ?")
+      if (confirm) {
+        dispatch(adminDeleteSalonAction(salonId, id))
+      }
+    }
+
+  }
+
   return (
     <div className='salon_wrapper'>
       <div>
@@ -78,17 +91,17 @@ const SalonList = () => {
                       <div onClick={() => editButtonClicked(s?.salonId)}><EditIcon /></div>
                     </div>
                     <div>
-                      <div><DeleteIcon /></div>
+                      <div onClick={() => deleteSalonHandler(s.salonId, s._id)}><DeleteIcon /></div>
                     </div>
                     <div>
                       <div><Settingsicon /></div>
                     </div>
                   </div>
                 )) :
-                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? 
-                <p>No Salon List</p> :
-                !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                <p>No Salon List</p>
+                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
+                  <p>No Salon List</p> :
+                  !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                  <p>No Salon List</p>
           }
 
         </div>

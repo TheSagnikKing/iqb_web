@@ -40,8 +40,6 @@ const BarberList = () => {
         payload:barber.email
       })
     }
-
-
   }
 
   const [checkMap, setCheckMap] = useState(new Map());

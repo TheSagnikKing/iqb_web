@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants"
+import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants"
 
 export const getAdminSalonListAction = (email, signal) => async (dispatch) => {
     try {
@@ -96,7 +96,7 @@ export const getAdminAllCountriesAction = (countryname) => async (dispatch) => {
     }
 }
 
-export const getAdminAllCitiesAction = (cityname,countrycode) => async (dispatch) => {
+export const getAdminAllCitiesAction = (cityname, countrycode) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_GET_ALL_CITIES_REQ })
 
@@ -125,7 +125,7 @@ export const getAdminAllCitiesAction = (cityname,countrycode) => async (dispatch
 }
 
 export const getAdminAllTimezoneAction = (countrycode) => async (dispatch) => {
-    try { 
+    try {
         dispatch({ type: ADMIN_GET_ALL_TIMEZONES_REQ })
 
         const { data } = await api.post(`/api/country/getAllTimeZones?countryCode=${countrycode}`)
@@ -137,6 +137,68 @@ export const getAdminAllTimezoneAction = (countrycode) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ADMIN_GET_ALL_TIMEZONES_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+export const adminDeleteSalonAction = (salonId, salonmongoid) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_DELETE_SALON_REQ })
+
+        const { data } = await api.post(`/api/salon/deleteSalon`, { salonId: salonId })
+
+        dispatch({
+            type: ADMIN_DELETE_SALON_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: "FILTER_SALONLIST",
+            payload: salonmongoid
+        })
+    } catch (error) {
+        dispatch({
+            type: ADMIN_DELETE_SALON_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+export const adminCreateSalonAction = (salondata) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_CREATE_SALON_REQ })
+
+        const { data } = await api.post("/api/salon/createSalonByAdmin",salondata)
+
+        dispatch({
+            type: ADMIN_CREATE_SALON_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_CREATE_SALON_FAIL,
             payload: error?.response?.data
         });
 
