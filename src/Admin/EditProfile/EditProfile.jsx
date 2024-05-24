@@ -4,7 +4,9 @@ import { CameraIcon, CheckIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { adminUpdateProfileAction } from '../../Redux/Admin/Actions/AdminProfileAction';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
 
@@ -96,6 +98,25 @@ const EditProfile = () => {
 
     const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber.toString())
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const updateAdminProfile = () => {
+        const profiledata = {
+            email: adminProfile?.email, 
+            salonId:adminProfile?.salonId,
+            dateOfBirth,
+            mobileNumber:Number(mobileNumber),
+            name,
+            gender
+        }
+
+        console.log(profiledata)
+
+        dispatch(adminUpdateProfileAction(profiledata,navigate))
+        
+    }
+
     return (
         <div className='admin_edit_profile'>
             <div className='admin_edit_profile_content_wrapper'>
@@ -117,10 +138,10 @@ const EditProfile = () => {
 
                 <div>
                     <p>Name</p>
-                    <input 
-                    type="text" 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
 
@@ -128,9 +149,9 @@ const EditProfile = () => {
                     <div>
                         <p>Email</p>
                         <div>
-                            <input 
-                            type="email" 
-                            value={adminProfile?.email}
+                            <input
+                                type="email"
+                                value={adminProfile?.email}
                             />
                             <button onClick={() => setVerifyEmailButtonClicked((prev) => !prev)}>
                                 <p>Verified</p>
@@ -150,7 +171,7 @@ const EditProfile = () => {
                                     onChange={(phone) => setMobileNumber(phone)}
                                 />
                             </div>
-                            <button onClick={() => {}}>
+                            <button onClick={() => { }}>
                                 <p>Verified</p>
                                 <div><CheckIcon /></div>
                             </button>
@@ -162,10 +183,10 @@ const EditProfile = () => {
                 <div>
                     <div>
                         <p>Date of Birth</p>
-                        <input 
-                        type="date" 
-                        value={dateOfBirth}
-                        onChange={(e) => setDateofBirth(e.target.value)}
+                        <input
+                            type="date"
+                            value={dateOfBirth}
+                            onChange={(e) => setDateofBirth(e.target.value)}
                         />
                     </div>
 
@@ -188,7 +209,7 @@ const EditProfile = () => {
                 </div>
 
                 <div>
-                    <button>Update</button>
+                    <button onClick={updateAdminProfile}>Update</button>
                 </div>
             </div>
 
