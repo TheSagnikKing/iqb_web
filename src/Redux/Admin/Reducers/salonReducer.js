@@ -1,4 +1,4 @@
-import { ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants";
+import { ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants";
 
 export const getAdminSalonListReducer = (state = {}, action) => {
     switch (action.type) {
@@ -43,6 +43,87 @@ export const getAdminAllSalonIconReducer = (state = {}, action) => {
                 ...action.payload
             };
         case ADMIN_GETALLSALON_ICONS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const getAdminAllCountriesReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_GET_ALL_COUNTRIES_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_GET_ALL_COUNTRIES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_GET_ALL_COUNTRIES_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const getAdminAllCitiesReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_GET_ALL_CITIES_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_GET_ALL_CITIES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_GET_ALL_CITIES_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const getAdminAllTimezoneReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_GET_ALL_TIMEZONES_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_GET_ALL_TIMEZONES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_GET_ALL_TIMEZONES_FAIL:
             return {
                 ...state,
                 loading: false,

@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdminAllSalonIconAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 
 const CreateSalon = () => {
 
@@ -174,14 +174,31 @@ const CreateSalon = () => {
 
   const [country, setCountry] = useState("")
   const [countryDrop, setCountryDrop] = useState(false)
-
-  const countryDropHandler = () => {
-    setCountryDrop((prev) => !prev)
-  }
+  const [countrycode, setCountryCode] = useState("")
 
   const setCountryHandler = (value) => {
-    setCountry(value)
+    setCountryCode(value.countryCode)
+    setCountry(value.name)
     setCountryDrop(false)
+  }
+
+  const [countryTimeout, setCountryTimeout] = useState(null);
+
+  const debounceSearch = (value) => {
+    if (countryTimeout) {
+      clearTimeout(countryTimeout);
+    }
+    setCountry(value)
+
+    setCountryTimeout(setTimeout(() => {
+      dispatch(getAdminAllCountriesAction(value));
+    }, 500));
+  };
+
+  const searchCountryHandler = (e) => {
+    const searchTerm = e.target.value;
+    setCountryDrop(true)
+    debounceSearch(searchTerm);
   }
 
   const countryinputRef = useRef()
@@ -206,16 +223,40 @@ const CreateSalon = () => {
   }, []);
 
 
+  const getAdminAllCountries = useSelector(state => state.getAdminAllCountries)
+
+  const {
+    loading: getAdminAllCountriesLoading,
+    resolve: getAdminAllCountriesResolve,
+    response: AllCountries
+  } = getAdminAllCountries
+
+
   const [city, setCity] = useState("")
   const [cityDrop, setCityDrop] = useState(false)
 
-  const cityDropHandler = () => {
-    setCityDrop((prev) => !prev)
+  const setCityHandler = (value) => {
+    setCity(value.name)
+    setCityDrop(false)
   }
 
-  const setCityHandler = (value) => {
+  const [cityTimeout, setCityTimeout] = useState(null);
+
+  const debounceCitySearch = (value, countrycode) => {
+    if (cityTimeout) {
+      clearTimeout(cityTimeout);
+    }
+
     setCity(value)
-    setCityDrop(false)
+    setCityTimeout(setTimeout(() => {
+      dispatch(getAdminAllCitiesAction(value, countrycode));
+    }, 500));
+  };
+
+  const searchCityHandler = (e) => {
+    const searchTerm = e.target.value;
+    setCityDrop(true)
+    debounceCitySearch(searchTerm, countrycode);
   }
 
   const cityinputRef = useRef()
@@ -239,6 +280,13 @@ const CreateSalon = () => {
     };
   }, []);
 
+  const getAdminAllCities = useSelector(state => state.getAdminAllCities)
+
+  const {
+    loading: getAdminAllCitiesLoading,
+    resolve: getAdminAllCitiesResolve,
+    response: AllCities
+  } = getAdminAllCities
 
   const [timezone, setTimezone] = useState("")
   const [timezoneDrop, setTimezoneDrop] = useState(false)
@@ -251,6 +299,20 @@ const CreateSalon = () => {
     setTimezone(value)
     setTimezoneDrop(false)
   }
+
+  useEffect(() => {
+    if (countrycode) {
+      dispatch(getAdminAllTimezoneAction(countrycode))
+    }
+  }, [countrycode, dispatch])
+
+  const getAdminAllTimezone = useSelector(state => state.getAdminAllTimezone)
+
+  const {
+    loading: getAdminAllTimezoneLoading,
+    resolve: getAdminAllTimezoneResolve,
+    response: AllTimezones
+  } = getAdminAllTimezone
 
   const timezoneinputRef = useRef()
   const timezoneDropRef = useRef()
@@ -575,9 +637,6 @@ const CreateSalon = () => {
     setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
   };
 
-
-
-
   const [selectedServices, setSelectedServices] = useState([])
 
   const addServiceHandler = () => {
@@ -591,10 +650,10 @@ const CreateSalon = () => {
     const service = {
       selectedLogo: selectedLogo?.url,
       serviceName,
-      servicePrice:Number(servicePrice),
+      servicePrice: Number(servicePrice),
       vipService,
       serviceDesc,
-      serviceEWT:Number(serviceEWT)
+      serviceEWT: Number(serviceEWT)
     }
 
     setSelectedServices([...selectedServices, service])
@@ -610,8 +669,6 @@ const CreateSalon = () => {
   const deleteServiceHandler = (index) => {
     const currentService = selectedServices[index];
 
-    console.log("current ", currentService)
-
     setSelectedLogo(currentService.selectedLogo)
     setServiceName(currentService.serviceName)
     setServicePrice(currentService.servicePrice)
@@ -624,8 +681,6 @@ const CreateSalon = () => {
 
     setSelectedServices(updatedServices);
   }
-
-  console.log(selectedServices)
 
   const createSalonHandler = () => {
     const salondata = {
@@ -650,13 +705,11 @@ const CreateSalon = () => {
       instraLink,
       twitterLink,
       appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
-      services:selectedServices
+      services: selectedServices
     }
 
     console.log(salondata)
   }
-
-  console.log(selectedLogo)
 
   return (
     <div className='create_salon_wrapper'>
@@ -767,16 +820,26 @@ const CreateSalon = () => {
               <input
                 type="text"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                onClick={() => countryDropHandler()}
+                onChange={(e) => searchCountryHandler(e)}
                 ref={countryinputRef}
               />
 
               {countryDrop && <div ref={countryDropRef}>
-                <p onClick={() => setCountryHandler("India")}>India</p>
-                <p onClick={() => setCountryHandler("USA")}>USA</p>
-                <p onClick={() => setCountryHandler("China")}>China</p>
-                <p onClick={() => setCountryHandler("Japan")}>Japan</p>
+                {
+                  getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
+
+                      AllCountries.map((c) => (
+                        <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
+                      ))
+
+                      :
+                      !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length == 0 ?
+                        <p>No Countries</p> :
+                        !getAdminAllCountriesLoading && !getAdminAllCountriesResolve &&
+                        <p>No Countries</p>
+                }
               </div>}
 
             </div>
@@ -786,16 +849,26 @@ const CreateSalon = () => {
               <input
                 type="text"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
-                onClick={() => cityDropHandler()}
+                onChange={(e) => searchCityHandler(e)}
                 ref={cityinputRef}
               />
 
               {cityDrop && <div ref={cityDropRef}>
-                <p onClick={() => setCityHandler("Alexander City")}>Alexander City</p>
-                <p onClick={() => setCityHandler("Andalusia")}>Andalusia</p>
-                <p onClick={() => setCityHandler("Anniston")}>Anniston</p>
-                <p onClick={() => setCityHandler("Athens")}>Athens</p>
+                {
+                  getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
+
+                      AllCities.map((c) => (
+                        <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
+                      ))
+
+                      :
+                      !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length == 0 ?
+                        <p>No Cities</p> :
+                        !getAdminAllCitiesLoading && !getAdminAllCitiesResolve &&
+                        <p>No Cities</p>
+                }
               </div>}
             </div>
           </div>
@@ -812,10 +885,25 @@ const CreateSalon = () => {
               />
 
               {timezoneDrop && <div ref={timezoneDropRef}>
-                <p onClick={() => setTimezoneHandler("Timezone 1")}>Timezone 1</p>
+                {/* <p onClick={() => setTimezoneHandler("Timezone 1")}>Timezone 1</p>
                 <p onClick={() => setTimezoneHandler("Timezone 2")}>Timezone 2</p>
                 <p onClick={() => setTimezoneHandler("Timezone 3")}>Timezone 3</p>
-                <p onClick={() => setTimezoneHandler("Timezone 4")}>Timezone 4</p>
+                <p onClick={() => setTimezoneHandler("Timezone 4")}>Timezone 4</p> */}
+                {
+                  getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
+
+                    AllTimezones.map((c) => (
+                        <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
+                      ))
+
+                      :
+                      !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length == 0 ?
+                        <p>No Timezone</p> :
+                        !getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve &&
+                        <p>No Timezone</p>
+                }
               </div>}
             </div>
 
