@@ -4,11 +4,16 @@ import { CameraIcon, CheckIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import { useSelector } from 'react-redux';
 
 const EditProfile = () => {
 
-    const [profilepic, setProfilepic] = useState("")
+    const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
+    const [name, setName] = useState(adminProfile?.name)
+    const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth.split('T')[0])
+
+    const [profilepic, setProfilepic] = useState(adminProfile?.profile[0].url)
 
     const fileInputRef = useRef(null);
 
@@ -55,7 +60,7 @@ const EditProfile = () => {
         }
     };
 
-    const [gender, setGender] = useState("")
+    const [gender, setGender] = useState(adminProfile?.gender)
     const [genderDrop, setGenderDrop] = useState(false)
 
     const genderDropHandler = () => {
@@ -89,39 +94,7 @@ const EditProfile = () => {
     }, []);
 
 
-
-    const [mobileNumber, setMobileNumber] = useState("")
-    const [mobileNumberDrop, setMobileNumberDrop] = useState(false)
-
-    const mobileNumberDropHandler = () => {
-        setMobileNumberDrop((prev) => !prev)
-    }
-
-    const setMobileNumberHandler = (value) => {
-        setMobileNumber(value)
-        setMobileNumberDrop(false)
-    }
-
-    const mobileNumberinputRef = useRef()
-    const mobileNumberDropRef = useRef()
-
-    useEffect(() => {
-        const handleClickMobileNumberOutside = (event) => {
-            if (
-                mobileNumberinputRef.current &&
-                mobileNumberDropRef.current &&
-                !mobileNumberinputRef.current.contains(event.target) &&
-                !mobileNumberDropRef.current.contains(event.target)
-            ) {
-                setMobileNumberDrop(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickMobileNumberOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickMobileNumberOutside);
-        };
-    }, []);
+    const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber.toString())
 
     return (
         <div className='admin_edit_profile'>
@@ -144,14 +117,21 @@ const EditProfile = () => {
 
                 <div>
                     <p>Name</p>
-                    <input type="text" />
+                    <input 
+                    type="text" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    />
                 </div>
 
                 <div>
                     <div>
                         <p>Email</p>
                         <div>
-                            <input type="email" />
+                            <input 
+                            type="email" 
+                            value={adminProfile?.email}
+                            />
                             <button onClick={() => setVerifyEmailButtonClicked((prev) => !prev)}>
                                 <p>Verified</p>
                                 <div><CheckIcon /></div>
@@ -182,7 +162,11 @@ const EditProfile = () => {
                 <div>
                     <div>
                         <p>Date of Birth</p>
-                        <input type="date" />
+                        <input 
+                        type="date" 
+                        value={dateOfBirth}
+                        onChange={(e) => setDateofBirth(e.target.value)}
+                        />
                     </div>
 
                     <div>
@@ -196,8 +180,8 @@ const EditProfile = () => {
                         />
 
                         {genderDrop && <div ref={genderDropRef}>
-                            <p onClick={() => setGenderHandler("Male")}>Male</p>
-                            <p onClick={() => setGenderHandler("Female")}>Female</p>
+                            <p onClick={() => setGenderHandler("male")}>male</p>
+                            <p onClick={() => setGenderHandler("female")}>female</p>
                             <p onClick={() => setGenderHandler("Other")}>Other</p>
                         </div>}
                     </div>
