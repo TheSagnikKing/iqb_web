@@ -1,103 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./CustomerList.css"
 import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
+import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CustomerList = () => {
-  const [loading, setLoading] = useState(false)
 
-  const customerlistdata = [
-    {
-      _id: 1,
-      salonId: 1,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 2,
-      salonId: 2,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 3,
-      salonId: 3,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 4,
-      salonId: 4,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 5,
-      salonId: 5,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 6,
-      salonId: 6,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 7,
-      salonId: 7,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 8,
-      salonId: 8,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 9,
-      salonId: 9,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 10,
-      salonId: 10,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-    {
-      _id: 11,
-      salonId: 11,
-      customerName: "Arghya",
-      customerEmail: "arghya@gmail.com",
-      gender: "Male",
-      mobileNumber: "9876543210"
-    },
-  ]
+  const dispatch = useDispatch()
 
-  const [searchState, setSearchState] = useState(false)
+  const CustomerListControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    CustomerListControllerRef.current = controller;
+
+    dispatch(adminGetAllCustomerListAction(controller.signal));
+
+    return () => {
+      if (CustomerListControllerRef.current) {
+        CustomerListControllerRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList)
+
+  const {
+    loading: adminGetAllCustomerListLoading,
+    resolve: adminGetAllCustomerListResolve,
+    getAllCustomers: AllCustomerList
+  } = adminGetAllCustomerList
 
   return (
     <div className='customer_wrapper'>
@@ -115,11 +48,7 @@ const CustomerList = () => {
       </div>
 
       <div className='customer_content_wrapper'>
-        <div className='customer_content_body'
-          style={{
-            overflow: loading === true ? "hidden" : "auto",
-          }}
-        >
+        <div className='customer_content_body'>
           <div>
             <input
               type="checkbox"
@@ -133,32 +62,37 @@ const CustomerList = () => {
           </div>
 
           {
-            loading ?
+            adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ?
               <>
                 <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
               </> :
-              customerlistdata.map((s) => (
-                <div key={s._id}>
-                  <input 
-                  type="checkbox" 
-                  style={{accentColor:"red",height:"1.6rem",width:"1.6rem"}}
-                  />
-                  <p>{s.salonId}</p>
-                  <p>{s.customerName}</p>
-                  <p>{s.customerEmail}</p>
-                  <p>{s.gender}</p>
-                  <p>{s.mobileNumber}</p>
-                  <div>
-                    <div><Notificationicon /></div>
+              !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ?
+                AllCustomerList.map((s) => (
+                  <div key={s._id}>
+                    <input
+                      type="checkbox"
+                      style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                    />
+                    <p>{s.salonId}</p>
+                    <p>{s.name}</p>
+                    <p>{s.email}</p>
+                    <p>{s.gender}</p>
+                    <p>{s.mobileNumber}</p>
+                    <div>
+                      <div><Notificationicon /></div>
+                    </div>
+                    <div>
+                      <div><EmailIcon /></div>
+                    </div>
+                    <div>
+                      <div><MessageIcon /></div>
+                    </div>
                   </div>
-                  <div>
-                    <div><EmailIcon /></div>
-                  </div>
-                  <div>
-                    <div><MessageIcon /></div>
-                  </div>
-                </div>
-              ))
+                )) :
+                !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length == 0 ? 
+                <p>No Customer List</p> :
+                !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve &&
+                <p>No Customer List</p>
           }
 
         </div>

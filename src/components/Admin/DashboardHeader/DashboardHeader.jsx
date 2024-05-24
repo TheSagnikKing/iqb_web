@@ -5,9 +5,12 @@ import { Adminqueueicon, DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon
 import { menudata } from '../menudata'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DashboardHeader = () => {
+
+    const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
     const [salonlistdrop, setSalonlistdrop] = useState(false)
     const [togglecheck, setTogglecheck] = useState(false)
 
@@ -200,7 +203,7 @@ const DashboardHeader = () => {
                         /> :
                         <div>
                             <img 
-                            src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" alt="" 
+                            src={`${adminProfile?.profile[0].url}`} alt="" 
                             onClick={() => setAdminEditDrop((prev) => !prev)}
                             ref={adminEditIconRef}
                             />

@@ -181,7 +181,7 @@ const Dashboard = () => {
           loading ?
             <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
             <div>
-              <h1>Welcome Back,</h1>
+              <h1>Welcome Back, {adminName}</h1>
               <div
                 style={{
                   background: togglecheck ? "limegreen" : "#000"

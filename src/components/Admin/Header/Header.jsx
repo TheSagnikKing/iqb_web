@@ -4,10 +4,12 @@ import { Adminqueueicon, MobileCrossIcon, MobileMenuIcon, Notificationicon, Sett
 import Skeleton from 'react-loading-skeleton'
 import { menudata } from '../menudata.jsx'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction.js'
 
 const Header = () => {
+  
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
   const [loading, setLoading] = useState(false)
   const [togglecheck, setTogglecheck] = useState(false)
@@ -76,6 +78,7 @@ const Header = () => {
     alert("logout")
   }
 
+  const [src, setSrc] = useState(adminProfile?.profile[0].url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
 
   return (
     <header className='admin_header_wrapper'>
@@ -107,7 +110,8 @@ const Header = () => {
             /> :
             <div>
               <img 
-              src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg" 
+              src={src}
+              onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
               alt="" 
               onClick={() => setAdminEditDrop((prev) => !prev)}
               ref={adminEditIconRef}

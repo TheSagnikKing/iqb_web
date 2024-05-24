@@ -13,6 +13,7 @@ export const adminUpdateProfileAction = (profiledata,navigate) => async (dispatc
             payload: data
         })
 
+        //calling this so that admin profile get updated and i dont have to refresh the page again
         const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
