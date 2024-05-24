@@ -4,8 +4,74 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdminAllSalonIconAction } from '../../../Redux/Admin/Actions/SalonAction';
 
 const CreateSalon = () => {
+
+  const dispatch = useDispatch()
+
+  const SalonIconControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonIconControllerRef.current = controller;
+
+    dispatch(getAdminAllSalonIconAction(controller.signal));
+
+    return () => {
+      if (SalonIconControllerRef.current) {
+        SalonIconControllerRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const getAdminAllSalonIcon = useSelector(state => state.getAdminAllSalonIcon)
+
+  const {
+    loading: getAdminAllSalonIconLoading,
+    resolve: getAdminAllSalonIconResolve,
+    response: SalonIcons
+  } = getAdminAllSalonIcon
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [error, setError] = useState(null);
+
+  const geoLocationHandler = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setLatitude(latitude);
+          setLongitude(longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            setError("You denied access to your geolocation. Please enable it in your browser settings.");
+          } else {
+            setError("Error accessing geolocation: " + error.message);
+          }
+        }
+      );
+    } else {
+      setError("Geolocation is not available in your browser.");
+    }
+  }
+
+  const [image, setImage] = useState("")
+  const [salonEmail, setSalonEmail] = useState("")
+  const [salonName, setSalonName] = useState("")
+  const [address, setAddress] = useState("")
+
+  const [postCode, setPostCode] = useState("")
+  const [contactTel, setContactTel] = useState("")
+
+  const [webLink, setWebLink] = useState("")
+  const [fbLink, setFbLink] = useState("")
+  const [twitterLink, setTwitterLink] = useState("")
+  const [instraLink, setInstraLink] = useState("")
 
   const [serviceName, setServiceName] = useState("")
   const [serviceDesc, setServiceDesc] = useState("")
@@ -90,8 +156,8 @@ const CreateSalon = () => {
 
   const [selectedLogo, setSelectedLogo] = useState("")
 
-  const logoselectHandler = (item) => {
-    setSelectedLogo(item)
+  const logoselectHandler = (serviceImg) => {
+    setSelectedLogo(serviceImg)
   }
 
   const [salonType, setSalonType] = useState("")
@@ -104,18 +170,6 @@ const CreateSalon = () => {
   const salonTypeHandler = (value) => {
     setSalonType(value)
     setSalonTypeDrop(false)
-  }
-
-  const [serviceType, setServiceType] = useState("Regular")
-  const [serviceTypeDrop, setServiceTypeDrop] = useState(false)
-
-  const serviceTypeDropHandler = () => {
-    setServiceTypeDrop((prev) => !prev)
-  }
-
-  const serviceTypeHandler = (value) => {
-    setServiceType(value)
-    setServiceTypeDrop(false)
   }
 
   const [country, setCountry] = useState("")
@@ -385,24 +439,37 @@ const CreateSalon = () => {
     };
   }, []);
 
-  const serviceTypeIconRef = useRef()
-  const serviceTypeDropRef = useRef()
+
+  const [vipService, setVipService] = useState(false)
+  const [vipServiceDrop, setVipServiceDrop] = useState(false)
+
+  const vipServiceDropHandler = () => {
+    setVipServiceDrop((prev) => !prev)
+  }
+
+  const vipServiceHandler = (value) => {
+    setVipService(value)
+    setVipServiceDrop(false)
+  }
+
+  const vipServiceIconRef = useRef()
+  const vipServiceDropRef = useRef()
 
   useEffect(() => {
-    const handleClickServiceTypeOutside = (event) => {
+    const handleClickVipServiceOutside = (event) => {
       if (
-        serviceTypeIconRef.current &&
-        serviceTypeDropRef.current &&
-        !serviceTypeIconRef.current.contains(event.target) &&
-        !serviceTypeDropRef.current.contains(event.target)
+        vipServiceIconRef.current &&
+        vipServiceDropRef.current &&
+        !vipServiceIconRef.current.contains(event.target) &&
+        !vipServiceDropRef.current.contains(event.target)
       ) {
-        setServiceTypeDrop(false)
+        setVipServiceDrop(false)
       }
     };
 
-    document.addEventListener('mousedown', handleClickServiceTypeOutside);
+    document.addEventListener('mousedown', handleClickVipServiceOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickServiceTypeOutside);
+      document.removeEventListener('mousedown', handleClickVipServiceOutside);
     };
   }, []);
 
@@ -509,21 +576,87 @@ const CreateSalon = () => {
   };
 
 
+
+
   const [selectedServices, setSelectedServices] = useState([])
 
   const addServiceHandler = () => {
-    const service = {
-      selectedLogo,
-      serviceName,
-      servicePrice,
-      serviceDesc,
-      serviceEWT
+
+    if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
+      // You can handle the case when any of the fields is empty (e.g., show an error message)
+      alert("Please fill all the fields")
+      return;
     }
 
+    const service = {
+      selectedLogo: selectedLogo?.url,
+      serviceName,
+      servicePrice:Number(servicePrice),
+      vipService,
+      serviceDesc,
+      serviceEWT:Number(serviceEWT)
+    }
 
+    setSelectedServices([...selectedServices, service])
+
+    setSelectedLogo("")
+    setServiceName("")
+    setServicePrice("")
+    setVipService(false)
+    setServiceDesc("")
+    setServiceEWT("")
+  }
+
+  const deleteServiceHandler = (index) => {
+    const currentService = selectedServices[index];
+
+    console.log("current ", currentService)
+
+    setSelectedLogo(currentService.selectedLogo)
+    setServiceName(currentService.serviceName)
+    setServicePrice(currentService.servicePrice)
+    setVipService(currentService.vipService)
+    setServiceDesc(currentService.serviceDesc)
+    setServiceEWT(currentService.serviceEWT)
+
+    const updatedServices = [...selectedServices];
+    updatedServices.splice(index, 1);
+
+    setSelectedServices(updatedServices);
   }
 
   console.log(selectedServices)
+
+  const createSalonHandler = () => {
+    const salondata = {
+      salonEmail,
+      salonName,
+      address,
+      location: {
+        type: "Point",
+        coordinates: {
+          longitude: Number(longitude),
+          latitude: Number(latitude)
+        }
+      },
+      country,
+      city,
+      timezone,
+      postCode,
+      contactTel,
+      salonType,
+      webLink,
+      fbLink,
+      instraLink,
+      twitterLink,
+      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
+      services:selectedServices
+    }
+
+    console.log(salondata)
+  }
+
+  console.log(selectedLogo)
 
   return (
     <div className='create_salon_wrapper'>
@@ -581,33 +714,51 @@ const CreateSalon = () => {
         <div>
           <div>
             <p>Salon Email</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={salonEmail}
+              onChange={(e) => setSalonEmail(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Salon Name</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={salonName}
+              onChange={(e) => setSalonName(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Address</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
           </div>
 
           <div>
             <div>
               <p>Latitude</p>
-              <input type="text" />
+              <input
+                type="number"
+                value={latitude}
+              />
             </div>
 
             <div>
               <p>Longitude</p>
-              <input type="text" />
+              <input
+                type="number"
+                value={longitude}
+              />
             </div>
           </div>
 
           <div>
-            <button>Get Geolocation</button>
+            <button onClick={geoLocationHandler}>Get Geolocation</button>
           </div>
 
           <div>
@@ -670,7 +821,11 @@ const CreateSalon = () => {
 
             <div>
               <p>Postal Code</p>
-              <input type="text" />
+              <input
+                type="text"
+                value={postCode}
+                onChange={(e) => setPostCode(e.target.value)}
+              />
             </div>
           </div>
 
@@ -751,7 +906,11 @@ const CreateSalon = () => {
 
           <div>
             <p>Contact Tel.</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={contactTel}
+              onChange={(e) => setContactTel(e.target.value)}
+            />
           </div>
 
           <p>Add Your Services</p>
@@ -760,7 +919,7 @@ const CreateSalon = () => {
           <div>
             <div>
               {
-                loading ?
+                getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
                   <div className='create_salon_carousel_loader'>
                     <Skeleton count={1}
                       height={"9rem"}
@@ -812,23 +971,28 @@ const CreateSalon = () => {
                       }}
                     />
                   </div> :
-                  <Carousel
-                    responsive={responsive}
-                    draggable={false}
-                    swipeable={false}
-                  >
-                    {
-                      slidedata.map((s) => (
-                        <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s.item)}
-                          style={{
-                            border: selectedLogo === s.item ? "3px solid var(--primary-bg-color3)" : "1px solid black"
-                          }}
-                        >
-                          <img src={s.item} alt="" />
-                        </div>
-                      ))
-                    }
-                  </Carousel>
+                  !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
+                    <Carousel
+                      responsive={responsive}
+                      draggable={false}
+                      swipeable={false}
+                    >
+                      {
+                        SalonIcons?.map((s) => (
+                          <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
+                            style={{
+                              border: selectedLogo?._id === s._id ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                            }}
+                          >
+                            <img src={s.url} alt="" />
+                          </div>
+                        ))
+                      }
+                    </Carousel> :
+                    !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
+                      <p>No Salon Icons Available</p> :
+                      !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
+                      <p>No Salon Icons Available</p>
               }
 
             </div>
@@ -840,49 +1004,49 @@ const CreateSalon = () => {
               type="text"
               value={serviceName}
               onChange={(e) => setServiceName(e.target.value)}
-              />
+            />
           </div>
 
           <div>
             <p>Service Desc</p>
             <input
-              type="text" 
+              type="text"
               value={serviceDesc}
               onChange={(e) => setServiceDesc(e.target.value)}
-              />
+            />
           </div>
 
           <div>
             <p>Service Type</p>
             <input
               type="text"
-              value={`${serviceType ? `${serviceType}` : ''}`}
-              onClick={() => serviceTypeDropHandler()}
-              ref={serviceTypeIconRef}
+              value={`${vipService ? 'Vip' : 'Regular'}`}
+              onClick={() => vipServiceDropHandler()}
+              ref={vipServiceIconRef}
             />
 
-            {serviceTypeDrop && <div ref={serviceTypeDropRef}>
-              <p onClick={() => serviceTypeHandler("Regular")}>Regular</p>
-              <p onClick={() => serviceTypeHandler("Vip")}>Vip</p>
+            {vipServiceDrop && <div ref={vipServiceDropRef}>
+              <p onClick={() => vipServiceHandler(false)}>Regular</p>
+              <p onClick={() => vipServiceHandler(true)}>Vip</p>
             </div>}
           </div>
 
           <div>
             <div>
               <p>Service Price</p>
-              <input 
-              type="text" 
-              value={servicePrice}
-              onChange={(e) => setServicePrice(e.target.value)}
+              <input
+                type="text"
+                value={servicePrice}
+                onChange={(e) => setServicePrice(e.target.value)}
               />
             </div>
 
             <div>
               <p>Est Wait Tm(mins)</p>
-              <input 
-              type="text" 
-              value={serviceEWT}
-              onChange={(e) => setServiceEWT(e.target.value)}
+              <input
+                type="text"
+                value={serviceEWT}
+                onChange={(e) => setServiceEWT(e.target.value)}
               />
             </div>
           </div>
@@ -892,19 +1056,19 @@ const CreateSalon = () => {
           </div>
 
           <div className='service_container'>
-            {/* {
-              selectedServices.map((s) => ())
-            } */}
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Regular</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
-
+            {
+              selectedServices.map((ser, index) => (
+                <div className='service_container_item' key={index}>
+                  <div><img src={ser.selectedLogo ? ser.selectedLogo : ""} alt="" /></div>
+                  <p>{ser.serviceName}</p>
+                  <p>{ser.serviceDesc}</p>
+                  <p>{ser.serviceType}</p>
+                  <p>${ser.servicePrice}</p>
+                  <p>{ser.serviceEWT}min</p>
+                  <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
+                </div>
+              ))
+            }
           </div>
 
 
@@ -949,26 +1113,42 @@ const CreateSalon = () => {
 
           <div>
             <p>Web Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={webLink}
+              onChange={(e) => setWebLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Facebook Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={fbLink}
+              onChange={(e) => setFbLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Instagram Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={instraLink}
+              onChange={(e) => setInstraLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Twitter Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={twitterLink}
+              onChange={(e) => setTwitterLink(e.target.value)}
+            />
           </div>
 
           <div>
-            <button>Submit</button>
+            <button onClick={createSalonHandler}>Submit</button>
           </div>
 
         </div>

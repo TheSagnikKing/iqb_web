@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutReducer } from "./Admin/Reducers/AuthReducer"
 import { BarberGoogleLoginReducer, BarberLoggedInMiddlewareReducer } from "./Barber/Reducers/AuthReducer"
 import { getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
-import { getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
+import { getAdminAllSalonIconReducer, getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
 import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer } from "./Admin/Reducers/BarberReducer"
 
 const rootReducer = combineReducers({
@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   adminCreateBarber:adminCreateBarberReducer,
   adminUpdateBarber:adminUpdateBarberReducer,
   adminDeleteBarber:adminDeleteBarberReducer,
+  getAdminAllSalonIcon:getAdminAllSalonIconReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,
