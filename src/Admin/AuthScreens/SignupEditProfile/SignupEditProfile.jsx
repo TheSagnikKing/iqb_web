@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './SignupEditProfile.css'
 import { useNavigate } from 'react-router-dom'
-import { Eyevisible, Notvisibleeye } from '../../../icons'
 
 const SignupEditProfile = () => {
 
@@ -12,9 +11,38 @@ const SignupEditProfile = () => {
 
   const navigate = useNavigate()
 
-  const signupClicked = () => {
-    navigate("/admin-signupeditprofile")
+
+  const [genderDrop, setGenderDrop] = useState(false)
+
+  const genderDropHandler = () => {
+    setGenderDrop((prev) => !prev)
   }
+
+  const setGenderHandler = (value) => {
+    setGender(value)
+    setGenderDrop(false)
+  }
+
+  const genderinputRef = useRef()
+  const genderDropRef = useRef()
+
+  useEffect(() => {
+    const handleClickGenderOutside = (event) => {
+      if (
+        genderinputRef.current &&
+        genderDropRef.current &&
+        !genderinputRef.current.contains(event.target) &&
+        !genderDropRef.current.contains(event.target)
+      ) {
+        setGenderDrop(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickGenderOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickGenderOutside);
+    };
+  }, []);
 
   return (
     <main className='admin_signup_edit_container'>
@@ -41,9 +69,17 @@ const SignupEditProfile = () => {
             <p>Gender</p>
             <input
               type="text"
-              value={gender}
+              value={`${gender ? `${gender}` : ''}`}
               onChange={(e) => setGender(e.target.value)}
+              onClick={() => genderDropHandler()}
+              ref={genderinputRef}
             />
+
+            {genderDrop && <div ref={genderDropRef}>
+              <p onClick={() => setGenderHandler("male")}>male</p>
+              <p onClick={() => setGenderHandler("female")}>female</p>
+              <p onClick={() => setGenderHandler("Other")}>Other</p>
+            </div>}
           </div>
 
           <div>
@@ -65,10 +101,10 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            <button onClick={signupClicked}>Update</button>
-            <button onClick={signupClicked}>Skip</button>
+            <button onClick={() => { }}>Update</button>
+            <button onClick={() => { }}>Skip</button>
           </div>
-          
+
         </div>
       </div>
     </main>
