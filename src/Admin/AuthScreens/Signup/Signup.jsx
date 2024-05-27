@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 
@@ -30,6 +30,12 @@ const Signup = () => {
 
   const [visibleeye, setVisibleeye] = useState(false)
 
+  const navigate = useNavigate()
+
+  const signupClicked = () => {
+    navigate("/admin-signupeditprofile")
+  }
+
   return (
     <main className='admin_signup_container'>
       <div>
@@ -56,7 +62,7 @@ const Signup = () => {
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>
 
-          <button>Signin</button>
+          <button onClick={signupClicked}>Signup</button>
 
           <div>
             <div />

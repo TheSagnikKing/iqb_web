@@ -30,6 +30,7 @@ const AdminEditSalon = React.lazy(() => import("./Admin/Salon/EditSalon/EditSalo
 const AdminEditBarber = React.lazy(() => import("./Admin/Barber/EditBarber/EditBarber"))
 const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfile"))
 const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
+const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -54,6 +55,7 @@ const App = () => {
               <Route path="/admincheckemail" element={<AdminCheckEmail />} />
               <Route path="/adminchangepassword" element={<AdminChangePassword />} />
               <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
+              <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile/>}/>
             </Route>
 
             {/* Admin Main Pages  */}
