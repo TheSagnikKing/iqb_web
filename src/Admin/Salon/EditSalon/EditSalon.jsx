@@ -4,8 +4,81 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux';
+import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import api from '../../../Redux/api/Api';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const EditSalon = () => {
+
+  const location = useLocation()
+
+  const currentSalon = location?.state
+  console.log(currentSalon)
+
+  const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const dispatch = useDispatch()
+
+  const SalonIconControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonIconControllerRef.current = controller;
+
+    dispatch(getAdminAllSalonIconAction(controller.signal));
+
+    return () => {
+      if (SalonIconControllerRef.current) {
+        SalonIconControllerRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const getAdminAllSalonIcon = useSelector(state => state.getAdminAllSalonIcon)
+
+  const {
+    loading: getAdminAllSalonIconLoading,
+    resolve: getAdminAllSalonIconResolve,
+    response: SalonIcons
+  } = getAdminAllSalonIcon
+
+  const [latitude, setLatitude] = useState(currentSalon?.location.coordinates.latitude);
+  const [longitude, setLongitude] = useState(currentSalon?.location.coordinates.longitude);
+  const [error, setError] = useState(null);
+
+  const geoLocationHandler = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setLatitude(latitude);
+          setLongitude(longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            setError("You denied access to your geolocation. Please enable it in your browser settings.");
+          } else {
+            setError("Error accessing geolocation: " + error.message);
+          }
+        }
+      );
+    } else {
+      setError("Geolocation is not available in your browser.");
+    }
+  }
+
+  const [salonEmail, setSalonEmail] = useState(currentSalon?.salonEmail)
+  const [salonName, setSalonName] = useState(currentSalon?.salonName)
+  const [address, setAddress] = useState(currentSalon?.address)
+
+  const [postCode, setPostCode] = useState(currentSalon?.postCode)
+  const [contactTel, setContactTel] = useState(currentSalon?.contactTel)
+
+  const [webLink, setWebLink] = useState(currentSalon?.webLink)
+  const [fbLink, setFbLink] = useState(currentSalon?.fbLink)
+  const [twitterLink, setTwitterLink] = useState(currentSalon?.twitterLink)
+  const [instraLink, setInstraLink] = useState(currentSalon?.instraLink)
 
   const [serviceName, setServiceName] = useState("")
   const [serviceDesc, setServiceDesc] = useState("")
@@ -88,13 +161,8 @@ const EditSalon = () => {
     },
   ]
 
-  const [selectedLogo, setSelectedLogo] = useState("")
 
-  const logoselectHandler = (item) => {
-    setSelectedLogo(item)
-  }
-
-  const [salonType, setSalonType] = useState("")
+  const [salonType, setSalonType] = useState(currentSalon?.salonType)
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
   const salonTypeDropHandler = () => {
@@ -106,28 +174,33 @@ const EditSalon = () => {
     setSalonTypeDrop(false)
   }
 
-  const [serviceType, setServiceType] = useState("Regular")
-  const [serviceTypeDrop, setServiceTypeDrop] = useState(false)
-
-  const serviceTypeDropHandler = () => {
-    setServiceTypeDrop((prev) => !prev)
-  }
-
-  const serviceTypeHandler = (value) => {
-    setServiceType(value)
-    setServiceTypeDrop(false)
-  }
-
-  const [country, setCountry] = useState("")
+  const [country, setCountry] = useState(currentSalon?.country)
   const [countryDrop, setCountryDrop] = useState(false)
-
-  const countryDropHandler = () => {
-    setCountryDrop((prev) => !prev)
-  }
+  const [countrycode, setCountryCode] = useState("")
 
   const setCountryHandler = (value) => {
-    setCountry(value)
+    setCountryCode(value.countryCode)
+    setCountry(value.name)
     setCountryDrop(false)
+  }
+
+  const [countryTimeout, setCountryTimeout] = useState(null);
+
+  const debounceSearch = (value) => {
+    if (countryTimeout) {
+      clearTimeout(countryTimeout);
+    }
+    setCountry(value)
+
+    setCountryTimeout(setTimeout(() => {
+      dispatch(getAdminAllCountriesAction(value));
+    }, 500));
+  };
+
+  const searchCountryHandler = (e) => {
+    const searchTerm = e.target.value;
+    setCountryDrop(true)
+    debounceSearch(searchTerm);
   }
 
   const countryinputRef = useRef()
@@ -152,16 +225,40 @@ const EditSalon = () => {
   }, []);
 
 
-  const [city, setCity] = useState("")
+  const getAdminAllCountries = useSelector(state => state.getAdminAllCountries)
+
+  const {
+    loading: getAdminAllCountriesLoading,
+    resolve: getAdminAllCountriesResolve,
+    response: AllCountries
+  } = getAdminAllCountries
+
+
+  const [city, setCity] = useState(currentSalon?.city)
   const [cityDrop, setCityDrop] = useState(false)
 
-  const cityDropHandler = () => {
-    setCityDrop((prev) => !prev)
+  const setCityHandler = (value) => {
+    setCity(value.name)
+    setCityDrop(false)
   }
 
-  const setCityHandler = (value) => {
+  const [cityTimeout, setCityTimeout] = useState(null);
+
+  const debounceCitySearch = (value, countrycode) => {
+    if (cityTimeout) {
+      clearTimeout(cityTimeout);
+    }
+
     setCity(value)
-    setCityDrop(false)
+    setCityTimeout(setTimeout(() => {
+      dispatch(getAdminAllCitiesAction(value, countrycode));
+    }, 500));
+  };
+
+  const searchCityHandler = (e) => {
+    const searchTerm = e.target.value;
+    setCityDrop(true)
+    debounceCitySearch(searchTerm, countrycode);
   }
 
   const cityinputRef = useRef()
@@ -185,8 +282,15 @@ const EditSalon = () => {
     };
   }, []);
 
+  const getAdminAllCities = useSelector(state => state.getAdminAllCities)
 
-  const [timezone, setTimezone] = useState("")
+  const {
+    loading: getAdminAllCitiesLoading,
+    resolve: getAdminAllCitiesResolve,
+    response: AllCities
+  } = getAdminAllCities
+
+  const [timezone, setTimezone] = useState(currentSalon?.timeZone)
   const [timezoneDrop, setTimezoneDrop] = useState(false)
 
   const timezoneDropHandler = () => {
@@ -197,6 +301,20 @@ const EditSalon = () => {
     setTimezone(value)
     setTimezoneDrop(false)
   }
+
+  useEffect(() => {
+    if (countrycode) {
+      dispatch(getAdminAllTimezoneAction(countrycode))
+    }
+  }, [countrycode, dispatch])
+
+  const getAdminAllTimezone = useSelector(state => state.getAdminAllTimezone)
+
+  const {
+    loading: getAdminAllTimezoneLoading,
+    resolve: getAdminAllTimezoneResolve,
+    response: AllTimezones
+  } = getAdminAllTimezone
 
   const timezoneinputRef = useRef()
   const timezoneDropRef = useRef()
@@ -220,7 +338,7 @@ const EditSalon = () => {
   }, []);
 
 
-  const [startTime, setStartTime] = useState("")
+  const [startTime, setStartTime] = useState()
   const [startTimeDrop, setStartTimeDrop] = useState(false)
 
   const startTimeDropHandler = () => {
@@ -316,7 +434,7 @@ const EditSalon = () => {
   }, []);
 
 
-  const [intervalTime, setIntervalTime] = useState("")
+  const [intervalTime, setIntervalTime] = useState()
   const [intervalTimeDrop, setIntervalTimeDrop] = useState(false)
 
   const intervalTimeDropHandler = () => {
@@ -385,31 +503,44 @@ const EditSalon = () => {
     };
   }, []);
 
-  const serviceTypeIconRef = useRef()
-  const serviceTypeDropRef = useRef()
+
+  const [vipService, setVipService] = useState(false)
+  const [vipServiceDrop, setVipServiceDrop] = useState(false)
+
+  const vipServiceDropHandler = () => {
+    setVipServiceDrop((prev) => !prev)
+  }
+
+  const vipServiceHandler = (value) => {
+    setVipService(value)
+    setVipServiceDrop(false)
+  }
+
+  const vipServiceIconRef = useRef()
+  const vipServiceDropRef = useRef()
 
   useEffect(() => {
-    const handleClickServiceTypeOutside = (event) => {
+    const handleClickVipServiceOutside = (event) => {
       if (
-        serviceTypeIconRef.current &&
-        serviceTypeDropRef.current &&
-        !serviceTypeIconRef.current.contains(event.target) &&
-        !serviceTypeDropRef.current.contains(event.target)
+        vipServiceIconRef.current &&
+        vipServiceDropRef.current &&
+        !vipServiceIconRef.current.contains(event.target) &&
+        !vipServiceDropRef.current.contains(event.target)
       ) {
-        setServiceTypeDrop(false)
+        setVipServiceDrop(false)
       }
     };
 
-    document.addEventListener('mousedown', handleClickServiceTypeOutside);
+    document.addEventListener('mousedown', handleClickVipServiceOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickServiceTypeOutside);
+      document.removeEventListener('mousedown', handleClickVipServiceOutside);
     };
   }, []);
 
 
   const [loading, setLoading] = useState(false)
 
-  const [salonLogo, setSalonLogo] = useState("")
+  const [salonLogo, setSalonLogo] = useState(currentSalon?.salonLogo[0]?.url || "")
 
 
   const fileInputRef = useRef(null);
@@ -417,6 +548,10 @@ const EditSalon = () => {
   const handleSalonLogoButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  const [uploadSalonLogo, setUploadSalonLogo] = useState("")
+  const [currentSalonLogoId, setCurrentSalonLogoId] = useState(currentSalon?.salonLogo[0]?.public_id);
+  const [currentSalonLogoMongoId, setCurrentSalonLogoMongoId] = useState(currentSalon?.salonLogo[0]?._id)
 
   const handleSalonFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
@@ -429,17 +564,37 @@ const EditSalon = () => {
 
     const imageUrl = URL.createObjectURL(uploadImage);
 
-    setSalonLogo(imageUrl);
+    const formData = new FormData();
 
+        formData.append('public_imgid', currentSalonLogoId);
+        formData.append('id', currentSalonLogoMongoId)
+        formData.append('salonLogo', uploadImage)
+        formData.append('salonId', currentSalon?.salonId)
+
+
+        try {
+            const imageResponse = await api.put('/api/salon/updateSalonLogo', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Salon Logo Upload success:', imageResponse.data);
+            setSalonLogo(imageUrl)
+        } catch (error) {
+            console.error('Image upload failed:', error);
+        }
   };
 
-  const [salonImages, setSalonImages] = useState([])
+  const [salonImages, setSalonImages] = useState(currentSalon?.gallery.map((s) => s.url))
 
   const salonImagefileInputRef = useRef(null);
 
   const handleSalonImageButtonClick = () => {
     salonImagefileInputRef.current.click();
   };
+
+  const [uploadSalonImages, setUploadSalonImages] = useState([])
 
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
@@ -459,6 +614,7 @@ const EditSalon = () => {
 
     // Filter out null values (in case of invalid files) and update the state with valid URLs
     setSalonImages(urls.filter((url) => url !== null));
+    setUploadSalonImages(uploadedFiles)
   };
 
   const [mobilesalonlogo, setMobileSalonlogo] = useState("")
@@ -509,21 +665,183 @@ const EditSalon = () => {
   };
 
 
-  const [selectedServices, setSelectedServices] = useState([])
+  const [selectedLogo, setSelectedLogo] = useState({
+    url: "",
+    public_id: ""
+  })
 
-  const addServiceHandler = () => {
-    const service = {
-      selectedLogo,
-      serviceName,
-      servicePrice,
-      serviceDesc,
-      serviceEWT
-    }
-
-
+  const logoselectHandler = (serviceImg) => {
+    setSelectedLogo({
+      url: serviceImg.url,
+      public_id: serviceImg.public_id
+    });
   }
 
-  console.log(selectedServices)
+  const [selectedServices, setSelectedServices] = useState(currentSalon?.services)
+
+  const addServiceHandler = () => {
+
+    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
+      alert("Please fill all the fields")
+      return;
+    }
+
+    const service = {
+      serviceIcon: {
+        url: selectedLogo.url,
+        public_id: selectedLogo.public_id
+      },
+      serviceName,
+      servicePrice: Number(servicePrice),
+      vipService,
+      serviceDesc,
+      serviceEWT: Number(serviceEWT)
+    }
+
+    setSelectedServices([...selectedServices, service])
+
+    setSelectedLogo({ url: "", public_id: "" })
+    setServiceName("")
+    setServicePrice("")
+    setVipService(false)
+    setServiceDesc("")
+    setServiceEWT("")
+  }
+
+
+  const deleteServiceHandler = (index) => {
+    const currentService = selectedServices[index];
+
+    setSelectedLogo({
+      url: currentService.serviceIcon.url,
+      public_id: currentService.serviceIcon.public_id
+    })
+    setServiceName(currentService.serviceName)
+    setServicePrice(currentService.servicePrice)
+    setVipService(currentService.vipService)
+    setServiceDesc(currentService.serviceDesc)
+    setServiceEWT(currentService.serviceEWT)
+
+    const updatedServices = [...selectedServices];
+    updatedServices.splice(index, 1);
+
+    setSelectedServices(updatedServices);
+  }
+
+  const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
+
+  const navigate = useNavigate()
+
+  const editSalonHandler = () => {
+    const salondata = {
+      adminEmail: email,
+      salonEmail,
+      salonName,
+      address,
+      location: {
+        type: "Point",
+        coordinates: {
+          longitude: Number(longitude),
+          latitude: Number(latitude)
+        }
+      },
+      country,
+      city,
+      timeZone: timezone,
+      postCode,
+      contactTel,
+      salonType,
+      webLink,
+      fbLink,
+      instraLink,
+      twitterLink,
+      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
+      services: selectedServices,
+      salonId:currentSalon?.salonId,
+      adminEmail:currentSalon?.adminEmail
+      // image:image2
+    }
+
+    console.log(salondata)
+    dispatch(adminEditSalonAction(salondata, navigate))
+  }
+
+  const adminCreateSalon = useSelector(state => state.adminCreateSalon)
+
+  const {
+    response: createSalonResponse
+  } = adminCreateSalon
+
+
+  useEffect(() => {
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonImages != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+          formData.append('salonId', SalonId);
+
+          for (const file of uploadSalonImages) {
+            formData.append('gallery', file);
+          }
+
+          try {
+            const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+
+            console.log('Upload success:', imageResponse.data);
+
+            alert("Image uploaded Successfully")
+          } catch (error) {
+            console.error('Image upload failed:', error);
+            setSalonImages([]);
+            setUploadSalonImages([])
+          }
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+    //For Salon Logo
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonLogo != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+
+          if (SalonId) {
+            formData.append('salonId', SalonId);
+            formData.append('salonLogo', uploadSalonLogo);
+
+            try {
+              const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+
+              console.log('Upload success:', imageResponse.data);
+              alert("Salon Logo uploaded Successfully")
+            } catch (error) {
+              console.error('Image upload failed:', error);
+              setSalonLogo("")
+              setUploadSalonLogo("")
+            }
+          }
+
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+  }, [createSalonResponse?.salonId]);
 
   return (
     <div className='edit_salon_wrapper'>
@@ -581,33 +899,51 @@ const EditSalon = () => {
         <div>
           <div>
             <p>Salon Email</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={salonEmail}
+              onChange={(e) => setSalonEmail(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Salon Name</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={salonName}
+              onChange={(e) => setSalonName(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Address</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
           </div>
 
           <div>
             <div>
               <p>Latitude</p>
-              <input type="text" />
+              <input
+                type="number"
+                value={latitude}
+              />
             </div>
 
             <div>
               <p>Longitude</p>
-              <input type="text" />
+              <input
+                type="number"
+                value={longitude}
+              />
             </div>
           </div>
 
           <div>
-            <button>Get Geolocation</button>
+            <button onClick={geoLocationHandler}>Get Geolocation</button>
           </div>
 
           <div>
@@ -616,16 +952,26 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                onClick={() => countryDropHandler()}
+                onChange={(e) => searchCountryHandler(e)}
                 ref={countryinputRef}
               />
 
               {countryDrop && <div ref={countryDropRef}>
-                <p onClick={() => setCountryHandler("India")}>India</p>
-                <p onClick={() => setCountryHandler("USA")}>USA</p>
-                <p onClick={() => setCountryHandler("China")}>China</p>
-                <p onClick={() => setCountryHandler("Japan")}>Japan</p>
+                {
+                  getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
+
+                      AllCountries.map((c) => (
+                        <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
+                      ))
+
+                      :
+                      !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length == 0 ?
+                        <p>No Countries</p> :
+                        !getAdminAllCountriesLoading && !getAdminAllCountriesResolve &&
+                        <p>No Countries</p>
+                }
               </div>}
 
             </div>
@@ -635,16 +981,26 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
-                onClick={() => cityDropHandler()}
+                onChange={(e) => searchCityHandler(e)}
                 ref={cityinputRef}
               />
 
               {cityDrop && <div ref={cityDropRef}>
-                <p onClick={() => setCityHandler("Alexander City")}>Alexander City</p>
-                <p onClick={() => setCityHandler("Andalusia")}>Andalusia</p>
-                <p onClick={() => setCityHandler("Anniston")}>Anniston</p>
-                <p onClick={() => setCityHandler("Athens")}>Athens</p>
+                {
+                  getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
+
+                      AllCities.map((c) => (
+                        <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
+                      ))
+
+                      :
+                      !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length == 0 ?
+                        <p>No Cities</p> :
+                        !getAdminAllCitiesLoading && !getAdminAllCitiesResolve &&
+                        <p>No Cities</p>
+                }
               </div>}
             </div>
           </div>
@@ -661,16 +1017,31 @@ const EditSalon = () => {
               />
 
               {timezoneDrop && <div ref={timezoneDropRef}>
-                <p onClick={() => setTimezoneHandler("Timezone 1")}>Timezone 1</p>
-                <p onClick={() => setTimezoneHandler("Timezone 2")}>Timezone 2</p>
-                <p onClick={() => setTimezoneHandler("Timezone 3")}>Timezone 3</p>
-                <p onClick={() => setTimezoneHandler("Timezone 4")}>Timezone 4</p>
+                {
+                  getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
+                    <p>Loading...</p> :
+                    !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
+
+                      AllTimezones.map((c) => (
+                        <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
+                      ))
+
+                      :
+                      !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length == 0 ?
+                        <p>No Timezone</p> :
+                        !getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve &&
+                        <p>No Timezone</p>
+                }
               </div>}
             </div>
 
             <div>
               <p>Postal Code</p>
-              <input type="text" />
+              <input
+                type="text"
+                value={postCode}
+                onChange={(e) => setPostCode(e.target.value)}
+              />
             </div>
           </div>
 
@@ -751,7 +1122,11 @@ const EditSalon = () => {
 
           <div>
             <p>Contact Tel.</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={contactTel}
+              onChange={(e) => setContactTel(e.target.value)}
+            />
           </div>
 
           <p>Add Your Services</p>
@@ -760,7 +1135,7 @@ const EditSalon = () => {
           <div>
             <div>
               {
-                loading ?
+                getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
                   <div className='create_salon_carousel_loader'>
                     <Skeleton count={1}
                       height={"9rem"}
@@ -812,23 +1187,28 @@ const EditSalon = () => {
                       }}
                     />
                   </div> :
-                  <Carousel
-                    responsive={responsive}
-                    draggable={false}
-                    swipeable={false}
-                  >
-                    {
-                      slidedata.map((s) => (
-                        <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s.item)}
-                          style={{
-                            border: selectedLogo === s.item ? "3px solid var(--primary-bg-color3)" : "1px solid black"
-                          }}
-                        >
-                          <img src={s.item} alt="" />
-                        </div>
-                      ))
-                    }
-                  </Carousel>
+                  !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
+                    <Carousel
+                      responsive={responsive}
+                      draggable={false}
+                      swipeable={false}
+                    >
+                      {
+                        SalonIcons?.map((s) => (
+                          <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
+                            style={{
+                              border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                            }}
+                          >
+                            <img src={s.url} alt="" />
+                          </div>
+                        ))
+                      }
+                    </Carousel> :
+                    !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
+                      <p>No Salon Icons Available</p> :
+                      !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
+                      <p>No Salon Icons Available</p>
               }
 
             </div>
@@ -840,49 +1220,49 @@ const EditSalon = () => {
               type="text"
               value={serviceName}
               onChange={(e) => setServiceName(e.target.value)}
-              />
+            />
           </div>
 
           <div>
             <p>Service Desc</p>
             <input
-              type="text" 
+              type="text"
               value={serviceDesc}
               onChange={(e) => setServiceDesc(e.target.value)}
-              />
+            />
           </div>
 
           <div>
             <p>Service Type</p>
             <input
               type="text"
-              value={`${serviceType ? `${serviceType}` : ''}`}
-              onClick={() => serviceTypeDropHandler()}
-              ref={serviceTypeIconRef}
+              value={`${vipService ? 'Vip' : 'Regular'}`}
+              onClick={() => vipServiceDropHandler()}
+              ref={vipServiceIconRef}
             />
 
-            {serviceTypeDrop && <div ref={serviceTypeDropRef}>
-              <p onClick={() => serviceTypeHandler("Regular")}>Regular</p>
-              <p onClick={() => serviceTypeHandler("Vip")}>Vip</p>
+            {vipServiceDrop && <div ref={vipServiceDropRef}>
+              <p onClick={() => vipServiceHandler(false)}>Regular</p>
+              <p onClick={() => vipServiceHandler(true)}>Vip</p>
             </div>}
           </div>
 
           <div>
             <div>
               <p>Service Price</p>
-              <input 
-              type="text" 
-              value={servicePrice}
-              onChange={(e) => setServicePrice(e.target.value)}
+              <input
+                type="text"
+                value={servicePrice}
+                onChange={(e) => setServicePrice(e.target.value)}
               />
             </div>
 
             <div>
               <p>Est Wait Tm(mins)</p>
-              <input 
-              type="text" 
-              value={serviceEWT}
-              onChange={(e) => setServiceEWT(e.target.value)}
+              <input
+                type="text"
+                value={serviceEWT}
+                onChange={(e) => setServiceEWT(e.target.value)}
               />
             </div>
           </div>
@@ -892,19 +1272,20 @@ const EditSalon = () => {
           </div>
 
           <div className='service_container'>
-            {/* {
-              selectedServices.map((s) => ())
-            } */}
-            <div className='service_container_item'>
-              <div><img src={selectedLogo ? selectedLogo : ""} alt="" /></div>
-              <p>Hair cut</p>
-              <p>ladies hair cut of any length</p>
-              <p>Regular</p>
-              <p>$20</p>
-              <p>30min</p>
-              <div><DeleteIcon /></div>
-            </div>
+            {
+              selectedServices.map((ser, index) => (
 
+                <div className='service_container_item' key={index}>
+                  <div><img src={ser.serviceIcon?.url ? ser.serviceIcon?.url : ""} alt="" /></div>
+                  <p>{ser.serviceName}</p>
+                  <p>{ser.serviceDesc}</p>
+                  <p>{ser.serviceType}</p>
+                  <p>${ser.servicePrice}</p>
+                  <p>{ser.serviceEWT}min</p>
+                  <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
+                </div>
+              ))
+            }
           </div>
 
 
@@ -949,26 +1330,42 @@ const EditSalon = () => {
 
           <div>
             <p>Web Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={webLink}
+              onChange={(e) => setWebLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Facebook Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={fbLink}
+              onChange={(e) => setFbLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Instagram Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={instraLink}
+              onChange={(e) => setInstraLink(e.target.value)}
+            />
           </div>
 
           <div>
             <p>Twitter Link</p>
-            <input type="text" />
+            <input
+              type="text"
+              value={twitterLink}
+              onChange={(e) => setTwitterLink(e.target.value)}
+            />
           </div>
 
           <div>
-            <button>Submit</button>
+            <button onClick={editSalonHandler}>Submit</button>
           </div>
 
         </div>

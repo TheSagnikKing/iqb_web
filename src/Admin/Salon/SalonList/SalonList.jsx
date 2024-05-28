@@ -42,8 +42,8 @@ const SalonList = () => {
   } = getAdminSalonList
 
 
-  const editButtonClicked = (salonid) => {
-    navigate(`/admin-editsalon/${salonid}`)
+  const editButtonClicked = (salon) => {
+    navigate(`/admin-editsalon/${salon?.salonId}`,{state:salon})
   }
 
   const deleteSalonHandler = (salonId, id) => {
@@ -88,7 +88,7 @@ const SalonList = () => {
                     <p>{s?.address}</p>
                     <p>{s?.city}</p>
                     <div>
-                      <div onClick={() => editButtonClicked(s?.salonId)}><EditIcon /></div>
+                      <div onClick={() => editButtonClicked(s)}><EditIcon /></div>
                     </div>
                     <div>
                       <div onClick={() => deleteSalonHandler(s.salonId, s._id)}><DeleteIcon /></div>

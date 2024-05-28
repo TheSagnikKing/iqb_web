@@ -6,6 +6,8 @@ import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import api from '../../../Redux/api/Api';
+import { useNavigate } from 'react-router-dom';
 
 const CreateSalon = () => {
 
@@ -155,11 +157,6 @@ const CreateSalon = () => {
     },
   ]
 
-  const [selectedLogo, setSelectedLogo] = useState("")
-
-  const logoselectHandler = (serviceImg) => {
-    setSelectedLogo(serviceImg)
-  }
 
   const [salonType, setSalonType] = useState("")
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
@@ -548,8 +545,12 @@ const CreateSalon = () => {
     fileInputRef.current.click();
   };
 
+  const [uploadSalonLogo, setUploadSalonLogo] = useState("")
+
   const handleSalonFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
+
+
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
     if (!allowedTypes.includes(uploadImage.type)) {
@@ -560,7 +561,7 @@ const CreateSalon = () => {
     const imageUrl = URL.createObjectURL(uploadImage);
 
     setSalonLogo(imageUrl);
-
+    setUploadSalonLogo(uploadImage)
   };
 
   const [salonImages, setSalonImages] = useState([])
@@ -570,6 +571,8 @@ const CreateSalon = () => {
   const handleSalonImageButtonClick = () => {
     salonImagefileInputRef.current.click();
   };
+
+  const [uploadSalonImages, setUploadSalonImages] = useState([])
 
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
@@ -589,6 +592,7 @@ const CreateSalon = () => {
 
     // Filter out null values (in case of invalid files) and update the state with valid URLs
     setSalonImages(urls.filter((url) => url !== null));
+    setUploadSalonImages(uploadedFiles)
   };
 
   const [mobilesalonlogo, setMobileSalonlogo] = useState("")
@@ -638,6 +642,19 @@ const CreateSalon = () => {
     setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
   };
 
+
+  const [selectedLogo, setSelectedLogo] = useState({
+    url: "",
+    public_id: ""
+  })
+
+  const logoselectHandler = (serviceImg) => {
+    setSelectedLogo({
+      url: serviceImg.url,
+      public_id: serviceImg.public_id
+    });
+  }
+
   const [selectedServices, setSelectedServices] = useState([])
 
   const addServiceHandler = () => {
@@ -648,7 +665,10 @@ const CreateSalon = () => {
     }
 
     const service = {
-      selectedLogo: selectedLogo?.url,
+      serviceIcon: {
+        url: selectedLogo.url,
+        public_id: selectedLogo.public_id
+      },
       serviceName,
       servicePrice: Number(servicePrice),
       vipService,
@@ -658,7 +678,7 @@ const CreateSalon = () => {
 
     setSelectedServices([...selectedServices, service])
 
-    setSelectedLogo("")
+    setSelectedLogo({ url: "", public_id: "" })
     setServiceName("")
     setServicePrice("")
     setVipService(false)
@@ -666,10 +686,14 @@ const CreateSalon = () => {
     setServiceEWT("")
   }
 
+
   const deleteServiceHandler = (index) => {
     const currentService = selectedServices[index];
 
-    setSelectedLogo(currentService.selectedLogo)
+    setSelectedLogo({
+      url: currentService.serviceIcon.url,
+      public_id: currentService.serviceIcon.public_id
+    })
     setServiceName(currentService.serviceName)
     setServicePrice(currentService.servicePrice)
     setVipService(currentService.vipService)
@@ -684,9 +708,11 @@ const CreateSalon = () => {
 
   const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
 
+  const navigate = useNavigate()
+
   const createSalonHandler = () => {
     const salondata = {
-      adminEmail:email,
+      adminEmail: email,
       salonEmail,
       salonName,
       address,
@@ -699,7 +725,7 @@ const CreateSalon = () => {
       },
       country,
       city,
-      timezone,
+      timeZone: timezone,
       postCode,
       contactTel,
       salonType,
@@ -713,8 +739,85 @@ const CreateSalon = () => {
     }
 
     console.log(salondata)
-    dispatch(adminCreateSalonAction(salondata))
+    dispatch(adminCreateSalonAction(salondata, navigate))
   }
+
+  const adminCreateSalon = useSelector(state => state.adminCreateSalon)
+
+  const {
+    response: createSalonResponse
+  } = adminCreateSalon
+
+
+  useEffect(() => {
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonImages != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+          formData.append('salonId', SalonId);
+
+          for (const file of uploadSalonImages) {
+            formData.append('gallery', file);
+          }
+
+          try {
+            const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+
+            console.log('Upload success:', imageResponse.data);
+
+            alert("Image uploaded Successfully")
+          } catch (error) {
+            console.error('Image upload failed:', error);
+            setSalonImages([]);
+            setUploadSalonImages([])
+          }
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+    //For Salon Logo
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonLogo != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+
+          if (SalonId) {
+            formData.append('salonId', SalonId);
+            formData.append('salonLogo', uploadSalonLogo);
+
+            try {
+              const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+
+              console.log('Upload success:', imageResponse.data);
+              alert("Salon Logo uploaded Successfully")
+            } catch (error) {
+              console.error('Image upload failed:', error);
+              setSalonLogo("")
+              setUploadSalonLogo("")
+            }
+          }
+
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+  }, [createSalonResponse?.salonId]);
 
   return (
     <div className='create_salon_wrapper'>
@@ -895,7 +998,7 @@ const CreateSalon = () => {
                     <p>Loading...</p> :
                     !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
-                    AllTimezones.map((c) => (
+                      AllTimezones.map((c) => (
                         <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
                       ))
 
@@ -1070,7 +1173,7 @@ const CreateSalon = () => {
                         SalonIcons?.map((s) => (
                           <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
                             style={{
-                              border: selectedLogo?._id === s._id ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                              border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
                             }}
                           >
                             <img src={s.url} alt="" />
@@ -1147,8 +1250,9 @@ const CreateSalon = () => {
           <div className='service_container'>
             {
               selectedServices.map((ser, index) => (
+
                 <div className='service_container_item' key={index}>
-                  <div><img src={ser.selectedLogo ? ser.selectedLogo : ""} alt="" /></div>
+                  <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
                   <p>{ser.serviceName}</p>
                   <p>{ser.serviceDesc}</p>
                   <p>{ser.serviceType}</p>

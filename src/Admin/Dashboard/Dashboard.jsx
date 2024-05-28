@@ -255,17 +255,26 @@ const Dashboard = () => {
                         <p>{q.name}</p>
                         <p>{q.barberName}</p>
                         <p>{q.qPosition}</p>
-                        <p>{q.services.map((s) => s.serviceName)}</p>
+                        <p>{q.services?.map((s) => s.serviceName)}</p>
                       </div>
                     ))
                   }
                 </div> :
 
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                  <div><p>No QueueList </p></div> :
+                  <div style={{
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center"
+                  }}><p>Queue not available </p></div> :
 
                   !getAllQueueListLoading && !getAllQueueListResolve &&
-                  <div><p>No QueueList </p></div>
+                  <div style={{
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    fontSize:"1.6rem"
+                  }}><p>Queue not available </p></div>
           }
           <Link to="/admin-queuelist">See All</Link>
         </div>

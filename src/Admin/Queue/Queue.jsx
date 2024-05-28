@@ -6,83 +6,11 @@ import { DeleteIcon, ServeIcon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
+import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
 
 const Queue = () => {
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
-
-  const queuelistdata = [
-    {
-      _id: 1,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 2,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 3,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 4,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 5,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 6,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 7,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 8,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 9,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-    {
-      _id: 10,
-      name: "Arghya",
-      TimeJoinedQ: "2:03:21",
-      barberName: "Bikki Das",
-      qposition: 1,
-    },
-  ]
 
   const dispatch = useDispatch()
 
@@ -110,15 +38,39 @@ const Queue = () => {
   } = getAllQueueList
 
   const serveHandler = (barberId, serviceId, customerid) => {
-    const infodata = {
-      barberId,
-      serviceId,
-      _id: customerid,
-      salonId
+    const confirm = window.confirm()
+
+    if (confirm) {
+      const infodata = {
+        barberId,
+        serviceId,
+        _id: customerid,
+        salonId
+      }
+
+      console.log("cust", infodata)
+
+      dispatch(adminServeQueueAction(infodata))
     }
 
-    console.log("cust", infodata)
   }
+
+  const cancelHandler = (barberId, serviceId, customerid) => {
+    const confirm = window.confirm()
+
+    if (confirm) {
+      const infodata = {
+        barberId,
+        _id: customerid,
+        salonId
+      }
+
+      console.log("cust", infodata)
+
+      dispatch(adminCancelQueueAction(infodata))
+    }
+  }
+  
 
   return (
     <div className='admin_queue_wrapper'>
@@ -153,7 +105,7 @@ const Queue = () => {
                       <div onClick={() => serveHandler(b.barberId, b.serviceId, b._id)}><ServeIcon /></div>
                     </div>
                     <div>
-                      <div><DeleteIcon /></div>
+                      <div onClick={() => cancelHandler(b.barberId, b.serviceId, b._id)}><DeleteIcon /></div>
                     </div>
                   </div>
                 )) :

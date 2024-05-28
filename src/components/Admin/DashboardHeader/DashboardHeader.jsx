@@ -239,7 +239,7 @@ const DashboardHeader = () => {
                         /> :
                         <div>
                             <img
-                                src={`${adminProfile?.profile[0].url}`} alt=""
+                                src={`${adminProfile?.profile[0]?.url}`} alt=""
                                 onClick={() => setAdminEditDrop((prev) => !prev)}
                                 ref={adminEditIconRef}
                             />
