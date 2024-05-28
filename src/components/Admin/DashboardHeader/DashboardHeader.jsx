@@ -6,10 +6,12 @@ import { menudata } from '../menudata'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 
 const DashboardHeader = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+    const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
 
     const [salonlistdrop, setSalonlistdrop] = useState(false)
     const [togglecheck, setTogglecheck] = useState(false)
@@ -89,36 +91,62 @@ const DashboardHeader = () => {
     }, []);
 
     const [adminEditDrop, setAdminEditDrop] = useState(false)
-  
+
     const adminEditDropHandler = () => {
         setAdminEditDrop((prev) => !prev)
     }
-  
+
     const adminEditIconRef = useRef()
     const adminEditDropRef = useRef()
-  
+
     useEffect(() => {
-      const handleClickProfileOutside = (event) => {
-        if (
-            adminEditIconRef.current &&
-            adminEditDropRef.current &&
-          !adminEditIconRef.current.contains(event.target) &&
-          !adminEditDropRef.current.contains(event.target)
-        ) {
-            setAdminEditDrop(false);
-        }
-      };
-  
-      document.addEventListener('mousedown', handleClickProfileOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickProfileOutside);
-      };
+        const handleClickProfileOutside = (event) => {
+            if (
+                adminEditIconRef.current &&
+                adminEditDropRef.current &&
+                !adminEditIconRef.current.contains(event.target) &&
+                !adminEditDropRef.current.contains(event.target)
+            ) {
+                setAdminEditDrop(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickProfileOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickProfileOutside);
+        };
     }, []);
 
     const logoutHandler = async () => {
         dispatch(AdminLogoutAction(navigate))
-      }
+    }
 
+
+    const SalonListControllerRef = useRef(new AbortController());
+
+    useEffect(() => {
+        const controller = new AbortController();
+        SalonListControllerRef.current = controller;
+
+        dispatch(getAdminSalonListAction(adminEmail, controller.signal));
+
+        return () => {
+            if (SalonListControllerRef.current) {
+                SalonListControllerRef.current.abort();
+            }
+        };
+    }, [adminEmail, dispatch]);
+
+    const getAdminSalonList = useSelector(state => state.getAdminSalonList)
+
+    const {
+        loading: getAdminSalonListLoading,
+        resolve: getAdminSalonListResolve,
+        salons: SalonList
+    } = getAdminSalonList
+
+
+    // console.log(SalonList)
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
@@ -136,10 +164,18 @@ const DashboardHeader = () => {
                             height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
                         }}
                     >
+
                         {
-                            salonListNames.map((s) => (
+                            getAdminSalonListLoading && !getAdminSalonListResolve ?
+                            <p>No Salon Present</p> : 
+                            !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ? 
+                            SalonList.map((s) => (
                                 <p key={s.id}>{s.salonName}</p>
-                            ))
+                            )) : 
+                            !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? 
+                            <p>No Salon Present</p> :
+                            !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                            <p>No Salon Present</p>
                         }
                     </div>
                 </div>
@@ -202,15 +238,15 @@ const DashboardHeader = () => {
                             }}
                         /> :
                         <div>
-                            <img 
-                            src={`${adminProfile?.profile[0].url}`} alt="" 
-                            onClick={() => setAdminEditDrop((prev) => !prev)}
-                            ref={adminEditIconRef}
+                            <img
+                                src={`${adminProfile?.profile[0].url}`} alt=""
+                                onClick={() => setAdminEditDrop((prev) => !prev)}
+                                ref={adminEditIconRef}
                             />
 
                             {
                                 adminEditDrop && <div ref={adminEditDropRef}
-                                className="profile_drop_container"
+                                    className="profile_drop_container"
                                 >
                                     <p onClick={() => navigate("/admin-editprofile")}>My Profile</p>
                                     <p onClick={logoutHandler}>Logout</p>

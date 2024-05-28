@@ -38,7 +38,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
     try {
         dispatch({ type: CHANGE_ADMIN_BARBER_ONLINESTATUS_REQ })
 
-        const { data } = await api.post(`/api/admin/changeBarberOnlineStatus`, barberOnlinedata)
+        const { data } = await api.post(`/api/barber/changeBarberOnlineStatus`, barberOnlinedata)
 
         dispatch({
             type: CHANGE_ADMIN_BARBER_ONLINESTATUS_SUCCESS,
@@ -114,7 +114,7 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
     try {
         dispatch({ type: ADMIN_ALL_SALON_SERVICES_REQ })
 
-        const { data } = await api.get(`/api/admin/allSalonServices?salonId=${salonId}`, { signal })
+        const { data } = await api.get(`/api/salon/getAllSalonServices?salonId=${salonId}`, { signal })
 
         dispatch({
             type: ADMIN_ALL_SALON_SERVICES_SUCCESS,

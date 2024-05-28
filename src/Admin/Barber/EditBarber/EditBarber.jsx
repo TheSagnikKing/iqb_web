@@ -91,6 +91,8 @@ const EditBarber = () => {
   const adminAllSalonServices = useSelector(state => state.adminAllSalonServices);
   const { loading: adminAllSalonServicesLoading, resolve: adminAllSalonServicesResolve, response: allSalonServices } = adminAllSalonServices;
 
+
+  console.log(serviceEWTValues)
   return (
     <div className='admin_edit_barber_wrapper'>
       <p>Edit Barber</p>
@@ -173,6 +175,7 @@ const EditBarber = () => {
                     value={serviceEWTValues[s._id] !== undefined ? serviceEWTValues[s._id] : s.serviceEWT}
                     onChange={(e) => handleEWTChange(s._id, e.target.value)}
                   />
+                  {console.log(serviceEWTValues[s._id])}
                 </div>
 
                 {chooseServices.find((c) => c._id === s._id) ? (

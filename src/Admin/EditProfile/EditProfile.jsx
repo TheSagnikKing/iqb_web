@@ -104,10 +104,10 @@ const EditProfile = () => {
     const updateAdminProfile = () => {
         const profiledata = {
             email: adminProfile?.email, 
-            salonId:adminProfile?.salonId,
+            // salonId:adminProfile?.salonId,
             dateOfBirth,
             mobileNumber:Number(mobileNumber),
-            name,
+            userName:name,
             gender
         }
 
