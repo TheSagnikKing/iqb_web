@@ -15,70 +15,70 @@ const Queue = () => {
     {
       _id: 1,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 2,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 3,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 4,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 5,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 6,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 7,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 8,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 9,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
     {
       _id: 10,
       name: "Arghya",
-      TimeJoinedQ:"2:03:21",
+      TimeJoinedQ: "2:03:21",
       barberName: "Bikki Das",
       qposition: 1,
     },
@@ -109,6 +109,17 @@ const Queue = () => {
     response: queuelist
   } = getAllQueueList
 
+  const serveHandler = (barberId, serviceId, customerid) => {
+    const infodata = {
+      barberId,
+      serviceId,
+      _id: customerid,
+      salonId
+    }
+
+    console.log("cust", infodata)
+  }
+
   return (
     <div className='admin_queue_wrapper'>
       <div>
@@ -131,25 +142,25 @@ const Queue = () => {
               <>
                 <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
               </> :
-            !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-              queuelist.map((b) => (
-                <div className='admin_queue_content_body_item' key={b._id}>
-                  <p>{b.name}</p>
-                  <p>{b.timeJoinedQ}</p>
-                  <p>{b.barberName}</p>
-                  <p>{b.qPosition}</p>
-                  <div>
-                    <div><ServeIcon /></div>
+              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
+                queuelist.map((b) => (
+                  <div className='admin_queue_content_body_item' key={b._id}>
+                    <p>{b.name}</p>
+                    <p>{b.timeJoinedQ}</p>
+                    <p>{b.barberName}</p>
+                    <p>{b.qPosition}</p>
+                    <div>
+                      <div onClick={() => serveHandler(b.barberId, b.serviceId, b._id)}><ServeIcon /></div>
+                    </div>
+                    <div>
+                      <div><DeleteIcon /></div>
+                    </div>
                   </div>
-                  <div>
-                    <div><DeleteIcon /></div>
-                  </div>
-                </div>
-              )) :
-              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-              <p>No QueueList</p> :
-              !getAllQueueListLoading && !getAllQueueListResolve && 
-              <p>No QueueList</p>
+                )) :
+                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
+                  <p>No QueueList</p> :
+                  !getAllQueueListLoading && !getAllQueueListResolve &&
+                  <p>No QueueList</p>
           }
 
         </div>

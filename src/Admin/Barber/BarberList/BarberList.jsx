@@ -72,7 +72,7 @@ const BarberList = () => {
       isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
     };
 
-    dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData));
+    dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
   }
 
 
@@ -122,7 +122,7 @@ const BarberList = () => {
       isApproved: !approveBarberMap.get(`${b.salonId}-${b.email}`) || false
     };
 
-    dispatch(adminApproveBarberAction(approvedata))
+    dispatch(adminApproveBarberAction(approvedata,setApproveBarberMap,b,approveBarberMap.get(`${b.salonId}-${b.email}`)))
   }
 
   const adminApproveBarber = useSelector(state => state.adminApproveBarber)
@@ -200,6 +200,7 @@ const BarberList = () => {
                         color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
                       }}
                       onClick={() => approveHandler(b)}
+                      disabled={adminApproveBarberLoading ? true : false}
                     >
                       {approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}
                     </button>

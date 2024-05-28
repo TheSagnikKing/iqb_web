@@ -642,8 +642,7 @@ const CreateSalon = () => {
 
   const addServiceHandler = () => {
 
-    if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
-      // You can handle the case when any of the fields is empty (e.g., show an error message)
+    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
       alert("Please fill all the fields")
       return;
     }
@@ -710,7 +709,7 @@ const CreateSalon = () => {
       twitterLink,
       appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
-      image:image2
+      // image:image2
     }
 
     console.log(salondata)
@@ -891,10 +890,6 @@ const CreateSalon = () => {
               />
 
               {timezoneDrop && <div ref={timezoneDropRef}>
-                {/* <p onClick={() => setTimezoneHandler("Timezone 1")}>Timezone 1</p>
-                <p onClick={() => setTimezoneHandler("Timezone 2")}>Timezone 2</p>
-                <p onClick={() => setTimezoneHandler("Timezone 3")}>Timezone 3</p>
-                <p onClick={() => setTimezoneHandler("Timezone 4")}>Timezone 4</p> */}
                 {
                   getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
                     <p>Loading...</p> :

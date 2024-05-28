@@ -6,6 +6,7 @@ import { adminCreateSalonReducer, adminDeleteSalonReducer, getAdminAllCitiesRedu
 import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer } from "./Admin/Reducers/BarberReducer"
 import { adminUpdateProfileReducer } from "./Admin/Reducers/AdminProfileReducer"
 import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer";
+import { adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
 
 const rootReducer = combineReducers({
 
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   adminCreateSalon:adminCreateSalonReducer,
   adminUpdateProfile:adminUpdateProfileReducer,
   adminGetAllCustomerList:adminGetAllCustomerListReducer,
+  adminServeQueue:adminServeQueueReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,

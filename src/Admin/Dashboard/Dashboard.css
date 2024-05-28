@@ -4,6 +4,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 25rem 27rem 1fr;
     gap: 1rem;
+    position: relative;
 }
 
 .admin_dashboard_page_container>div {

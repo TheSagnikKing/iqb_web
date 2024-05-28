@@ -174,6 +174,8 @@ const Dashboard = () => {
     response: appointmentList
   } = getDashboardAppointmentList
 
+  const [editSalonModalOpen, setEditSalonModalOpen] = useState(false)
+
   return (
     <div className='admin_dashboard_page_container'>
       <div>
@@ -431,7 +433,7 @@ const Dashboard = () => {
                       className='dashboard_appointment_loader'
                     /> :
                     !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
-                      appointmentList.map((a,index) => (
+                      appointmentList.map((a, index) => (
                         <div key={index}>
                           <p>{a.timeSlots}</p>
                           <p>{a.customerName}</p>
@@ -450,6 +452,15 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* <div style={{
+        position:"absolute",
+        inset: "0px 0px 0px 0px",
+        background:"rgba(0,0,0,0.4)",
+        zIndex:"1000"
+      }}>
+        Update Modal
+      </div> */}
     </div>
   )
 }

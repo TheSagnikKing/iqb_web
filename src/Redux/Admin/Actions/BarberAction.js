@@ -34,7 +34,7 @@ export const getAdminBarberListAction = (salonId, signal) => async (dispatch) =>
     }
 }
 
-export const changeAdminBarberOnlineStatusAction = (barberOnlinedata) => async (dispatch) => {
+export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMap, b, originalIsOnline) => async (dispatch) => {
     try {
         dispatch({ type: CHANGE_ADMIN_BARBER_ONLINESTATUS_REQ })
 
@@ -60,10 +60,18 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata) => async (
                 color: '#fff',
             },
         });
+
+        // Revert to original state
+        setCheckMap((prevCheckMap) => {
+            const newCheckMap = new Map(prevCheckMap);
+            const key = `${b.salonId}-${b.barberId}`;
+            newCheckMap.set(key, originalIsOnline);
+            return newCheckMap;
+        });
     }
 }
 
-export const adminApproveBarberAction = (approvedata) => async (dispatch) => {
+export const adminApproveBarberAction = (approvedata,setApproveBarberMap,b,originalIsOnline) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_APPROVE_BARBER_REQ })
 
@@ -88,6 +96,14 @@ export const adminApproveBarberAction = (approvedata) => async (dispatch) => {
                 background: '#333',
                 color: '#fff',
             },
+        });
+
+        // Revert to original state
+        setApproveBarberMap((prevCheckMap) => {
+            const newCheckMap = new Map(prevCheckMap);
+            const key = `${b.salonId}-${b.email}`;
+            newCheckMap.set(key, originalIsOnline);
+            return newCheckMap;
         });
     }
 
@@ -126,7 +142,7 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
     }
 }
 
-export const adminCreateBarberAction = (barberdata,navigate) => async (dispatch) => {
+export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CREATE_BARBER_REQ })
 
@@ -157,7 +173,7 @@ export const adminCreateBarberAction = (barberdata,navigate) => async (dispatch)
     }
 }
 
-export const adminUpdateBarberAction = (barberdata,navigate) => async (dispatch) => {
+export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_BARBER_REQ })
 
@@ -188,11 +204,11 @@ export const adminUpdateBarberAction = (barberdata,navigate) => async (dispatch)
     }
 }
 
-export const adminDeleteBarberAction = (salonId,email) => async (dispatch) => {
+export const adminDeleteBarberAction = (salonId, email) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_DELETE_BARBER_REQ })
 
-        const { data } = await api.post(`/api/barber/deleteBarberByEmail`, {salonId,email})
+        const { data } = await api.post(`/api/barber/deleteBarberByEmail`, { salonId, email })
 
         dispatch({
             type: ADMIN_DELETE_BARBER_SUCCESS,
