@@ -37,40 +37,6 @@ const Queue = () => {
     response: queuelist
   } = getAllQueueList
 
-  const serveHandler = (barberId, serviceId, customerid) => {
-    const confirm = window.confirm()
-
-    if (confirm) {
-      const infodata = {
-        barberId,
-        serviceId,
-        _id: customerid,
-        salonId
-      }
-
-      console.log("cust", infodata)
-
-      dispatch(adminServeQueueAction(infodata))
-    }
-
-  }
-
-  const cancelHandler = (barberId, serviceId, customerid) => {
-    const confirm = window.confirm()
-
-    if (confirm) {
-      const infodata = {
-        barberId,
-        _id: customerid,
-        salonId
-      }
-
-      console.log("cust", infodata)
-
-      dispatch(adminCancelQueueAction(infodata))
-    }
-  }
-  
 
   return (
     <div className='admin_queue_wrapper'>
@@ -85,8 +51,6 @@ const Queue = () => {
             <p>Time Joined Q</p>
             <p>Barber Name</p>
             <p>Q Postion</p>
-            <p>Served</p>
-            <p>Cancel</p>
           </div>
 
           {
@@ -101,18 +65,16 @@ const Queue = () => {
                     <p>{b.timeJoinedQ}</p>
                     <p>{b.barberName}</p>
                     <p>{b.qPosition}</p>
-                    <div>
-                      <div onClick={() => serveHandler(b.barberId, b.serviceId, b._id)}><ServeIcon /></div>
-                    </div>
-                    <div>
-                      <div onClick={() => cancelHandler(b.barberId, b.serviceId, b._id)}><DeleteIcon /></div>
-                    </div>
                   </div>
                 )) :
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                  <p>No QueueList</p> :
+                  <p
+                  style={{margin:"2rem"}}
+                  >No QueueList</p> :
                   !getAllQueueListLoading && !getAllQueueListResolve &&
-                  <p>No QueueList</p>
+                  <p 
+                  style={{margin:"2rem"}}
+                  >Queue not available</p>
           }
 
         </div>

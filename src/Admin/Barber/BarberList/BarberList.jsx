@@ -214,9 +214,13 @@ const BarberList = () => {
                   </div>
                 )) :
                 !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ?
-                  <p>No Barber List</p> :
+                  <p
+                  style={{margin:"2rem"}}
+                  >Barbers not available</p> :
                   !getAdminBarberListLoading && !getAdminBarberListResolve &&
-                  <p>No Barber List</p>
+                  <p
+                  style={{margin:"2rem"}}
+                  >Barbers not available</p>
           }
 
         </div>

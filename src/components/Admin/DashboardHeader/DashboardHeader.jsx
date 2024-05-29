@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
-import { adminApplySalonAction, adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/DashboardAction'
+import { adminApplySalonAction, adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction'
 
 const DashboardHeader = () => {
 
@@ -157,16 +157,13 @@ const DashboardHeader = () => {
     }
 
     const applySelectedSalonHandler = () => {
-        const confirm = window.confirm("Are you sure ?")
 
         const applySalonData = {
             salonId: chooseSalonId,
             adminEmail
         }
 
-        if (confirm) {
-            dispatch(adminApplySalonAction(applySalonData))
-        }
+        dispatch(adminApplySalonAction(applySalonData))
     }
 
     const getDefaultSalonControllerRef = useRef(new AbortController())
@@ -176,7 +173,7 @@ const DashboardHeader = () => {
             const controller = new AbortController();
             getDefaultSalonControllerRef.current = controller;
 
-            dispatch(adminGetDefaultSalonAction(chooseSalonId, adminEmail, controller.signal, setChooseSalonId, setCurrentActiveSalon));
+            dispatch(adminGetDefaultSalonAction(adminEmail, controller.signal, setChooseSalonId, setCurrentActiveSalon));
 
             return () => {
                 if (getDefaultSalonControllerRef.current) {
@@ -210,7 +207,14 @@ const DashboardHeader = () => {
                                 <p>No Salon Present</p> :
                                 !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
                                     SalonList.map((s) => (
-                                        <p key={s.id} onClick={() => selectedActiveSalon(s)}>{s.salonName}</p>
+                                        <p
+                                            key={s.id}
+                                            onClick={() => selectedActiveSalon(s)}
+                                            style={{
+                                                background: s.salonId == adminProfile?.salonId && "var(--primary-bg-color3)",
+                                                color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                                            }}
+                                        >{s.salonName}</p>
                                     )) :
                                     !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
                                         <p>No Salon Present</p> :
@@ -219,7 +223,8 @@ const DashboardHeader = () => {
                         }
                     </div>
                 </div>
-                <button onClick={applySelectedSalonHandler}>Apply</button>
+                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId}>Apply</button>}
+
             </div>
 
             <div className='mobile_choose_salon_div'>

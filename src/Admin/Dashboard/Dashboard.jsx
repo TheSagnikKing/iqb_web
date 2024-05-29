@@ -144,8 +144,6 @@ const Dashboard = () => {
 
   const [currentDate, setCurrentDate] = useState(new Date())
 
-  console.log(currentDate?.toISOString())
-
   const appointmentlistcontrollerRef = useRef(new AbortController());
 
   useEffect(() => {
@@ -174,7 +172,16 @@ const Dashboard = () => {
     response: appointmentList
   } = getDashboardAppointmentList
 
-  const [editSalonModalOpen, setEditSalonModalOpen] = useState(false)
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading:adminGetDefaultSalonLoading,
+    resolve:adminGetDefaultSalonResolve,
+    response:adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  console.log(adminGetDefaultSalonResponse)
 
   return (
     <div className='admin_dashboard_page_container'>
@@ -186,12 +193,12 @@ const Dashboard = () => {
               <h1>Welcome Back, {adminName}</h1>
               <div
                 style={{
-                  background: togglecheck ? "limegreen" : "#000"
+                  background: adminGetDefaultSalonResponse?.isOnline ? "limegreen" : "#000"
                 }}
               >
-                <p className={`dashboard_toggle_btn_text ${togglecheck ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
+                <p className={`dashboard_toggle_btn_text ${adminGetDefaultSalonResponse?.isOnline ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{adminGetDefaultSalonResponse?.isOnline ? "Online" : "Offline"}</p>
                 <button
-                  className={`dashboard_toggle_btn ${togglecheck ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
+                  className={`dashboard_toggle_btn ${adminGetDefaultSalonResponse?.isOnline ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
                   onClick={toggleHandler}
                 ></button>
               </div>
@@ -263,16 +270,11 @@ const Dashboard = () => {
 
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
                   <div style={{
-                    display:"flex",
-                    justifyContent:"center",
-                    alignItems:"center"
+                    fontSize:"1.6rem"
                   }}><p>Queue not available </p></div> :
 
                   !getAllQueueListLoading && !getAllQueueListResolve &&
                   <div style={{
-                    display:"flex",
-                    justifyContent:"center",
-                    alignItems:"center",
                     fontSize:"1.6rem"
                   }}><p>Queue not available </p></div>
           }
@@ -452,9 +454,19 @@ const Dashboard = () => {
                         </div>
                       )) :
                       !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length == 0 ?
-                        <p>No Appointment</p> :
+                        <p
+                        style={{
+                          fontSize:"1.6rem",
+                          margin:"1rem"
+                        }}
+                        >Appointments not available</p> :
                         !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
-                        <p>No Appointment</p>
+                        <p 
+                        style={{
+                          fontSize:"1.6rem",
+                          margin:"1rem"
+                        }}
+                        >Appointments not available</p>
                 }
               </div>
             </div>
@@ -462,14 +474,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* <div style={{
-        position:"absolute",
-        inset: "0px 0px 0px 0px",
-        background:"rgba(0,0,0,0.4)",
-        zIndex:"1000"
-      }}>
-        Update Modal
-      </div> */}
     </div>
   )
 }

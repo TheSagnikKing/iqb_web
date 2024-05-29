@@ -1,12 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutReducer, AdminGoogleSignupReducer, AdminSignupReducer, AdminSignupEditReducer } from "./Admin/Reducers/AuthReducer"
 import { BarberGoogleLoginReducer, BarberLoggedInMiddlewareReducer } from "./Barber/Reducers/AuthReducer"
-import { adminGetDefaultSalonReducer, getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
+import { getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
 import { adminCreateSalonReducer, adminDeleteSalonReducer, adminEditSalonReducer, getAdminAllCitiesReducer, getAdminAllCountriesReducer, getAdminAllSalonIconReducer, getAdminAllTimezoneReducer, getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
 import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer } from "./Admin/Reducers/BarberReducer"
 import { adminUpdateProfileReducer, adminSendVerifyEmailReducer, adminVerifiedEmailStatusReducer } from "./Admin/Reducers/AdminProfileReducer"
 import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer";
 import { adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
+import { adminGetDefaultSalonReducer,adminApplySalonReducer } from "./Admin/Reducers/AdminHeaderReducer"
 
 const rootReducer = combineReducers({
 
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   adminSendVerifyEmail:adminSendVerifyEmailReducer,
   adminVerifiedEmailStatus:adminVerifiedEmailStatusReducer,
   adminGetDefaultSalon:adminGetDefaultSalonReducer,
+  adminApplySalon:adminApplySalonReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,

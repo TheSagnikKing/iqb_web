@@ -99,9 +99,13 @@ const SalonList = () => {
                   </div>
                 )) :
                 !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
-                  <p>No Salon List</p> :
+                  <p
+                  style={{margin:"2rem"}}
+                  >Salons not available</p> :
                   !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                  <p>No Salon List</p>
+                  <p
+                  style={{margin:"2rem"}}
+                  >Salons not available</p>
           }
 
         </div>

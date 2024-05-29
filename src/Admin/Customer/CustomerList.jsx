@@ -90,9 +90,13 @@ const CustomerList = () => {
                   </div>
                 )) :
                 !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length == 0 ? 
-                <p>No Customer List</p> :
+                <p 
+                style={{margin:"2rem"}}
+                >Customers not available</p> :
                 !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve &&
-                <p>No Customer List</p>
+                <p 
+                style={{margin:"2rem"}}
+                >Customers not available</p>
           }
 
         </div>

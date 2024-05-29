@@ -95,11 +95,11 @@
 
 .admin_queue_content_body>div{
     min-height: 6rem;
-    min-width: 100rem;
+    min-width: 80rem;
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: repeat(6,1fr);
+    grid-template-columns: repeat(4,1fr);
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
