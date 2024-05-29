@@ -31,6 +31,8 @@ import { MdOutlineMessage } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
 import { RiExpandRightLine } from "react-icons/ri";
+import { MdMan } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 
 // Make sure the icon first letter is capital
@@ -41,7 +43,7 @@ export const RightArrow = MdKeyboardArrowRight
 
 export const Admindashboardicon = MdDashboard
 export const Adminsalonicon = RiScissors2Fill
-export const Adminbarbericon = FaUser
+export const Adminbarbericon = MdMan
 export const Admincustomericon =IoPersonCircle
 export const Adminqueueicon = FaUserGroup
 export const Adminadvertisementicon = RiAdvertisementFill
@@ -73,3 +75,5 @@ export const MessageIcon = MdOutlineMessage
 export const SearchIcon = IoSearch
 export const CheckIcon = FaCheck
 export const ServeIcon = RiExpandRightLine
+export const ProfileIcon = FaUser
+export const LogoutIcon = MdLogout

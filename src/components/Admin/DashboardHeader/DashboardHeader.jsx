@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./DashboardHeader.css"
 import Skeleton from 'react-loading-skeleton'
-import { Adminqueueicon, DropdownIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, Settingsicon, Sunicon } from '../../../icons'
+import { Adminqueueicon, DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
 import { menudata } from '../menudata'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
@@ -184,6 +184,8 @@ const DashboardHeader = () => {
 
     }, [adminProfile, dispatch]);
 
+    const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
+
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
@@ -236,7 +238,7 @@ const DashboardHeader = () => {
                         <button onClick={() => setMobileDrop(false)}>X</button>
                         <p>Choose Salon</p>
                         <div>
-                            <p>Classic touch</p>
+                            <p>{currentActiveSalon}</p>
                         </div>
                         <div
                             className='mobile_dashboard_salon_list_dropdown'
@@ -249,12 +251,26 @@ const DashboardHeader = () => {
                             }}
                         >
                             {
-                                salonListNames.map((s) => (
-                                    <p key={s.id}>{s.salonName}</p>
-                                ))
+                                getAdminSalonListLoading && !getAdminSalonListResolve ?
+                                    <p>No Salon Present</p> :
+                                    !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
+                                        SalonList.map((s) => (
+                                            <p
+                                                key={s.id}
+                                                onClick={() => selectedActiveSalon(s)}
+                                                style={{
+                                                    background: s.salonId == adminProfile?.salonId && "var(--primary-bg-color3)",
+                                                    color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                                                }}
+                                            >{s.salonName}</p>
+                                        )) :
+                                        !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
+                                            <p>No Salon Present</p> :
+                                            !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                                            <p>No Salon Present</p>
                             }
                         </div>
-                        <button>Apply</button>
+                        {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId}>Apply</button>}
                     </div>
                 </section>
             }
@@ -284,7 +300,9 @@ const DashboardHeader = () => {
                         /> :
                         <div>
                             <img
-                                src={`${adminProfile?.profile[0]?.url}`} alt=""
+                                src={src}
+                                onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
+                                alt=''
                                 onClick={() => setAdminEditDrop((prev) => !prev)}
                                 ref={adminEditIconRef}
                             />
@@ -328,6 +346,15 @@ const DashboardHeader = () => {
                         </div>
                     ))
                 }
+
+                <div onClick={() => navigate("/admin-editprofile")}>
+                    <div><ProfileIcon/></div>
+                    <p>Profile</p>
+                </div>
+                <div onClick={() => dispatch(AdminLogoutAction(navigate))}>
+                    <div><LogoutIcon/></div>
+                    <p>Logout</p>
+                </div>
 
                 <div className='dashboard_theme_container'>
                     <p>Theme</p>

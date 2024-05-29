@@ -9,9 +9,19 @@ import Calender from '../../components/Admin/Calender/Calender'
 
 import { useDispatch, useSelector } from 'react-redux';
 import api from "../../Redux/api/Api"
-import { getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
+import { adminSalonStatusAction, getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
 
 const Dashboard = () => {
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  console.log(adminGetDefaultSalonResponse)
 
   const dispatch = useDispatch()
 
@@ -21,10 +31,27 @@ const Dashboard = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const [togglecheck, setTogglecheck] = useState(false)
+  useEffect(() => {
+    if (adminGetDefaultSalonResponse) {
+      setTogglecheck(adminGetDefaultSalonResponse?.isOnline)
+    }
+
+  }, [adminGetDefaultSalonResponse])
+
+  const [togglecheck, setTogglecheck] = useState(false);
+
+  console.log(togglecheck)
 
   const toggleHandler = () => {
-    setTogglecheck((prev) => !prev)
+    const newCheckValue = !togglecheck;
+    setTogglecheck(newCheckValue);
+
+    const salonStatusOnlineData = {
+      salonId,
+      isOnline: newCheckValue,
+    };
+
+    dispatch(adminSalonStatusAction(salonStatusOnlineData));
   }
 
 
@@ -173,308 +200,299 @@ const Dashboard = () => {
   } = getDashboardAppointmentList
 
 
-  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
-
-  const {
-    loading:adminGetDefaultSalonLoading,
-    resolve:adminGetDefaultSalonResolve,
-    response:adminGetDefaultSalonResponse
-  } = adminGetDefaultSalon
-
-  console.log(adminGetDefaultSalonResponse)
-
   return (
-    <div className='admin_dashboard_page_container'>
-      <div>
-        {
-          loading ?
-            <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
-            <div>
-              <h1>Welcome Back, {adminName}</h1>
-              <div
-                style={{
-                  background: adminGetDefaultSalonResponse?.isOnline ? "limegreen" : "#000"
-                }}
-              >
-                <p className={`dashboard_toggle_btn_text ${adminGetDefaultSalonResponse?.isOnline ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{adminGetDefaultSalonResponse?.isOnline ? "Online" : "Offline"}</p>
-                <button
-                  className={`dashboard_toggle_btn ${adminGetDefaultSalonResponse?.isOnline ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
-                  onClick={toggleHandler}
-                ></button>
-              </div>
-            </div>
-        }
-
+    salonId == 0 ? (<>
+      <div className='admin_dashboard_page_container_two'>
+        <h1>{adminName || email.split('@')[0]} , don't have any salon</h1>
+        <Link to="/admin-salonlist">Create </Link>
+      </div>
+    </>) : (<>
+      <div className='admin_dashboard_page_container'>
         <div>
-          <div>Salon Information</div>
           {
             loading ?
+              <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
               <div>
-                <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} />
-                <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} />
-              </div> :
-              <div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio numquam soluta iure quaerat voluptate debitis perspiciatis,
-                  fugiat libero quos. Ducimus, quasi quaerat commodi inventore fugit expedita voluptates vero est laborum?</p>
-                <button>Update</button>
-              </div>
-          }
-
-        </div>
-      </div>
-      <div>
-        <div>page</div>
-        <div>
-          <div>
-            <p>Queue List</p>
-            <div>
-              {/* <button onClick={() => setLoading((prev) => !prev)}>
-                <div><UserIcon /></div>
-                <p>Add Customer</p>
-              </button>
-              <button>
-                <div><UserIcon /></div>
-                <p>Join Queue</p>
-              </button> */}
-            </div>
-          </div>
-          {
-            getAllQueueListLoading && !getAllQueueListResolve ?
-              <div>
-                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-              </div> :
-              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-                <div>
-                  <div style={{
-                    background: "var(--primary-bg-color3)"
-                  }}>
-                    <p style={{ color: "var(--primary-text-light-color1)" }}>Customer Name</p>
-                    <p style={{ color: "var(--primary-text-light-color1)" }}>Barber Name</p>
-                    <p style={{ color: "var(--primary-text-light-color1)" }}>Q Position</p>
-                    <p style={{ color: "var(--primary-text-light-color1)" }}>Services</p>
-                  </div>
-
-                  {
-                    queuelist?.map((q) => (
-                      <div key={q._id}>
-                        <p>{q.name}</p>
-                        <p>{q.barberName}</p>
-                        <p>{q.qPosition}</p>
-                        <p>{q.services?.map((s) => s.serviceName)}</p>
-                      </div>
-                    ))
-                  }
-                </div> :
-
-                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                  <div style={{
-                    fontSize:"1.6rem"
-                  }}><p>Queue not available </p></div> :
-
-                  !getAllQueueListLoading && !getAllQueueListResolve &&
-                  <div style={{
-                    fontSize:"1.6rem"
-                  }}><p>Queue not available </p></div>
-          }
-          <Link to="/admin-queuelist">See All</Link>
-        </div>
-      </div>
-
-      <div
-        style={{
-          boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
-        }}
-      >
-        {
-          getAllAdvertisementLoading && !getAllAdvertisementResolve ?
-            <div className='admin_dashboard_carousel_loading'>
-              <Skeleton count={1}
-                height={"100%"}
-                width={"100%"}
-                style={{
-                  borderRadius: "1.5rem"
-                }}
-              />
-            </div> :
-            !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
-              <div className='admin_dashboard_carousel'>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop={true}
-                  autoPlay={true}
-                  interval={6000}
-                  showStatus={false}
-                  showArrows={false}
-                  stopOnHover={false}
-                  swipeable={false}
+                <h1>Welcome Back, {adminName}</h1>
+                <div
+                  style={{
+                    background: togglecheck ? "limegreen" : "#000"
+                  }}
                 >
-                  {
-                    advertisements?.map((ad) => (
-                      <div className='admin_dashboard_carousel_item' key={ad._id}>
-                        <img src={ad.url} />
-                      </div>
-                    ))
-                  }
-                </Carousel>
-              </div> :
-              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
-                <div className='admin_dashboard_carousel error'>
-                  <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
-                </div> :
-                !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
-                <div className='admin_dashboard_carousel error'>
-                  <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                  <p className={`dashboard_toggle_btn_text ${togglecheck ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
+                  <button
+                    className={`dashboard_toggle_btn ${togglecheck ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
+                    onClick={toggleHandler}
+                  ></button>
                 </div>
-        }
-
-      </div>
-
-      <div>
-        <div>Reports</div>
-        <div>
-
-          {
-            loading ?
-              <div>
-                <div>
-                  <Skeleton count={1}
-                    height={"5.7rem"}
-                    width={"5.7rem"}
-                    style={{
-                      borderRadius: "50%"
-                    }}
-                  />
-                  <Skeleton count={1}
-                    height={"1rem"}
-                    width={"5.7rem"}
-                  />
-                </div>
-
-                <div>
-                  <Skeleton count={1}
-                    height={"5.7rem"}
-                    width={"5.7rem"}
-                    style={{
-                      borderRadius: "50%"
-                    }}
-                  />
-                  <Skeleton count={1}
-                    height={"1rem"}
-                    width={"5.7rem"}
-                  />
-                </div>
-
-                <div>
-                  <Skeleton count={1}
-                    height={"5.7rem"}
-                    width={"5.7rem"}
-                    style={{
-                      borderRadius: "50%"
-                    }}
-                  />
-                  <Skeleton count={1}
-                    height={"1rem"}
-                    width={"5.7rem"}
-                  />
-                </div>
-              </div> :
-              <div>
-                {
-                  reportsdata.map((r) => (
-                    <div key={r.id}>
-                      <div>{r.icon}</div>
-                      <p>{r.p}</p>
-                      <p>Report</p>
-                    </div>
-                  ))
-                }
-
               </div>
           }
 
-          <div style={{ paddingInline: "3rem" }}>
+          <div>
+            <div>Salon Information</div>
             {
               loading ?
-                <Skeleton count={1}
-                  height={"80%"}
-                  width={"100%"}
-                /> :
-                <ResponsiveContainer width="70%" height="100%" style={{ margin: "auto" }}>
-                  <LineChart width={300} height={100} data={data}>
-                    <Line type="" dataKey="pv" stroke="#000" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
+                <div>
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} />
+                </div> :
+                <div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio numquam soluta iure quaerat voluptate debitis perspiciatis,
+                    fugiat libero quos. Ducimus, quasi quaerat commodi inventore fugit expedita voluptates vero est laborum?</p>
+                  <button>Update</button>
+                </div>
             }
 
           </div>
-
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <p>Calender</p>
-          <div>
-            <button>
-              <div><UserIcon /></div>
-              <p>Appointments</p>
-            </button>
-
-            <button>
-              <div><UserIcon /></div>
-              <p>Reservation</p>
-            </button>
-          </div>
         </div>
         <div>
-          <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
+          <div>page</div>
           <div>
             <div>
+              <p>Queue List</p>
               <div>
-                <p>Timeslots</p>
-                <p>Customer Name</p>
-                <p>Barber Name</p>
               </div>
-              <div>
-                {
-                  getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
-                    <Skeleton count={4}
-                      className='dashboard_appointment_loader'
-                    /> :
-                    !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
-                      appointmentList.map((a, index) => (
-                        <div key={index}>
-                          <p>{a.timeSlots}</p>
-                          <p>{a.customerName}</p>
-                          <p>{a.barberName}</p>
-                          <button>Follow Up</button>
-                          <div><Threeverticaldots /></div>
+            </div>
+            {
+              getAllQueueListLoading && !getAllQueueListResolve ?
+                <div>
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                </div> :
+                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
+                  <div>
+                    <div style={{
+                      background: "var(--primary-bg-color3)"
+                    }}>
+                      <p style={{ color: "var(--primary-text-light-color1)" }}>Customer Name</p>
+                      <p style={{ color: "var(--primary-text-light-color1)" }}>Barber Name</p>
+                      <p style={{ color: "var(--primary-text-light-color1)" }}>Q Position</p>
+                      <p style={{ color: "var(--primary-text-light-color1)" }}>Services</p>
+                    </div>
+
+                    {
+                      queuelist?.map((q) => (
+                        <div key={q._id}>
+                          <p>{q.name}</p>
+                          <p>{q.barberName}</p>
+                          <p>{q.qPosition}</p>
+                          <p>{q.services?.map((s) => s.serviceName)}</p>
                         </div>
-                      )) :
-                      !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length == 0 ?
-                        <p
-                        style={{
-                          fontSize:"1.6rem",
-                          margin:"1rem"
-                        }}
-                        >Appointments not available</p> :
-                        !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
-                        <p 
-                        style={{
-                          fontSize:"1.6rem",
-                          margin:"1rem"
-                        }}
-                        >Appointments not available</p>
-                }
+                      ))
+                    }
+                  </div> :
+
+                  !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
+                    <div style={{
+                      fontSize: "1.6rem"
+                    }}><p>Queue not available </p></div> :
+
+                    !getAllQueueListLoading && !getAllQueueListResolve &&
+                    <div style={{
+                      fontSize: "1.6rem"
+                    }}><p>Queue not available </p></div>
+            }
+            <Link to="/admin-queuelist">See All</Link>
+          </div>
+        </div>
+
+        <div
+          style={{
+            boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
+          }}
+        >
+          {
+            getAllAdvertisementLoading && !getAllAdvertisementResolve ?
+              <div className='admin_dashboard_carousel_loading'>
+                <Skeleton count={1}
+                  height={"100%"}
+                  width={"100%"}
+                  style={{
+                    borderRadius: "1.5rem"
+                  }}
+                />
+              </div> :
+              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
+                <div className='admin_dashboard_carousel'>
+                  <Carousel
+                    showThumbs={false}
+                    infiniteLoop={true}
+                    autoPlay={true}
+                    interval={6000}
+                    showStatus={false}
+                    showArrows={false}
+                    stopOnHover={false}
+                    swipeable={false}
+                  >
+                    {
+                      advertisements?.map((ad) => (
+                        <div className='admin_dashboard_carousel_item' key={ad._id}>
+                          <img src={ad.url} />
+                        </div>
+                      ))
+                    }
+                  </Carousel>
+                </div> :
+                !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
+                  <div className='admin_dashboard_carousel error'>
+                    <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                  </div> :
+                  !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
+                  <div className='admin_dashboard_carousel error'>
+                    <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                  </div>
+          }
+
+        </div>
+
+        <div>
+          <div>Reports</div>
+          <div>
+
+            {
+              loading ?
+                <div>
+                  <div>
+                    <Skeleton count={1}
+                      height={"5.7rem"}
+                      width={"5.7rem"}
+                      style={{
+                        borderRadius: "50%"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"1rem"}
+                      width={"5.7rem"}
+                    />
+                  </div>
+
+                  <div>
+                    <Skeleton count={1}
+                      height={"5.7rem"}
+                      width={"5.7rem"}
+                      style={{
+                        borderRadius: "50%"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"1rem"}
+                      width={"5.7rem"}
+                    />
+                  </div>
+
+                  <div>
+                    <Skeleton count={1}
+                      height={"5.7rem"}
+                      width={"5.7rem"}
+                      style={{
+                        borderRadius: "50%"
+                      }}
+                    />
+                    <Skeleton count={1}
+                      height={"1rem"}
+                      width={"5.7rem"}
+                    />
+                  </div>
+                </div> :
+                <div>
+                  {
+                    reportsdata.map((r) => (
+                      <div key={r.id}>
+                        <div>{r.icon}</div>
+                        <p>{r.p}</p>
+                        <p>Report</p>
+                      </div>
+                    ))
+                  }
+
+                </div>
+            }
+
+            <div style={{ paddingInline: "3rem" }}>
+              {
+                loading ?
+                  <Skeleton count={1}
+                    height={"80%"}
+                    width={"100%"}
+                  /> :
+                  <ResponsiveContainer width="70%" height="100%" style={{ margin: "auto" }}>
+                    <LineChart width={300} height={100} data={data}>
+                      <Line type="" dataKey="pv" stroke="#000" strokeWidth={2} />
+                    </LineChart>
+                  </ResponsiveContainer>
+              }
+
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <p>Calender</p>
+            <div>
+              <button>
+                <div><UserIcon /></div>
+                <p>Appointments</p>
+              </button>
+
+              <button>
+                <div><UserIcon /></div>
+                <p>Reservation</p>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
+            <div>
+              <div>
+                <div>
+                  <p>Timeslots</p>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                </div>
+                <div>
+                  {
+                    getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
+                      <Skeleton count={4}
+                        className='dashboard_appointment_loader'
+                      /> :
+                      !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
+                        appointmentList.map((a, index) => (
+                          <div key={index}>
+                            <p>{a.timeSlots}</p>
+                            <p>{a.customerName}</p>
+                            <p>{a.barberName}</p>
+                            <button>Follow Up</button>
+                            <div><Threeverticaldots /></div>
+                          </div>
+                        )) :
+                        !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length == 0 ?
+                          <p
+                            style={{
+                              fontSize: "1.6rem",
+                              margin: "1rem"
+                            }}
+                          >Appointments not availables</p> :
+                          !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
+                          <p
+                            style={{
+                              fontSize: "1.6rem",
+                              margin: "1rem"
+                            }}
+                          >Appointments not available</p>
+                  }
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+    </>)
+
+
   )
 }
 

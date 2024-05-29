@@ -597,6 +597,10 @@
         -ms-transform: translateX(-2rem);
         -o-transform: translateX(-2rem);
     }
+
+    .profile_drop_container{
+        display: none;
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:1140px) {

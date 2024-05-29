@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Header.css"
-import { Adminqueueicon, MobileCrossIcon, MobileMenuIcon, Notificationicon, Settingsicon } from '../../../icons'
+import { Adminqueueicon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, Notificationicon, ProfileIcon, Settingsicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { menudata } from '../menudata.jsx'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction.js'
 
 const Header = () => {
-  
+
   const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
   const [loading, setLoading] = useState(false)
@@ -45,11 +45,11 @@ const Header = () => {
   // console.log(location.pathname)
 
   const [adminEditDrop, setAdminEditDrop] = useState(false)
-  
+
   const adminEditDropHandler = () => {
-      setAdminEditDrop((prev) => !prev)
+    setAdminEditDrop((prev) => !prev)
   }
-  
+
 
   const adminEditIconRef = useRef()
   const adminEditDropRef = useRef()
@@ -57,12 +57,12 @@ const Header = () => {
   useEffect(() => {
     const handleClickProfileOutside = (event) => {
       if (
-          adminEditIconRef.current &&
-          adminEditDropRef.current &&
+        adminEditIconRef.current &&
+        adminEditDropRef.current &&
         !adminEditIconRef.current.contains(event.target) &&
         !adminEditDropRef.current.contains(event.target)
       ) {
-          setAdminEditDrop(false);
+        setAdminEditDrop(false);
       }
     };
 
@@ -72,17 +72,16 @@ const Header = () => {
     };
   }, []);
 
-  
+
   const logoutHandler = async () => {
-    // dispatch(AdminLogoutAction(navigate))
-    alert("logout")
+    dispatch(AdminLogoutAction(navigate))
   }
 
   const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
 
   return (
     <header className='admin_header_wrapper'>
-      <div>
+      {/* <div>
         <div
           style={{
             background: togglecheck ? "limegreen" : "#000"
@@ -94,7 +93,8 @@ const Header = () => {
             onClick={toggleHandler}
           ></button>
         </div>
-      </div>
+      </div> */}
+      <div />
 
       <div className='profile_header_wrapper'>
         <div><Notificationicon /></div>
@@ -109,12 +109,12 @@ const Header = () => {
               }}
             /> :
             <div>
-              <img 
-              src={src}
-              onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
-              alt="" 
-              onClick={() => setAdminEditDrop((prev) => !prev)}
-              ref={adminEditIconRef}
+              <img
+                src={src}
+                onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
+                alt=""
+                onClick={() => setAdminEditDrop((prev) => !prev)}
+                ref={adminEditIconRef}
               />
 
               {
@@ -157,6 +157,16 @@ const Header = () => {
             </div>
           ))
         }
+
+
+        <div onClick={() => navigate("/admin-editprofile")}>
+          <div><ProfileIcon /></div>
+          <p>Profile</p>
+        </div>
+        <div onClick={() => dispatch(AdminLogoutAction(navigate))}>
+          <div><LogoutIcon /></div>
+          <p>Logout</p>
+        </div>
       </div>
     </header>
   )

@@ -38,7 +38,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
     try {
         dispatch({ type: CHANGE_ADMIN_BARBER_ONLINESTATUS_REQ })
 
-        const { data } = await api.post(`/api/barber/changeBarberOnlineStatus`, barberOnlinedata)
+        const { data } = await api.post(`/api/admin/changeBarberOnlineStatus`, barberOnlinedata)
 
         dispatch({
             type: CHANGE_ADMIN_BARBER_ONLINESTATUS_SUCCESS,
@@ -204,18 +204,22 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
     }
 }
 
-export const adminDeleteBarberAction = (salonId, email) => async (dispatch) => {
+export const adminDeleteBarberAction = (salonId, email,barber) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_DELETE_BARBER_REQ })
 
-        const { data } = await api.post(`/api/barber/deleteBarberByEmail`, { salonId, email })
+        const { data } = await api.post(`/api/admin/deleteBarberByEmail`, { salonId, email })
 
         dispatch({
             type: ADMIN_DELETE_BARBER_SUCCESS,
             payload: data
         })
 
-        navigate("/admin-barberlist")
+        dispatch({
+            type:"FILTER_BARBERLIST",
+            payload:barber.email
+        })
+
     } catch (error) {
 
         dispatch({

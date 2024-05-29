@@ -15,10 +15,16 @@ const EditProfile = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
-    const [name, setName] = useState(adminProfile?.name)
-    const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth.split('T')[0])
+    // useEffect(() => {
+    //     if(adminProfile){
+    //         setDateofBirth(adminProfile?.dateOfBirth?.split('T')[0])
+    //     }
+    // },[adminProfile])
 
-    const [profilepic, setProfilepic] = useState(adminProfile?.profile[0].url)
+    const [name, setName] = useState(adminProfile?.name)
+    const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
+
+    const [profilepic, setProfilepic] = useState(adminProfile?.profile[0]?.url)
 
     const fileInputRef = useRef(null);
 
@@ -103,7 +109,7 @@ const EditProfile = () => {
     }, []);
 
 
-    const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber.toString())
+    const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber?.toString())
 
     const updateAdminProfile = () => {
         const profiledata = {

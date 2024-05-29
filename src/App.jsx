@@ -31,6 +31,7 @@ const AdminEditBarber = React.lazy(() => import("./Admin/Barber/EditBarber/EditB
 const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfile"))
 const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
 const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
+const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/SalonAppointmentSettings/SalonAppointmentSettings"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -66,6 +67,7 @@ const App = () => {
                 <Route path="/admin-salonlist" element={<AdminSalonList />} />
                 <Route path="/admin-createsalon" element={<AdminCreateSalon />} />
                 <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon />} />
+                <Route path="/admin-salonappointment/:salonid" element={<AdminSalonAppointmentSettings/>}/>
                 <Route path="/admin-barberlist" element={<AdminBarberList />} />
                 <Route path="/admin-createbarber" element={<AdminCreateBarber />} />
                 <Route path="/admin-editbarber/:salonid" element={<AdminEditBarber />} />

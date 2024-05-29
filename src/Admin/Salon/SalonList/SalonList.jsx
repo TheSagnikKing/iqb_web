@@ -58,6 +58,10 @@ const SalonList = () => {
 
   }
 
+  const salonappointmentClicked = (salon) => {
+    navigate(`/admin-salonappointment/${salon?.salonId}`,{state:salon})
+  }
+
   return (
     <div className='salon_wrapper'>
       <div>
@@ -94,7 +98,7 @@ const SalonList = () => {
                       <div onClick={() => deleteSalonHandler(s.salonId, s._id)}><DeleteIcon /></div>
                     </div>
                     <div>
-                      <div><Settingsicon /></div>
+                      <div onClick={() => salonappointmentClicked(s)}><Settingsicon /></div>
                     </div>
                   </div>
                 )) :
