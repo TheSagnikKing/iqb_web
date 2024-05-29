@@ -31,7 +31,7 @@ const SalonList = () => {
         SalonListControllerRef.current.abort();
       }
     };
-  }, [email, dispatch]);
+  }, [email,dispatch]);
 
   const getAdminSalonList = useSelector(state => state.getAdminSalonList)
 

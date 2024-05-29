@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
+import { adminApplySalonAction, adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/DashboardAction'
 
 const DashboardHeader = () => {
 
@@ -146,13 +147,52 @@ const DashboardHeader = () => {
     } = getAdminSalonList
 
 
-    // console.log(SalonList)
+    const [currentActiveSalon, setCurrentActiveSalon] = useState("")
+    const [chooseSalonId, setChooseSalonId] = useState(adminProfile?.salonId)
+
+    const selectedActiveSalon = (salon) => {
+        setCurrentActiveSalon(salon.salonName)
+        setChooseSalonId(salon.salonId)
+        setSalonlistdrop(false)
+    }
+
+    const applySelectedSalonHandler = () => {
+        const confirm = window.confirm("Are you sure ?")
+
+        const applySalonData = {
+            salonId: chooseSalonId,
+            adminEmail
+        }
+
+        if (confirm) {
+            dispatch(adminApplySalonAction(applySalonData))
+        }
+    }
+
+    const getDefaultSalonControllerRef = useRef(new AbortController())
+
+    useEffect(() => {
+        if (adminProfile && chooseSalonId != 0) {
+            const controller = new AbortController();
+            getDefaultSalonControllerRef.current = controller;
+
+            dispatch(adminGetDefaultSalonAction(chooseSalonId, adminEmail, controller.signal, setChooseSalonId, setCurrentActiveSalon));
+
+            return () => {
+                if (getDefaultSalonControllerRef.current) {
+                    getDefaultSalonControllerRef.current.abort();
+                }
+            };
+        }
+
+    }, [adminProfile, dispatch]);
+
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
                 <p>Choose Salon</p>
                 <div>
-                    <p>Classic touch</p>
+                    <p>{currentActiveSalon}</p>
                     <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
                     <div
                         className='dashboard_salon_list_dropdown'
@@ -167,19 +207,19 @@ const DashboardHeader = () => {
 
                         {
                             getAdminSalonListLoading && !getAdminSalonListResolve ?
-                            <p>No Salon Present</p> : 
-                            !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ? 
-                            SalonList.map((s) => (
-                                <p key={s.id}>{s.salonName}</p>
-                            )) : 
-                            !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? 
-                            <p>No Salon Present</p> :
-                            !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                            <p>No Salon Present</p>
+                                <p>No Salon Present</p> :
+                                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
+                                    SalonList.map((s) => (
+                                        <p key={s.id} onClick={() => selectedActiveSalon(s)}>{s.salonName}</p>
+                                    )) :
+                                    !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
+                                        <p>No Salon Present</p> :
+                                        !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                                        <p>No Salon Present</p>
                         }
                     </div>
                 </div>
-                <button>Apply</button>
+                <button onClick={applySelectedSalonHandler}>Apply</button>
             </div>
 
             <div className='mobile_choose_salon_div'>

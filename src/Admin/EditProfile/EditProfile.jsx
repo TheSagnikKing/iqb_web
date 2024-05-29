@@ -5,10 +5,13 @@ import { CameraIcon, CheckIcon } from '../../icons';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminUpdateProfileAction } from '../../Redux/Admin/Actions/AdminProfileAction';
+import { adminSendVerifyEmailAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
 import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
@@ -37,7 +40,11 @@ const EditProfile = () => {
         setProfilepic(imageUrl);
     };
 
-    const [verifyEmailButtonClicked, setVerifyEmailButtonClicked] = useState(false)
+    const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
+
+    const sendVerificationEmail = () => {
+        dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
+    }
 
     const [otp, setOtp] = useState(["", "", "", ""]);
     const otpinputRef = useRef([]);
@@ -98,23 +105,26 @@ const EditProfile = () => {
 
     const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber.toString())
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
     const updateAdminProfile = () => {
         const profiledata = {
-            email: adminProfile?.email, 
+            email: adminProfile?.email,
             // salonId:adminProfile?.salonId,
             dateOfBirth,
-            mobileNumber:Number(mobileNumber),
-            userName:name,
+            mobileNumber: Number(mobileNumber),
+            userName: name,
             gender
         }
 
         console.log(profiledata)
 
-        dispatch(adminUpdateProfileAction(profiledata,navigate))
-        
+        dispatch(adminUpdateProfileAction(profiledata, navigate))
+
+    }
+
+    const verifyEmailStatusClicked = () => {
+        const currentOtp = otp?.join("")
+
+        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email,currentOtp,setSendVerificationEmailModal,setOtp))
     }
 
     return (
@@ -153,7 +163,7 @@ const EditProfile = () => {
                                 type="email"
                                 value={adminProfile?.email}
                             />
-                            <button onClick={() => setVerifyEmailButtonClicked((prev) => !prev)}>
+                            <button onClick={() => sendVerificationEmail()}>
                                 <p>Verified</p>
                                 <div><CheckIcon /></div>
                             </button>
@@ -214,10 +224,10 @@ const EditProfile = () => {
             </div>
 
             {
-                verifyEmailButtonClicked && <div className='verify_email_wrapper'>
+                sendVerificationEmailModal && <div className='verify_email_wrapper'>
                     <div className='verify_email_content_wrapper'>
                         <div>
-                            <button onClick={() => setVerifyEmailButtonClicked(false)}>X</button>
+                            <button onClick={() => setSendVerificationEmailModal(false)}>X</button>
                         </div>
 
                         <div>
@@ -252,7 +262,7 @@ const EditProfile = () => {
                                     </div>
 
                                     <div>
-                                        <button>Verify</button>
+                                        <button onClick={verifyEmailStatusClicked}>Verify</button>
                                     </div>
                                 </div>
                             </div>

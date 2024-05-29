@@ -1,4 +1,4 @@
-import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_UPDATE_PROFILE_FAIL, ADMIN_UPDATE_PROFILE_REQ, ADMIN_UPDATE_PROFILE_SUCCESS } from "../Constants/constants";
+import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_SEND_VERIFY_EMAIL_FAIL, ADMIN_SEND_VERIFY_EMAIL_REQ, ADMIN_SEND_VERIFY_EMAIL_SUCCESS, ADMIN_UPDATE_PROFILE_FAIL, ADMIN_UPDATE_PROFILE_REQ, ADMIN_UPDATE_PROFILE_SUCCESS, ADMIN_VERIFIED_EMAIL_STATUS_FAIL, ADMIN_VERIFIED_EMAIL_STATUS_REQ, ADMIN_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants";
 import api from "../../api/Api";
 import toast from "react-hot-toast";
 
@@ -26,6 +26,70 @@ export const adminUpdateProfileAction = (profiledata,navigate) => async (dispatc
     } catch (error) {
         dispatch({
             type: ADMIN_UPDATE_PROFILE_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+
+export const adminSendVerifyEmailAction = (verifyemail,setSendVerificationEmailModal) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_SEND_VERIFY_EMAIL_REQ })
+
+        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminEmail",{email:verifyemail})
+
+        dispatch({
+            type: ADMIN_SEND_VERIFY_EMAIL_SUCCESS,
+            payload: data
+        })
+
+        setSendVerificationEmailModal(true)
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_SEND_VERIFY_EMAIL_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_VERIFIED_EMAIL_STATUS_REQ })
+
+        const { data } = await api.post("/api/admin/changeEmailVerifiedStatus",{email:verifyemail,verificationCode:otp})
+
+        dispatch({
+            type: ADMIN_VERIFIED_EMAIL_STATUS_SUCCESS,
+            payload: data
+        })
+
+        setSendVerificationEmailModal(false)
+        setOtp(["","","",""])
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_VERIFIED_EMAIL_STATUS_FAIL,
             payload: error?.response?.data
         });
 
