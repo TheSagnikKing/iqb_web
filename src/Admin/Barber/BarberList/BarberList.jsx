@@ -33,7 +33,7 @@ const BarberList = () => {
   const deleteButtonClicked = (barber) => {
     const confirm = window.confirm("Are you sure ?")
     if (confirm) {
-      dispatch(adminDeleteBarberAction(barber.salonId, barber.email,barber))
+      dispatch(adminDeleteBarberAction(barber.salonId, barber.email, barber))
     }
   }
 
@@ -117,7 +117,7 @@ const BarberList = () => {
       isApproved: !approveBarberMap.get(`${b.salonId}-${b.email}`) || false
     };
 
-    dispatch(adminApproveBarberAction(approvedata,setApproveBarberMap,b,approveBarberMap.get(`${b.salonId}-${b.email}`)))
+    dispatch(adminApproveBarberAction(approvedata, setApproveBarberMap, b, approveBarberMap.get(`${b.salonId}-${b.email}`)))
   }
 
   const adminApproveBarber = useSelector(state => state.adminApproveBarber)
@@ -127,6 +127,28 @@ const BarberList = () => {
     resolve: adminApproveBarberResolve,
     response: approvebarber
   } = adminApproveBarber
+
+  const [selectedAllBarberNotification, setSelectedAllBarberNotification] = useState([])
+  const [allCheckbox, setAllCheckbox] = useState(false)
+
+  const selectAllBarbers = () => {
+    setAllCheckbox((prev) => {
+      const newCheckboxState = !prev;
+  
+      if (newCheckboxState) {
+        setSelectedAllBarberNotification(BarberList.map((b) => b.email));
+      } else {
+        setSelectedAllBarberNotification([]);
+      }
+  
+      return newCheckboxState;
+    });
+  };
+
+  console.log(selectedAllBarberNotification)
+  console.log(allCheckbox)
+
+  const [selectedMultiplebarbers, setSelectedMultiplebarbers] = useState([])
 
   return (
     <div className='admin_barber_wrapper'>
@@ -151,6 +173,9 @@ const BarberList = () => {
             <input
               type="checkbox"
               style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+              onClick={() => selectAllBarbers()}
+              checked={allCheckbox}
+
             />
             <p>Salon ID</p>
             <p>Barber Name</p>
@@ -210,11 +235,11 @@ const BarberList = () => {
                 )) :
                 !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ?
                   <p
-                  style={{margin:"2rem"}}
+                    style={{ margin: "2rem" }}
                   >Barbers not available</p> :
                   !getAdminBarberListLoading && !getAdminBarberListResolve &&
                   <p
-                  style={{margin:"2rem"}}
+                    style={{ margin: "2rem" }}
                   >Barbers not available</p>
           }
 

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const CustomerList = () => {
 
+  const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
   const dispatch = useDispatch()
 
   const CustomerListControllerRef = useRef(new AbortController());
@@ -15,7 +16,7 @@ const CustomerList = () => {
     const controller = new AbortController();
     CustomerListControllerRef.current = controller;
 
-    dispatch(adminGetAllCustomerListAction(controller.signal));
+    dispatch(adminGetAllCustomerListAction(currentsalonId,controller.signal));
 
     return () => {
       if (CustomerListControllerRef.current) {

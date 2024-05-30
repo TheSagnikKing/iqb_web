@@ -21,8 +21,6 @@ const Dashboard = () => {
     response: adminGetDefaultSalonResponse
   } = adminGetDefaultSalon
 
-  console.log(adminGetDefaultSalonResponse)
-
   const dispatch = useDispatch()
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
@@ -39,8 +37,6 @@ const Dashboard = () => {
   }, [adminGetDefaultSalonResponse])
 
   const [togglecheck, setTogglecheck] = useState(false);
-
-  console.log(togglecheck)
 
   const toggleHandler = () => {
     const newCheckValue = !togglecheck;

@@ -31,7 +31,7 @@ export const adminForgetPasswordAction = (email) => async (dispatch) => {
     }
 }
 
-export const adminResetPasswordAction = (password) => async (dispatch) => {
+export const adminResetPasswordAction = (password,token,navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_FORGET_PASSWORD_REQ })
 
@@ -41,6 +41,8 @@ export const adminResetPasswordAction = (password) => async (dispatch) => {
             type: ADMIN_FORGET_PASSWORD_SUCCESS,
             payload: data
         })
+
+        navigate("/adminpasswordreset")
 
     } catch (error) {
         dispatch({

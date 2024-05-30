@@ -15,12 +15,6 @@ const EditProfile = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
-    // useEffect(() => {
-    //     if(adminProfile){
-    //         setDateofBirth(adminProfile?.dateOfBirth?.split('T')[0])
-    //     }
-    // },[adminProfile])
-
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
 

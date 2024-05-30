@@ -42,7 +42,7 @@ const SalonAppointmentSettings = () => {
     }, []);
 
 
-    const [startTime, setStartTime] = useState("")
+    const [startTime, setStartTime] = useState(currentSalon?.appointmentSettings?.appointmentStartTime)
     const [startTimeDrop, setStartTimeDrop] = useState(false)
 
     const startTimeDropHandler = () => {
@@ -76,7 +76,7 @@ const SalonAppointmentSettings = () => {
     }, []);
 
 
-    const [endTime, setEndTime] = useState("")
+    const [endTime, setEndTime] = useState(currentSalon?.appointmentSettings?.appointmentEndTime)
     const [endTimeDrop, setEndTimeDrop] = useState(false)
 
     const endTimeDropHandler = () => {
@@ -110,7 +110,7 @@ const SalonAppointmentSettings = () => {
     }, []);
 
 
-    const [intervalTime, setIntervalTime] = useState("")
+    const [intervalTime, setIntervalTime] = useState(currentSalon?.appointmentSettings?.intervalInMinutes)
     const [intervalTimeDrop, setIntervalTimeDrop] = useState(false)
 
     const intervalTimeDropHandler = () => {

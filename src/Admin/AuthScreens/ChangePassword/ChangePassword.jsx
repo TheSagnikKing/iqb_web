@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ChangePassword.css"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { adminResetPasswordAction } from '../../../Redux/Admin/Actions/AdminPasswordAction'
 
 const ChangePassword = () => {
 
+  const params = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
   const ChangePasswordHandler = () => {
-    navigate("/adminpasswordreset")
+    if(password == confirmPassword){
+      dispatch(adminResetPasswordAction(password,params?.token,navigate))
+    }else{
+      alert("Password donot match")
+    }
   }
 
   return (
@@ -25,6 +37,8 @@ const ChangePassword = () => {
                     <label htmlFor="">New Password</label>
                     <input 
                     type="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
 
@@ -32,6 +46,8 @@ const ChangePassword = () => {
                     <label htmlFor="">Confirm Password</label>
                     <input 
                     type="password" 
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
 
