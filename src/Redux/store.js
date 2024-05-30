@@ -2,12 +2,13 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutReducer, AdminGoogleSignupReducer, AdminSignupReducer, AdminSignupEditReducer } from "./Admin/Reducers/AuthReducer"
 import { BarberGoogleLoginReducer, BarberLoggedInMiddlewareReducer } from "./Barber/Reducers/AuthReducer"
 import { adminSalonStatusReducer, getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
-import { adminCreateSalonReducer, adminDeleteSalonReducer, adminEditSalonReducer, getAdminAllCitiesReducer, getAdminAllCountriesReducer, getAdminAllSalonIconReducer, getAdminAllTimezoneReducer, getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
+import { adminCreateSalonReducer, adminDeleteSalonReducer, adminEditSalonReducer, adminUpdateSalonSettingsReducer, getAdminAllCitiesReducer, getAdminAllCountriesReducer, getAdminAllSalonIconReducer, getAdminAllTimezoneReducer, getAdminSalonListReducer } from "./Admin/Reducers/SalonReducer";
 import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer } from "./Admin/Reducers/BarberReducer"
 import { adminUpdateProfileReducer, adminSendVerifyEmailReducer, adminVerifiedEmailStatusReducer } from "./Admin/Reducers/AdminProfileReducer"
 import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer";
 import { adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
 import { adminGetDefaultSalonReducer,adminApplySalonReducer } from "./Admin/Reducers/AdminHeaderReducer"
+import { adminForgetPasswordReducer, adminResetPasswordReducer } from "./Admin/Reducers/AdminPasswordReducer";
 
 const rootReducer = combineReducers({
 
@@ -44,6 +45,9 @@ const rootReducer = combineReducers({
   adminGetDefaultSalon:adminGetDefaultSalonReducer,
   adminApplySalon:adminApplySalonReducer,
   adminSalonStatus:adminSalonStatusReducer,
+  adminUpdateSalonSettings:adminUpdateSalonSettingsReducer,
+  adminForgetPassword:adminForgetPasswordReducer,
+  adminResetPassword:adminResetPasswordReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,

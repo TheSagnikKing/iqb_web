@@ -1,7 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./SalonAppointmentSettings.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { adminUpdateSalonSettingsAction } from '../../../Redux/Admin/Actions/SalonAction';
 
 const SalonAppointmentSettings = () => {
+    
+    const location = useLocation()
+    const currentSalon = location?.state
+
+    console.log(currentSalon)
+
+    const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
     const [timeOptions, setTimeOptions] = useState([]);
 
@@ -148,6 +158,23 @@ const SalonAppointmentSettings = () => {
         generateTimeIntervalInMinutes()
     }, [])
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const updateSalonAppointment = () => {
+        const appointmentdata = {
+            salonId,
+            appointmentSettings:{
+                startTime,
+                endTime,
+                intervalInMinutes:intervalTime
+            }
+        }
+
+        console.log(appointmentdata)
+
+        dispatch(adminUpdateSalonSettingsAction(appointmentdata,navigate))
+    }
 
     return (
         <div className='salon_appointment_wrapper'>
@@ -213,7 +240,7 @@ const SalonAppointmentSettings = () => {
                     </div>
 
                     <div>
-                        <button>Update</button>
+                        <button onClick={updateSalonAppointment}>Update</button>
                     </div>
                 </div>
 

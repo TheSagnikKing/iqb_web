@@ -55,7 +55,7 @@ const App = () => {
               <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
               <Route path="/admincheckemail" element={<AdminCheckEmail />} />
               <Route path="/adminchangepassword" element={<AdminChangePassword />} />
-              <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
+              <Route path="/adminpasswordreset/:token" element={<AdminPasswordReset />} />
               <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile/>}/>
             </Route>
 

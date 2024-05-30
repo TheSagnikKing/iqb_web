@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ForgotPassword.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { adminForgetPasswordAction } from '../../../Redux/Admin/Actions/AdminPasswordAction'
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("")
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const mailHandler = () => {
-    navigate("/admincheckemail")
+      dispatch(adminForgetPasswordAction(email))
+    // navigate("/admincheckemail")
   }
 
   return (
@@ -21,6 +26,8 @@ const ForgotPassword = () => {
                 <input 
                 type="email"
                 placeholder='Enter Your Email ID'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <button onClick={mailHandler}>Send Email</button>

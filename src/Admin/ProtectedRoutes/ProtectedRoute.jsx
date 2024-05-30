@@ -14,7 +14,6 @@ const ProtectedRoute = () => {
         const logginadmin = async () => {
             try {
                 const { data } = await api.get('/api/admin/adminloggedin');
-                console.log(data)
                 setloggindata(data);
                 dispatch({
                     type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
