@@ -757,9 +757,7 @@ const EditSalon = () => {
       twitterLink,
       appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
-      salonId:currentSalon?.salonId,
-      adminEmail:currentSalon?.adminEmail
-      // image:image2
+      salonId:currentSalon?.salonId
     }
 
     console.log(salondata)

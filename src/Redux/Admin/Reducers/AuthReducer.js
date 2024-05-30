@@ -1,4 +1,4 @@
-import { ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_FAIL, ADMIN_GOOGLE_SIGNUP_REQ, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_SIGNUP_EDIT_FAIL, ADMIN_SIGNUP_EDIT_REQ, ADMIN_SIGNUP_EDIT_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS } from "../Constants/constants";
+import { ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_FAIL, ADMIN_GOOGLE_SIGNUP_REQ, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_EDIT_FAIL, ADMIN_SIGNUP_EDIT_REQ, ADMIN_SIGNUP_EDIT_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS } from "../Constants/constants";
 
 export const AdminLoggedInMiddlewareReducer = (state = {}, action) => {
     switch (action.type) {
@@ -50,6 +50,20 @@ export const AdminSignupReducer = (state = {}, action) => {
         case ADMIN_SIGNUP_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case ADMIN_SIGNUP_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+
+export const AdminSigninReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_SIGNIN_REQ:
+            return { ...state, loading: true };
+        case ADMIN_SIGNIN_SUCCESS:
+            return { ...state, loading: false, ...action.payload };
+        case ADMIN_SIGNIN_FAIL:
             return { ...state, loading: false, error: action.payload };
         default:
             return state;

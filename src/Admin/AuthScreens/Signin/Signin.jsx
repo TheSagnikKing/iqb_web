@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { Toaster, toast } from 'react-hot-toast';
-import { AdminGoogleloginAction } from '../../../Redux/Admin/Actions/AuthAction'
+import { AdminGoogleloginAction, AdminSigninAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch } from 'react-redux'
 
 const Signin = () => {
@@ -42,8 +42,7 @@ const Signin = () => {
 
   const signinClicked = () => {
     const adminsignindata = { email, password}
-    console.log(adminsignindata)
-    navigate("/admin-dashboard")
+    dispatch(AdminSigninAction(adminsignindata,navigate))
   }
 
   const forgotClicked = () => {
