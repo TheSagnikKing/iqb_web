@@ -81,12 +81,6 @@
     color: var(--primary-text-light-color1);
 }
 
-.admin_edit_profile_content_wrapper>div:nth-child(2){
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .admin_edit_profile_content_wrapper>div:nth-child(2)>p{
     font-size: 1.6rem;
 }

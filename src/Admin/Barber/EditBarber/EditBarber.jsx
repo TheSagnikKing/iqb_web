@@ -28,7 +28,7 @@ const EditBarber = () => {
   const [email, setEmail] = useState(currentBarber?.email);
   const [nickName, setNickName] = useState(currentBarber?.nickName);
   const [mobileNumber, setMobileNumber] = useState(currentBarber?.mobileNumber);
-  const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth);
+  const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth?.split('T')[0]);
   const [chooseServices, setChooseServices] = useState([]);
   const [serviceEWTValues, setServiceEWTValues] = useState({});
 

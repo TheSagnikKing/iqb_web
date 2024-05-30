@@ -7,6 +7,9 @@ import 'react-international-phone/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminSendVerifyEmailAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
 import { useNavigate } from 'react-router-dom';
+import api from '../../Redux/api/Api';
+import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
+import Skeleton from 'react-loading-skeleton';
 
 const EditProfile = () => {
 
@@ -26,6 +29,9 @@ const EditProfile = () => {
         fileInputRef.current.click();
     };
 
+
+    const [uploadpicLoader, setUploadpicLoader] = useState(false)
+
     const handleProfileFileInputChange = async (e) => {
         const uploadImage = e.target.files[0]; // Get the uploaded file
 
@@ -35,9 +41,37 @@ const EditProfile = () => {
             return;
         }
 
-        const imageUrl = URL.createObjectURL(uploadImage);
+        const formData = new FormData();
 
-        setProfilepic(imageUrl);
+        formData.append('email', adminProfile?.email);
+        formData.append('profile', uploadImage);
+
+        try {
+            setUploadpicLoader(true)
+            const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            setUploadpicLoader(false)
+
+            // setProfilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
+
+            const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
+
+            dispatch({
+                type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+                payload: adminloggedindata
+            })
+
+    
+            navigate("/admin-dashboard")
+        } catch (error) {
+            setUploadpicLoader(false)
+            console.error('Image upload failed:', error);
+            setProfilepic("")
+        }
     };
 
     const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
@@ -105,10 +139,11 @@ const EditProfile = () => {
 
     const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber?.toString())
 
+    // const [password, setPassword] 
+
     const updateAdminProfile = () => {
         const profiledata = {
             email: adminProfile?.email,
-            // salonId:adminProfile?.salonId,
             dateOfBirth,
             mobileNumber: Number(mobileNumber),
             userName: name,
@@ -124,7 +159,7 @@ const EditProfile = () => {
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
 
-        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email,currentOtp,setSendVerificationEmailModal,setOtp))
+        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp))
     }
 
     return (
@@ -133,7 +168,10 @@ const EditProfile = () => {
                 <div>
                     <p>Edit profile</p>
                     <div>
-                        <img src={`${profilepic}`} alt="" />
+                        {
+                            uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
+                        }
+
                         <div>
                             <button onClick={() => handleSalonLogoButtonClick()}><CameraIcon /></button>
                             <input
@@ -145,15 +183,43 @@ const EditProfile = () => {
                         </div>
                     </div>
                 </div>
+                {
+                    adminProfile?.AuthType == "google" ? (
+                        <div style={{
+                            display:"flex",
+                            flexDirection:"column",
+                            gap:"1rem"
+                        }}> 
+                            <p>Name</p>
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                    ) : (
+                        <div>
+                            <div>
+                                <p>Name</p>
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
+                            
+                            <div>
+                                <p>Password</p>
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
 
-                <div>
-                    <p>Name</p>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
+                        </div>
+                    )
+                }
 
                 <div>
                     <div>
