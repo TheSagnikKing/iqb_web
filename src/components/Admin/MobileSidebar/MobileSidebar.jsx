@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Sidebar.css'
+import './MobileSidebar.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons'
@@ -7,7 +7,7 @@ import Header from '../Header/Header.jsx'
 import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 import Skeleton from 'react-loading-skeleton'
 
-const Sidebar = () => {
+const MobileSidebar = () => {
 
   const [showSidebar, setShowSidebar] = useState(true)
 
@@ -57,9 +57,9 @@ const Sidebar = () => {
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
 
-      <div className='content'
+      <div className='mobile_content'
         style={{
-          width: showSidebar ? "calc(100% - 21rem)" : "100%"
+          width: "100%"
         }}
       >
         <div>
@@ -67,9 +67,8 @@ const Sidebar = () => {
           <div><Outlet /></div>
         </div>
       </div>
-        
     </main>
   )
 }
 
-export default Sidebar
+export default MobileSidebar

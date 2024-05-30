@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 
@@ -33,12 +33,35 @@ const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
 const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/SalonAppointmentSettings/SalonAppointmentSettings"))
 
+const AdminMobileSidebar = React.lazy(() => import("./components/Admin/MobileSidebar/MobileSidebar"))
+
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
 import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
 import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
 
 const App = () => {
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Function to handle media query change
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(max-width: 1140px)").matches);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener to check for changes in media query
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   return (
     <>
@@ -61,7 +84,7 @@ const App = () => {
 
             {/* Admin Main Pages  */}
             <Route element={<ProtectedAdminRoute />}>
-              <Route element={<AdminSidebar />}>
+              <Route element={isMobile ? <AdminMobileSidebar/> : <AdminSidebar />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/admin-editprofile" element={<AdminEditProfile />} />
                 <Route path="/admin-salonlist" element={<AdminSalonList />} />
