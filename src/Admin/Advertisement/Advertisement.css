@@ -170,7 +170,7 @@
 }
 
 .advertisement_cards>div:nth-child(2)>button{
-    width: 28%;
+    width: 35%;
     height: 75%;
     border: none;
     cursor: pointer;
@@ -204,6 +204,7 @@
 .advertisement_cards>div:nth-child(2)>button:nth-child(1){
     background-color: var(--primary-bg-color3);
 }
+
 
 @media screen and (min-width: 0px) and (max-width: 768px){
     .advertisement_wrapper>div:nth-child(1){

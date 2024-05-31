@@ -13,7 +13,7 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
                 ...state,
                 resolve: true,
                 loading: false,
-                ...action.payload
+                ...action.payload,
             };
         case GET_ALL_ADVERTISEMENT_FAIL:
             return {
@@ -21,6 +21,26 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
                 resolve: false,
                 loading: false,
                 error: action.payload
+            };
+        case "FILTER_ADVERTISEMENTLIST":
+
+            const filteredAdvertisements = state.advertisements.filter((b) => b._id !== action.payload);
+
+            return {
+                ...state,
+                advertisements: filteredAdvertisements
+            };
+        case "AFTER_UPDATE_ADVERTISEMENTLIST":
+
+            const updatedAdvertisements = state.advertisements.map((advertisement) =>
+                advertisement._id === action.payload._id
+                    ? { ...advertisement, url: action.payload._url }
+                    : advertisement
+            );
+
+            return {
+                ...state,
+                advertisements: updatedAdvertisements
             };
         default:
             return state;
