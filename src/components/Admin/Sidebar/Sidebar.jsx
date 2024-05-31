@@ -26,7 +26,7 @@ const Sidebar = () => {
                 loading ?
                   <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
                   <>
-                    <div>
+                    <div onClick={() => navigate("/admin-dashboard")} style={{cursor:"pointer"}}>
                       <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
                     </div>
                     <p>IQB</p>
