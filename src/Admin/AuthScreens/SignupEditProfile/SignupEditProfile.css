@@ -134,6 +134,29 @@
     -o-border-radius: 0.6rem;
 }
 
+
+.react-international-phone-input-container .react-international-phone-input{
+    width: 100%;
+    background-color: var(--bg-color3) !important;
+    min-height: 4rem !important;
+    border: none !important;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+    background-color: var(--bg-color3) !important;
+    min-height: 4rem !important;
+    width: 6rem !important;
+    border: none !important;
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+}
+
+.react-international-phone-country-selector-dropdown {
+    width: 30rem !important;
+}
+
 @media((min-width:0px) and (max-width:576px)) {
     .admin_signup_edit_container {
         grid-template-columns: 1fr;

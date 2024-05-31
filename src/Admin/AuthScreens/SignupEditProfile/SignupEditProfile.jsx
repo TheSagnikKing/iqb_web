@@ -3,6 +3,7 @@ import './SignupEditProfile.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminSignupEditAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch } from 'react-redux'
+import { PhoneInput } from 'react-international-phone'
 
 const SignupEditProfile = () => {
 
@@ -115,11 +116,17 @@ const SignupEditProfile = () => {
 
           <div>
             <p>Mobile Number</p>
-            <input
-              type="text"
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-            />
+            <div>
+              <div>
+                <PhoneInput
+                  forceDialCode={true}
+                  defaultCountry="gb"
+                  value={mobileNumber}
+                  onChange={(phone) => setMobileNumber(phone)}
+                />
+              </div>
+
+            </div>
           </div>
 
           <div>

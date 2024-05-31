@@ -3,7 +3,6 @@ import "./EditProfile.css"
 import { CameraIcon, CheckIcon, MobileCrossIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
-import 'react-international-phone/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminSendVerifyEmailAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
 import { useNavigate } from 'react-router-dom';
@@ -146,7 +145,7 @@ const EditProfile = () => {
             email: adminProfile?.email,
             dateOfBirth,
             mobileNumber: Number(mobileNumber),
-            userName: name,
+            name,
             gender,
             password
         }

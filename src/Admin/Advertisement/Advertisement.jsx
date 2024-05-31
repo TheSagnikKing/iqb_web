@@ -137,6 +137,7 @@ const Advertisement = () => {
       setMongoid("")
       sethandleEditLoader(false)
       dispatch(getAllAdvertisementAction(salonId));
+      
     } catch (error) {
       console.error('Image upload failed:', error);
       sethandleEditLoader(false)

@@ -84,6 +84,14 @@ export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificati
             payload: data
         })
 
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+
+        dispatch({
+            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:adminloggedindata
+        })
+
         setChangeEmailVerifiedState(true)
         setSendVerificationEmailModal(false)
         setOtp(["","","",""])

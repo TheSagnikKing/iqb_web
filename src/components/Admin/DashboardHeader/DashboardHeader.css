@@ -272,9 +272,35 @@
     font-weight: 500;
 }
 
-.profile_drop_container>p:hover{
+.profile_drop_container>div:hover{
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
+    color: #fff;
+}
+
+.profile_drop_container>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    border-radius: 0.4rem;
+    -webkit-border-radius: 0.4rem;
+    -moz-border-radius: 0.4rem;
+    -ms-border-radius: 0.4rem;
+    -o-border-radius: 0.4rem;
+    padding-inline: 0.8rem;
+}
+
+.profile_drop_container>div>div:nth-child(2){
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.profile_drop_container>div>div:nth-child(1){
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

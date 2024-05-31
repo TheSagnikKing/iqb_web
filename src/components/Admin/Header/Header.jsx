@@ -79,6 +79,10 @@ const Header = () => {
 
   const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
 
+  const profileClicked = () => {
+    navigate("/admin-editprofile")
+    setAdminEditDrop(false)
+  }
   return (
     <header className='admin_header_wrapper'>
       {/* <div>
@@ -121,8 +125,15 @@ const Header = () => {
                 adminEditDrop && <div ref={adminEditDropRef}
                   className="profile_drop_container"
                 >
-                  <p onClick={() => navigate("/admin-editprofile")}>My Profile</p>
-                  <p onClick={() => logoutHandler()}>Logout</p>
+
+                  <div>
+                    <div><ProfileIcon /></div>
+                    <div onClick={() => profileClicked()}>My Profile</div>
+                  </div>
+                  <div>
+                    <div><LogoutIcon /></div>
+                    <div onClick={logoutHandler}>Logout</div>
+                  </div>
                 </div>
               }
             </div>

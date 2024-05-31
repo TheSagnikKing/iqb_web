@@ -30,18 +30,19 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
                 ...state,
                 advertisements: filteredAdvertisements
             };
-        case "AFTER_UPDATE_ADVERTISEMENTLIST":
+        // case "AFTER_UPDATE_ADVERTISEMENTLIST":
 
-            const updatedAdvertisements = state.advertisements.map((advertisement) =>
-                advertisement._id === action.payload._id
-                    ? { ...advertisement, url: action.payload._url }
-                    : advertisement
-            );
+        //     const updatedAdvertisements = state.advertisements.map((advertisement) =>
+        //         advertisement._id === action.payload._id
+        //             ? { ...advertisement, _id: action.payload._id, url: action.payload.url, public_id: action.payload.public_id }
+        //             : advertisement
+        //     );
 
-            return {
-                ...state,
-                advertisements: updatedAdvertisements
-            };
+
+        //     return {
+        //         ...state,
+        //         advertisements: updatedAdvertisements
+        //     };
 
         default:
             return state;
