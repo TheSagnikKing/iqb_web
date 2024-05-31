@@ -1,55 +1,145 @@
-// import React, { useCallback, useState } from 'react';
-// import { useDropzone } from 'react-dropzone';
-// import { Uploadicon } from '../../icons';
-
-// const Advertisement = () => {
-//   const [files, setFiles] = useState([]);
-
-//   const onDrop = useCallback((acceptedFiles) => {
-//     setFiles(acceptedFiles.map(file => file.name));
-//   }, []);
-
-//   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-//   return (
-//     <div className='advertisement_wrapper'>
-//       <div className='advertisement_content_wrapper'>
-//         <p>Advertisement</p>
-//         <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''}`}>
-//           <input {...getInputProps()} />
-//           <div>
-//             <div><Uploadicon /></div>
-//             <div>
-//               {files?.length > 0 ? <p>Files selected:</p> : <p>Drag and Drop or <span>Choose file</span> here</p>}
-//               {files?.length > 0 && (
-//                 <div className='file-list'>
-//                   {files.slice(0, 3).map((file, index) => (
-//                     <p key={index} className='file-name'>{file}</p>
-//                   ))}
-//                   {files?.length > 3 && (
-//                     <p className='file-name'>...and {files?.length - 3} more</p>
-//                   )}
-//                 </div>
-//               )}
-//               {files?.length > 0 && <p className='file-count'>Total files: {files?.length}</p>}
-//             </div>
-//           </div>
-//         </div>
-//         <div>
-//           <button>Upload</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Advertisement;
-
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import "./Advertisement.css"
+import { DeleteIcon, EditIcon, FaFileIcon, Uploadicon } from '../../icons'
 
 const Advertisement = () => {
+
+  const adverdata = [
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    },
+    {
+      _id: 1,
+    }
+  ]
+
+
+  const advImagefileInputRef = useRef(null);
+
+  const handleAdvImageButtonClick = () => {
+    advImagefileInputRef.current.click();
+  };
+
+  const [uploadAdvImages, setUploadAdvImages] = useState([])
+
+  const handleAdvImageFileInputChange = async (e) => {
+    const uploadedFiles = e.target.files;
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+    const files = Array.from(uploadedFiles).map((file) => {
+      if (!allowedTypes.includes(file.type)) {
+        alert("Please upload only valid image files (JPEG, WebP, PNG).");
+        return null;
+      }
+
+      return file
+    });
+
+    setUploadAdvImages(files)
+  };
+
+  console.log(uploadAdvImages)
+
   return (
-    <div>Advertisement</div>
+    <div className='advertisement_wrapper'>
+      <div>
+        <p>Advertisements</p>
+        <div>
+          <div>
+            <button
+              onClick={() => handleAdvImageButtonClick()}
+            >
+              <div><FaFileIcon /></div>
+              <p>Choose Files</p>
+
+              <input
+                type="file"
+                ref={advImagefileInputRef}
+                style={{ display: 'none' }}
+                multiple
+                onChange={handleAdvImageFileInputChange}
+              />
+            </button>
+            <p>{uploadAdvImages?.length} Files</p>
+          </div>
+          <button>
+            <div><Uploadicon /></div>
+            <p>Upload</p>
+          </button>
+        </div>
+
+      </div>
+      <div className='advertisement_content'>
+        {
+          adverdata.map((ad, index) => (
+            <div className='advertisement_cards' key={index}>
+              <div><img src="https://pbs.twimg.com/media/FHsyI-TUUAELpAm?format=jpg&name=4096x4096" alt="" /></div>
+              <div>
+                <button>
+                  <div><EditIcon /></div>
+                  <p>Edit</p>
+                </button>
+
+                <button>
+                  <div><DeleteIcon /></div>
+                  <p>Delete</p>
+                </button>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
   )
 }
 

@@ -33,6 +33,7 @@ import { FaCheck } from "react-icons/fa";
 import { RiExpandRightLine } from "react-icons/ri";
 import { MdMan } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { FaFile } from "react-icons/fa";
 
 
 // Make sure the icon first letter is capital
@@ -77,3 +78,4 @@ export const CheckIcon = FaCheck
 export const ServeIcon = RiExpandRightLine
 export const ProfileIcon = FaUser
 export const LogoutIcon = MdLogout
+export const FaFileIcon = FaFile

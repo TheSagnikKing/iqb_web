@@ -139,15 +139,14 @@ const EditProfile = () => {
 
     const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber?.toString())
 
-    // const [password, setPassword] 
-
     const updateAdminProfile = () => {
         const profiledata = {
             email: adminProfile?.email,
             dateOfBirth,
             mobileNumber: Number(mobileNumber),
             userName: name,
-            gender
+            gender,
+            password
         }
 
         console.log(profiledata)
@@ -161,6 +160,8 @@ const EditProfile = () => {
 
         dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp))
     }
+
+    const [password, setPassword] = useState("")
 
     return (
         <div className='admin_edit_profile'>
@@ -212,8 +213,8 @@ const EditProfile = () => {
                                 <p>Password</p>
                                 <input
                                     type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
 
