@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import "./Advertisement.css"
+import "./SalonAdv.css"
 import { DeleteIcon, EditIcon, FaFileIcon, Uploadicon } from '../../icons'
 import { getAllAdvertisementAction } from '../../Redux/Admin/Actions/DashboardAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import api from '../../Redux/api/Api'
 
-const Advertisement = () => {
+const SalonAdv = () => {
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
@@ -170,7 +170,7 @@ const Advertisement = () => {
   return (
     <div className='advertisement_wrapper'>
       <div>
-        <p>Advertisements</p>
+        {/* <p>Advertisements</p> */}
         <div>
           <div>
             <button
@@ -243,4 +243,4 @@ const Advertisement = () => {
   )
 }
 
-export default Advertisement
+export default SalonAdv
