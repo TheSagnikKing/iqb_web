@@ -45,18 +45,14 @@ const App = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Function to handle media query change
     const handleResize = () => {
       setIsMobile(window.matchMedia("(max-width: 1140px)").matches);
     };
 
-    // Initial check
     handleResize();
 
-    // Add event listener to check for changes in media query
     window.addEventListener('resize', handleResize);
 
-    // Clean up
     return () => {
       window.removeEventListener('resize', handleResize);
     };

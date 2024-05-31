@@ -18,7 +18,7 @@ const MobileSidebar = () => {
 
   return (
     <main className='container'>
-      <div className={`sidebar ${showSidebar ? "show" : "hide"}`}>
+      {/* <div className={`sidebar ${showSidebar ? "show" : "hide"}`}>
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
@@ -55,7 +55,7 @@ const MobileSidebar = () => {
         </div>
 
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
-      </div>
+      </div> */}
 
       <div className='mobile_content'
         style={{
