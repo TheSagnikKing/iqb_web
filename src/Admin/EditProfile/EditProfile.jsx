@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./EditProfile.css"
-import { CameraIcon, CheckIcon } from '../../icons';
+import { CameraIcon, CheckIcon, MobileCrossIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
@@ -17,6 +17,8 @@ const EditProfile = () => {
     const navigate = useNavigate()
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
+    const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
 
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
@@ -158,10 +160,12 @@ const EditProfile = () => {
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
 
-        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp))
+        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp,setChangeEmailVerifiedState))
     }
 
     const [password, setPassword] = useState("")
+
+    
 
     return (
         <div className='admin_edit_profile'>
@@ -230,9 +234,10 @@ const EditProfile = () => {
                                 type="email"
                                 value={adminProfile?.email}
                             />
-                            <button onClick={() => sendVerificationEmail()}>
-                                <p>Verified</p>
-                                <div><CheckIcon /></div>
+                            <button onClick={() => sendVerificationEmail()} title={changeEmailVerifiedState ? "Verified" : "NotVerified"} style={{
+                                    background:changeEmailVerifiedState ? "limegreen" : "red"
+                                }}>
+                                <div>{changeEmailVerifiedState ? <CheckIcon /> : <MobileCrossIcon/>}</div>
                             </button>
                         </div>
                     </div>
@@ -248,8 +253,7 @@ const EditProfile = () => {
                                     onChange={(phone) => setMobileNumber(phone)}
                                 />
                             </div>
-                            <button onClick={() => { }}>
-                                <p>Verified</p>
+                            <button onClick={() => { }} title="Verified">
                                 <div><CheckIcon /></div>
                             </button>
                         </div>

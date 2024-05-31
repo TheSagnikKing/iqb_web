@@ -465,6 +465,9 @@
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
     font-size: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>input{
@@ -479,30 +482,26 @@
 }
 
 .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>button{
-    background-color: limegreen;
     border: none;
     height: 3rem;
-    width: 20rem;
-    border-radius: 1rem;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    -ms-border-radius: 1rem;
-    -o-border-radius: 1rem;
+    width: 4rem;
+    border-radius: 3rem;
+    -webkit-border-radius: 3rem;
+    -moz-border-radius: 3rem;
+    -ms-border-radius: 3rem;
+    -o-border-radius: 3rem;
     cursor: pointer;
     position: relative;
     text-align: start;
     padding-inline: 1rem;
+    margin-right: 0.5rem;
+    display: grid;
+    place-items: center;
 }
 
-.admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>button>p{
-    color: var(--primary-text-light-color1);
-    font-weight: 500;
-    font-size: 1.4rem;
-}
 
 .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>button>div{
     position: absolute;
-    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
@@ -513,6 +512,8 @@
     font-weight: 500;
     display: grid;
     place-items: center;
+    font-size: 1.8rem;
+    font-weight: bolder;
 }
 
 
@@ -541,12 +542,12 @@
     background-color: limegreen;
     border: none;
     height: 3rem;
-    width: 20rem;
-    border-radius: 1rem;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    -ms-border-radius: 1rem;
-    -o-border-radius: 1rem;
+    width: 4rem;
+    border-radius: 3rem;
+    -webkit-border-radius: 3rem;
+    -moz-border-radius: 3rem;
+    -ms-border-radius: 3rem;
+    -o-border-radius: 3rem;
     cursor: pointer;
     position: relative;
     text-align: start;

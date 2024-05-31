@@ -73,7 +73,7 @@ export const adminSendVerifyEmailAction = (verifyemail,setSendVerificationEmailM
     }
 }
 
-export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp) => async (dispatch) => {
+export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_VERIFIED_EMAIL_STATUS_REQ })
 
@@ -84,6 +84,7 @@ export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificati
             payload: data
         })
 
+        setChangeEmailVerifiedState(true)
         setSendVerificationEmailModal(false)
         setOtp(["","","",""])
 
