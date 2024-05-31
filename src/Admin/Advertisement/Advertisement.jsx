@@ -137,7 +137,6 @@ const Advertisement = () => {
       setMongoid("")
       sethandleEditLoader(false)
       dispatch(getAllAdvertisementAction(salonId));
-      // window.location.reload()
     } catch (error) {
       console.error('Image upload failed:', error);
       sethandleEditLoader(false)
@@ -184,7 +183,7 @@ const Advertisement = () => {
                 ref={advImagefileInputRef}
                 style={{ display: 'none' }}
                 multiple
-                onChange={handleEditFileInputChange}
+                onChange={handleAdvImageFileInputChange}
               />
             </button>
             <p>{uploadAdvImages?.length} Files</p>

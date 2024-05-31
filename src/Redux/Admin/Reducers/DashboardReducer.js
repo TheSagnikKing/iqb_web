@@ -42,6 +42,7 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
                 ...state,
                 advertisements: updatedAdvertisements
             };
+
         default:
             return state;
     }
