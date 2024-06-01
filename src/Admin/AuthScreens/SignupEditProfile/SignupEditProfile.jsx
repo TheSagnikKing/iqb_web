@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import './SignupEditProfile.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminSignupEditAction } from '../../../Redux/Admin/Actions/AuthAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PhoneInput } from 'react-international-phone'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const SignupEditProfile = () => {
 
@@ -66,6 +67,12 @@ const SignupEditProfile = () => {
 
     dispatch(AdminSignupEditAction(profiledata, navigate))
   }
+
+  const AdminSignupEdit = useSelector(state => state.AdminSignupEdit)
+
+  const {
+    loading: AdminSignupEditLoading,
+  } = AdminSignupEdit
 
   return (
     <main className='admin_signup_edit_container'>
@@ -130,8 +137,15 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            <button onClick={() => updateClicked()}>Update</button>
+            {
+              AdminSignupEditLoading ? <button style={{
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={() => updateClicked()}>Update</button>
+            }
+
             <button onClick={() => skipClicked()}>Skip</button>
+
           </div>
 
         </div>

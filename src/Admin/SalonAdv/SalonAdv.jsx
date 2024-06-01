@@ -5,6 +5,7 @@ import { getAllAdvertisementAction } from '../../Redux/Admin/Actions/DashboardAc
 import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import api from '../../Redux/api/Api'
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 
 const SalonAdv = () => {
 
@@ -194,10 +195,13 @@ const SalonAdv = () => {
             </button>
             <p>{uploadAdvImages?.length} Files</p>
           </div>
-          <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
-            <div><Uploadicon /></div>
-            <p>Upload</p>
-          </button>
+          {
+            uploadLoader ? <button><ButtonLoader color="var(--primary-bg-color3)" /></button> :
+              <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
+                <div><Uploadicon /></div>
+                <p>Upload</p>
+              </button>
+          }
         </div>
 
       </div>

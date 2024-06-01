@@ -1,13 +1,3 @@
-// Promt of that code
-// // no not correct. 
-// // let me explain clearly.
-// // let say i have array 1 = [1,2,3,] 
-// // and array 2 = [1,2,3,4,5]
-// // i have to merge the two arrays and make it in a single one with commons value update on the actual value so the ans will be [1,2,3,4,5] but not the 1,2,3 are from the array1 not the intial array 2.
-// // this is something that will happen in my code.
-// // here 1,2,3 are service
-
-
 import React, { useEffect, useRef, useState } from 'react';
 import "./EditBarber.css";
 import { DeleteIcon } from '../../../icons';
@@ -15,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminAllSalonServicesAction, adminCreateBarberAction, adminUpdateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
 import Skeleton from 'react-loading-skeleton';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 
 const EditBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -92,7 +83,12 @@ const EditBarber = () => {
   const { loading: adminAllSalonServicesLoading, resolve: adminAllSalonServicesResolve, response: allSalonServices } = adminAllSalonServices;
 
 
-  console.log(serviceEWTValues)
+  const adminUpdateBarber = useSelector(state => state.adminUpdateBarber)
+
+  const {
+    loading: adminUpdateBarberLoading,
+  } = adminUpdateBarber
+
   return (
     <div className='admin_edit_barber_wrapper'>
       <p>Edit Barber</p>
@@ -203,7 +199,12 @@ const EditBarber = () => {
         </div>
 
         <div>
-          <button onClick={EditBarberHandler}>Submit</button>
+          {
+            adminUpdateBarberLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={EditBarberHandler}>Update</button>
+          }
         </div>
       </div>
     </div>

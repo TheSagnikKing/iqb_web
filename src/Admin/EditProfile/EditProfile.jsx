@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../Redux/api/Api';
 import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import Skeleton from 'react-loading-skeleton';
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const EditProfile = () => {
 
@@ -66,7 +67,7 @@ const EditProfile = () => {
                 payload: adminloggedindata
             })
 
-    
+
             navigate("/admin-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
@@ -159,12 +160,16 @@ const EditProfile = () => {
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
 
-        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp,setChangeEmailVerifiedState))
+        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
     const [password, setPassword] = useState("")
 
-    
+    const adminUpdateProfile = useSelector(state => state.adminUpdateProfile)
+
+    const {
+        loading: adminUpdateProfileLoading,
+    } = adminUpdateProfile
 
     return (
         <div className='admin_edit_profile'>
@@ -190,10 +195,10 @@ const EditProfile = () => {
                 {
                     adminProfile?.AuthType == "google" ? (
                         <div style={{
-                            display:"flex",
-                            flexDirection:"column",
-                            gap:"1rem"
-                        }}> 
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "1rem"
+                        }}>
                             <p>Name</p>
                             <input
                                 type="text"
@@ -211,7 +216,7 @@ const EditProfile = () => {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
-                            
+
                             <div>
                                 <p>Password</p>
                                 <input
@@ -234,9 +239,9 @@ const EditProfile = () => {
                                 value={adminProfile?.email}
                             />
                             <button onClick={() => sendVerificationEmail()} title={changeEmailVerifiedState ? "Verified" : "NotVerified"} style={{
-                                    background:changeEmailVerifiedState ? "limegreen" : "red"
-                                }}>
-                                <div>{changeEmailVerifiedState ? <CheckIcon /> : <MobileCrossIcon/>}</div>
+                                background: changeEmailVerifiedState ? "limegreen" : "red"
+                            }}>
+                                <div>{changeEmailVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
                             </button>
                         </div>
                     </div>
@@ -289,7 +294,12 @@ const EditProfile = () => {
                 </div>
 
                 <div>
-                    <button onClick={updateAdminProfile}>Update</button>
+                    {
+                        adminUpdateProfileLoading ? <button style={{
+                            display: "grid",
+                            placeItems: "center"
+                        }}><ButtonLoader /></button> : <button onClick={updateAdminProfile}>Update</button>
+                    }
                 </div>
             </div>
 

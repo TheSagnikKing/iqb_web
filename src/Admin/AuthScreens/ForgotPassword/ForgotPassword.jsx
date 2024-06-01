@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import "./ForgotPassword.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { adminForgetPasswordAction } from '../../../Redux/Admin/Actions/AdminPasswordAction'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("")
@@ -11,30 +12,41 @@ const ForgotPassword = () => {
   const dispatch = useDispatch()
 
   const mailHandler = () => {
-      dispatch(adminForgetPasswordAction(email))
+    dispatch(adminForgetPasswordAction(email))
     // navigate("/admincheckemail")
   }
 
+  const adminForgetPassword = useSelector(state => state.adminForgetPassword)
+
+  const {
+    loading: adminForgetPasswordLoading,
+  } = adminForgetPassword
+
   return (
     <div className='forgot_container'>
-        <div><img src="/forgot_img.png" alt="forgot_image" /></div>
+      <div><img src="/forgot_img.png" alt="forgot_image" /></div>
 
+      <div>
         <div>
-            <div>
-                <h1>Forgot Password</h1>
-                
-                <input 
-                type="email"
-                placeholder='Enter Your Email ID'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
+          <h1>Forgot Password</h1>
 
-                <button onClick={mailHandler}>Send Email</button>
+          <input
+            type="email"
+            placeholder='Enter Your Email ID'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-                <Link to="/adminsignin">Back</Link>
-            </div>
+          {
+            adminForgetPasswordLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={mailHandler}>Send Email</button>
+          }
+          
+          <Link to="/adminsignin">Back</Link>
         </div>
+      </div>
     </div>
   )
 }

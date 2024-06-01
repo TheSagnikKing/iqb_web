@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 
 const CreateSalon = () => {
 
@@ -745,6 +746,7 @@ const CreateSalon = () => {
   const adminCreateSalon = useSelector(state => state.adminCreateSalon)
 
   const {
+    loading:createSalonLoading,
     response: createSalonResponse
   } = adminCreateSalon
 
@@ -1425,7 +1427,12 @@ const CreateSalon = () => {
           </div>
 
           <div>
-            <button onClick={createSalonHandler}>Submit</button>
+            {
+              createSalonLoading ? <button style={{
+                display:"grid",
+                placeItems:"center"
+              }}><ButtonLoader/></button> : <button onClick={createSalonHandler}>Submit</button>
+            }          
           </div>
 
         </div>

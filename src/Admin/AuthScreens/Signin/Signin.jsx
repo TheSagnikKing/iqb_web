@@ -5,11 +5,12 @@ import { Eyevisible, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { Toaster, toast } from 'react-hot-toast';
 import { AdminGoogleloginAction, AdminSigninAction } from '../../../Redux/Admin/Actions/AuthAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const Signin = () => {
 
-  const [email,setEmail] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const dispatch = useDispatch()
@@ -41,13 +42,19 @@ const Signin = () => {
   const [visibleeye, setVisibleeye] = useState(false)
 
   const signinClicked = () => {
-    const adminsignindata = { email, password}
-    dispatch(AdminSigninAction(adminsignindata,navigate))
+    const adminsignindata = { email, password }
+    dispatch(AdminSigninAction(adminsignindata, navigate))
   }
 
   const forgotClicked = () => {
     navigate("/adminforgotpassword")
   }
+
+  const AdminSignin = useSelector(state => state.AdminSignin)
+
+  const {
+    loading: AdminSigninLoading,
+  } = AdminSignin
 
   return (
     <main className='admin_signin_container'>
@@ -83,7 +90,12 @@ const Signin = () => {
             <p onClick={forgotClicked}>Forgot Password ?</p>
           </div>
 
-          <button onClick={signinClicked}>Signin</button>
+          {
+            AdminSigninLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={signinClicked}>Signin</button>
+          }
 
           <div>
             <div />

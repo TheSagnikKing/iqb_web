@@ -3,8 +3,9 @@ import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
-import { useDispatch } from 'react-redux'
-import { AdminGoogleSignupAction,AdminSignupAction } from '../../../Redux/Admin/Actions/AuthAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { AdminGoogleSignupAction, AdminSignupAction } from '../../../Redux/Admin/Actions/AuthAction'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const Signup = () => {
 
@@ -39,11 +40,17 @@ const Signup = () => {
   const [visibleeye, setVisibleeye] = useState(false)
 
   const signupClicked = () => {
-    const adminsignindata = { email, password}
+    const adminsignindata = { email, password }
     console.log(adminsignindata)
-    dispatch(AdminSignupAction(adminsignindata,navigate))
+    dispatch(AdminSignupAction(adminsignindata, navigate))
     // navigate("/admin-signupeditprofile")
   }
+
+  const AdminSignup = useSelector(state => state.AdminSignup)
+
+  const {
+    loading: AdminSignupLoading,
+  } = AdminSignup
 
   return (
     <main className='admin_signup_container'>
@@ -75,8 +82,12 @@ const Signup = () => {
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>
 
-          <button onClick={signupClicked}>Signup</button>
-
+          {
+            AdminSignupLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={signupClicked}>Signup</button>
+          }
           <div>
             <div />
             <p>or</p>

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 
 const EditSalon = () => {
 
@@ -764,82 +765,83 @@ const EditSalon = () => {
     dispatch(adminEditSalonAction(salondata, navigate))
   }
 
-  const adminCreateSalon = useSelector(state => state.adminCreateSalon)
+  const adminEditSalon = useSelector(state => state.adminEditSalon)
 
   const {
-    response: createSalonResponse
-  } = adminCreateSalon
+    loading:editSalonLoading,
+    response: editSalonResponse
+  } = adminEditSalon
 
 
-  useEffect(() => {
-    if (createSalonResponse?.salonId) {
-      const uploadImageHandler = async () => {
-        if (uploadSalonImages != null) {
-          const formData = new FormData();
+  // useEffect(() => {
+  //   if (editSalonResponse?.salonId) {
+  //     const uploadImageHandler = async () => {
+  //       if (uploadSalonImages != null) {
+  //         const formData = new FormData();
 
-          const SalonId = createSalonResponse?.salonId;
-          formData.append('salonId', SalonId);
+  //         const SalonId = editSalonResponse?.salonId;
+  //         formData.append('salonId', SalonId);
 
-          for (const file of uploadSalonImages) {
-            formData.append('gallery', file);
-          }
+  //         for (const file of uploadSalonImages) {
+  //           formData.append('gallery', file);
+  //         }
 
-          try {
-            const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            });
+  //         try {
+  //           const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
+  //             headers: {
+  //               'Content-Type': 'multipart/form-data',
+  //             },
+  //           });
 
-            console.log('Upload success:', imageResponse.data);
+  //           console.log('Upload success:', imageResponse.data);
 
-            alert("Image uploaded Successfully")
-          } catch (error) {
-            console.error('Image upload failed:', error);
-            setSalonImages([]);
-            setUploadSalonImages([])
-          }
-        }
-      };
+  //           alert("Image uploaded Successfully")
+  //         } catch (error) {
+  //           console.error('Image upload failed:', error);
+  //           setSalonImages([]);
+  //           setUploadSalonImages([])
+  //         }
+  //       }
+  //     };
 
-      uploadImageHandler();
-    }
+  //     uploadImageHandler();
+  //   }
 
-    //For Salon Logo
-    if (createSalonResponse?.salonId) {
-      const uploadImageHandler = async () => {
-        if (uploadSalonLogo != null) {
-          const formData = new FormData();
+  //   //For Salon Logo
+  //   if (editSalonResponse?.salonId) {
+  //     const uploadImageHandler = async () => {
+  //       if (uploadSalonLogo != null) {
+  //         const formData = new FormData();
 
-          const SalonId = createSalonResponse?.salonId;
+  //         const SalonId = editSalonResponse?.salonId;
 
-          if (SalonId) {
-            formData.append('salonId', SalonId);
-            formData.append('salonLogo', uploadSalonLogo);
+  //         if (SalonId) {
+  //           formData.append('salonId', SalonId);
+  //           formData.append('salonLogo', uploadSalonLogo);
 
-            try {
-              const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              });
+  //           try {
+  //             const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
+  //               headers: {
+  //                 'Content-Type': 'multipart/form-data',
+  //               },
+  //             });
 
-              console.log('Upload success:', imageResponse.data);
-              alert("Salon Logo uploaded Successfully")
-            } catch (error) {
-              console.error('Image upload failed:', error);
-              setSalonLogo("")
-              setUploadSalonLogo("")
-            }
-          }
+  //             console.log('Upload success:', imageResponse.data);
+  //             alert("Salon Logo uploaded Successfully")
+  //           } catch (error) {
+  //             console.error('Image upload failed:', error);
+  //             setSalonLogo("")
+  //             setUploadSalonLogo("")
+  //           }
+  //         }
 
-        }
-      };
+  //       }
+  //     };
 
-      uploadImageHandler();
-    }
+  //     uploadImageHandler();
+  //   }
 
-  }, [createSalonResponse?.salonId]);
+  // }, [editSalonResponse?.salonId]);
 
   return (
     <div className='edit_salon_wrapper'>
@@ -1446,7 +1448,13 @@ const EditSalon = () => {
           </div>
 
           <div>
-            <button onClick={editSalonHandler}>Submit</button>
+          {
+              editSalonLoading ? <button style={{
+                display:"grid",
+                placeItems:"center"
+              }}><ButtonLoader/></button> : <button onClick={editSalonHandler}>Update</button>
+            }
+            
           </div>
 
         </div>

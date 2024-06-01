@@ -3,9 +3,10 @@ import "./SalonAppointmentSettings.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { adminUpdateSalonSettingsAction } from '../../../Redux/Admin/Actions/SalonAction';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 
 const SalonAppointmentSettings = () => {
-    
+
     const location = useLocation()
     const currentSalon = location?.state
 
@@ -164,17 +165,23 @@ const SalonAppointmentSettings = () => {
     const updateSalonAppointment = () => {
         const appointmentdata = {
             salonId,
-            appointmentSettings:{
+            appointmentSettings: {
                 startTime,
                 endTime,
-                intervalInMinutes:intervalTime
+                intervalInMinutes: intervalTime
             }
         }
 
         console.log(appointmentdata)
 
-        dispatch(adminUpdateSalonSettingsAction(appointmentdata,navigate))
+        dispatch(adminUpdateSalonSettingsAction(appointmentdata, navigate))
     }
+
+    const adminUpdateSalonSettings = useSelector(state => state.adminUpdateSalonSettings)
+
+    const {
+        loading: adminUpdateSalonSettingsLoading,
+    } = adminUpdateSalonSettings
 
     return (
         <div className='salon_appointment_wrapper'>
@@ -240,7 +247,13 @@ const SalonAppointmentSettings = () => {
                     </div>
 
                     <div>
-                        <button onClick={updateSalonAppointment}>Update</button>
+                        {
+                            adminUpdateSalonSettingsLoading ? <button style={{
+                                display: "grid",
+                                placeItems: "center"
+                            }}><ButtonLoader /></button> : <button onClick={updateSalonAppointment}>Update</button>
+                        }
+
                     </div>
                 </div>
 

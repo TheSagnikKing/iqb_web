@@ -47,19 +47,14 @@ const SalonList = () => {
   }
 
   const deleteSalonHandler = (salonId, id) => {
-    const confirm = window.confirm("Are you sure ?")
-
-    if (confirm) {
-      if (currentsalonId == salonId) {
-        alert("You are currently in this salon")
-      } else {
-        const confirm = window.confirm("Are you sure ?")
-        if (confirm) {
-          dispatch(adminDeleteSalonAction(salonId, id))
-        }
+    if (currentsalonId == salonId) {
+      alert("You are currently in this salon")
+    } else {
+      const confirm = window.confirm("Are you sure ?")
+      if (confirm) {
+        dispatch(adminDeleteSalonAction(salonId, id))
       }
     }
-
   }
 
   const salonappointmentClicked = (salon) => {
@@ -118,6 +113,7 @@ const SalonList = () => {
 
         </div>
       </div>
+
     </div>
   )
 }

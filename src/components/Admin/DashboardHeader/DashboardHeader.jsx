@@ -186,6 +186,12 @@ const DashboardHeader = () => {
 
     const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
 
+
+    const adminApplySalon = useSelector(state => state.adminApplySalon)
+
+    const {
+        loading: adminApplySalonLoading,
+    } = adminApplySalon
     return (
         <div className='admin_dashboard_header_wrapper'>
             <div className='choose_salon_div'>
@@ -225,7 +231,7 @@ const DashboardHeader = () => {
                         }
                     </div>
                 </div>
-                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId}>Apply</button>}
+                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
 
             </div>
 
@@ -270,7 +276,7 @@ const DashboardHeader = () => {
                                             <p>No Salon Present</p>
                             }
                         </div>
-                        {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId}>Apply</button>}
+                        {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
                     </div>
                 </section>
             }
@@ -312,14 +318,14 @@ const DashboardHeader = () => {
                                     className="profile_drop_container"
                                 >
                                     <div>
-                                        <div><ProfileIcon/></div>
+                                        <div><ProfileIcon /></div>
                                         <div onClick={() => navigate("/admin-editprofile")}>My Profile</div>
                                     </div>
                                     <div>
-                                        <div><LogoutIcon/></div>
+                                        <div><LogoutIcon /></div>
                                         <div onClick={logoutHandler}>Logout</div>
                                     </div>
-                                    
+
                                 </div>
                             }
                         </div>
@@ -355,11 +361,11 @@ const DashboardHeader = () => {
                 }
 
                 <div onClick={() => navigate("/admin-editprofile")}>
-                    <div><ProfileIcon/></div>
+                    <div><ProfileIcon /></div>
                     <p>Profile</p>
                 </div>
                 <div onClick={() => dispatch(AdminLogoutAction(navigate))}>
-                    <div><LogoutIcon/></div>
+                    <div><LogoutIcon /></div>
                     <p>Logout</p>
                 </div>
 
