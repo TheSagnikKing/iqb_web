@@ -170,7 +170,7 @@ const SalonAdv = () => {
   return (
     <div className='salonadv_wrapper'>
       <div>
-        <p>Advertisements</p>
+        <p>Salon Advertisements</p>
         <div>
           <div>
             <button
