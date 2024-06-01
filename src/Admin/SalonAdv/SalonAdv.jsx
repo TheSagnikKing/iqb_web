@@ -168,9 +168,9 @@ const SalonAdv = () => {
   }
 
   return (
-    <div className='advertisement_wrapper'>
+    <div className='salonadv_wrapper'>
       <div>
-        {/* <p>Advertisements</p> */}
+        <p>Advertisements</p>
         <div>
           <div>
             <button
@@ -196,7 +196,7 @@ const SalonAdv = () => {
         </div>
 
       </div>
-      <div className='advertisement_content'>
+      <div className='salonadv_content'>
 
         {
           getAllAdvertisementLoading && !getAllAdvertisementResolve ?
@@ -210,7 +210,7 @@ const SalonAdv = () => {
             </> :
             !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
               advertisements.map((ad, index) => (
-                <div className='advertisement_cards' key={ad._id}>
+                <div className='salonadv_cards' key={ad._id}>
                   <div><img src={`${ad.url}`} alt="" /></div>
                   <div>
                     <button onClick={() => editImageHandler(ad.public_id, ad._id)} disabled={handleEditLoader ? true : false}>
@@ -244,3 +244,4 @@ const SalonAdv = () => {
 }
 
 export default SalonAdv
+

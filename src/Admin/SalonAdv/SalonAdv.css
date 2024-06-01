@@ -1,27 +1,27 @@
-.advertisement_wrapper {
+.salonadv_wrapper {
     height: calc(100vh - 7rem);
     width: 100%;
     padding-top: 2rem;
 }
 
-.advertisement_wrapper>div:nth-child(1){
+.salonadv_wrapper>div:nth-child(1){
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
 }
 
-.advertisement_wrapper>div:nth-child(1)>p{
+.salonadv_wrapper>div:nth-child(1)>p{
     font-size: 2rem;
     font-weight: bold;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div{
+.salonadv_wrapper>div:nth-child(1)>div{
     display: flex;
     gap: 2rem;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>button{
+.salonadv_wrapper>div:nth-child(1)>div>button{
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -38,23 +38,23 @@
     -o-border-radius: 6px;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>button>p{
+.salonadv_wrapper>div:nth-child(1)>div>button>p{
     font-size: 1.4rem;
     font-weight: 500;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>button>div{
+.salonadv_wrapper>div:nth-child(1)>div>button>div{
     font-size: 1.8rem;
     display: grid;
     place-items: center;
 }
 
 
-.advertisement_wrapper>div:nth-child(1)>div>button:nth-child(2){
+.salonadv_wrapper>div:nth-child(1)>div>button:nth-child(2){
     width: 12rem;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>div:nth-child(1){
+.salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1){
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,7 +69,7 @@
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>div:nth-child(1)>button{
+.salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button{
     height: 3.8rem;
     /*margin-left: 0.4rem;
     */display: flex;
@@ -86,24 +86,24 @@
     cursor: pointer;
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>div:nth-child(1)>button>p{
+.salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button>p{
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--primary-text-light-color1);
 }
-.advertisement_wrapper>div:nth-child(1)>div>div:nth-child(1)>button>div{
+.salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button>div{
     font-size: 1.8rem;
     display: grid;
     place-items: center;
     color: var(--primary-text-light-color1);
 }
 
-.advertisement_wrapper>div:nth-child(1)>div>div:nth-child(1)>p{
+.salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>p{
     font-size: 1.6rem;
     font-weight: 500;
 }
 
-.advertisement_content{
+.salonadv_content{
     height: calc(100vh - 7rem - 1.5rem - 4.5rem - 2rem);
     width: 100%;
     display: grid;
@@ -114,24 +114,24 @@
     padding: 1rem;
 }
 
-.advertisement_content::-webkit-scrollbar {
+.salonadv_content::-webkit-scrollbar {
     width: 6px !important;
     height: 7px;
 }
 
-.advertisement_content::-webkit-scrollbar-track {
+.salonadv_content::-webkit-scrollbar-track {
     background-color: #fff !important;
 }
 
-.advertisement_content::-webkit-scrollbar-thumb {
+.salonadv_content::-webkit-scrollbar-thumb {
     background: var(--primary-bg-color3) !important;
 }
 
-.advertisement_content::-webkit-scrollbar-thumb:hover {
+.salonadv_content::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
 }
 
-.advertisement_cards{
+.salonadv_cards{
     width:100%;
     max-height: 100%;
     min-height: 35rem;
@@ -144,13 +144,13 @@
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
 }
 
-.advertisement_cards>div:nth-child(1){
+.salonadv_cards>div:nth-child(1){
     width: 100%;
     height: 80%;
     border-bottom: 2px solid var(--primary-bg-color3);
 }
 
-.advertisement_cards>div:nth-child(1)>img{
+.salonadv_cards>div:nth-child(1)>img{
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -159,7 +159,7 @@
     border-top-right-radius: 1.7rem;
 }
 
-.advertisement_cards>div:nth-child(2){
+.salonadv_cards>div:nth-child(2){
     width: 100%;
     height: 20%;
     border-bottom-left-radius: 1.7rem;
@@ -169,7 +169,7 @@
     align-items: center;
 }
 
-.advertisement_cards>div:nth-child(2)>button{
+.salonadv_cards>div:nth-child(2)>button{
     width: 35%;
     height: 75%;
     border: none;
@@ -185,42 +185,42 @@
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
 }
 
-.advertisement_cards>div:nth-child(2)>button>p{
+.salonadv_cards>div:nth-child(2)>button>p{
     font-weight: 500;
     color: var(--primary-text-light-color1);
     font-size: 1.6rem;
 }
 
-.advertisement_cards>div:nth-child(2)>button>div{
+.salonadv_cards>div:nth-child(2)>button>div{
     font-weight: 500;
     color: var(--primary-text-light-color1);
     font-size: 1.8rem;
 }
 
-.advertisement_cards>div:nth-child(2)>button:nth-child(2){
+.salonadv_cards>div:nth-child(2)>button:nth-child(2){
     background: red;
 }
 
-.advertisement_cards>div:nth-child(2)>button:nth-child(1){
+.salonadv_cards>div:nth-child(2)>button:nth-child(1){
     background-color: var(--primary-bg-color3);
 }
 
 
 @media screen and (min-width: 0px) and (max-width: 768px){
-    .advertisement_wrapper>div:nth-child(1){
+    .salonadv_wrapper>div:nth-child(1){
         flex-direction: column;
         gap: 1.5rem;
         align-items: flex-start;
         padding-left: 1.5rem;
     }
 
-    .advertisement_content{
+    .salonadv_content{
         grid-template-columns: 1fr;
     }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1250px){
-    .advertisement_content{
+    .salonadv_content{
         grid-template-columns: 1fr 1fr;
     }
 }
