@@ -31,7 +31,7 @@ const SalonList = () => {
         SalonListControllerRef.current.abort();
       }
     };
-  }, [email,dispatch]);
+  }, [email, dispatch]);
 
   const getAdminSalonList = useSelector(state => state.getAdminSalonList)
 
@@ -43,23 +43,27 @@ const SalonList = () => {
 
 
   const editButtonClicked = (salon) => {
-    navigate(`/admin-editsalon/${salon?.salonId}`,{state:salon})
+    navigate(`/admin-editsalon/${salon?.salonId}`, { state: salon })
   }
 
   const deleteSalonHandler = (salonId, id) => {
-    if (currentsalonId == salonId) {
-      alert("You are currently in this salon")
-    } else {
-      const confirm = window.confirm("Are you sure ?")
-      if (confirm) {
-        dispatch(adminDeleteSalonAction(salonId, id))
+    const confirm = window.confirm("Are you sure ?")
+
+    if (confirm) {
+      if (currentsalonId == salonId) {
+        alert("You are currently in this salon")
+      } else {
+        const confirm = window.confirm("Are you sure ?")
+        if (confirm) {
+          dispatch(adminDeleteSalonAction(salonId, id))
+        }
       }
     }
 
   }
 
   const salonappointmentClicked = (salon) => {
-    navigate(`/admin-salonappointment/${salon?.salonId}`,{state:salon})
+    navigate(`/admin-salonappointment/${salon?.salonId}`, { state: salon })
   }
 
   return (
@@ -104,11 +108,11 @@ const SalonList = () => {
                 )) :
                 !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
                   <p
-                  style={{margin:"2rem"}}
+                    style={{ margin: "2rem" }}
                   >Salons not available</p> :
                   !getAdminSalonListLoading && !getAdminSalonListResolve &&
                   <p
-                  style={{margin:"2rem"}}
+                    style={{ margin: "2rem" }}
                   >Salons not available</p>
           }
 

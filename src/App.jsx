@@ -39,6 +39,7 @@ import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
 import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
 import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
+import Loader from './components/Loader/Loader';
 
 const App = () => {
 
@@ -63,7 +64,7 @@ const App = () => {
     <>
       <Toaster />
       <BrowserRouter>
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <React.Suspense fallback={<div style={{width:"100vw",height:"100vh",display:"flex",justifyContent:"center",alignItems:"center"}}><Loader/></div>}>
           <Routes>
             <Route path="/" element={<Public />} />
 

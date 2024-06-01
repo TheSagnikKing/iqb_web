@@ -137,7 +137,7 @@ const SalonAdv = () => {
       setMongoid("")
       sethandleEditLoader(false)
       dispatch(getAllAdvertisementAction(salonId));
-      
+
     } catch (error) {
       console.error('Image upload failed:', error);
       sethandleEditLoader(false)
@@ -147,30 +147,35 @@ const SalonAdv = () => {
   const [deleteLoader, setDeleteLoader] = useState(false)
 
   const deleteHandler = async (publicId, mongoid) => {
-    try {
-      setDeleteLoader(true)
-      await api.delete("/api/advertisement/deleteAdvertisements", {
-        data: {
-          public_id: publicId,
-          img_id: mongoid
-        }
-      })
-      setDeleteLoader(false)
-      dispatch({
-        type: "FILTER_ADVERTISEMENTLIST",
-        payload: mongoid
-      })
+    const confirm = window.confirm("Are you sure ?")
 
-    } catch (error) {
-      setDeleteLoader(false)
-      console.log(error)
+    if (confirm) {
+      try {
+        setDeleteLoader(true)
+        await api.delete("/api/advertisement/deleteAdvertisements", {
+          data: {
+            public_id: publicId,
+            img_id: mongoid
+          }
+        })
+        setDeleteLoader(false)
+        dispatch({
+          type: "FILTER_ADVERTISEMENTLIST",
+          payload: mongoid
+        })
+
+      } catch (error) {
+        setDeleteLoader(false)
+        console.log(error)
+      }
     }
+
   }
 
   return (
     <div className='salonadv_wrapper'>
       <div>
-        <p>Salon Advertisements</p>
+        <p>Advertisements</p>
         <div>
           <div>
             <button

@@ -3,6 +3,7 @@ import api from '../../Redux/api/Api'
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants'
+import AuthLoader from '../../components/AuthLoader/AuthLoader';
 
 const ProtectedRoute = () => {
     const [loggindata, setloggindata] = useState({});
@@ -14,18 +15,18 @@ const ProtectedRoute = () => {
         const logginadmin = async () => {
             try {
                 const { data } = await api.get('/api/admin/adminloggedin');
-                console.log("Admin Logged in from protected Route ",data)
+                console.log("Admin Logged in from protected Route ", data)
                 setloggindata(data);
                 dispatch({
-                    type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-                    payload:data
+                    type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+                    payload: data
                 })
             } catch (error) {
-                if(error?.response?.data?.message === "UnAuthorized Admin" || error?.response?.data?.message === "Forbidden Admin"){
-                    localStorage.setItem("userAdminLoggedIn","false")
+                if (error?.response?.data?.message === "UnAuthorized Admin" || error?.response?.data?.message === "Forbidden Admin") {
+                    localStorage.setItem("userAdminLoggedIn", "false")
                     setlogginerror(error?.response?.data?.message)
                 }
-                
+
             }
         };
 
@@ -37,7 +38,7 @@ const ProtectedRoute = () => {
     const navigate = useNavigate()
 
     const ErrorClickedHandler = () => {
-        localStorage.setItem("userAdminLoggedIn","false")
+        localStorage.setItem("userAdminLoggedIn", "false")
         navigate("/adminsignin")
     }
 
@@ -48,12 +49,20 @@ const ProtectedRoute = () => {
         // Data is not present, render a button or any other UI element
         content = (
             <div className='route_error_container'>
-                <button
-                 onClick={ErrorClickedHandler}
-                 style={{
-                    color:logginerror ? "red" : "black"
-                 }}
-                 >{logginerror ? logginerror : "Loading..."}</button>
+                {
+                    logginerror ? <div className='route_error_container_content'>
+                        <div>
+                            <h1>You are not authorize</h1>
+                            <p>You tried to access a page you did not have prior authorization for.</p>
+                            <p>Click the Link below to signin again</p>
+                            <button onClick={ErrorClickedHandler}>Signin</button>
+                        </div>
+                        <div>
+                            <img src="./403.jpg" alt="unauthorize" />
+                        </div>
+                    </div> : <AuthLoader />
+                }
+
             </div>
         );
     }
