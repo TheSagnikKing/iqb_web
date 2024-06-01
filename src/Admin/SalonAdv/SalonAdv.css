@@ -170,8 +170,8 @@
 }
 
 .salonadv_cards>div:nth-child(2)>button{
-    width: 35%;
-    height: 75%;
+    width: 13rem;
+    height: 4rem;
     border: none;
     cursor: pointer;
     display: flex;
