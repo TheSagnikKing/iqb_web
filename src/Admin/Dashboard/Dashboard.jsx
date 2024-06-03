@@ -199,8 +199,11 @@ const Dashboard = () => {
   return (
     salonId == 0 ? (<>
       <div className='admin_dashboard_page_container_two'>
-        <h1>{adminName || email.split('@')[0]} , don't have any salon</h1>
-        <Link to="/admin-salonlist">Create </Link>
+
+        <div>
+          <h1>{adminName || email.split('@')[0]} , don't have any salon</h1>
+          <Link to="/admin-salonlist">Create </Link>
+        </div>
       </div>
     </>) : (<>
       <div className='admin_dashboard_page_container'>

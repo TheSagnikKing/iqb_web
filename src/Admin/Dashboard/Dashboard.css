@@ -589,16 +589,27 @@
 .admin_dashboard_page_container_two{
     width: 100%;
     height: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.admin_dashboard_page_container_two>h1{
-    font-size: 3rem;
+.admin_dashboard_page_container_two>div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin_dashboard_page_container_two>div>h1{
+    font-size: 4rem;
     line-height: 4.5rem;
+    text-transform: capitalize;
 }
 
-.admin_dashboard_page_container_two>a{
+.admin_dashboard_page_container_two>div>a{
     height: 4.5rem;
-    padding: 0.8rem 3rem;
+    padding: 1rem 5rem;
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
     border-radius: 1rem;
@@ -610,6 +621,9 @@
     font-size: 1.6rem;
     font-weight: 500;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

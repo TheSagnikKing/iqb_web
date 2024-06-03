@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./CreateSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import Modal from '../../../components/Modal/Modal';
 
 const CreateSalon = () => {
 
@@ -551,8 +552,6 @@ const CreateSalon = () => {
   const handleSalonFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
 
-
-
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
     if (!allowedTypes.includes(uploadImage.type)) {
       alert("Please upload a valid image file (JPEG, WebP, PNG).");
@@ -580,6 +579,11 @@ const CreateSalon = () => {
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
+    // Helper function to generate a unique ID
+    const generateUniqueId = () => {
+      return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    };
+
     // Iterate over each uploaded file
     const urls = Array.from(uploadedFiles).map((file) => {
       // Check if the file type is allowed
@@ -588,7 +592,9 @@ const CreateSalon = () => {
         return null;
       }
       // Create a URL representing the file content
-      return URL.createObjectURL(file);
+      const blobUrl = URL.createObjectURL(file);
+      const _id = generateUniqueId();
+      return { _id, blobUrl };
     });
 
     // Filter out null values (in case of invalid files) and update the state with valid URLs
@@ -746,7 +752,7 @@ const CreateSalon = () => {
   const adminCreateSalon = useSelector(state => state.adminCreateSalon)
 
   const {
-    loading:createSalonLoading,
+    loading: createSalonLoading,
     response: createSalonResponse
   } = adminCreateSalon
 
@@ -820,6 +826,72 @@ const CreateSalon = () => {
     }
 
   }, [createSalonResponse?.salonId]);
+
+  const [openModal, setOpenModal] = useState(true)
+  const [openBlobSalonImage, setOpenBlobSalonImage] = useState({})
+
+  const [userSelectSalonImage, setUserSelectSalonImage] = useState({})
+
+  const selectedSalonImageClicked = async (imgObject) => {
+    try {
+      setOpenBlobSalonImage(imgObject)
+      // Fetch the Blob from the URL
+      const response = await fetch(imgObject?.blobUrl );
+      const blob = await response.blob();
+
+      // Create a File object from the Blob
+      const file = new File([blob], "salonImage.jpg", { type: blob.type });
+
+      // Now you can set the File object to your state
+      setUserSelectSalonImage(file);
+      setOpenModal(true)
+    } catch (error) {
+      console.error("Error fetching and converting blob URL to file:", error);
+    }
+  };
+
+
+  const currentEditSalonImageInputRef = useRef(null);
+
+  const handleCurrentEditSalonImageButtonClick = () => {
+    currentEditSalonImageInputRef.current.click();
+  };
+
+  const handleEditSelectedImageFileInputChange = (e) => {
+    const uploadImage = e.target.files[0]; // Get the uploaded file
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+    if (!allowedTypes.includes(uploadImage.type)) {
+      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
+
+    console.log(salonImages)
+    const imageUrl = URL.createObjectURL(uploadImage);
+
+    setOpenBlobSalonImage({
+      ...openBlobSalonImage,
+      blobUrl:imageUrl
+    })
+
+    setSalonImages((images) =>
+      images.map((image) =>
+        image._id === openBlobSalonImage?._id ? { ...image, blobUrl: imageUrl } : image
+      )
+    );
+    
+
+    // console.log({blobUrl:imageUrl,_id})
+
+    // setOpenBlobSalonImage(imageUrl);
+    // console.log(salonImages)
+    // setUserSelectSalonImage(uploadImage)
+  }
+
+  console.log("Blob Object ",openBlobSalonImage)
+  console.log("Upload salonImages ",uploadSalonImages)
+
 
   return (
     <div className='create_salon_wrapper'>
@@ -935,7 +1007,7 @@ const CreateSalon = () => {
           <div>
             {
               salonImages.map((s, index) => (
-                <div key={index}><img src={s} alt="" /></div>
+                <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s?.blobUrl} alt="" /></div>
               ))
             }
           </div>
@@ -1429,14 +1501,42 @@ const CreateSalon = () => {
           <div>
             {
               createSalonLoading ? <button style={{
-                display:"grid",
-                placeItems:"center"
-              }}><ButtonLoader/></button> : <button onClick={createSalonHandler}>Submit</button>
-            }          
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={createSalonHandler}>Submit</button>
+            }
           </div>
 
         </div>
       </div>
+
+      {
+        openModal && <Modal setOpenModal={setOpenModal}>
+          <div>
+            <img src={openBlobSalonImage?.blobUrl} alt="" />
+          </div>
+          <div>
+            <div>
+              <button>
+                <div><DeleteIcon /></div>
+                <p>Delete</p>
+              </button>
+              <button onClick={handleCurrentEditSalonImageButtonClick}>
+                <div><EditIcon /></div>
+                <p>Edit</p>
+
+                <input
+                  type="file"
+                  ref={currentEditSalonImageInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleEditSelectedImageFileInputChange}
+                />
+              </button>
+            </div>
+          </div>
+        </Modal>
+      }
+
     </div>
   )
 }
