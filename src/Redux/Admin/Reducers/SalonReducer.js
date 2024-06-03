@@ -180,7 +180,6 @@ export const adminCreateSalonReducer = (state = {}, action) => {
             };
         case ADMIN_CREATE_SALON_SUCCESS:
             return {
-                ...state,
                 loading: false,
                 resolve: true,
                 ...action.payload
@@ -192,6 +191,8 @@ export const adminCreateSalonReducer = (state = {}, action) => {
                 resolve: false,
                 error: action.payload
             };
+        case "ADMIN_RESET_SALON":
+                return {};
         default:
             return state;
     }

@@ -10,6 +10,8 @@ import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../../components/Modal/Modal';
+import { GET_ADMIN_SALONLIST_SUCCESS } from '../../../Redux/Admin/Constants/constants';
+import toast from 'react-hot-toast';
 
 const CreateSalon = () => {
 
@@ -572,7 +574,7 @@ const CreateSalon = () => {
     salonImagefileInputRef.current.click();
   };
 
-  const [uploadSalonImages, setUploadSalonImages] = useState([])
+  // const [uploadSalonImages, setUploadSalonImages] = useState([])
 
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
@@ -594,12 +596,11 @@ const CreateSalon = () => {
       // Create a URL representing the file content
       const blobUrl = URL.createObjectURL(file);
       const _id = generateUniqueId();
-      return { _id, blobUrl };
+      return { _id, blobUrl, name: file.name };
     });
 
     // Filter out null values (in case of invalid files) and update the state with valid URLs
     setSalonImages(urls.filter((url) => url !== null));
-    setUploadSalonImages(uploadedFiles)
   };
 
   const [mobilesalonlogo, setMobileSalonlogo] = useState("")
@@ -715,135 +716,14 @@ const CreateSalon = () => {
 
   const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
 
-  const navigate = useNavigate()
 
-  const createSalonHandler = () => {
-    const salondata = {
-      adminEmail: email,
-      salonEmail,
-      salonName,
-      address,
-      location: {
-        type: "Point",
-        coordinates: {
-          longitude: Number(longitude),
-          latitude: Number(latitude)
-        }
-      },
-      country,
-      city,
-      timeZone: timezone,
-      postCode,
-      contactTel,
-      salonType,
-      webLink,
-      fbLink,
-      instraLink,
-      twitterLink,
-      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
-      services: selectedServices,
-      // image:image2
-    }
-
-    console.log(salondata)
-    dispatch(adminCreateSalonAction(salondata, navigate))
-  }
-
-  const adminCreateSalon = useSelector(state => state.adminCreateSalon)
-
-  const {
-    loading: createSalonLoading,
-    response: createSalonResponse
-  } = adminCreateSalon
-
-
-  useEffect(() => {
-    if (createSalonResponse?.salonId) {
-      const uploadImageHandler = async () => {
-        if (uploadSalonImages != null) {
-          const formData = new FormData();
-
-          const SalonId = createSalonResponse?.salonId;
-          formData.append('salonId', SalonId);
-
-          for (const file of uploadSalonImages) {
-            formData.append('gallery', file);
-          }
-
-          try {
-            const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            });
-
-            console.log('Upload success:', imageResponse.data);
-
-            alert("Image uploaded Successfully")
-          } catch (error) {
-            console.error('Image upload failed:', error);
-            setSalonImages([]);
-            setUploadSalonImages([])
-          }
-        }
-      };
-
-      uploadImageHandler();
-    }
-
-    //For Salon Logo
-    if (createSalonResponse?.salonId) {
-      const uploadImageHandler = async () => {
-        if (uploadSalonLogo != null) {
-          const formData = new FormData();
-
-          const SalonId = createSalonResponse?.salonId;
-
-          if (SalonId) {
-            formData.append('salonId', SalonId);
-            formData.append('salonLogo', uploadSalonLogo);
-
-            try {
-              const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              });
-
-              console.log('Upload success:', imageResponse.data);
-              alert("Salon Logo uploaded Successfully")
-            } catch (error) {
-              console.error('Image upload failed:', error);
-              setSalonLogo("")
-              setUploadSalonLogo("")
-            }
-          }
-
-        }
-      };
-
-      uploadImageHandler();
-    }
-
-  }, [createSalonResponse?.salonId]);
-
-  const [openModal, setOpenModal] = useState(true)
+  const [openModal, setOpenModal] = useState(false)
   const [openBlobSalonImage, setOpenBlobSalonImage] = useState({})
-
-  const [userSelectSalonImage, setUserSelectSalonImage] = useState({})
 
   const selectedSalonImageClicked = async (imgObject) => {
     try {
+      console.log(imgObject)
       setOpenBlobSalonImage(imgObject)
-      // Fetch the Blob from the URL
-      const response = await fetch(imgObject?.blobUrl );
-      const blob = await response.blob();
-
-      // Create a File object from the Blob
-      const file = new File([blob], "salonImage.jpg", { type: blob.type });
-
-      // Now you can set the File object to your state
-      setUserSelectSalonImage(file);
       setOpenModal(true)
     } catch (error) {
       console.error("Error fetching and converting blob URL to file:", error);
@@ -872,26 +752,211 @@ const CreateSalon = () => {
 
     setOpenBlobSalonImage({
       ...openBlobSalonImage,
-      blobUrl:imageUrl
+      blobUrl: imageUrl,
+      name: uploadImage.name
     })
 
     setSalonImages((images) =>
       images.map((image) =>
-        image._id === openBlobSalonImage?._id ? { ...image, blobUrl: imageUrl } : image
+        image._id === openBlobSalonImage?._id ? { ...image, blobUrl: imageUrl, name: uploadImage.name } : image
       )
     );
-    
 
-    // console.log({blobUrl:imageUrl,_id})
-
-    // setOpenBlobSalonImage(imageUrl);
-    // console.log(salonImages)
-    // setUserSelectSalonImage(uploadImage)
   }
 
-  console.log("Blob Object ",openBlobSalonImage)
-  console.log("Upload salonImages ",uploadSalonImages)
+  console.log("salon Images ", salonImages)
 
+
+  const navigate = useNavigate()
+
+  const [uploadSalonImages, setUploadSalonImages] = useState([])
+
+  const createSalonHandler = async () => {
+    const salondata = {
+      adminEmail: email,
+      salonEmail,
+      salonName,
+      address,
+      location: {
+        type: "Point",
+        coordinates: {
+          longitude: Number(longitude),
+          latitude: Number(latitude)
+        }
+      },
+      country,
+      city,
+      timeZone: timezone,
+      postCode,
+      contactTel,
+      salonType,
+      webLink,
+      fbLink,
+      instraLink,
+      twitterLink,
+      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
+      services: selectedServices,
+      // image:image2
+    }
+
+    // console.log(salondata)
+    // 
+
+    // Create a new array to hold the File objects
+    const files = await Promise.all(
+      salonImages?.map(async (imgObject) => {
+        try {
+          // Fetch the Blob from the URL
+          const response = await fetch(imgObject.blobUrl);
+          const blob = await response.blob();
+
+          // Create a File object from the Blob
+          const file = new File([blob], imgObject.name, { type: blob.type });
+
+          // Return the file object with the associated _id
+          return file;
+        } catch (error) {
+          console.error("Error converting blob URL to file:", error);
+          return null;
+        }
+      })
+    );
+
+    setUploadSalonImages(files)
+
+    dispatch(adminCreateSalonAction(salondata, navigate))
+  }
+
+  const adminCreateSalon = useSelector(state => state.adminCreateSalon)
+
+  const {
+    loading: createSalonLoading,
+    response: createSalonResponse
+  } = adminCreateSalon
+
+  // console.log("From DiffArray ",uploadSalonImages)
+
+  useEffect(() => {
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonImages != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+          formData.append('salonId', SalonId);
+
+          for (const file of uploadSalonImages) {
+            formData.append('gallery', file);
+          }
+
+          try {
+            await api.post('/api/salon/uploadSalonImage', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+
+            const { data } = await api.post(`/api/admin/getAllSalonsByAdmin`, {
+              adminEmail: email
+            })
+
+            dispatch({
+              type: GET_ADMIN_SALONLIST_SUCCESS,
+              payload: data
+            })
+
+            toast.success("Salon images uploaded successfully", {
+              duration: 3000,
+              style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+              },
+            });
+          } catch (error) {
+            toast.error(error?.response?.data?.message, {
+              duration: 3000,
+              style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+              },
+            });
+            setSalonImages([]);
+            setUploadSalonImages([])
+          }
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+    //For Salon Logo
+    if (createSalonResponse?.salonId) {
+      const uploadImageHandler = async () => {
+        if (uploadSalonLogo != null) {
+          const formData = new FormData();
+
+          const SalonId = createSalonResponse?.salonId;
+
+          if (SalonId) {
+            formData.append('salonId', SalonId);
+            formData.append('salonLogo', uploadSalonLogo);
+
+            try {
+              await api.post('/api/salon/uploadSalonLogo', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+
+              const { data } = await api.post(`/api/admin/getAllSalonsByAdmin`, {
+                adminEmail: email
+              })
+
+              dispatch({
+                type: GET_ADMIN_SALONLIST_SUCCESS,
+                payload: data
+              })
+
+              toast.success("Salon logo uploaded successfully", {
+                duration: 3000,
+                style: {
+                  fontSize: "1.4rem",
+                  borderRadius: '10px',
+                  background: '#333',
+                  color: '#fff',
+                },
+              });
+            } catch (error) {
+              toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                  fontSize: "1.4rem",
+                  borderRadius: '10px',
+                  background: '#333',
+                  color: '#fff',
+                },
+              });
+              setSalonLogo("")
+              setUploadSalonLogo("")
+            }
+          }
+
+        }
+      };
+
+      uploadImageHandler();
+    }
+
+  }, [createSalonResponse?.salonId]);
+
+  const deleteSalonImageHandler = (imgObject) => {
+    setSalonImages((images) => images.filter((image) => image._id !== imgObject._id))
+    setOpenModal(false)
+  }
 
   return (
     <div className='create_salon_wrapper'>
@@ -1517,7 +1582,7 @@ const CreateSalon = () => {
           </div>
           <div>
             <div>
-              <button>
+              <button onClick={() => deleteSalonImageHandler(openBlobSalonImage)}>
                 <div><DeleteIcon /></div>
                 <p>Delete</p>
               </button>

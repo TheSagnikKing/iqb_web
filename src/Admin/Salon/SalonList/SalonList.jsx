@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminDeleteSalonAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
+import toast from 'react-hot-toast'
 
 const SalonList = () => {
 
@@ -15,6 +16,9 @@ const SalonList = () => {
   const navigate = useNavigate()
 
   const createSalonClicked = () => {
+    dispatch({
+      type:"ADMIN_CREATE_SALON_SUCCESS",
+    })
     navigate("/admin-createsalon")
   }
 
@@ -48,7 +52,15 @@ const SalonList = () => {
 
   const deleteSalonHandler = (salonId, id) => {
     if (currentsalonId == salonId) {
-      alert("You are currently in this salon")
+      toast.error("You are currently in this salon", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     } else {
       const confirm = window.confirm("Are you sure ?")
       if (confirm) {
