@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Signin.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eyevisible, Notvisibleeye } from '../../../icons'
+import { Eyevisible, Notvisibleeye, HomeIcon } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { Toaster, toast } from 'react-hot-toast';
 import { AdminGoogleloginAction, AdminSigninAction } from '../../../Redux/Admin/Actions/AuthAction'
@@ -62,6 +62,8 @@ const Signin = () => {
         <div>
           <img src="./signin.png" alt="admin_Signin" />
         </div>
+
+
       </div>
 
       <div>
@@ -115,6 +117,7 @@ const Signin = () => {
 
           <p>Don't you have an account ? <Link to="/adminsignup">Sign up</Link></p>
         </div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </main>
   )

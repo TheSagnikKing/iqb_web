@@ -34,7 +34,7 @@ import { RiExpandRightLine } from "react-icons/ri";
 import { MdMan } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { FaFile } from "react-icons/fa";
-
+import { IoHome } from "react-icons/io5";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -79,3 +79,4 @@ export const ServeIcon = RiExpandRightLine
 export const ProfileIcon = FaUser
 export const LogoutIcon = MdLogout
 export const FaFileIcon = FaFile
+export const HomeIcon = IoHome

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminForgetPasswordAction } from '../../../Redux/Admin/Actions/AdminPasswordAction'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { HomeIcon } from '../../../icons'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("")
@@ -46,6 +47,7 @@ const ForgotPassword = () => {
           
           <Link to="/adminsignin">Back</Link>
         </div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </div>
   )

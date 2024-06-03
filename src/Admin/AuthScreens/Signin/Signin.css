@@ -24,6 +24,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.homeicon{
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+    font-size: 4rem;
+    cursor: pointer;
 }
 
 .admin_signin_container>div:nth-child(2)>div{

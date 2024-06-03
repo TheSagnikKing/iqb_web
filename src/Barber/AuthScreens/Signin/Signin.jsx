@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Signin.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eyevisible,Notvisibleeye } from '../../../icons'
+import { Eyevisible,HomeIcon,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
 import {BarberGoogleloginAction} from "../../../Redux/Barber/Actions/AuthAction"
@@ -96,6 +96,7 @@ const Signin = () => {
 
           <p>Don't you have an account ? <Link to="/barbersignup">Sign up</Link></p>
         </div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </main>
   )

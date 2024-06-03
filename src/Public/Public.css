@@ -4,123 +4,95 @@
 }
 
 .public_main_content {
-    width: 55%;
-    height: 100vh;
-    background-color: var(--primary-bg-light-color1);
-    /* border: 1px solid black; */
-    margin: auto;
     display: grid;
-    grid-template-rows: 2fr 0.3fr 1fr;
-}
-
-.public_main_content>div:nth-child(1) {
-    /* background-color: blue; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.public_main_content>div:nth-child(1)>div{
-    width: 50rem;
+    grid-template-columns: 1fr 1fr;
     height: 100%;
-    /* background-color: gray; */
 }
 
-.public_main_content>div:nth-child(1)>div>img {
+.public_main_content>div:nth-child(1){
     width: 100%;
     height: 100%;
+    border-right: 2px solid black;
+}
+.public_main_content>div:nth-child(1)>img{
+    height: 80%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
 }
 
-.public_main_content>div:nth-child(2) {
-    /* background-color: green; */
-}
-
-.public_main_content>div:nth-child(2)>h1 {
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 4.8rem;
-    font-weight: bold;
-}
-
-.public_main_content>div:nth-child(3) {
-    /* background-color: yellow; */
-}
-
-.public_main_content>div:nth-child(3)>div {
-    height: 4rem;
-    width: 50%;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    justify-content: space-between;
-    margin-top: 3rem;
-}
-
-.public_main_content>div:nth-child(3)>div a {
-    height: 4rem;
-    width: 14.5rem;
-    background-color: var(--primary-bg-color3);
-    border-radius: 5.5rem;
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: 500;
+.public_main_content>div:nth-child(2){
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.public_main_content>div:nth-child(2)>div{
+    min-width: 50%;
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.public_main_content>div:nth-child(2)>div>h1{
+    font-size: 4rem;
+    text-transform: capitalize;
+}
+
+.public_main_content>div:nth-child(2)>div>div{
+    height: 4.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.public_main_content>div:nth-child(2)>div>div>a{
+    height: 100%;
+    width: 20rem;
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
     text-decoration: none;
-    color: var(--primary-text-light-color1);
-    border: 1px solid var(--primary-text-light-color1);
 }
 
-.public_main_content>div:nth-child(3)>div a:hover {
-    background-color: var(--primary-bg-light-color2);
-    color: var(--primary-text-light-color1);
-}
-
-@media((min-width:0px) and (max-width:576px)) {
+@media screen and (min-width: 0px) and (max-width:1000px){
     .public_main_content{
-        width: 100%;
-        height: 100vh;
+        grid-template-columns: 1fr;
     }
 
-    .public_main_content>div:nth-child(2)>h1 {
-        font-size: 3rem;
+    .public_main_content>div:nth-child(1){
+        height: 60vh;
+        border-right: 0px;
     }
 
-    .public_main_content>div:nth-child(3)>div {
-        width: 90%;
+    .public_main_content>div:nth-child(1)>img{
+        margin-left: 15%;
+        margin-top: 5%;
     }
 
-    .public_main_content>div:nth-child(3)>div{
-        margin-top: 0rem;
+    .public_main_content>div:nth-child(2){
+        height: 40vh;
+        align-items: flex-start;
     }
 
-    .public_main_content>div:nth-child(1)>div{
-        width: 100%;
-        height: 100%;
+    .public_main_content>div:nth-child(2)>div>div>a{
+        width: 45%;
     }
 
-    .public_main_content>div:nth-child(1)>div>img{
-        width: 100%;
-        height: 100%;
-    }
-}
-
-@media((min-width:576px) and (max-width:768px)) {
-    .public_main_content{
-        width: 85%;
-    }
-}
-
-@media((min-width:768px) and (max-width:992px)) {
-    .public_main_content{
-        width: 75%;
-    }
-}
-
-@media((min-width:992px) and (max-width:1200px)) {
-    .public_main_content{
-        width: 65%;
+    .public_main_content>div:nth-child(2)>div>h1{
+        font-size: 3.2rem;
+        text-transform: capitalize;
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import "./ForgotPassword.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { HomeIcon } from '../../../icons'
 
 const ForgotPassword = () => {
 
@@ -27,6 +28,7 @@ const ForgotPassword = () => {
 
                 <Link to="/barbersignin">Back</Link>
             </div>
+            <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
         </div>
     </div>
   )
