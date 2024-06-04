@@ -319,7 +319,7 @@ const DashboardHeader = () => {
                                 >
                                     <div>
                                         <div><ProfileIcon /></div>
-                                        <div onClick={() => navigate("/admin-editprofile")}>My Profile</div>
+                                        <div onClick={() => navigate("/admin-dashboard/editprofile")}>My Profile</div>
                                     </div>
                                     <div>
                                         <div><LogoutIcon /></div>

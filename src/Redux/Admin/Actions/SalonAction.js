@@ -204,7 +204,7 @@ export const adminCreateSalonAction = (salondata,navigate) => async (dispatch) =
             payload: adminloggedindata
         })
 
-        navigate("/admin-salonlist")
+        navigate("/admin-salon")
 
     } catch (error) {
         dispatch({
@@ -236,7 +236,7 @@ export const adminEditSalonAction = (salondata,navigate) => async (dispatch) => 
             payload: data
         })
 
-        navigate("/admin-salonlist")
+        navigate("/admin-salon")
 
     } catch (error) {
         dispatch({
@@ -267,7 +267,7 @@ export const adminUpdateSalonSettingsAction = (appointmentdata,navigate) => asyn
             payload: data
         })
 
-        navigate("/admin-salonlist")
+        navigate("/admin-salon")
 
     } catch (error) {
         dispatch({

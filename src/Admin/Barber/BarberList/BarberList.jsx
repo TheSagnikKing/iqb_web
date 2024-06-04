@@ -23,11 +23,11 @@ const BarberList = () => {
   const navigate = useNavigate()
 
   const createbarberClicked = () => {
-    navigate("/admin-createbarber")
+    navigate("/admin-barber/createbarber")
   }
 
   const editButtonClicked = (barber) => {
-    navigate(`/admin-editbarber/${barber.salonId}`, { state: barber })
+    navigate(`/admin-barber/editbarber/${barber.salonId}`, { state: barber })
   }
 
   const deleteButtonClicked = (barber) => {

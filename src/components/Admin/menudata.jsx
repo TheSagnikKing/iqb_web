@@ -11,19 +11,19 @@ export const menudata = [
         id: 2,
         title: "Salons",
         icon: <Adminsalonicon />,
-        url: "/admin-salonlist"
+        url: "/admin-salon"
     },
     {
         id: 3,
         title: "Barbers",
         icon: <Adminbarbericon />,
-        url: "/admin-barberlist"
+        url: "/admin-barber"
     },
     {
         id: 4,
         title: "Customers",
         icon: <Admincustomericon />,
-        url: "/admin-customerlist"
+        url: "/admin-customer"
     },
     {
         id: 5,
@@ -35,7 +35,7 @@ export const menudata = [
         id: 6,
         title: "Queuings",
         icon: <Adminqueueicon />,
-        url: "/admin-queuelist"
+        url: "/admin-queue"
     },
     // {
     //     id: 7,

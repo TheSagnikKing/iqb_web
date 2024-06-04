@@ -19,7 +19,7 @@ const SalonList = () => {
     dispatch({
       type:"ADMIN_CREATE_SALON_SUCCESS",
     })
-    navigate("/admin-createsalon")
+    navigate("/admin-salon/createsalon")
   }
 
   const SalonListControllerRef = useRef(new AbortController());
@@ -47,7 +47,7 @@ const SalonList = () => {
 
 
   const editButtonClicked = (salon) => {
-    navigate(`/admin-editsalon/${salon?.salonId}`, { state: salon })
+    navigate(`/admin-salon/editsalon/${salon?.salonId}`, { state: salon })
   }
 
   const deleteSalonHandler = (salonId, id) => {
@@ -70,7 +70,7 @@ const SalonList = () => {
   }
 
   const salonappointmentClicked = (salon) => {
-    navigate(`/admin-salonappointment/${salon?.salonId}`, { state: salon })
+    navigate(`/admin-salon/appointment/${salon?.salonId}`, { state: salon })
   }
 
   return (

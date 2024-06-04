@@ -153,7 +153,7 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
             payload: data
         })
 
-        navigate("/admin-barberlist")
+        navigate("/admin-barber")
     } catch (error) {
 
         dispatch({
@@ -184,7 +184,7 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
             payload: data
         })
 
-        navigate("/admin-barberlist")
+        navigate("/admin-barber")
     } catch (error) {
 
         dispatch({

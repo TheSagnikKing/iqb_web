@@ -13,8 +13,6 @@ const AdminSidebar = React.lazy(() => import("./components/Admin/Sidebar/Sidebar
 const AdminBarberList = React.lazy(() => import("./Admin/Barber/BarberList/BarberList"))
 const AdminSalonAdv = React.lazy(() => import("./Admin/SalonAdv/SalonAdv"))
 const AdminQueue = React.lazy(() => import("./Admin/Queue/Queue"))
-const AdminAppointment = React.lazy(() => import("./Admin/Appointment/Appointment"))
-const AdminReport = React.lazy(() => import("./Admin/Report/Report"))
 const AdminForgotPassword = React.lazy(() => import("./Admin/AuthScreens/ForgotPassword/ForgotPassword"))
 const AdminCheckEmail = React.lazy(() => import("./Admin/AuthScreens/CheckEmail/CheckEmail"))
 const AdminChangePassword = React.lazy(() => import("./Admin/AuthScreens/ChangePassword/ChangePassword"))
@@ -83,19 +81,19 @@ const App = () => {
             <Route element={<ProtectedAdminRoute />}>
               <Route element={isMobile ? <AdminMobileSidebar/> : <AdminSidebar />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/admin-editprofile" element={<AdminEditProfile />} />
-                <Route path="/admin-salonlist" element={<AdminSalonList />} />
-                <Route path="/admin-createsalon" element={<AdminCreateSalon />} />
-                <Route path="/admin-editsalon/:salonid" element={<AdminEditSalon />} />
-                <Route path="/admin-salonappointment/:salonid" element={<AdminSalonAppointmentSettings/>}/>
-                <Route path="/admin-barberlist" element={<AdminBarberList />} />
-                <Route path="/admin-createbarber" element={<AdminCreateBarber />} />
-                <Route path="/admin-editbarber/:salonid" element={<AdminEditBarber />} />
-                <Route path="/admin-customerlist" element={<AdminCustomerList />} />
+                <Route path="/admin-dashboard/editprofile" element={<AdminEditProfile />} />
+
+                <Route path="/admin-salon" element={<AdminSalonList />} />
+                <Route path="/admin-salon/createsalon" element={<AdminCreateSalon />} />
+                <Route path="/admin-salon/editsalon/:salonid" element={<AdminEditSalon />} />
+                <Route path="/admin-salon/appointment/:salonid" element={<AdminSalonAppointmentSettings/>}/>
+
+                <Route path="/admin-barber" element={<AdminBarberList />} />
+                <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
+                <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
+                <Route path="/admin-customer" element={<AdminCustomerList />} />
                 <Route path="/admin-salonadvertise" element={<AdminSalonAdv />} />
-                <Route path="/admin-queuelist" element={<AdminQueue />} />
-                <Route path="/admin-appointment" element={<AdminAppointment />} />
-                <Route path="/admin-report" element={<AdminReport />} />
+                <Route path="/admin-queue" element={<AdminQueue />} />
               </Route>
 
             </Route>

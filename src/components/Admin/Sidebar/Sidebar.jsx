@@ -14,6 +14,10 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  console.log(location.pathname.includes("/admin-salon"))
+
+  console.log("Sidebar")
+
   const [loading, setLoading] = useState(false)
 
   return (
@@ -39,15 +43,15 @@ const Sidebar = () => {
 
         <div className='menu_items_container'>
           {menudata.map((m) => (
-            <div className={`menu_item ${m.url === location?.pathname && "menu_item_active"}`} key={m.id} onClick={() => navigate(m?.url)}
+            <div className={`menu_item ${location.pathname.includes(m.url) && "menu_item_active"}`} key={m.id} onClick={() => navigate(m?.url)}
 
             >
               <p style={{
-                color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
               }}
               >{m.icon}</p>
               <p style={{
-                color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
               }}>{m.title}</p>
             </div>
           ))}
