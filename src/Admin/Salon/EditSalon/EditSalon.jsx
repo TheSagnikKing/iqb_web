@@ -2,22 +2,25 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./EditSalon.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, DeleteIcon, DropdownIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import Modal from '../../../components/Modal/Modal';
+import toast from 'react-hot-toast';
 
 const EditSalon = () => {
 
   const location = useLocation()
 
   const currentSalon = location?.state
-  console.log(currentSalon)
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+
   const dispatch = useDispatch()
 
   const SalonIconControllerRef = useRef(new AbortController());
@@ -109,58 +112,6 @@ const EditSalon = () => {
       items: 3
     }
   };
-
-
-  const slidedata = [
-    {
-      _id: 1,
-      item: "https://static.vecteezy.com/system/resources/previews/024/284/257/original/beauty-salon-logo-design-free-vector.jpg"
-    },
-    {
-      _id: 2,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
-    },
-    {
-      _id: 3,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo%2C-berber-shop-logo-%282%29-design-template-f3e545ef9d52cb9e7ae3417ce224e7cc_screen.jpg?ts=1670083891"
-    },
-    {
-      _id: 4,
-      item: "https://i.etsystatic.com/25554738/r/il/e41d02/2658645383/il_1080xN.2658645383_98de.jpg"
-    },
-    {
-      _id: 5,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-template-template-design-a9bd85723adce8b0807a304e83ee311c_screen.jpg?ts=1646827983"
-    },
-    {
-      _id: 6,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJ5LX65c_fr-nkD6VUBrkBFmgSgZ3Z5pZmdcpcvpR3BG-qG_c58NAis2_8E7lw6cZtPE&usqp=CAU"
-    },
-    {
-      _id: 7,
-      item: "https://static.vecteezy.com/system/resources/previews/021/966/428/non_2x/beauty-logo-for-woman-logo-can-be-used-for-beauty-salon-cosmetic-spa-premium-vector.jpg"
-    },
-    {
-      _id: 8,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgyasp38zhIQ4j-x0Mo6xgd5SQmykEhuRt2-xOW6-oNw&s"
-    },
-    {
-      _id: 9,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
-    },
-    {
-      _id: 10,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY4Z0Y0uJHZp4dGFLekfimfc19sCFo6QN_reeW56TFuw&s"
-    },
-    {
-      _id: 11,
-      item: "https://pnclogosofficial.s3.us-west-2.amazonaws.com/2020/10/09153501/salon-logos-20-scaled.jpg"
-    },
-    {
-      _id: 12,
-      item: "https://previews.123rf.com/images/butenkow/butenkow1511/butenkow151100071/48324057-beauty-female-face-logo-design-cosmetic-salon-logo-design-creative-woman-face-vector.jpg"
-    },
-  ]
 
 
   const [salonType, setSalonType] = useState(currentSalon?.salonType)
@@ -567,27 +518,27 @@ const EditSalon = () => {
 
     const formData = new FormData();
 
-        formData.append('public_imgid', currentSalonLogoId);
-        formData.append('id', currentSalonLogoMongoId)
-        formData.append('salonLogo', uploadImage)
-        formData.append('salonId', currentSalon?.salonId)
+    formData.append('public_imgid', currentSalonLogoId);
+    formData.append('id', currentSalonLogoMongoId)
+    formData.append('salonLogo', uploadImage)
+    formData.append('salonId', currentSalon?.salonId)
 
 
-        try {
-            const imageResponse = await api.put('/api/salon/updateSalonLogo', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+    try {
+      const imageResponse = await api.put('/api/salon/updateSalonLogo', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-            console.log('Salon Logo Upload success:', imageResponse.data);
-            setSalonLogo(imageUrl)
-        } catch (error) {
-            console.error('Image upload failed:', error);
-        }
+      console.log('Salon Logo Upload success:', imageResponse.data);
+      setSalonLogo(imageUrl)
+    } catch (error) {
+      console.error('Image upload failed:', error);
+    }
   };
 
-  const [salonImages, setSalonImages] = useState(currentSalon?.gallery.map((s) => s.url))
+  const [salonImages, setSalonImages] = useState(currentSalon?.gallery)
 
   const salonImagefileInputRef = useRef(null);
 
@@ -758,7 +709,7 @@ const EditSalon = () => {
       twitterLink,
       appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
-      salonId:currentSalon?.salonId
+      salonId: currentSalon?.salonId
     }
 
     console.log(salondata)
@@ -768,80 +719,100 @@ const EditSalon = () => {
   const adminEditSalon = useSelector(state => state.adminEditSalon)
 
   const {
-    loading:editSalonLoading,
+    loading: editSalonLoading,
     response: editSalonResponse
   } = adminEditSalon
 
+  const [openModal, setOpenModal] = useState(false)
 
-  // useEffect(() => {
-  //   if (editSalonResponse?.salonId) {
-  //     const uploadImageHandler = async () => {
-  //       if (uploadSalonImages != null) {
-  //         const formData = new FormData();
+  const [selectedEditImageObject, setSelectedEditImageObject] = useState({})
 
-  //         const SalonId = editSalonResponse?.salonId;
-  //         formData.append('salonId', SalonId);
+  const selectedSalonImageClicked = async (imgObject) => {
+    setSelectedEditImageObject(imgObject)
+    setOpenModal(true)
+  };
 
-  //         for (const file of uploadSalonImages) {
-  //           formData.append('gallery', file);
-  //         }
+  const currentEditSalonImageInputRef = useRef(null);
 
-  //         try {
-  //           const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
-  //             headers: {
-  //               'Content-Type': 'multipart/form-data',
-  //             },
-  //           });
+  const handleCurrentEditSalonImageButtonClick = () => {
+    currentEditSalonImageInputRef.current.click();
+  };
 
-  //           console.log('Upload success:', imageResponse.data);
+  console.log(selectedEditImageObject)
 
-  //           alert("Image uploaded Successfully")
-  //         } catch (error) {
-  //           console.error('Image upload failed:', error);
-  //           setSalonImages([]);
-  //           setUploadSalonImages([])
-  //         }
-  //       }
-  //     };
+  const handleEditSelectedImageFileInputChange = async (e) => {
+    const uploadImage = e.target.files[0]; // Get the uploaded file
 
-  //     uploadImageHandler();
-  //   }
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-  //   //For Salon Logo
-  //   if (editSalonResponse?.salonId) {
-  //     const uploadImageHandler = async () => {
-  //       if (uploadSalonLogo != null) {
-  //         const formData = new FormData();
+    if (!allowedTypes.includes(uploadImage.type)) {
+      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
 
-  //         const SalonId = editSalonResponse?.salonId;
+    console.log(uploadImage)
 
-  //         if (SalonId) {
-  //           formData.append('salonId', SalonId);
-  //           formData.append('salonLogo', uploadSalonLogo);
+    if (uploadImage != null) {
+      const formData = new FormData();
 
-  //           try {
-  //             const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
-  //               headers: {
-  //                 'Content-Type': 'multipart/form-data',
-  //               },
-  //             });
+      formData.append('public_imgid', selectedEditImageObject?.public_id);
+      formData.append('id', selectedEditImageObject?._id)
+      formData.append('gallery', uploadImage)
 
-  //             console.log('Upload success:', imageResponse.data);
-  //             alert("Salon Logo uploaded Successfully")
-  //           } catch (error) {
-  //             console.error('Image upload failed:', error);
-  //             setSalonLogo("")
-  //             setUploadSalonLogo("")
-  //           }
-  //         }
+      try {
+        await api.put('/api/salon/updateSalonImages', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-  //       }
-  //     };
+        toast.success("Image updated successfully", {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      } catch (error) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }
+    }
+  }
 
-  //     uploadImageHandler();
-  //   }
+  const deleteEditImageHandler = async(imgObj) => {
+    if (window.confirm("Are you sure ?")) {
+      try {
+        await api.delete("/api/salon/deleteSalonImages", {
+          data: {
+            public_id: imgObj?.public_id,
+            img_id: imgObj?._id
+          }
+        })
 
-  // }, [editSalonResponse?.salonId]);
+
+      } catch (error) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }
+    }
+  }
 
   return (
     <div className='edit_salon_wrapper'>
@@ -956,7 +927,7 @@ const EditSalon = () => {
           <div>
             {
               salonImages.map((s, index) => (
-                <div key={index}><img src={s} alt="" /></div>
+                <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s.url} alt="" /></div>
               ))
             }
           </div>
@@ -1448,17 +1419,44 @@ const EditSalon = () => {
           </div>
 
           <div>
-          {
+            {
               editSalonLoading ? <button style={{
-                display:"grid",
-                placeItems:"center"
-              }}><ButtonLoader/></button> : <button onClick={editSalonHandler}>Update</button>
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={editSalonHandler}>Update</button>
             }
-            
+
           </div>
 
         </div>
       </div>
+
+      {
+        openModal && <Modal setOpenModal={setOpenModal}>
+          <div>
+            <img src={selectedEditImageObject?.url} alt="salon_image" />
+          </div>
+          <div>
+            <div>
+              <button onClick={() => deleteEditImageHandler(selectedEditImageObject)}>
+                <div><DeleteIcon /></div>
+                <p>Delete</p>
+              </button>
+              <button onClick={() => handleCurrentEditSalonImageButtonClick()}>
+                <div><EditIcon /></div>
+                <p>Edit</p>
+
+                <input
+                  type="file"
+                  ref={currentEditSalonImageInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleEditSelectedImageFileInputChange}
+                />
+              </button>
+            </div>
+          </div>
+        </Modal>
+      }
     </div>
   )
 }
