@@ -10,6 +10,8 @@ import api from '../../Redux/api/Api';
 import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
+import Modal from '../../components/Modal/Modal';
+import toast from 'react-hot-toast';
 
 const EditProfile = () => {
 
@@ -163,13 +165,40 @@ const EditProfile = () => {
         dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState(adminProfile?.password)
+    const [confirmPassword, setConfirmPassword] = useState("")
 
     const adminUpdateProfile = useSelector(state => state.adminUpdateProfile)
 
     const {
         loading: adminUpdateProfileLoading,
     } = adminUpdateProfile
+
+    const [openModal, setOpenModal] = useState(true)
+
+    const updatePasswordHandler = () => {
+        if (password !== confirmPassword) {
+            toast.error("Password donot match", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '1rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        } else {
+            toast.success("Password matched successfully", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '1rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+    }
 
     return (
         <div className='admin_edit_profile'>
@@ -217,15 +246,42 @@ const EditProfile = () => {
                                 />
                             </div>
 
-                            <div>
+                            <div onClick={() => setOpenModal(true)}>
                                 <p>Password</p>
                                 <input
                                     type="text"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    value="********"
                                 />
                             </div>
+                            {
+                                openModal && <Modal setOpenModal={setOpenModal}>
+                                    <div className='password_modal_container'>
+                                        <h1>Change your password</h1>
 
+                                        <div>
+                                            <p>Password</p>
+                                            <input
+                                                type="text"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <p>Confirm Password</p>
+                                            <input
+                                                type="text"
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <button onClick={updatePasswordHandler}>Update</button>
+                                        </div>
+                                    </div>
+                                </Modal>
+                            }
                         </div>
                     )
                 }
@@ -242,6 +298,7 @@ const EditProfile = () => {
                                 background: changeEmailVerifiedState ? "limegreen" : "red"
                             }}>
                                 <div>{changeEmailVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
+
                             </button>
                         </div>
                     </div>
@@ -320,8 +377,8 @@ const EditProfile = () => {
                                     <p>An email with a verification code was just sent to your email address</p>
 
                                     <div>
-                                        <p>arghy@gmail.com</p>
-                                        <button>change</button>
+                                        <p>{adminProfile?.email}</p>
+                                        <button onClick={verifyEmailStatusClicked}>Verify</button>
                                     </div>
 
                                     <div>
@@ -339,10 +396,6 @@ const EditProfile = () => {
                                                 ></input>
                                             ))
                                         }
-                                    </div>
-
-                                    <div>
-                                        <button onClick={verifyEmailStatusClicked}>Verify</button>
                                     </div>
                                 </div>
                             </div>

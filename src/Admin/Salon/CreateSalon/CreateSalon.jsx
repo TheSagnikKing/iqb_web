@@ -12,6 +12,7 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../../components/Modal/Modal';
 import { GET_ADMIN_SALONLIST_SUCCESS } from '../../../Redux/Admin/Constants/constants';
 import toast from 'react-hot-toast';
+import { PhoneInput } from 'react-international-phone';
 
 const CreateSalon = () => {
 
@@ -174,6 +175,8 @@ const CreateSalon = () => {
     setSalonTypeDrop(false)
   }
 
+  const [countryCurrency, setCountryCurrency] = useState("")
+
   const [country, setCountry] = useState("")
   const [countryDrop, setCountryDrop] = useState(false)
   const [countrycode, setCountryCode] = useState("")
@@ -181,6 +184,7 @@ const CreateSalon = () => {
   const setCountryHandler = (value) => {
     setCountryCode(value.countryCode)
     setCountry(value.name)
+    setCountryCurrency(value.currency)
     setCountryDrop(false)
   }
 
@@ -668,7 +672,15 @@ const CreateSalon = () => {
   const addServiceHandler = () => {
 
     if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
-      alert("Please fill all the fields")
+      toast.error("Please fill all the services", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 
@@ -794,7 +806,7 @@ const CreateSalon = () => {
       fbLink,
       instraLink,
       twitterLink,
-      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
+      // appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
       // image:image2
     }
@@ -958,6 +970,8 @@ const CreateSalon = () => {
     setOpenModal(false)
   }
 
+  const [openServices, setOpenServices] = useState(false)
+
   return (
     <div className='create_salon_wrapper'>
       <p>Create Salon</p>
@@ -1063,9 +1077,8 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>Salon Name: Classic Touch</p>
-              <p>City: Athens</p>
-              <p>Country: United States of America</p>
+              <p>{salonName}</p>
+              <p><span>{country}</span>{country && ",  "}<span>{city}</span></p>
             </div>
           </div>
 
@@ -1158,7 +1171,7 @@ const CreateSalon = () => {
               {countryDrop && <div ref={countryDropRef}>
                 {
                   getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
 
                       AllCountries.map((c) => (
@@ -1187,7 +1200,7 @@ const CreateSalon = () => {
               {cityDrop && <div ref={cityDropRef}>
                 {
                   getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
 
                       AllCities.map((c) => (
@@ -1218,7 +1231,7 @@ const CreateSalon = () => {
               {timezoneDrop && <div ref={timezoneDropRef}>
                 {
                   getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
                       AllTimezones.map((c) => (
@@ -1244,7 +1257,7 @@ const CreateSalon = () => {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div>
               <p>Start Time</p>
               <input
@@ -1301,7 +1314,8 @@ const CreateSalon = () => {
                 ))}
               </div>}
             </div>
-          </div>
+          </div> */}
+          <div />
 
           <div>
             <p>Salon Type</p>
@@ -1313,180 +1327,192 @@ const CreateSalon = () => {
             />
 
             {salonTypeDrop && <div ref={salonTypeDropRef}>
-              <p onClick={() => salonTypeHandler("Salon Type 1")}>Salon Type 1</p>
-              <p onClick={() => salonTypeHandler("Salon Type 2")}>Salon Type 2</p>
-              <p onClick={() => salonTypeHandler("Salon Type 3")}>Salon Type 3</p>
+              <p onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</p>
+              <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
             </div>}
           </div>
 
           <div>
-            <p>Contact Tel.</p>
-            <input
-              type="text"
-              value={contactTel}
-              onChange={(e) => setContactTel(e.target.value)}
-            />
-          </div>
-
-          <p>Add Your Services</p>
-
-          <p>Choose your service icon:</p>
-          <div>
+            <p>Mobile Number</p>
             <div>
-              {
-                getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
-                  <div className='create_salon_carousel_loader'>
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                  </div> :
-                  !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
-                    <Carousel
-                      responsive={responsive}
-                      draggable={false}
-                      swipeable={false}
-                    >
-                      {
-                        SalonIcons?.map((s) => (
-                          <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
-                            style={{
-                              border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
-                            }}
-                          >
-                            <img src={s.url} alt="" />
-                          </div>
-                        ))
-                      }
-                    </Carousel> :
-                    !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
-                      <p>No Salon Icons Available</p> :
-                      !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
-                      <p>No Salon Icons Available</p>
-              }
+              <div>
+                <PhoneInput
+                  forceDialCode={true}
+                  defaultCountry="gb"
+                  value={contactTel}
+                  onChange={(phone) => setContactTel(phone)}
+                />
+              </div>
 
             </div>
           </div>
 
-          <div>
-            <p>Service Name</p>
-            <input
-              type="text"
-              value={serviceName}
-              onChange={(e) => setServiceName(e.target.value)}
-            />
+          <div className='add_services_drop'>
+            <p>Add Your Services</p>
+            <div onClick={() => setOpenServices((prev) => !prev)}>{openServices ? "-" : "+"}</div>
           </div>
 
-          <div>
-            <p>Service Desc</p>
-            <input
-              type="text"
-              value={serviceDesc}
-              onChange={(e) => setServiceDesc(e.target.value)}
-            />
-          </div>
+          {
+            openServices &&
+            <main className='add_services_drop_container'>
+              <p>Choose your service icon:</p>
+              <div>
+                <div>
+                  {
+                    getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
+                      <div className='create_salon_carousel_loader'>
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                      </div> :
+                      !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
+                        <Carousel
+                          responsive={responsive}
+                          draggable={false}
+                          swipeable={false}
+                        >
+                          {
+                            SalonIcons?.map((s) => (
+                              <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
+                                style={{
+                                  border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                                }}
+                              >
+                                <img src={s.url} alt="" />
+                              </div>
+                            ))
+                          }
+                        </Carousel> :
+                        !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
+                          <p>No Salon Icons Available</p> :
+                          !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
+                          <p>No Salon Icons Available</p>
+                  }
 
-          <div>
-            <p>Service Type</p>
-            <input
-              type="text"
-              value={`${vipService ? 'Vip' : 'Regular'}`}
-              onClick={() => vipServiceDropHandler()}
-              ref={vipServiceIconRef}
-            />
-
-            {vipServiceDrop && <div ref={vipServiceDropRef}>
-              <p onClick={() => vipServiceHandler(false)}>Regular</p>
-              <p onClick={() => vipServiceHandler(true)}>Vip</p>
-            </div>}
-          </div>
-
-          <div>
-            <div>
-              <p>Service Price</p>
-              <input
-                type="text"
-                value={servicePrice}
-                onChange={(e) => setServicePrice(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={serviceEWT}
-                onChange={(e) => setServiceEWT(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button onClick={addServiceHandler}>Add Service</button>
-          </div>
-
-          <div className='service_container'>
-            {
-              selectedServices.map((ser, index) => (
-
-                <div className='service_container_item' key={index}>
-                  <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
-                  <p>{ser.serviceName}</p>
-                  <p>{ser.serviceDesc}</p>
-                  <p>{ser.serviceType}</p>
-                  <p>${ser.servicePrice}</p>
-                  <p>{ser.serviceEWT}min</p>
-                  <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
                 </div>
-              ))
-            }
-          </div>
+              </div>
 
+              <div>
+                <p>Service Name</p>
+                <input
+                  type="text"
+                  value={serviceName}
+                  onChange={(e) => setServiceName(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <p>Service Desc</p>
+                <input
+                  type="text"
+                  value={serviceDesc}
+                  onChange={(e) => setServiceDesc(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <p>Service Type (*VIP services have top priority in queue)</p>
+                <input
+                  type="text"
+                  value={`${vipService ? 'VIP' : 'Regular'}`}
+                  onClick={() => vipServiceDropHandler()}
+                  ref={vipServiceIconRef}
+                />
+
+                {vipServiceDrop && <div ref={vipServiceDropRef}>
+                  <p onClick={() => vipServiceHandler(false)}>Regular</p>
+                  <p onClick={() => vipServiceHandler(true)}>VIP</p>
+                </div>}
+              </div>
+
+              <div>
+                <div>
+                  <p>Service Price</p>
+                  <input
+                    type="text"
+                    value={servicePrice}
+                    onChange={(e) => setServicePrice(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <p>Est Wait Tm(mins)</p>
+                  <input
+                    type="text"
+                    value={serviceEWT}
+                    onChange={(e) => setServiceEWT(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* <div>
+                <button onClick={addServiceHandler}>Add Service</button>
+              </div>
+
+              <div className='service_container'>
+                {
+                  selectedServices.map((ser, index) => (
+
+                    <div className='service_container_item' key={index}>
+                      <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
+                      <p>{ser.serviceName}</p>
+                      <p>{ser.serviceDesc}</p>
+                      <p>{ser.serviceType}</p>
+                      <p>{countryCurrency}{" "}{ser.servicePrice}</p>
+                      <p>{ser.serviceEWT}min</p>
+                      <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
+                    </div>
+                  ))
+                }
+              </div> */}
+            </main>
+          }
 
           <div className='salon_logo_wrapper'>
             <p>Select Salon Logo</p>

@@ -78,6 +78,7 @@ export const getAdminAllCountriesAction = (countryname) => async (dispatch) => {
             type: ADMIN_GET_ALL_COUNTRIES_SUCCESS,
             payload: data
         })
+
     } catch (error) {
         dispatch({
             type: ADMIN_GET_ALL_COUNTRIES_FAIL,

@@ -6,6 +6,7 @@ import { adminAllSalonServicesAction, adminCreateBarberAction } from '../../../R
 import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import { PhoneInput } from 'react-international-phone';
 
 const CreateBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -16,7 +17,7 @@ const CreateBarber = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
-  const [mobileNumber, setMobileNumber] = useState(null);
+  const [mobileNumber, setMobileNumber] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
 
   const AllSalonServicesControllerRef = useRef(new AbortController());
@@ -122,13 +123,28 @@ const CreateBarber = () => {
         </div>
 
         <div>
-          <div>
+          {/* <div>
             <p>Mobile No.</p>
             <input
               type='text'
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
             />
+          </div> */}
+
+          <div>
+            <p>Mobile Number</p>
+            <div>
+              <div>
+                <PhoneInput
+                  forceDialCode={true}
+                  defaultCountry="gb"
+                  value={mobileNumber}
+                  onChange={(phone) => setMobileNumber(phone)}
+                />
+              </div>
+
+            </div>
           </div>
 
           <div>

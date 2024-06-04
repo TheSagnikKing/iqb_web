@@ -126,6 +126,8 @@ const EditSalon = () => {
     setSalonTypeDrop(false)
   }
 
+  const [countryCurrency, setCountryCurrency] = useState(currentSalon?.currency)
+
   const [country, setCountry] = useState(currentSalon?.country)
   const [countryDrop, setCountryDrop] = useState(false)
   const [countrycode, setCountryCode] = useState("")
@@ -133,6 +135,7 @@ const EditSalon = () => {
   const setCountryHandler = (value) => {
     setCountryCode(value.countryCode)
     setCountry(value.name)
+    setCountryCurrency(value.currency)
     setCountryDrop(false)
   }
 
@@ -634,7 +637,15 @@ const EditSalon = () => {
   const addServiceHandler = () => {
 
     if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
-      alert("Please fill all the fields")
+      toast.error("Please fill all the services", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 
@@ -789,7 +800,7 @@ const EditSalon = () => {
     }
   }
 
-  const deleteEditImageHandler = async(imgObj) => {
+  const deleteEditImageHandler = async (imgObj) => {
     if (window.confirm("Are you sure ?")) {
       try {
         await api.delete("/api/salon/deleteSalonImages", {
@@ -918,9 +929,8 @@ const EditSalon = () => {
             </div>
 
             <div>
-              <p>Salon Name: Classic Touch</p>
-              <p>City: Athens</p>
-              <p>Country: United States of America</p>
+              <p>{salonName}</p>
+              <p><span>{country}</span>{country && ",  "}<span>{city}</span></p>
             </div>
           </div>
 
@@ -1013,7 +1023,7 @@ const EditSalon = () => {
               {countryDrop && <div ref={countryDropRef}>
                 {
                   getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
 
                       AllCountries.map((c) => (
@@ -1042,7 +1052,7 @@ const EditSalon = () => {
               {cityDrop && <div ref={cityDropRef}>
                 {
                   getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
 
                       AllCities.map((c) => (
@@ -1073,7 +1083,7 @@ const EditSalon = () => {
               {timezoneDrop && <div ref={timezoneDropRef}>
                 {
                   getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
-                    <p>Loading...</p> :
+                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
                       AllTimezones.map((c) => (
@@ -1099,7 +1109,7 @@ const EditSalon = () => {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div>
               <p>Start Time</p>
               <input
@@ -1156,7 +1166,8 @@ const EditSalon = () => {
                 ))}
               </div>}
             </div>
-          </div>
+          </div> */}
+          <div />
 
           <div>
             <p>Salon Type</p>
@@ -1168,9 +1179,8 @@ const EditSalon = () => {
             />
 
             {salonTypeDrop && <div ref={salonTypeDropRef}>
-              <p onClick={() => salonTypeHandler("Salon Type 1")}>Salon Type 1</p>
-              <p onClick={() => salonTypeHandler("Salon Type 2")}>Salon Type 2</p>
-              <p onClick={() => salonTypeHandler("Salon Type 3")}>Salon Type 3</p>
+              <p onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</p>
+              <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
             </div>}
           </div>
 
@@ -1297,7 +1307,7 @@ const EditSalon = () => {
 
             {vipServiceDrop && <div ref={vipServiceDropRef}>
               <p onClick={() => vipServiceHandler(false)}>Regular</p>
-              <p onClick={() => vipServiceHandler(true)}>Vip</p>
+              <p onClick={() => vipServiceHandler(true)}>VIP</p>
             </div>}
           </div>
 
@@ -1334,7 +1344,7 @@ const EditSalon = () => {
                   <p>{ser.serviceName}</p>
                   <p>{ser.serviceDesc}</p>
                   <p>{ser.serviceType}</p>
-                  <p>${ser.servicePrice}</p>
+                  <p>{countryCurrency}{" "}{ser.servicePrice}</p>
                   <p>{ser.serviceEWT}min</p>
                   <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
                 </div>
