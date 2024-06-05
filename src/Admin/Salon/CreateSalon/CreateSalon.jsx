@@ -800,7 +800,8 @@ const CreateSalon = () => {
       city,
       timeZone: timezone,
       postCode,
-      contactTel,
+      // contactTel:Number(contactTel),
+      contactTel:"1234567890",
       salonType,
       webLink,
       fbLink,
@@ -1491,7 +1492,7 @@ const CreateSalon = () => {
                 </div>
               </div>
 
-              {/* <div>
+              <div>
                 <button onClick={addServiceHandler}>Add Service</button>
               </div>
 
@@ -1510,7 +1511,7 @@ const CreateSalon = () => {
                     </div>
                   ))
                 }
-              </div> */}
+              </div>
             </main>
           }
 

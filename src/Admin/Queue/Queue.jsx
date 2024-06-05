@@ -45,7 +45,7 @@ const Queue = () => {
       </div>
 
       <div className='admin_queue_content_wrapper'>
-        <div className='admin_queue_content_body'>
+        {/* <div className='admin_queue_content_body'>
           <div>
             <p>Name</p>
             <p>Time Joined Q</p>
@@ -77,7 +77,44 @@ const Queue = () => {
                   >Queue not available</p>
           }
 
-        </div>
+        </div> */}
+
+        {
+          getAllQueueListLoading && !getAllQueueListResolve ? (
+            <div className='admin_queue_content_body'>
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ? (
+            <div className='admin_queue_content_body'>
+              <div>
+                <p>Name</p>
+                <p>Time Joined Q</p>
+                <p>Barber Name</p>
+                <p>Q Postion</p>
+              </div>
+
+              {queuelist.map((b) => (
+                <div className='admin_queue_content_body_item' key={b._id}>
+                  <p>{b.name}</p>
+                  <p>{b.timeJoinedQ}</p>
+                  <p>{b.barberName}</p>
+                  <p>{b.qPosition}</p>
+                </div>
+              ))}
+            </div>
+          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ? (
+            <div className='admin_queue_content_body_error'>
+              <p style={{ margin: "2rem" }}>Queue not available</p>
+            </div>
+          ) : (
+            !getAllQueueListLoading && !getAllQueueListResolve && (
+              <div className='admin_queue_content_body_error'>
+                <p style={{ margin: "2rem" }}>Queue not available</p>
+              </div>
+            )
+          )
+        }
+
       </div>
     </div>
   )

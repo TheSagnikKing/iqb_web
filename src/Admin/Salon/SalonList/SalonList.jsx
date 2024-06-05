@@ -17,7 +17,7 @@ const SalonList = () => {
 
   const createSalonClicked = () => {
     dispatch({
-      type:"ADMIN_CREATE_SALON_SUCCESS",
+      type: "ADMIN_CREATE_SALON_SUCCESS",
     })
     navigate("/admin-salon/createsalon")
   }
@@ -84,20 +84,21 @@ const SalonList = () => {
       </div>
 
       <div className='salon_content_wrapper'>
-        <div className='salon_content_body'>
-          <div>
-            <p>Salon Name</p>
-            <p>Address</p>
-            <p>City</p>
-          </div>
 
-          {
-            getAdminSalonListLoading && !getAdminSalonListResolve ?
-              <>
-                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
-              </> :
-              !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
-                SalonList.map((s) => (
+        {
+          getAdminSalonListLoading && !getAdminSalonListResolve ? (
+            <div className='salon_content_body'>
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ? (
+            <div className='salon_content_body'>
+              <div>
+                <p>Salon Name</p>
+                <p>Address</p>
+                <p>City</p>
+              </div>
+
+              {SalonList.map((s) => (
                   <div key={s?._id}>
                     <p>{s?.salonName}</p>
                     <p>{s?.address}</p>
@@ -112,18 +113,20 @@ const SalonList = () => {
                       <div onClick={() => salonappointmentClicked(s)}><Settingsicon /></div>
                     </div>
                   </div>
-                )) :
-                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
-                  <p
-                    style={{ margin: "2rem" }}
-                  >Salons not available</p> :
-                  !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                  <p
-                    style={{ margin: "2rem" }}
-                  >Salons not available</p>
-          }
-
-        </div>
+                ))}
+            </div>
+          ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? (
+            <div className='salon_content_body_error'>
+              <p style={{ margin: "2rem" }}>Salons not available</p>
+            </div>
+          ) : (
+            !getAdminSalonListLoading && !getAdminSalonListResolve && (
+              <div className='salon_content_body_error'>
+                <p style={{ margin: "2rem" }}>Salon not available</p>
+              </div>
+            )
+          )
+        }
       </div>
 
     </div>

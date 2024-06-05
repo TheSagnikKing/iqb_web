@@ -134,13 +134,13 @@ const BarberList = () => {
   const selectAllBarbers = () => {
     setAllCheckbox((prev) => {
       const newCheckboxState = !prev;
-  
+
       if (newCheckboxState) {
         setSelectedAllBarberNotification(BarberList.map((b) => b.email));
       } else {
         setSelectedAllBarberNotification([]);
       }
-  
+
       return newCheckboxState;
     });
   };
@@ -168,28 +168,29 @@ const BarberList = () => {
       </div>
 
       <div className='admin_barber_content_wrapper'>
-        <div className='admin_barber_content_body'>
-          <div>
-            <input
-              type="checkbox"
-              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-              onClick={() => selectAllBarbers()}
-              checked={allCheckbox}
-
-            />
-            <p>Salon ID</p>
-            <p>Barber Name</p>
-            <p>Email</p>
-            <p>isOnline</p>
-          </div>
-
-          {
-            getAdminBarberListLoading && !getAdminBarberListResolve ?
-              <>
+        
+        {
+            getAdminBarberListLoading && !getAdminBarberListResolve ? (
+              <div className='admin_barber_content_body'>
                 <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
-              </> :
-              !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ?
-                BarberList.map((b) => (
+              </div>
+            ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
+              <div className='admin_barber_content_body'>
+                <div>
+                  <input
+                    type="checkbox"
+                    style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                    onClick={() => selectAllBarbers()}
+                    checked={allCheckbox}
+
+                  />
+                  <p>Salon ID</p>
+                  <p>Barber Name</p>
+                  <p>Email</p>
+                  <p>isOnline</p>
+                </div>
+
+                {BarberList.map((b) => (
                   <div className='admin_barber_content_body_item' key={b._id}>
                     <input
                       type="checkbox"
@@ -232,18 +233,21 @@ const BarberList = () => {
                       <div onClick={() => deleteButtonClicked(b)}><DeleteIcon /></div>
                     </div>
                   </div>
-                )) :
-                !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ?
-                  <p
-                    style={{ margin: "2rem" }}
-                  >Barbers not available</p> :
-                  !getAdminBarberListLoading && !getAdminBarberListResolve &&
-                  <p
-                    style={{ margin: "2rem" }}
-                  >Barbers not available</p>
-          }
+                ))}
 
-        </div>
+              </div>
+            ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
+              <div className='barber_content_body_error'>
+                <p style={{ margin: "2rem" }}>Barbers not available</p>
+              </div>
+            ) : (
+              !getAdminBarberListLoading && !getAdminBarberListResolve && (
+                <div className='barber_content_body_error'>
+                  <p style={{ margin: "2rem" }}>Barbers not available</p>
+                </div>
+              )
+            )
+          }
       </div>
     </div>
   )

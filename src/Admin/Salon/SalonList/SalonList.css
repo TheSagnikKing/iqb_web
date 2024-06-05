@@ -178,6 +178,13 @@
     color: var(--primary-text-light-color1);
 }
 
+.salon_content_body_error{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .salon_content_wrapper{

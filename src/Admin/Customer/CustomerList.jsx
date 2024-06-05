@@ -16,7 +16,7 @@ const CustomerList = () => {
     const controller = new AbortController();
     CustomerListControllerRef.current = controller;
 
-    dispatch(adminGetAllCustomerListAction(currentsalonId,controller.signal));
+    dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
 
     return () => {
       if (CustomerListControllerRef.current) {
@@ -49,58 +49,61 @@ const CustomerList = () => {
       </div>
 
       <div className='customer_content_wrapper'>
-        <div className='customer_content_body'>
-          <div>
-            <input
-              type="checkbox"
-              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-            />
-            <p>Salon ID</p>
-            <p>Name</p>
-            <p>Email</p>
-            <p>Gender</p>
-            <p>Mobile Number</p>
-          </div>
+        {
+          adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
+            <div className='customer_content_body'>
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
+            <div className='customer_content_body'>
+              <div>
+                <input
+                  type="checkbox"
+                  style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                />
+                <p>Salon ID</p>
+                <p>Name</p>
+                <p>Email</p>
+                <p>Gender</p>
+                <p>Mobile Number</p>
+              </div>
 
-          {
-            adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ?
-              <>
-                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
-              </> :
-              !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ?
-                AllCustomerList.map((s) => (
-                  <div key={s._id}>
-                    <input
-                      type="checkbox"
-                      style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-                    />
-                    <p>{s.salonId}</p>
-                    <p>{s.name}</p>
-                    <p>{s.email}</p>
-                    <p>{s.gender}</p>
-                    <p>{s.mobileNumber}</p>
-                    <div>
-                      <div><Notificationicon /></div>
-                    </div>
-                    <div>
-                      <div><EmailIcon /></div>
-                    </div>
-                    <div>
-                      <div><MessageIcon /></div>
-                    </div>
+              {AllCustomerList.map((s) => (
+                <div key={s._id}>
+                  <input
+                    type="checkbox"
+                    style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                  />
+                  <p>{s.salonId}</p>
+                  <p>{s.name}</p>
+                  <p>{s.email}</p>
+                  <p>{s.gender}</p>
+                  <p>{s.mobileNumber}</p>
+                  <div>
+                    <div><Notificationicon /></div>
                   </div>
-                )) :
-                !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length == 0 ? 
-                <p 
-                style={{margin:"2rem"}}
-                >Customers not available</p> :
-                !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve &&
-                <p 
-                style={{margin:"2rem"}}
-                >Customers not available</p>
-          }
+                  <div>
+                    <div><EmailIcon /></div>
+                  </div>
+                  <div>
+                    <div><MessageIcon /></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
+            <div className='customer_content_body_error'>
+              <p style={{ margin: "2rem" }}>Customers not available</p>
+            </div>
+          ) : (
+            !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve && (
+              <div className='customer_content_body_error'>
+                <p style={{ margin: "2rem" }}>Customers not available</p>
+              </div>
+            )
+          )
+        }
 
-        </div>
       </div>
 
       <div className='customer_pagination_wrapper'>

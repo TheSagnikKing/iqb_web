@@ -255,6 +255,13 @@
     color: #fff;
 }
 
+.admin_queue_content_body_error{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_queue_content_wrapper{
         width: calc(100vw - 2rem);
