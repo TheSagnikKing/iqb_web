@@ -171,10 +171,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (currentDate) {
-      const formattedDate = currentDate?.toISOString()
+      const formattedDate = currentDate?.toISOString().split("T")[0]
 
       const controller = new AbortController();
       appointmentlistcontrollerRef.current = controller;
+
+      console.log(formattedDate)
 
       dispatch(getDashboardAppointmentListAction(salonId, formattedDate, controller.signal));
 
@@ -252,7 +254,7 @@ const Dashboard = () => {
               <div>
               </div>
             </div>
-            {
+            {/* {
               getAllQueueListLoading && !getAllQueueListResolve ?
                 <div>
                   <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
@@ -291,8 +293,77 @@ const Dashboard = () => {
                     <div style={{
                       fontSize: "1.6rem"
                     }}><p>Queue not available </p></div>
+            } */}
+            {/* <Link to="/admin-queuelist">See All</Link> */}
+
+            {
+              getAllQueueListLoading && !getAllQueueListResolve ?
+                <div>
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                </div> :
+                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
+                  <>
+                    <div className='queuelist_container'>
+                      <div>
+                        <p>Customer Name</p>
+                        <p>Barber Name</p>
+                        <p>Q Position</p>
+                        <p>Services</p>
+                      </div>
+                      <div>
+                        {
+                          queuelist?.map((q) => (
+                            <div key={q._id}>
+                              <p>{q.name}</p>
+                              <p>{q.barberName}</p>
+                              <p>{q.qPosition}</p>
+                              <p>{q.services?.map((s) => s.serviceName)}</p>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    </div>
+                    <Link to="/admin-queue" style={{ fontSize: "1.2rem" }}>See All</Link>
+                  </> :
+                  !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
+                    <div className='queuelist_container_error'><p>Queue List not available</p></div> :
+                    !getAllQueueListLoading && !getAllQueueListResolve &&
+                    <div className='queuelist_container_error'><p>Queue List not available</p></div>
             }
-            <Link to="/admin-queuelist">See All</Link>
+
+            {/* <div className='queuelist_container'>
+              <div>
+                <p>Customer Name</p>
+                <p>Barber Name</p>
+                <p>Q Position</p>
+                <p>Services</p>
+              </div>
+              <div>
+                <div>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                  <p>Q Position</p>
+                  <p>Services</p>
+                </div>
+                <div>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                  <p>Q Position</p>
+                  <p>Services</p>
+                </div>
+                <div>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                  <p>Q Position</p>
+                  <p>Services</p>
+                </div>
+              </div>
+            </div>
+            <Link to="/admin-queue" style={{ fontSize: "1.2rem" }}>See All</Link> */}
+
+            {/* <div className='queuelist_container_error'><p>Queue List not available</p></div> */}
           </div>
         </div>
 
@@ -445,20 +516,19 @@ const Dashboard = () => {
           <div>
             <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
             <div>
-              <div>
-                <div>
-                  <p>Timeslots</p>
-                  <p>Customer Name</p>
-                  <p>Barber Name</p>
-                </div>
-                <div>
-                  {
-                    getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
-                      <Skeleton count={4}
-                        className='dashboard_appointment_loader'
-                      /> :
-                      !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
-                        appointmentList.map((a, index) => (
+
+              {
+                getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
+                  <div><Skeleton count={5} className='dashboard_appointment_loader' /></div> :
+                  !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
+                    <div>
+                      <div>
+                        <p>Timeslots</p>
+                        <p>Customer Name</p>
+                        <p>Barber Name</p>
+                      </div>
+                      <div>
+                        {appointmentList.map((a, index) => (
                           <div key={index}>
                             <p>{a.timeSlots}</p>
                             <p>{a.customerName}</p>
@@ -466,24 +536,15 @@ const Dashboard = () => {
                             <button>Follow Up</button>
                             <div><Threeverticaldots /></div>
                           </div>
-                        )) :
-                        !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length == 0 ?
-                          <p
-                            style={{
-                              fontSize: "1.6rem",
-                              margin: "1rem"
-                            }}
-                          >Appointments not availables</p> :
-                          !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
-                          <p
-                            style={{
-                              fontSize: "1.6rem",
-                              margin: "1rem"
-                            }}
-                          >Appointments not available</p>
-                  }
-                </div>
-              </div>
+                        ))}
+                      </div>
+                    </div> :
+                    !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length === 0 ?
+                      <div className='dashboard_appointment_error'><p>Appointments not available</p></div> :
+                      !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
+                      <div className='dashboard_appointment_error'><p>Appointments not available</p></div>
+              }
+
             </div>
           </div>
         </div>

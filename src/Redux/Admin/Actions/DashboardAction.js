@@ -116,20 +116,20 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
             payload: data
         })
     } catch (error) {
-            dispatch({
-                type: SALON_ONLINE_STATUS_FAIL,
-                payload: error?.response?.data
-            });
+        dispatch({
+            type: SALON_ONLINE_STATUS_FAIL,
+            payload: error?.response?.data
+        });
 
-            toast.error(error?.response?.data?.message, {
-                duration: 3000,
-                style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
     }
 }
 
