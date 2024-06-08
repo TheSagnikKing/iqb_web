@@ -802,8 +802,7 @@ const CreateSalon = () => {
       city,
       timeZone: timezone,
       postCode,
-      // contactTel:Number(contactTel),
-      contactTel: "1234567890",
+      contactTel:Number(contactTel),
       salonType,
       webLink,
       fbLink,
@@ -1116,20 +1115,20 @@ const CreateSalon = () => {
 
         <div>
           <div>
-            <p>Salon Email</p>
-            <input
-              type="text"
-              value={salonEmail}
-              onChange={(e) => setSalonEmail(e.target.value)}
-            />
-          </div>
-
-          <div>
             <p>Salon Name</p>
             <input
               type="text"
               value={salonName}
               onChange={(e) => setSalonName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p>Salon Email</p>
+            <input
+              type="text"
+              value={salonEmail}
+              onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
 
@@ -1229,7 +1228,6 @@ const CreateSalon = () => {
               <input
                 type="text"
                 value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
                 onClick={() => timezoneDropHandler()}
                 ref={timezoneinputRef}
               />
@@ -1355,7 +1353,7 @@ const CreateSalon = () => {
 
           <div className='add_services_drop'>
             <p>Add Your Services</p>
-            <div onClick={() => setOpenServices((prev) => !prev)}>{openServices ? "-" : "+"}</div>
+            <button onClick={() => setOpenServices((prev) => !prev)} disabled={country == ""}>{openServices ? "-" : "+"}</button>
           </div>
 
           {
@@ -1509,8 +1507,8 @@ const CreateSalon = () => {
                       <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
                       <p style={{ minWidth: "1fr", maxWidth: "27rem" }}>{ser.serviceDesc}</p>
                       <p>{ser.vipService ? "VIP" : "Regular"}</p>
-                      <p style={{ minWidth: "0.3fr", maxWidth: "5rem" }}>{countryCurrency}{" "}{ser.servicePrice}</p>
-                      <p style={{ minWidth: "0.3fr", maxWidth: "5rem" }}>{ser.serviceEWT}min</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{countryCurrency}{" "}{ser.servicePrice}</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{ser.serviceEWT}min</p>
                       <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
                     </div>
                   ))

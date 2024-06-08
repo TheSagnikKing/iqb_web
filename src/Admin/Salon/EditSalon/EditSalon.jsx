@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../../components/Modal/Modal';
 import toast from 'react-hot-toast';
+import { PhoneInput } from 'react-international-phone';
 
 const EditSalon = () => {
 
@@ -77,8 +78,8 @@ const EditSalon = () => {
   const [address, setAddress] = useState(currentSalon?.address)
 
   const [postCode, setPostCode] = useState(currentSalon?.postCode)
-  const [contactTel, setContactTel] = useState(currentSalon?.contactTel)
-
+  const [contactTel, setContactTel] = useState(currentSalon?.contactTel.toString())
+  // currentSalon?.contactTel
   const [webLink, setWebLink] = useState(currentSalon?.webLink)
   const [fbLink, setFbLink] = useState(currentSalon?.fbLink)
   const [twitterLink, setTwitterLink] = useState(currentSalon?.twitterLink)
@@ -712,13 +713,13 @@ const EditSalon = () => {
       city,
       timeZone: timezone,
       postCode,
-      contactTel,
+      contactTel: Number(contactTel),
       salonType,
       webLink,
       fbLink,
       instraLink,
       twitterLink,
-      appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
+      // appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
       salonId: currentSalon?.salonId
     }
@@ -750,6 +751,7 @@ const EditSalon = () => {
   };
 
   console.log(selectedEditImageObject)
+  // console.log("vsdvsdvsdvsd",salonImages)
 
   const handleEditSelectedImageFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
@@ -761,8 +763,6 @@ const EditSalon = () => {
       return;
     }
 
-    console.log(uploadImage)
-
     if (uploadImage != null) {
       const formData = new FormData();
 
@@ -771,11 +771,21 @@ const EditSalon = () => {
       formData.append('gallery', uploadImage)
 
       try {
-        await api.put('/api/salon/updateSalonImages', formData, {
+        const { data: responseimage } = await api.put('/api/salon/updateSalonImages', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
+        
+        if (responseimage) {
+          const updatedImages = salonImages.map((image) =>
+            image._id === responseimage?.response?._id
+              ? { ...image, public_id: responseimage?.response?.public_id, url: responseimage?.response?.url, _id: responseimage?.response?._id }
+              : image
+          );
+          setSalonImages(updatedImages);
+          setOpenModal(false)
+        } 
 
         toast.success("Image updated successfully", {
           duration: 3000,
@@ -800,16 +810,30 @@ const EditSalon = () => {
     }
   }
 
+  console.log(salonImages)
+
   const deleteEditImageHandler = async (imgObj) => {
     if (window.confirm("Are you sure ?")) {
       try {
-        await api.delete("/api/salon/deleteSalonImages", {
+        const { data: responseimage } = await api.delete("/api/salon/deleteSalonImages", {
           data: {
             public_id: imgObj?.public_id,
             img_id: imgObj?._id
           }
         })
 
+        setSalonImages((images) => images.filter((image) => image._id !== responseimage?.response?._id))
+        setOpenModal(false)
+
+        toast.success("Image deleted successfully", {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
 
       } catch (error) {
         toast.error(error?.response?.data?.message, {
@@ -825,12 +849,15 @@ const EditSalon = () => {
     }
   }
 
+  const [openServices, setOpenServices] = useState(false)
+
   return (
     <div className='edit_salon_wrapper'>
       <p>Edit Salon</p>
       <div className='edit_salon_content_wrapper'>
         <div>
           <div>
+            {/* <div><img src={salonImages[0]} alt="" /></div> */}
             <div><svg xmlns="http://www.w3.org/2000/svg" width="100%">
               <rect fill="#ffffff" width="540" height="450"></rect>
               <defs>
@@ -935,6 +962,25 @@ const EditSalon = () => {
           </div>
 
           <div>
+            <p>Gallery</p>
+            {/* <button
+              className='salon_upload_button'
+              onClick={() => handleSalonImageButtonClick()}
+            >
+              <div><Uploadicon /></div>
+              <p>Salon Images</p>
+
+              <input
+                type="file"
+                ref={salonImagefileInputRef}
+                style={{ display: 'none' }}
+                multiple
+                onChange={handleSalonImageFileInputChange}
+              />
+            </button> */}
+          </div>
+
+          <div>
             {
               salonImages.map((s, index) => (
                 <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s.url} alt="" /></div>
@@ -942,40 +988,24 @@ const EditSalon = () => {
             }
           </div>
 
-          <button
-            className='salon_upload_button'
-            onClick={() => handleSalonImageButtonClick()}
-          >
-            <div><Uploadicon /></div>
-            <p>Salon Images</p>
-
-            <input
-              type="file"
-              ref={salonImagefileInputRef}
-              style={{ display: 'none' }}
-              multiple
-              onChange={handleSalonImageFileInputChange}
-            />
-          </button>
-
         </div>
 
         <div>
-          <div>
-            <p>Salon Email</p>
-            <input
-              type="text"
-              value={salonEmail}
-              onChange={(e) => setSalonEmail(e.target.value)}
-            />
-          </div>
-
           <div>
             <p>Salon Name</p>
             <input
               type="text"
               value={salonName}
               onChange={(e) => setSalonName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p>Salon Email</p>
+            <input
+              type="text"
+              value={salonEmail}
+              onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
 
@@ -1075,7 +1105,6 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
                 onClick={() => timezoneDropHandler()}
                 ref={timezoneinputRef}
               />
@@ -1185,15 +1214,187 @@ const EditSalon = () => {
           </div>
 
           <div>
-            <p>Contact Tel.</p>
-            <input
-              type="text"
-              value={contactTel}
-              onChange={(e) => setContactTel(e.target.value)}
-            />
+            <p>Mobile Number</p>
+            <div>
+              <div>
+                <PhoneInput
+                  forceDialCode={true}
+                  defaultCountry="gb"
+                  value={contactTel}
+                  onChange={(phone) => setContactTel(phone)}
+                />
+              </div>
+
+            </div>
           </div>
 
-          <p>Add Your Services</p>
+          <div className='add_services_drop'>
+            <p>Add Your Services</p>
+            <button onClick={() => setOpenServices((prev) => !prev)} disabled={country == ""}>{openServices ? "-" : "+"}</button>
+          </div>
+
+          {
+            openServices &&
+            <main className='add_services_drop_container'>
+              <p>Choose your service icon:</p>
+              <div>
+                <div>
+                  {
+                    getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
+                      <div className='create_salon_carousel_loader'>
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                        <Skeleton count={1}
+                          height={"9rem"}
+                          width={"9rem"}
+                          style={{
+                            borderRadius: "1rem"
+                          }}
+                        />
+                      </div> :
+                      !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
+                        <Carousel
+                          responsive={responsive}
+                          draggable={false}
+                          swipeable={false}
+                        >
+                          {
+                            SalonIcons?.map((s) => (
+                              <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
+                                style={{
+                                  border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                                }}
+                              >
+                                <img src={s.url} alt="" />
+                              </div>
+                            ))
+                          }
+                        </Carousel> :
+                        !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
+                          <p>No Salon Icons Available</p> :
+                          !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
+                          <p>No Salon Icons Available</p>
+                  }
+
+                </div>
+              </div>
+
+              <div>
+                <p>Service Name</p>
+                <input
+                  type="text"
+                  value={serviceName}
+                  onChange={(e) => setServiceName(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <p>Service Desc</p>
+                <input
+                  type="text"
+                  value={serviceDesc}
+                  onChange={(e) => setServiceDesc(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <p>Service Type (*VIP services have top priority in queue)</p>
+                <input
+                  type="text"
+                  value={`${vipService ? 'VIP' : 'Regular'}`}
+                  onClick={() => vipServiceDropHandler()}
+                  ref={vipServiceIconRef}
+                />
+
+                {vipServiceDrop && <div ref={vipServiceDropRef}>
+                  <p onClick={() => vipServiceHandler(false)}>Regular</p>
+                  <p onClick={() => vipServiceHandler(true)}>VIP</p>
+                </div>}
+              </div>
+
+              <div>
+                <div>
+                  <p>Service Price</p>
+                  <input
+                    type="text"
+                    value={servicePrice}
+                    onChange={(e) => setServicePrice(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <p>Est Wait Tm(mins)</p>
+                  <input
+                    type="text"
+                    value={serviceEWT}
+                    onChange={(e) => setServiceEWT(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <button onClick={addServiceHandler} className='add_service_btn'>Add Service</button>
+              </div>
+
+              <div className='service_container'>
+                {
+                  selectedServices.map((ser, index) => (
+                    <div className='service_container_item' key={index}>
+                      <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
+                      <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
+                      <p style={{ minWidth: "1fr", maxWidth: "27rem" }}>{ser.serviceDesc}</p>
+                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{countryCurrency}{" "}{ser.servicePrice}</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{ser.serviceEWT}min</p>
+                      <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
+                    </div>
+                  ))
+                }
+              </div>
+            </main>
+          }
+
+          {/* <p>Add Your Services</p>
 
           <p>Choose your service icon:</p>
           <div>
@@ -1350,7 +1551,7 @@ const EditSalon = () => {
                 </div>
               ))
             }
-          </div>
+          </div> */}
 
 
           <div className='salon_logo_wrapper'>
@@ -1433,7 +1634,9 @@ const EditSalon = () => {
               editSalonLoading ? <button style={{
                 display: "grid",
                 placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={editSalonHandler}>Update</button>
+              }}
+                className='submit_btn'
+              ><ButtonLoader /></button> : <button onClick={editSalonHandler} className='submit_btn'>Update</button>
             }
 
           </div>
