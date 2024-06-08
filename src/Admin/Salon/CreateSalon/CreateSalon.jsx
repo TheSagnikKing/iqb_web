@@ -669,6 +669,8 @@ const CreateSalon = () => {
 
   const [selectedServices, setSelectedServices] = useState([])
 
+  console.log("Hello seer", selectedServices)
+
   const addServiceHandler = () => {
 
     if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
@@ -801,7 +803,7 @@ const CreateSalon = () => {
       timeZone: timezone,
       postCode,
       // contactTel:Number(contactTel),
-      contactTel:"1234567890",
+      contactTel: "1234567890",
       salonType,
       webLink,
       fbLink,
@@ -1084,28 +1086,31 @@ const CreateSalon = () => {
           </div>
 
           <div>
+            <p>Gallery</p>
+            <button
+              className='salon_upload_button'
+              onClick={() => handleSalonImageButtonClick()}
+            >
+              <div><Uploadicon /></div>
+              <p>Salon Images</p>
+
+              <input
+                type="file"
+                ref={salonImagefileInputRef}
+                style={{ display: 'none' }}
+                multiple
+                onChange={handleSalonImageFileInputChange}
+              />
+            </button>
+          </div>
+
+          <div>
             {
               salonImages.map((s, index) => (
                 <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s?.blobUrl} alt="" /></div>
               ))
             }
           </div>
-
-          <button
-            className='salon_upload_button'
-            onClick={() => handleSalonImageButtonClick()}
-          >
-            <div><Uploadicon /></div>
-            <p>Salon Images</p>
-
-            <input
-              type="file"
-              ref={salonImagefileInputRef}
-              style={{ display: 'none' }}
-              multiple
-              onChange={handleSalonImageFileInputChange}
-            />
-          </button>
 
         </div>
 
@@ -1493,20 +1498,19 @@ const CreateSalon = () => {
               </div>
 
               <div>
-                <button onClick={addServiceHandler}>Add Service</button>
+                <button onClick={addServiceHandler} className='add_service_btn'>Add Service</button>
               </div>
 
               <div className='service_container'>
                 {
                   selectedServices.map((ser, index) => (
-
                     <div className='service_container_item' key={index}>
                       <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
-                      <p>{ser.serviceName}</p>
-                      <p>{ser.serviceDesc}</p>
-                      <p>{ser.serviceType}</p>
-                      <p>{countryCurrency}{" "}{ser.servicePrice}</p>
-                      <p>{ser.serviceEWT}min</p>
+                      <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
+                      <p style={{ minWidth: "1fr", maxWidth: "27rem" }}>{ser.serviceDesc}</p>
+                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "5rem" }}>{countryCurrency}{" "}{ser.servicePrice}</p>
+                      <p style={{ minWidth: "0.3fr", maxWidth: "5rem" }}>{ser.serviceEWT}min</p>
                       <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
                     </div>
                   ))
@@ -1595,7 +1599,7 @@ const CreateSalon = () => {
               createSalonLoading ? <button style={{
                 display: "grid",
                 placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={createSalonHandler}>Submit</button>
+              }}><ButtonLoader /></button> : <button onClick={createSalonHandler} className='submit_btn'>Create</button>
             }
           </div>
 
