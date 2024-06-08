@@ -168,7 +168,6 @@ const BarberList = () => {
       </div>
 
       <div className='admin_barber_content_wrapper'>
-        
         {
             getAdminBarberListLoading && !getAdminBarberListResolve ? (
               <div className='admin_barber_content_body'>
@@ -248,6 +247,7 @@ const BarberList = () => {
               )
             )
           }
+          
       </div>
     </div>
   )

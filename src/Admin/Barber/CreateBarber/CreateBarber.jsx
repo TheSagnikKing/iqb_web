@@ -74,7 +74,7 @@ const CreateBarber = () => {
 
   const CreateBarberHandler = () => {
     const barberdata = {
-      name, email, nickName, mobileNumber, dateOfBirth,
+      name, email, nickName, mobileNumber:Number(mobileNumber), dateOfBirth,
       salonId,
       barberServices: chooseServices.map(service => ({
         ...service,
