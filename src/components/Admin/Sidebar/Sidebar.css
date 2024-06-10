@@ -234,16 +234,46 @@
   display: none;
 }
 
-
 /* Dark Mode Css */
 
 .content.dark{
   background-color: var(--dark-mode-bg-color-1);
+  transition: 300ms ease;
 }
 
 .content.dark>div>div:nth-child(2){
   background-color: var(--dark-mode-bg-color-1);
+  transition: 300ms ease;
 }
+
+.sidebar.dark{
+  background-color: var(--dark-mode-bg-color-2);
+  border-right: 1px dashed var(--primary-text-light-color1);
+  transition: 300ms ease;
+}
+
+.sidebar_top_salon>p:nth-child(2){
+  color: var(--primary-text-light-color1);
+} 
+
+.menu_item.dark>p:nth-child(1),
+.menu_item.dark>p:nth-child(2){
+  color: var(--primary-text-light-color1);
+}
+
+.menu_item.dark:hover {
+  background-color: var(--dark-mode-bg-color-4);
+  border-right: 6px solid var(--primary-bg-color3);
+}
+
+.menu_item.dark:hover p{
+  color: var(--primary-bg-color3);
+}
+
+.menu_item_active.dark{
+  background-color: var(--dark-mode-bg-color-4);
+}
+
 
 @media screen and (min-width: 0px) and (max-width: 1140px){
   .show {

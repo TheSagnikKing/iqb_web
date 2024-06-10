@@ -12,6 +12,7 @@ import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const EditProfile = () => {
 
@@ -200,9 +201,13 @@ const EditProfile = () => {
         }
     }
 
+    const darkMode = useSelector(darkmodeSelector)
+
+    const darkmodeOn = darkMode === "On"
+
     return (
         <div className='admin_edit_profile'>
-            <div className='admin_edit_profile_content_wrapper'>
+            <div className={`admin_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
                     <p>Edit profile</p>
                     <div>

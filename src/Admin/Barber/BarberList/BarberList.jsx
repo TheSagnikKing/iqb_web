@@ -6,6 +6,7 @@ import { DeleteIcon, EditIcon, Notificationicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const BarberList = () => {
 
@@ -150,8 +151,12 @@ const BarberList = () => {
 
   const [selectedMultiplebarbers, setSelectedMultiplebarbers] = useState([])
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className='admin_barber_wrapper'>
+    <div className={`admin_barber_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Barber List</p>
         <div>
@@ -167,14 +172,15 @@ const BarberList = () => {
         </div>
       </div>
 
-      <div className='admin_barber_content_wrapper'>
+      <div className={`admin_barber_content_wrapper ${darkmodeOn && "dark"}`}>
         {
             getAdminBarberListLoading && !getAdminBarberListResolve ? (
               <div className='admin_barber_content_body'>
-                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
               </div>
             ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
-              <div className='admin_barber_content_body'>
+              <div className={`admin_barber_content_body ${darkmodeOn && "dark"}`}>
                 <div>
                   <input
                     type="checkbox"

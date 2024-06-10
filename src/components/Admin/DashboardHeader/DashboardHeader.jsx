@@ -235,17 +235,17 @@ const DashboardHeader = () => {
 
     const currentmode = darkMode === "Off"
 
-    const darkmode = darkMode === "On"
+    const darkmodeOn = darkMode === "On"
 
     return (
-        <div className={`admin_dashboard_header_wrapper ${darkmode && "dark"}`}>
-            <div className={`choose_salon_div ${darkmode && "dark"}`}>
+        <div className={`admin_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
+            <div className={`choose_salon_div ${darkmodeOn && "dark"}`}>
                 <p>Choose Salon</p>
                 <div>
                     <p>{currentActiveSalon}</p>
                     <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
                     <div
-                        className={`dashboard_salon_list_dropdown ${darkmode && "dark"}`}
+                        className={`dashboard_salon_list_dropdown ${darkmodeOn && "dark"}`}
                         ref={salonlistRef}
                         style={{
                             opacity: salonlistdrop ? "1" : "0",
@@ -325,7 +325,7 @@ const DashboardHeader = () => {
                     </div>
                 </section>
             }
-            <div className={`profile_wrapper ${darkmode && "dark"}`}>
+            <div className={`profile_wrapper ${darkmodeOn && "dark"}`}>
                 <div
                     style={{
                         background: currentmode ? "#FF8A08" : "#000"
@@ -360,7 +360,7 @@ const DashboardHeader = () => {
 
                             {
                                 adminEditDrop && <div ref={adminEditDropRef}
-                                    className="profile_drop_container"
+                                    className={`profile_drop_container ${darkmodeOn && "dark"}`}
                                 >
                                     <div>
                                         <div><ProfileIcon /></div>

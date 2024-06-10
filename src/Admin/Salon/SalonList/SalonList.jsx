@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminDeleteSalonAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 import toast from 'react-hot-toast'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const SalonList = () => {
 
@@ -73,8 +74,12 @@ const SalonList = () => {
     navigate(`/admin-salon/appointment/${salon?.salonId}`, { state: salon })
   }
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className='salon_wrapper'>
+    <div className={`salon_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Salon List</p>
         <button onClick={createSalonClicked}>
@@ -83,15 +88,20 @@ const SalonList = () => {
         </button>
       </div>
 
-      <div className='salon_content_wrapper'>
+      <div className={`salon_content_wrapper ${darkmodeOn && "dark"}`}>
 
         {
           getAdminSalonListLoading && !getAdminSalonListResolve ? (
-            <div className='salon_content_body'>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+            <div className={`salon_content_body ${darkmodeOn && "dark"}`}>
+              <Skeleton
+                count={9}
+                height={"6rem"}
+                baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                style={{ marginBottom: "1rem" }} />
             </div>
           ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ? (
-            <div className='salon_content_body'>
+            <div className={`salon_content_body ${darkmodeOn && "dark"}`}>
               <div>
                 <p>Salon Name</p>
                 <p>Address</p>
@@ -99,21 +109,21 @@ const SalonList = () => {
               </div>
 
               {SalonList.map((s) => (
-                  <div key={s?._id}>
-                    <p>{s?.salonName}</p>
-                    <p>{s?.address}</p>
-                    <p>{s?.city}</p>
-                    <div>
-                      <div onClick={() => editButtonClicked(s)}><EditIcon /></div>
-                    </div>
-                    <div>
-                      <div onClick={() => deleteSalonHandler(s.salonId, s._id)}><DeleteIcon /></div>
-                    </div>
-                    <div>
-                      <div onClick={() => salonappointmentClicked(s)}><Settingsicon /></div>
-                    </div>
+                <div key={s?._id}>
+                  <p>{s?.salonName}</p>
+                  <p>{s?.address}</p>
+                  <p>{s?.city}</p>
+                  <div>
+                    <div onClick={() => editButtonClicked(s)}><EditIcon /></div>
                   </div>
-                ))}
+                  <div>
+                    <div onClick={() => deleteSalonHandler(s.salonId, s._id)}><DeleteIcon /></div>
+                  </div>
+                  <div>
+                    <div onClick={() => salonappointmentClicked(s)}><Settingsicon /></div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? (
             <div className='salon_content_body_error'>

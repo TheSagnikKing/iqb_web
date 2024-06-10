@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import api from '../../Redux/api/Api'
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const SalonAdv = () => {
 
@@ -173,6 +174,10 @@ const SalonAdv = () => {
 
   }
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
     <div className='salonadv_wrapper'>
       <div>
@@ -210,12 +215,18 @@ const SalonAdv = () => {
         {
           getAllAdvertisementLoading && !getAllAdvertisementResolve ?
             <>
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </> :
             !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
               advertisements.map((ad, index) => (

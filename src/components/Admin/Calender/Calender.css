@@ -30,7 +30,7 @@
     height: 3rem;
 }
 .calender-header>div:nth-child(1):hover{
-    background: white;
+    /* background: white; */
     border-radius: none;
 }
 
@@ -58,8 +58,22 @@
     -o-border-radius: 3px;
 }
 .next-month{
-    color: rgba(165, 42, 42, 0.492);
+    color: red;
 }
 
+.calender-header > div:nth-child(1):hover {
+    background-color: none;
+}
 
+/* Dark Mode Css */
 
+.calender-header.dark{
+    background-color: var(--dark-mode-bg-color-4);
+    color: var(--primary-bg-light-color1);
+}
+
+.calender-header.dark>div:nth-child(2):hover,
+.calender-header.dark>div:nth-child(3):hover{
+    background-color: var(--dark-mode-bg-color-1);
+    color: var(--primary-text-light-color1);
+}

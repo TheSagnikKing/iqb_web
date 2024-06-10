@@ -17,3 +17,10 @@
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
+
+/* Dark Css style */
+
+.cells.dark:hover{
+    background-color: var(--dark-mode-bg-color-1);
+    color: var(--primary-text-light-color1);
+}

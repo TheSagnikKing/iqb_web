@@ -1,26 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Header.css"
-import { Adminqueueicon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, Notificationicon, ProfileIcon, Settingsicon } from '../../../icons'
+import { Adminqueueicon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { menudata } from '../menudata.jsx'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction.js'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants.js'
 
 const Header = () => {
 
   const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
   const [loading, setLoading] = useState(false)
-  const [togglecheck, setTogglecheck] = useState(false)
 
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-
-  const toggleHandler = () => {
-    setTogglecheck((prev) => !prev)
-  }
 
   const [sidebarToggle, setSidebarToggle] = useState(false)
 
@@ -83,24 +80,68 @@ const Header = () => {
     navigate("/admin-dashboard/editprofile")
     setAdminEditDrop(false)
   }
+
+  const [check, setCheck] = useState(true);
+  const darkMode = useSelector(darkmodeSelector)
+
+  const [togglecheck, setTogglecheck] = useState(false)
+
+    const toggleHandler = () => {
+        // setTogglecheck((prev) => !prev)
+        setTogglecheck((prev) => {
+            if (!prev) {
+                darkHandler()
+            } else {
+                lightHandler()
+            }
+            return !prev
+        })
+    }
+
+  useEffect(() => {
+    if (localStorage.getItem("dark") === "On") {
+      setCheck(true)
+    } else {
+      setCheck(false)
+    }
+  }, [])
+
+  const darkHandler = () => {
+    setCheck(true)
+    dispatch({ type: DARK_MODE_ON });
+    localStorage.setItem("dark", "On");
+  }
+
+  const lightHandler = () => {
+    setCheck(false)
+    dispatch({ type: DARK_MODE_OFF });
+    localStorage.setItem("dark", "Off");
+  }
+
+
+  const currentmode = darkMode === "Off"
+
+  const darkmodeOn = darkMode === "On"
   return (
     <header className='admin_header_wrapper'>
-      {/* <div>
+      <div>
         <div
           style={{
-            background: togglecheck ? "limegreen" : "#000"
+            background: currentmode ? "limegreen" : "#000"
           }}
         >
-          <p className={`dashboard_toggle_btn_text ${togglecheck ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
+          <p className={`dashboard_toggle_btn_text ${currentmode ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{currentmode ? "Light" : "Dark"}</p>
           <button
-            className={`dashboard_toggle_btn ${togglecheck ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
+            className={`dashboard_toggle_btn ${currentmode ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
             onClick={toggleHandler}
           ></button>
         </div>
-      </div> */}
+      </div>
+
       <div />
 
-      <div className='profile_header_wrapper'>
+      <div className={`profile_header_wrapper ${darkmodeOn && "dark"}`}>
+        
         <div><Notificationicon /></div>
         <div><Settingsicon /></div>
         {
@@ -123,7 +164,7 @@ const Header = () => {
 
               {
                 adminEditDrop && <div ref={adminEditDropRef}
-                  className="profile_drop_container"
+                  className={`profile_drop_container ${darkmodeOn && "dark"}`}
                 >
 
                   <div>

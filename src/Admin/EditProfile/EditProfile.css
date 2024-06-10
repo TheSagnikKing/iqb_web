@@ -20,6 +20,12 @@
     -o-border-radius: 1.7rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     margin-inline: auto;
+    background-color: var(--primary-bg-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_edit_profile_content_wrapper>div {
@@ -387,13 +393,13 @@
 
 .react-international-phone-input-container .react-international-phone-input {
     width: 100%;
-    background-color: var(--bg-color3) !important;
+    background-color: transparent !important;
     min-height: 4rem !important;
     border: none !important;
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-    background-color: var(--bg-color3) !important;
+    background-color: transparent !important;
     min-height: 4rem !important;
     width: 6rem !important;
     border: none !important;
@@ -473,6 +479,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>input {
@@ -631,6 +642,34 @@
     font-size: 1.6rem;
     margin-inline: auto;
     margin-top: 4rem;
+}
+
+.admin_edit_profile_content_wrapper>div:nth-child(3) div>div{
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+/* Dark Css Style */
+
+.admin_edit_profile_content_wrapper.dark{
+    background-color: var(--dark-mode-bg-color-4);
+} 
+
+.admin_edit_profile_content_wrapper.dark>div p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_edit_profile_content_wrapper.dark>div input {
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
+}
+
+.admin_edit_profile_content_wrapper.dark>div:nth-child(3) div>div{
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

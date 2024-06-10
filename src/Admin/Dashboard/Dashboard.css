@@ -30,6 +30,11 @@
     -ms-border-radius: none;
     -o-border-radius: none;
     background-color: none;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_dashboard_page_container>div:nth-child(1) {
@@ -84,6 +89,11 @@
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_dashboard_page_container>div:nth-child(2)>div:nth-child(2)>div:nth-child(1) {
@@ -145,7 +155,11 @@
     padding-block: 3rem;
     padding-inline: 2rem;
     position: relative;
-    /* background-color: red; */
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p {
@@ -375,6 +389,11 @@
     height: calc(100% - 3.8rem);
     border-bottom-left-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_dashboard_page_container>div:nth-child(4)>div:nth-child(2)>div:nth-child(1) {
@@ -467,6 +486,11 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(1) {

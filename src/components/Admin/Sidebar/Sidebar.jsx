@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <main className='container'>
-      <div className={`sidebar ${showSidebar ? "show" : "hide"}`}>
+      <div className={`sidebar ${showSidebar ? "show" : "hide"} ${darkmodeOn && "dark"}`}>
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
@@ -45,7 +45,7 @@ const Sidebar = () => {
 
         <div className='menu_items_container'>
           {menudata.map((m) => (
-            <div className={`menu_item ${location.pathname.includes(m.url) && "menu_item_active"}`} key={m.id} onClick={() => navigate(m?.url)}
+            <div className={`menu_item ${location.pathname.includes(m.url) && `menu_item_active ${darkmodeOn && "dark"}`} ${darkmodeOn && "dark"}`} key={m.id} onClick={() => navigate(m?.url)}
 
             >
               <p style={{

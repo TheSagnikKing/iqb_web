@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
 import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const Queue = () => {
 
@@ -37,6 +38,9 @@ const Queue = () => {
     response: queuelist
   } = getAllQueueList
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
 
   return (
     <div className='admin_queue_wrapper'>
@@ -82,7 +86,8 @@ const Queue = () => {
         {
           getAllQueueListLoading && !getAllQueueListResolve ? (
             <div className='admin_queue_content_body'>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
             </div>
           ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ? (
             <div className='admin_queue_content_body'>

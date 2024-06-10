@@ -4,6 +4,7 @@ import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightA
 import Skeleton from 'react-loading-skeleton'
 import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const CustomerList = () => {
 
@@ -33,11 +34,15 @@ const CustomerList = () => {
     getAllCustomers: AllCustomerList
   } = adminGetAllCustomerList
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className='customer_wrapper'>
+    <div className={`customer_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Customer List</p>
-        <div className='customer_search'>
+        <div className={`customer_search ${darkmodeOn && "dark"}`}>
           <input
             type="text"
             placeholder='Search Customer'
@@ -48,14 +53,15 @@ const CustomerList = () => {
         <div className='mobile_customer_search'><SearchIcon /></div>
       </div>
 
-      <div className='customer_content_wrapper'>
-        {
+      <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
+        {/* {
           adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
             </div>
           ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
-            <div className='customer_content_body'>
+            <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
               <div>
                 <input
                   type="checkbox"
@@ -102,7 +108,42 @@ const CustomerList = () => {
               </div>
             )
           )
-        }
+        } */}
+
+        <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
+          <div>
+            <input
+              type="checkbox"
+              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+            />
+            <p>Salon ID</p>
+            <p>Name</p>
+            <p>Email</p>
+            <p>Gender</p>
+            <p>Mobile Number</p>
+          </div>
+
+            <div>
+              <input
+                type="checkbox"
+                style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+              />
+              <p>salonId</p>
+              <p>name</p>
+              <p>email</p>
+              <p>gender</p>
+              <p>mobileNumber</p>
+              <div>
+                <div><Notificationicon /></div>
+              </div>
+              <div>
+                <div><EmailIcon /></div>
+              </div>
+              <div>
+                <div><MessageIcon /></div>
+              </div>
+            </div>
+        </div>
 
       </div>
 

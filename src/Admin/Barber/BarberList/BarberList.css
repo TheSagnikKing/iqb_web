@@ -43,6 +43,11 @@
     -o-border-radius: 6px;
     font-weight: 500;
     font-size: 1.4rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_wrapper>div:nth-child(1)>div>button>div{
@@ -67,6 +72,12 @@
     -ms-border-radius: 1.7rem;
     -o-border-radius: 1.7rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    background-color: var(--primary-bg-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_content_body{
@@ -81,7 +92,7 @@
 }
 
 .admin_barber_content_body::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .admin_barber_content_body::-webkit-scrollbar-thumb {
@@ -103,6 +114,11 @@
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_content_body>div:nth-child(1){
@@ -125,6 +141,11 @@
 
 .admin_barber_content_body>div:not(:nth-child(1))>p:nth-child(2){
     background-color: #efefef;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_content_body>div:nth-child(1)>p:nth-child(2){
@@ -266,6 +287,49 @@
     height: 100%;
     display: grid;
     place-items: center;
+}
+
+/* Dark Mode CSS Style */
+
+.admin_barber_content_wrapper.dark{
+    background-color: var(--dark-mode-bg-color-4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_barber_wrapper.dark>div:nth-child(1)>div>button{
+    background-color: var(--dark-mode-bg-color-4);
+    color: var(--primary-text-light-color1);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+}
+
+.admin_barber_wrapper.dark>div:nth-child(1)>div>button>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_barber_content_body.dark>div:not(:nth-child(1)){
+    background-color: var(--dark-mode-bg-color-2);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_barber_content_body.dark>div:not(:nth-child(1))>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_barber_content_body.dark>div:not(:nth-child(1))>p:nth-child(2){
+    background-color: var(--dark-mode-bg-color-2);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

@@ -227,7 +227,13 @@ const Dashboard = () => {
         <div>
           {
             loading ?
-              <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} /> :
+              <Skeleton
+                count={1}
+                height={"3.8rem"}
+                style={{ borderRadius: "5px" }}
+                baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+              /> :
               <div>
                 <h1>Welcome Back, {adminName}</h1>
                 <div
@@ -249,16 +255,18 @@ const Dashboard = () => {
             {
               loading ?
                 <div>
-                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} />
-                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} />
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                 </div> :
                 <div>
-                <p>{truncateText(text, 30)}</p>
-                <button onClick={() => setOpenModal(true)}>
-                  <div><EditIcon/></div>
-                  <p>Edit</p>
-                </button>
-              </div>
+                  <p>{truncateText(text, 30)}</p>
+                  <button onClick={() => setOpenModal(true)}>
+                    <div><EditIcon /></div>
+                    <p>Edit</p>
+                  </button>
+                </div>
             }
 
           </div>
@@ -275,9 +283,12 @@ const Dashboard = () => {
             {
               getAllQueueListLoading && !getAllQueueListResolve ?
                 <div>
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                 </div> :
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
                   <>
@@ -326,6 +337,8 @@ const Dashboard = () => {
                   style={{
                     borderRadius: "1.5rem"
                   }}
+                  baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                 />
               </div> :
               !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
@@ -375,10 +388,14 @@ const Dashboard = () => {
                       style={{
                         borderRadius: "50%"
                       }}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                     <Skeleton count={1}
                       height={"1rem"}
                       width={"5.7rem"}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                   </div>
 
@@ -389,10 +406,14 @@ const Dashboard = () => {
                       style={{
                         borderRadius: "50%"
                       }}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                     <Skeleton count={1}
                       height={"1rem"}
                       width={"5.7rem"}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                   </div>
 
@@ -403,10 +424,14 @@ const Dashboard = () => {
                       style={{
                         borderRadius: "50%"
                       }}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                     <Skeleton count={1}
                       height={"1rem"}
                       width={"5.7rem"}
+                      baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                     />
                   </div>
                 </div> :
@@ -430,6 +455,8 @@ const Dashboard = () => {
                   <Skeleton count={1}
                     height={"80%"}
                     width={"100%"}
+                    baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                   /> :
                   <ResponsiveContainer width="70%" height="100%" style={{ margin: "auto" }}>
                     <LineChart width={300} height={100} data={data}>
@@ -464,7 +491,8 @@ const Dashboard = () => {
 
               {
                 getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
-                  <div><Skeleton count={5} className='dashboard_appointment_loader' /></div> :
+                  <div><Skeleton count={5} className='dashboard_appointment_loader' baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /></div> :
                   !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
                     <div>
                       <div>
@@ -502,7 +530,7 @@ const Dashboard = () => {
                 <textarea id="salonInfo" name="salonInfo" value={text}></textarea>
               </div>
               <button>
-                <div><EditIcon/></div>
+                <div><EditIcon /></div>
                 <p>Update</p>
               </button>
             </div>

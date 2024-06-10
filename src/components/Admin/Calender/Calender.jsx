@@ -2,6 +2,8 @@ import { startOfMonth, endOfMonth, differenceInDays, format, sub, add, setDate }
 import React from 'react'
 import "./Calender.css"
 import Cell from './Cell'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import { useSelector } from 'react-redux'
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
@@ -33,9 +35,13 @@ const Calender = ({ value, setCurrentDate }) => {
 
   const daysInNextMonth = new Date(value.getFullYear(), value.getMonth() + 1, 0).getDate(); // Days in next month
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
     <div className='calender-box'>
-      <div className='calender-header'>
+      <div className={`calender-header ${darkmodeOn && "dark"}`}>
         <Cell>{format(value, "LLLL yyyy")}</Cell>
         <Cell onClick={prevMonth}>{"<"}</Cell>
         <Cell onClick={nextMonth}>{">"}</Cell>
