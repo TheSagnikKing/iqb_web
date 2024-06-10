@@ -8,6 +8,8 @@ import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 import { adminApplySalonAction, adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants'
 
 const DashboardHeader = () => {
 
@@ -18,7 +20,15 @@ const DashboardHeader = () => {
     const [togglecheck, setTogglecheck] = useState(false)
 
     const toggleHandler = () => {
-        setTogglecheck((prev) => !prev)
+        // setTogglecheck((prev) => !prev)
+        setTogglecheck((prev) => {
+            if (!prev) {
+                darkHandler()
+            } else {
+                lightHandler()
+            }
+            return !prev
+        })
     }
 
     const [loading, setLoading] = useState(false)
@@ -192,15 +202,50 @@ const DashboardHeader = () => {
     const {
         loading: adminApplySalonLoading,
     } = adminApplySalon
+
+    const [check, setCheck] = useState(true);
+
+    // const darkMode = localStorage.getItem("dark")
+    const darkMode = useSelector(darkmodeSelector)
+
+    console.log(darkMode)
+
+    useEffect(() => {
+        if (localStorage.getItem("dark") === "On") {
+            setCheck(true)
+        } else {
+            setCheck(false)
+        }
+    }, [])
+
+    console.log("Check refresh ", check)
+    console.log("Dark Mode ",darkMode)
+
+    const darkHandler = () => {
+        setCheck(true)
+        dispatch({ type: DARK_MODE_ON });
+        localStorage.setItem("dark", "On");
+    }
+
+    const lightHandler = () => {
+        setCheck(false)
+        dispatch({ type: DARK_MODE_OFF });
+        localStorage.setItem("dark", "Off");
+    }
+
+    const currentmode = darkMode === "Off"
+
+    const darkmode = darkMode === "On"
+
     return (
-        <div className='admin_dashboard_header_wrapper'>
-            <div className='choose_salon_div'>
+        <div className={`admin_dashboard_header_wrapper ${darkmode && "dark"}`}>
+            <div className={`choose_salon_div ${darkmode && "dark"}`}>
                 <p>Choose Salon</p>
                 <div>
                     <p>{currentActiveSalon}</p>
                     <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
                     <div
-                        className='dashboard_salon_list_dropdown'
+                        className={`dashboard_salon_list_dropdown ${darkmode && "dark"}`}
                         ref={salonlistRef}
                         style={{
                             opacity: salonlistdrop ? "1" : "0",
@@ -280,15 +325,15 @@ const DashboardHeader = () => {
                     </div>
                 </section>
             }
-            <div className='profile_wrapper'>
+            <div className={`profile_wrapper ${darkmode && "dark"}`}>
                 <div
                     style={{
-                        background: togglecheck ? "#FF8A08" : "#000"
+                        background: currentmode ? "#FF8A08" : "#000"
                     }}
                 >
-                    <p className={`toggle_btn_text ${togglecheck ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{togglecheck ? <Sunicon /> : <MoonIcon />}</p>
+                    <p className={`toggle_btn_text ${currentmode ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{currentmode ? <Sunicon /> : <MoonIcon />}</p>
                     <button
-                        className={`toggle_btn ${togglecheck ? 'toggle_active' : 'toggle_inactive'}`}
+                        className={`toggle_btn ${currentmode ? 'toggle_active' : 'toggle_inactive'}`}
                         onClick={toggleHandler}
                     ></button>
                 </div>
@@ -373,12 +418,12 @@ const DashboardHeader = () => {
                     <p>Theme</p>
                     <div
                         style={{
-                            background: togglecheck ? "#FF8A08" : "#000"
+                            background: currentmode ? "#FF8A08" : "#000"
                         }}
                     >
-                        <p className={`toggle_btn_text ${togglecheck ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{togglecheck ? <Sunicon /> : <MoonIcon />}</p>
+                        <p className={`toggle_btn_text ${currentmode ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{currentmode ? <Sunicon /> : <MoonIcon />}</p>
                         <button
-                            className={`toggle_btn ${togglecheck ? 'toggle_active' : 'toggle_inactive'}`}
+                            className={`toggle_btn ${currentmode ? 'toggle_active' : 'toggle_inactive'}`}
                             onClick={toggleHandler}
                         ></button>
                     </div>

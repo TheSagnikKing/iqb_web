@@ -234,6 +234,17 @@
   display: none;
 }
 
+
+/* Dark Mode Css */
+
+.content.dark{
+  background-color: var(--dark-mode-bg-color-1);
+}
+
+.content.dark>div>div:nth-child(2){
+  background-color: var(--dark-mode-bg-color-1);
+}
+
 @media screen and (min-width: 0px) and (max-width: 1140px){
   .show {
     width: 7rem;

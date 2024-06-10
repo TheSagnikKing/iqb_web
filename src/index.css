@@ -35,6 +35,14 @@
   --text-color-4: #B2AFAF;
 
   --border-color-1: #000;
+
+
+  /* Dark mode colors */
+
+  --dark-mode-bg-color-4: #3c4043;
+  --dark-mode-bg-color-2: #202124;
+  --dark-mode-bg-color-3: #28292a;
+  --dark-mode-bg-color-1: #28292a;
 }
 
 h1,

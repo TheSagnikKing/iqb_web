@@ -6,6 +6,8 @@ import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons'
 import Header from '../Header/Header.jsx'
 import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
 
 const Sidebar = () => {
 
@@ -14,11 +16,11 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location.pathname.includes("/admin-salon"))
-
-  console.log("Sidebar")
-
   const [loading, setLoading] = useState(false)
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
 
   return (
     <main className='container'>
@@ -61,7 +63,7 @@ const Sidebar = () => {
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
 
-      <div className='content'
+      <div className={`content ${darkmodeOn && "dark"}`}
         style={{
           width: showSidebar ? "calc(100% - 21rem)" : "100%"
         }}

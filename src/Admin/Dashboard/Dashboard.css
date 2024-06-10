@@ -149,7 +149,7 @@
 }
 
 .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-align: center;
 }
 
@@ -798,6 +798,58 @@
 }
 
 .salon_info_container>button>p{
+    color: var(--primary-text-light-color1);
+}
+
+/* Dark Mode css */
+
+.admin_dashboard_page_container.dark>div:nth-child(1),
+.admin_dashboard_page_container.dark>div:nth-child(2){
+    background-color: var(--dark-mode-bg-color-1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(1)>div>h1{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(1)>div:nth-child(1)>div:nth-child(2){
+    height: 1.8rem;
+    border: 1px solid var(--primary-text-light-color1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(1)>div:nth-child(2)>div:nth-child(2){
+    background-color: var(--dark-mode-bg-color-4);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(2)>div:nth-child(2){
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.queuelist_container_error.dark>p {
+    color: var(--primary-text-light-color1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(4)>div:nth-child(2){
+    background-color: var(--dark-mode-bg-color-4);
+} 
+
+.admin_dashboard_page_container.dark>div:nth-child(4)>div:nth-child(2)>div:nth-child(1)>div>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_dashboard_page_container.dark>div:nth-child(5)>div:nth-child(2){
+    background-color: var(--dark-mode-bg-color-4);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.dashboard_appointment_error.dark>p{
     color: var(--primary-text-light-color1);
 }
 

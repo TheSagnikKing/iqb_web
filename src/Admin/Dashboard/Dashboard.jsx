@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import api from "../../Redux/api/Api"
 import { adminSalonStatusAction, getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
 import DashboardModal from '../../components/Modal/DashboardModal/DashboardModal';
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const Dashboard = () => {
 
@@ -208,6 +209,10 @@ const Dashboard = () => {
 
   const [openModal, setOpenModal] = useState(false)
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
     salonId == 0 ? (<>
       <div className='admin_dashboard_page_container_two'>
@@ -218,7 +223,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>) : (<>
-      <div className='admin_dashboard_page_container'>
+      <div className={`admin_dashboard_page_container ${darkmodeOn && "dark"}`}>
         <div>
           {
             loading ?
@@ -266,47 +271,6 @@ const Dashboard = () => {
               <div>
               </div>
             </div>
-            {/* {
-              getAllQueueListLoading && !getAllQueueListResolve ?
-                <div>
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} />
-                </div> :
-                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-                  <div>
-                    <div style={{
-                      background: "var(--primary-bg-color3)"
-                    }}>
-                      <p style={{ color: "var(--primary-text-light-color1)" }}>Customer Name</p>
-                      <p style={{ color: "var(--primary-text-light-color1)" }}>Barber Name</p>
-                      <p style={{ color: "var(--primary-text-light-color1)" }}>Q Position</p>
-                      <p style={{ color: "var(--primary-text-light-color1)" }}>Services</p>
-                    </div>
-
-                    {
-                      queuelist?.map((q) => (
-                        <div key={q._id}>
-                          <p>{q.name}</p>
-                          <p>{q.barberName}</p>
-                          <p>{q.qPosition}</p>
-                          <p>{q.services?.map((s) => s.serviceName)}</p>
-                        </div>
-                      ))
-                    }
-                  </div> :
-
-                  !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                    <div style={{
-                      fontSize: "1.6rem"
-                    }}><p>Queue not available </p></div> :
-
-                    !getAllQueueListLoading && !getAllQueueListResolve &&
-                    <div style={{
-                      fontSize: "1.6rem"
-                    }}><p>Queue not available </p></div>
-            } */}
-            {/* <Link to="/admin-queuelist">See All</Link> */}
 
             {
               getAllQueueListLoading && !getAllQueueListResolve ?
@@ -340,42 +304,11 @@ const Dashboard = () => {
                     <Link to="/admin-queue" style={{ fontSize: "1.2rem" }}>See All</Link>
                   </> :
                   !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                    <div className='queuelist_container_error'><p>Queue List not available</p></div> :
+                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
                     !getAllQueueListLoading && !getAllQueueListResolve &&
-                    <div className='queuelist_container_error'><p>Queue List not available</p></div>
+                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
             }
 
-            {/* <div className='queuelist_container'>
-              <div>
-                <p>Customer Name</p>
-                <p>Barber Name</p>
-                <p>Q Position</p>
-                <p>Services</p>
-              </div>
-              <div>
-                <div>
-                  <p>Customer Name</p>
-                  <p>Barber Name</p>
-                  <p>Q Position</p>
-                  <p>Services</p>
-                </div>
-                <div>
-                  <p>Customer Name</p>
-                  <p>Barber Name</p>
-                  <p>Q Position</p>
-                  <p>Services</p>
-                </div>
-                <div>
-                  <p>Customer Name</p>
-                  <p>Barber Name</p>
-                  <p>Q Position</p>
-                  <p>Services</p>
-                </div>
-              </div>
-            </div>
-            <Link to="/admin-queue" style={{ fontSize: "1.2rem" }}>See All</Link> */}
-
-            {/* <div className='queuelist_container_error'><p>Queue List not available</p></div> */}
           </div>
         </div>
 
@@ -500,7 +433,7 @@ const Dashboard = () => {
                   /> :
                   <ResponsiveContainer width="70%" height="100%" style={{ margin: "auto" }}>
                     <LineChart width={300} height={100} data={data}>
-                      <Line type="" dataKey="pv" stroke="#000" strokeWidth={2} />
+                      <Line type="" dataKey="pv" stroke={darkmodeOn ? "#fff" : "#000"} strokeWidth={2} />
                     </LineChart>
                   </ResponsiveContainer>
               }
@@ -552,9 +485,9 @@ const Dashboard = () => {
                       </div>
                     </div> :
                     !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length === 0 ?
-                      <div className='dashboard_appointment_error'><p>Appointments not available</p></div> :
+                      <div className={`dashboard_appointment_error ${darkmodeOn && "dark"}`}><p>Appointments not available</p></div> :
                       !getAllAdvertisementLoading && !getDashboardAppointmentListResolve &&
-                      <div className='dashboard_appointment_error'><p>Appointments not available</p></div>
+                      <div className={`dashboard_appointment_error ${darkmodeOn && "dark"}`}><p>Appointments not available</p></div>
               }
 
             </div>

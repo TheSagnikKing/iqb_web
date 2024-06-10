@@ -1,4 +1,4 @@
-import { ADMIN_APPLY_SALON_FAIL, ADMIN_APPLY_SALON_REQ, ADMIN_APPLY_SALON_SUCCESS, ADMIN_GET_DEFAULT_SALON_FAIL, ADMIN_GET_DEFAULT_SALON_REQ, ADMIN_GET_DEFAULT_SALON_SUCCESS } from "../Constants/constants";
+import { ADMIN_APPLY_SALON_FAIL, ADMIN_APPLY_SALON_REQ, ADMIN_APPLY_SALON_SUCCESS, ADMIN_GET_DEFAULT_SALON_FAIL, ADMIN_GET_DEFAULT_SALON_REQ, ADMIN_GET_DEFAULT_SALON_SUCCESS, DARK_MODE_OFF, DARK_MODE_ON } from "../Constants/constants";
 
 export const adminApplySalonReducer = (state = {}, action) => {
     switch (action.type) {
@@ -53,6 +53,25 @@ export const adminGetDefaultSalonReducer = (state = {}, action) => {
             return state;
     }
 };
+
+
+const initialState = {
+    darkmode: localStorage.getItem("dark")
+}
+
+export const colorReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case DARK_MODE_ON:
+            return { ...state, darkmode: "On" };
+        case DARK_MODE_OFF:
+            return { ...state, darkmode: "Off" };
+        default:
+            return state;
+    }
+}
+
+
+export const darkmodeSelector = (state) => state.color.darkmode
 
 // export const adminSetSalonNameReducer = (state = "", action) => {
 //     switch (action.type) {

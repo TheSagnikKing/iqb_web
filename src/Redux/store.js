@@ -7,7 +7,7 @@ import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminAp
 import { adminUpdateProfileReducer, adminSendVerifyEmailReducer, adminVerifiedEmailStatusReducer, adminUploadProfilePicReducer } from "./Admin/Reducers/AdminProfileReducer"
 import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer";
 import { adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
-import { adminGetDefaultSalonReducer,adminApplySalonReducer } from "./Admin/Reducers/AdminHeaderReducer"
+import { adminGetDefaultSalonReducer,adminApplySalonReducer, colorReducer } from "./Admin/Reducers/AdminHeaderReducer"
 import { adminForgetPasswordReducer, adminResetPasswordReducer } from "./Admin/Reducers/AdminPasswordReducer";
 
 const rootReducer = combineReducers({
@@ -50,7 +50,7 @@ const rootReducer = combineReducers({
   adminResetPassword:adminResetPasswordReducer,
   adminUploadProfilePic:adminUploadProfilePicReducer,
   AdminSignin:AdminSigninReducer,
-  // adminSetSalonName:adminSetSalonNameReducer,
+  color:colorReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,

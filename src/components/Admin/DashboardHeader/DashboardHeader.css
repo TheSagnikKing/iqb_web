@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--primary-bg-light-color1);
 }
 
 .choose_salon_div {
@@ -301,6 +302,44 @@
     display: grid;
     place-items: center;
     font-size: 1.6rem;
+}
+
+
+/* Dark Mode Css */
+
+.admin_dashboard_header_wrapper.dark{
+    background-color: var(--dark-mode-bg-color-1);
+}
+
+.choose_salon_div.dark>p:nth-child(1){
+    color:var(--primary-text-light-color1)
+}
+
+.choose_salon_div.dark>div:nth-child(2){
+    border: 1px solid var(--primary-text-light-color1);
+    color: var(--primary-text-light-color1);
+}
+
+.choose_salon_div.dark>div:nth-child(2)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.profile_wrapper.dark>div:nth-child(1){
+    height: 2.9rem;
+    border: 1px solid var(--primary-text-light-color1);
+}
+
+.profile_wrapper.dark>div:nth-child(2), 
+.profile_wrapper.dark>div:nth-child(3){
+    color: var(--primary-text-light-color1);
+}
+
+.dashboard_salon_list_dropdown.dark{
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.dashboard_salon_list_dropdown.dark>p{
+    color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
