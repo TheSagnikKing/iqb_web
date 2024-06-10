@@ -3,13 +3,14 @@ import Skeleton from 'react-loading-skeleton'
 import './Dashboard.css'
 import { Link } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel';
-import { ChartIcon1, ChartIcon2, ChartIcon3, Threeverticaldots, UserIcon } from '../../icons';
+import { ChartIcon1, ChartIcon2, ChartIcon3, EditIcon, Threeverticaldots, UserIcon } from '../../icons';
 import { ResponsiveContainer, LineChart, Line } from 'recharts'
 import Calender from '../../components/Admin/Calender/Calender'
 
 import { useDispatch, useSelector } from 'react-redux';
 import api from "../../Redux/api/Api"
 import { adminSalonStatusAction, getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
+import DashboardModal from '../../components/Modal/DashboardModal/DashboardModal';
 
 const Dashboard = () => {
 
@@ -198,6 +199,15 @@ const Dashboard = () => {
   } = getDashboardAppointmentList
 
 
+  let text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.";
+
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(' ');
+    return words.slice(0, wordLimit).join(' ') + (words.length > wordLimit ? '...' : '');
+  };
+
+  const [openModal, setOpenModal] = useState(false)
+
   return (
     salonId == 0 ? (<>
       <div className='admin_dashboard_page_container_two'>
@@ -238,10 +248,12 @@ const Dashboard = () => {
                   <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} />
                 </div> :
                 <div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio numquam soluta iure quaerat voluptate debitis perspiciatis,
-                    fugiat libero quos. Ducimus, quasi quaerat commodi inventore fugit expedita voluptates vero est laborum?</p>
-                  <button>Update</button>
-                </div>
+                <p>{truncateText(text, 30)}</p>
+                <button onClick={() => setOpenModal(true)}>
+                  <div><EditIcon/></div>
+                  <p>Edit</p>
+                </button>
+              </div>
             }
 
           </div>
@@ -548,6 +560,21 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        {
+          openModal && <DashboardModal setOpenModal={setOpenModal}>
+            <div className='salon_info_container'>
+              <div>
+                <label htmlFor="salonInfo">Write about Salon Information</label>
+                <textarea id="salonInfo" name="salonInfo" value={text}></textarea>
+              </div>
+              <button>
+                <div><EditIcon/></div>
+                <p>Update</p>
+              </button>
+            </div>
+          </DashboardModal>
+        }
 
       </div>
     </>)

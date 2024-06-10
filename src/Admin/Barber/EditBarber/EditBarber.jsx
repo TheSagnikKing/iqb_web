@@ -6,6 +6,7 @@ import { adminAllSalonServicesAction, adminCreateBarberAction, adminUpdateBarber
 import Skeleton from 'react-loading-skeleton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import { PhoneInput } from 'react-international-phone';
 
 const EditBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -18,7 +19,7 @@ const EditBarber = () => {
   const [name, setName] = useState(currentBarber?.name);
   const [email, setEmail] = useState(currentBarber?.email);
   const [nickName, setNickName] = useState(currentBarber?.nickName);
-  const [mobileNumber, setMobileNumber] = useState(currentBarber?.mobileNumber);
+  const [mobileNumber, setMobileNumber] = useState(currentBarber?.mobileNumber.toString());
   const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth?.split('T')[0]);
   const [chooseServices, setChooseServices] = useState([]);
   const [serviceEWTValues, setServiceEWTValues] = useState({});
@@ -63,7 +64,7 @@ const EditBarber = () => {
       name,
       email,
       nickName,
-      mobileNumber,
+      mobileNumber:Number(mobileNumber),
       dateOfBirth,
       salonId,
       barberServices: chooseServices.map(service => ({
@@ -121,13 +122,28 @@ const EditBarber = () => {
         </div>
 
         <div>
-          <div>
+          {/* <div>
             <p>Mobile No.</p>
             <input
               type='text'
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
             />
+          </div> */}
+
+          <div>
+            <p>Mobile Number</p>
+            <div>
+              <div>
+                <PhoneInput
+                  forceDialCode={true}
+                  defaultCountry="gb"
+                  value={mobileNumber}
+                  onChange={(phone) => setMobileNumber(phone)}
+                />
+              </div>
+
+            </div>
           </div>
 
           <div>

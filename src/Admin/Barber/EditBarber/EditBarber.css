@@ -235,6 +235,30 @@
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
 }
 
+
+.react-international-phone-input-container .react-international-phone-input{
+    width: 100%;
+    background-color: var(--bg-color3) !important;
+    min-height: 4rem !important;
+    border: none !important;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+    background-color: var(--bg-color3) !important;
+    min-height: 4rem !important;
+    width: 6rem !important;
+    border: none !important;
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+}
+
+.react-international-phone-country-selector-dropdown {
+    width: 30rem !important;
+}
+
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_edit_barber_wrapper{
         width: calc(100vw - 4rem);

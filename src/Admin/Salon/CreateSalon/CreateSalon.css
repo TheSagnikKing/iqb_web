@@ -711,12 +711,12 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(12) {
-    width: 100%;
+    /* width: 100%;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
-    height: 9rem;
+    height: 9rem; */
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>p:nth-child(12) {

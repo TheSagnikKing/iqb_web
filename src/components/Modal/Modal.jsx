@@ -1,15 +1,3 @@
-// import React from 'react'
-// import "./Modal.css"
-
-// const Modal = () => {
-//   return (
-//     <div>Modal</div>
-//   )
-// }
-
-// export default Modal
-
-// Modal.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
