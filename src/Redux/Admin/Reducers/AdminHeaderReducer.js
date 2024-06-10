@@ -53,3 +53,21 @@ export const adminGetDefaultSalonReducer = (state = {}, action) => {
             return state;
     }
 };
+
+// export const adminSetSalonNameReducer = (state = "", action) => {
+//     switch (action.type) {
+//         case "ADMIN_SET_SALON_NAME":
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// };
+
+// export const adminSetSalonNameSalonIdReducer = (state = "", action) => {
+//     switch (action.type) {
+//         case "ADMIN_SET_SALON_NAME_SALON_ID":
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// };

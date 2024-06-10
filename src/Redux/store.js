@@ -50,6 +50,7 @@ const rootReducer = combineReducers({
   adminResetPassword:adminResetPasswordReducer,
   adminUploadProfilePic:adminUploadProfilePicReducer,
   AdminSignin:AdminSigninReducer,
+  // adminSetSalonName:adminSetSalonNameReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,
