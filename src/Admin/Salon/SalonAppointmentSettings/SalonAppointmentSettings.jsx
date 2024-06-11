@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { adminUpdateSalonSettingsAction } from '../../../Redux/Admin/Actions/SalonAction';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const SalonAppointmentSettings = () => {
 
@@ -183,11 +184,15 @@ const SalonAppointmentSettings = () => {
         loading: adminUpdateSalonSettingsLoading,
     } = adminUpdateSalonSettings
 
+    const darkMode = useSelector(darkmodeSelector)
+
+    const darkmodeOn = darkMode === "On"
+
     return (
-        <div className='salon_appointment_wrapper'>
+        <div className={`salon_appointment_wrapper ${darkmodeOn && "dark"}`}>
             <p>Salon Appointment Settings</p>
 
-            <div className='salon_appointment_content'>
+            <div className={`salon_appointment_content ${darkmodeOn && "dark"}`}>
                 <div>
                     <div>
                         <p>Start Time</p>

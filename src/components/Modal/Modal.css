@@ -15,6 +15,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+
 .modal__content{
     width: 100rem;
     height: 59rem;
@@ -122,3 +123,17 @@
 }
 
 
+/* Dark Mode css */
+
+.modal__content.dark{
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.modal__content.dark>button:nth-child(1){
+    background-color: var(--dark-mode-bg-color-4);
+    box-shadow: 0px 0px  6px rgba(0, 0, 0, 0.8);
+}
+
+.modal__content.dark>div:nth-child(3){
+    background-color: var(--dark-mode-bg-color-4);
+}

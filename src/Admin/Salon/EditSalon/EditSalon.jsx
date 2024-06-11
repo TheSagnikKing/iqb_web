@@ -12,6 +12,7 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const EditSalon = () => {
 
@@ -851,10 +852,15 @@ const EditSalon = () => {
 
   const [openServices, setOpenServices] = useState(false)
 
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className='edit_salon_wrapper'>
+    <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
       <p>Edit Salon</p>
-      <div className='edit_salon_content_wrapper'>
+      <div className={`edit_salon_content_wrapper ${darkmodeOn && "dark"}`}>
         <div>
           <div>
             {/* <div><img src={salonImages[0]} alt="" /></div> */}
@@ -1215,7 +1221,7 @@ const EditSalon = () => {
 
           <div>
             <p>Mobile Number</p>
-            <div>
+            <div className={`salon_mobile_input ${darkmodeOn && "dark"}`}>
               <div>
                 <PhoneInput
                   forceDialCode={true}
@@ -1235,7 +1241,7 @@ const EditSalon = () => {
 
           {
             openServices &&
-            <main className='add_services_drop_container'>
+            <main className={`add_services_drop_container ${darkmodeOn && "dark"}`}>
               <p>Choose your service icon:</p>
               <div>
                 <div>
@@ -1245,6 +1251,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1252,6 +1260,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1259,6 +1269,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1266,6 +1278,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1273,6 +1287,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1280,6 +1296,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1287,6 +1305,8 @@ const EditSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                           style={{
                             borderRadius: "1rem"
                           }}
@@ -1376,10 +1396,10 @@ const EditSalon = () => {
                 <button onClick={addServiceHandler} className='add_service_btn'>Add Service</button>
               </div>
 
-              <div className='service_container'>
+              <div className={`service_container ${darkmodeOn && "dark"}`}>
                 {
                   selectedServices.map((ser, index) => (
-                    <div className='service_container_item' key={index}>
+                    <div className={`service_container_item ${darkmodeOn && "dark"}`} key={index}>
                       <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
                       <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
                       <p style={{ minWidth: "1fr", maxWidth: "27rem" }}>{ser.serviceDesc}</p>
