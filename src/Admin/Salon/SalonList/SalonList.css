@@ -254,6 +254,10 @@
     -o-transition: 300ms ease;
 }
 
+.salon_content_body_error.dark p{
+    color: var(--primary-text-light-color1);
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .salon_content_wrapper{
         width: calc(100vw - 2rem);

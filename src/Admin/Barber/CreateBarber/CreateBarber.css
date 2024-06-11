@@ -25,6 +25,12 @@
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     padding: 2rem;
     overflow-y: scroll;
+    background-color: var(--primary-bg-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_create_barber_wrapper_container::-webkit-scrollbar {
@@ -33,7 +39,7 @@
 }
 
 .admin_create_barber_wrapper_container::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .admin_create_barber_wrapper_container::-webkit-scrollbar-thumb {
@@ -42,6 +48,20 @@
 
 .admin_create_barber_wrapper_container::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
+}
+
+.admin_create_barber_wrapper_container>div:nth-child(4)>div:nth-child(1)>div{
+    background-color: var(--bg-color3);
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_create_barber_wrapper_container>div {
@@ -66,6 +86,12 @@
     -o-border-radius: 1rem;
     padding-inline: 1rem;
     font-size: 1.6rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+    color: var(--primary-text-light-color2);
 }
 
 .admin_create_barber_wrapper_container>div>input:focus {
@@ -126,6 +152,11 @@
     -o-border-radius: 1rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     overflow: scroll;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_services_container::-webkit-scrollbar {
@@ -134,7 +165,7 @@
 }
 
 .admin_barber_services_container::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: #ffffff2a !important;
 }
 
 .admin_barber_services_container::-webkit-scrollbar-thumb {
@@ -160,6 +191,11 @@
     grid-template-columns: 0.4fr 1fr 0.4fr 0.4fr;
     place-items: center;
     font-size: 1.4rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_services_container_item>div{
@@ -185,6 +221,12 @@
     border-bottom: 2px solid black;
     font-size: 1.6rem;
     font-weight: 500;
+    background-color: var(--primary-bg-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .admin_barber_services_container_item>div:nth-child(4){
@@ -237,7 +279,7 @@
 
 .react-international-phone-input-container .react-international-phone-input{
     width: 100%;
-    background-color: var(--bg-color3) !important;
+    background-color: transparent !important;
     min-height: 4rem !important;
     border: none !important;
     border-top-right-radius: 1rem;
@@ -245,7 +287,7 @@
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-    background-color: var(--bg-color3) !important;
+    background-color: transparent !important;
     min-height: 4rem !important;
     width: 6rem !important;
     border: none !important;
@@ -255,6 +297,112 @@
 
 .react-international-phone-country-selector-dropdown {
     width: 30rem !important;
+}
+
+.admin_barber_services_container_item_error{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dark Css Style */
+
+.admin_create_barber_wrapper.dark>p:nth-child(1){
+    color: var(--primary-text-light-color1);
+}
+
+.admin_create_barber_wrapper_container.dark{
+    background-color: var(--dark-mode-bg-color-4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_create_barber_wrapper_container.dark>div>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_create_barber_wrapper_container.dark>div>input{
+    color: var(--primary-text-light-color1);
+    background-color: var(--dark-mode-bg-color-2);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_create_barber_wrapper_container.dark>div:nth-child(4)>div>p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_create_barber_wrapper_container.dark>div:nth-child(4)>div>input{
+    color: var(--primary-text-light-color1);
+    background-color: var(--dark-mode-bg-color-2);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_create_barber_wrapper_container.dark>p:nth-child(5){
+    color: var(--primary-text-light-color1);
+}
+
+.admin_barber_services_container.dark{
+    background-color: var(--dark-mode-bg-color-2) !important;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_barber_services_container_item.dark{
+    background-color: var(--dark-mode-bg-color-4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.admin_barber_services_container_item.dark>div>p:nth-child(1),
+.admin_barber_services_container_item.dark>div>p:nth-child(2){
+    color: var(--primary-text-light-color1);
+}
+
+.admin_barber_services_container_item.dark>div:nth-child(3)>input{
+    background-color: var(--dark-mode-bg-color-4);
+    color: var(--primary-text-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+    border-bottom: 2px solid var(--primary-text-light-color1);
+}
+
+.admin_barber_services_container_item_error.dark p{
+    color: var(--primary-text-light-color1);
+}
+
+.admin_create_barber_wrapper_container.dark>div:nth-child(4)>div:nth-child(1)>div{
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.admin_create_barber_wrapper_container.dark>div:nth-child(4)>div:nth-child(1)>div input{
+    color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

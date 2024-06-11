@@ -126,12 +126,12 @@ const SalonList = () => {
               ))}
             </div>
           ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? (
-            <div className='salon_content_body_error'>
+            <div className={`salon_content_body_error ${darkmodeOn && "dark"}`}>
               <p style={{ margin: "2rem" }}>Salons not available</p>
             </div>
           ) : (
             !getAdminSalonListLoading && !getAdminSalonListResolve && (
-              <div className='salon_content_body_error'>
+              <div className={`salon_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Salon not available</p>
               </div>
             )

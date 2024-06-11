@@ -54,7 +54,7 @@ const CustomerList = () => {
       </div>
 
       <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
-        {/* {
+        {
           adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -98,52 +98,17 @@ const CustomerList = () => {
               ))}
             </div>
           ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
-            <div className='customer_content_body_error'>
+            <div className={`customer_content_body_error ${darkmodeOn && "dark"}`}>
               <p style={{ margin: "2rem" }}>Customers not available</p>
             </div>
           ) : (
             !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve && (
-              <div className='customer_content_body_error'>
+              <div className={`customer_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Customers not available</p>
               </div>
             )
           )
-        } */}
-
-        <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
-          <div>
-            <input
-              type="checkbox"
-              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-            />
-            <p>Salon ID</p>
-            <p>Name</p>
-            <p>Email</p>
-            <p>Gender</p>
-            <p>Mobile Number</p>
-          </div>
-
-            <div>
-              <input
-                type="checkbox"
-                style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-              />
-              <p>salonId</p>
-              <p>name</p>
-              <p>email</p>
-              <p>gender</p>
-              <p>mobileNumber</p>
-              <div>
-                <div><Notificationicon /></div>
-              </div>
-              <div>
-                <div><EmailIcon /></div>
-              </div>
-              <div>
-                <div><MessageIcon /></div>
-              </div>
-            </div>
-        </div>
+        }
 
       </div>
 

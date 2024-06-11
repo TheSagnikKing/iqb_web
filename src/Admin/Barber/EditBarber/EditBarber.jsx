@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import { PhoneInput } from 'react-international-phone';
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const EditBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -64,7 +65,7 @@ const EditBarber = () => {
       name,
       email,
       nickName,
-      mobileNumber:Number(mobileNumber),
+      mobileNumber: Number(mobileNumber),
       dateOfBirth,
       salonId,
       barberServices: chooseServices.map(service => ({
@@ -90,10 +91,14 @@ const EditBarber = () => {
     loading: adminUpdateBarberLoading,
   } = adminUpdateBarber
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className='admin_edit_barber_wrapper'>
+    <div className={`admin_edit_barber_wrapper ${darkmodeOn && "dark"}`}>
       <p>Edit Barber</p>
-      <div className='admin_edit_barber_wrapper_container'>
+      <div className={`admin_edit_barber_wrapper_container ${darkmodeOn && "dark"}`}>
         <div>
           <p>Barber Name</p>
           <input
@@ -159,7 +164,7 @@ const EditBarber = () => {
 
         <p>Add Services</p>
 
-        <div className='admin_barber_services_container'
+        <div className={`admin_barber_services_container ${darkmodeOn && "dark"}`}
           style={{
             marginBottom: "3rem",
             background: adminAllSalonServicesLoading ? "var(--primary-bg-light-color1)" : "var(--bg-color3)"
@@ -169,7 +174,7 @@ const EditBarber = () => {
             <Skeleton count={4} height={"6rem"} style={{ marginBottom: "1rem" }} />
           ) : !adminAllSalonServicesLoading && adminAllSalonServicesResolve && allSalonServices?.length > 0 ? (
             allSalonServices.map((s) => (
-              <div className='admin_barber_services_container_item' key={s._id}>
+              <div className={`admin_barber_services_container_item ${darkmodeOn && "dark"}`} key={s._id}>
                 <div>
                   <p>Service ID</p>
                   <p>{s.serviceId}</p>
@@ -208,9 +213,13 @@ const EditBarber = () => {
               </div>
             ))
           ) : adminAllSalonServicesLoading && adminAllSalonServicesResolve && allSalonServices?.length === 0 ? (
-            <p>No Salon Services Available</p>
+            <div className={`admin_barber_services_container_item_error ${darkmodeOn && "dark"}`}>
+              <p>No Salon Services Available</p>
+            </div>
           ) : !adminAllSalonServicesLoading && !adminAllSalonServicesResolve && (
-            <p>No Salon Services Available</p>
+            <div className={`admin_barber_services_container_item_error ${darkmodeOn && "dark"}`}>
+              <p>No Salon Services Available</p>
+            </div>
           )}
         </div>
 

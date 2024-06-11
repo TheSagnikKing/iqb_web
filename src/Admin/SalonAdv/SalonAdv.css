@@ -52,6 +52,11 @@
 
 .salonadv_wrapper>div:nth-child(1)>div>button:nth-child(2){
     width: 12rem;
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1){
@@ -67,6 +72,11 @@
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button{
@@ -114,13 +124,20 @@
     padding: 1rem;
 }
 
+.salonadv_content_error{
+    height: calc(100vh - 7rem - 1.5rem - 4.5rem - 2rem);
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
 .salonadv_content::-webkit-scrollbar {
     width: 6px !important;
     height: 7px;
 }
 
 .salonadv_content::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .salonadv_content::-webkit-scrollbar-thumb {
@@ -142,6 +159,11 @@
     -ms-border-radius: 1.7rem;
     -o-border-radius: 1.7rem;
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
 }
 
 .salonadv_cards>div:nth-child(1){
@@ -205,6 +227,53 @@
     background-color: var(--primary-bg-color3);
 }
 
+/* Dark Css Style */
+
+.salonadv_content_error.dark>p{
+    color: var(--primary-text-light-color1);
+}
+
+.salonadv_wrapper.dark>div:nth-child(1)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.salonadv_wrapper.dark>div:nth-child(1)>div>div:nth-child(1){
+    background-color: var(--dark-mode-bg-color-4);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.salonadv_wrapper.dark>div:nth-child(1)>div>div:nth-child(1)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.salonadv_wrapper.dark>div:nth-child(1)>div>button:nth-child(2){
+    background-color: var(--dark-mode-bg-color-4);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+    color: var(--primary-text-light-color1);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
+
+.salonadv_wrapper.dark>div:nth-child(1)>div>button:nth-child(2)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.salonadv_cards.dark{
+    background-color: var(--dark-mode-bg-color-4);
+    transition: 300ms ease;
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -ms-transition: 300ms ease;
+    -o-transition: 300ms ease;
+}
 
 @media screen and (min-width: 0px) and (max-width: 768px){
     .salonadv_wrapper>div:nth-child(1){

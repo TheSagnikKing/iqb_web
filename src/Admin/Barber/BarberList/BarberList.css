@@ -332,6 +332,14 @@
     -o-transition: 300ms ease;
 }
 
+.admin_barber_wrapper.dark>div:nth-child(1)>p{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_content_body_error.dark p{
+    color: var(--primary-text-light-color1);
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_barber_content_wrapper{
         width: calc(100vw - 2rem);

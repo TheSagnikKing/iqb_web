@@ -179,7 +179,7 @@ const SalonAdv = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <div className='salonadv_wrapper'>
+    <div className={`salonadv_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Advertisements</p>
         <div>
@@ -210,54 +210,59 @@ const SalonAdv = () => {
         </div>
 
       </div>
-      <div className='salonadv_content'>
 
-        {
-          getAllAdvertisementLoading && !getAllAdvertisementResolve ?
-            <>
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-              <Skeleton count={1} height={"35rem"} style={{ borderRadius: "1.7rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-            </> :
-            !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
-              advertisements.map((ad, index) => (
-                <div className='salonadv_cards' key={ad._id}>
-                  <div><img src={`${ad.url}`} alt="" /></div>
-                  <div>
-                    <button onClick={() => editImageHandler(ad.public_id, ad._id)} disabled={handleEditLoader ? true : false}>
-                      <div><EditIcon /></div>
-                      <p>Edit</p>
-
-                      <input
-                        type="file"
-                        ref={fileEditInputRef}
-                        style={{ display: 'none' }}
-                        onChange={handleEditFileInputChange}
-                      />
-                    </button>
-
-                    <button onClick={() => deleteHandler(ad.public_id, ad._id)} disabled={deleteLoader ? true : false}>
-                      <div><DeleteIcon /></div>
-                      <p>Delete</p>
-                    </button>
-                  </div>
+      {
+        getAllAdvertisementLoading && !getAllAdvertisementResolve ? (
+          <div className='salonadv_content'>
+            {[...Array(6)].map((_, index) => (
+              <Skeleton
+                key={index}
+                count={1}
+                height={"35rem"}
+                style={{ borderRadius: "1.7rem" }}
+                baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+              />
+            ))}
+          </div>
+        ) : !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ? (
+          <div className='salonadv_content'>
+            {advertisements.map((ad) => (
+              <div className={`salonadv_cards ${darkmodeOn && "dark"}`} key={ad._id}>
+                <div>
+                  <img src={`${ad.url}`} alt="" />
                 </div>
-              )) :
-              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
-                <p>Advertisement not available</p> :
-                !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
-                <p>Advertisement not available</p>
-        }
-      </div>
+                <div>
+                  <button onClick={() => editImageHandler(ad.public_id, ad._id)} disabled={handleEditLoader}>
+                    <div><EditIcon /></div>
+                    <p>Edit</p>
+                    <input
+                      type="file"
+                      ref={fileEditInputRef}
+                      style={{ display: 'none' }}
+                      onChange={handleEditFileInputChange}
+                    />
+                  </button>
+                  <button onClick={() => deleteHandler(ad.public_id, ad._id)} disabled={deleteLoader}>
+                    <div><DeleteIcon /></div>
+                    <p>Delete</p>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length === 0 ? (
+          <div className={`salonadv_content_error ${darkmodeOn && "dark"}`}>
+            <p>Advertisement not available</p>
+          </div>
+        ) : (
+          !getAllAdvertisementLoading && !getAllAdvertisementResolve && (
+            <div className={`salonadv_content_error ${darkmodeOn && "dark"}`}>
+              <p>Advertisement not available</p>
+            </div>
+          )
+        )
+      }
 
     </div>
   )

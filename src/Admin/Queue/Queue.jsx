@@ -43,45 +43,12 @@ const Queue = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <div className='admin_queue_wrapper'>
+    <div className={`admin_queue_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Queue List</p>
       </div>
 
-      <div className='admin_queue_content_wrapper'>
-        {/* <div className='admin_queue_content_body'>
-          <div>
-            <p>Name</p>
-            <p>Time Joined Q</p>
-            <p>Barber Name</p>
-            <p>Q Postion</p>
-          </div>
-
-          {
-            getAllQueueListLoading && !getAllQueueListResolve ?
-              <>
-                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} />
-              </> :
-              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-                queuelist.map((b) => (
-                  <div className='admin_queue_content_body_item' key={b._id}>
-                    <p>{b.name}</p>
-                    <p>{b.timeJoinedQ}</p>
-                    <p>{b.barberName}</p>
-                    <p>{b.qPosition}</p>
-                  </div>
-                )) :
-                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                  <p
-                  style={{margin:"2rem"}}
-                  >No QueueList</p> :
-                  !getAllQueueListLoading && !getAllQueueListResolve &&
-                  <p 
-                  style={{margin:"2rem"}}
-                  >Queue not available</p>
-          }
-
-        </div> */}
+      <div className={`admin_queue_content_wrapper ${darkmodeOn && "dark"}`}>
 
         {
           getAllQueueListLoading && !getAllQueueListResolve ? (
@@ -90,7 +57,7 @@ const Queue = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
             </div>
           ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ? (
-            <div className='admin_queue_content_body'>
+            <div className={`admin_queue_content_body ${darkmodeOn && "dark"}`}>
               <div>
                 <p>Name</p>
                 <p>Time Joined Q</p>
@@ -99,7 +66,7 @@ const Queue = () => {
               </div>
 
               {queuelist.map((b) => (
-                <div className='admin_queue_content_body_item' key={b._id}>
+                <div className={`admin_queue_content_body_item ${darkmodeOn && "dark"}`} key={b._id}>
                   <p>{b.name}</p>
                   <p>{b.timeJoinedQ}</p>
                   <p>{b.barberName}</p>
@@ -108,12 +75,12 @@ const Queue = () => {
               ))}
             </div>
           ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ? (
-            <div className='admin_queue_content_body_error'>
+            <div className={`admin_queue_content_body_error ${darkmodeOn && "dark"}`}>
               <p style={{ margin: "2rem" }}>Queue not available</p>
             </div>
           ) : (
             !getAllQueueListLoading && !getAllQueueListResolve && (
-              <div className='admin_queue_content_body_error'>
+            <div className={`admin_queue_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Queue not available</p>
               </div>
             )

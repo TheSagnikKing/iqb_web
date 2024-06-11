@@ -242,18 +242,18 @@ const BarberList = () => {
 
               </div>
             ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
-              <div className='barber_content_body_error'>
+              <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Barbers not available</p>
               </div>
             ) : (
               !getAdminBarberListLoading && !getAdminBarberListResolve && (
-                <div className='barber_content_body_error'>
+                <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
                   <p style={{ margin: "2rem" }}>Barbers not available</p>
                 </div>
               )
             )
           }
-          
+
       </div>
     </div>
   )
