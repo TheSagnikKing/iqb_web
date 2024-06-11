@@ -292,7 +292,7 @@ const Dashboard = () => {
                 </div> :
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
                   <>
-                    <div className='queuelist_container'>
+                    <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
                       <div>
                         <p>Customer Name</p>
                         <p>Barber Name</p>
@@ -312,7 +312,7 @@ const Dashboard = () => {
                         }
                       </div>
                     </div>
-                    <Link to="/admin-queue" style={{ fontSize: "1.2rem" }}>See All</Link>
+                    <Link to="/admin-queue" style={{ fontSize: "1.2rem",color:darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)" }}>See All</Link>
                   </> :
                   !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
                     <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
@@ -491,7 +491,7 @@ const Dashboard = () => {
 
               {
                 getDashboardAppointmentListLoading && !getDashboardAppointmentListResolve ?
-                  <div><Skeleton count={5} className='dashboard_appointment_loader' baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  <div style={{ overflow: "hidden" }}><Skeleton count={5} className='dashboard_appointment_loader' baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /></div> :
                   !getDashboardAppointmentListLoading && getDashboardAppointmentListResolve && appointmentList?.length > 0 ?
                     <div>
@@ -524,7 +524,7 @@ const Dashboard = () => {
 
         {
           openModal && <DashboardModal setOpenModal={setOpenModal}>
-            <div className='salon_info_container'>
+            <div className={`salon_info_container ${darkmodeOn && "dark"}`}>
               <div>
                 <label htmlFor="salonInfo">Write about Salon Information</label>
                 <textarea id="salonInfo" name="salonInfo" value={text}></textarea>

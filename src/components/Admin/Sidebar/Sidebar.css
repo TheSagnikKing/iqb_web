@@ -168,13 +168,12 @@
   font-size: 2rem;
 }
 
-/* width */
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
   width: 1rem;
   height: 1.2rem;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
@@ -183,17 +182,18 @@
   width: 0px !important;
 }
 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 2rem;
   cursor: pointer;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
+} */
+
+
 
 .sidebar_top_salon{
   display: flex;

@@ -270,6 +270,7 @@
     -moz-transition: 300ms ease;
     -ms-transition: 300ms ease;
     -o-transition: 300ms ease;
+    overflow: hidden;
 }
 
 .profile_drop_container>p{

@@ -1,17 +1,9 @@
-// import React from 'react'
-// import "./DashboardModal.css"
-
-// const DashboardModal = () => {
-//   return (
-//     <div>DashboardModal</div>
-//   )
-// }
-
-// export default DashboardModal
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './DashboardModal.css';
+import { useSelector } from 'react-redux';
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 const DashboardModal = ({children,setOpenModal}) => {
 
@@ -19,10 +11,14 @@ const DashboardModal = ({children,setOpenModal}) => {
     setOpenModal(false)
   }
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return ReactDOM.createPortal(
     <div className="dashboard_main__modal__container">
       <div>
-        <div className="dashboard_modal__content">
+        <div className={`dashboard_modal__content ${darkmodeOn && "dark"}`}>
             <button onClick={closeModal} className='dashboard_main__modal__close' style={{cursor:"pointer"}}>X</button>
             <br/>
           {children}

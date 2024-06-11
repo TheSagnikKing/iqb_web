@@ -23,6 +23,8 @@ const EditProfile = () => {
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
 
+    console.log("changeEmailVerifiedState   sdvsdv", changeEmailVerifiedState)
+
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
 
@@ -82,7 +84,9 @@ const EditProfile = () => {
     const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
 
     const sendVerificationEmail = () => {
-        dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
+        if(!changeEmailVerifiedState){
+            dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
+        } 
     }
 
     const [otp, setOtp] = useState(["", "", "", ""]);
@@ -367,14 +371,14 @@ const EditProfile = () => {
 
             {
                 sendVerificationEmailModal && <div className='verify_email_wrapper'>
-                    <div className='verify_email_content_wrapper'>
+                    <div className={`verify_email_content_wrapper ${darkmodeOn && "dark"}`}>
                         <div>
                             <button onClick={() => setSendVerificationEmailModal(false)}>X</button>
                         </div>
 
                         <div>
                             <div>
-                                <img src="./email_verification.png" alt="" />
+                                <img src="/email_verification.png" alt="" />
                             </div>
                             <div>
                                 <div>

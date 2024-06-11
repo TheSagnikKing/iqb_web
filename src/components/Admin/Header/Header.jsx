@@ -86,17 +86,17 @@ const Header = () => {
 
   const [togglecheck, setTogglecheck] = useState(false)
 
-    const toggleHandler = () => {
-        // setTogglecheck((prev) => !prev)
-        setTogglecheck((prev) => {
-            if (!prev) {
-                darkHandler()
-            } else {
-                lightHandler()
-            }
-            return !prev
-        })
-    }
+  const toggleHandler = () => {
+    // setTogglecheck((prev) => !prev)
+    setTogglecheck((prev) => {
+      if (!prev) {
+        darkHandler()
+      } else {
+        lightHandler()
+      }
+      return !prev
+    })
+  }
 
   useEffect(() => {
     if (localStorage.getItem("dark") === "On") {
@@ -124,13 +124,16 @@ const Header = () => {
   const darkmodeOn = darkMode === "On"
   return (
     <header className='admin_header_wrapper'>
-      <div>
+      <div style={{
+        border:darkmodeOn && "1px solid var(--primary-text-light-color1)",
+        borderRadius: darkmodeOn && "2rem"
+      }}>
         <div
           style={{
-            background: currentmode ? "limegreen" : "#000"
+            background: currentmode ? "#FF8A08" : "#000"
           }}
         >
-          <p className={`dashboard_toggle_btn_text ${currentmode ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{currentmode ? "Light" : "Dark"}</p>
+          <p className={`dashboard_toggle_btn_text ${currentmode ? 'dashboard_toggle_btn_text_active' : 'dashboard_toggle_btn_text_inactive'}`}>{currentmode ? <Sunicon /> : <MoonIcon />}</p>
           <button
             className={`dashboard_toggle_btn ${currentmode ? 'dashboard_toggle_active' : 'dashboard_toggle_inactive'}`}
             onClick={toggleHandler}
@@ -141,7 +144,7 @@ const Header = () => {
       <div />
 
       <div className={`profile_header_wrapper ${darkmodeOn && "dark"}`}>
-        
+
         <div><Notificationicon /></div>
         <div><Settingsicon /></div>
         {

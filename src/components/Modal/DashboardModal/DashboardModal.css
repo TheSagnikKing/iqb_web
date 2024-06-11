@@ -120,6 +120,16 @@
     font-size: 1.6rem;
 }
 
+/* Dark Css Style */
+
+.dashboard_modal__content.dark{
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.dashboard_modal__content.dark>button:nth-child(1){
+    background-color: var(--dark-mode-bg-color-4);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .dashboard_modal__content{
