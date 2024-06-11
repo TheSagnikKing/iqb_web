@@ -314,7 +314,7 @@
     -o-border-radius: 15px;
 }
 
-.dashboard_toggle_btn {
+.salononline_toggle_btn {
     background-color: #fff;
     height: 1.6rem;
     width: 4rem;
@@ -330,7 +330,7 @@
     top: 0px;
 }
 
-.dashboard_toggle_active {
+.salononline_toggle_active {
     transform: translateX(4.8rem);
     transition: 300ms ease;
     -webkit-transform: translateX(4.8rem);
@@ -339,7 +339,7 @@
     -o-transform: translateX(4.8rem);
 }
 
-.dashboard_toggle_inactive {
+.salononline_toggle_inactive {
     transform: translateX(0rem);
     transition: 300ms ease;
     -webkit-transform: translateX(0rem);
@@ -348,7 +348,7 @@
     -o-transform: translateX(0rem);
 }
 
-.dashboard_toggle_btn_text {
+.salononline_toggle_btn_text {
     position: absolute;
     top: 0px;
     height: 1.6rem;
@@ -360,13 +360,13 @@
 
 }
 
-.dashboard_toggle_btn_text_active {
+.salononline_toggle_btn_text_active {
     left: 0.5rem;
     opacity: 1;
     color: #000;
 }
 
-.dashboard_toggle_btn_text_inactive {
+.salononline_toggle_btn_text_inactive {
     right: 0.5rem;
     color: #fff;
 }
