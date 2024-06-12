@@ -61,25 +61,26 @@
   color: var(--primary-text-light-color1);
 }
 
+.sidebar {
+  transition: background-color 0ms, width 300ms ease;
+}
+
+
 .show {
   width: 28rem;
   height: 100vh;
-  transition: 300ms ease;
 }
 
 .hide {
   width: 7rem;
-  transition: 300ms ease;
 }
 
 .hide .menu_item {
   justify-content: center;
-  transition: 300ms ease;
 }
 
 .hide .menu_item>p:nth-child(2) {
   display: none;
-  transition: 300ms ease;
 }
 
 .titleActive {
@@ -163,7 +164,6 @@
 .content>div>div:nth-child(2) {
   height: calc(100vh - 6rem);
   width: 100%;
-  /* overflow-y: auto; */
   background-color: var(--primary-bg-light-color1);
   font-size: 2rem;
 }
@@ -238,18 +238,15 @@
 
 .content.dark{
   background-color: var(--dark-mode-bg-color-1);
-  transition: 300ms ease;
 }
 
 .content.dark>div>div:nth-child(2){
   background-color: var(--dark-mode-bg-color-1);
-  transition: 300ms ease;
 }
 
 .sidebar.dark{
   background-color: var(--dark-mode-bg-color-2);
   border-right: 1px dashed var(--primary-text-light-color1);
-  transition: 300ms ease;
 }
 
 .sidebar_top_salon>p:nth-child(2){

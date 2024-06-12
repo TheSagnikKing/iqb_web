@@ -61,17 +61,6 @@
   color: var(--primary-text-light-color1);
 }
 
-.show {
-  width: 28rem;
-  height: 100vh;
-  transition: 300ms ease;
-}
-
-.hide {
-  width: 7rem;
-  transition: 300ms ease;
-}
-
 .hide .menu_item {
   justify-content: center;
   transition: 300ms ease;
@@ -283,19 +272,9 @@
 
   .mobile_content.dark {
     background-color: var(--dark-mode-bg-color-1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
   }
 
-  .mobile_content.dark>div>div:nth-child(2){
+  .mobile_content.dark>div>div:nth-child(2) {
     background-color: var(--dark-mode-bg-color-1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
-}
+  }
 }

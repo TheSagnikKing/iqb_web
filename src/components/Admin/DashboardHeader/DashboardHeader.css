@@ -1,18 +1,12 @@
 .admin_dashboard_header_wrapper {
     width: 100%;
     height: 6rem;
-    /*border-bottom: 1px solid rgb(79, 79, 79);
-    */
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--primary-bg-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
+
 
 .choose_salon_div {
     margin-inline: auto;
@@ -167,8 +161,6 @@
     -o-border-radius: 5px;
     padding: 1rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
-    /*border: 1px solid #000;
-    */
     z-index: 100;
     background-color: var(--primary-bg-light-color1);
     overflow-y: scroll;
@@ -187,7 +179,7 @@
 }
 
 .dashboard_salon_list_dropdown::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .dashboard_salon_list_dropdown::-webkit-scrollbar-thumb {
@@ -267,11 +259,6 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     width: 15rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     overflow: hidden;
 }
 
@@ -327,7 +314,6 @@
 
 .admin_dashboard_header_wrapper.dark {
     background-color: var(--dark-mode-bg-color-1);
-    transition: 300ms ease;
 }
 
 .choose_salon_div.dark>p:nth-child(1) {
@@ -355,7 +341,6 @@
 
 .dashboard_salon_list_dropdown.dark {
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
 }
 
 .dashboard_salon_list_dropdown.dark>p {
@@ -370,6 +355,7 @@
 .dashboard_mobile_menu.dark {
     color: var(--primary-text-light-color1);
 }
+
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .profile_wrapper>div:nth-child(1) {
@@ -571,12 +557,8 @@
         box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.4);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
-        transition: 300ms ease-in;
-        -webkit-transition: 300ms ease-in;
-        -moz-transition: 300ms ease-in;
-        -ms-transition: 300ms ease-in;
-        -o-transition: 300ms ease-in;
         padding: 2rem;
+        transition: background-color 0ms, right 300ms ease;
     }
 
     .dashboard_mobile_sidebar_active {
@@ -722,23 +704,18 @@
 
     .dashboard_mobile_sidebar_container.dark {
         background-color: var(--dark-mode-bg-color-3);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
     }
 
     .dashboard_mobile_sidebar_container.dark>div>p,
-    .dashboard_mobile_sidebar_container.dark>div>div{
+    .dashboard_mobile_sidebar_container.dark>div>div {
         color: var(--primary-text-light-color1);
     }
 
-    .dashboard_mobile_menu_item_active.dark{
+    .dashboard_mobile_menu_item_active.dark {
         background-color: var(--dark-mode-bg-color-4) !important;
     }
 
-    .dashboard_mobile_sidebar_container.dark>button:nth-child(1){
+    .dashboard_mobile_sidebar_container.dark>button:nth-child(1) {
         background-color: var(--dark-mode-bg-color-4);
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     }
@@ -946,11 +923,7 @@
         background-color: var(--primary-bg-light-color1);
         padding: 2rem;
         overflow-y: scroll;
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
+        transition: background-color 0ms, right 300ms ease;
     }
 
     .dashboard_mobile_sidebar_active {
@@ -1092,23 +1065,18 @@
 
     .dashboard_mobile_sidebar_container.dark {
         background-color: var(--dark-mode-bg-color-3);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
     }
 
     .dashboard_mobile_sidebar_container.dark>div>p,
-    .dashboard_mobile_sidebar_container.dark>div>div{
+    .dashboard_mobile_sidebar_container.dark>div>div {
         color: var(--primary-text-light-color1);
     }
 
-    .dashboard_mobile_menu_item_active.dark{
+    .dashboard_mobile_menu_item_active.dark {
         background-color: var(--dark-mode-bg-color-4) !important;
     }
 
-    .dashboard_mobile_sidebar_container.dark>button:nth-child(1){
+    .dashboard_mobile_sidebar_container.dark>button:nth-child(1) {
         background-color: var(--dark-mode-bg-color-4);
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     }
