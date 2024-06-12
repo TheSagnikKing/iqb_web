@@ -125,7 +125,7 @@ const Header = () => {
   return (
     <header className='admin_header_wrapper'>
       <div style={{
-        border:darkmodeOn && "1px solid var(--primary-text-light-color1)",
+        border: darkmodeOn && "1px solid var(--primary-text-light-color1)",
         borderRadius: darkmodeOn && "2rem"
       }}>
         <div
@@ -187,7 +187,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`mobile_sidebar_container ${sidebarToggle ? "mobile_sidebar_active" : "mobile_sidebar_inactive"}`}
+        className={`mobile_sidebar_container ${sidebarToggle ? "mobile_sidebar_active" : "mobile_sidebar_inactive"} ${darkmodeOn && "dark"}`}
         ref={MobileIconDropRef}
       >
         <button onClick={() => setSidebarToggle(false)}><MobileCrossIcon /></button>
@@ -196,18 +196,18 @@ const Header = () => {
           menudata.map((m) => (
             <div
               key={m.id}
-              className={`${m.url === location?.pathname && "mobile_menu_item_active"}`}
+              className={`${location.pathname.includes(m.url) && `mobile_menu_item_active ${darkmodeOn && "dark"}`}`}
               onClick={() => {
                 navigate(m?.url)
                 setSidebarToggle(false)
               }}
             >
               <div style={{
-                color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
               }}>{m.icon}</div>
               <p
                 style={{
-                  color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                  color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
                 }}>{m.title}</p>
             </div>
           ))
@@ -221,6 +221,21 @@ const Header = () => {
         <div onClick={() => dispatch(AdminLogoutAction(navigate))}>
           <div><LogoutIcon /></div>
           <p>Logout</p>
+        </div>
+
+        <div className='dashboard_theme_container'>
+          <p>Theme</p>
+          <div
+            style={{
+              background: currentmode ? "#FF8A08" : "#000"
+            }}
+          >
+            <p className={`toggle_btn_text ${currentmode ? 'toggle_btn_text_active' : 'toggle_btn_text_inactive'}`}>{currentmode ? <Sunicon /> : <MoonIcon />}</p>
+            <button
+              className={`toggle_btn ${currentmode ? 'toggle_active' : 'toggle_inactive'}`}
+              onClick={toggleHandler}
+            ></button>
+          </div>
         </div>
       </div>
     </header>

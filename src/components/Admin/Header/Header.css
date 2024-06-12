@@ -120,11 +120,11 @@
     display: none;
 }
 
-.mobile_sidebar_container{
+.mobile_sidebar_container {
     display: none;
 }
 
-.profile_drop_container{
+.profile_drop_container {
     position: absolute;
     top: 5rem;
     right: 0rem;
@@ -144,7 +144,7 @@
     width: 15rem;
 }
 
-.profile_drop_container>p{
+.profile_drop_container>p {
     min-height: 2.5rem;
     width: 100%;
     display: flex;
@@ -160,13 +160,13 @@
     font-weight: 500;
 }
 
-.profile_drop_container>div:hover{
+.profile_drop_container>div:hover {
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
     color: #fff;
 }
 
-.profile_drop_container>div{
+.profile_drop_container>div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -181,12 +181,12 @@
     cursor: pointer;
 }
 
-.profile_drop_container>div>div:nth-child(2){
+.profile_drop_container>div>div:nth-child(2) {
     font-size: 1.6rem;
     font-weight: 500;
 }
 
-.profile_drop_container>div>div:nth-child(1){
+.profile_drop_container>div>div:nth-child(1) {
     display: grid;
     place-items: center;
     font-size: 1.6rem;
@@ -195,7 +195,7 @@
 
 /* Dark Css Style */
 
-.profile_header_wrapper.dark>div{
+.profile_header_wrapper.dark>div {
     color: var(--primary-text-light-color1);
 }
 
@@ -223,12 +223,12 @@
         box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.4);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
-        transition: 300ms ease-in;
-        -webkit-transition: 300ms ease-in;
-        -moz-transition: 300ms ease-in;
-        -ms-transition: 300ms ease-in;
-        -o-transition: 300ms ease-in;
+        transition: 300ms ease;
         padding: 2rem;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
     }
 
     .mobile_sidebar_active {
@@ -239,7 +239,7 @@
         right: -90vw;
     }
 
-    .mobile_sidebar_container{
+    .mobile_sidebar_container {
         display: block;
     }
 
@@ -286,13 +286,40 @@
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div p{
+    .mobile_sidebar_container>div p {
         font-size: 1.6rem;
     }
 
     .mobile_menu_item_active {
         background-color: var(--sidebar-bg-color) !important;
         border-right: 6px solid var(--primary-bg-color3);
+    }
+
+    .admin_header_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .mobile_sidebar_container.dark {
+        background-color: var(--dark-mode-bg-color-3);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+    }
+
+    .mobile_sidebar_container.dark>div>p,
+    .mobile_sidebar_container.dark>div>div {
+        color: var(--primary-text-light-color1);
+    }
+
+    .mobile_menu_item_active.dark {
+        background-color: var(--dark-mode-bg-color-4) !important;
+    }
+
+    .mobile_sidebar_container.dark>button:nth-child(1) {
+        background-color: var(--dark-mode-bg-color-4);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     }
 }
 
@@ -337,7 +364,7 @@
         right: -60vw;
     }
 
-    .mobile_sidebar_container{
+    .mobile_sidebar_container {
         display: block;
     }
 
@@ -384,12 +411,39 @@
         font-size: 1.6rem;
     }
 
-    .mobile_sidebar_container>div p{
+    .mobile_sidebar_container>div p {
         font-size: 1.6rem;
     }
 
     .mobile_menu_item_active {
         background-color: var(--sidebar-bg-color) !important;
         border-right: 6px solid var(--primary-bg-color3);
+    }
+
+    .admin_header_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .mobile_sidebar_container.dark {
+        background-color: var(--dark-mode-bg-color-3);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+    }
+
+    .mobile_sidebar_container.dark>div>p,
+    .mobile_sidebar_container.dark>div>div {
+        color: var(--primary-text-light-color1);
+    }
+
+    .mobile_menu_item_active.dark {
+        background-color: var(--dark-mode-bg-color-4) !important;
+    }
+
+    .mobile_sidebar_container.dark>button:nth-child(1) {
+        background-color: var(--dark-mode-bg-color-4);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     }
 }

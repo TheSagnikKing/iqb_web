@@ -719,6 +719,29 @@
     .chooseSalon_model_content.dark>div:nth-child(4) p {
         background-color: var(--dark-mode-bg-color-4);
     }
+
+    .dashboard_mobile_sidebar_container.dark {
+        background-color: var(--dark-mode-bg-color-3);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+    }
+
+    .dashboard_mobile_sidebar_container.dark>div>p,
+    .dashboard_mobile_sidebar_container.dark>div>div{
+        color: var(--primary-text-light-color1);
+    }
+
+    .dashboard_mobile_menu_item_active.dark{
+        background-color: var(--dark-mode-bg-color-4) !important;
+    }
+
+    .dashboard_mobile_sidebar_container.dark>button:nth-child(1){
+        background-color: var(--dark-mode-bg-color-4);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:1140px) {
@@ -921,13 +944,13 @@
         box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.4);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
-        transition: 300ms ease-in;
-        -webkit-transition: 300ms ease-in;
-        -moz-transition: 300ms ease-in;
-        -ms-transition: 300ms ease-in;
-        -o-transition: 300ms ease-in;
         padding: 2rem;
         overflow-y: scroll;
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
     }
 
     .dashboard_mobile_sidebar_active {
@@ -1065,5 +1088,28 @@
 
     .chooseSalon_model_content.dark>div:nth-child(4) p {
         background-color: var(--dark-mode-bg-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark {
+        background-color: var(--dark-mode-bg-color-3);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+    }
+
+    .dashboard_mobile_sidebar_container.dark>div>p,
+    .dashboard_mobile_sidebar_container.dark>div>div{
+        color: var(--primary-text-light-color1);
+    }
+
+    .dashboard_mobile_menu_item_active.dark{
+        background-color: var(--dark-mode-bg-color-4) !important;
+    }
+
+    .dashboard_mobile_sidebar_container.dark>button:nth-child(1){
+        background-color: var(--dark-mode-bg-color-4);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     }
 }

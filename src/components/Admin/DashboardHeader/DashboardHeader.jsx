@@ -382,7 +382,7 @@ const DashboardHeader = () => {
 
 
             <div
-                className={`dashboard_mobile_sidebar_container ${sidebarToggle ? "dashboard_mobile_sidebar_active" : "dashboard_mobile_sidebar_inactive"}`}
+                className={`dashboard_mobile_sidebar_container ${sidebarToggle ? "dashboard_mobile_sidebar_active" : "dashboard_mobile_sidebar_inactive"} ${darkmodeOn && "dark"}`}
                 ref={MobileIconDropRef}
             >
                 <button onClick={() => setSidebarToggle(false)}><MobileCrossIcon /></button>
@@ -391,15 +391,15 @@ const DashboardHeader = () => {
                     menudata.map((m) => (
                         <div
                             key={m.id}
-                            className={`${m.url === location?.pathname && "dashboard_mobile_menu_item_active"}`}
+                            className={`${location.pathname.includes(m.url) && `dashboard_mobile_menu_item_active ${darkmodeOn && "dark"}`}`}
                             onClick={() => navigate(m?.url)}
                         >
                             <div style={{
-                                color: m.url === location?.pathname && "var(--primary-bg-color3)"
+                                color: location.pathname.includes(m.url) && "var(--primary-bg-color3)"
                             }}>{m.icon}</div>
                             <p
                                 style={{
-                                    color: m.url === location?.pathname && " var(--primary-bg-color3)"
+                                    color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
                                 }}>{m.title}</p>
                         </div>
                     ))
