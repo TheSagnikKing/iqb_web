@@ -157,19 +157,25 @@ const DashboardHeader = () => {
     } = getAdminSalonList
 
 
-    const [currentActiveSalon, setCurrentActiveSalon] = useState("")
-    const [chooseSalonId, setChooseSalonId] = useState(adminProfile?.salonId)
-
     const selectedActiveSalon = (salon) => {
-        setCurrentActiveSalon(salon.salonName)
-        setChooseSalonId(salon.salonId)
+        dispatch({
+            type:"ADMIN_SET_SALON",
+            payload:{
+                currentActiveSalon: salon.salonName,
+                chooseSalonId: salon.salonId
+
+            }
+        })
         setSalonlistdrop(false)
     }
+
+    const adminSetSalon = useSelector(state => state.adminSetSalon)
+
 
     const applySelectedSalonHandler = () => {
 
         const applySalonData = {
-            salonId: chooseSalonId,
+            salonId: adminSetSalon?.chooseSalonId,
             adminEmail
         }
 
@@ -179,11 +185,11 @@ const DashboardHeader = () => {
     const getDefaultSalonControllerRef = useRef(new AbortController())
 
     useEffect(() => {
-        if (adminProfile && chooseSalonId != 0) {
+            if (adminProfile) {
             const controller = new AbortController();
             getDefaultSalonControllerRef.current = controller;
 
-            dispatch(adminGetDefaultSalonAction(adminEmail, controller.signal, setChooseSalonId, setCurrentActiveSalon));
+            dispatch(adminGetDefaultSalonAction(adminEmail, controller.signal,adminSetSalon));
 
             return () => {
                 if (getDefaultSalonControllerRef.current) {
@@ -205,7 +211,6 @@ const DashboardHeader = () => {
 
     const [check, setCheck] = useState(true);
 
-    // const darkMode = localStorage.getItem("dark")
     const darkMode = useSelector(darkmodeSelector)
 
     console.log(darkMode)
@@ -242,7 +247,7 @@ const DashboardHeader = () => {
             <div className={`choose_salon_div ${darkmodeOn && "dark"}`}>
                 <p>Choose Salon</p>
                 <div>
-                    <p>{currentActiveSalon}</p>
+                    <p>{adminSetSalon?.currentActiveSalon}</p>
                     <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
                     <div
                         className={`dashboard_salon_list_dropdown ${darkmodeOn && "dark"}`}
@@ -276,8 +281,8 @@ const DashboardHeader = () => {
                         }
                     </div>
                 </div>
-                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
-
+                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
+            
             </div>
 
             <div className='mobile_choose_salon_div'>

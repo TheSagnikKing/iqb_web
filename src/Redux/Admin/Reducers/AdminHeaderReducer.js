@@ -60,7 +60,7 @@ const initialState = {
 }
 
 export const colorReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case DARK_MODE_ON:
             return { ...state, darkmode: "On" };
         case DARK_MODE_OFF:
@@ -90,3 +90,18 @@ export const darkmodeSelector = (state) => state.color.darkmode
 //             return state;
 //     }
 // };
+
+export const adminSetSalonReducer = (state = {
+    currentActiveSalon: "",
+    chooseSalonId: ""
+}, action) => {
+    switch (action.type) {
+        case "ADMIN_SET_SALON":
+            return {
+                currentActiveSalon:action.payload.currentActiveSalon,
+                chooseSalonId:action.payload.chooseSalonId
+            };
+        default:
+            return state;
+    }
+};

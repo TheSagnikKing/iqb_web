@@ -784,7 +784,7 @@ const CreateSalon = () => {
 
   const navigate = useNavigate()
 
-  const [uploadSalonImages, setUploadSalonImages] = useState([])
+  const [uploadSalonImages, setUploadSalonImages] = useState("")
 
   const createSalonHandler = async () => {
     const salondata = {
@@ -852,7 +852,7 @@ const CreateSalon = () => {
   // console.log("From DiffArray ",uploadSalonImages)
 
   useEffect(() => {
-    if (createSalonResponse?.salonId) {
+    if (createSalonResponse?.salonId && uploadSalonImages != "") {
       const uploadImageHandler = async () => {
         if (uploadSalonImages != null) {
           const formData = new FormData();
@@ -909,7 +909,7 @@ const CreateSalon = () => {
     }
 
     //For Salon Logo
-    if (createSalonResponse?.salonId) {
+    if (createSalonResponse?.salonId && uploadSalonLogo != "") {
       const uploadImageHandler = async () => {
         if (uploadSalonLogo != null) {
           const formData = new FormData();
@@ -1632,11 +1632,11 @@ const CreateSalon = () => {
             <div>
               <button onClick={() => deleteSalonImageHandler(openBlobSalonImage)}>
                 <div><DeleteIcon /></div>
-                <p>Delete</p>
+                <p>Remove</p>
               </button>
               <button onClick={handleCurrentEditSalonImageButtonClick}>
                 <div><EditIcon /></div>
-                <p>Edit</p>
+                <p>Reselect</p>
 
                 <input
                   type="file"

@@ -35,7 +35,7 @@ export const adminApplySalonAction = (applySalondata) => async (dispatch) => {
 }
 
 
-export const adminGetDefaultSalonAction = (adminEmail, signal,setChooseSalonId,setCurrentActiveSalon) => async (dispatch) => {
+export const adminGetDefaultSalonAction = (adminEmail, signal, adminSetSalon) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_GET_DEFAULT_SALON_REQ })
 
@@ -48,9 +48,17 @@ export const adminGetDefaultSalonAction = (adminEmail, signal,setChooseSalonId,s
             payload: data
         })
 
-        //Value ta update korbo
-        setCurrentActiveSalon(data?.response?.salonName)
-        setChooseSalonId(data?.response?.salonId)
+        dispatch({
+            type: "ADMIN_SET_SALON",
+            payload:{
+                currentActiveSalon: data?.response?.salonName,
+                chooseSalonId: data?.response?.salonId
+            }
+        })
+
+        // //Value ta update korbo
+        // setCurrentActiveSalon(data?.response?.salonName)
+        // setChooseSalonId(data?.response?.salonId)
 
     } catch (error) {
 

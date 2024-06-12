@@ -186,18 +186,27 @@ export const adminDeleteSalonAction = (salonId, salonmongoid) => async (dispatch
     }
 }
 
-export const adminCreateSalonAction = (salondata,navigate) => async (dispatch) => {
+export const adminCreateSalonAction = (salondata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CREATE_SALON_REQ })
 
-        const { data } = await api.post("/api/salon/createSalonByAdmin",salondata)
+        const { data } = await api.post("/api/salon/createSalonByAdmin", salondata)
 
         dispatch({
             type: ADMIN_CREATE_SALON_SUCCESS,
             payload: data
         })
 
-        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        dispatch({
+            type: "ADMIN_SET_SALON",
+            payload: {
+                currentActiveSalon: data?.response?.salonName,
+                chooseSalonId: data?.response?.salonId
+
+            }
+        })
+
+        const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
             type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
@@ -225,11 +234,11 @@ export const adminCreateSalonAction = (salondata,navigate) => async (dispatch) =
 }
 
 
-export const adminEditSalonAction = (salondata,navigate) => async (dispatch) => {
+export const adminEditSalonAction = (salondata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_EDIT_SALON_REQ })
 
-        const { data } = await api.put("/api/salon/updateSalonBySalonIdAndAdminEmail",salondata)
+        const { data } = await api.put("/api/salon/updateSalonBySalonIdAndAdminEmail", salondata)
 
         dispatch({
             type: ADMIN_EDIT_SALON_SUCCESS,
@@ -256,11 +265,11 @@ export const adminEditSalonAction = (salondata,navigate) => async (dispatch) => 
     }
 }
 
-export const adminUpdateSalonSettingsAction = (appointmentdata,navigate) => async (dispatch) => {
+export const adminUpdateSalonSettingsAction = (appointmentdata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_SALON_SETTINGS_REQ })
 
-        const { data } = await api.put("/api/salonSettings/updateSalonSettings",appointmentdata)
+        const { data } = await api.put("/api/salonSettings/updateSalonSettings", appointmentdata)
 
         dispatch({
             type: ADMIN_UPDATE_SALON_SETTINGS_SUCCESS,
