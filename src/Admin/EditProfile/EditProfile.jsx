@@ -84,9 +84,9 @@ const EditProfile = () => {
     const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
 
     const sendVerificationEmail = () => {
-        if(!changeEmailVerifiedState){
+        // if(!changeEmailVerifiedState){
             dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
-        } 
+        // } 
     }
 
     const [otp, setOtp] = useState(["", "", "", ""]);
@@ -211,9 +211,10 @@ const EditProfile = () => {
 
     return (
         <div className='admin_edit_profile'>
+            <p style={{color:darkmodeOn && "var(--primary-text-light-color1)",marginLeft:"1%",paddingTop:"2rem",fontWeight:"bold"}}>Edit profile</p>
             <div className={`admin_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
-                    <p>Edit profile</p>
+                    {/* <p>Edit profile</p> */}
                     <div>
                         {
                             uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />

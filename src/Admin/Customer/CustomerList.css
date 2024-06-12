@@ -98,7 +98,7 @@
 }
 
 .customer_content_body::-webkit-scrollbar-track {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .customer_content_body::-webkit-scrollbar-thumb {

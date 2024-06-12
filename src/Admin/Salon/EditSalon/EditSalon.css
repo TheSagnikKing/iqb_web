@@ -1615,6 +1615,39 @@
         padding-block: 1rem;
         padding-inline: 0rem;
     }
+
+    .add_services_drop_container>div:nth-child(6){
+        grid-template-columns: 1fr;
+    }
+
+    /* Dark Css Style */
+    .salon_logo_wrapper.dark p {
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_logo_wrapper.dark>div:nth-child(2) {
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark p{
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark>div:nth-child(2){
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
+    }
 }
 
 @media screen and (min-width: 431px) and (max-width:768px) {
@@ -1751,6 +1784,39 @@
         font-size: 1.6rem;
         line-height: 3rem;
     }
+
+    .add_services_drop_container>div:nth-child(6){
+        grid-template-columns: 1fr;
+    }
+
+    /* Dark Css Style */
+    .salon_logo_wrapper.dark p {
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_logo_wrapper.dark>div:nth-child(2) {
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark p{
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark>div:nth-child(2){
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
+    }
 }
 
 @media screen and (min-width: 769px) and (max-width:1250px) {
@@ -1886,6 +1952,35 @@
     .salon_images_wrapper>div:nth-child(2)>p {
         font-size: 1.6rem;
         line-height: 3rem;
+    }
+
+    /* Dark Css Style */
+    .salon_logo_wrapper.dark p {
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_logo_wrapper.dark>div:nth-child(2) {
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark p{
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_images_wrapper.dark>div:nth-child(2){
+        background-color: var(--dark-mode-bg-color-2);
+        transition: 300ms ease;
+        -webkit-transition: 300ms ease;
+        -moz-transition: 300ms ease;
+        -ms-transition: 300ms ease;
+        -o-transition: 300ms ease;
+        color: var(--primary-text-light-color1);
     }
 }
 

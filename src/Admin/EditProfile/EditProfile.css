@@ -1,7 +1,7 @@
 .admin_edit_profile {
     height: calc(100vh - 6rem);
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .admin_edit_profile_content_wrapper {
@@ -243,6 +243,7 @@
     font-size: 1.6rem;
     color: red;
     background-color: var(--primary-bg-light-color1);
+    z-index: 1;
 }
 
 .verify_email_content_wrapper>div:nth-child(2) {
@@ -658,6 +659,12 @@
     -o-border-radius: 1rem;
 }
 
+.admin_edit_profile_content_wrapper>div:nth-child(1){
+    /* background-color: red; */
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
 /* Dark Css Style */
 
 .admin_edit_profile_content_wrapper.dark{
@@ -708,6 +715,7 @@
 
     .verify_email_content_wrapper>div:nth-child(2) {
         grid-template-columns: 1fr;
+        grid-template-rows: 42vh 1fr;
     }
 
     .admin_edit_profile_content_wrapper>div {
@@ -715,7 +723,8 @@
     }
 
     .verify_email_content_wrapper {
-        width: 90%;
+        max-width: 90vw;
+        padding: 1rem;
     }
 
     .verify_email_content_wrapper>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(3) {
@@ -740,7 +749,7 @@
     }
 
     .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>input {
-        width: calc(100% - 10.5rem);
+        width: calc(100% - 5.5rem);
     }
 
     .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>button {
@@ -754,11 +763,19 @@
     .admin_profile_mobile_container>div>div:nth-child(1) {
         width: 70% !important;
     }
+
+    .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(1)>div>button{
+        width: 5rem;
+    }
+    .admin_edit_profile_content_wrapper>div:nth-child(3)>div:nth-child(2)>div>button{
+        width: 5rem;
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
     .verify_email_content_wrapper>div:nth-child(2) {
         grid-template-columns: 1fr;
+        grid-template-rows: 42vh 1fr;
     }
 
     .admin_edit_profile_content_wrapper>div {
@@ -766,7 +783,8 @@
     }
 
     .verify_email_content_wrapper {
-        width: 90%;
+        max-width: 90vw;
+        padding: 1rem;
     }
 
     .verify_email_content_wrapper>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(3) {
@@ -806,6 +824,7 @@
 @media screen and (min-width:769px) and (max-width:1250px) {
     .verify_email_content_wrapper>div:nth-child(2) {
         grid-template-columns: 1fr;
+        grid-template-rows: 42vh 1fr;
     }
 
     .admin_edit_profile_content_wrapper>div {
@@ -813,7 +832,8 @@
     }
 
     .verify_email_content_wrapper {
-        width: 90%;
+        max-width: 90vw;
+        padding: 1rem;
     }
 
     .verify_email_content_wrapper>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(3) {

@@ -1574,7 +1574,7 @@ const EditSalon = () => {
           </div> */}
 
 
-          <div className='salon_logo_wrapper'>
+          <div className={`salon_logo_wrapper ${darkmodeOn && "dark"}`}>
             <p>Select Salon Logo</p>
             <div>
               <button onClick={() => handleMobileSalonLogoButtonClick()}>
@@ -1592,7 +1592,7 @@ const EditSalon = () => {
           </div>
 
 
-          <div className='salon_images_wrapper'>
+          <div className={`salon_images_wrapper ${darkmodeOn && "dark"}`}>
             <div>
               <p>Select Salon Images</p>
 

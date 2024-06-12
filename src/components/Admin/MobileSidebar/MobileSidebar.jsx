@@ -6,6 +6,8 @@ import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons'
 import Header from '../Header/Header.jsx'
 import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
 
 const MobileSidebar = () => {
 
@@ -15,6 +17,10 @@ const MobileSidebar = () => {
   const location = useLocation()
 
   const [loading, setLoading] = useState(false)
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
 
   return (
     <main className='container'>
@@ -57,7 +63,7 @@ const MobileSidebar = () => {
         <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div> */}
 
-      <div className='mobile_content'
+      <div className={`mobile_content ${darkmodeOn && "dark"}`}
         style={{
           width: "100%"
         }}

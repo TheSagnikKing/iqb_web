@@ -51,7 +51,7 @@
 
 
 .salonadv_wrapper>div:nth-child(1)>div>button:nth-child(2){
-    width: 12rem;
+    width: 13rem;
     transition: 300ms ease;
     -webkit-transition: 300ms ease;
     -moz-transition: 300ms ease;
@@ -280,11 +280,23 @@
         flex-direction: column;
         gap: 1.5rem;
         align-items: flex-start;
-        padding-left: 1.5rem;
+        /* padding-left: 1.5rem; */
     }
 
     .salonadv_content{
         grid-template-columns: 1fr;
+    }
+
+    .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1){
+        width: 20rem;
+    }
+
+    .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button{
+        width: 12rem;
+    }
+
+    .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button>p{
+        font-size: 1.2rem;
     }
 }
 

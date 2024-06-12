@@ -134,11 +134,19 @@
 @media screen and (min-width:0px) and (max-width:430px) {
     .dashboard_modal__content{
         width: 90vw;
+        height: 70vh;
+    }
+    .salon_info_container>div>textarea{
+        height: 43vh;
     }
 }
 
 @media screen and (min-width:431px) and (max-width:1140px){
     .dashboard_modal__content{
-        width: 80vw;
+        width: 90vw;
+        height: 70vh;
+    }
+    .salon_info_container>div>textarea{
+        height: 43vh;
     }
 }
