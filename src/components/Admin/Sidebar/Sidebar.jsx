@@ -38,17 +38,6 @@ const Sidebar = () => {
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
-              {/* {
-                loading ?
-                  <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
-                  <>
-                    <div onClick={() => navigate("/admin-dashboard")} style={{cursor:"pointer"}}>
-                      <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
-                    </div>
-                    <p>IQB</p>
-                  </>
-              } */}
-
               {
                 adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve ?
                   <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
@@ -69,7 +58,9 @@ const Sidebar = () => {
               {/* <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
                 <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
               </div> */}
-              <p>IQB</p>
+              <p style={{
+                color:darkmodeOn && "var(--primary-text-light-color1)"
+              }}>IQB</p>
 
             </div> : ""}
           </p>

@@ -100,7 +100,6 @@ const SignupEditProfile = () => {
             <input
               type="text"
               value={`${gender ? `${gender}` : ''}`}
-              onChange={(e) => setGender(e.target.value)}
               onClick={() => genderDropHandler()}
               ref={genderinputRef}
             />
