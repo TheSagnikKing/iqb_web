@@ -34,11 +34,6 @@
     -moz-border-radius: 1.7rem;
     -ms-border-radius: 1.7rem;
     -o-border-radius: 1.7rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper>div:nth-child(1)>div:nth-child(1)>div:nth-child(1) {
@@ -276,11 +271,6 @@
     padding-block: 2rem;
     overflow-y: scroll;
     background-color: var(--primary-bg-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper>div:nth-child(2)::-webkit-scrollbar {
@@ -322,11 +312,6 @@
     -o-border-radius: 1rem;
     padding-inline: 1rem;
     font-size: 1.6rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper>div:nth-child(2)>div>input:focus {
@@ -1316,11 +1301,6 @@
 
 .salon_mobile_input{
     background-color: var(--bg-color3);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -1336,21 +1316,11 @@
 
 .edit_salon_content_wrapper.dark>div:nth-child(1)>div:nth-child(1){
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
 }
 
 .edit_salon_content_wrapper.dark>div:nth-child(1)>div:nth-child(1)>div:nth-child(2){
     border: 0.8rem solid var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper.dark>div:nth-child(1)>div:nth-child(2)>p{
@@ -1372,11 +1342,6 @@
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div>input{
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(4)>div>p,
@@ -1390,11 +1355,6 @@
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(7)>div>input{
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(6)>div:nth-child(1)>div,
@@ -1402,11 +1362,6 @@
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(7)>div:nth-child(1)>div,
 .edit_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(9)>div:nth-child(3){
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
 }
 
@@ -1429,29 +1384,14 @@
 .add_services_drop_container.dark>div:nth-child(6)>div>input{
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .service_container.dark{
     background-color: var(--dark-mode-bg-color-2);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .service_container_item.dark{
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .service_container_item.dark>p{
@@ -1460,11 +1400,6 @@
 
 .salon_mobile_input.dark{
     background-color: var(--dark-mode-bg-color-2) !important;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_mobile_input.dark input{
@@ -1627,11 +1562,6 @@
 
     .salon_logo_wrapper.dark>div:nth-child(2) {
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 
@@ -1641,11 +1571,6 @@
 
     .salon_images_wrapper.dark>div:nth-child(2){
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 }
@@ -1796,11 +1721,6 @@
 
     .salon_logo_wrapper.dark>div:nth-child(2) {
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 
@@ -1810,11 +1730,6 @@
 
     .salon_images_wrapper.dark>div:nth-child(2){
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 }
@@ -1961,11 +1876,6 @@
 
     .salon_logo_wrapper.dark>div:nth-child(2) {
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 
@@ -1975,11 +1885,6 @@
 
     .salon_images_wrapper.dark>div:nth-child(2){
         background-color: var(--dark-mode-bg-color-2);
-        transition: 300ms ease;
-        -webkit-transition: 300ms ease;
-        -moz-transition: 300ms ease;
-        -ms-transition: 300ms ease;
-        -o-transition: 300ms ease;
         color: var(--primary-text-light-color1);
     }
 }

@@ -52,11 +52,6 @@
 
 .salonadv_wrapper>div:nth-child(1)>div>button:nth-child(2){
     width: 13rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1){
@@ -72,11 +67,6 @@
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper>div:nth-child(1)>div>div:nth-child(1)>button{
@@ -159,11 +149,6 @@
     -ms-border-radius: 1.7rem;
     -o-border-radius: 1.7rem;
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salonadv_cards>div:nth-child(1){
@@ -240,11 +225,6 @@
 .salonadv_wrapper.dark>div:nth-child(1)>div>div:nth-child(1){
     background-color: var(--dark-mode-bg-color-4);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper.dark>div:nth-child(1)>div>div:nth-child(1)>p{
@@ -255,11 +235,6 @@
     background-color: var(--dark-mode-bg-color-4);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salonadv_wrapper.dark>div:nth-child(1)>div>button:nth-child(2)>p{
@@ -268,11 +243,6 @@
 
 .salonadv_cards.dark{
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 @media screen and (min-width: 0px) and (max-width: 768px){

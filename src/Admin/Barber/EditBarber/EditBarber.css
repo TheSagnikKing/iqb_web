@@ -274,11 +274,6 @@
     -moz-border-radius: 1rem;
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 /* Dark Css Style */
@@ -289,11 +284,6 @@
 
 .admin_edit_barber_wrapper_container.dark{
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .admin_edit_barber_wrapper_container.dark>div>p{
@@ -303,11 +293,6 @@
 .admin_edit_barber_wrapper_container.dark>div>input{
     color: var(--primary-text-light-color1);
     background-color: var(--dark-mode-bg-color-2);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .admin_edit_barber_wrapper_container.dark>div:nth-child(4)>div>p{
@@ -317,11 +302,6 @@
 .admin_edit_barber_wrapper_container.dark>div:nth-child(4)>div>input{
     color: var(--primary-text-light-color1);
     background-color: var(--dark-mode-bg-color-2);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .admin_edit_barber_wrapper_container.dark>p:nth-child(5){
@@ -330,20 +310,10 @@
 
 .admin_barber_services_container.dark{
     background-color: var(--dark-mode-bg-color-2) !important;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .admin_barber_services_container_item.dark{
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .admin_barber_services_container_item.dark>div>p:nth-child(1),
@@ -354,11 +324,6 @@
 .admin_barber_services_container_item.dark>div:nth-child(3)>input{
     background-color: var(--dark-mode-bg-color-4);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     border-bottom: 2px solid var(--primary-text-light-color1);
 }
 
@@ -367,11 +332,6 @@
 }
 
 .admin_edit_barber_wrapper_container.dark>div:nth-child(4)>div:nth-child(1)>div{
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
     background-color: var(--dark-mode-bg-color-2);
 }
 
