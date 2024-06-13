@@ -81,6 +81,7 @@ const CreateSalon = () => {
   const [fbLink, setFbLink] = useState("")
   const [twitterLink, setTwitterLink] = useState("")
   const [instraLink, setInstraLink] = useState("")
+  const [tiktokLink, setTiktokLink] = useState("")
 
   const [serviceName, setServiceName] = useState("")
   const [serviceDesc, setServiceDesc] = useState("")
@@ -782,6 +783,7 @@ const CreateSalon = () => {
       fbLink,
       instraLink,
       twitterLink,
+      tiktokLink,
       services: selectedServices,
     }
 
@@ -1514,6 +1516,15 @@ const CreateSalon = () => {
               type="text"
               value={twitterLink}
               onChange={(e) => setTwitterLink(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p>Tiktok Link</p>
+            <input
+              type="text"
+              value={tiktokLink}
+              onChange={(e) => setTiktokLink(e.target.value)}
             />
           </div>
 

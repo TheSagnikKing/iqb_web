@@ -42,19 +42,39 @@ const CustomerList = () => {
     <div className={`customer_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Customer List</p>
-        <div className={`customer_search ${darkmodeOn && "dark"}`}>
-          <input
-            type="text"
-            placeholder='Search Customer'
-          />
-          <div><SearchIcon /></div>
+
+        <div>
+          <div className={`customer_search ${darkmodeOn && "dark"}`}>
+            <input
+              type="text"
+              placeholder='Search Customer'
+            />
+            <div><SearchIcon /></div>
+          </div>
+
+          <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
+            <p>Send</p>
+            <div><Notificationicon /></div>
+          </div>
+
+          <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
+            <p>Send</p>
+            <div><EmailIcon /></div>
+          </div>
+
+          <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
+            <p>Send</p>
+            <div><MessageIcon /></div>
+          </div>
+
         </div>
+
 
         <div className='mobile_customer_search'><SearchIcon /></div>
       </div>
 
       <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
-        {
+        {/* {
           adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -108,7 +128,42 @@ const CustomerList = () => {
               </div>
             )
           )
-        }
+        } */}
+
+        <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
+          <div>
+            <input
+              type="checkbox"
+              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+            />
+            <p>Name</p>
+            <p>Email</p>
+            <p>Gender</p>
+            <p>Mobile Number</p>
+          </div>
+
+
+          <div>
+            <input
+              type="checkbox"
+              style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+            />
+            <p>s.name</p>
+            <p>s.emai</p>
+            <p>s.gender</p>
+            <p>s.mobileNumber</p>
+            {/* <div>
+              <div><Notificationicon /></div>
+            </div>
+            <div>
+              <div><EmailIcon /></div>
+            </div>
+            <div>
+              <div><MessageIcon /></div>
+            </div> */}
+          </div>
+
+        </div>
 
       </div>
 

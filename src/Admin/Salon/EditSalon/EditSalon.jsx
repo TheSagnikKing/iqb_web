@@ -87,6 +87,7 @@ const EditSalon = () => {
   const [fbLink, setFbLink] = useState(currentSalon?.fbLink)
   const [twitterLink, setTwitterLink] = useState(currentSalon?.twitterLink)
   const [instraLink, setInstraLink] = useState(currentSalon?.instraLink)
+  const [tiktokLink, setTiktokLink] = useState(currentSalon?.tiktokLink)
 
   const [serviceName, setServiceName] = useState("")
   const [serviceDesc, setServiceDesc] = useState("")
@@ -728,6 +729,7 @@ const EditSalon = () => {
       fbLink,
       instraLink,
       twitterLink,
+      tiktokLink,
       services: selectedServices,
       salonId: currentSalon?.salonId
     }
@@ -1364,7 +1366,7 @@ const EditSalon = () => {
             </main>
           }
 
-          
+
           <div className={`salon_logo_wrapper ${darkmodeOn && "dark"}`}>
             <p>Select Salon Logo</p>
             <div>
@@ -1437,6 +1439,15 @@ const EditSalon = () => {
               type="text"
               value={twitterLink}
               onChange={(e) => setTwitterLink(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p>Tiktok Link</p>
+            <input
+              type="text"
+              value={tiktokLink}
+              onChange={(e) => setTiktokLink(e.target.value)}
             />
           </div>
 

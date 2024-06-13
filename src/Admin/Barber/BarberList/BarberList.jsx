@@ -189,7 +189,7 @@ const BarberList = () => {
                     checked={allCheckbox}
 
                   />
-                  <p>Salon ID</p>
+                  {/* <p>Salon ID</p> */}
                   <p>Barber Name</p>
                   <p>Email</p>
                   <p>isOnline</p>
@@ -201,7 +201,7 @@ const BarberList = () => {
                       type="checkbox"
                       style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                     />
-                    <p>{b.salonId}</p>
+                    {/* <p>{b.salonId}</p> */}
                     <p>{b.name}</p>
                     <p>{b.email}</p>
                     <div>
