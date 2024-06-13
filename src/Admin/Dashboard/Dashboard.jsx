@@ -281,7 +281,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* {
+            {
               getAllQueueListLoading && !getAllQueueListResolve ?
                 <div>
                   <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -313,16 +313,15 @@ const Dashboard = () => {
                       }
  
                     </div>
-                    <Link to="/admin-queue" style={{ fontSize: "1.2rem", color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)" }}>See All</Link>
                   </> :
                   !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
                     <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
                     !getAllQueueListLoading && !getAllQueueListResolve &&
                     <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
-            } */}
+            }
 
 
-            <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
+            {/* <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
               <div>
                 <p>Customer Name</p>
                 <p>Barber Name</p>
@@ -379,7 +378,7 @@ const Dashboard = () => {
                 <p>q.services</p>
               </div>
 
-            </div>
+            </div> */}
 
           </div>
         </div>
