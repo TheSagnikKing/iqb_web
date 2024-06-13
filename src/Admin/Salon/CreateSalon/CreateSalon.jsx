@@ -579,32 +579,26 @@ const CreateSalon = () => {
     salonImagefileInputRef.current.click();
   };
 
-  // const [uploadSalonImages, setUploadSalonImages] = useState([])
-
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-    // Helper function to generate a unique ID
     const generateUniqueId = () => {
       return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     };
 
-    // Iterate over each uploaded file
     const urls = Array.from(uploadedFiles).map((file) => {
-      // Check if the file type is allowed
       if (!allowedTypes.includes(file.type)) {
         alert("Please upload only valid image files (JPEG, WebP, PNG).");
         return null;
       }
-      // Create a URL representing the file content
+
       const blobUrl = URL.createObjectURL(file);
       const _id = generateUniqueId();
       return { _id, blobUrl, name: file.name };
     });
 
-    // Filter out null values (in case of invalid files) and update the state with valid URLs
     setSalonImages(urls.filter((url) => url !== null));
   };
 
@@ -633,27 +627,6 @@ const CreateSalon = () => {
 
   const mobileSalonImageInputRef = useRef(null);
 
-  const handleMobileSalonImageButtonClick = () => {
-    mobileSalonImageInputRef.current.click();
-  };
-
-  const handleMobileSalonImageFileInputChange = async (e) => {
-    const uploadedFiles = e.target.files;
-
-    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-
-    // Iterate over each uploaded file
-    const names = Array.from(uploadedFiles).map((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null;
-      }
-
-      return file.name;
-    }).filter(Boolean);
-
-    setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
-  };
 
 
   const [selectedLogo, setSelectedLogo] = useState({
@@ -1257,64 +1230,6 @@ const CreateSalon = () => {
             </div>
           </div>
 
-          {/* <div>
-            <div>
-              <p>Start Time</p>
-              <input
-                type="text"
-                value={`${startTime ? `${startTime} hr` : ''}`}
-                onChange={(e) => setStartTime(e.target.value)}
-                onClick={() => startTimeDropHandler()}
-                ref={startTimeinputRef}
-              />
-
-              {startTimeDrop && <div ref={startTimeDropRef}>
-                {timeOptions.map((option) => (
-                  <p key={option} value={option} onClick={() => setStartTimeHandler(option?.value)}>
-                    {option?.value} hr
-                  </p>
-                ))}
-              </div>}
-            </div>
-
-            <div>
-              <p>End Time</p>
-              <input
-                type="text"
-                value={`${endTime ? `${endTime} hr` : ''}`}
-                onChange={(e) => setEndTime(e.target.value)}
-                onClick={() => endTimeDropHandler()}
-                ref={endTimeinputRef}
-              />
-
-              {endTimeDrop && <div ref={endTimeDropRef}>
-                {timeOptions.map((option) => (
-                  <p key={option} value={option} onClick={() => setEndTimeHandler(option?.value)}>
-                    {option?.value} hr
-                  </p>
-                ))}
-              </div>}
-            </div>
-
-            <div>
-              <p>Intvl Tm</p>
-              <input
-                type="text"
-                value={`${intervalTime ? `${intervalTime} mins` : ''}`}
-                onChange={(e) => setIntervalTime(e.target.value)}
-                onClick={() => intervalTimeDropHandler()}
-                ref={intervalTimeinputRef}
-              />
-
-              {intervalTimeDrop && <div ref={intervalTimeDropRef}>
-                {intervalTimemin.map((option) => (
-                  <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
-                    {option} mins
-                  </p>
-                ))}
-              </div>}
-            </div>
-          </div> */}
           <div />
 
           <div>
@@ -1530,17 +1445,17 @@ const CreateSalon = () => {
           <div className={`salon_logo_wrapper ${darkmodeOn && "dark"}`}>
             <p>Select Salon Logo</p>
             <div>
-              <button onClick={() => handleMobileSalonLogoButtonClick()}>
+              <button onClick={() => handleSalonLogoButtonClick()}>
                 Upload
                 <input
                   type="file"
-                  style={{ display: "none" }}
-                  ref={mobileSalonInputRef}
-                  onChange={handleMobileSalonFileInputChange}
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleSalonFileInputChange}
                 />
               </button>
 
-              <div>{mobilesalonlogo}</div>
+              <div>{uploadSalonLogo?.name}</div>
             </div>
           </div>
 
@@ -1549,20 +1464,20 @@ const CreateSalon = () => {
             <div>
               <p>Select Salon Images</p>
 
-              <button onClick={() => handleMobileSalonImageButtonClick()}>
+              <button onClick={() => handleSalonImageButtonClick()}>
                 Upload
                 <input
                   type="file"
-                  style={{ display: "none" }}
-                  ref={mobileSalonImageInputRef}
-                  onChange={handleMobileSalonImageFileInputChange}
+                  ref={salonImagefileInputRef}
+                  style={{ display: 'none' }}
                   multiple
+                  onChange={handleSalonImageFileInputChange}
                 />
               </button>
             </div>
 
             <div>
-              <p>{mobilesalonimagesnames && mobilesalonimagesnames.join(',  ')}</p>
+              <p>{salonImages?.map((s) => s.name).join(',')}</p>
             </div>
           </div>
 
@@ -1604,7 +1519,7 @@ const CreateSalon = () => {
 
           <div>
             {
-              createSalonLoading ? <button style={{
+              createSalonLoading ? <button className='submit_btn' style={{
                 display: "grid",
                 placeItems: "center"
               }}><ButtonLoader /></button> : <button onClick={createSalonHandler} className='submit_btn'>Create</button>

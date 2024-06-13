@@ -1152,64 +1152,6 @@ const EditSalon = () => {
             </div>
           </div>
 
-          {/* <div>
-            <div>
-              <p>Start Time</p>
-              <input
-                type="text"
-                value={`${startTime ? `${startTime} hr` : ''}`}
-                onChange={(e) => setStartTime(e.target.value)}
-                onClick={() => startTimeDropHandler()}
-                ref={startTimeinputRef}
-              />
-
-              {startTimeDrop && <div ref={startTimeDropRef}>
-                {timeOptions.map((option) => (
-                  <p key={option} value={option} onClick={() => setStartTimeHandler(option?.value)}>
-                    {option?.value} hr
-                  </p>
-                ))}
-              </div>}
-            </div>
-
-            <div>
-              <p>End Time</p>
-              <input
-                type="text"
-                value={`${endTime ? `${endTime} hr` : ''}`}
-                onChange={(e) => setEndTime(e.target.value)}
-                onClick={() => endTimeDropHandler()}
-                ref={endTimeinputRef}
-              />
-
-              {endTimeDrop && <div ref={endTimeDropRef}>
-                {timeOptions.map((option) => (
-                  <p key={option} value={option} onClick={() => setEndTimeHandler(option?.value)}>
-                    {option?.value} hr
-                  </p>
-                ))}
-              </div>}
-            </div>
-
-            <div>
-              <p>Intvl Tm</p>
-              <input
-                type="text"
-                value={`${intervalTime ? `${intervalTime} mins` : ''}`}
-                onChange={(e) => setIntervalTime(e.target.value)}
-                onClick={() => intervalTimeDropHandler()}
-                ref={intervalTimeinputRef}
-              />
-
-              {intervalTimeDrop && <div ref={intervalTimeDropRef}>
-                {intervalTimemin.map((option) => (
-                  <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
-                    {option} mins
-                  </p>
-                ))}
-              </div>}
-            </div>
-          </div> */}
           <div />
 
           <div>
@@ -1422,180 +1364,21 @@ const EditSalon = () => {
             </main>
           }
 
-          {/* <p>Add Your Services</p>
-
-          <p>Choose your service icon:</p>
-          <div>
-            <div>
-              {
-                getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
-                  <div className='create_salon_carousel_loader'>
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                    <Skeleton count={1}
-                      height={"9rem"}
-                      width={"9rem"}
-                      style={{
-                        borderRadius: "1rem"
-                      }}
-                    />
-                  </div> :
-                  !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
-                    <Carousel
-                      responsive={responsive}
-                      draggable={false}
-                      swipeable={false}
-                    >
-                      {
-                        SalonIcons?.map((s) => (
-                          <div key={s._id} className='slider_item' onClick={() => logoselectHandler(s)}
-                            style={{
-                              border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
-                            }}
-                          >
-                            <img src={s.url} alt="" />
-                          </div>
-                        ))
-                      }
-                    </Carousel> :
-                    !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
-                      <p>No Salon Icons Available</p> :
-                      !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
-                      <p>No Salon Icons Available</p>
-              }
-
-            </div>
-          </div>
-
-          <div>
-            <p>Service Name</p>
-            <input
-              type="text"
-              value={serviceName}
-              onChange={(e) => setServiceName(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <p>Service Desc</p>
-            <input
-              type="text"
-              value={serviceDesc}
-              onChange={(e) => setServiceDesc(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <p>Service Type</p>
-            <input
-              type="text"
-              value={`${vipService ? 'Vip' : 'Regular'}`}
-              onClick={() => vipServiceDropHandler()}
-              ref={vipServiceIconRef}
-            />
-
-            {vipServiceDrop && <div ref={vipServiceDropRef}>
-              <p onClick={() => vipServiceHandler(false)}>Regular</p>
-              <p onClick={() => vipServiceHandler(true)}>VIP</p>
-            </div>}
-          </div>
-
-          <div>
-            <div>
-              <p>Service Price</p>
-              <input
-                type="text"
-                value={servicePrice}
-                onChange={(e) => setServicePrice(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <p>Est Wait Tm(mins)</p>
-              <input
-                type="text"
-                value={serviceEWT}
-                onChange={(e) => setServiceEWT(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button onClick={addServiceHandler}>Add Service</button>
-          </div>
-
-          <div className='service_container'>
-            {
-              selectedServices.map((ser, index) => (
-
-                <div className='service_container_item' key={index}>
-                  <div><img src={ser.serviceIcon?.url ? ser.serviceIcon?.url : ""} alt="" /></div>
-                  <p>{ser.serviceName}</p>
-                  <p>{ser.serviceDesc}</p>
-                  <p>{ser.serviceType}</p>
-                  <p>{countryCurrency}{" "}{ser.servicePrice}</p>
-                  <p>{ser.serviceEWT}min</p>
-                  <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
-                </div>
-              ))
-            }
-          </div> */}
-
-
+          
           <div className={`salon_logo_wrapper ${darkmodeOn && "dark"}`}>
             <p>Select Salon Logo</p>
             <div>
-              <button onClick={() => handleMobileSalonLogoButtonClick()}>
+              <button onClick={() => handleSalonLogoButtonClick()}>
                 Upload
                 <input
                   type="file"
-                  style={{ display: "none" }}
-                  ref={mobileSalonInputRef}
-                  onChange={handleMobileSalonFileInputChange}
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleSalonFileInputChange}
                 />
               </button>
 
-              <div>{mobilesalonlogo}</div>
+              <div>{uploadSalonLogo?.name}</div>
             </div>
           </div>
 
