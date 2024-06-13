@@ -961,6 +961,10 @@
         margin-top: 2rem;
     }
 
+    .queuelist_container{
+        height: calc(25rem - 6rem) !important;
+    }
+
     /* Dark Css Style */
     .admin_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -1039,6 +1043,10 @@
 @media screen and (min-width:768px) and (max-width:1140px){
     .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2) {
         flex-direction: row;
+    }
+
+    .queuelist_container{
+        height: calc(25rem - 6rem) !important;
     }
 }
 

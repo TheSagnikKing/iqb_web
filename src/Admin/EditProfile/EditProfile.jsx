@@ -178,7 +178,7 @@ const EditProfile = () => {
         loading: adminUpdateProfileLoading,
     } = adminUpdateProfile
 
-    const [openModal, setOpenModal] = useState(true)
+    const [openModal, setOpenModal] = useState(false)
 
     const updatePasswordHandler = () => {
         if (password !== confirmPassword) {

@@ -691,7 +691,8 @@
     background-color: var(--dark-mode-bg-color-2) !important;
 }
 
-.password_modal_container.dark p,h1{
+.password_modal_container.dark p,
+.password_modal_container.dark h1{
     color: var(--primary-text-light-color1);
 }
 

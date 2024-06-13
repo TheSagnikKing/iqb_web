@@ -11,6 +11,16 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 
 const Sidebar = () => {
 
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  console.log("DEEEEEE ", adminGetDefaultSalonResponse)
+
   const [showSidebar, setShowSidebar] = useState(true)
 
   const navigate = useNavigate()
@@ -28,7 +38,7 @@ const Sidebar = () => {
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
-              {
+              {/* {
                 loading ?
                   <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
                   <>
@@ -37,7 +47,29 @@ const Sidebar = () => {
                     </div>
                     <p>IQB</p>
                   </>
+              } */}
+
+              {
+                adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve ?
+                  <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
+                  !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo.length > 0 ?
+                    <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
+                      <img src={`${adminGetDefaultSalonResponse?.salonLogo[0]?.url}`} alt="" />
+                    </div> :
+                    !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo.length == 0 ?
+                      <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="no image" />
+                      </div> :
+                      !adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve &&
+                      <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="no image" />
+                      </div> 
+
               }
+              {/* <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
+                <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
+              </div> */}
+              <p>IQB</p>
 
             </div> : ""}
           </p>
@@ -73,7 +105,7 @@ const Sidebar = () => {
           <div><Outlet /></div>
         </div>
       </div>
-        
+
     </main>
   )
 }
