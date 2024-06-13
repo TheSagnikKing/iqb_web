@@ -809,26 +809,18 @@ const CreateSalon = () => {
       fbLink,
       instraLink,
       twitterLink,
-      // appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
-      // image:image2
     }
 
-    // console.log(salondata)
-    // 
 
-    // Create a new array to hold the File objects
     const files = await Promise.all(
       salonImages?.map(async (imgObject) => {
         try {
-          // Fetch the Blob from the URL
           const response = await fetch(imgObject.blobUrl);
           const blob = await response.blob();
 
-          // Create a File object from the Blob
           const file = new File([blob], imgObject.name, { type: blob.type });
 
-          // Return the file object with the associated _id
           return file;
         } catch (error) {
           console.error("Error converting blob URL to file:", error);
@@ -849,7 +841,6 @@ const CreateSalon = () => {
     response: createSalonResponse
   } = adminCreateSalon
 
-  // console.log("From DiffArray ",uploadSalonImages)
 
   useEffect(() => {
     if (createSalonResponse?.salonId && uploadSalonImages != "") {

@@ -720,7 +720,6 @@ const EditSalon = () => {
       fbLink,
       instraLink,
       twitterLink,
-      // appointmentSettings: { startTime, endTime, intervalInMinutes: Number(intervalTime) },
       services: selectedServices,
       salonId: currentSalon?.salonId
     }
@@ -770,6 +769,7 @@ const EditSalon = () => {
       formData.append('public_imgid', selectedEditImageObject?.public_id);
       formData.append('id', selectedEditImageObject?._id)
       formData.append('gallery', uploadImage)
+      formData.append('salonId', currentSalon?.salonId)
 
       try {
         const { data: responseimage } = await api.put('/api/salon/updateSalonImages', formData, {

@@ -23,8 +23,6 @@ const EditProfile = () => {
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
 
-    console.log("changeEmailVerifiedState   sdvsdv", changeEmailVerifiedState)
-
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
 
@@ -52,6 +50,7 @@ const EditProfile = () => {
 
         formData.append('email', adminProfile?.email);
         formData.append('profile', uploadImage);
+        formData.append('salonId', adminProfile?.salonId)
 
         try {
             setUploadpicLoader(true)
@@ -84,9 +83,9 @@ const EditProfile = () => {
     const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
 
     const sendVerificationEmail = () => {
-        // if(!changeEmailVerifiedState){
+        if (!changeEmailVerifiedState) {
             dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
-        // } 
+        }
     }
 
     const [otp, setOtp] = useState(["", "", "", ""]);
@@ -170,7 +169,7 @@ const EditProfile = () => {
         dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
-    const [password, setPassword] = useState(adminProfile?.password)
+    const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const adminUpdateProfile = useSelector(state => state.adminUpdateProfile)
@@ -193,6 +192,18 @@ const EditProfile = () => {
                 },
             });
         } else {
+
+            const profiledata = {
+                email: adminProfile?.email,
+                dateOfBirth,
+                mobileNumber: Number(mobileNumber),
+                name,
+                gender,
+                password
+            }
+
+            dispatch(adminUpdateProfileAction(profiledata, navigate))
+
             toast.success("Password matched successfully", {
                 duration: 3000,
                 style: {
@@ -211,7 +222,7 @@ const EditProfile = () => {
 
     return (
         <div className='admin_edit_profile'>
-            <p style={{color:darkmodeOn && "var(--primary-text-light-color1)",marginLeft:"1%",paddingTop:"2rem",fontWeight:"bold"}}>Edit profile</p>
+            <p style={{ color: darkmodeOn && "var(--primary-text-light-color1)", marginLeft: "1%", paddingTop: "2rem", fontWeight: "bold" }}>Edit profile</p>
             <div className={`admin_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
                     {/* <p>Edit profile</p> */}
@@ -232,7 +243,7 @@ const EditProfile = () => {
                     </div>
                 </div>
                 {
-                    adminProfile?.AuthType == "google" ? (
+                    !adminProfile?.AuthType == "google" ? (
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
@@ -265,7 +276,7 @@ const EditProfile = () => {
                             </div>
                             {
                                 openModal && <Modal setOpenModal={setOpenModal}>
-                                    <div className='password_modal_container'>
+                                    <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                         <h1>Change your password</h1>
 
                                         <div>

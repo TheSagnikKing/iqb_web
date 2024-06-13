@@ -277,7 +277,7 @@ const Dashboard = () => {
             <div>
               <p>Queue List</p>
               <div>
-                <Link to="/admin-queue" style={{ fontSize: "1.2rem", color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)" }}>See All</Link>
+                <Link to="/admin-queue" style={{ fontSize: "1.6rem", color:"var(--primary-text-light-color1)",textDecoration:"none" }}>See All</Link>
               </div>
             </div>
 

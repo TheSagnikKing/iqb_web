@@ -687,6 +687,19 @@
     color: var(--primary-text-light-color1);
 }
 
+.password_modal_container.dark{
+    background-color: var(--dark-mode-bg-color-2) !important;
+}
+
+.password_modal_container.dark p,h1{
+    color: var(--primary-text-light-color1);
+}
+
+.password_modal_container.dark input{
+    background-color: var(--dark-mode-bg-color-4);
+    color: var(--primary-text-light-color1);
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
 
     .verify_email_content_wrapper>div:nth-child(2) {
