@@ -20,6 +20,8 @@ const EditSalon = () => {
 
   const currentSalon = location?.state
 
+  console.log(currentSalon)
+
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
@@ -523,19 +525,25 @@ const EditSalon = () => {
 
     const formData = new FormData();
 
-    formData.append('public_imgid', currentSalonLogoId);
-    formData.append('id', currentSalonLogoMongoId)
-    formData.append('salonLogo', uploadImage)
-    formData.append('salonId', currentSalon?.salonId)
-
+    formData.append('salonId', currentSalon?.salonId);
+    formData.append('salonLogo', uploadImage);
 
     try {
-      const imageResponse = await api.put('/api/salon/updateSalonLogo', formData, {
+      const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
+      toast.success("Salon logo uploaded successfully", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       console.log('Salon Logo Upload success:', imageResponse.data);
       setSalonLogo(imageUrl)
     } catch (error) {
@@ -777,7 +785,7 @@ const EditSalon = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
-        
+
         if (responseimage) {
           const updatedImages = salonImages.map((image) =>
             image._id === responseimage?.response?._id
@@ -786,7 +794,7 @@ const EditSalon = () => {
           );
           setSalonImages(updatedImages);
           setOpenModal(false)
-        } 
+        }
 
         toast.success("Image updated successfully", {
           duration: 3000,

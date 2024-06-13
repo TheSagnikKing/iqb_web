@@ -125,7 +125,7 @@ const SalonAdv = () => {
     formData.append('id', mongoid)
     formData.append('advertisements', uploadImage)
     formData.append('public_imgid', publicId)
-    formData.append('salonId',salonId)
+    formData.append('salonId', salonId);
 
     try {
       sethandleEditLoader(true)
