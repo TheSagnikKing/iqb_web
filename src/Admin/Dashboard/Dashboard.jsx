@@ -277,11 +277,11 @@ const Dashboard = () => {
             <div>
               <p>Queue List</p>
               <div>
-                <Link to="/admin-queue" style={{ fontSize: "1.6rem", color:"var(--primary-text-light-color1)",textDecoration:"none" }}>See All</Link>
+                <Link to="/admin-queue" style={{ fontSize: "1.6rem", color: "var(--primary-text-light-color1)", textDecoration: "none" }}>See All</Link>
               </div>
             </div>
 
-            {
+            {/* {
               getAllQueueListLoading && !getAllQueueListResolve ?
                 <div>
                   <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -300,7 +300,7 @@ const Dashboard = () => {
                         <p>Q Position</p>
                         <p>Services</p>
                       </div>
-                      {/* <div> */}
+
                       {
                         queuelist?.map((q) => (
                           <div key={q._id}>
@@ -311,7 +311,7 @@ const Dashboard = () => {
                           </div>
                         ))
                       }
-                      {/* </div> */}
+ 
                     </div>
                     <Link to="/admin-queue" style={{ fontSize: "1.2rem", color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)" }}>See All</Link>
                   </> :
@@ -319,10 +319,10 @@ const Dashboard = () => {
                     <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
                     !getAllQueueListLoading && !getAllQueueListResolve &&
                     <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
-            }
+            } */}
 
 
-            {/* <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
+            <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
               <div>
                 <p>Customer Name</p>
                 <p>Barber Name</p>
@@ -358,7 +358,28 @@ const Dashboard = () => {
                 <p>q.services</p>
               </div>
 
-            </div> */}
+              <div>
+                <p>q.name</p>
+                <p>q.barberName</p>
+                <p>q.qPosition</p>
+                <p>q.services</p>
+              </div>
+
+              <div>
+                <p>q.name</p>
+                <p>q.barberName</p>
+                <p>q.qPosition</p>
+                <p>q.services</p>
+              </div>
+
+              <div>
+                <p>q.name</p>
+                <p>q.barberName</p>
+                <p>q.qPosition</p>
+                <p>q.services</p>
+              </div>
+
+            </div>
 
           </div>
         </div>
@@ -559,6 +580,70 @@ const Dashboard = () => {
               }
 
             </div>
+
+            {/* <main className='my_container'>
+              <div className='my_container_item'>
+                <div>
+                  <p>Timeslots</p>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                </div>
+
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+                <div>
+                  <p>a.timeSlots</p>
+                  <p>a.customerName</p>
+                  <p>a.barberName</p>
+                  <button>Follow Up</button>
+                  <div><Threeverticaldots /></div>
+                </div>
+
+
+              </div>
+            </main> */}
+
+
+
           </div>
         </div>
 

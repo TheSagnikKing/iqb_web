@@ -644,9 +644,12 @@
 
 .queuelist_container {
     /* background-color: red; */
-    width: 100%;
-    height: 100%;
+    min-width: 99% !important;
+    height: calc(25rem - 9.6rem) !important;
     overflow: auto;
+    padding: 0px !important;
+    margin-block: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .queuelist_container>div:nth-child(1) {
@@ -660,7 +663,7 @@
     place-items: center;
     min-height: 3.5rem;
     width: 100%;
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
     font-size: 1.4rem;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -686,7 +689,7 @@
     place-items: center;
     min-height: 3.5rem;
     width: 100%;
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
     font-size: 1.4rem;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -872,6 +875,36 @@
     background-color: var(--dark-mode-bg-color-4);
     color: var(--primary-text-light-color1);
 }
+
+/* .my_container {
+    height: 20rem;
+    width: 80%;
+    background-color: rgba(255, 0, 0, 0.448) !important;
+    overflow: auto;
+}
+
+.my_container_item {
+    background-color: green;
+}
+
+.my_container_item > div:nth-child(1) {
+    display: grid;
+    height: 4.5rem; 
+    grid-template-columns: repeat(5, 1fr);
+    position: sticky;
+    top: 0;
+    z-index: 1; 
+    background-color: inherit; 
+    font-size: 1.4rem;
+}
+
+.my_container_item > div:not(:nth-child(1)) {
+    background-color: var(--bg-color3);
+    display: grid;
+    height: 4.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 1.4rem;
+} */
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_dashboard_page_container {
