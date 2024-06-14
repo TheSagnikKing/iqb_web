@@ -600,6 +600,99 @@ const Dashboard = () => {
                       <div className={`dashboard_appointment_error ${darkmodeOn && "dark"}`}><p>Appointments not available</p></div>
               }
 
+              {/* <div>
+                <div>
+                  <p>Timeslots</p>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                </div>
+                <div>
+
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>qwertyuiopasdfghjklz</p>
+                      <p>qwertyuiopasdfghjklz</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+
+
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+                    <div>
+                      <p>a.timeSlots</p>
+                      <p>a.customerName</p>
+                      <p>a.barberName</p>
+                      <button>Follow Up</button>
+                      <div><Threeverticaldots /></div>
+                    </div>
+
+
+                </div>
+              </div> */}
+
             </div>
 
             {/* <main className='my_container'>
@@ -677,7 +770,7 @@ const Dashboard = () => {
               </div>
               {
                 adminUpdateSalonInfoLoading ?
-                  <button style={{display:"grid", placeItems:"center"}}>
+                  <button style={{ display: "grid", placeItems: "center" }}>
                     <ButtonLoader />
                   </button> : <button onClick={updateSalonInfo}>
                     <div><EditIcon /></div>
