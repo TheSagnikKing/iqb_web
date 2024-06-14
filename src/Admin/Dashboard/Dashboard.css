@@ -654,7 +654,7 @@
 
 .queuelist_container>div:nth-child(1) {
     background-color: var(--primary-bg-color3) !important;
-    min-width: 51.7rem;
+    min-width: 70.7rem;
     max-width: 99%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -679,7 +679,7 @@
 }
 
 .queuelist_container>div>p{
-    width: 12rem;
+    width: 15.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
@@ -687,7 +687,7 @@
 
 .queuelist_container>div {
     background-color: var(--bg-color3) !important;
-    min-width: 51.7rem;
+    min-width: 70.7rem;
     max-width: 99%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

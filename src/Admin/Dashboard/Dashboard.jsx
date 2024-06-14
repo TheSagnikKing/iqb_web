@@ -213,7 +213,6 @@ const Dashboard = () => {
     return truncatedText + '...'
   }
 
-
   const [openModal, setOpenModal] = useState(false)
 
   const updateSalonInfo = () => {
@@ -354,7 +353,7 @@ const Dashboard = () => {
 
               <div>
                 <p>q.name</p>
-                <p>frddddddddddddddddddddddddddddddddddddvwregvetrhbtrhtrntrntrnntr</p>
+                <p>{truncateText("Arghya Test Barber 1",20)}</p>
                 <p>q.qPosition</p>
                 <p>q.services</p>
               </div>
