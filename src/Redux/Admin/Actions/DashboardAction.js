@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS } from "../Constants/constants"
+import { ADMIN_GET_DEFAULT_SALON_SUCCESS, ADMIN_UPDATE_SALON_INFO_FAIL, ADMIN_UPDATE_SALON_INFO_REQ, ADMIN_UPDATE_SALON_INFO_SUCCESS, GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS } from "../Constants/constants"
 
 export const getAllAdvertisementAction = (salonId, signal) => async (dispatch) => {
     try {
@@ -118,6 +118,40 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SALON_ONLINE_STATUS_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+
+export const adminUpdateSalonInfoAction = (salonupdatedata,setOpenModal,setSalonDesc) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_UPDATE_SALON_INFO_REQ })
+
+        const { data } = await api.post(`/api/salon/updateSalonInfo`, salonupdatedata)
+
+        console.log(data?.response)
+
+        dispatch({
+            type: ADMIN_UPDATE_SALON_INFO_SUCCESS,
+            payload: data
+        })
+
+        setSalonDesc(data?.response)
+        setOpenModal(false)
+    } catch (error) {
+        dispatch({
+            type: ADMIN_UPDATE_SALON_INFO_FAIL,
             payload: error?.response?.data
         });
 

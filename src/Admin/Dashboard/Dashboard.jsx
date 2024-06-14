@@ -9,9 +9,10 @@ import Calender from '../../components/Admin/Calender/Calender'
 
 import { useDispatch, useSelector } from 'react-redux';
 import api from "../../Redux/api/Api"
-import { adminSalonStatusAction, getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
+import { adminSalonStatusAction, adminUpdateSalonInfoAction, getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
 import DashboardModal from '../../components/Modal/DashboardModal/DashboardModal';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const Dashboard = () => {
 
@@ -30,10 +31,12 @@ const Dashboard = () => {
   const adminName = useSelector(state => state.AdminLoggedInMiddleware.adminName)
 
   const [loading, setLoading] = useState(false)
+  const [salonDesc, setSalonDesc] = useState("")
 
   useEffect(() => {
     if (adminGetDefaultSalonResponse) {
       setTogglecheck(adminGetDefaultSalonResponse?.isOnline)
+      setSalonDesc(adminGetDefaultSalonResponse?.salonDesc)
     }
 
   }, [adminGetDefaultSalonResponse])
@@ -118,7 +121,6 @@ const Dashboard = () => {
   ];
 
 
-
   const advertisementcontrollerRef = useRef(new AbortController());
 
   useEffect(() => {
@@ -199,27 +201,46 @@ const Dashboard = () => {
     response: appointmentList
   } = getDashboardAppointmentList
 
+  // let text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32."
 
-  let text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.";
+  const truncateText = (text, charecterLimit) => {
+    if (text.length <= charecterLimit) {
+      return text;
+    }
 
-  const truncateText = (text, wordLimit) => {
-    const words = text.split(' ');
-    return words.slice(0, wordLimit).join(' ') + (words.length > wordLimit ? '...' : '');
-  };
+    let truncatedText = text.slice(0, charecterLimit);
+
+    return truncatedText + '...'
+  }
+
 
   const [openModal, setOpenModal] = useState(false)
+
+  const updateSalonInfo = () => {
+    const salonupdatedata = {
+      salonId: adminGetDefaultSalonResponse?.salonId,
+      salonDesc
+    }
+
+    dispatch(adminUpdateSalonInfoAction(salonupdatedata, setOpenModal, setSalonDesc))
+  }
 
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
 
+  const adminUpdateSalonInfo = useSelector(state => state.adminUpdateSalonInfo)
+
+  const {
+    loading: adminUpdateSalonInfoLoading,
+  } = adminUpdateSalonInfo
   return (
     salonId == 0 ? (<>
       <div className='admin_dashboard_page_container_two'>
 
         <div>
           <h1 style={{
-            color:darkmodeOn && "var(--primary-text-light-color1)"
+            color: darkmodeOn && "var(--primary-text-light-color1)"
           }}>{adminName || email.split('@')[0]} , don't have any salon</h1>
           <Link to="/admin-salon">Create </Link>
         </div>
@@ -263,8 +284,8 @@ const Dashboard = () => {
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                 </div> :
                 <div>
-                  <p>{truncateText(text, 30)}</p>
-                  <button onClick={() => setOpenModal(true)}>
+                  <p>{truncateText(salonDesc, 60)}</p>
+                  <button onClick={() => setOpenModal(true)} disabled={adminGetDefaultSalonLoading == true ? true : false}>
                     <div><EditIcon /></div>
                     <p>Edit</p>
                   </button>
@@ -313,7 +334,7 @@ const Dashboard = () => {
                           </div>
                         ))
                       }
- 
+
                     </div>
                   </> :
                   !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
@@ -653,12 +674,18 @@ const Dashboard = () => {
             <div className={`salon_info_container ${darkmodeOn && "dark"}`}>
               <div>
                 <label htmlFor="salonInfo">Write about Salon Information</label>
-                <textarea id="salonInfo" name="salonInfo" value={text}></textarea>
+                <textarea id="salonInfo" name="salonInfo" value={salonDesc} onChange={(e) => setSalonDesc(e.target.value)}></textarea>
               </div>
-              <button>
-                <div><EditIcon /></div>
-                <p>Update</p>
-              </button>
+              {
+                adminUpdateSalonInfoLoading ?
+                  <button style={{display:"grid", placeItems:"center"}}>
+                    <ButtonLoader />
+                  </button> : <button onClick={updateSalonInfo}>
+                    <div><EditIcon /></div>
+                    <p>Update</p>
+                  </button>
+              }
+
             </div>
           </DashboardModal>
         }

@@ -41,11 +41,11 @@ const Sidebar = () => {
               {
                 adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve ?
                   <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
-                  !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo.length > 0 ?
+                  !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo?.length > 0 ?
                     <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
                       <img src={`${adminGetDefaultSalonResponse?.salonLogo[0]?.url}`} alt="" />
                     </div> :
-                    !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo.length == 0 ?
+                    !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo?.length == 0 ?
                       <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="no image" />
                       </div> :
