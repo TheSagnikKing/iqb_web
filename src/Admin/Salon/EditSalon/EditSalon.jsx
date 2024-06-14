@@ -13,6 +13,7 @@ import Modal from '../../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
+import SalonModal from '../../../components/Modal/SalonModal/SalonModal';
 
 const EditSalon = () => {
 
@@ -298,150 +299,6 @@ const EditSalon = () => {
   }, []);
 
 
-  const [startTime, setStartTime] = useState()
-  const [startTimeDrop, setStartTimeDrop] = useState(false)
-
-  const startTimeDropHandler = () => {
-    setStartTimeDrop((prev) => !prev)
-  }
-
-  const setStartTimeHandler = (value) => {
-    setStartTime(value)
-    setStartTimeDrop(false)
-  }
-
-  const startTimeinputRef = useRef()
-  const startTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickStartTimeOutside = (event) => {
-      if (
-        startTimeinputRef.current &&
-        startTimeDropRef.current &&
-        !startTimeinputRef.current.contains(event.target) &&
-        !startTimeDropRef.current.contains(event.target)
-      ) {
-        setStartTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickStartTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickStartTimeOutside);
-    };
-  }, []);
-
-
-  const [endTime, setEndTime] = useState("")
-  const [endTimeDrop, setEndTimeDrop] = useState(false)
-
-  const endTimeDropHandler = () => {
-    setEndTimeDrop((prev) => !prev)
-  }
-
-  const setEndTimeHandler = (value) => {
-    setEndTime(value)
-    setEndTimeDrop(false)
-  }
-
-  const endTimeinputRef = useRef()
-  const endTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickEndTimeOutside = (event) => {
-      if (
-        endTimeinputRef.current &&
-        endTimeDropRef.current &&
-        !endTimeinputRef.current.contains(event.target) &&
-        !endTimeDropRef.current.contains(event.target)
-      ) {
-        setEndTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickEndTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickEndTimeOutside);
-    };
-  }, []);
-
-  const [timeOptions, setTimeOptions] = useState([]);
-
-  // Function to add leading zero for single-digit hours and minutes
-  const addLeadingZero = (num) => (num < 10 ? '0' : '') + num;
-
-  // Function to generate time options
-  const generateTimeOptions = () => {
-    const options = [];
-
-    // Loop through hours (0 to 23)
-    for (let hour = 0; hour < 24; hour++) {
-      // Loop through minutes (0 and 30)
-      for (let minute = 0; minute < 60; minute += 30) {
-        // Format the time as HH:mm
-        const time = addLeadingZero(hour) + ':' + addLeadingZero(minute);
-        options.push({ value: time, label: time });
-      }
-    }
-
-    setTimeOptions(options);
-  };
-
-  // Call the function to generate time options when the component mounts
-
-  useEffect(() => {
-    generateTimeOptions();
-  }, []);
-
-
-  const [intervalTime, setIntervalTime] = useState()
-  const [intervalTimeDrop, setIntervalTimeDrop] = useState(false)
-
-  const intervalTimeDropHandler = () => {
-    setIntervalTimeDrop((prev) => !prev)
-  }
-
-  const setIntervalTimeHandler = (value) => {
-    setIntervalTime(value)
-    setIntervalTimeDrop(false)
-  }
-
-  const intervalTimeinputRef = useRef()
-  const intervalTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickIntervalTimeOutside = (event) => {
-      if (
-        intervalTimeinputRef.current &&
-        intervalTimeDropRef.current &&
-        !intervalTimeinputRef.current.contains(event.target) &&
-        !intervalTimeDropRef.current.contains(event.target)
-      ) {
-        setIntervalTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickIntervalTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickIntervalTimeOutside);
-    };
-  }, []);
-
-  const [intervalTimemin, setIntervalTimemin] = useState([])
-
-  const generateTimeIntervalInMinutes = () => {
-    const options = []
-    for (let i = 1; i <= 60; i++) {
-      options.push(i);
-    }
-
-    setIntervalTimemin(options)
-  }
-
-  useEffect(() => {
-    generateTimeIntervalInMinutes()
-  }, [])
-
   const salonTypeIconRef = useRef()
   const salonTypeDropRef = useRef()
 
@@ -567,69 +424,54 @@ const EditSalon = () => {
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-    // Iterate over each uploaded file
-    const urls = Array.from(uploadedFiles).map((file) => {
-      // Check if the file type is allowed
+    const files = Array.from(uploadedFiles).map((file) => {
       if (!allowedTypes.includes(file.type)) {
         alert("Please upload only valid image files (JPEG, WebP, PNG).");
         return null;
       }
-      // Create a URL representing the file content
-      return URL.createObjectURL(file);
+
+      return file;
     });
 
-    // Filter out null values (in case of invalid files) and update the state with valid URLs
-    setSalonImages(urls.filter((url) => url !== null));
-    setUploadSalonImages(uploadedFiles)
-  };
+    const formData = new FormData();
 
-  const [mobilesalonlogo, setMobileSalonlogo] = useState("")
+    const SalonId = currentSalon?.salonId;
+    formData.append('salonId', SalonId);
 
-  const mobileSalonInputRef = useRef(null);
-
-  const handleMobileSalonLogoButtonClick = () => {
-    mobileSalonInputRef.current.click();
-  };
-
-  const handleMobileSalonFileInputChange = async (e) => {
-    const uploadImage = e.target.files[0]; // Get the uploaded file
-
-    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-    if (!allowedTypes.includes(uploadImage.type)) {
-      alert("Please upload a valid image file (JPEG, WebP, PNG).");
-      return;
+    for (const file of files) { // <-- Corrected here
+      formData.append('gallery', file);
     }
 
-    setMobileSalonlogo(uploadImage.name)
+    try {
+      const {data} = await api.post('/api/salon/uploadSalonImage', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setSalonImages([...salonImages, ...data?.response])
+
+      toast.success("Salon images uploaded successfully", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } catch (error) {
+      toast.error(error?.response?.data?.message, {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
   };
-
-
-  const [mobilesalonimagesnames, setMobileSalonimagesnames] = useState("")
-
-  const mobileSalonImageInputRef = useRef(null);
-
-  const handleMobileSalonImageButtonClick = () => {
-    mobileSalonImageInputRef.current.click();
-  };
-
-  const handleMobileSalonImageFileInputChange = async (e) => {
-    const uploadedFiles = e.target.files;
-
-    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-
-    // Iterate over each uploaded file
-    const names = Array.from(uploadedFiles).map((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null;
-      }
-
-      return file.name;
-    }).filter(Boolean);
-
-    setMobileSalonimagesnames((prevImages) => [...prevImages, ...names]);
-  };
-
 
   const [selectedLogo, setSelectedLogo] = useState({
     url: "",
@@ -867,6 +709,8 @@ const EditSalon = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  const [openMobileUpdateModal, setOpenMobileUpdateModal] = useState(false)
+
   return (
     <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
       <p>Edit Salon</p>
@@ -979,7 +823,7 @@ const EditSalon = () => {
 
           <div>
             <p>Gallery</p>
-            {/* <button
+            <button
               className='salon_upload_button'
               onClick={() => handleSalonImageButtonClick()}
             >
@@ -993,7 +837,7 @@ const EditSalon = () => {
                 multiple
                 onChange={handleSalonImageFileInputChange}
               />
-            </button> */}
+            </button>
           </div>
 
           <div>
@@ -1389,21 +1233,29 @@ const EditSalon = () => {
             <div>
               <p>Select Salon Images</p>
 
-              <button onClick={() => handleMobileSalonImageButtonClick()}>
+              <button onClick={() => handleSalonImageButtonClick()}>
                 Upload
                 <input
                   type="file"
-                  style={{ display: "none" }}
-                  ref={mobileSalonImageInputRef}
-                  onChange={handleMobileSalonImageFileInputChange}
+                  ref={salonImagefileInputRef}
+                  style={{ display: 'none' }}
                   multiple
+                  onChange={handleSalonImageFileInputChange}
                 />
               </button>
             </div>
 
             <div>
-              <p>{mobilesalonimagesnames && mobilesalonimagesnames.join(',  ')}</p>
+              <p>Update Salon Images</p>
+
+              <button onClick={() => setOpenMobileUpdateModal(true)}>
+                Update
+              </button>
             </div>
+
+            {/* <div>
+              <p>{mobilesalonimagesnames && mobilesalonimagesnames.join(',  ')}</p>
+            </div> */}
           </div>
 
           <div>
@@ -1465,6 +1317,12 @@ const EditSalon = () => {
 
         </div>
       </div>
+
+      {
+        openMobileUpdateModal && <SalonModal setOpenMobileUpdateModal={setOpenMobileUpdateModal}>
+          <h1>Update</h1>
+        </SalonModal>
+      }
 
       {
         openModal && <Modal setOpenModal={setOpenModal}>
