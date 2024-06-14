@@ -21,7 +21,6 @@ const EditSalon = () => {
 
   const currentSalon = location?.state
 
-  console.log(currentSalon)
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
@@ -443,7 +442,7 @@ const EditSalon = () => {
     }
 
     try {
-      const {data} = await api.post('/api/salon/uploadSalonImage', formData, {
+      const { data } = await api.post('/api/salon/uploadSalonImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -602,9 +601,6 @@ const EditSalon = () => {
     currentEditSalonImageInputRef.current.click();
   };
 
-  console.log(selectedEditImageObject)
-  // console.log("vsdvsdvsdvsd",salonImages)
-
   const handleEditSelectedImageFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
 
@@ -663,8 +659,6 @@ const EditSalon = () => {
     }
   }
 
-  console.log(salonImages)
-
   const deleteEditImageHandler = async (imgObj) => {
     if (window.confirm("Are you sure ?")) {
       try {
@@ -710,6 +704,117 @@ const EditSalon = () => {
   const darkmodeOn = darkMode === "On"
 
   const [openMobileUpdateModal, setOpenMobileUpdateModal] = useState(false)
+
+
+  const mobiledeleteImage = async (imgObj) => {
+    if (window.confirm("Are you sure ?")) {
+      try {
+        const { data: responseimage } = await api.delete("/api/salon/deleteSalonImages", {
+          data: {
+            public_id: imgObj?.public_id,
+            img_id: imgObj?._id
+          }
+        })
+
+        setSalonImages((images) => images.filter((image) => image._id !== responseimage?.response?._id))
+
+        toast.success("Image deleted successfully", {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+      } catch (error) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }
+    }
+  }
+
+  const [selectedMobileEditImageObject, setSelectedMobileEditImageObject] = useState({})
+
+  const mobileEditSalonImageInputRef = useRef(null);
+
+  const handleCurrentMobileEditSalonImageButtonClick = (imgObj) => {
+    
+    mobileEditSalonImageInputRef.current.click();
+    setSelectedMobileEditImageObject(imgObj)
+  };
+
+  
+
+  const mobileEditSelectedImageFileInputChange = async (e) => {
+    const uploadImage = e.target.files[0]; // Get the uploaded file
+
+    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+    if (!allowedTypes.includes(uploadImage.type)) {
+      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
+
+    if (uploadImage != null) {
+      const formData = new FormData();
+
+      formData.append('public_imgid', selectedMobileEditImageObject?.public_id);
+      formData.append('id', selectedMobileEditImageObject?._id)
+      formData.append('gallery', uploadImage)
+      formData.append('salonId', currentSalon?.salonId)
+
+      try {
+        const { data: responseimage } = await api.put('/api/salon/updateSalonImages', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        if (responseimage) {
+          const updatedImages = salonImages.map((image) =>
+            image._id === responseimage?.response?._id
+              ? { ...image, public_id: responseimage?.response?.public_id, url: responseimage?.response?.url, _id: responseimage?.response?._id }
+              : image
+          );
+          setSalonImages(updatedImages);
+        }
+
+        toast.success("Image updated successfully", {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      } catch (error) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }
+    }
+  }
+
+  // const mobileEditSelectedImageFileInputChange = (e) => {
+  //   console.log("hello")
+  //   console.log("omg ",selectedMobileEditImageObject)
+  // }
 
   return (
     <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
@@ -1320,7 +1425,37 @@ const EditSalon = () => {
 
       {
         openMobileUpdateModal && <SalonModal setOpenMobileUpdateModal={setOpenMobileUpdateModal}>
-          <h1>Update</h1>
+          {
+            salonImages?.map((s) => (
+              <div className='salon_image_update_item' key={s._id}>
+                <div>
+                  <img src={s.url} alt="image" />
+                </div>
+                <div>
+                  <div>
+                    <button onClick={() => mobiledeleteImage(s)}>
+                      <div><DeleteIcon /></div>
+                      <p>Remove</p>
+                    </button>
+                    <button onClick={() => handleCurrentMobileEditSalonImageButtonClick(s)}>
+                      <div><EditIcon /></div>
+                      <p>Reselect</p>
+
+                      <input
+                        type="file"
+                        ref={mobileEditSalonImageInputRef}
+                        style={{ display: 'none' }}
+                        onChange={(e) => mobileEditSelectedImageFileInputChange(e)}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+
+
+
         </SalonModal>
       }
 
