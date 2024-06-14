@@ -74,7 +74,7 @@ const CustomerList = () => {
       </div>
 
       <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
-        {/* {
+        {
           adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -105,7 +105,7 @@ const CustomerList = () => {
                   <p>{s.email}</p>
                   <p>{s.gender}</p>
                   <p>{s.mobileNumber}</p>
-                  <div>
+                  {/* <div>
                     <div><Notificationicon /></div>
                   </div>
                   <div>
@@ -113,7 +113,7 @@ const CustomerList = () => {
                   </div>
                   <div>
                     <div><MessageIcon /></div>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -128,9 +128,9 @@ const CustomerList = () => {
               </div>
             )
           )
-        } */}
+        }
 
-        <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
+        {/* <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
           <div>
             <input
               type="checkbox"
@@ -152,18 +152,9 @@ const CustomerList = () => {
             <p>s.emai</p>
             <p>s.gender</p>
             <p>s.mobileNumber</p>
-            {/* <div>
-              <div><Notificationicon /></div>
-            </div>
-            <div>
-              <div><EmailIcon /></div>
-            </div>
-            <div>
-              <div><MessageIcon /></div>
-            </div> */}
           </div>
 
-        </div>
+        </div> */}
 
       </div>
 

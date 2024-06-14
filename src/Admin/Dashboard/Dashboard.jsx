@@ -354,7 +354,7 @@ const Dashboard = () => {
 
               <div>
                 <p>q.name</p>
-                <p>q.barberName</p>
+                <p>frddddddddddddddddddddddddddddddddddddvwregvetrhbtrhtrntrntrnntr</p>
                 <p>q.qPosition</p>
                 <p>q.services</p>
               </div>

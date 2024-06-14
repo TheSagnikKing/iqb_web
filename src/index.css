@@ -62,6 +62,11 @@ p {
   color: var(--primary-text-light-color2);
 }
 
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+} */
+
 @media((min-width:0px) and (max-width:576px)) {
   :root {
     /* font-size: 42%; */

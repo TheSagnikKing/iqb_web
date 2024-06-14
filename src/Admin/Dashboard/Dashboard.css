@@ -678,6 +678,13 @@
     color: var(--primary-text-light-color1);
 }
 
+.queuelist_container>div>p{
+    width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
 .queuelist_container>div {
     background-color: var(--bg-color3) !important;
     min-width: 51.7rem;
@@ -697,8 +704,6 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-
-
 
 .queuelist_container::-webkit-scrollbar {
     width: 6px !important;
@@ -873,6 +878,14 @@
 
 .salon_info_container.dark>div>textarea {
     background-color: var(--dark-mode-bg-color-4);
+    color: var(--primary-text-light-color1);
+}
+
+.queuelist_container.dark>div:not(:nth-child(1)){
+    background-color: var(--dark-mode-bg-color-2) !important;
+}
+
+.queuelist_container.dark>div:not(:nth-child(1))>p{
     color: var(--primary-text-light-color1);
 }
 
