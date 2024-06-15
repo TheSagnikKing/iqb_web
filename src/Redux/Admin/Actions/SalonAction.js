@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_EDIT_SALON_FAIL, ADMIN_EDIT_SALON_REQ, ADMIN_EDIT_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_UPDATE_SALON_SETTINGS_FAIL, ADMIN_UPDATE_SALON_SETTINGS_REQ, ADMIN_UPDATE_SALON_SETTINGS_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants"
+import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_EDIT_SALON_FAIL, ADMIN_EDIT_SALON_REQ, ADMIN_EDIT_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, ADMIN_GET_SALON_IMAGES_FAIL, ADMIN_GET_SALON_IMAGES_REQ, ADMIN_GET_SALON_IMAGES_SUCCESS, ADMIN_GET_SALON_LOGO_FAIL, ADMIN_GET_SALON_LOGO_REQ, ADMIN_GET_SALON_LOGO_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_UPDATE_SALON_SETTINGS_FAIL, ADMIN_UPDATE_SALON_SETTINGS_REQ, ADMIN_UPDATE_SALON_SETTINGS_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants"
 
 export const getAdminSalonListAction = (email, signal) => async (dispatch) => {
     try {
@@ -293,5 +293,73 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, navigate) => asy
                 color: '#fff',
             },
         });
+    }
+}
+
+export const getAdminSalonImagesAction = (salonId) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_GET_SALON_IMAGES_REQ })
+
+        const { data } = await api.post(`/api/salon/getSalonImages`, {
+            salonId
+        })
+
+        dispatch({
+            type: ADMIN_GET_SALON_IMAGES_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+
+        if (error.name !== 'CanceledError') {
+            dispatch({
+                type: ADMIN_GET_SALON_IMAGES_FAIL,
+                payload: error?.response?.data
+            });
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+    }
+}
+
+export const getAdminSalonLogoAction = (salonId) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_GET_SALON_LOGO_REQ })
+
+        const { data } = await api.post(`/api/salon/getSalonLogo`, {
+            salonId
+        })
+
+        dispatch({
+            type: ADMIN_GET_SALON_LOGO_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+
+        if (error.name !== 'CanceledError') {
+            dispatch({
+                type: ADMIN_GET_SALON_LOGO_FAIL,
+                payload: error?.response?.data
+            });
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
     }
 }

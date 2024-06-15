@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./EditProfile.css"
-import { CameraIcon, CheckIcon, MobileCrossIcon } from '../../icons';
+import { CameraIcon, CheckIcon, Eyevisible, MobileCrossIcon, Notvisibleeye } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -220,6 +220,9 @@ const EditProfile = () => {
 
     const darkmodeOn = darkMode === "On"
 
+    const [seePassword, setSeePassword] = useState(false)
+    const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
     return (
         <div className='admin_edit_profile'>
             <p style={{ color: darkmodeOn && "var(--primary-text-light-color1)", marginLeft: "1%", paddingTop: "2rem", fontWeight: "bold" }}>Edit profile</p>
@@ -243,7 +246,7 @@ const EditProfile = () => {
                     </div>
                 </div>
                 {
-                    !adminProfile?.AuthType == "google" ? (
+                    adminProfile?.AuthType == "google" ? (
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
@@ -278,23 +281,28 @@ const EditProfile = () => {
                                 openModal && <Modal setOpenModal={setOpenModal}>
                                     <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                         <h1>Change your password</h1>
-
                                         <div>
                                             <p>Password</p>
-                                            <input
-                                                type="text"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                            />
+                                            <div>
+                                                <input
+                                                    type={`${seePassword ? "text" : "password"}`}
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                />
+                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                            </div>
                                         </div>
 
                                         <div>
                                             <p>Confirm Password</p>
-                                            <input
-                                                type="text"
-                                                value={confirmPassword}
-                                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                            />
+                                            <div>
+                                                <input
+                                                    type={`${seeConfirmPassword ? "text" : "password"}`}
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                                />
+                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                            </div>
                                         </div>
 
                                         <div>

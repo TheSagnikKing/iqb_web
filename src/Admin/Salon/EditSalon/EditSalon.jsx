@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
@@ -17,15 +17,54 @@ import SalonModal from '../../../components/Modal/SalonModal/SalonModal';
 
 const EditSalon = () => {
 
+  const dispatch = useDispatch()
   const location = useLocation()
 
   const currentSalon = location?.state
 
+  const [salonImages, setSalonImages] = useState([])
+  const [salonLogo, setSalonLogo] = useState([])
+
+  const getAdminSalonImages = useSelector(state => state.getAdminSalonImages)
+
+  const {
+    loading: getAdminSalonImagesLoading,
+    resolve: getAdminSalonImagesResolve,
+    response: AdminSalonImages
+  } = getAdminSalonImages
+
+  const getAdminSalonLogo = useSelector(state => state.getAdminSalonLogo)
+
+  const {
+    loading: getAdminSalonLogoLoading,
+    resolve: getAdminSalonLogoResolve,
+    response: AdminSalonLogo
+  } = getAdminSalonLogo
+
+  useEffect(() => {
+    if (currentSalon?.salonId) {
+      dispatch(getAdminSalonImagesAction(currentSalon?.salonId))
+      dispatch(getAdminSalonLogoAction(currentSalon?.salonId))
+    }
+  }, [currentSalon])
+
+  console.log("Hurrayy  ",AdminSalonImages)
+  console.log("Salon logo ",AdminSalonLogo)
+
+  useEffect(() => {
+    if(AdminSalonImages){
+      setSalonImages(AdminSalonImages)
+    }
+  },[AdminSalonImages])
+  
+  useEffect(() => {
+    if(AdminSalonLogo){
+      setSalonLogo(AdminSalonLogo?.salonLogo[0]?.url)
+    }
+  },[AdminSalonLogo])
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
-
-  const dispatch = useDispatch()
 
   const SalonIconControllerRef = useRef(new AbortController());
 
@@ -356,9 +395,7 @@ const EditSalon = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const [salonLogo, setSalonLogo] = useState(currentSalon?.salonLogo[0]?.url || "")
-
-
+  
   const fileInputRef = useRef(null);
 
   const handleSalonLogoButtonClick = () => {
@@ -408,8 +445,6 @@ const EditSalon = () => {
     }
   };
 
-  const [salonImages, setSalonImages] = useState(currentSalon?.gallery)
-
   const salonImagefileInputRef = useRef(null);
 
   const handleSalonImageButtonClick = () => {
@@ -448,7 +483,7 @@ const EditSalon = () => {
         },
       });
 
-      setSalonImages([...salonImages, ...data?.response])
+      setSalonImages([...data?.response,...salonImages])
 
       toast.success("Salon images uploaded successfully", {
         duration: 3000,
@@ -747,12 +782,12 @@ const EditSalon = () => {
   const mobileEditSalonImageInputRef = useRef(null);
 
   const handleCurrentMobileEditSalonImageButtonClick = (imgObj) => {
-    
+
     mobileEditSalonImageInputRef.current.click();
     setSelectedMobileEditImageObject(imgObj)
   };
 
-  
+
 
   const mobileEditSelectedImageFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
@@ -1427,7 +1462,7 @@ const EditSalon = () => {
         openMobileUpdateModal && <SalonModal setOpenMobileUpdateModal={setOpenMobileUpdateModal}>
           {
             salonImages?.map((s) => (
-              <div className='salon_image_update_item' key={s._id}>
+              <div className={`salon_image_update_item ${darkmodeOn && "dark"}`} key={s._id}>
                 <div>
                   <img src={s.url} alt="image" />
                 </div>
@@ -1435,11 +1470,11 @@ const EditSalon = () => {
                   <div>
                     <button onClick={() => mobiledeleteImage(s)}>
                       <div><DeleteIcon /></div>
-                      <p>Remove</p>
+                      <p>Delete</p>
                     </button>
                     <button onClick={() => handleCurrentMobileEditSalonImageButtonClick(s)}>
                       <div><EditIcon /></div>
-                      <p>Reselect</p>
+                      <p>Update</p>
 
                       <input
                         type="file"
