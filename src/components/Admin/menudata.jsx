@@ -29,7 +29,7 @@ export const menudata = [
         id: 5,
         title: "Advertisements",
         icon: <Adminadvertisementicon />,
-        url: "/admin-salonadvertise"
+        url: "/admin-advertise"
     },
     {
         id: 6,
