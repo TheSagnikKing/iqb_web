@@ -84,7 +84,10 @@ const SignupEditProfile = () => {
 
       <div>
         <div>
-          <h1>Add Your Account Details</h1>
+          <div>
+            <h1>Add Your Account Details</h1>
+            <button onClick={() => skipClicked()}>Skip</button>
+          </div>
 
           <div>
             <p>Name</p>
@@ -142,8 +145,6 @@ const SignupEditProfile = () => {
                 placeItems: "center"
               }}><ButtonLoader /></button> : <button onClick={() => updateClicked()}>Update</button>
             }
-
-            <button onClick={() => skipClicked()}>Skip</button>
 
           </div>
 

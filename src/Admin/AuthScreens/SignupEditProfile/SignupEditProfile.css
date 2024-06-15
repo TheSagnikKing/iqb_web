@@ -66,21 +66,21 @@
 .admin_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1) {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2rem;
     margin-top: 2rem;
 }
 
 .admin_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
-    width: 30%;
+    width: 40%;
     height: 4.5rem;
     font-size: 1.6rem;
     cursor: pointer;
-    border-radius: 1.5rem;
-    -webkit-border-radius: 1.5rem;
-    -moz-border-radius: 1.5rem;
-    -ms-border-radius: 1.5rem;
-    -o-border-radius: 1.5rem;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
     border: none;
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
@@ -155,6 +155,29 @@
 
 .react-international-phone-country-selector-dropdown {
     width: 30rem !important;
+}
+
+.admin_signup_edit_container>div:nth-child(2)>div>div:nth-child(1){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) button{
+    width: 25%;
+    height: 4rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    border: none;
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
+    box-shadow: 0 2px 7.7px #0006;
 }
 
 @media((min-width:0px) and (max-width:576px)) {
