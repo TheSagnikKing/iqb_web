@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
+import { BarberSignupAction } from '../../../Redux/Barber/Actions/AuthAction'
+import { useDispatch } from 'react-redux'
 
 const Signup = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const responseMessage = () => {
 
@@ -30,6 +38,14 @@ const Signup = () => {
 
   const [visibleeye, setVisibleeye] = useState(false)
 
+  // BarberSignupAction
+
+  const signupClicked = () => {
+    const barbersignupdata = { email, password }
+    console.log(barbersignupdata)
+    dispatch(BarberSignupAction(barbersignupdata, navigate))
+  }
+
   return (
     <main className='barber_signup_container'>
       <div>
@@ -46,17 +62,21 @@ const Signup = () => {
           <input
             type="email"
             placeholder='Enter Your Email ID'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <div>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>
 
-          <button>Signin</button>
+          <button onClick={signupClicked}>Sign Up</button>
 
           <div>
             <div />

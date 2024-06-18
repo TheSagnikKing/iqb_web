@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,HomeIcon,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
-import {BarberGoogleloginAction} from "../../../Redux/Barber/Actions/AuthAction"
+import {BarberGoogleloginAction, BarberSigninAction} from "../../../Redux/Barber/Actions/AuthAction"
 
 const Signin = () => {
 
@@ -42,6 +42,12 @@ const Signin = () => {
     navigate("/barberforgotpassword")
   }
 
+  const signinClicked = () => {
+    const barbersignindata = { email, password }
+    console.log(barbersignindata)
+    dispatch(BarberSigninAction(barbersignindata, navigate))
+  }
+
   return (
     <main className='barber_signin_container'>
       <div>
@@ -76,7 +82,7 @@ const Signin = () => {
             <p onClick={forgotClicked}>Forgot Password ?</p>
           </div>
 
-          <button>Signin</button>
+          <button onClick={signinClicked}>Signin</button>
 
           <div>
             <div />

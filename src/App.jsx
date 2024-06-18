@@ -33,6 +33,11 @@ const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/Sal
 
 const AdminMobileSidebar = React.lazy(() => import("./components/Admin/MobileSidebar/MobileSidebar"))
 
+const BarberSidebar = React.lazy(() => import("./components/Barber/Sidebar/Sidebar"))
+const BarberMobileSidebar = React.lazy(() => import("./components/Barber/MobileSidebar/MobileSidebar"))
+const BarberEditProfile = React.lazy(() => import("./Barber/EditProfile/EditProfile"))
+const BarberSignupEditProfile = React.lazy(() => import("./Barber/AuthScreens/SignupEditProfile/SignupEditProfile"))
+
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
 import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
@@ -62,7 +67,7 @@ const App = () => {
     <>
       <Toaster />
       <BrowserRouter>
-        <React.Suspense fallback={<div style={{width:"100vw",height:"100vh",display:"flex",justifyContent:"center",alignItems:"center"}}><Loader/></div>}>
+        <React.Suspense fallback={<div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}><Loader /></div>}>
           <Routes>
             <Route path="/" element={<Public />} />
 
@@ -74,19 +79,19 @@ const App = () => {
               <Route path="/admincheckemail" element={<AdminCheckEmail />} />
               <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
               <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
-              <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile/>}/>
+              <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
             </Route>
 
             {/* Admin Main Pages  */}
             <Route element={<ProtectedAdminRoute />}>
-              <Route element={isMobile ? <AdminMobileSidebar/> : <AdminSidebar />}>
+              <Route element={isMobile ? <AdminMobileSidebar /> : <AdminSidebar />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/admin-dashboard/editprofile" element={<AdminEditProfile />} />
 
                 <Route path="/admin-salon" element={<AdminSalonList />} />
                 <Route path="/admin-salon/createsalon" element={<AdminCreateSalon />} />
                 <Route path="/admin-salon/editsalon/:salonid" element={<AdminEditSalon />} />
-                <Route path="/admin-salon/appointment/:salonid" element={<AdminSalonAppointmentSettings/>}/>
+                <Route path="/admin-salon/appointment/:salonid" element={<AdminSalonAppointmentSettings />} />
 
                 <Route path="/admin-barber" element={<AdminBarberList />} />
                 <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
@@ -106,10 +111,15 @@ const App = () => {
               <Route path="/barbercheckemail" element={<BarberCheckEmail />} />
               <Route path="/barberchangepassword" element={<BarberChangePassword />} />
               <Route path="/barberpasswordreset" element={<BarberPasswordReset />} />
+              <Route path="/barber-signupeditprofile" element={<BarberSignupEditProfile />} />
             </Route>
 
             <Route element={<ProtectedBarberRoute />}>
-              <Route path="/barber-dashboard" element={<BarberDashboard />} />
+              <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
+                <Route path="/barber-dashboard" element={<BarberDashboard />} />
+                <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
+
+              </Route>
             </Route>
 
 

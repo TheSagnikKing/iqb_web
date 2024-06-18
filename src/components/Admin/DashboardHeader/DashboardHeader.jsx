@@ -103,10 +103,6 @@ const DashboardHeader = () => {
 
     const [adminEditDrop, setAdminEditDrop] = useState(false)
 
-    const adminEditDropHandler = () => {
-        setAdminEditDrop((prev) => !prev)
-    }
-
     const adminEditIconRef = useRef()
     const adminEditDropRef = useRef()
 

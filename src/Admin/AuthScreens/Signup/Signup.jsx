@@ -43,7 +43,6 @@ const Signup = () => {
     const adminsignindata = { email, password }
     console.log(adminsignindata)
     dispatch(AdminSignupAction(adminsignindata, navigate))
-    // navigate("/admin-signupeditprofile")
   }
 
   const AdminSignup = useSelector(state => state.AdminSignup)
