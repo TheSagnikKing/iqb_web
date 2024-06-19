@@ -7,6 +7,7 @@ export const BarberLoggedInMiddlewareReducer = (state = {}, action) => {
                 ...state, 
                 loading: false, 
                 barberSalonId: Number(action.payload.user[0].salonId),
+                barberId: Number(action.payload.user[0].barberId),
                 barberEmail: action.payload.user[0].email,
                 barberName: action.payload.user[0].name,
                 entiredata: action.payload

@@ -14,6 +14,9 @@ import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
+import {barberSendVerifyEmailAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction} from "../../Redux/Barber/Actions/BarberProfileAction"
+import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
+
 const EditProfile = () => {
 
     const dispatch = useDispatch()
@@ -54,7 +57,7 @@ const EditProfile = () => {
 
         try {
             setUploadpicLoader(true)
-            const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
+            const imageResponse = await api.post('/api/barber/uploadBarberProfilePicture', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -64,15 +67,15 @@ const EditProfile = () => {
 
             // setProfilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
 
-            const { data: barberloggedindata } = await api.get('/api/admin/adminloggedin');
+            const { data: barberloggedindata } = await api.get('/api/barber/barberloggedin');
 
             dispatch({
-                type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+                type: BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
                 payload: barberloggedindata
             })
 
 
-            navigate("/admin-dashboard")
+            navigate("/barber-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
             console.error('Image upload failed:', error);
@@ -84,7 +87,7 @@ const EditProfile = () => {
 
     const sendVerificationEmail = () => {
         if (!changeEmailVerifiedState) {
-            dispatch(adminSendVerifyEmailAction(barberProfile?.email, setSendVerificationEmailModal))
+            dispatch(barberSendVerifyEmailAction(barberProfile?.email, setSendVerificationEmailModal))
         }
     }
 
@@ -147,7 +150,7 @@ const EditProfile = () => {
 
     const [mobileNumber, setMobileNumber] = useState(barberProfile?.mobileNumber?.toString())
 
-    const updateAdminProfile = () => {
+    const updateBarberProfile = () => {
         const profiledata = {
             email: barberProfile?.email,
             dateOfBirth,
@@ -159,14 +162,21 @@ const EditProfile = () => {
 
         console.log(profiledata)
 
-        dispatch(adminUpdateProfileAction(profiledata, navigate))
-
+        dispatch(barberUpdateProfileAction(profiledata, navigate))
     }
+
+    const barberUpdateProfile = useSelector(state => state.barberUpdateProfile)
+
+  const {
+    loading: barberUpdateProfileLoading,
+    resolve: barberUpdateProfileResolve,
+    // response: AllCustomerList
+  } = barberUpdateProfile
 
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
 
-        dispatch(adminVerifiedEmailStatusAction(barberProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
+        dispatch(barberVerifiedEmailStatusAction(barberProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
     const [password, setPassword] = useState("")
@@ -202,17 +212,17 @@ const EditProfile = () => {
                 password
             }
 
-            dispatch(adminUpdateProfileAction(profiledata, navigate))
+            dispatch(barberUpdateProfileAction(profiledata, navigate))
 
-            toast.success("Password matched successfully", {
-                duration: 3000,
-                style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '1rem',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
+            // toast.success("Password matched successfully", {
+            //     duration: 3000,
+            //     style: {
+            //         fontSize: "1.4rem",
+            //         borderRadius: '1rem',
+            //         background: '#333',
+            //         color: '#fff',
+            //     },
+            // });
         }
     }
 
@@ -224,9 +234,9 @@ const EditProfile = () => {
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
     return (
-        <div className='admin_edit_profile'>
+        <div className='barber_edit_profile'>
             <p style={{ color: darkmodeOn && "var(--primary-text-light-color1)", marginLeft: "1%", paddingTop: "2rem", fontWeight: "bold" }}>Edit profile</p>
-            <div className={`admin_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
+            <div className={`barber_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
                     {/* <p>Edit profile</p> */}
                     <div>
@@ -332,7 +342,7 @@ const EditProfile = () => {
                         </div>
                     </div>
 
-                    <div className='admin_profile_mobile_container'>
+                    <div className='barber_profile_mobile_container'>
                         <p>Mobile Number</p>
                         <div>
                             <div>
@@ -380,12 +390,12 @@ const EditProfile = () => {
                 </div>
 
                 <div>
-                    {/* {
+                    {
                         barberUpdateProfileLoading ? <button style={{
                             display: "grid",
                             placeItems: "center"
-                        }}><ButtonLoader /></button> : <button onClick={updateAdminProfile}>Update</button>
-                    } */}
+                        }}><ButtonLoader /></button> : <button onClick={updateBarberProfile}>Update</button>
+                    }
                 </div>
             </div>
 
@@ -406,7 +416,7 @@ const EditProfile = () => {
                                     <p>An email with a verification code was just sent to your email address</p>
 
                                     <div>
-                                        <p>{adminProfile?.email}</p>
+                                        <p>{barberProfile?.email}</p>
                                         <button onClick={verifyEmailStatusClicked}>Verify</button>
                                     </div>
 

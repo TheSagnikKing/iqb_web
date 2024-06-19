@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ForgotPassword.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { HomeIcon } from '../../../icons'
+import { useDispatch } from 'react-redux'
+import { barberForgetPasswordAction } from '../../../Redux/Barber/Actions/BarberPasswordAction'
 
 const ForgotPassword = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [email, setEmail] = useState()
 
   const mailHandler = () => {
-    navigate("/barbercheckemail")
+    dispatch(barberForgetPasswordAction(email))
+    // navigate("/barbercheckemail")
   }
 
   return (
@@ -22,6 +28,8 @@ const ForgotPassword = () => {
                 <input 
                 type="email"
                 placeholder='Enter Your Email ID'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <button onClick={mailHandler}>Send Email</button>

@@ -256,7 +256,7 @@
 }
 
 .barber_dashboard_page_container>div:nth-child(1)>div:nth-child(1)>div:nth-child(2) {
-    width: 8.8rem;
+    width: 9rem;
     height: 1.6rem;
     border-radius: 2rem;
     position: relative;
@@ -986,6 +986,8 @@
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
 }
 
+
+
 /* Dark Mode css */
 
 .barber_dashboard_page_container.dark>div:nth-child(1),
@@ -1069,6 +1071,50 @@
 }
 
 .queuelist_container.dark>div:not(:nth-child(1))>p{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_connect_salon_container.dark > h3{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_connect_salon_list_container.dark{
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.barber_connect_salon_list.dark>h4{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_connect_salon_list.dark>div{
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.barber_connect_salon_list.dark>div>div>div{
+    background:var(--dark-mode-bg-color-4);
+}
+
+.barber_connect_salon_list.dark>div>div>div>p{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_list_services_list.dark{
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.barber_list_services_list.dark>h4{
+    color: var(--primary-text-light-color1);
+}
+
+.barber_list_services_list.dark>div{
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.barber_list_services_list.dark>div>div>div{
+    background:var(--dark-mode-bg-color-4);
+}
+
+.barber_list_services_list.dark>div>div>div>p{
     color: var(--primary-text-light-color1);
 }
 

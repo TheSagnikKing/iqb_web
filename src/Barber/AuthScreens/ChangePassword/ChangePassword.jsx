@@ -1,14 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ChangePassword.css"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { barberResetPasswordAction } from '../../../Redux/Barber/Actions/BarberPasswordAction'
 
 const ChangePassword = () => {
 
+  const params = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  // const ChangePasswordHandler = () => {
+  //   navigate("/barberpasswordreset")
+  // }
 
   const ChangePasswordHandler = () => {
-    navigate("/barberpasswordreset")
+    if (password == confirmPassword) {
+      dispatch(barberResetPasswordAction(password, params?.token, navigate))
+    } else {
+      alert("Password donot match")
+    }
   }
+
+  const barberResetPassword = useSelector(state => state.barberResetPassword)
+
+  const {
+    loading: barberResetPasswordLoading,
+  } = barberResetPassword
 
   return (
     <div className='change_password_container'>
@@ -25,6 +47,8 @@ const ChangePassword = () => {
                     <label htmlFor="">New Password</label>
                     <input 
                     type="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
 
@@ -32,6 +56,8 @@ const ChangePassword = () => {
                     <label htmlFor="">Confirm Password</label>
                     <input 
                     type="password" 
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
 

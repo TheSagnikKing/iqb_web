@@ -1,21 +1,21 @@
-import { BARBER_CONNECT_SALON_FAIL, BARBER_CONNECT_SALON_REQ, BARBER_CONNECT_SALON_SUCCESS, CHANGE_BARBER_ONLINESTATUS_FAIL, CHANGE_BARBER_ONLINESTATUS_REQ, CHANGE_BARBER_ONLINESTATUS_SUCCESS, CONNECT_SALON_LIST_FAIL, CONNECT_SALON_LIST_REQ, CONNECT_SALON_LIST_SUCCESS } from "../Constants/constants";
+import { BARBER_SEND_VERIFY_EMAIL_FAIL, BARBER_SEND_VERIFY_EMAIL_REQ, BARBER_SEND_VERIFY_EMAIL_SUCCESS, BARBER_UPDATE_PROFILE_FAIL, BARBER_UPDATE_PROFILE_REQ, BARBER_UPDATE_PROFILE_SUCCESS, BARBER_VERIFIED_EMAIL_STATUS_FAIL, BARBER_VERIFIED_EMAIL_STATUS_REQ, BARBER_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants";
 
-export const connectSalonListReducer = (state = {}, action) => {
+export const barberUpdateProfileReducer = (state = {}, action) => {
     switch (action.type) {
-        case CONNECT_SALON_LIST_REQ:
+        case BARBER_UPDATE_PROFILE_REQ:
             return {
                 ...state,
                 loading: true,
                 resolve: false
             };
-        case CONNECT_SALON_LIST_SUCCESS:
+        case BARBER_UPDATE_PROFILE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 resolve: true,
                 ...action.payload
             };
-        case CONNECT_SALON_LIST_FAIL:
+        case BARBER_UPDATE_PROFILE_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -27,22 +27,22 @@ export const connectSalonListReducer = (state = {}, action) => {
     }
 }
 
-export const barberConnectSalonReducer = (state = {}, action) => {
+export const barberSendVerifyEmailReducer = (state = {}, action) => {
     switch (action.type) {
-        case BARBER_CONNECT_SALON_REQ:
+        case BARBER_SEND_VERIFY_EMAIL_REQ:
             return {
                 ...state,
                 loading: true,
                 resolve: false
             };
-        case BARBER_CONNECT_SALON_SUCCESS:
+        case BARBER_SEND_VERIFY_EMAIL_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 resolve: true,
                 ...action.payload
             };
-        case BARBER_CONNECT_SALON_FAIL:
+        case BARBER_SEND_VERIFY_EMAIL_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -54,22 +54,22 @@ export const barberConnectSalonReducer = (state = {}, action) => {
     }
 }
 
-export const barberSalonStatusReducer = (state = {}, action) => {
+export const barberVerifiedEmailStatusReducer = (state = {}, action) => {
     switch (action.type) {
-        case CHANGE_BARBER_ONLINESTATUS_REQ:
+        case BARBER_VERIFIED_EMAIL_STATUS_REQ:
             return {
                 ...state,
                 loading: true,
                 resolve: false
             };
-        case CHANGE_BARBER_ONLINESTATUS_SUCCESS:
+        case BARBER_VERIFIED_EMAIL_STATUS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 resolve: true,
                 ...action.payload
             };
-        case CHANGE_BARBER_ONLINESTATUS_FAIL:
+        case BARBER_VERIFIED_EMAIL_STATUS_FAIL:
             return {
                 ...state,
                 loading: false,

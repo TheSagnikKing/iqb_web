@@ -11,7 +11,8 @@ import DashboardModal from '../../components/Modal/DashboardModal/DashboardModal
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
-import { barberConnectSalonAction, connectSalonListAction } from '../../Redux/Barber/Actions/DashboardAction';
+import { barberConnectSalonAction, barberSalonStatusAction, connectSalonListAction } from '../../Redux/Barber/Actions/DashboardAction';
+import { getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction';
 
 const Dashboard = () => {
 
@@ -20,6 +21,9 @@ const Dashboard = () => {
   const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
   const email = useSelector(state => state.BarberLoggedInMiddleware.barberEmail)
   const barberName = useSelector(state => state.BarberLoggedInMiddleware.barberName)
+  const barberId = useSelector(state => state.BarberLoggedInMiddleware.barberId)
+
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata)
 
   useEffect(() => {
     if (salonId == 0) {
@@ -139,7 +143,7 @@ const Dashboard = () => {
   const [barberSelectedServices, setBarberSelectedServices] = useState([])
 
   const selectServiceHandler = (ser) => {
-    setBarberSelectedServices([...barberSelectedServices,ser])
+    setBarberSelectedServices([...barberSelectedServices, ser])
   }
 
   // console.log("BarberSelectedServices ",barberSelectedServices)
@@ -150,23 +154,79 @@ const Dashboard = () => {
 
   const connectSalonClicked = () => {
     const connectSalondata = {
-      barberServices:barberSelectedServices,
+      barberServices: barberSelectedServices,
       email,
-      salonId:selectedSalonId
+      salonId: selectedSalonId
     }
 
     dispatch(barberConnectSalonAction(connectSalondata))
     console.log(connectSalondata)
   }
 
+  const barberConnectSalon = useSelector(state => state.barberConnectSalon)
+
+  const {
+    loading: barberConnectSalonLoading,
+    resolve: barberConnectSalonResolve,
+    response: barberConnectSalonResponse
+  } = barberConnectSalon
+
+
+  const queuelistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    queuelistcontrollerRef.current = controller;
+
+    dispatch(getBarberQueueListAction(salonId, barberId, controller.signal));
+
+    return () => {
+      if (queuelistcontrollerRef.current) {
+        queuelistcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getBarberQueueList = useSelector(state => state.getBarberQueueList)
+
+  const {
+    loading: getBarberQueueListLoading,
+    resolve: getBarberQueueListResolve,
+    response: BarberQueueList
+  } = getBarberQueueList
+
+
   const [currentDate, setCurrentDate] = useState(new Date())
+
+  console.log("svdsdvsdv",barberProfile)
+
+  useEffect(() => {
+    if(barberProfile){
+      setTogglecheck(barberProfile?.user[0]?.isOnline)
+    }
+  },[barberProfile])
+
+  const [togglecheck, setTogglecheck] = useState(false);
+
+  const toggleHandler = () => {
+    const newCheckValue = !togglecheck;
+    setTogglecheck(newCheckValue);
+
+    const salonStatusOnlineData = {
+      barberId,
+      salonId,
+      isOnline: newCheckValue,
+    };
+
+    dispatch(barberSalonStatusAction(salonStatusOnlineData));
+  }
 
   return (
     salonId == 0 ? <>
-      <div className='barber_connect_salon_container'>
+      <div className={`barber_connect_salon_container ${darkmodeOn && "dark"}`}>
         <h3>Connect To Your Salon</h3>
-        <div className='barber_connect_salon_list_container'>
-          <div className='barber_connect_salon_list'>
+        <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
+          <div className={`barber_connect_salon_list ${darkmodeOn && "dark"}`}>
             <h4>Choose Your Salon</h4>
             <div>
               <div>
@@ -178,7 +238,10 @@ const Dashboard = () => {
 
                 {
                   connectSalonListLoading && !connectSalonListResolve ?
-                    <div>Loading...</div> :
+                    <>
+                      <Skeleton count={4} height={"5rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                    </> :
                     !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length > 0 ?
                       connectSalonListResponse?.map((s) => (
                         <div key={s._id}>
@@ -206,7 +269,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className='barber_list_services_list'>
+          <div className={`barber_list_services_list ${darkmodeOn && "dark"}`}>
             <h4>List of Services</h4>
             <div>
               <div>
@@ -225,9 +288,9 @@ const Dashboard = () => {
                       <p>${ser.servicePrice}</p>
                       {
                         barberSelectedServices.some((b) => b._id === ser._id) ?
-                        <button style={{background:"red"}} onClick={() => deleteServiceHandler(ser)}><DeleteIcon/></button> : <button onClick={() => selectServiceHandler(ser)}>+</button> 
+                          <button style={{ background: "red" }} onClick={() => deleteServiceHandler(ser)}><DeleteIcon /></button> : <button onClick={() => selectServiceHandler(ser)}>+</button>
                       }
-                      
+
                     </div>
                   ))
                 }
@@ -237,7 +300,13 @@ const Dashboard = () => {
           </div>
 
           <div>
-            <button onClick={connectSalonClicked}>Connect Salon</button>
+            {
+              barberConnectSalonLoading ? <button style={{
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={connectSalonClicked}>Connect Salon</button>
+            }
+
           </div>
         </div>
       </div>
@@ -255,7 +324,7 @@ const Dashboard = () => {
               /> :
               <div>
                 <h1>Welcome Back Arghya</h1>
-                {/* <div
+                <div
                   style={{
                     background: togglecheck ? "limegreen" : "#000"
                   }}
@@ -265,7 +334,7 @@ const Dashboard = () => {
                     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
                     onClick={toggleHandler}
                   ></button>
-                </div> */}
+                </div>
               </div>
           }
 
@@ -274,7 +343,7 @@ const Dashboard = () => {
           }}>
             <div>Salon Information</div>
 
-            <p style={{textAlign:"center",marginBlock:"2rem",fontSize:"1.4rem",color:darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"}}>            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro vel eum dolorem neque est voluptas eaque quasi explicabo amet iure error sint, deserunt maxime placeat rem culpa vitae ipsam modi itaque enim eligendi, quisquam ducimus repudiandae. Facere blanditiis ipsum assumenda?</p>
+            <p style={{ textAlign: "center", marginBlock: "2rem", fontSize: "1.4rem", color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)" }}>            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro vel eum dolorem neque est voluptas eaque quasi explicabo amet iure error sint, deserunt maxime placeat rem culpa vitae ipsam modi itaque enim eligendi, quisquam ducimus repudiandae. Facere blanditiis ipsum assumenda?</p>
 
           </div>
         </div>
@@ -288,6 +357,98 @@ const Dashboard = () => {
               </div>
             </div>
 
+            {
+              getBarberQueueListLoading && !getBarberQueueListResolve ?
+                <div>
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                </div> :
+                !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length > 0 ?
+                  <>
+                    <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
+                      <div>
+                        <p>Customer Name</p>
+                        <p>Barber Name</p>
+                        <p>Q Position</p>
+                        <p>Services</p>
+                      </div>
+
+                      {
+                        queuelist?.map((q) => (
+                          <div key={q._id}>
+                            <p>{q.name}</p>
+                            <p>{q.barberName}</p>
+                            <p>{q.qPosition}</p>
+                            <p>{q.services?.map((s) => s.serviceName)}</p>
+                          </div>
+                        ))
+                      }
+
+                    </div>
+                  </> :
+                  !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length == 0 ?
+                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
+                    !getBarberQueueListLoading && !getBarberQueueListResolve &&
+                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
+            }
+
+            {/* <>
+              <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
+                <div>
+                  <p>Customer Name</p>
+                  <p>Barber Name</p>
+                  <p>Q Position</p>
+                  <p>Services</p>
+                </div>
+
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+                <div>
+                  <p>q.name</p>
+                  <p>q.barberName</p>
+                  <p>q.qPosition</p>
+                  <p>q.services?.map</p>
+                </div>
+
+              </div>
+            </> */}
+
           </div>
         </div>
 
@@ -296,11 +457,11 @@ const Dashboard = () => {
             boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
           }}
         >
-            <img 
+          <img
             src="https://i.pinimg.com/736x/10/05/2a/10052a45b91b9f02d7e417084ab5a02e.jpg"
-            alt="" 
-            style={{width:"100%",height:"100%",borderRadius:"1.5rem"}}
-            />
+            alt=""
+            style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
+          />
         </div>
 
         <div>
@@ -417,9 +578,9 @@ const Dashboard = () => {
           <div>
             <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
             <div style={{
-              color:darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"
+              color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"
             }}>
-                Appointment not available
+              Appointment not available
             </div>
 
           </div>

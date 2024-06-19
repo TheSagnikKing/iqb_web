@@ -111,7 +111,7 @@ const App = () => {
               <Route path="/barbersignup" element={<BarberSignup />} />
               <Route path="/barberforgotpassword" element={<BarberForgotPassword />} />
               <Route path="/barbercheckemail" element={<BarberCheckEmail />} />
-              <Route path="/barberchangepassword" element={<BarberChangePassword />} />
+              <Route path="/barberchangepassword/:token" element={<BarberChangePassword />} />
               <Route path="/barberpasswordreset" element={<BarberPasswordReset />} />
               <Route path="/barber-signupeditprofile" element={<BarberSignupEditProfile />} />
             </Route>

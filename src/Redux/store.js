@@ -9,7 +9,10 @@ import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer
 import { adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
 import { adminGetDefaultSalonReducer,adminApplySalonReducer, colorReducer, adminSetSalonReducer } from "./Admin/Reducers/AdminHeaderReducer"
 import { adminForgetPasswordReducer, adminResetPasswordReducer } from "./Admin/Reducers/AdminPasswordReducer";
-import { barberConnectSalonReducer, connectSalonListReducer } from "./Barber/Reducers/DashboardReducer";
+import { barberConnectSalonReducer, barberSalonStatusReducer, connectSalonListReducer } from "./Barber/Reducers/DashboardReducer";
+import { barberForgetPasswordReducer, barberResetPasswordReducer } from "./Barber/Reducers/BarberPasswordReducer";
+import { getBarberQueueListReducer } from "./Barber/Reducers/BarberQueueReducer";
+import { barberSendVerifyEmailReducer, barberUpdateProfileReducer, barberVerifiedEmailStatusReducer } from "./Barber/Reducers/BarberProfileReducer";
 
 const rootReducer = combineReducers({
 
@@ -63,10 +66,17 @@ const rootReducer = combineReducers({
   BarberGoogleSignup:BarberGoogleSignupReducer,
   BarberSignin:BarberSigninReducer,
   BarberSignup:BarberSignupReducer,
+  barberForgetPassword:barberForgetPasswordReducer,
+  barberResetPassword:barberResetPasswordReducer,
   BarberSignupEdit:BarberSignupEditReducer,
   BarberLogout:BarberLogoutReducer,
   connectSalonList:connectSalonListReducer,
   barberConnectSalon:barberConnectSalonReducer,
+  getBarberQueueList:getBarberQueueListReducer,
+  barberUpdateProfile:barberUpdateProfileReducer,
+  barberSendVerifyEmail:barberSendVerifyEmailReducer,
+  barberVerifiedEmailStatus:barberVerifiedEmailStatusReducer,
+  barberSalonStatus:barberSalonStatusReducer,
 })
 
 const initialState = {};

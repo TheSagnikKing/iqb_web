@@ -26,7 +26,8 @@
     width: 32rem;
     height: 100%;
     /*background-color: var(--primary-bg-light-color1);
-    */border: none;
+    */
+    border: none;
     border-radius: 6px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -46,7 +47,7 @@
     -o-border-radius: 6px;
     padding-inline: 1rem;
     font-size: 1.6rem;
-    background:transparent;
+    background: transparent;
 }
 
 .customer_search>input:focus {
@@ -105,7 +106,7 @@
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: 0.2fr 0.8fr 0.8fr 0.4fr 0.5fr  ;
+    grid-template-columns: 0.2fr 0.8fr 0.8fr 0.4fr 0.5fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
@@ -157,6 +158,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 /* 
 .customer_content_body>div>div:nth-child(7),
 .customer_content_body>div>div:nth-child(8),
@@ -243,20 +245,20 @@
 }
 
 
-.customer_content_body_error{
+.customer_content_body_error {
     width: 100%;
     height: 100%;
     display: grid;
     place-items: center;
 }
 
-.customer_wrapper>div:nth-child(1)>div:nth-child(2){
+.customer_wrapper>div:nth-child(1)>div:nth-child(2) {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.customer_send_btn{
+.customer_send_btn {
     height: 4rem;
     display: flex;
     align-items: center;
@@ -274,7 +276,7 @@
     cursor: pointer;
 }
 
-.customer_send_btn>div{
+.customer_send_btn>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,59 +286,71 @@
 
 /* Dark Css Style */
 
-.customer_wrapper.dark>div:nth-child(1)>p{
+.customer_wrapper.dark>div:nth-child(1)>p {
     color: var(--primary-text-light-color1);
 }
 
-.customer_content_wrapper.dark{
+.customer_content_wrapper.dark {
     background-color: var(--dark-mode-bg-color-4);
 }
 
-.customer_content_body.dark>div:not(:nth-child(1)){
+.customer_content_body.dark>div:not(:nth-child(1)) {
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.customer_content_body.dark>div:not(:nth-child(1))>p{
+.customer_content_body.dark>div:not(:nth-child(1))>p {
     color: var(--primary-text-light-color1);
 }
 
-.customer_content_body.dark>div:not(:nth-child(1))>p:nth-child(2){
+.customer_content_body.dark>div:not(:nth-child(1))>p:nth-child(2) {
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.customer_search.dark{
+.customer_search.dark {
     background: var(--dark-mode-bg-color-4);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);
 }
 
-.customer_search.dark>input{
-    background:transparent;
+.customer_search.dark>input {
+    background: transparent;
     color: var(--primary-text-light-color1);
 }
 
-.customer_search.dark>input::placeholder{
+.customer_search.dark>input::placeholder {
     color: var(--primary-text-light-color1);
 }
 
-.customer_search.dark>div{
-    background:transparent;
+.customer_search.dark>div {
+    background: transparent;
     color: var(--primary-text-light-color1);
 }
 
-.customer_content_body_error.dark p{
+.customer_content_body_error.dark p {
     color: var(--primary-text-light-color1);
 }
 
-.customer_send_btn.dark{
+.customer_send_btn.dark {
     background-color: var(--dark-mode-bg-color-4);
 }
 
 .customer_send_btn.dark>div,
-.customer_send_btn.dark>p{
+.customer_send_btn.dark>p {
     color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
+
+    .customer_wrapper>div:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        height: 4rem;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 3.2rem;
+    }
+
+
     .customer_content_wrapper {
         width: calc(100vw - 2rem);
     }
@@ -350,7 +364,7 @@
     }
 
     .mobile_customer_search {
-        display: block;
+        /* display: block; */
     }
 
     .mobile_customer_search {
@@ -372,6 +386,17 @@
 }
 
 @media screen and (min-width:431px) and (max-width:1140px) {
+
+    .customer_wrapper>div:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+        height: 4rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+        margin-bottom: 3.2rem;
+    }
+
     .customer_content_wrapper {
         width: calc(100vw - 2rem);
     }
@@ -385,6 +410,6 @@
     }
 
     .mobile_customer_search {
-        display: block;
+        /* display: block; */
     }
 }

@@ -70,7 +70,7 @@ const CustomerList = () => {
         </div>
 
 
-        <div className='mobile_customer_search'><SearchIcon /></div>
+        <div className='mobile_customer_search' style={{color:darkmodeOn && "var(--primary-text-light-color1)"}}><SearchIcon /></div>
       </div>
 
       <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
@@ -87,7 +87,6 @@ const CustomerList = () => {
                   type="checkbox"
                   style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                 />
-                <p>Salon ID</p>
                 <p>Name</p>
                 <p>Email</p>
                 <p>Gender</p>
@@ -100,20 +99,10 @@ const CustomerList = () => {
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                   />
-                  <p>{s.salonId}</p>
                   <p>{s.name}</p>
                   <p>{s.email}</p>
                   <p>{s.gender}</p>
                   <p>{s.mobileNumber}</p>
-                  {/* <div>
-                    <div><Notificationicon /></div>
-                  </div>
-                  <div>
-                    <div><EmailIcon /></div>
-                  </div>
-                  <div>
-                    <div><MessageIcon /></div>
-                  </div> */}
                 </div>
               ))}
             </div>

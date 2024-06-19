@@ -63,7 +63,15 @@ const DashboardHeader = () => {
 
     const darkmodeOn = darkMode === "On"
 
-    const [src, setSrc] = useState('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
+    const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
+
+    const [src, setSrc] = useState("");
+
+    useEffect(() => {
+        if(barberProfile){
+            setSrc(barberProfile?.profile[0]?.url)
+        }
+    },[barberProfile])
 
     const [barberEditDrop, setBarberEditDrop] = useState(false)
 
