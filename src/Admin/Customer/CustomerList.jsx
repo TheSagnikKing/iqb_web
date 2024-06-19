@@ -87,7 +87,7 @@ const CustomerList = () => {
                   type="checkbox"
                   style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                 />
-                <p>Salon ID</p>
+                {/* <p>Salon ID</p> */}
                 <p>Name</p>
                 <p>Email</p>
                 <p>Gender</p>
@@ -100,7 +100,7 @@ const CustomerList = () => {
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                   />
-                  <p>{s.salonId}</p>
+                  {/* <p>{s.salonId}</p> */}
                   <p>{s.name}</p>
                   <p>{s.email}</p>
                   <p>{s.gender}</p>
