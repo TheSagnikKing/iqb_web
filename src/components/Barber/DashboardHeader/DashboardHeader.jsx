@@ -88,37 +88,36 @@ const DashboardHeader = () => {
         };
     }, []);
 
-    const logoutHandler = async () => {
+    const logoutHandler = () => {
         dispatch(BarberLogoutAction(navigate))
     }
 
+    const [sidebarToggle, setSidebarToggle] = useState(false)
+
+    const MobileIconDropRef = useRef()
+
+    useEffect(() => {
+        const handleClickMobileIconOutside = (event) => {
+            if (
+                MobileIconDropRef.current &&
+                !MobileIconDropRef.current.contains(event.target)
+            ) {
+                setSidebarToggle(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickMobileIconOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickMobileIconOutside);
+        };
+    }, []);
+
+
     return (
         <div className={`admin_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
-            <div className={`choose_salon_div ${darkmodeOn && "dark"}`}>
-                <p>Choose Salon</p>
-                <div>
-                    {/* <p>{adminSetSalon?.currentActiveSalon}</p> */}
-                    <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
-                    {/* <div
-                        className={`dashboard_salon_list_dropdown ${darkmodeOn && "dark"}`}
-                        ref={salonlistRef}
-                        style={{
-                            opacity: salonlistdrop ? "1" : "0",
-                            zIndex: salonlistdrop ? "2" : "-1",
-                            transition: "300ms ease",
-                            height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
-                        }}
-                    >                       
-                    </div> */}
-                </div>
+            <div></div>
 
-            
-            </div>
 
-            <div className='mobile_choose_salon_div'>
-                <button onClick={() => setMobileDrop((prev) => !prev)}>Select Salon</button>
-            </div>
-            
             <div className={`profile_wrapper ${darkmodeOn && "dark"}`}>
                 <div
                     style={{
@@ -176,7 +175,7 @@ const DashboardHeader = () => {
             </div>
 
 
-            {/* <div
+            <div
                 className={`dashboard_mobile_sidebar_container ${sidebarToggle ? "dashboard_mobile_sidebar_active" : "dashboard_mobile_sidebar_inactive"} ${darkmodeOn && "dark"}`}
                 ref={MobileIconDropRef}
             >
@@ -200,11 +199,13 @@ const DashboardHeader = () => {
                     ))
                 }
 
-                <div>
+                <div onClick={() => {
+                    navigate("/barber-dashboard/editprofile")
+                }}>
                     <div><ProfileIcon /></div>
                     <p>Profile</p>
                 </div>
-                <div>
+                <div onClick={logoutHandler}>
                     <div><LogoutIcon /></div>
                     <p>Logout</p>
                 </div>
@@ -223,7 +224,7 @@ const DashboardHeader = () => {
                         ></button>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 }

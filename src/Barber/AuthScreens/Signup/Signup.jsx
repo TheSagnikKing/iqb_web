@@ -3,8 +3,9 @@ import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
-import { BarberSignupAction } from '../../../Redux/Barber/Actions/AuthAction'
-import { useDispatch } from 'react-redux'
+import { BarberGoogleSignupAction, BarberSignupAction } from '../../../Redux/Barber/Actions/AuthAction'
+import { useDispatch, useSelector } from 'react-redux'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const Signup = () => {
 
@@ -14,8 +15,8 @@ const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const responseMessage = () => {
-
+  const responseMessage = (response) => {
+    dispatch(BarberGoogleSignupAction(response.credential, navigate))
   }
 
   const errorMessage = () => {
@@ -45,6 +46,12 @@ const Signup = () => {
     console.log(barbersignupdata)
     dispatch(BarberSignupAction(barbersignupdata, navigate))
   }
+
+  const BarberSignup = useSelector(state => state.BarberSignup)
+
+  const {
+    loading: BarberSignupLoading,
+  } = BarberSignup
 
   return (
     <main className='barber_signup_container'>
@@ -76,7 +83,12 @@ const Signup = () => {
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>
 
-          <button onClick={signupClicked}>Sign Up</button>
+          {
+            BarberSignupLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={signupClicked}>Signup</button>
+          }
 
           <div>
             <div />

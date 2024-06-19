@@ -159,6 +159,8 @@ const Dashboard = () => {
     console.log(connectSalondata)
   }
 
+  const [currentDate, setCurrentDate] = useState(new Date())
+
   return (
     salonId == 0 ? <>
       <div className='barber_connect_salon_container'>
@@ -267,9 +269,12 @@ const Dashboard = () => {
               </div>
           }
 
-          <div>
+          <div style={{
+            background: darkmodeOn ? "var(--dark-mode-bg-color-4)" : "var(--primary-bg-light-color1)"
+          }}>
             <div>Salon Information</div>
 
+            <p style={{textAlign:"center",marginBlock:"2rem",fontSize:"1.4rem",color:darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"}}>            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro vel eum dolorem neque est voluptas eaque quasi explicabo amet iure error sint, deserunt maxime placeat rem culpa vitae ipsam modi itaque enim eligendi, quisquam ducimus repudiandae. Facere blanditiis ipsum assumenda?</p>
 
           </div>
         </div>
@@ -291,7 +296,11 @@ const Dashboard = () => {
             boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
           }}
         >
-
+            <img 
+            src="https://i.pinimg.com/736x/10/05/2a/10052a45b91b9f02d7e417084ab5a02e.jpg"
+            alt="" 
+            style={{width:"100%",height:"100%",borderRadius:"1.5rem"}}
+            />
         </div>
 
         <div>
@@ -406,9 +415,11 @@ const Dashboard = () => {
             </div>
           </div>
           <div>
-            {/* <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div> */}
-            <div>
-
+            <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
+            <div style={{
+              color:darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"
+            }}>
+                Appointment not available
             </div>
 
           </div>

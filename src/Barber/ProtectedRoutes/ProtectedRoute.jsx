@@ -3,6 +3,7 @@ import api from '../../Redux/api/Api';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
+import AuthLoader from '../../components/AuthLoader/AuthLoader';
 
 const ProtectedRoute = () => {
     const [loggindata, setloggindata] = useState({});
@@ -46,11 +47,21 @@ const ProtectedRoute = () => {
     } else {
         // Data is not present, render a button or any other UI element
         content = (
-            <div>
-                <button
-                 onClick={ErrorClickedHandler}
-                 style={{padding:"0.5rem",margin:"1rem",cursor:"pointer"}}
-                 >{logginerror ? logginerror : "Loading"}</button>
+            <div className='route_error_container'>
+                {
+                    logginerror ? <div className='route_error_container_content'>
+                        <div>
+                            <h1>You are not authorize</h1>
+                            <p>You tried to access a page you did not have prior authorization for.</p>
+                            <p>Click the Link below to signin again</p>
+                            <button onClick={ErrorClickedHandler}>Signin</button>
+                        </div>
+                        <div>
+                            <img src="./403.jpg" alt="unauthorize" />
+                        </div>
+                    </div> : <AuthLoader />
+                }
+
             </div>
         );
     }

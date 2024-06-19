@@ -64,8 +64,8 @@ const Sidebar = () => {
         }}
       >
         <div>
-          {location?.pathname === "/barber-dashboard" ? <DashboardHeader /> : <h1>Header</h1>}
-          {/* <h1>Barber Header</h1> */}
+          {/* {location?.pathname === "/barber-dashboard" ? <DashboardHeader /> : <h1>Header</h1>} */}
+          <DashboardHeader />
           <div><Outlet /></div>
         </div>
       </div>

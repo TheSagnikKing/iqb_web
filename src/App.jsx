@@ -37,6 +37,8 @@ const BarberSidebar = React.lazy(() => import("./components/Barber/Sidebar/Sideb
 const BarberMobileSidebar = React.lazy(() => import("./components/Barber/MobileSidebar/MobileSidebar"))
 const BarberEditProfile = React.lazy(() => import("./Barber/EditProfile/EditProfile"))
 const BarberSignupEditProfile = React.lazy(() => import("./Barber/AuthScreens/SignupEditProfile/SignupEditProfile"))
+const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
+const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -118,7 +120,8 @@ const App = () => {
               <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
                 <Route path="/barber-dashboard" element={<BarberDashboard />} />
                 <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
-
+                <Route path="/barber-customer" element={<BarberCustomer/>}/>
+                <Route path="/barber-queue" element={<BarberQueueList/>}/>
               </Route>
             </Route>
 

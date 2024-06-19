@@ -1,7 +1,7 @@
 .calender-box{
     width: 98%;
-    height: auto;
-    background-color: white;
+    height: 99%;
+    /* background-color: white; */
     border-radius: 10px;
     font-size: 1rem;
 }

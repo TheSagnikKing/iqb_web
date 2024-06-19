@@ -3,8 +3,9 @@ import './Signin.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible,HomeIcon,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {BarberGoogleloginAction, BarberSigninAction} from "../../../Redux/Barber/Actions/AuthAction"
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const Signin = () => {
 
@@ -48,6 +49,12 @@ const Signin = () => {
     dispatch(BarberSigninAction(barbersignindata, navigate))
   }
 
+  const BarberSignin = useSelector(state => state.BarberSignin)
+
+  const {
+    loading: BarberSigninLoading,
+  } = BarberSignin
+
   return (
     <main className='barber_signin_container'>
       <div>
@@ -82,7 +89,12 @@ const Signin = () => {
             <p onClick={forgotClicked}>Forgot Password ?</p>
           </div>
 
-          <button onClick={signinClicked}>Signin</button>
+          {
+            BarberSigninLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={signinClicked}>Signin</button>
+          }
 
           <div>
             <div />

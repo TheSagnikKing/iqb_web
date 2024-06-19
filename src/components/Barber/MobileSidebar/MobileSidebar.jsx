@@ -3,6 +3,7 @@ import './MobileSidebar.css'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
+import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 
 const MobileSidebar = () => {
 
@@ -22,6 +23,7 @@ const MobileSidebar = () => {
         <div>
           {/* {location?.pathname === "/admin-dashboard" ? <DashboardHeader /> : <Header />} */}
           {/* <div>BarberHeader or header</div> */}
+          <DashboardHeader />
           <div><Outlet /></div>
         </div>
       </div>
