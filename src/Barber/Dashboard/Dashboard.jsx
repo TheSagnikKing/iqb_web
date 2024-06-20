@@ -128,6 +128,18 @@ const Dashboard = () => {
 
   console.log(selectedSalonId)
 
+  const [currentSelectedSalon, setCurrentSelectedSalon] = useState({})
+
+  useEffect(() => {
+    if(selectedSalonId){
+      const currentSalon = connectSalonListResponse?.find((s) => s.salonId === selectedSalonId)
+      setCurrentSelectedSalon(currentSalon)
+    }
+    
+  },[selectedSalonId])
+
+  console.log("Current    sdssss", currentSelectedSalon)
+
   const [selectedServiceList, setSelectedServiceList] = useState([])
 
   useEffect(() => {
@@ -294,7 +306,7 @@ const Dashboard = () => {
                     <div key={ser._id}>
                       <p>{ser.serviceName}</p>
                       <p>{ser.vipService ? "VIP" : "Regular"}</p>
-                      <p>${ser.servicePrice}</p>
+                      <p>{currentSelectedSalon?.currency}{" "}{ser.servicePrice}</p>
                       {
                         barberSelectedServices.some((b) => b._id === ser._id) ?
                           <button style={{ background: "red" }} onClick={() => deleteServiceHandler(ser)}><DeleteIcon /></button> : <button onClick={() => selectServiceHandler(ser)}>+</button>
