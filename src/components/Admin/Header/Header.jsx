@@ -74,7 +74,15 @@ const Header = () => {
     dispatch(AdminLogoutAction(navigate))
   }
 
-  const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
+  const [src, setSrc] = useState("");
+
+    useEffect(() => {
+        if (adminProfile && adminProfile?.profile[0]?.url) {
+            setSrc(adminProfile?.profile[0]?.url)
+        } else {
+            setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+        }
+    }, [adminProfile])
 
   const profileClicked = () => {
     navigate("/admin-dashboard/editprofile")

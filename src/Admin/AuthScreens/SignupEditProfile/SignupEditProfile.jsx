@@ -5,6 +5,7 @@ import { AdminSignupEditAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhoneInput } from 'react-international-phone'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { adminSkipProfileAction } from '../../../Redux/Admin/Actions/AdminProfileAction'
 
 const SignupEditProfile = () => {
 
@@ -56,7 +57,7 @@ const SignupEditProfile = () => {
 
 
   const updateClicked = () => {
-    const profiledata = { email: admindata?.email, mobileNumber, name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType };
+    const profiledata = { email: admindata?.email, mobileNumber:Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType };
 
     console.log(profiledata)
     dispatch(AdminSignupEditAction(profiledata, navigate))
@@ -65,7 +66,7 @@ const SignupEditProfile = () => {
   const skipClicked = () => {
     const profiledata = { email: admindata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: admindata?.salonId };
 
-    dispatch(AdminSignupEditAction(profiledata, navigate))
+    dispatch(adminSkipProfileAction(profiledata, navigate))
   }
 
   const AdminSignupEdit = useSelector(state => state.AdminSignupEdit)
@@ -73,6 +74,12 @@ const SignupEditProfile = () => {
   const {
     loading: AdminSignupEditLoading,
   } = AdminSignupEdit
+
+  const adminSkipProfile = useSelector(state => state.adminSkipProfile)
+
+  const {
+    loading: adminSkipProfileLoading
+  } = adminSkipProfile
 
   return (
     <main className='admin_signup_edit_container'>
@@ -86,7 +93,16 @@ const SignupEditProfile = () => {
         <div>
           <div>
             <h1>Add Your Account Details</h1>
-            <button onClick={() => skipClicked()}>Skip</button>
+            {
+              adminSkipProfileLoading ? 
+              <button style={{
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
+              }}><ButtonLoader/></button> : 
+              <button onClick={() => skipClicked()}>Skip</button>
+            }
+            
           </div>
 
           <div>

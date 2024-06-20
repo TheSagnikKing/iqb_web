@@ -155,8 +155,8 @@ const DashboardHeader = () => {
 
     const selectedActiveSalon = (salon) => {
         dispatch({
-            type:"ADMIN_SET_SALON",
-            payload:{
+            type: "ADMIN_SET_SALON",
+            payload: {
                 currentActiveSalon: salon.salonName,
                 chooseSalonId: salon.salonId
 
@@ -181,11 +181,11 @@ const DashboardHeader = () => {
     const getDefaultSalonControllerRef = useRef(new AbortController())
 
     useEffect(() => {
-            if (adminProfile) {
+        if (adminProfile) {
             const controller = new AbortController();
             getDefaultSalonControllerRef.current = controller;
 
-            dispatch(adminGetDefaultSalonAction(adminEmail, controller.signal,adminSetSalon));
+            dispatch(adminGetDefaultSalonAction(adminEmail, controller.signal, adminSetSalon));
 
             return () => {
                 if (getDefaultSalonControllerRef.current) {
@@ -196,7 +196,15 @@ const DashboardHeader = () => {
 
     }, [adminProfile, dispatch]);
 
-    const [src, setSrc] = useState(adminProfile?.profile[0]?.url || 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg');
+    const [src, setSrc] = useState("");
+
+    useEffect(() => {
+        if (adminProfile && adminProfile?.profile[0]?.url) {
+            setSrc(adminProfile?.profile[0]?.url)
+        } else {
+            setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+        }
+    }, [adminProfile])
 
     const adminApplySalon = useSelector(state => state.adminApplySalon)
 
@@ -219,7 +227,7 @@ const DashboardHeader = () => {
     }, [])
 
     console.log("Check refresh ", check)
-    console.log("Dark Mode ",darkMode)
+    console.log("Dark Mode ", darkMode)
 
     const darkHandler = () => {
         setCheck(true)
@@ -277,7 +285,7 @@ const DashboardHeader = () => {
                     </div>
                 </div>
                 {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
-            
+
             </div>
 
             <div className='mobile_choose_salon_div'>

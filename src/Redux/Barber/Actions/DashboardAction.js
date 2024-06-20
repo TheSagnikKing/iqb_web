@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { BARBER_CONNECT_SALON_FAIL, BARBER_CONNECT_SALON_REQ, BARBER_CONNECT_SALON_SUCCESS, BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, CHANGE_BARBER_ONLINESTATUS_FAIL, CHANGE_BARBER_ONLINESTATUS_REQ, CHANGE_BARBER_ONLINESTATUS_SUCCESS, CONNECT_SALON_LIST_FAIL, CONNECT_SALON_LIST_REQ, CONNECT_SALON_LIST_SUCCESS } from "../Constants/constants";
+import { BARBER_CONNECT_SALON_FAIL, BARBER_CONNECT_SALON_REQ, BARBER_CONNECT_SALON_SUCCESS, BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, CHANGE_BARBER_ONLINESTATUS_FAIL, CHANGE_BARBER_ONLINESTATUS_REQ, CHANGE_BARBER_ONLINESTATUS_SUCCESS, CONNECT_SALON_LIST_FAIL, CONNECT_SALON_LIST_REQ, CONNECT_SALON_LIST_SUCCESS, GET_BARBER_SALON_LOGO_FAIL, GET_BARBER_SALON_LOGO_REQ, GET_BARBER_SALON_LOGO_SUCCESS } from "../Constants/constants";
 import api from "../../api/Api";
 
 export const connectSalonListAction = () => async (dispatch) => {
@@ -105,3 +105,36 @@ export const barberSalonStatusAction = (salonStatusdata) => async (dispatch) => 
         });
     }
 }
+
+export const barberGetSalonLogoAction = (salonId) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_BARBER_SALON_LOGO_REQ })
+
+        const { data } = await api.post(`/api/salon/getSalonLogo`, {
+            salonId
+        })
+
+        dispatch({
+            type: GET_BARBER_SALON_LOGO_SUCCESS,
+            payload: data
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: GET_BARBER_SALON_LOGO_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+

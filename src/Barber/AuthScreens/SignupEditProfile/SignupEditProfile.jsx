@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './SignupEditProfile.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AdminSignupEditAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhoneInput } from 'react-international-phone'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { BarberSignupEditAction } from '../../../Redux/Barber/Actions/AuthAction'
+import { barberSkipProfileAction } from '../../../Redux/Barber/Actions/BarberProfileAction'
 
 const SignupEditProfile = () => {
 
   const dispatch = useDispatch()
   const location = useLocation()
-  
+
   const barberdata = location?.state?.newUser
 
   console.log(barberdata)
@@ -57,7 +57,7 @@ const SignupEditProfile = () => {
 
 
   const updateClicked = () => {
-    const profiledata = { email: barberdata?.email, mobileNumber, name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType };
+    const profiledata = { email: barberdata?.email, mobileNumber:Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType };
 
     console.log(profiledata)
     dispatch(BarberSignupEditAction(profiledata, navigate))
@@ -66,7 +66,7 @@ const SignupEditProfile = () => {
   const skipClicked = () => {
     const profiledata = { email: barberdata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: barberdata?.salonId };
 
-    dispatch(BarberSignupEditAction(profiledata, navigate))
+    dispatch(barberSkipProfileAction(profiledata, navigate))
   }
 
   const BarberSignupEdit = useSelector(state => state.BarberSignupEdit)
@@ -74,6 +74,12 @@ const SignupEditProfile = () => {
   const {
     loading: BarberSignupEditLoading,
   } = BarberSignupEdit
+
+  const barberSkipProfile = useSelector(state => state.barberSkipProfile)
+
+  const {
+    loading: barberSkipProfileLoading,
+  } = barberSkipProfile
 
   return (
     <main className='admin_signup_edit_container'>
@@ -87,7 +93,16 @@ const SignupEditProfile = () => {
         <div>
           <div>
             <h1>Add Your Account Details</h1>
-            <button onClick={() => skipClicked()}>Skip</button>
+            {
+              barberSkipProfileLoading ?
+                <button style={{
+                  display:"flex",
+                  justifyContent:"center",
+                  alignItems:"center"
+                }}><ButtonLoader /></button> :
+                <button onClick={() => skipClicked()}>Skip</button>
+            }
+
           </div>
 
           <div>

@@ -1,14 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Sidebar.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { LeftArrow, RightArrow } from '../../../icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import DashboardHeader from '../DashboardHeader/DashboardHeader'
+import { barberGetSalonLogoAction } from '../../../Redux/Barber/Actions/DashboardAction.js'
 
 const Sidebar = () => {
 
+  const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (salonId != 0) {
+      dispatch(barberGetSalonLogoAction(salonId))
+    }
+  }, [salonId])
+
+  const barberGetSalonLogo = useSelector(state => state.barberGetSalonLogo)
+
+  const {
+    loading: barberGetSalonLogoLoading,
+    resolve: barberGetSalonLogoResolve,
+    response: barberGetSalonLogoResponse
+  } = barberGetSalonLogo
+
+  const [salonLogo, setSalonLogo] = useState("")
+
+  useEffect(() => {
+    if (barberGetSalonLogoResponse && barberGetSalonLogoResponse?.salonLogo[0]?.url) {
+      setSalonLogo(barberGetSalonLogoResponse?.salonLogo[0]?.url)
+    } else {
+      setSalonLogo("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+    }
+  }, [barberGetSalonLogoResponse])
 
   const [showSidebar, setShowSidebar] = useState(true)
 
@@ -28,10 +56,10 @@ const Sidebar = () => {
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
               <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
-                <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
+                <img src={`${salonLogo}`} alt="" />
               </div>
               <p style={{
-                color:darkmodeOn && "var(--primary-text-light-color1)"
+                color: darkmodeOn && "var(--primary-text-light-color1)"
               }}>IQB</p>
 
             </div> : ""}

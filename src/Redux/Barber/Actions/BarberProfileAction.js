@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 import api from "../../api/Api"
-import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, BARBER_SEND_VERIFY_EMAIL_FAIL, BARBER_SEND_VERIFY_EMAIL_REQ, BARBER_SEND_VERIFY_EMAIL_SUCCESS, BARBER_UPDATE_PROFILE_FAIL, BARBER_UPDATE_PROFILE_REQ, BARBER_UPDATE_PROFILE_SUCCESS, BARBER_VERIFIED_EMAIL_STATUS_FAIL, BARBER_VERIFIED_EMAIL_STATUS_REQ, BARBER_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants"
+import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, BARBER_SEND_VERIFY_EMAIL_FAIL, BARBER_SEND_VERIFY_EMAIL_REQ, BARBER_SEND_VERIFY_EMAIL_SUCCESS, BARBER_SKIP_PROFILE_FAIL, BARBER_SKIP_PROFILE_REQ, BARBER_SKIP_PROFILE_SUCCESS, BARBER_UPDATE_PROFILE_FAIL, BARBER_UPDATE_PROFILE_REQ, BARBER_UPDATE_PROFILE_SUCCESS, BARBER_VERIFIED_EMAIL_STATUS_FAIL, BARBER_VERIFIED_EMAIL_STATUS_REQ, BARBER_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants"
 
 export const barberUpdateProfileAction = (profiledata,navigate) => async (dispatch) => {
     try {
@@ -37,6 +37,43 @@ export const barberUpdateProfileAction = (profiledata,navigate) => async (dispat
                 background: '#333',
                 color: '#fff',
             },
+        });
+    }
+}
+
+export const barberSkipProfileAction = (profiledata,navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: BARBER_SKIP_PROFILE_REQ
+        });
+
+        const {data} = await api.put("/api/barber/updateBarberInfo",profiledata);
+
+        dispatch({
+            type: BARBER_SKIP_PROFILE_SUCCESS,
+            payload: { message: "Admin updated successfully" }
+        });
+
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "true")
+
+        navigate("/barber-dashboard",{state:data})
+    } catch (error) {
+
+        dispatch({
+            type: BARBER_SKIP_PROFILE_FAIL,
+            payload: error.response.data
+        });
+
+
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '1rem',
+            background: '#333',
+            color: '#fff',
+          },
         });
     }
 }

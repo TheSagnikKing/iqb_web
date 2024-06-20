@@ -1,4 +1,4 @@
-import { BARBER_CONNECT_SALON_FAIL, BARBER_CONNECT_SALON_REQ, BARBER_CONNECT_SALON_SUCCESS, CHANGE_BARBER_ONLINESTATUS_FAIL, CHANGE_BARBER_ONLINESTATUS_REQ, CHANGE_BARBER_ONLINESTATUS_SUCCESS, CONNECT_SALON_LIST_FAIL, CONNECT_SALON_LIST_REQ, CONNECT_SALON_LIST_SUCCESS } from "../Constants/constants";
+import { BARBER_CONNECT_SALON_FAIL, BARBER_CONNECT_SALON_REQ, BARBER_CONNECT_SALON_SUCCESS, CHANGE_BARBER_ONLINESTATUS_FAIL, CHANGE_BARBER_ONLINESTATUS_REQ, CHANGE_BARBER_ONLINESTATUS_SUCCESS, CONNECT_SALON_LIST_FAIL, CONNECT_SALON_LIST_REQ, CONNECT_SALON_LIST_SUCCESS, GET_BARBER_SALON_LOGO_FAIL, GET_BARBER_SALON_LOGO_REQ, GET_BARBER_SALON_LOGO_SUCCESS } from "../Constants/constants";
 
 export const connectSalonListReducer = (state = {}, action) => {
     switch (action.type) {
@@ -70,6 +70,33 @@ export const barberSalonStatusReducer = (state = {}, action) => {
                 ...action.payload
             };
         case CHANGE_BARBER_ONLINESTATUS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const barberGetSalonLogoReducer = (state = {}, action) => {
+    switch (action.type) {
+        case GET_BARBER_SALON_LOGO_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case GET_BARBER_SALON_LOGO_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case GET_BARBER_SALON_LOGO_FAIL:
             return {
                 ...state,
                 loading: false,

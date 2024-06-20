@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminResetPasswordAction } from '../../../Redux/Admin/Actions/AdminPasswordAction'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import toast from 'react-hot-toast'
 
 const ChangePassword = () => {
 
@@ -19,7 +20,15 @@ const ChangePassword = () => {
     if (password == confirmPassword) {
       dispatch(adminResetPasswordAction(password, params?.token, navigate))
     } else {
-      alert("Password donot match")
+      toast.error("Password donot match", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '1rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   }
 
@@ -64,7 +73,7 @@ const ChangePassword = () => {
               placeItems: "center"
             }}><ButtonLoader /></button> : <button onClick={ChangePasswordHandler}>Change Password</button>
           }
-          
+
           <Link to="/adminsignin">Back</Link>
         </div>
       </div>

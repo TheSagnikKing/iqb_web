@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Sidebar.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
@@ -19,7 +19,19 @@ const Sidebar = () => {
     response: adminGetDefaultSalonResponse
   } = adminGetDefaultSalon
 
-  console.log("DEEEEEE ", adminGetDefaultSalonResponse)
+  console.log("YEAHHHH",adminGetDefaultSalonResponse)
+
+
+  const [src, setSrc] = useState("");
+
+    useEffect(() => {
+        if (adminGetDefaultSalonResponse && adminGetDefaultSalonResponse?.salonLogo[0]?.url) {
+            setSrc(adminGetDefaultSalonResponse?.salonLogo[0]?.url)
+        } else {
+            setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+        }
+    }, [adminGetDefaultSalonResponse])
+
 
   const [showSidebar, setShowSidebar] = useState(true)
 
@@ -38,26 +50,10 @@ const Sidebar = () => {
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
-              {
-                adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve ?
-                  <Skeleton count={1} height={"5rem"} width={"5rem"} style={{ borderRadius: "50%" }} /> :
-                  !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo?.length > 0 ?
-                    <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
-                      <img src={`${adminGetDefaultSalonResponse?.salonLogo[0]?.url}`} alt="" />
-                    </div> :
-                    !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonLogo?.length == 0 ?
-                      <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="no image" />
-                      </div> :
-                      !adminGetDefaultSalonLoading && !adminGetDefaultSalonResolve &&
-                      <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="no image" />
-                      </div> 
 
-              }
-              {/* <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
-                <img src="https://i.pinimg.com/originals/44/e9/b5/44e9b5cb7c7d37857da5bb5685cf12cb.png" alt="" />
-              </div> */}
+              <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
+                <img src={`${src}`} alt="salonLogo" />
+              </div>
               <p style={{
                 color:darkmodeOn && "var(--primary-text-light-color1)"
               }}>IQB</p>

@@ -26,7 +26,17 @@ const EditProfile = () => {
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
 
-    const [profilepic, setProfilepic] = useState(adminProfile?.profile[0]?.url)
+    // const [profilepic, setProfilepic] = useState(adminProfile?.profile[0]?.url)
+
+    const [profilepic, setProfilepic] = useState("")
+
+    useEffect(() => {
+        if (adminProfile && adminProfile?.profile[0]?.url) {
+            setProfilepic(adminProfile?.profile[0]?.url)
+        } else {
+            setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+        }
+    }, [adminProfile])
 
     const fileInputRef = useRef(null);
 
@@ -72,7 +82,7 @@ const EditProfile = () => {
             })
 
 
-            navigate("/admin-dashboard")
+            // navigate("/admin-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
             console.error('Image upload failed:', error);
@@ -231,7 +241,8 @@ const EditProfile = () => {
                     {/* <p>Edit profile</p> */}
                     <div>
                         {
-                            uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
+                            uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
                         }
 
                         <div>
@@ -289,7 +300,7 @@ const EditProfile = () => {
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}
                                                 />
-                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
                                         </div>
 
@@ -301,7 +312,7 @@ const EditProfile = () => {
                                                     value={confirmPassword}
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />
-                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
                                         </div>
 

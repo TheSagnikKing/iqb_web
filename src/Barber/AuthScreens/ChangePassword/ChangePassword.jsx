@@ -3,6 +3,8 @@ import "./ChangePassword.css"
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { barberResetPasswordAction } from '../../../Redux/Barber/Actions/BarberPasswordAction'
+import toast from 'react-hot-toast'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const ChangePassword = () => {
 
@@ -22,7 +24,15 @@ const ChangePassword = () => {
     if (password == confirmPassword) {
       dispatch(barberResetPasswordAction(password, params?.token, navigate))
     } else {
-      alert("Password donot match")
+      toast.error("Password donot match", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   }
 
@@ -34,38 +44,42 @@ const ChangePassword = () => {
 
   return (
     <div className='change_password_container'>
-        <div><img src="/reset_img.png" alt="reset_image" /></div>
+      <div><img src="/reset_img.png" alt="reset_image" /></div>
 
+      <div>
         <div>
-            <div>
-                <h1>Change Password</h1>
-                <p>In order to protect your account, make sure your password</p>
-                <p>Point 1</p>
-                <p>Point 2</p>
-                
-                <div>
-                    <label htmlFor="">New Password</label>
-                    <input 
-                    type="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+          <h1>Change Password</h1>
+          <p>In order to protect your account, make sure your password</p>
+          <p>Point 1</p>
+          <p>Point 2</p>
 
-                <div>
-                    <label htmlFor="">Confirm Password</label>
-                    <input 
-                    type="password" 
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </div>
+          <div>
+            <label htmlFor="">New Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-                <button onClick={ChangePasswordHandler}>Change Password</button>
+          <div>
+            <label htmlFor="">Confirm Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
 
-                <Link to="/barbersignin">Back</Link>
-            </div>
+          {
+            barberResetPasswordLoading ?
+              <button style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><ButtonLoader /></button> :
+              <button onClick={ChangePasswordHandler}>Change Password</button>
+          }
+
+          <Link to="/barbersignin">Back</Link>
         </div>
+      </div>
     </div>
   )
 }

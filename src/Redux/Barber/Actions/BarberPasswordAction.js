@@ -13,6 +13,16 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
             payload: data
         })
 
+        toast.success(data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+
     } catch (error) {
         dispatch({
             type: BARBER_FORGET_PASSWORD_FAIL,

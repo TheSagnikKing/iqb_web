@@ -4,10 +4,8 @@ import { CameraIcon, CheckIcon, Eyevisible, MobileCrossIcon, Notvisibleeye } fro
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminSendVerifyEmailAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
 import { useNavigate } from 'react-router-dom';
 import api from '../../Redux/api/Api';
-import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import Modal from '../../components/Modal/Modal';
@@ -29,7 +27,15 @@ const EditProfile = () => {
     const [name, setName] = useState(barberProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(barberProfile?.dateOfBirth?.split('T')[0])
 
-    const [profilepic, setProfilepic] = useState(barberProfile?.profile[0]?.url)
+    const [profilepic, setProfilepic] = useState("")
+
+    useEffect(() => {
+        if(barberProfile && barberProfile?.profile[0]?.url){
+            setProfilepic(barberProfile?.profile[0]?.url)
+        }else{
+            setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+        }
+    },[barberProfile])
 
     const fileInputRef = useRef(null);
 
@@ -75,7 +81,7 @@ const EditProfile = () => {
             })
 
 
-            navigate("/barber-dashboard")
+            // navigate("/barber-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
             console.error('Image upload failed:', error);
@@ -241,7 +247,8 @@ const EditProfile = () => {
                     {/* <p>Edit profile</p> */}
                     <div>
                         {
-                            uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
+                            uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                            highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
                         }
 
                         <div>
