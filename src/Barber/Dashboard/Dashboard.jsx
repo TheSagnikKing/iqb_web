@@ -400,11 +400,11 @@ const Dashboard = () => {
 
                       {
                         queuelist?.map((q) => (
-                          <div key={q._id}>
-                            <p>{q.name}</p>
-                            <p>{q.barberName}</p>
-                            <p>{q.qPosition}</p>
-                            <p>{q.services?.map((s) => s.serviceName)}</p>
+                          <div key={q?._id}>
+                            <p>{q?.name}</p>
+                            <p>{q?.barberName}</p>
+                            <p>{q?.qPosition}</p>
+                            <p>{q?.services?.map((s) => s.serviceName)}</p>
                           </div>
                         ))
                       }

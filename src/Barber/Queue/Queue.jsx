@@ -69,10 +69,10 @@ const Queue = () => {
 
               {queuelist.map((b) => (
                 <div className={`admin_queue_content_body_item ${darkmodeOn && "dark"}`} key={b._id}>
-                  <p>{b.name}</p>
-                  <p>{b.timeJoinedQ}</p>
-                  <p>{b.barberName}</p>
-                  <p>{b.qPosition}</p>
+                  <p>{b?.name}</p>
+                  <p>{b?.timeJoinedQ}</p>
+                  <p>{b?.barberName}</p>
+                  <p>{b?.qPosition}</p>
                 </div>
               ))}
             </div>
