@@ -143,7 +143,14 @@ const Dashboard = () => {
   const [barberSelectedServices, setBarberSelectedServices] = useState([])
 
   const selectServiceHandler = (ser) => {
-    setBarberSelectedServices([...barberSelectedServices, ser])
+    // setBarberSelectedServices([...barberSelectedServices, ser])
+    const servicepresent = barberSelectedServices.find((s) => s._id === ser._id)
+
+    if (!servicepresent) {
+      const serviceWithEWT = { ...ser, barberServiceEWT: Number(ser.serviceEWT) };
+
+      setBarberSelectedServices([...barberSelectedServices, serviceWithEWT]);
+    }
   }
 
   // console.log("BarberSelectedServices ",barberSelectedServices)
@@ -160,7 +167,7 @@ const Dashboard = () => {
     }
 
     dispatch(barberConnectSalonAction(connectSalondata))
-    console.log(connectSalondata)
+    // console.log(connectSalondata)
   }
 
   const barberConnectSalon = useSelector(state => state.barberConnectSalon)
