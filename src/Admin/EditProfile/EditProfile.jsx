@@ -246,7 +246,7 @@ const EditProfile = () => {
                     </div>
                 </div>
                 {
-                    adminProfile?.AuthType == "google" ? (
+                    adminProfile?.AuthType != "google" ? (
                         <div style={{
                             display: "flex",
                             flexDirection: "column",

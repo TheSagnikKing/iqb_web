@@ -137,3 +137,15 @@
 .modal__content.dark>div:nth-child(3){
     background-color: var(--dark-mode-bg-color-4);
 }
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .modal__content{
+        width: 95vw;
+    }
+}
+
+@media screen and (min-width:431px) and (max-width:1140px) {
+    .modal__content{
+        width: 75vw;
+    }
+}

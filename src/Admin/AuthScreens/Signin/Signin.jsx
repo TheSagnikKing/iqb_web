@@ -62,8 +62,6 @@ const Signin = () => {
         <div>
           <img src="./signin.png" alt="admin_Signin" />
         </div>
-
-
       </div>
 
       <div>

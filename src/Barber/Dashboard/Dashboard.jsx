@@ -175,16 +175,18 @@ const Dashboard = () => {
   const queuelistcontrollerRef = useRef(new AbortController());
 
   useEffect(() => {
-    const controller = new AbortController();
-    queuelistcontrollerRef.current = controller;
+    if (salonId != 0) {
+      const controller = new AbortController();
+      queuelistcontrollerRef.current = controller;
 
-    dispatch(getBarberQueueListAction(salonId, barberId, controller.signal));
+      dispatch(getBarberQueueListAction(salonId, barberId, controller.signal));
 
-    return () => {
-      if (queuelistcontrollerRef.current) {
-        queuelistcontrollerRef.current.abort();
-      }
-    };
+      return () => {
+        if (queuelistcontrollerRef.current) {
+          queuelistcontrollerRef.current.abort();
+        }
+      };
+    }
   }, [salonId, dispatch]);
 
   const getBarberQueueList = useSelector(state => state.getBarberQueueList)
@@ -192,19 +194,19 @@ const Dashboard = () => {
   const {
     loading: getBarberQueueListLoading,
     resolve: getBarberQueueListResolve,
-    response: BarberQueueList
+    queueList: BarberQueueList
   } = getBarberQueueList
 
 
   const [currentDate, setCurrentDate] = useState(new Date())
 
-  console.log("svdsdvsdv",barberProfile)
+  console.log("svdsdvsdv", barberProfile)
 
   useEffect(() => {
-    if(barberProfile){
+    if (barberProfile) {
       setTogglecheck(barberProfile?.user[0]?.isOnline)
     }
-  },[barberProfile])
+  }, [barberProfile])
 
   const [togglecheck, setTogglecheck] = useState(false);
 
@@ -353,7 +355,7 @@ const Dashboard = () => {
             <div>
               <p>Queue List</p>
               <div>
-                <Link to="/admin-queue" style={{ fontSize: "1.6rem", color: "var(--primary-text-light-color1)", textDecoration: "none" }}>See All</Link>
+                <Link to="/barber-queue" style={{ fontSize: "1.6rem", color: "var(--primary-text-light-color1)", textDecoration: "none" }}>See All</Link>
               </div>
             </div>
 
@@ -458,7 +460,7 @@ const Dashboard = () => {
           }}
         >
           <img
-            src="https://i.pinimg.com/736x/10/05/2a/10052a45b91b9f02d7e417084ab5a02e.jpg"
+            src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-some-pictures-of-an-antique-barber-shop-image_2906288.jpg"
             alt=""
             style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
           />

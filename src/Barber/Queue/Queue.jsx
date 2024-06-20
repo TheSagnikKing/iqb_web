@@ -37,7 +37,7 @@ const Queue = () => {
   const {
     loading: getBarberQueueListLoading,
     resolve: getBarberQueueListResolve,
-    response: BarberQueueList
+    queueList: BarberQueueList
   } = getBarberQueueList
 
   const darkMode = useSelector(darkmodeSelector)

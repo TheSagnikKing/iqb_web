@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eyevisible, Notvisibleeye } from '../../../icons'
+import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminGoogleSignupAction, AdminSignupAction } from '../../../Redux/Admin/Actions/AuthAction'
@@ -105,6 +105,7 @@ const Signup = () => {
 
           <p>Already a member ? <Link to="/adminsignin">Log In</Link></p>
         </div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </main>
   )

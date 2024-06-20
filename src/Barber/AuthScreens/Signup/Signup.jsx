@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eyevisible,Notvisibleeye } from '../../../icons'
+import { Eyevisible,HomeIcon,Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { BarberGoogleSignupAction, BarberSignupAction } from '../../../Redux/Barber/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +20,7 @@ const Signup = () => {
   }
 
   const errorMessage = () => {
-
+  
   }
 
   const [screenwidth, setScreenWidth] = useState(window.innerWidth)
@@ -108,6 +108,7 @@ const Signup = () => {
 
           <p>Already a member ? <Link to="/barbersignin">Log In</Link></p>
         </div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </main>
   )
