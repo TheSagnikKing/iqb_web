@@ -67,7 +67,7 @@ const Queue = () => {
                 <p>Q Postion</p>
               </div>
 
-              {queuelist.map((b) => (
+              {BarberQueueList.map((b) => (
                 <div className={`admin_queue_content_body_item ${darkmodeOn && "dark"}`} key={b._id}>
                   <p>{b?.name}</p>
                   <p>{b?.timeJoinedQ}</p>

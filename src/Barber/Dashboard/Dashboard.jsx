@@ -399,7 +399,7 @@ const Dashboard = () => {
                       </div>
 
                       {
-                        queuelist?.map((q) => (
+                        BarberQueueList?.map((q) => (
                           <div key={q?._id}>
                             <p>{q?.name}</p>
                             <p>{q?.barberName}</p>
