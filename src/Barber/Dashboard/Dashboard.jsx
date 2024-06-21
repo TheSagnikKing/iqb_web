@@ -345,7 +345,7 @@ const Dashboard = () => {
               /> :
               <div>
                 <h1>Welcome Back Arghya</h1>
-                <div
+                {/* <div
                   style={{
                     background: togglecheck ? "limegreen" : "#000"
                   }}
@@ -354,6 +354,17 @@ const Dashboard = () => {
                   <button
                     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
                     onClick={toggleHandler}
+                  ></button>
+                </div> */}
+                <div
+                  style={{
+                    background: barberProfile?.user[0]?.isOnline ? "limegreen" : "#000"
+                  }}
+                >
+                  <p className={`salononline_toggle_btn_text ${barberProfile?.user[0]?.isOnline ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{barberProfile?.user[0]?.isOnline ? "Online" : "Offline"}</p>
+                  <button
+                    className={`salononline_toggle_btn ${barberProfile?.user[0]?.isOnline ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
+                    // onClick={toggleHandler}
                   ></button>
                 </div>
               </div>

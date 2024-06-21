@@ -14,19 +14,6 @@ const DashboardHeader = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [togglecheck, setTogglecheck] = useState(false)
-
-    const toggleHandler = () => {
-        // setTogglecheck((prev) => !prev)
-        setTogglecheck((prev) => {
-            if (!prev) {
-                darkHandler()
-            } else {
-                lightHandler()
-            }
-            return !prev
-        })
-    }
 
     const [loading, setLoading] = useState(false)
 
@@ -34,15 +21,13 @@ const DashboardHeader = () => {
 
     const darkMode = useSelector(darkmodeSelector)
 
-    console.log(darkMode)
-
-    useEffect(() => {
-        if (localStorage.getItem("dark") === "On") {
-            setCheck(true)
-        } else {
-            setCheck(false)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (darkMode === "On") {
+    //         setCheck(true)
+    //     } else {
+    //         setCheck(false)
+    //     }
+    // }, [darkMode])
 
     console.log("Check refresh ", check)
     console.log("Dark Mode ",darkMode)
@@ -57,6 +42,20 @@ const DashboardHeader = () => {
         setCheck(false)
         dispatch({ type: DARK_MODE_OFF });
         localStorage.setItem("dark", "Off");
+    }
+
+    const [togglecheck, setTogglecheck] = useState(false)
+
+    const toggleHandler = () => {
+        // setTogglecheck((prev) => !prev)
+        setTogglecheck((prev) => {
+            if (!prev) {
+                darkHandler()
+            } else {
+                lightHandler()
+            }
+            return !prev
+        })
     }
 
     const currentmode = darkMode === "Off"

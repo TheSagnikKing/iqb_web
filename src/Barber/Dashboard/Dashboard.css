@@ -1207,6 +1207,21 @@
         height: calc(25rem - 6rem) !important;
     }
 
+    .barber_connect_salon_list_container{
+        width: 95vw;
+    }
+
+    .barber_connect_salon_list>div:nth-child(2)>div>div,
+    .barber_list_services_list>div:nth-child(2)>div>div{
+        min-width: 75rem;
+        max-width: 100%;
+    }
+
+    .barber_connect_salon_list_container>div:nth-child(3)>button{
+        margin-top: 2rem;
+        width: 55%;
+    }
+
     /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -1276,6 +1291,21 @@
         margin-top: 2rem;
     }
 
+    .barber_connect_salon_list_container{
+        width: 95vw;
+    }
+
+    .barber_connect_salon_list>div:nth-child(2)>div>div,
+    .barber_list_services_list>div:nth-child(2)>div>div{
+        min-width: 75rem;
+        max-width: 100%;
+    }
+
+    .barber_connect_salon_list_container>div:nth-child(3)>button{
+        margin-top: 2rem;
+        width: 55%;
+    }
+
     /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -1289,6 +1319,21 @@
 
     .queuelist_container{
         height: calc(25rem - 6rem) !important;
+    }
+    
+    .barber_connect_salon_list_container{
+        width: 95vw;
+    }
+
+    .barber_connect_salon_list>div:nth-child(2)>div>div,
+    .barber_list_services_list>div:nth-child(2)>div>div{
+        min-width: 75rem;
+        max-width: 100%;
+    }
+
+    .barber_connect_salon_list_container>div:nth-child(3)>button{
+        margin-top: 2rem;
+        width: 55%;
     }
 }
 

@@ -174,38 +174,38 @@ const BarberList = () => {
 
       <div className={`admin_barber_content_wrapper ${darkmodeOn && "dark"}`}>
         {
-            getAdminBarberListLoading && !getAdminBarberListResolve ? (
-              <div className='admin_barber_content_body'>
-                <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
+          getAdminBarberListLoading && !getAdminBarberListResolve ? (
+            <div className='admin_barber_content_body'>
+              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+            </div>
+          ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
+            <div className={`admin_barber_content_body ${darkmodeOn && "dark"}`}>
+              <div>
+                <input
+                  type="checkbox"
+                  style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                  onClick={() => selectAllBarbers()}
+                  checked={allCheckbox}
+
+                />
+                {/* <p>Salon ID</p> */}
+                <p>Barber Name</p>
+                <p>Email</p>
+                <p>isOnline</p>
               </div>
-            ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
-              <div className={`admin_barber_content_body ${darkmodeOn && "dark"}`}>
-                <div>
+
+              {BarberList.map((b) => (
+                <div className='admin_barber_content_body_item' key={b._id}>
                   <input
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-                    onClick={() => selectAllBarbers()}
-                    checked={allCheckbox}
-
                   />
-                  {/* <p>Salon ID</p> */}
-                  <p>Barber Name</p>
-                  <p>Email</p>
-                  <p>isOnline</p>
-                </div>
-
-                {BarberList.map((b) => (
-                  <div className='admin_barber_content_body_item' key={b._id}>
-                    <input
-                      type="checkbox"
-                      style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-                    />
-                    {/* <p>{b.salonId}</p> */}
-                    <p>{b.name}</p>
-                    <p>{b.email}</p>
-                    <div>
-                      <div
+                  {/* <p>{b.salonId}</p> */}
+                  <p>{b.name}</p>
+                  <p>{b.email}</p>
+                  <div>
+                    {/* <div
                         style={{
                           background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "#000"
                         }}
@@ -217,42 +217,55 @@ const BarberList = () => {
                           onClick={() => toggleHandler(b)}
                         ></button>
 
-                      </div>
-                    </div>
+                      </div> */}
 
-                    <button
+                    <div
                       style={{
-                        background: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "gray" : "white",
-                        color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
+                        background: b?.isOnline ? "limegreen" : "#000"
                       }}
-                      onClick={() => approveHandler(b)}
-                      disabled={adminApproveBarberLoading ? true : false}
                     >
-                      {approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}
-                    </button>
+                      <span className={`barberlist_toggle_btn_text ${b?.isOnline ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}></span>
+                      <button
+                        type="checkbox"
+                        className={`barberlist_dashboard_toggle_btn ${b?.isOnline ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
+                      ></button>
 
-                    <div>
-                      <div onClick={() => editButtonClicked(b)}><EditIcon /></div>
-                    </div>
-                    <div>
-                      <div onClick={() => deleteButtonClicked(b)}><DeleteIcon /></div>
                     </div>
                   </div>
-                ))}
 
-              </div>
-            ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
+                  <button
+                    style={{
+                      background: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "gray" : "white",
+                      color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
+                    }}
+                    onClick={() => approveHandler(b)}
+                    disabled={adminApproveBarberLoading ? true : false}
+                  >
+                    {approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}
+                  </button>
+
+                  <div>
+                    <div onClick={() => editButtonClicked(b)}><EditIcon /></div>
+                  </div>
+                  <div>
+                    <div onClick={() => deleteButtonClicked(b)}><DeleteIcon /></div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+          ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
+            <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
+              <p style={{ margin: "2rem" }}>Barbers not available</p>
+            </div>
+          ) : (
+            !getAdminBarberListLoading && !getAdminBarberListResolve && (
               <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Barbers not available</p>
               </div>
-            ) : (
-              !getAdminBarberListLoading && !getAdminBarberListResolve && (
-                <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
-                  <p style={{ margin: "2rem" }}>Barbers not available</p>
-                </div>
-              )
             )
-          }
+          )
+        }
 
       </div>
     </div>
