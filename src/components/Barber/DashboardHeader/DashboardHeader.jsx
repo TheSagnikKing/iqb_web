@@ -15,47 +15,28 @@ const DashboardHeader = () => {
     const dispatch = useDispatch()
 
 
-    const [loading, setLoading] = useState(false)
-
-    const [check, setCheck] = useState(true);
-
     const darkMode = useSelector(darkmodeSelector)
 
-    // useEffect(() => {
-    //     if (darkMode === "On") {
-    //         setCheck(true)
-    //     } else {
-    //         setCheck(false)
-    //     }
-    // }, [darkMode])
-
-    console.log("Check refresh ", check)
-    console.log("Dark Mode ",darkMode)
+    console.log("Dark Mode ", darkMode)
 
     const darkHandler = () => {
-        setCheck(true)
-        dispatch({ type: DARK_MODE_ON });
         localStorage.setItem("dark", "On");
+        dispatch({ type: DARK_MODE_ON });
+
     }
 
     const lightHandler = () => {
-        setCheck(false)
-        dispatch({ type: DARK_MODE_OFF });
         localStorage.setItem("dark", "Off");
+        dispatch({ type: DARK_MODE_OFF });
     }
 
-    const [togglecheck, setTogglecheck] = useState(false)
 
     const toggleHandler = () => {
-        // setTogglecheck((prev) => !prev)
-        setTogglecheck((prev) => {
-            if (!prev) {
-                darkHandler()
-            } else {
-                lightHandler()
-            }
-            return !prev
-        })
+        if (darkMode == "Off") {
+            darkHandler()
+        } else {
+            lightHandler()
+        }
     }
 
     const currentmode = darkMode === "Off"
@@ -67,12 +48,12 @@ const DashboardHeader = () => {
     const [src, setSrc] = useState("");
 
     useEffect(() => {
-        if(barberProfile && barberProfile?.profile[0]?.url){
+        if (barberProfile && barberProfile?.profile[0]?.url) {
             setSrc(barberProfile?.profile[0]?.url)
-        }else{
+        } else {
             setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
         }
-    },[barberProfile])
+    }, [barberProfile])
 
     const [barberEditDrop, setBarberEditDrop] = useState(false)
 
@@ -142,42 +123,33 @@ const DashboardHeader = () => {
 
                 <div><Notificationicon /></div>
                 <div><Settingsicon /></div>
-                {
-                    loading ?
-                        <Skeleton count={1}
-                            height={"4.5rem"}
-                            width={"4.5rem"}
-                            style={{
-                                borderRadius: "50%"
-                            }}
-                        /> :
-                        <div>
-                            <img
-                                src={src}
-                                onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
-                                alt=''
-                                onClick={() => setBarberEditDrop((prev) => !prev)}
-                                ref={barberEditIconRef}
-                            />
+                <div>
+                    <img
+                        src={src}
+                        onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
+                        alt=''
+                        onClick={() => setBarberEditDrop((prev) => !prev)}
+                        ref={barberEditIconRef}
+                    />
 
-                            {
-                                barberEditDrop && <div ref={barberEditDropRef}
-                                    className={`profile_drop_container ${darkmodeOn && "dark"}`}
-                                >
-                                    <div>
-                                        <div><ProfileIcon /></div>
-                                        <div onClick={() => navigate("/barber-dashboard/editprofile")}>My Profile</div>
-                                    </div>
-                                    <div>
-                                        <div><LogoutIcon /></div>
-                                        <div onClick={logoutHandler}>Logout</div>
-                                    </div>
-
-                                </div>
-                            }
+                    {
+                        barberEditDrop && <div ref={barberEditDropRef}
+                            className={`profile_drop_container ${darkmodeOn && "dark"}`}
+                        >
+                            <div>
+                                <div><ProfileIcon /></div>
+                                <div onClick={() => navigate("/barber-dashboard/editprofile")}>My Profile</div>
+                            </div>
+                            <div>
+                                <div><LogoutIcon /></div>
+                                <div onClick={logoutHandler}>Logout</div>
+                            </div>
 
                         </div>
-                }
+                    }
+
+                </div>
+
                 <div onClick={() => setSidebarToggle(true)}
                     className={`dashboard_mobile_menu ${darkmodeOn && "dark"}`}
                 ><MobileMenuIcon /></div>

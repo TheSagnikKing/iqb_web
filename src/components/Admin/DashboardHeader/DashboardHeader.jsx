@@ -17,19 +17,6 @@ const DashboardHeader = () => {
     const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
 
     const [salonlistdrop, setSalonlistdrop] = useState(false)
-    const [togglecheck, setTogglecheck] = useState(false)
-
-    const toggleHandler = () => {
-        // setTogglecheck((prev) => !prev)
-        setTogglecheck((prev) => {
-            if (!prev) {
-                darkHandler()
-            } else {
-                lightHandler()
-            }
-            return !prev
-        })
-    }
 
     const [loading, setLoading] = useState(false)
 
@@ -212,33 +199,27 @@ const DashboardHeader = () => {
         loading: adminApplySalonLoading,
     } = adminApplySalon
 
-    const [check, setCheck] = useState(true);
 
     const darkMode = useSelector(darkmodeSelector)
 
-    console.log(darkMode)
-
-    useEffect(() => {
-        if (localStorage.getItem("dark") === "On") {
-            setCheck(true)
-        } else {
-            setCheck(false)
-        }
-    }, [])
-
-    console.log("Check refresh ", check)
     console.log("Dark Mode ", darkMode)
 
     const darkHandler = () => {
-        setCheck(true)
         dispatch({ type: DARK_MODE_ON });
         localStorage.setItem("dark", "On");
     }
 
     const lightHandler = () => {
-        setCheck(false)
         dispatch({ type: DARK_MODE_OFF });
         localStorage.setItem("dark", "Off");
+    }
+
+    const toggleHandler = () => {
+        if (darkMode == "Off") {
+            darkHandler()
+        } else {
+            lightHandler()
+        }
     }
 
     const currentmode = darkMode === "Off"

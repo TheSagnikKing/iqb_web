@@ -126,7 +126,7 @@ const Dashboard = () => {
 
   const [selectedSalonId, setSelectedSalonId] = useState("")
 
-  console.log(selectedSalonId)
+  // console.log(selectedSalonId)
 
   const [currentSelectedSalon, setCurrentSelectedSalon] = useState({})
 
@@ -138,7 +138,7 @@ const Dashboard = () => {
     
   },[selectedSalonId])
 
-  console.log("Current    sdssss", currentSelectedSalon)
+  // console.log("Current    sdssss", currentSelectedSalon)
 
   const [selectedServiceList, setSelectedServiceList] = useState([])
 
@@ -219,7 +219,7 @@ const Dashboard = () => {
 
   const [currentDate, setCurrentDate] = useState(new Date())
 
-  console.log("svdsdvsdv", barberProfile)
+  // console.log("svdsdvsdv", barberProfile)
 
   useEffect(() => {
     if (barberProfile) {
