@@ -15,9 +15,6 @@
 
 /* #222831,#3E3232,#FC6736,#561C24,#720455 */
 
-body{
-  overflow: hidden;
-}
 
 :root {
   font-size: 62.5%;

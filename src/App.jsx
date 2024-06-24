@@ -106,7 +106,7 @@ const App = () => {
                 <Route path="/drop" element={<Drop/>}/>
                 <Route path="/demo" element={<Demo/>}/>
               </Route>
-
+              
             </Route>
 
             {/* Barber Auth Screens */}

@@ -82,7 +82,7 @@ const Sidebar = () => {
 
       <div className={`content ${darkmodeOn && "dark"}`}
         style={{
-          width: showSidebar ? "calc(100% - 21rem)" : "100%"
+          width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 7rem)"
         }}
       >
         <div>
