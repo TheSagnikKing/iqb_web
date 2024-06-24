@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Drop.css"
 import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
@@ -19,29 +19,47 @@ const Drop = () => {
         }])
     }
 
+    const [ originalPos, setOriginalPos] = useState("")
+    const [ newPos, setNewPos ] = useState("")
+
     const getTaskPos = (id) => tasks.findIndex(task => task.id === id)
 
     const handleDragEnd = (event) => {
-        const {active, over} = event
+        const { active, over } = event
 
-        if(active.id === over.id){
-            return 
+        if (active.id === over.id) {
+            return
         }
 
         setTasks((tasks) => {
             const originalPos = getTaskPos(active.id)
             const newPos = getTaskPos(over.id)
 
-            return arrayMove(tasks,originalPos,newPos)
+            // console.log("Original Pos ",originalPos)
+            // console.log("New Pos ",newPos)
+
+            setOriginalPos(originalPos)
+            setNewPos(newPos)
+
+            return arrayMove(tasks, originalPos, newPos)
         })
     }
+
+    useEffect(() => {
+        console.log(tasks)
+        console.log(originalPos)
+        console.log(newPos)
+        //For tasks array change i will call api to save the data in the database
+    }, [tasks])
+
+
 
     //For Mobile Devices
 
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(TouchSensor), // For Mobile
-        useSensor(KeyboardSensor,{ // First go to the element press enter and then ctrl hold + up/down arrow
+        useSensor(KeyboardSensor, { // First go to the element press enter and then ctrl hold + up/down arrow
             coordinateGetter: sortableKeyboardCoordinates
         })
     )
