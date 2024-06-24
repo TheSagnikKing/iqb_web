@@ -118,7 +118,13 @@ const Demo = () => {
         { _id: 3, title: "How to center a div ?" },
         { _id: 4, title: "What is html5 ?" },
         { _id: 5, title: "Define map function" },
-        { _id: 6, title: "How to use a flexbox ?" }
+        { _id: 6, title: "How to use a flexbox ?" },
+        { _id: 7, title: "Add test to homepage" },
+        { _id: 8, title: "Fix Styling in about section" },
+        { _id: 9, title: "How to center a div ?" },
+        { _id: 10, title: "What is html5 ?" },
+        { _id: 11, title: "Define map function" },
+        { _id: 12, title: "How to use a flexbox ?" }
     ]);
 
     const addTasks = (title) => {
@@ -157,6 +163,7 @@ const Demo = () => {
             coordinateGetter: sortableKeyboardCoordinates
         })
     );
+    
 
     return (
         <div className='demo_container'>
@@ -188,8 +195,7 @@ const Task = ({ id, title }) => {
 
     return (
         <div className='demo_task' ref={setNodeRef} {...attributes} {...listeners} style={style}>
-            <input type="checkbox" className='demo_checkbox' />
-            {title}
+            <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
         </div>
     );
 };
