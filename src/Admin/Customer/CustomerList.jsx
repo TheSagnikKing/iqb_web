@@ -53,17 +53,14 @@ const CustomerList = () => {
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><Notificationicon /></div>
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><EmailIcon /></div>
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><MessageIcon /></div>
           </div>
 
@@ -87,7 +84,6 @@ const CustomerList = () => {
                   type="checkbox"
                   style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                 />
-                {/* <p>Salon ID</p> */}
                 <p>Name</p>
                 <p>Email</p>
                 <p>Gender</p>
@@ -100,20 +96,10 @@ const CustomerList = () => {
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                   />
-                  {/* <p>{s.salonId}</p> */}
                   <p>{s.name}</p>
                   <p>{s.email}</p>
                   <p>{s.gender}</p>
                   <p>{s.mobileNumber}</p>
-                  {/* <div>
-                    <div><Notificationicon /></div>
-                  </div>
-                  <div>
-                    <div><EmailIcon /></div>
-                  </div>
-                  <div>
-                    <div><MessageIcon /></div>
-                  </div> */}
                 </div>
               ))}
             </div>

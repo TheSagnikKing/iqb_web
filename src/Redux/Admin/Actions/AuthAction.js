@@ -211,7 +211,8 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
         localStorage.setItem("userAdminLoggedIn", "false")
         localStorage.setItem("userBarberLoggedIn", "false")
 
-        navigate("/adminsignin")
+        // navigate("/adminsignin")
+        navigate("/")
     } catch (error) {
         dispatch({
             type: ADMIN_LOGOUT_FAIL,

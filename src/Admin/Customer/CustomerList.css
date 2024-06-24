@@ -260,8 +260,8 @@
     height: 4rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 9rem;
+    justify-content: center;
+    width: 4rem;
     border-radius: 6px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;

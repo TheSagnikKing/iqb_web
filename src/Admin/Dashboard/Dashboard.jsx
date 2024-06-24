@@ -241,7 +241,7 @@ const Dashboard = () => {
           <h1 style={{
             color: darkmodeOn && "var(--primary-text-light-color1)"
           }}>{adminName || email.split('@')[0]} , don't have any salon</h1>
-          <Link to="/admin-salon">Create </Link>
+          <Link to="/admin-salon/createsalon">Create </Link>
         </div>
       </div>
     </>) : (<>

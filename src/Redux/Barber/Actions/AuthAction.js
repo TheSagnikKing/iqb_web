@@ -209,7 +209,8 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
         localStorage.setItem("userAdminLoggedIn", "false")
         localStorage.setItem("userBarberLoggedIn", "false")
 
-        navigate("/barbersignin")
+        // navigate("/barbersignin")
+        navigate("/")
     } catch (error) {
         dispatch({
             type: BARBER_LOGOUT_FAIL,

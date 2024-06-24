@@ -257,7 +257,7 @@ const EditProfile = () => {
                     </div>
                 </div>
                 {
-                    adminProfile?.AuthType == "google" ? (
+                    adminProfile?.AuthType != "google" ? (
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
@@ -293,7 +293,19 @@ const EditProfile = () => {
                                     <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                         <h1>Change your password</h1>
                                         <div>
-                                            <p>Password</p>
+                                            <p>Old Password</p>
+                                            <div>
+                                                <input
+                                                    type={`${seePassword ? "text" : "password"}`}
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                />
+                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <p>New Password</p>
                                             <div>
                                                 <input
                                                     type={`${seePassword ? "text" : "password"}`}

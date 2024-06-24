@@ -230,42 +230,49 @@ const DashboardHeader = () => {
         <div className={`admin_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
             <div className={`choose_salon_div ${darkmodeOn && "dark"}`}>
                 <p>Choose Salon</p>
-                <div>
-                    <p>{adminSetSalon?.currentActiveSalon}</p>
-                    <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
-                    <div
-                        className={`dashboard_salon_list_dropdown ${darkmodeOn && "dark"}`}
-                        ref={salonlistRef}
-                        style={{
-                            opacity: salonlistdrop ? "1" : "0",
-                            zIndex: salonlistdrop ? "2" : "-1",
-                            transition: "300ms ease",
-                            height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
-                        }}
-                    >
+               
+                {
+                    adminProfile?.salonId == 0 ?
+                        <div>No Salon Present</div> :
+                        <>
+                            <div>
+                                <p>{adminSetSalon?.currentActiveSalon}</p>
+                                <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
+                                <div
+                                    className={`dashboard_salon_list_dropdown ${darkmodeOn && "dark"}`}
+                                    style={{
+                                        opacity: salonlistdrop ? "1" : "0",
+                                        zIndex: salonlistdrop ? "2" : "-1",
+                                        transition: "300ms ease",
+                                        height: salonListNames.length > 0 && salonListNames.length <= 4 ? "auto" : "15rem"
+                                    }}
+                                >
 
-                        {
-                            getAdminSalonListLoading && !getAdminSalonListResolve ?
-                                <p>No Salon Present</p> :
-                                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
-                                    SalonList.map((s) => (
-                                        <p
-                                            key={s.id}
-                                            onClick={() => selectedActiveSalon(s)}
-                                            style={{
-                                                background: s.salonId == adminProfile?.salonId && "var(--primary-bg-color3)",
-                                                color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
-                                            }}
-                                        >{s.salonName}</p>
-                                    )) :
-                                    !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
-                                        <p>No Salon Present</p> :
-                                        !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                                        <p>No Salon Present</p>
-                        }
-                    </div>
-                </div>
-                {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
+                                    {
+                                        getAdminSalonListLoading && !getAdminSalonListResolve ?
+                                            <p>No Salon Present</p> :
+                                            !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
+                                                SalonList.map((s) => (
+                                                    <p
+                                                        key={s.id}
+                                                        onClick={() => selectedActiveSalon(s)}
+                                                        style={{
+                                                            background: s.salonId == adminProfile?.salonId && "var(--primary-bg-color3)",
+                                                            color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                                                        }}
+                                                    >{s.salonName}</p>
+                                                )) :
+                                                !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
+                                                    <p>No Salon Present</p> :
+                                                    !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                                                    <p>No Salon Present</p>
+                                    }
+                                </div>
+                            </div>
+                            {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
+                        </>
+                }
+
 
             </div>
 

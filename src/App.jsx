@@ -71,10 +71,10 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={<div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}><Loader /></div>}>
           <Routes>
-            <Route path="/" element={<Public />} />
 
             {/* Admin Auth Screens */}
             <Route element={<ProtectedAdminAuthRoute />}>
+              <Route path="/" element={<Public />} />
               <Route path="/adminsignin" element={<AdminSignin />} />
               <Route path="/adminsignup" element={<AdminSignup />} />
               <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
@@ -107,6 +107,7 @@ const App = () => {
 
             {/* Barber Auth Screens */}
             <Route element={<ProtectedBarberAuthRoute />}>
+              <Route path="/" element={<Public />} />
               <Route path="/barbersignin" element={<BarberSignin />} />
               <Route path="/barbersignup" element={<BarberSignup />} />
               <Route path="/barberforgotpassword" element={<BarberForgotPassword />} />
@@ -120,8 +121,8 @@ const App = () => {
               <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
                 <Route path="/barber-dashboard" element={<BarberDashboard />} />
                 <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
-                <Route path="/barber-customer" element={<BarberCustomer/>}/>
-                <Route path="/barber-queue" element={<BarberQueueList/>}/>
+                <Route path="/barber-customer" element={<BarberCustomer />} />
+                <Route path="/barber-queue" element={<BarberQueueList />} />
               </Route>
             </Route>
 

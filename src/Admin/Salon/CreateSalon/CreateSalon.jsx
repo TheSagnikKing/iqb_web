@@ -1051,7 +1051,7 @@ const CreateSalon = () => {
 
             <div>
               <p>{salonName}</p>
-              <p><span>{country}</span>{country && ",  "}<span>{city}</span></p>
+              <p><span>{city}</span>{city && ",  "}<span>{country}</span></p>
             </div>
           </div>
 
@@ -1223,7 +1223,7 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>Postal Code</p>
+              <p>Post Code</p>
               <input
                 type="text"
                 value={postCode}
