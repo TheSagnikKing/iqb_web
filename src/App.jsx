@@ -45,6 +45,7 @@ import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
 import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
 import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
 import Loader from './components/Loader/Loader';
+import Drop from './Admin/Demo/Drop';
 
 const App = () => {
 
@@ -101,6 +102,7 @@ const App = () => {
                 <Route path="/admin-customer" element={<AdminCustomerList />} />
                 <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                 <Route path="/admin-queue" element={<AdminQueue />} />
+                <Route path="/drop" element={<Drop/>}/>
               </Route>
 
             </Route>
