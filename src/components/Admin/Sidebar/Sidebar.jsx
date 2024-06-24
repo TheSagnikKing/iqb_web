@@ -14,8 +14,6 @@ const Sidebar = () => {
   const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
 
   const {
-    loading: adminGetDefaultSalonLoading,
-    resolve: adminGetDefaultSalonResolve,
     response: adminGetDefaultSalonResponse
   } = adminGetDefaultSalon
 

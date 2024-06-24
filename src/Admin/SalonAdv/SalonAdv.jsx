@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import api from '../../Redux/api/Api'
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
+import Adv from './Adv'
 
 const SalonAdv = () => {
 
@@ -227,31 +228,11 @@ const SalonAdv = () => {
             ))}
           </div>
         ) : !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ? (
-          <div className='salonadv_content'>
-            {advertisements.map((ad) => (
-              <div className={`salonadv_cards ${darkmodeOn && "dark"}`} key={ad._id}>
-                <div>
-                  <img src={`${ad.url}`} alt="" />
-                </div>
-                <div>
-                  <button onClick={() => editImageHandler(ad.public_id, ad._id)} disabled={handleEditLoader}>
-                    <div><EditIcon /></div>
-                    <p>Edit</p>
-                    <input
-                      type="file"
-                      ref={fileEditInputRef}
-                      style={{ display: 'none' }}
-                      onChange={handleEditFileInputChange}
-                    />
-                  </button>
-                  <button onClick={() => deleteHandler(ad.public_id, ad._id)} disabled={deleteLoader}>
-                    <div><DeleteIcon /></div>
-                    <p>Delete</p>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className='salonadv_content'>
+                {advertisements.map((ad) => (
+                  <Adv ad={ad} key={ad._id} url={ad.url} id={ad._id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef}  handleEditFileInputChange={handleEditFileInputChange} />
+                ))}
+            </div>
         ) : !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length === 0 ? (
           <div className={`salonadv_content_error ${darkmodeOn && "dark"}`}>
             <p>Advertisement not available</p>

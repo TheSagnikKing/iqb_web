@@ -46,6 +46,7 @@ import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
 import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
 import Loader from './components/Loader/Loader';
 import Drop from './Admin/Demo/Drop';
+import Demo from './Admin/Demo/Demo';
 
 const App = () => {
 
@@ -103,6 +104,7 @@ const App = () => {
                 <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                 <Route path="/admin-queue" element={<AdminQueue />} />
                 <Route path="/drop" element={<Drop/>}/>
+                <Route path="/demo" element={<Demo/>}/>
               </Route>
 
             </Route>

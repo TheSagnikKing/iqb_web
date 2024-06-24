@@ -1,6 +1,6 @@
 .container {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: grid;
   grid-template-columns: auto calc(100% - 7rem);
   font-family: "Poppins", sans-serif;
@@ -11,9 +11,9 @@
   border-right: 1px dashed black;
   background-color: var(--primary-bg-light-color1);
   color: var(--primary-text-light-color1);
+  width: calc(100vw - 28rem);
   height: 100vh;
   position: relative;
-  /* width: 35rem; */
 }
 
 .sidebar>div:nth-child(1) {
@@ -154,11 +154,13 @@
   font-weight: 500;
 }
 
-.content {
+.content { 
+  width: calc(100vw - 28rem) !important;
   height: 100vh;
   color: var(--primary-text-light-color2);
   padding-inline: 3rem;
   font-weight: 500;
+  background-color: red;
 }
 
 .content>div>div:nth-child(2) {
