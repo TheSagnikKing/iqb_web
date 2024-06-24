@@ -6,7 +6,6 @@
     box-sizing: border-box;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
   }
   
   .demo_header {
@@ -30,18 +29,17 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
-    overflow: hidden;
     border-radius: 0 0 8px 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* overflow: auto; */
+    height: 100%;
     height: calc(100vh - 15rem);
-    overflow-y: scroll;
-
+    overflow-y: auto;
   }
 
   /* Custom scrollbar styles */
 .demo_column::-webkit-scrollbar {
   width: 8px; /* Adjust width as needed */
+  height: 8px;
 }
 
 .demo_column::-webkit-scrollbar-track {

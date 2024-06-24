@@ -559,14 +559,20 @@
         background-color: var(--primary-bg-light-color1);
         padding: 2rem;
         transition: background-color 0ms, right 300ms ease;
-    }
+        -webkit-transition: background-color 0ms, right 300ms ease;
+        -moz-transition: background-color 0ms, right 300ms ease;
+        -ms-transition: background-color 0ms, right 300ms ease;
+        -o-transition: background-color 0ms, right 300ms ease;
+}
 
     .dashboard_mobile_sidebar_active {
         right: -2rem;
+        /* display: block; */
     }
 
     .dashboard_mobile_sidebar_inactive {
         right: -90vw;
+        /* display: none; */
     }
 
     .dashboard_mobile_sidebar_container {
