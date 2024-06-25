@@ -2,7 +2,6 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: auto calc(100% - 7rem);
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
