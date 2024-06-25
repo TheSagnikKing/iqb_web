@@ -344,9 +344,11 @@ const SalonAdv = () => {
         });
 
         setUploadLoader(false)
-        console.log('Upload success:', imageResponse.data);
         setUploadAdvImages(null);
-        dispatch(getAllAdvertisementAction(salonId));
+        dispatch({
+          type: "ADD_ADVETISEMENT",
+          payload: imageResponse?.data?.response
+        })
       } catch (error) {
         setUploadLoader(false)
         console.error('Image upload failed:', error);
@@ -536,7 +538,7 @@ const SalonAdv = () => {
                   highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                 />
               ))}
-            </div> : 
+            </div> :
             !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
 
               <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
@@ -550,8 +552,12 @@ const SalonAdv = () => {
                   </SortableContext>
 
                 </div>
-              </DndContext> : 
-              <div className='salonadv_column'>No Adv </div>
+              </DndContext> :
+              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
+                <div className='salonadv_column_error'><p>No Advertisment Avaialble</p></div> :
+                !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
+                <div className='salonadv_column_error'><p>No Advertisment Avaialble</p></div>
+
         }
 
       </div>

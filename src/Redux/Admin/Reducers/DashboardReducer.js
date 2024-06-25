@@ -62,7 +62,7 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
 
             return {
                 ...state,
-                advertisements: [...state.advertisements, ...newadvertisement]
+                advertisements: [...newadvertisement, ...state.advertisements]
             }
 
         case "DRAG_END_ADVERTISEMENTLIST":
