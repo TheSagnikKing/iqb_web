@@ -17,9 +17,6 @@ const Sidebar = () => {
     response: adminGetDefaultSalonResponse
   } = adminGetDefaultSalon
 
-  console.log("YEAHHHH",adminGetDefaultSalonResponse)
-
-
   const [src, setSrc] = useState("");
 
     useEffect(() => {
