@@ -1511,6 +1511,7 @@
         align-items: center;
         background-color: transparent !important;
         margin-bottom: 1rem !important;
+        padding: 0px !important;
     }
 
     .salon_images_wrapper>div:nth-child(2)>p {
@@ -1743,6 +1744,7 @@
         align-items: center;
         background-color: transparent !important;
         margin-bottom: 1rem !important;
+        padding: 0px !important;
     }
 
     .salon_images_wrapper>div:nth-child(2)>p {

@@ -7,7 +7,7 @@ import { DeleteIcon, EditIcon, FaFileIcon, Uploadicon } from '../../icons'
 import { useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useDispatch } from 'react-redux';
-import { getAllAdvertisementAction } from '../../Redux/Admin/Actions/DashboardAction'
+import { adminDragAdvertisementAction, getAllAdvertisementAction } from '../../Redux/Admin/Actions/DashboardAction'
 import api from '../../Redux/api/Api';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 import Skeleton from 'react-loading-skeleton';
@@ -195,13 +195,6 @@ const SalonAdv = () => {
       return;
     }
 
-    // setAdvState((advs) => {
-    //   const originalPos = getAdvPos(active.id);
-    //   const newPos = getAdvPos(over.id);
-
-    //   return arrayMove(advs, originalPos, newPos);
-    // });
-
     dispatch({
       type: "DRAG_END_ADVERTISEMENTLIST",
       payload: {
@@ -211,10 +204,23 @@ const SalonAdv = () => {
     })
   };
 
+
+  const adminDragAdvertisementControllerRef = useRef(new AbortController());
+
   useEffect(() => {
-    console.log(advertisements);
-    // For tasks array change I will call an API to save the data in the database
-  }, [advertisements]);
+    if (salonId && advertisements) {
+      const controller = new AbortController();
+      adminDragAdvertisementControllerRef.current = controller;
+
+      dispatch(adminDragAdvertisementAction(salonId, advertisements, controller.signal));
+
+      return () => {
+        if (adminDragAdvertisementControllerRef.current) {
+          adminDragAdvertisementControllerRef.current.abort();
+        }
+      };
+    }
+  }, [advertisements, salonId, dispatch]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -281,7 +287,7 @@ const SalonAdv = () => {
                   <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
                     {advertisements.map((adv) => (
                       <>
-                        <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn}/>
+                        <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
                       </>
                     ))}
                   </SortableContext>
@@ -302,7 +308,7 @@ const SalonAdv = () => {
 
 export default SalonAdv;
 
-const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHandler, deleteLoader, fileEditInputRef, handleEditFileInputChange,darkmodeOn }) => {
+const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHandler, deleteLoader, fileEditInputRef, handleEditFileInputChange, darkmodeOn }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {

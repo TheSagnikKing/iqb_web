@@ -226,7 +226,7 @@
 }
 
 
-.salonadv_column_error .dark>p{
+.salonadv_column_error.dark>p{
     color: var(--primary-text-light-color1);
 }
 

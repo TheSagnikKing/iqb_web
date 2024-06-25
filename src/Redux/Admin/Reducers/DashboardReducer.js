@@ -1,4 +1,4 @@
-import { ADMIN_UPDATE_SALON_INFO_FAIL, ADMIN_UPDATE_SALON_INFO_REQ, ADMIN_UPDATE_SALON_INFO_SUCCESS, GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS } from "../Constants/constants";
+import { ADMIN_DRAG_ADVERTISEMENT_FAIL, ADMIN_DRAG_ADVERTISEMENT_REQ, ADMIN_DRAG_ADVERTISEMENT_SUCCESS, ADMIN_UPDATE_SALON_INFO_FAIL, ADMIN_UPDATE_SALON_INFO_REQ, ADMIN_UPDATE_SALON_INFO_SUCCESS, GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS } from "../Constants/constants";
 
 import { arrayMove } from '@dnd-kit/sortable';
 
@@ -62,7 +62,7 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
 
             return {
                 ...state,
-                advertisements: [...newadvertisement, ...state.advertisements]
+                advertisements: [...state.advertisements, ...newadvertisement]
             }
 
         case "DRAG_END_ADVERTISEMENTLIST":
@@ -179,6 +179,33 @@ export const adminUpdateSalonInfoReducer = (state = {}, action) => {
                 ...action.payload
             };
         case ADMIN_UPDATE_SALON_INFO_FAIL:
+            return {
+                ...state,
+                loading: false,
+                resolve: false,
+                error: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+export const adminDragAdvertisementReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_DRAG_ADVERTISEMENT_REQ:
+            return {
+                ...state,
+                loading: true,
+                resolve: false
+            };
+        case ADMIN_DRAG_ADVERTISEMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                ...action.payload
+            };
+        case ADMIN_DRAG_ADVERTISEMENT_FAIL:
             return {
                 ...state,
                 loading: false,

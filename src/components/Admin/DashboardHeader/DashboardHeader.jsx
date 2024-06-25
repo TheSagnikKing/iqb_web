@@ -285,7 +285,7 @@ const DashboardHeader = () => {
                         <button onClick={() => setMobileDrop(false)}>X</button>
                         <p>Choose Salon</p>
                         <div>
-                            <p>{currentActiveSalon}</p>
+                        <p>{adminSetSalon?.currentActiveSalon}</p>
                         </div>
                         <div
                             className='mobile_dashboard_salon_list_dropdown'
@@ -317,7 +317,7 @@ const DashboardHeader = () => {
                                             <p>No Salon Present</p>
                             }
                         </div>
-                        {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
+                        {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
                     </div>
                 </section>
             }
