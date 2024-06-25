@@ -1,5 +1,9 @@
 import { ADMIN_UPDATE_SALON_INFO_FAIL, ADMIN_UPDATE_SALON_INFO_REQ, ADMIN_UPDATE_SALON_INFO_SUCCESS, GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS, GET_ALL_QUEUELIST_FAIL, GET_ALL_QUEUELIST_REQ, GET_ALL_QUEUELIST_SUCCESS, GET_DASHBOARD_APPOINTMENT_LIST_FAIL, GET_DASHBOARD_APPOINTMENT_LIST_REQ, GET_DASHBOARD_APPOINTMENT_LIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS } from "../Constants/constants";
 
+import { arrayMove } from '@dnd-kit/sortable';
+
+const getAdvPos = (advertisements, id) => advertisements.findIndex(adv => adv._id === id);
+
 export const getAllAdvertisementReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_ALL_ADVERTISEMENT_REQ:
@@ -30,19 +34,48 @@ export const getAllAdvertisementReducer = (state = {}, action) => {
                 ...state,
                 advertisements: filteredAdvertisements
             };
-        // case "AFTER_UPDATE_ADVERTISEMENTLIST":
 
-        //     const updatedAdvertisements = state.advertisements.map((advertisement) =>
-        //         advertisement._id === action.payload._id
-        //             ? { ...advertisement, _id: action.payload._id, url: action.payload.url, public_id: action.payload.public_id }
-        //             : advertisement
-        //     );
+        case "AFTER_UPDATE_ADVERTISEMENTLIST":
+            const updatedAd = action.payload;
 
+            const index = state.advertisements.findIndex((ad) => ad._id === updatedAd._id);
 
-        //     return {
-        //         ...state,
-        //         advertisements: updatedAdvertisements
-        //     };
+            if (index === -1) {
+                return state;
+            }
+
+            // Update the advertisement in the state
+            const updatedAdvertisements = [
+                ...state.advertisements.slice(0, index), // before the updated advertisement
+                updatedAd, // the updated advertisement
+                ...state.advertisements.slice(index + 1), // after the updated advertisement
+            ];
+
+            return {
+                ...state,
+                advertisements: updatedAdvertisements
+            };
+
+        case "ADD_ADVETISEMENT":
+
+            const newadvertisement = action.payload
+
+            return {
+                ...state,
+                advertisements: [...state.advertisements, ...newadvertisement]
+            }
+
+        case "DRAG_END_ADVERTISEMENTLIST":
+            const { active, over } = action.payload; // Assuming payload contains active and over advertisements
+
+            if (!over || active.id === over.id) {
+                return state;
+            }
+
+            return {
+                ...state,
+                advertisements: arrayMove(state.advertisements, getAdvPos(state.advertisements, active.id), getAdvPos(state.advertisements, over.id))
+            };
 
         default:
             return state;

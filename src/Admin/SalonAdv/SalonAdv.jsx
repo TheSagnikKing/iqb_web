@@ -216,16 +216,16 @@
 //       {
 //         getAllAdvertisementLoading && !getAllAdvertisementResolve ? (
 //           <div className='salonadv_content'>
-//             {[...Array(6)].map((_, index) => (
-//               <Skeleton
-//                 key={index}
-//                 count={1}
-//                 height={"35rem"}
-//                 style={{ borderRadius: "1.7rem" }}
-//                 baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-//                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
-//               />
-//             ))}
+// {[...Array(6)].map((_, index) => (
+//   <Skeleton
+//     key={index}
+//     count={1}
+//     height={"35rem"}
+//     style={{ borderRadius: "1.7rem" }}
+//     baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+//     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+//   />
+// ))}
 //           </div>
 //         ) : !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ? (
 //             <div className='salonadv_content'>
@@ -265,6 +265,7 @@ import { useDispatch } from 'react-redux';
 import { getAllAdvertisementAction } from '../../Redux/Admin/Actions/DashboardAction'
 import api from '../../Redux/api/Api';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
+import Skeleton from 'react-loading-skeleton';
 
 const SalonAdv = () => {
 
@@ -397,7 +398,10 @@ const SalonAdv = () => {
       setPublicId("")
       setMongoid("")
       sethandleEditLoader(false)
-      dispatch(getAllAdvertisementAction(salonId));
+      dispatch({
+        type: "AFTER_UPDATE_ADVERTISEMENTLIST",
+        payload: imageResponse?.data?.response
+      })
 
     } catch (error) {
       console.error('Image upload failed:', error);
@@ -438,14 +442,6 @@ const SalonAdv = () => {
   const darkmodeOn = darkMode === "On"
 
 
-  const [advState, setAdvState] = useState([]);
-
-  useEffect(() => {
-    if (advertisements) {
-      setAdvState(advertisements)
-    }
-  }, [advertisements])
-
   // const addTasks = (title) => {
   //     setTasks((tasks) => [...tasks, {
   //         _id: tasks.length + 1,
@@ -453,7 +449,7 @@ const SalonAdv = () => {
   //     }]);
   // };
 
-  const getAdvPos = (id) => advState.findIndex(adv => adv._id === id);
+  // const getAdvPos = (id) => advState.findIndex(adv => adv._id === id);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -462,18 +458,26 @@ const SalonAdv = () => {
       return;
     }
 
-    setAdvState((advs) => {
-      const originalPos = getAdvPos(active.id);
-      const newPos = getAdvPos(over.id);
+    // setAdvState((advs) => {
+    //   const originalPos = getAdvPos(active.id);
+    //   const newPos = getAdvPos(over.id);
 
-      return arrayMove(advs, originalPos, newPos);
-    });
+    //   return arrayMove(advs, originalPos, newPos);
+    // });
+
+    dispatch({
+      type: "DRAG_END_ADVERTISEMENTLIST",
+      payload: {
+        active,
+        over
+      }
+    })
   };
 
   useEffect(() => {
-    console.log(advState);
+    console.log(advertisements);
     // For tasks array change I will call an API to save the data in the database
-  }, [advState]);
+  }, [advertisements]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -519,15 +523,37 @@ const SalonAdv = () => {
 
       </div>
       <div className='salonadv_list_container'>
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
-          <div className='salonadv_column'>
-            <SortableContext items={advState.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
-              {advState.map((adv) => (
-                <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef}  handleEditFileInputChange={handleEditFileInputChange}/>
+        {
+          getAllAdvertisementLoading && !getAllAdvertisementResolve ?
+            <div className='salonadv_column'>
+              {[...Array(6)].map((_, index) => (
+                <Skeleton
+                  key={index}
+                  count={1}
+                  height={"35rem"}
+                  style={{ borderRadius: "1.7rem" }}
+                  baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                />
               ))}
-            </SortableContext>
-          </div>
-        </DndContext>
+            </div> : 
+            !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
+
+              <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
+                <div className='salonadv_column'>
+                  <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
+                    {advertisements.map((adv) => (
+                      <>
+                        <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} />
+                      </>
+                    ))}
+                  </SortableContext>
+
+                </div>
+              </DndContext> : 
+              <div className='salonadv_column'>No Adv </div>
+        }
+
       </div>
     </div>
   );
@@ -535,7 +561,7 @@ const SalonAdv = () => {
 
 export default SalonAdv;
 
-const Adv = ({ id, url, public_id, editImageHandler,handleEditLoader,deleteHandler,deleteLoader,fileEditInputRef,handleEditFileInputChange }) => {
+const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHandler, deleteLoader, fileEditInputRef, handleEditFileInputChange }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
@@ -543,11 +569,19 @@ const Adv = ({ id, url, public_id, editImageHandler,handleEditLoader,deleteHandl
     transform: CSS.Transform.toString(transform)
   };
 
+
+
   return (
     <div className='salonadv_task' ref={setNodeRef} {...attributes} {...listeners} style={style}>
+
       <div><img src={url} alt="" /></div>
       <div>
-        <button onClick={() => editImageHandler(public_id, id)} disabled={handleEditLoader}>
+        <button
+          onClick={() => editImageHandler(public_id, id)}
+          disabled={handleEditLoader}
+          onPointerDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           <div><EditIcon /></div>
           <p>Edit</p>
           <input
@@ -557,10 +591,11 @@ const Adv = ({ id, url, public_id, editImageHandler,handleEditLoader,deleteHandl
             onChange={handleEditFileInputChange}
           />
         </button>
-        <button 
-        // onClick={() => deleteHandler(public_id, id)} 
-        // disabled={deleteLoader}
-        onClick={() => alert("delete")}
+        <button
+          onClick={() => deleteHandler(public_id, id)}
+          disabled={deleteLoader}
+          onPointerDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           <div><DeleteIcon /></div>
           <p>Delete</p>
