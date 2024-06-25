@@ -440,7 +440,7 @@ const Dashboard = () => {
                         <div className='admin_dashboard_carousel_item' key={ad._id}>
                           <img src={ad.url} />
                         </div>
-                      ))
+                      )).slice(0,5)
                     }
                   </Carousel>
                 </div> :

@@ -56,13 +56,15 @@ const Queue = () => {
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
             </div>
-          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ? (
+          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ? (
             <div className={`admin_queue_content_body ${darkmodeOn && "dark"}`}>
               <div>
                 <p>Name</p>
                 <p>Time Joined Q</p>
                 <p>Barber Name</p>
                 <p>Q Postion</p>
+                <p>Serve</p>
+                <p>Cancel</p>
               </div>
 
               {queuelist.map((b) => (
@@ -71,10 +73,12 @@ const Queue = () => {
                   <p>{b.timeJoinedQ}</p>
                   <p>{b.barberName}</p>
                   <p>{b.qPosition}</p>
+                  <div><div><ServeIcon/></div></div>
+                  <div><div><DeleteIcon/></div></div>
                 </div>
               ))}
             </div>
-          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ? (
+          ) : !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ? (
             <div className={`admin_queue_content_body_error ${darkmodeOn && "dark"}`}>
               <p style={{ margin: "2rem" }}>Queue not available</p>
             </div>

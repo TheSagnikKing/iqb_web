@@ -96,11 +96,11 @@
 
 .admin_queue_content_body>div{
     min-height: 6rem;
-    min-width: 80rem;
+    min-width: 100rem;
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
@@ -189,7 +189,7 @@
 }
 
 .admin_queue_content_body_item>div:nth-child(5)>div{
-    background-color: limegreen;
+    background-color: rgb(50, 60, 205);
     color: var(--primary-text-light-color1);
 }
 

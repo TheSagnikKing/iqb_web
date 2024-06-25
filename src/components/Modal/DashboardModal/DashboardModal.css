@@ -18,16 +18,17 @@
 .dashboard_modal__content{
     width: 70vw;
     height: 60vh;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 2rem;
     position: relative;
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 
 .dashboard_modal__content>div:nth-child(3){
-    margin-top: 4rem;
+    margin-top: 0rem;
     height: 100%;
     border-radius: 1.7rem;
     -webkit-border-radius: 1.7rem;

@@ -33,7 +33,7 @@ export const menudata = [
     },
     {
         id: 6,
-        title: "Queuings",
+        title: "Queue List",
         icon: <Adminqueueicon />,
         url: "/admin-queue"
     },
