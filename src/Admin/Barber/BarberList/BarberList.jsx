@@ -189,10 +189,10 @@ const BarberList = () => {
                   checked={allCheckbox}
 
                 />
-                {/* <p>Salon ID</p> */}
                 <p>Barber Name</p>
                 <p>Email</p>
                 <p>isOnline</p>
+                <p>isClockIn</p>
               </div>
 
               {BarberList.map((b) => (
@@ -201,36 +201,53 @@ const BarberList = () => {
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
                   />
-                  {/* <p>{b.salonId}</p> */}
                   <p>{b.name}</p>
                   <p>{b.email}</p>
                   <div>
-                    {/* <div
+                    <div
                         style={{
-                          background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "#000"
+                          background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
+                          border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
                         }}
                       >
-                        <span className={`barberlist_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}></span>
+                        <span className={`barberlist_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</span>
                         <button
                           type="checkbox"
                           className={`barberlist_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
                           onClick={() => toggleHandler(b)}
                         ></button>
 
-                      </div> */}
+                      </div>
 
-                    <div
+                    {/* <div
                       style={{
-                        background: b?.isOnline ? "limegreen" : "#000"
+                        background: b?.isOnline ? "limegreen" : "#000",
                       }}
                     >
-                      <span className={`barberlist_toggle_btn_text ${b?.isOnline ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}></span>
+                      <span className={`barberlist_toggle_btn_text ${b?.isOnline ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{b?.isOnline ? "Online" : "Offline"}</span>
                       <button
                         type="checkbox"
                         className={`barberlist_dashboard_toggle_btn ${b?.isOnline ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
                       ></button>
 
-                    </div>
+                    </div> */}
+                  </div>
+
+                  <div>
+                    <div
+                        style={{
+                          background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
+                          border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
+                        }}
+                      >
+                        <span className={`barberlist_clock_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_btn_text_active' : 'barberlist_clock_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "ClockIn" : "ClockOut"}</span>
+                        <button
+                          type="checkbox"
+                          className={`barberlist_clock_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_active' : 'barberlist_clock_dashboard_toggle_inactive'}`}
+                          onClick={() => toggleHandler(b)}
+                        ></button>
+
+                      </div>
                   </div>
 
                   <button
