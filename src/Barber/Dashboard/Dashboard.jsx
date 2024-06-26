@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import './Dashboard.css'
 import { Link } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel';
-import { ChartIcon1, ChartIcon2, ChartIcon3, CheckIcon, DeleteIcon, EditIcon, Threeverticaldots, UserIcon } from '../../icons';
+import { ChartIcon1, ChartIcon2, ChartIcon3, CheckIcon, DeleteIcon, ShowSalonInfo, UserIcon } from '../../icons';
 import { ResponsiveContainer, LineChart, Line } from 'recharts'
 import Calender from '../../components/Admin/Calender/Calender'
 
@@ -11,8 +11,10 @@ import DashboardModal from '../../components/Modal/DashboardModal/DashboardModal
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
-import { barberConnectSalonAction, barberSalonStatusAction, connectSalonListAction } from '../../Redux/Barber/Actions/DashboardAction';
+import { barberConnectSalonAction, barberDashboardSalonInfoAction, barberSalonStatusAction, connectSalonListAction } from '../../Redux/Barber/Actions/DashboardAction';
 import { getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction';
+import { adminGetDefaultSalonAction } from '../../Redux/Admin/Actions/AdminHeaderAction';
+import { getAdminSalonImagesAction } from '../../Redux/Admin/Actions/SalonAction';
 
 const Dashboard = () => {
 
@@ -131,12 +133,12 @@ const Dashboard = () => {
   const [currentSelectedSalon, setCurrentSelectedSalon] = useState({})
 
   useEffect(() => {
-    if(selectedSalonId){
+    if (selectedSalonId) {
       const currentSalon = connectSalonListResponse?.find((s) => s.salonId === selectedSalonId)
       setCurrentSelectedSalon(currentSalon)
     }
-    
-  },[selectedSalonId])
+
+  }, [selectedSalonId])
 
   // console.log("Current    sdssss", currentSelectedSalon)
 
@@ -242,6 +244,61 @@ const Dashboard = () => {
     dispatch(barberSalonStatusAction(salonStatusOnlineData));
   }
 
+  const barberDashboardSalonInfoRef = useRef(new AbortController())
+
+  useEffect(() => {
+    if (salonId) {
+      const controller = new AbortController();
+      barberDashboardSalonInfoRef.current = controller;
+
+      dispatch(barberDashboardSalonInfoAction(salonId, controller.signal));
+
+      return () => {
+        if (barberDashboardSalonInfoRef.current) {
+          barberDashboardSalonInfoRef.current.abort();
+        }
+      };
+    }
+
+  }, [salonId, dispatch]);
+
+  const barberDashboardSalonInfo = useSelector(state => state.barberDashboardSalonInfo)
+
+  const {
+    loading: barberDashboardSalonInfoLoading,
+    resolve: barberDashboardSalonInfoResolve,
+    response: barberDashboardSalonInfoResponse
+  } = barberDashboardSalonInfo
+
+
+  const [salonDesc, setSalonDesc] = useState("")
+
+  useEffect(() => {
+    if (barberDashboardSalonInfoResponse) {
+      setSalonDesc(barberDashboardSalonInfoResponse)
+    }
+
+  }, [barberDashboardSalonInfoResponse])
+
+
+  //Salon Images
+
+  useEffect(() => {
+    if (salonId) {
+      dispatch(getAdminSalonImagesAction(salonId))
+    }
+  }, [salonId])
+
+  const getAdminSalonImages = useSelector(state => state.getAdminSalonImages)
+
+  const {
+    loading: getAdminSalonImagesLoading,
+    resolve: getAdminSalonImagesResolve,
+    response: AdminSalonImages
+  } = getAdminSalonImages
+
+  const [openModal, setOpenModal] = useState(false)
+
   return (
     salonId == 0 ? <>
       <div className={`barber_connect_salon_container ${darkmodeOn && "dark"}`}>
@@ -345,28 +402,7 @@ const Dashboard = () => {
               /> :
               <div>
                 <h1>Welcome Back Arghya</h1>
-                {/* <div
-                  style={{
-                    background: togglecheck ? "limegreen" : "#000"
-                  }}
-                >
-                  <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
-                  <button
-                    className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
-                    onClick={toggleHandler}
-                  ></button>
-                </div> */}
-                <div
-                  style={{
-                    background: barberProfile?.user[0]?.isOnline ? "limegreen" : "#000"
-                  }}
-                >
-                  <p className={`salononline_toggle_btn_text ${barberProfile?.user[0]?.isOnline ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{barberProfile?.user[0]?.isOnline ? "Online" : "Offline"}</p>
-                  <button
-                    className={`salononline_toggle_btn ${barberProfile?.user[0]?.isOnline ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
-                    // onClick={toggleHandler}
-                  ></button>
-                </div>
+
               </div>
           }
 
@@ -375,7 +411,22 @@ const Dashboard = () => {
           }}>
             <div>Salon Information</div>
 
-            <p style={{ textAlign: "center", marginBlock: "2rem", fontSize: "1.4rem", color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)" }}>            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro vel eum dolorem neque est voluptas eaque quasi explicabo amet iure error sint, deserunt maxime placeat rem culpa vitae ipsam modi itaque enim eligendi, quisquam ducimus repudiandae. Facere blanditiis ipsum assumenda?</p>
+            {
+              barberDashboardSalonInfoLoading ?
+                <div>
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px", marginTop: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                </div> :
+                <div>
+                  <p>{truncateText(salonDesc, 60)}</p>
+                  <button onClick={() => setOpenModal(true)} disabled={barberDashboardSalonInfoLoading == true ? true : false}>
+                    <div><ShowSalonInfo /></div>
+                    <p>Show</p>
+                  </button>
+                </div>
+            }
 
           </div>
         </div>
@@ -489,11 +540,55 @@ const Dashboard = () => {
             boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
           }}
         >
-          <img
+          {/* <img
             src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-some-pictures-of-an-antique-barber-shop-image_2906288.jpg"
             alt=""
             style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
-          />
+          /> */}
+
+{
+            getAdminSalonImagesLoading && !getAdminSalonImagesResolve ?
+              <div className='barber_dashboard_carousel_loading'>
+                <Skeleton count={1}
+                  height={"100%"}
+                  width={"100%"}
+                  style={{
+                    borderRadius: "1.5rem"
+                  }}
+                  baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                />
+              </div> :
+              !getAdminSalonImagesLoading && getAdminSalonImagesResolve && AdminSalonImages?.length > 0 ?
+                <div className='admin_dashboard_carousel'>
+                  <Carousel
+                    showThumbs={false}
+                    infiniteLoop={true}
+                    autoPlay={true}
+                    interval={6000}
+                    showStatus={false}
+                    showArrows={false}
+                    stopOnHover={false}
+                    swipeable={false}
+                  >
+                    {
+                      AdminSalonImages?.map((ad) => (
+                        <div className='admin_dashboard_carousel_item' key={ad._id}>
+                          <img src={ad.url} />
+                        </div>
+                      )).slice(0,5)
+                    }
+                  </Carousel>
+                </div> :
+                !getAdminSalonImagesLoading && getAdminSalonImagesResolve && AdminSalonImages?.length == 0 ?
+                  <div className='admin_dashboard_carousel error'>
+                    <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                  </div> :
+                  !getAdminSalonImagesLoading && !getAdminSalonImagesResolve &&
+                  <div className='admin_dashboard_carousel error'>
+                    <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="" />
+                  </div>
+          }
         </div>
 
         <div>
@@ -617,6 +712,18 @@ const Dashboard = () => {
 
           </div>
         </div>
+
+        {
+          openModal && <DashboardModal setOpenModal={setOpenModal}>
+            <div className={`barber_salon_info_container ${darkmodeOn && "dark"}`}>
+              <div>
+                <label htmlFor="barbersalonInfo">Salon Information</label>
+                <textarea id="barbersalonInfo" name="barbersalonInfo" value={salonDesc} onChange={(e) => setSalonDesc(e.target.value)}></textarea>
+              </div>
+
+            </div>
+          </DashboardModal>
+        }
 
       </div>
     </>

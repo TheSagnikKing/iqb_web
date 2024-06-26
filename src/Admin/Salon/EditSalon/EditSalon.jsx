@@ -132,6 +132,8 @@ const EditSalon = () => {
   const [serviceDesc, setServiceDesc] = useState("")
   const [servicePrice, setServicePrice] = useState("")
   const [serviceEWT, setServiceEWT] = useState("")
+  const [serviceCode, setServiceCode] = useState("")
+  const [serviceId, setServiceId] = useState(0)
 
   const responsive = {
     superLargeDesktop: {
@@ -545,7 +547,9 @@ const EditSalon = () => {
       servicePrice: Number(servicePrice),
       vipService,
       serviceDesc,
-      serviceEWT: Number(serviceEWT)
+      serviceEWT: Number(serviceEWT),
+      serviceId,
+      serviceCode
     }
 
     setSelectedServices([...selectedServices, service])
@@ -556,6 +560,8 @@ const EditSalon = () => {
     setVipService(false)
     setServiceDesc("")
     setServiceEWT("")
+    setServiceCode("")
+    setServiceId(0)
   }
 
 
@@ -571,6 +577,8 @@ const EditSalon = () => {
     setVipService(currentService.vipService)
     setServiceDesc(currentService.serviceDesc)
     setServiceEWT(currentService.serviceEWT)
+    setServiceCode(currentService.serviceCode)
+    setServiceId(currentService.serviceId)
 
     const updatedServices = [...selectedServices];
     updatedServices.splice(index, 1);
@@ -611,7 +619,7 @@ const EditSalon = () => {
     }
 
     console.log(salondata)
-    dispatch(adminEditSalonAction(salondata, navigate))
+    // dispatch(adminEditSalonAction(salondata, navigate))
   }
 
   const adminEditSalon = useSelector(state => state.adminEditSalon)

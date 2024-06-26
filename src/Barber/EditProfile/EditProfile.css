@@ -672,6 +672,13 @@
     place-items: center;
 }
 
+
+.password_modal_container>div:nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Dark Css Style */
 
 .barber_edit_profile_content_wrapper.dark{

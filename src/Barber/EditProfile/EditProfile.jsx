@@ -12,7 +12,7 @@ import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
-import {barberSendVerifyEmailAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction} from "../../Redux/Barber/Actions/BarberProfileAction"
+import { barberSendVerifyEmailAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction } from "../../Redux/Barber/Actions/BarberProfileAction"
 import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
 
 const EditProfile = () => {
@@ -30,12 +30,12 @@ const EditProfile = () => {
     const [profilepic, setProfilepic] = useState("")
 
     useEffect(() => {
-        if(barberProfile && barberProfile?.profile[0]?.url){
+        if (barberProfile && barberProfile?.profile[0]?.url) {
             setProfilepic(barberProfile?.profile[0]?.url)
-        }else{
+        } else {
             setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
         }
-    },[barberProfile])
+    }, [barberProfile])
 
     const fileInputRef = useRef(null);
 
@@ -173,11 +173,11 @@ const EditProfile = () => {
 
     const barberUpdateProfile = useSelector(state => state.barberUpdateProfile)
 
-  const {
-    loading: barberUpdateProfileLoading,
-    resolve: barberUpdateProfileResolve,
-    // response: AllCustomerList
-  } = barberUpdateProfile
+    const {
+        loading: barberUpdateProfileLoading,
+        resolve: barberUpdateProfileResolve,
+        // response: AllCustomerList
+    } = barberUpdateProfile
 
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
@@ -185,6 +185,7 @@ const EditProfile = () => {
         dispatch(barberVerifiedEmailStatusAction(barberProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
+    const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
@@ -215,7 +216,8 @@ const EditProfile = () => {
                 mobileNumber: Number(mobileNumber),
                 name,
                 gender,
-                password
+                password,
+                oldPassword
             }
 
             dispatch(barberUpdateProfileAction(profiledata, navigate))
@@ -236,6 +238,7 @@ const EditProfile = () => {
 
     const darkmodeOn = darkMode === "On"
 
+    const [seeOldPassword, setSeeOldPassword] = useState(false)
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
@@ -248,7 +251,7 @@ const EditProfile = () => {
                     <div>
                         {
                             uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                            highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
+                                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
                         }
 
                         <div>
@@ -299,6 +302,18 @@ const EditProfile = () => {
                                     <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                         <h1>Change your password</h1>
                                         <div>
+                                            <p>Old Password</p>
+                                            <div>
+                                                <input
+                                                    type={`${seePassword ? "text" : "password"}`}
+                                                    value={oldPassword}
+                                                    onChange={(e) => setOldPassword(e.target.value)}
+                                                />
+                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                            </div>
+                                        </div>
+
+                                        <div>
                                             <p>Password</p>
                                             <div>
                                                 <input
@@ -306,7 +321,7 @@ const EditProfile = () => {
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}
                                                 />
-                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
                                         </div>
 
@@ -318,7 +333,7 @@ const EditProfile = () => {
                                                     value={confirmPassword}
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />
-                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible/> : <Notvisibleeye/>}</div>
+                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
                                         </div>
 

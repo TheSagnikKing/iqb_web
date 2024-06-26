@@ -14,7 +14,6 @@ const DashboardHeader = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-
     const darkMode = useSelector(darkmodeSelector)
 
     console.log("Dark Mode ", darkMode)
@@ -104,8 +103,35 @@ const DashboardHeader = () => {
 
 
     return (
-        <div className={`admin_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
-            <div></div>
+        <div className={`barber_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
+            <div>
+                <div
+                    style={{
+                        background: barberProfile?.isOnline ? "limegreen" : "red"
+                    }}
+                >
+
+                    <div>
+                        <p className={`barber_header_salononline_toggle_btn_text ${barberProfile?.isOnline ? 'barber_headersalononline_toggle_btn_text_active' : 'barber_headersalononline_toggle_btn_text_inactive'}`}>{barberProfile?.isOnline ? "Online" : "Offline"}</p>
+                        <button
+                            className={`barber_headersalononline_toggle_btn ${barberProfile?.isOnline ? 'barber_headersalononline_toggle_active' : 'barber_headersalononline_toggle_inactive'}`}
+                        ></button>
+                    </div>
+
+                </div>
+                <div
+                    style={{
+                        background: barberProfile?.isClockedIn ? "limegreen" : "red"
+                    }}
+                >
+                    <div>
+                        <p className={`barber_header_salonclock_toggle_btn_text ${barberProfile?.isClockedIn ? 'barber_headersalonclock_toggle_btn_text_active' : 'barber_headersalonclock_toggle_btn_text_inactive'}`}>{barberProfile?.isClockedIn ? "ClockedIn" : "ClockedOut"}</p>
+                        <button
+                            className={`barber_headersalonclock_toggle_btn ${barberProfile?.isClockedIn ? 'barber_headersalonclock_toggle_active' : 'barber_headersalonclock_toggle_inactive'}`}
+                        ></button>
+                    </div>
+                </div>
+            </div>
 
 
             <div className={`profile_wrapper ${darkmodeOn && "dark"}`}>

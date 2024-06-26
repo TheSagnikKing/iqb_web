@@ -35,6 +35,7 @@ import { MdMan } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { FaFile } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
+import { PiPaperPlaneRightFill } from "react-icons/pi";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -80,3 +81,4 @@ export const ProfileIcon = FaUser
 export const LogoutIcon = MdLogout
 export const FaFileIcon = FaFile
 export const HomeIcon = IoHome
+export const ShowSalonInfo = PiPaperPlaneRightFill

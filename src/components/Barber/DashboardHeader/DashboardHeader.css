@@ -1,4 +1,4 @@
-.admin_dashboard_header_wrapper {
+.barber_dashboard_header_wrapper {
     width: 100%;
     height: 6rem;
     display: flex;
@@ -7,6 +7,153 @@
     background-color: var(--primary-bg-light-color1);
 }
 
+.barber_dashboard_header_wrapper>div:nth-child(1){
+    /* background-color: rgba(255, 0, 0, 0.239); */
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+}
+
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1){
+    width: 9rem;
+    height: 2.5rem;
+}
+
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2){
+    width: 10rem;
+    height: 2.5rem;
+}
+
+
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1){
+    width: 9rem;
+    height: 2rem;
+    border-radius: 2rem;
+    position: relative;
+}
+
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2){
+    width: 11rem;
+    height: 2rem;
+    border-radius: 2rem;
+    position: relative;
+}
+
+.barber_headersalononline_toggle_btn {
+    background-color: #fff;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #000;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    position: absolute;
+    top: 0px;
+}
+
+.barber_headersalononline_toggle_active {
+    transform: translateX(4.9rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(4.9rem);
+    -moz-transform: translateX(4.9rem);
+    -ms-transform: translateX(4.9rem);
+    -o-transform: translateX(4.9rem);
+}
+
+.barber_headersalononline_toggle_inactive {
+    transform: translateX(0rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(0rem);
+    -moz-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    -o-transform: translateX(0rem);
+}
+
+.barber_header_salononline_toggle_btn_text {
+    position: absolute;
+    top: 0px;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+}
+
+.barber_headersalononline_toggle_btn_text_active {
+    left: 0.5rem;
+    opacity: 1;
+    color: #000;
+}
+
+.barber_headersalononline_toggle_btn_text_inactive {
+    right: 0.5rem;
+    color: #fff;
+}
+
+
+.barber_headersalonclock_toggle_btn {
+    background-color: #fff;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #000;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    position: absolute;
+    top: 0px;
+}
+
+.barber_headersalonclock_toggle_active {
+    transform: translateX(6.9rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(6.9rem);
+    -moz-transform: translateX(6.9rem);
+    -ms-transform: translateX(6.9rem);
+    -o-transform: translateX(6.9rem);
+}
+
+.barber_headersalonclock_toggle_inactive {
+    transform: translateX(0rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(0rem);
+    -moz-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    -o-transform: translateX(0rem);
+}
+
+.barber_header_salonclock_toggle_btn_text {
+    position: absolute;
+    top: 0px;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+
+}
+
+.barber_headersalonclock_toggle_btn_text_active {
+    left: 0.5rem;
+    opacity: 1;
+    color: #000;
+}
+
+.barber_headersalonclock_toggle_btn_text_inactive {
+    right: 0.5rem;
+    color: #fff;
+}
 
 .choose_salon_div {
     margin-inline: auto;
@@ -312,7 +459,7 @@
 
 /* Dark Mode Css */
 
-.admin_dashboard_header_wrapper.dark {
+.barber_dashboard_header_wrapper.dark {
     background-color: var(--dark-mode-bg-color-1);
 }
 
@@ -370,7 +517,7 @@
         display: block;
     }
 
-    .admin_dashboard_header_wrapper {
+    .barber_dashboard_header_wrapper {
         position: relative;
     }
 
@@ -739,7 +886,7 @@
         display: block;
     }
 
-    .admin_dashboard_header_wrapper {
+    .barber_dashboard_header_wrapper {
         position: relative;
     }
 

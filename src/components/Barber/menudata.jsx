@@ -15,7 +15,7 @@ export const menudata = [
     },
     {
         id: 3,
-        title: "Queuings",
+        title: "QueueList",
         icon: <Adminqueueicon />,
         url: "/barber-queue"
     },

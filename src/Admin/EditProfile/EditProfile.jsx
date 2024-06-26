@@ -179,6 +179,7 @@ const EditProfile = () => {
         dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
+    const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
@@ -209,7 +210,8 @@ const EditProfile = () => {
                 mobileNumber: Number(mobileNumber),
                 name,
                 gender,
-                password
+                password,
+                oldPassword
             }
 
             dispatch(adminUpdateProfileAction(profiledata, navigate))
@@ -230,6 +232,7 @@ const EditProfile = () => {
 
     const darkmodeOn = darkMode === "On"
 
+    const [seeOldPassword, setSeeOldPassword] = useState(false)
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
@@ -297,8 +300,8 @@ const EditProfile = () => {
                                             <div>
                                                 <input
                                                     type={`${seePassword ? "text" : "password"}`}
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    value={oldPassword}
+                                                    onChange={(e) => setOldPassword(e.target.value)}
                                                 />
                                                 <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
@@ -308,11 +311,11 @@ const EditProfile = () => {
                                             <p>New Password</p>
                                             <div>
                                                 <input
-                                                    type={`${seePassword ? "text" : "password"}`}
+                                                    type={`${seeOldPassword ? "text" : "password"}`}
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}
                                                 />
-                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                                <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                             </div>
                                         </div>
 
