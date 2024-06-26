@@ -65,6 +65,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
         setCheckMap((prevCheckMap) => {
             const newCheckMap = new Map(prevCheckMap);
             const key = `${b.salonId}-${b.barberId}`;
+            console.log(key)
             newCheckMap.set(key, originalIsOnline);
             return newCheckMap;
         });
@@ -72,7 +73,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
 }
 
 
-export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapClock, b, originalIsClock) => async (dispatch) => {
+export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapClock, b, originalIsClock, setCheckMap) => async (dispatch) => {
     try {
         dispatch({ type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_REQ })
 
@@ -82,7 +83,14 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
             type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_SUCCESS,
             payload: data
         })
-        
+
+        setCheckMap((prevCheckMap) => {
+            const newCheckMap = new Map(prevCheckMap);
+            const key = `${b.salonId}-${b.barberId}`;
+            newCheckMap.set(key, false);
+            return newCheckMap;
+        });
+
     } catch (error) {
 
         dispatch({
@@ -110,7 +118,7 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
     }
 }
 
-export const adminApproveBarberAction = (approvedata,setApproveBarberMap,b,originalIsOnline) => async (dispatch) => {
+export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, originalIsOnline) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_APPROVE_BARBER_REQ })
 
@@ -243,7 +251,7 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
     }
 }
 
-export const adminDeleteBarberAction = (salonId, email,barber) => async (dispatch) => {
+export const adminDeleteBarberAction = (salonId, email, barber) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_DELETE_BARBER_REQ })
 
@@ -255,8 +263,8 @@ export const adminDeleteBarberAction = (salonId, email,barber) => async (dispatc
         })
 
         dispatch({
-            type:"FILTER_BARBERLIST",
-            payload:barber.email
+            type: "FILTER_BARBERLIST",
+            payload: barber.email
         })
 
     } catch (error) {

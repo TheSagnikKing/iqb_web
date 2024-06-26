@@ -44,60 +44,57 @@ const BarberList = () => {
 
   useEffect(() => {
     if (BarberList && BarberList.length > 0) {
-      const initialCheckMap = new Map();
-      BarberList.forEach(barber => {
-        const key = `${barber.salonId}-${barber.barberId}`;
-        initialCheckMap.set(key, barber.isOnline || false);
-      });
-      setCheckMap(initialCheckMap);
+        const initialCheckMap = new Map();
+        BarberList.forEach(barber => {
+            const key = `${barber.salonId}-${barber.barberId}`;
+            initialCheckMap.set(key, barber.isOnline || false);
+        });
+        setCheckMap(initialCheckMap);
 
-      const initialCheckMapClock = new Map();
-      BarberList.forEach(barber => {
-        const key = `${barber.salonId}-${barber.barberId}`;
-        initialCheckMapClock.set(key, barber.isClockedIn || false);
-      });
-      setCheckMapClock(initialCheckMapClock);
+        const initialCheckMapClock = new Map();
+        BarberList.forEach(barber => {
+            const key = `${barber.salonId}-${barber.barberId}`;
+            initialCheckMapClock.set(key, barber.isClockedIn || false);
+        });
+        setCheckMapClock(initialCheckMapClock);
     }
-  }, [BarberList]);
-
+}, [BarberList]);
 
   const toggleHandler = (b) => {
-
-    setCheckMap((prevCheckMap) => {
-      const newCheckMap = new Map(prevCheckMap);
-      const key = `${b.salonId}-${b.barberId}`;
-      const newIsOnline = !newCheckMap.get(key) || false; // Toggle the value
-      newCheckMap.set(key, newIsOnline);
-      return newCheckMap;
+    setCheckMap(prevCheckMap => {
+        const newCheckMap = new Map(prevCheckMap);
+        const key = `${b.salonId}-${b.barberId}`;
+        const newIsOnline = !newCheckMap.get(key) || false; // Toggle the value
+        newCheckMap.set(key, newIsOnline);
+        return newCheckMap;
     });
 
     const barberOnlineData = {
-      barberId: b.barberId,
-      salonId: b.salonId,
-      isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
+        barberId: b.barberId,
+        salonId: b.salonId,
+        isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
     };
 
     dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
-  }
+}
 
-  const toggleClockHandler = (b) => {
-    setCheckMapClock((prevCheckMap) => {
-      const newCheckMap = new Map(prevCheckMap);
-      const key = `${b.salonId}-${b.barberId}`;
-      const newIsClock = !newCheckMap.get(key) || false; // Toggle the value
-      newCheckMap.set(key, newIsClock);
-      return newCheckMap;
+const toggleClockHandler = (b) => {
+    setCheckMapClock(prevCheckMapClock => {
+        const newCheckMapClock = new Map(prevCheckMapClock);
+        const key = `${b.salonId}-${b.barberId}`;
+        const newIsClock = !newCheckMapClock.get(key) || false; // Toggle the value
+        newCheckMapClock.set(key, newIsClock);
+        return newCheckMapClock;
     });
 
     const barberClockData = {
-      barberId: b.barberId,
-      salonId: b.salonId,
-      isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
+        barberId: b.barberId,
+        salonId: b.salonId,
+        isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
     };
 
-    console.log(barberClockData)
-    dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock.get(`${b.salonId}-${b.barberId}`)));
-  }
+    dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock.get(`${b.salonId}-${b.barberId}`), setCheckMap));
+}
 
 
   const BarberListcontrollerRef = useRef(new AbortController());
@@ -174,10 +171,6 @@ const BarberList = () => {
     });
   };
 
-  console.log(selectedAllBarberNotification)
-  console.log(allCheckbox)
-
-  const [selectedMultiplebarbers, setSelectedMultiplebarbers] = useState([])
 
   const darkMode = useSelector(darkmodeSelector)
 
