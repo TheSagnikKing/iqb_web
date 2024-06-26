@@ -11,7 +11,7 @@
     /* background-color: rgba(255, 0, 0, 0.239); */
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     height: 100%;
 }
 
@@ -47,7 +47,7 @@
     border-radius: 2rem;
     cursor: pointer;
     border: none;
-    border: 1px solid #000;
+    border: 1px solid #00000077;
     -webkit-border-radius: 2rem;
     -moz-border-radius: 2rem;
     -ms-border-radius: 2rem;
@@ -57,12 +57,12 @@
 }
 
 .barber_headersalononline_toggle_active {
-    transform: translateX(4.9rem);
+    transform: translateX(5rem);
     transition: 300ms ease;
-    -webkit-transform: translateX(4.9rem);
-    -moz-transform: translateX(4.9rem);
-    -ms-transform: translateX(4.9rem);
-    -o-transform: translateX(4.9rem);
+    -webkit-transform: translateX(5rem);
+    -moz-transform: translateX(5rem);
+    -ms-transform: translateX(5rem);
+    -o-transform: translateX(5rem);
 }
 
 .barber_headersalononline_toggle_inactive {
@@ -105,7 +105,7 @@
     border-radius: 2rem;
     cursor: pointer;
     border: none;
-    border: 1px solid #000;
+    border: 1px solid #00000077;
     -webkit-border-radius: 2rem;
     -moz-border-radius: 2rem;
     -ms-border-radius: 2rem;
@@ -115,12 +115,12 @@
 }
 
 .barber_headersalonclock_toggle_active {
-    transform: translateX(6.9rem);
+    transform: translateX(7rem);
     transition: 300ms ease;
-    -webkit-transform: translateX(6.9rem);
-    -moz-transform: translateX(6.9rem);
-    -ms-transform: translateX(6.9rem);
-    -o-transform: translateX(6.9rem);
+    -webkit-transform: translateX(7rem);
+    -moz-transform: translateX(7rem);
+    -ms-transform: translateX(7rem);
+    -o-transform: translateX(7rem);
 }
 
 .barber_headersalonclock_toggle_inactive {

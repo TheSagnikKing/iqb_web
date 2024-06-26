@@ -1278,12 +1278,34 @@
         padding-block: 0.5rem;
     }
 
+    .barber_dashboard_page_container::-webkit-scrollbar {
+        width: 6px !important;
+        height: 7px;
+    }
+
+    .barber_dashboard_page_container::-webkit-scrollbar-track {
+        background-color: transparent !important;
+    }
+
+    .barber_dashboard_page_container::-webkit-scrollbar-thumb {
+        background: transparent !important;
+    }
+
+    .barber_dashboard_page_container::-webkit-scrollbar-thumb:hover {
+        background: transparent !important;
+    }
+
     .barber_dashboard_page_container>div:nth-child(2)>div:nth-child(1) {
         display: none;
     }
 
     .barber_dashboard_page_container>div:nth-child(5) {
         grid-column: 1;
+        width: 98%;
+    }
+
+    .barber_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(1){
+        border-right: none;
     }
 
     .barber_dashboard_page_container>div:nth-child(5)>div:nth-child(2) {
@@ -1343,6 +1365,10 @@
         width: 55%;
     }
 
+    .barber_salon_info_container>div>textarea{
+        height: 60vh;
+    }
+
     /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -1350,11 +1376,9 @@
 }
 
 @media screen and (min-width:431px) and (max-width:1140px) {
-    .barber_dashboard_page_container {
-        grid-template-columns: 1fr;
-        grid-template-rows: 25rem 25rem 27rem 27rem 1fr;
-        overflow-y: scroll;
-        gap: 2rem;
+
+    .barber_salon_info_container>div>textarea{
+        height: 60vh;
     }
 
     .barber_dashboard_page_container::-webkit-scrollbar {
@@ -1363,16 +1387,29 @@
     }
 
     .barber_dashboard_page_container::-webkit-scrollbar-track {
-        background-color: #fff !important;
+        background-color: transparent !important;
     }
 
     .barber_dashboard_page_container::-webkit-scrollbar-thumb {
-        background: var(--primary-bg-color3) !important;
+        background: transparent !important;
     }
 
     .barber_dashboard_page_container::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255) !important;
+        background: transparent !important;
     }
+
+    .barber_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(1){
+        border-right: none;
+    }
+
+
+    .barber_dashboard_page_container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 25rem 25rem 27rem 27rem 1fr;
+        overflow-y: scroll;
+        gap: 2rem;
+    }
+
 
     .barber_dashboard_page_container>div:nth-child(2)>div:nth-child(1) {
         display: none;
@@ -1380,6 +1417,7 @@
 
     .barber_dashboard_page_container>div:nth-child(5) {
         grid-column: 1;
+        width: 98%;
     }
 
     .barber_dashboard_page_container>div:nth-child(5)>div:nth-child(2) {
@@ -1400,7 +1438,7 @@
     }
 
     .barber_dashboard_page_container>div {
-        width: 99%;
+        width: 98%;
         margin-left: 1%;
     }
 

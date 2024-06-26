@@ -1,4 +1,4 @@
-.admin_queue_wrapper{
+.barber_queue_wrapper{
     height: calc(100vh - 6rem);
     width: 100%;
     padding-block: 2rem;
@@ -7,26 +7,26 @@
     gap: 1.5rem;
 }
 
-.admin_queue_wrapper>div:nth-child(1){
+.barber_queue_wrapper>div:nth-child(1){
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 4rem;
 }
 
-.admin_queue_wrapper>div:nth-child(1)>p{
+.barber_queue_wrapper>div:nth-child(1)>p{
     font-size: 2rem;
     font-weight: bold;
 }
 
-.admin_queue_wrapper>div:nth-child(1)>div{
+.barber_queue_wrapper>div:nth-child(1)>div{
     display: flex;
     align-items: center;
     gap: 2rem;
     height: 100%;
 }
 
-.admin_queue_wrapper>div:nth-child(1)>div>button{
+.barber_queue_wrapper>div:nth-child(1)>div>button{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -45,20 +45,20 @@
     font-size: 1.4rem;
 }
 
-.admin_queue_wrapper>div:nth-child(1)>div>button>div{
+.barber_queue_wrapper>div:nth-child(1)>div>button>div{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.admin_queue_wrapper>div:nth-child(1)>div>button:nth-child(2)>div{
+.barber_queue_wrapper>div:nth-child(1)>div>button:nth-child(2)>div{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
 }
 
-.admin_queue_content_wrapper{
+.barber_queue_content_wrapper{
     width: 100%;
     height: 100%;
     border-radius: 1.7rem;
@@ -70,43 +70,43 @@
     background-color: var(--primary-bg-light-color1);
 }
 
-.admin_queue_content_body{
+.barber_queue_content_body{
     height: calc(88vh - 6rem);
     overflow-y: scroll;
     position: relative;
 }
 
-.admin_queue_content_body::-webkit-scrollbar {
+.barber_queue_content_body::-webkit-scrollbar {
     width: 6px !important;
     height: 7px;
 }
 
-.admin_queue_content_body::-webkit-scrollbar-track {
+.barber_queue_content_body::-webkit-scrollbar-track {
     background-color: transparent !important;
 }
 
-.admin_queue_content_body::-webkit-scrollbar-thumb {
+.barber_queue_content_body::-webkit-scrollbar-thumb {
     background: var(--primary-bg-color3) !important;
 }
 
-.admin_queue_content_body::-webkit-scrollbar-thumb:hover {
+.barber_queue_content_body::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
 }
 
 
-.admin_queue_content_body>div{
+.barber_queue_content_body>div{
     min-height: 6rem;
-    min-width: 80rem;
+    min-width: 100rem;
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
 }
 
-.admin_queue_content_body>div:nth-child(1){
+.barber_queue_content_body>div:nth-child(1){
     position: sticky;
     top: 0;
     z-index: 3;
@@ -114,29 +114,29 @@
     border-top-left-radius: 1.7rem;
 }
 
-.admin_queue_content_body>div:nth-child(1)>p{
+.barber_queue_content_body>div:nth-child(1)>p{
     color: var(--primary-text-light-color1);
 }
 
-.admin_queue_content_body>div>p:nth-child(1){
+.barber_queue_content_body>div>p:nth-child(1){
     position: sticky;
     left: 0;
     z-index: 2;
 }
 
-.admin_queue_content_body>div:not(:nth-child(1))>p:nth-child(1){
+.barber_queue_content_body>div:not(:nth-child(1))>p:nth-child(1){
     background-color: #efefef;
 }
 
-.admin_queue_content_body>div:nth-child(1)>p:nth-child(1){
+.barber_queue_content_body>div:nth-child(1)>p:nth-child(1){
     background-color: var(--primary-bg-color3);
     border-top-left-radius: 1.7rem;
 }
 
-.admin_queue_content_body>div:nth-child(2){
+.barber_queue_content_body>div:nth-child(2){
     margin-top: 1rem;
 }
-.admin_queue_content_body>div>p{
+.barber_queue_content_body>div>p{
     height: 100%;
     width: 100%;
     display: flex;
@@ -147,7 +147,7 @@
     text-overflow: ellipsis;
 }
 
-.admin_queue_content_body_item>button{
+.barber_queue_content_body_item>button{
     width: 60%;
     height: 4rem;
     border-radius: 2rem;
@@ -162,7 +162,7 @@
     font-weight: 500;
 }
 
-.admin_queue_content_body_item>div{
+.barber_queue_content_body_item>div{
     height: 100%;
     width: 100%;
     display: flex;
@@ -170,8 +170,8 @@
     align-items: center;
 }
 
-.admin_queue_content_body_item>div:nth-child(5)>div,
-.admin_queue_content_body_item>div:nth-child(6)>div
+.barber_queue_content_body_item>div:nth-child(5)>button,
+.barber_queue_content_body_item>div:nth-child(6)>button
 {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     width: 4.5rem;
@@ -186,14 +186,15 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    border: none;
 }
 
-.admin_queue_content_body_item>div:nth-child(5)>div{
-    background-color: limegreen;
+.barber_queue_content_body_item>div:nth-child(5)>button{
+    background-color: rgb(50, 60, 205);
     color: var(--primary-text-light-color1);
 }
 
-.admin_queue_content_body_item>div:nth-child(6)>div{
+.barber_queue_content_body_item>div:nth-child(6)>button{
     background-color:red;
     color: var(--primary-text-light-color1);
 }
@@ -256,7 +257,7 @@
     color: #fff;
 }
 
-.admin_queue_content_body_error{
+.barber_queue_content_body_error{
     width: 100%;
     height: 100%;
     display: grid;
@@ -271,11 +272,11 @@
 
 /* Dark mode Css */
 
-.admin_queue_content_wrapper.dark{
+.barber_queue_content_wrapper.dark{
     background-color: var(--dark-mode-bg-color-4);
 }
 
-.admin_queue_content_body_error.dark{
+.barber_queue_content_body_error.dark{
     background-color: var(--dark-mode-bg-color-4);
     border-radius: 1.7rem;
     -webkit-border-radius: 1.7rem;
@@ -284,34 +285,34 @@
     -o-border-radius: 1.7rem;
 }
 
-.admin_queue_content_body_error.dark>p{
+.barber_queue_content_body_error.dark>p{
     color: var(--primary-text-light-color1);
 }
 
-.admin_queue_wrapper.dark>div:nth-child(1)>p{
+.barber_queue_wrapper.dark>div:nth-child(1)>p{
     color: var(--primary-text-light-color1);
 }
 
-.admin_queue_content_body.dark>div:not(:nth-child(1)){
+.barber_queue_content_body.dark>div:not(:nth-child(1)){
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.admin_queue_content_body.dark>div:not(:nth-child(1))>p{
+.barber_queue_content_body.dark>div:not(:nth-child(1))>p{
     color: var(--primary-text-light-color1);
 }
 
-.admin_queue_content_body.dark>div:not(:nth-child(1))>p:nth-child(1){
+.barber_queue_content_body.dark>div:not(:nth-child(1))>p:nth-child(1){
     background-color: var(--dark-mode-bg-color-2);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
-    .admin_queue_content_wrapper{
+    .barber_queue_content_wrapper{
         width: calc(100vw - 2rem);
     }
 }
 
 @media screen and (min-width:431px) and (max-width:1140px){
-    .admin_queue_content_wrapper{
+    .barber_queue_content_wrapper{
         width: calc(100vw - 2rem);
     }
 }

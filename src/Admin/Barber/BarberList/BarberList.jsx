@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { DeleteIcon, EditIcon, Notificationicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
+import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const BarberList = () => {
@@ -40,6 +40,8 @@ const BarberList = () => {
 
   const [checkMap, setCheckMap] = useState(new Map());
 
+  const [checkMapClock, setCheckMapClock] = useState(new Map())
+
   useEffect(() => {
     if (BarberList && BarberList.length > 0) {
       const initialCheckMap = new Map();
@@ -48,6 +50,13 @@ const BarberList = () => {
         initialCheckMap.set(key, barber.isOnline || false);
       });
       setCheckMap(initialCheckMap);
+
+      const initialCheckMapClock = new Map();
+      BarberList.forEach(barber => {
+        const key = `${barber.salonId}-${barber.barberId}`;
+        initialCheckMapClock.set(key, barber.isClockedIn || false);
+      });
+      setCheckMapClock(initialCheckMapClock);
     }
   }, [BarberList]);
 
@@ -69,6 +78,25 @@ const BarberList = () => {
     };
 
     dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
+  }
+
+  const toggleClockHandler = (b) => {
+    setCheckMapClock((prevCheckMap) => {
+      const newCheckMap = new Map(prevCheckMap);
+      const key = `${b.salonId}-${b.barberId}`;
+      const newIsClock = !newCheckMap.get(key) || false; // Toggle the value
+      newCheckMap.set(key, newIsClock);
+      return newCheckMap;
+    });
+
+    const barberClockData = {
+      barberId: b.barberId,
+      salonId: b.salonId,
+      isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
+    };
+
+    console.log(barberClockData)
+    dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock.get(`${b.salonId}-${b.barberId}`)));
   }
 
 
@@ -205,19 +233,19 @@ const BarberList = () => {
                   <p>{b.email}</p>
                   <div>
                     <div
-                        style={{
-                          background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
-                          border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
-                        }}
-                      >
-                        <span className={`barberlist_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</span>
-                        <button
-                          type="checkbox"
-                          className={`barberlist_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
-                          onClick={() => toggleHandler(b)}
-                        ></button>
+                      style={{
+                        background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
+                        border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
+                      }}
+                    >
+                      <span className={`barberlist_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</span>
+                      <button
+                        type="checkbox"
+                        className={`barberlist_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
+                        onClick={() => toggleHandler(b)}
+                      ></button>
 
-                      </div>
+                    </div>
 
                     {/* <div
                       style={{
@@ -235,19 +263,19 @@ const BarberList = () => {
 
                   <div>
                     <div
-                        style={{
-                          background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
-                          border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
-                        }}
-                      >
-                        <span className={`barberlist_clock_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_btn_text_active' : 'barberlist_clock_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "ClockIn" : "ClockOut"}</span>
-                        <button
-                          type="checkbox"
-                          className={`barberlist_clock_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_active' : 'barberlist_clock_dashboard_toggle_inactive'}`}
-                          onClick={() => toggleHandler(b)}
-                        ></button>
+                      style={{
+                        background: checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
+                        border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
+                      }}
+                    >
+                      <span className={`barberlist_clock_toggle_btn_text ${checkMapClock.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_btn_text_active' : 'barberlist_clock_dashboard_toggle_btn_text_inactive'}`}>{checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "ClockIn" : "ClockOut"}</span>
+                      <button
+                        type="checkbox"
+                        className={`barberlist_clock_dashboard_toggle_btn ${checkMapClock.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_active' : 'barberlist_clock_dashboard_toggle_inactive'}`}
+                        onClick={() => toggleClockHandler(b)}
+                      ></button>
 
-                      </div>
+                    </div>
                   </div>
 
                   <button

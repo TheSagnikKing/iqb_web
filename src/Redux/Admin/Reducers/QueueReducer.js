@@ -27,6 +27,7 @@ export const adminServeQueueReducer = (state = {}, action) => {
     }
 }
 
+
 export const adminCancelQueueReducer = (state = {}, action) => {
     switch (action.type) {
         case ADMIN_CANCEL_QUEUE_REQ:
@@ -53,3 +54,4 @@ export const adminCancelQueueReducer = (state = {}, action) => {
             return state;
     }
 }
+

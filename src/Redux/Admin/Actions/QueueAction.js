@@ -6,7 +6,7 @@ export const adminServeQueueAction = (barberqueuedata) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
-        const { data } = await api.post("/api/admin/barberServedQueue",barberqueuedata)
+        const { data } = await api.post("/api/queue/barberServedQueue",barberqueuedata)
 
         dispatch({
             type: ADMIN_BARBER_SERVED_QUEUE_SUCCESS,

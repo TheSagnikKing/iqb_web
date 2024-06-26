@@ -107,7 +107,8 @@ const DashboardHeader = () => {
             <div>
                 <div
                     style={{
-                        background: barberProfile?.isOnline ? "limegreen" : "red"
+                        background: barberProfile?.isOnline ? "limegreen" : "red",
+                        outline: darkmodeOn ? "1px solid white" : "1px solid black"
                     }}
                 >
 
@@ -121,7 +122,8 @@ const DashboardHeader = () => {
                 </div>
                 <div
                     style={{
-                        background: barberProfile?.isClockedIn ? "limegreen" : "red"
+                        background: barberProfile?.isClockedIn ? "limegreen" : "red",
+                        outline: darkmodeOn ? "1px solid white" : "1px solid black"
                     }}
                 >
                     <div>

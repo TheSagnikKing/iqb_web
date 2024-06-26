@@ -260,7 +260,8 @@ const Dashboard = () => {
                 <h1>Welcome Back, {adminName}</h1>
                 <div
                   style={{
-                    background: togglecheck ? "limegreen" : "#000"
+                    background: togglecheck ? "limegreen" : "#000",
+                    outline: darkmodeOn ? "1px solid white" : "1px solid black"
                   }}
                 >
                   <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>

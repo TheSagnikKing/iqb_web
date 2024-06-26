@@ -540,13 +540,9 @@ const Dashboard = () => {
             boxShadow: loading ? "none" : "0px 0px 6px rgba(0,0,0,0.4)",
           }}
         >
-          {/* <img
-            src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-some-pictures-of-an-antique-barber-shop-image_2906288.jpg"
-            alt=""
-            style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
-          /> */}
 
-{
+
+          {
             getAdminSalonImagesLoading && !getAdminSalonImagesResolve ?
               <div className='barber_dashboard_carousel_loading'>
                 <Skeleton count={1}
@@ -576,7 +572,7 @@ const Dashboard = () => {
                         <div className='admin_dashboard_carousel_item' key={ad._id}>
                           <img src={ad.url} />
                         </div>
-                      )).slice(0,5)
+                      )).slice(0, 5)
                     }
                   </Carousel>
                 </div> :

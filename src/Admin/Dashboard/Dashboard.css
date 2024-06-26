@@ -266,19 +266,19 @@
 
 .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(1)>div:nth-child(2) {
     width: 9rem;
-    height: 1.6rem;
+    height: 2rem;
     border-radius: 2rem;
     position: relative;
 }
 
 .salononline_toggle_btn {
     background-color: #fff;
-    height: 1.6rem;
+    height: 2rem;
     width: 4rem;
     border-radius: 2rem;
     cursor: pointer;
     border: none;
-    border: 1px solid #000;
+    border: 1px solid #00000077;
     -webkit-border-radius: 2rem;
     -moz-border-radius: 2rem;
     -ms-border-radius: 2rem;
@@ -288,12 +288,12 @@
 }
 
 .salononline_toggle_active {
-    transform: translateX(4.8rem);
+    transform: translateX(5rem);
     transition: 300ms ease;
-    -webkit-transform: translateX(4.8rem);
-    -moz-transform: translateX(4.8rem);
-    -ms-transform: translateX(4.8rem);
-    -o-transform: translateX(4.8rem);
+    -webkit-transform: translateX(5rem);
+    -moz-transform: translateX(5rem);
+    -ms-transform: translateX(5rem);
+    -o-transform: translateX(5rem);
 }
 
 .salononline_toggle_inactive {
@@ -308,7 +308,7 @@
 .salononline_toggle_btn_text {
     position: absolute;
     top: 0px;
-    height: 1.6rem;
+    height: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,13 +318,13 @@
 }
 
 .salononline_toggle_btn_text_active {
-    left: 0.5rem;
+    left: 0.6rem;
     opacity: 1;
     color: #000;
 }
 
 .salononline_toggle_btn_text_inactive {
-    right: 0.5rem;
+    right: 0.6rem;
     color: #fff;
 }
 
@@ -815,11 +815,6 @@
     color: var(--primary-text-light-color1);
 }
 
-.admin_dashboard_page_container.dark>div:nth-child(1)>div:nth-child(1)>div:nth-child(2) {
-    height: 1.8rem;
-    border: 1px solid var(--primary-text-light-color1);
-}
-
 .admin_dashboard_page_container.dark>div:nth-child(1)>div:nth-child(2)>div:nth-child(2) {
     background-color: var(--dark-mode-bg-color-4);
     border-bottom-left-radius: 12px;
@@ -979,6 +974,27 @@
         height: calc(25rem - 6rem) !important;
     }
 
+    .admin_dashboard_page_container::-webkit-scrollbar {
+        width: 6px !important;
+        height: 7px;
+    }
+
+    .admin_dashboard_page_container::-webkit-scrollbar-track {
+        background-color: transparent !important;
+    }
+
+    .admin_dashboard_page_container::-webkit-scrollbar-thumb {
+        background: transparent !important;
+    }
+
+    .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
+        background: transparent !important;
+    }
+
+    .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(1){
+        border: none;
+    }
+
     /* Dark Css Style */
     .admin_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -999,15 +1015,15 @@
     }
 
     .admin_dashboard_page_container::-webkit-scrollbar-track {
-        background-color: #fff !important;
+        background-color: transparent !important;
     }
 
     .admin_dashboard_page_container::-webkit-scrollbar-thumb {
-        background: var(--primary-bg-color3) !important;
+        background: transparent !important;
     }
 
     .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255) !important;
+        background: transparent !important;
     }
 
     .admin_dashboard_page_container>div:nth-child(2)>div:nth-child(1) {
