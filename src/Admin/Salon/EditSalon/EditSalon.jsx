@@ -619,7 +619,7 @@ const EditSalon = () => {
     }
 
     console.log(salondata)
-    // dispatch(adminEditSalonAction(salondata, navigate))
+    dispatch(adminEditSalonAction(salondata, navigate))
   }
 
   const adminEditSalon = useSelector(state => state.adminEditSalon)
