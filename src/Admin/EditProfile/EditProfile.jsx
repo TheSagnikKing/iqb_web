@@ -259,87 +259,71 @@ const EditProfile = () => {
                         </div>
                     </div>
                 </div>
-                {
-                    adminProfile?.AuthType != "google" ? (
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "1rem"
-                        }}>
-                            <p>Name</p>
-                            <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                    ) : (
-                        <div>
-                            <div>
-                                <p>Name</p>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
 
-                            <div onClick={() => setOpenModal(true)}>
-                                <p>Password</p>
-                                <input
-                                    type="text"
-                                    value="********"
-                                />
-                            </div>
-                            {
-                                openModal && <Modal setOpenModal={setOpenModal}>
-                                    <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
-                                        <h1>Change your password</h1>
-                                        <div>
-                                            <p>Old Password</p>
-                                            <div>
-                                                <input
-                                                    type={`${seePassword ? "text" : "password"}`}
-                                                    value={oldPassword}
-                                                    onChange={(e) => setOldPassword(e.target.value)}
-                                                />
-                                                <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-                                            </div>
-                                        </div>
+                <div>
+                    <div>
+                        <p>Name</p>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
 
-                                        <div>
-                                            <p>New Password</p>
-                                            <div>
-                                                <input
-                                                    type={`${seeOldPassword ? "text" : "password"}`}
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                />
-                                                <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <p>Confirm Password</p>
-                                            <div>
-                                                <input
-                                                    type={`${seeConfirmPassword ? "text" : "password"}`}
-                                                    value={confirmPassword}
-                                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                                />
-                                                <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <button onClick={updatePasswordHandler}>Update</button>
-                                        </div>
+                    <div onClick={() => setOpenModal(true)}>
+                        <p>Password</p>
+                        <input
+                            type="text"
+                            value="********"
+                        />
+                    </div>
+                    {
+                        openModal && <Modal setOpenModal={setOpenModal}>
+                            <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
+                                <h1>Change your password</h1>
+                                <div>
+                                    <p>Old Password</p>
+                                    <div>
+                                        <input
+                                            type={`${seePassword ? "text" : "password"}`}
+                                            value={oldPassword}
+                                            onChange={(e) => setOldPassword(e.target.value)}
+                                        />
+                                        <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                     </div>
-                                </Modal>
-                            }
-                        </div>
-                    )
-                }
+                                </div>
+
+                                <div>
+                                    <p>New Password</p>
+                                    <div>
+                                        <input
+                                            type={`${seeOldPassword ? "text" : "password"}`}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p>Confirm Password</p>
+                                    <div>
+                                        <input
+                                            type={`${seeConfirmPassword ? "text" : "password"}`}
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                        />
+                                        <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button onClick={updatePasswordHandler}>Update</button>
+                                </div>
+                            </div>
+                        </Modal>
+                    }
+                </div>
 
                 <div>
                     <div>

@@ -47,6 +47,7 @@ import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRout
 import Loader from './components/Loader/Loader';
 import Drop from './Admin/Demo/Drop';
 import Demo from './Admin/Demo/Demo';
+import Table from './Admin/Demo/Table';
 
 const App = () => {
 
@@ -105,6 +106,7 @@ const App = () => {
                 <Route path="/admin-queue" element={<AdminQueue />} />
                 <Route path="/drop" element={<Drop/>}/>
                 <Route path="/demo" element={<Demo/>}/>
+                <Route path='/table' element={<Table/>}/>
               </Route>
               
             </Route>

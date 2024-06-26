@@ -72,16 +72,17 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
 }
 
 
-export const changeAdminBarberClockStatusAction = (barberOnlinedata, setCheckMap, b, originalIsOnline) => async (dispatch) => {
+export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapClock, b, originalIsClock) => async (dispatch) => {
     try {
         dispatch({ type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_REQ })
 
-        const { data } = await api.post(`/api/barber/changeBarberClockedInStatus`, barberOnlinedata)
+        const { data } = await api.post(`/api/barber/changeBarberClockedInStatus`, barberClockdata)
 
         dispatch({
             type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_SUCCESS,
             payload: data
         })
+        
     } catch (error) {
 
         dispatch({
@@ -100,10 +101,10 @@ export const changeAdminBarberClockStatusAction = (barberOnlinedata, setCheckMap
         });
 
         // Revert to original state
-        setCheckMap((prevCheckMap) => {
+        setCheckMapClock((prevCheckMap) => {
             const newCheckMap = new Map(prevCheckMap);
             const key = `${b.salonId}-${b.barberId}`;
-            newCheckMap.set(key, originalIsOnline);
+            newCheckMap.set(key, originalIsClock);
             return newCheckMap;
         });
     }
