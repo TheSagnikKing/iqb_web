@@ -34,3 +34,37 @@
     height: 20px;
     width: 20px;
 }
+
+.drop_overflow{
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.drop_overflow>p{
+    width: 80rem ;
+    background-color: red;
+}
+
+.drop_overflow::-webkit-scrollbar {
+    width: 12px;
+    height: 6px;
+}
+
+.drop_overflow::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.drop_overflow::-webkit-scrollbar-thumb {
+    background: #0864e5; 
+}
+
+.drop_overflow::-webkit-scrollbar-thumb:hover {
+    background: #0c04f7; 
+}
+
+.drop_overflow::-webkit-scrollbar-corner {
+    background: transparent;
+}

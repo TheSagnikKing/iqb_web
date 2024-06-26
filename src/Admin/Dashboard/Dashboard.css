@@ -480,6 +480,10 @@
     background: rgb(0, 98, 255) !important;
 }
 
+.admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div ::-webkit-scrollbar-corner {
+    background: transparent !important;
+}
+
 .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(1) {
     height: 3.8rem;
     max-width: 100%;
@@ -532,6 +536,10 @@
     background: rgb(0, 98, 255) !important;
 }
 
+
+.admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(2)::-webkit-scrollbar-corner {
+    background: transparent !important;
+}
 
 .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(2)>div {
     min-height: 3.8rem;
@@ -721,6 +729,10 @@
 
 .queuelist_container::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
+}
+
+.queuelist_container::-webkit-scrollbar-corner {
+    background: transparent !important;
 }
 
 .queuelist_container>div p {
@@ -954,10 +966,6 @@
         margin-inline: 1%;
     }
 
-    .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(1)>div:nth-child(2) {
-        right: 1rem;
-    }
-
     .admin_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div {
         width: calc(100vw - 5rem);
     }
@@ -988,6 +996,10 @@
     }
 
     .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
+        background: transparent !important;
+    }
+
+    .admin_dashboard_page_container::-webkit-scrollbar-corner {
         background: transparent !important;
     }
 
@@ -1026,6 +1038,10 @@
         background: transparent !important;
     }
 
+    .admin_dashboard_page_container::-webkit-scrollbar-corner {
+        background: transparent !important;
+    }
+
     .admin_dashboard_page_container>div:nth-child(2)>div:nth-child(1) {
         display: none;
     }
@@ -1054,10 +1070,6 @@
     .admin_dashboard_page_container>div {
         width: 99%;
         margin-left: 1%;
-    }
-
-    .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(1)>div:nth-child(2) {
-        right: 1rem;
     }
 
     .admin_dashboard_page_container>div:nth-child(2)>div:nth-child(2)>a {
@@ -1101,6 +1113,10 @@
     .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
         background: rgb(0, 98, 255) !important;
     }
+   
+    .admin_dashboard_page_container ::-webkit-scrollbar-corner {
+        background: transparent !important;
+    }
 
     .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2) {
         width: 99%;
@@ -1143,6 +1159,10 @@
 
     .admin_dashboard_page_container::-webkit-scrollbar-thumb:hover {
         background: rgb(0, 98, 255) !important;
+    }
+
+    .admin_dashboard_page_container    ::-webkit-scrollbar-corner {
+        background: transparent !important;
     }
 
     .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2) {
