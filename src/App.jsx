@@ -140,4 +140,8 @@ const App = () => {
   )
 }
 
+
+// signup kore -> your requested is pending. -> frontend e connectSalon page arghya link kore email send korbe->
+// open kore o connect korbe -> connect hoegele oke dashboarde send korbo
+
 export default App
