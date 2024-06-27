@@ -138,6 +138,10 @@
     background: rgb(0, 98, 255) !important;
 }
 
+.salonadv_column::-webkit-scrollbar-corner{
+    background-color: transparent;
+}
+
 .salonadv_task {
     display: flex;
     flex-direction: column;
