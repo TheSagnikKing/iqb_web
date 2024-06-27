@@ -401,8 +401,9 @@ const Dashboard = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
               /> :
               <div>
-                <h1>Welcome Back Arghya</h1>
-
+                {
+                  barberName && <h1>Welcome Back, {truncateText(barberName, 11)}</h1>
+                }
               </div>
           }
 

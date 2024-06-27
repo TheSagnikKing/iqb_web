@@ -257,7 +257,10 @@ const Dashboard = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
               /> :
               <div>
-                <h1>Welcome Back, {adminName}</h1>
+                {
+                  adminName && <h1>Welcome Back, {truncateText(adminName, 11)}</h1>
+                }
+                
                 <div
                   style={{
                     background: togglecheck ? "limegreen" : "#000",
