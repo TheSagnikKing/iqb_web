@@ -38,6 +38,8 @@ const CustomerList = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  console.log(AllCustomerList)
+
   return (
     <div className={`customer_wrapper ${darkmodeOn && "dark"}`}>
       <div>

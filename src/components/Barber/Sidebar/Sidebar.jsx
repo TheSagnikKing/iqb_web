@@ -11,14 +11,15 @@ import { barberGetSalonLogoAction } from '../../../Redux/Barber/Actions/Dashboar
 const Sidebar = () => {
 
   const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (salonId != 0) {
+    if (barberProfile?.user[0]?.isApproved && salonId !== 0) {
       dispatch(barberGetSalonLogoAction(salonId))
     }
-  }, [salonId])
+  }, [salonId, barberProfile, dispatch])
 
   const barberGetSalonLogo = useSelector(state => state.barberGetSalonLogo)
 
@@ -88,7 +89,7 @@ const Sidebar = () => {
 
       <div className={`content ${darkmodeOn && "dark"}`}
         style={{
-          width: showSidebar ? "calc(100% - 21rem)" : "100%"
+          width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 7rem)"
         }}
       >
         <div>

@@ -44,57 +44,57 @@ const BarberList = () => {
 
   useEffect(() => {
     if (BarberList && BarberList.length > 0) {
-        const initialCheckMap = new Map();
-        BarberList.forEach(barber => {
-            const key = `${barber.salonId}-${barber.barberId}`;
-            initialCheckMap.set(key, barber.isOnline || false);
-        });
-        setCheckMap(initialCheckMap);
+      const initialCheckMap = new Map();
+      BarberList.forEach(barber => {
+        const key = `${barber.salonId}-${barber.barberId}`;
+        initialCheckMap.set(key, barber.isOnline || false);
+      });
+      setCheckMap(initialCheckMap);
 
-        const initialCheckMapClock = new Map();
-        BarberList.forEach(barber => {
-            const key = `${barber.salonId}-${barber.barberId}`;
-            initialCheckMapClock.set(key, barber.isClockedIn || false);
-        });
-        setCheckMapClock(initialCheckMapClock);
+      const initialCheckMapClock = new Map();
+      BarberList.forEach(barber => {
+        const key = `${barber.salonId}-${barber.barberId}`;
+        initialCheckMapClock.set(key, barber.isClockedIn || false);
+      });
+      setCheckMapClock(initialCheckMapClock);
     }
-}, [BarberList]);
+  }, [BarberList]);
 
   const toggleHandler = (b) => {
     setCheckMap(prevCheckMap => {
-        const newCheckMap = new Map(prevCheckMap);
-        const key = `${b.salonId}-${b.barberId}`;
-        const newIsOnline = !newCheckMap.get(key) || false; // Toggle the value
-        newCheckMap.set(key, newIsOnline);
-        return newCheckMap;
+      const newCheckMap = new Map(prevCheckMap);
+      const key = `${b.salonId}-${b.barberId}`;
+      const newIsOnline = !newCheckMap.get(key) || false; // Toggle the value
+      newCheckMap.set(key, newIsOnline);
+      return newCheckMap;
     });
 
     const barberOnlineData = {
-        barberId: b.barberId,
-        salonId: b.salonId,
-        isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
+      barberId: b.barberId,
+      salonId: b.salonId,
+      isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
     };
 
     dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
-}
+  }
 
-const toggleClockHandler = (b) => {
+  const toggleClockHandler = (b) => {
     setCheckMapClock(prevCheckMapClock => {
-        const newCheckMapClock = new Map(prevCheckMapClock);
-        const key = `${b.salonId}-${b.barberId}`;
-        const newIsClock = !newCheckMapClock.get(key) || false; // Toggle the value
-        newCheckMapClock.set(key, newIsClock);
-        return newCheckMapClock;
+      const newCheckMapClock = new Map(prevCheckMapClock);
+      const key = `${b.salonId}-${b.barberId}`;
+      const newIsClock = !newCheckMapClock.get(key) || false; // Toggle the value
+      newCheckMapClock.set(key, newIsClock);
+      return newCheckMapClock;
     });
 
     const barberClockData = {
-        barberId: b.barberId,
-        salonId: b.salonId,
-        isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
+      barberId: b.barberId,
+      salonId: b.salonId,
+      isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
     };
 
     dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock.get(`${b.salonId}-${b.barberId}`), setCheckMap));
-}
+  }
 
 
   const BarberListcontrollerRef = useRef(new AbortController());
@@ -176,6 +176,8 @@ const toggleClockHandler = (b) => {
 
   const darkmodeOn = darkMode === "On"
 
+  console.log(BarberList)
+
   return (
     <div className={`admin_barber_wrapper ${darkmodeOn && "dark"}`}>
       <div>
@@ -239,19 +241,6 @@ const toggleClockHandler = (b) => {
                       ></button>
 
                     </div>
-
-                    {/* <div
-                      style={{
-                        background: b?.isOnline ? "limegreen" : "#000",
-                      }}
-                    >
-                      <span className={`barberlist_toggle_btn_text ${b?.isOnline ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{b?.isOnline ? "Online" : "Offline"}</span>
-                      <button
-                        type="checkbox"
-                        className={`barberlist_dashboard_toggle_btn ${b?.isOnline ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
-                      ></button>
-
-                    </div> */}
                   </div>
 
                   <div>
@@ -304,7 +293,6 @@ const toggleClockHandler = (b) => {
             )
           )
         }
-
       </div>
     </div>
   )

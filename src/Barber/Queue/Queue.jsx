@@ -123,7 +123,7 @@ const Queue = () => {
                   <p>{b?.timeJoinedQ}</p>
                   <p>{b?.barberName}</p>
                   <p>{b?.qPosition}</p>
-                  <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading ? true : false}><ServeIcon /></button></div>
+                  <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}><ServeIcon /></button></div>
                   <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}><DeleteIcon /></button></div>
                 </div>
               ))}

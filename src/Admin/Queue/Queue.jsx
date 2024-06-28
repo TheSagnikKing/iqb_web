@@ -42,9 +42,52 @@ const Queue = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  console.log(queuelist)
-  console.log(getAllQueueListLoading)
-  console.log(getAllQueueListResolve)
+  const serveQHandler = (b) => {
+    const confirm = window.confirm("Are you Sure ?")
+
+    const queueData = {
+      barberEmail,
+      barberId: b.barberId,
+      salonId,
+      services: b.services,
+      _id: b._id
+    }
+
+    if (confirm) {
+      console.log(queueData)
+      // dispatch(adminServeQueueAction(queueData))
+    }
+  }
+
+
+  const cancelQHandler = (b) => {
+    const confirm = window.confirm("Are you Sure ?")
+
+    const queueData = {
+      barberEmail,
+      barberId: b.barberId,
+      salonId,
+      _id: b._id
+    }
+
+    if (confirm) {
+      console.log(queueData)
+      // dispatch(adminCancelQueueAction(queueData))
+    }
+
+  }
+
+  const adminServeQueue = useSelector(state => state.adminServeQueue)
+
+  const {
+    loading: adminServeQueueLoading
+  } = adminServeQueue
+
+  const adminCancelQueue = useSelector(state => state.adminCancelQueue)
+
+  const {
+    loading: adminCancelQueueLoading
+  } = adminCancelQueue
 
   return (
     <div className={`admin_queue_wrapper ${darkmodeOn && "dark"}`}>
@@ -78,8 +121,8 @@ const Queue = () => {
                       <p>{b.timeJoinedQ}</p>
                       <p>{b.barberName}</p>
                       <p>{b.qPosition}</p>
-                      <div><div><ServeIcon /></div></div>
-                      <div><div><DeleteIcon /></div></div>
+                      <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}><ServeIcon /></button></div>
+                      <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}><DeleteIcon /></button></div>
                     </div>
                   ))}
                 </div>

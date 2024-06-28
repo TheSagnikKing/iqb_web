@@ -9,11 +9,12 @@ export const getAdminBarberListReducer = (state = {}, action) => {
                 resolve: false
             };
         case GET_ADMIN_BARBERLIST_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
                 resolve: true,
-                ...action.payload
+                getAllBarbers: action.payload.getAllBarbers
             };
         case GET_ADMIN_BARBERLIST_FAIL:
             return {

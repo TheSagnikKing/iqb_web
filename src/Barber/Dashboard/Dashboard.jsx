@@ -28,10 +28,10 @@ const Dashboard = () => {
   const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata)
 
   useEffect(() => {
-    if (salonId == 0) {
+    if (barberProfile?.user[0]?.isApproved == false) {
       dispatch(connectSalonListAction())
     }
-  }, [salonId])
+  }, [barberProfile])
 
   const [loading, setLoading] = useState(false)
 
@@ -100,16 +100,14 @@ const Dashboard = () => {
   ];
 
 
-
-
   // let text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32."
 
   const truncateText = (text, charecterLimit) => {
-    if (text.length <= charecterLimit) {
+    if (text?.length <= charecterLimit) {
       return text;
     }
 
-    let truncatedText = text.slice(0, charecterLimit);
+    let truncatedText = text?.slice(0, charecterLimit);
 
     return truncatedText + '...'
   }
@@ -189,14 +187,14 @@ const Dashboard = () => {
   const {
     loading: barberConnectSalonLoading,
     resolve: barberConnectSalonResolve,
-    response: barberConnectSalonResponse
+    message: barberConnectSalonMessage
   } = barberConnectSalon
 
 
   const queuelistcontrollerRef = useRef(new AbortController());
 
   useEffect(() => {
-    if (salonId != 0) {
+    if (barberProfile?.user[0]?.isApproved) {
       const controller = new AbortController();
       queuelistcontrollerRef.current = controller;
 
@@ -247,7 +245,7 @@ const Dashboard = () => {
   const barberDashboardSalonInfoRef = useRef(new AbortController())
 
   useEffect(() => {
-    if (salonId) {
+    if (barberProfile?.user[0]?.isApproved && salonId != 0) {
       const controller = new AbortController();
       barberDashboardSalonInfoRef.current = controller;
 
@@ -260,7 +258,7 @@ const Dashboard = () => {
       };
     }
 
-  }, [salonId, dispatch]);
+  }, [salonId, dispatch, barberProfile]);
 
   const barberDashboardSalonInfo = useSelector(state => state.barberDashboardSalonInfo)
 
@@ -284,10 +282,10 @@ const Dashboard = () => {
   //Salon Images
 
   useEffect(() => {
-    if (salonId) {
+    if (barberProfile?.user[0]?.isApproved && salonId != 0) {
       dispatch(getAdminSalonImagesAction(salonId))
     }
-  }, [salonId])
+  }, [salonId,barberProfile])
 
   const getAdminSalonImages = useSelector(state => state.getAdminSalonImages)
 
@@ -299,11 +297,16 @@ const Dashboard = () => {
 
   const [openModal, setOpenModal] = useState(false)
 
+  console.log(barberConnectSalonMessage)
+
   return (
-    salonId == 0 ? <>
+    barberProfile?.user[0]?.isApproved == false ? <>
       <div className={`barber_connect_salon_container ${darkmodeOn && "dark"}`}>
         <h3>Connect To Your Salon</h3>
-        <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
+        {
+          barberConnectSalonMessage ? 
+          <div>{barberConnectSalonMessage}</div> :
+          <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
           <div className={`barber_connect_salon_list ${darkmodeOn && "dark"}`}>
             <h4>Choose Your Salon</h4>
             <div>
@@ -387,6 +390,8 @@ const Dashboard = () => {
 
           </div>
         </div>
+        }
+        
       </div>
     </> : <>
       <div className={`barber_dashboard_page_container ${darkmodeOn && "dark"}`}>
@@ -401,9 +406,7 @@ const Dashboard = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
               /> :
               <div>
-                {
-                  barberName && <h1>Welcome Back, {truncateText(barberName, 11)}</h1>
-                }
+                <h1 style={{visibility: barberName == "" && "hidden"}}>Welcome Back, {truncateText(barberName, 11)}</h1>
               </div>
           }
 
