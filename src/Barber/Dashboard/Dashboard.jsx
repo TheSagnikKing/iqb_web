@@ -304,8 +304,13 @@ const Dashboard = () => {
       <div className={`barber_connect_salon_container ${darkmodeOn && "dark"}`}>
         <h3>Connect To Your Salon</h3>
         {
-          barberConnectSalonMessage ? 
-          <div>{barberConnectSalonMessage}</div> :
+          barberProfile?.user[0]?.approvePendingMessage ? 
+          <div className='barber_approve_container'>
+            <div>
+              <h2>{barberProfile?.user[0]?.approvePendingMessage}</h2>
+              <button onClick={() => window.location.reload()}>Reload</button>
+            </div>
+          </div> :
           <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
           <div className={`barber_connect_salon_list ${darkmodeOn && "dark"}`}>
             <h4>Choose Your Salon</h4>
