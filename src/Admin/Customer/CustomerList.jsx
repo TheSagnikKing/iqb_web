@@ -5,6 +5,8 @@ import Skeleton from 'react-loading-skeleton'
 import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
+import api from '../../Redux/api/Api'
+import { GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants'
 
 const CustomerList = () => {
 
@@ -31,13 +33,58 @@ const CustomerList = () => {
   const {
     loading: adminGetAllCustomerListLoading,
     resolve: adminGetAllCustomerListResolve,
-    getAllCustomers: AllCustomerList
+    getAllCustomers: AllCustomerList,
+    currentPage,
+    totalPages
   } = adminGetAllCustomerList
 
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
 
+  const [search, setSearch] = useState("")
+
+  const searchCustomerhandler = async () => {
+    const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`)
+
+    dispatch({
+      type: GET_ALL_CUSTOMERLIST_SUCCESS,
+      payload: data
+    })
+  }
+
+  const [page, setPage] = useState(currentPage)
+
+  const paginationRightHandler = async () => {
+    try {
+      const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
+      dispatch({
+        type: GET_ALL_CUSTOMERLIST_SUCCESS,
+        payload: data,
+      });
+      setPage(prevPage => prevPage + 1);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+    }
+  };
+
+  const paginationLeftHandler = async () => {
+    if (page > 1) {
+      try {
+        const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
+        dispatch({
+          type: GET_ALL_CUSTOMERLIST_SUCCESS,
+          payload: data,
+        });
+        setPage(prevPage => prevPage - 1);
+      } catch (error) {
+        console.error('Error fetching customers:', error);
+      }
+    }
+  };
+
+  console.log(page)
+  console.log(totalPages)
   return (
     <div className={`customer_wrapper ${darkmodeOn && "dark"}`}>
       <div>
@@ -48,7 +95,15 @@ const CustomerList = () => {
             <input
               type="text"
               placeholder='Search Customer'
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
+          </div>
+          <div
+            className={`customer_send_btn ${darkmodeOn && "dark"}`}
+            style={{ background: "var(--primary-bg-color3)", color: "#fff" }}
+            onClick={searchCustomerhandler}
+          >
             <div><SearchIcon /></div>
           </div>
 
@@ -75,7 +130,7 @@ const CustomerList = () => {
           adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </div>
           ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
             <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
@@ -146,8 +201,8 @@ const CustomerList = () => {
 
       <div className='customer_pagination_wrapper'>
         <div>
-          <div><LeftArrow /></div>
-          <div><RightArrow /></div>
+          <div onClick={paginationLeftHandler} disabled={page == currentPage}><LeftArrow /></div>
+          <div onClick={paginationRightHandler} disabled={page == totalPages}><RightArrow /></div>
         </div>
       </div>
     </div>

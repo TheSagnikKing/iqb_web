@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./BarberList.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, Notificationicon } from '../../../icons'
+import { DeleteIcon, EditIcon, EmailIcon, Notificationicon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
@@ -154,7 +154,6 @@ const BarberList = () => {
     response: approvebarber
   } = adminApproveBarber
 
-  const [selectedAllBarberNotification, setSelectedAllBarberNotification] = useState([])
   const [allCheckbox, setAllCheckbox] = useState(false)
 
   const selectAllBarbers = () => {
@@ -171,20 +170,62 @@ const BarberList = () => {
     });
   };
 
-
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
 
-  console.log(BarberList)
+  const [checkAllBarbers, setCheckAllBarbers] = useState(false)
+  const [checkedBarbers, setCheckedBarbers] = useState({});
+  const [checkedEmails, setCheckedEmails] = useState([]);
+
+  const barberEmailCheckedHandler = (barber) => {
+    const isChecked = !checkedBarbers[barber._id];
+    setCheckedBarbers(prevState => ({
+      ...prevState,
+      [barber._id]: isChecked,
+    }));
+
+    if (isChecked) {
+      setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
+    } else {
+      setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
+    }
+  };
+
+  const checkAllBarbersHandler = (e) => {
+    setCheckAllBarbers((prev) => {
+      if (!prev) {
+        const barberEmails = BarberList.map((b) => b.email)
+        const allCheckedBarbers = BarberList.reduce((acc, barber) => {
+          acc[barber._id] = true;
+          return acc;
+        }, {});
+        setCheckedEmails(barberEmails)
+        setCheckedBarbers(allCheckedBarbers);
+      } else {
+        setCheckedEmails([])
+        setCheckedBarbers({});
+      }
+
+      return !prev
+    })
+  }
+
+
+  const sendEmailNavigate = () => {
+    navigate("/admin-barber/send-email", {state:checkedEmails})
+  }
 
   return (
     <div className={`admin_barber_wrapper ${darkmodeOn && "dark"}`}>
       <div>
         <p>Barber List</p>
         <div>
+          <button onClick={sendEmailNavigate}>
+            <div><EmailIcon /></div>
+          </button>
+
           <button onClick={() => { }}>
-            <p>Send</p>
             <div><Notificationicon /></div>
           </button>
 
@@ -208,8 +249,8 @@ const BarberList = () => {
                 <input
                   type="checkbox"
                   style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
-                  onClick={() => selectAllBarbers()}
-                  checked={allCheckbox}
+                  onChange={checkAllBarbersHandler}
+                  checked={checkAllBarbers}
 
                 />
                 <p>Barber Name</p>
@@ -223,6 +264,8 @@ const BarberList = () => {
                   <input
                     type="checkbox"
                     style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                    checked={checkedBarbers[b._id] || false}
+                    onChange={() => barberEmailCheckedHandler(b)}
                   />
                   <p>{b.name}</p>
                   <p>{b.email}</p>

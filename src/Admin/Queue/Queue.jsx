@@ -12,6 +12,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 const Queue = () => {
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
 
   const dispatch = useDispatch()
 
@@ -46,7 +47,7 @@ const Queue = () => {
     const confirm = window.confirm("Are you Sure ?")
 
     const queueData = {
-      barberEmail,
+      adminEmail,
       barberId: b.barberId,
       salonId,
       services: b.services,
@@ -55,7 +56,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      // dispatch(adminServeQueueAction(queueData))
+      dispatch(adminServeQueueAction(queueData,salonId))
     }
   }
 
@@ -64,7 +65,7 @@ const Queue = () => {
     const confirm = window.confirm("Are you Sure ?")
 
     const queueData = {
-      barberEmail,
+      adminEmail,
       barberId: b.barberId,
       salonId,
       _id: b._id
@@ -72,7 +73,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      // dispatch(adminCancelQueueAction(queueData))
+      dispatch(adminCancelQueueAction(queueData,salonId))
     }
 
   }

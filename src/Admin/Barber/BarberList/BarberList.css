@@ -45,6 +45,11 @@
     font-size: 1.4rem;
 }
 
+.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(1),
+.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(2){
+    width: 5rem;
+}
+
 .admin_barber_wrapper>div:nth-child(1)>div>button>div{
     display: flex;
     justify-content: center;

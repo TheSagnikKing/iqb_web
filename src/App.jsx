@@ -30,7 +30,7 @@ const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfil
 const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
 const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/SalonAppointmentSettings/SalonAppointmentSettings"))
-
+const AdminBarberSendEmail = React.lazy(() => import("./Admin/Barber/SendEmail/SendEmail"))
 const AdminMobileSidebar = React.lazy(() => import("./components/Admin/MobileSidebar/MobileSidebar"))
 
 const BarberSidebar = React.lazy(() => import("./components/Barber/Sidebar/Sidebar"))
@@ -101,6 +101,7 @@ const App = () => {
                 <Route path="/admin-barber" element={<AdminBarberList />} />
                 <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
                 <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
+                <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail/>}/>
                 <Route path="/admin-customer" element={<AdminCustomerList />} />
                 <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                 <Route path="/admin-queue" element={<AdminQueue />} />

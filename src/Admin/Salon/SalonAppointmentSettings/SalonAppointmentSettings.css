@@ -71,11 +71,6 @@
     -o-border-radius: 1rem;
     padding-inline: 1rem;
     font-size: 1.6rem;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_appointment_content>div:nth-child(1)>div>input:focus{
@@ -100,11 +95,6 @@
     flex-direction: column;
     gap: 1rem;
     overflow-y: scroll;
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_appointment_content>div:nth-child(1)>div>div>p{
@@ -161,11 +151,6 @@
 
 .salon_appointment_content.dark>div:nth-child(1){
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>p{
@@ -175,20 +160,10 @@
 .salon_appointment_content.dark>div:nth-child(1)>div>input{
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>div{
     background-color: var(--dark-mode-bg-color-4);
-    transition: 300ms ease;
-    -webkit-transition: 300ms ease;
-    -moz-transition: 300ms ease;
-    -ms-transition: 300ms ease;
-    -o-transition: 300ms ease;
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>div p{

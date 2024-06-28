@@ -1,8 +1,9 @@
 import toast from "react-hot-toast"
 import { ADMIN_BARBER_SERVED_QUEUE_REQ,ADMIN_BARBER_SERVED_QUEUE_SUCCESS,ADMIN_BARBER_SERVED_QUEUE_FAIL, ADMIN_CANCEL_QUEUE_REQ, ADMIN_CANCEL_QUEUE_SUCCESS, ADMIN_CANCEL_QUEUE_FAIL } from "../Constants/constants"
 import api from "../../api/Api"
+import { getAllQueueListAction } from "./DashboardAction"
 
-export const adminServeQueueAction = (barberqueuedata) => async (dispatch) => {
+export const adminServeQueueAction = (barberqueuedata,salonId) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
@@ -12,6 +13,8 @@ export const adminServeQueueAction = (barberqueuedata) => async (dispatch) => {
             type: ADMIN_BARBER_SERVED_QUEUE_SUCCESS,
             payload: data
         })
+
+        dispatch(getAllQueueListAction(salonId));
 
     } catch (error) {
         dispatch({
@@ -31,7 +34,7 @@ export const adminServeQueueAction = (barberqueuedata) => async (dispatch) => {
     }
 }
 
-export const adminCancelQueueAction = (canceldata) => async (dispatch) => {
+export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CANCEL_QUEUE_REQ })
 
@@ -41,6 +44,8 @@ export const adminCancelQueueAction = (canceldata) => async (dispatch) => {
             type: ADMIN_CANCEL_QUEUE_SUCCESS,
             payload: data
         })
+
+        dispatch(getAllQueueListAction(salonId));
 
     } catch (error) {
         dispatch({

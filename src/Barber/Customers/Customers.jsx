@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./Customers.css"
 import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
-import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction'
+import { barberGetAllCustomerListAction } from "../../Redux/Barber/Actions/BarberCustomersAction"
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const CustomerList = () => {
 
   const currentsalonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata)
+
   const dispatch = useDispatch()
 
   const CustomerListControllerRef = useRef(new AbortController());
@@ -17,22 +19,22 @@ const CustomerList = () => {
     const controller = new AbortController();
     CustomerListControllerRef.current = controller;
 
-    dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
+    dispatch(barberGetAllCustomerListAction(currentsalonId, barberProfile?.user[0]?.isApproved, controller.signal));
 
     return () => {
       if (CustomerListControllerRef.current) {
         CustomerListControllerRef.current.abort();
       }
     };
-  }, [dispatch]);
+  }, [dispatch,barberProfile]);
 
-  const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList)
+  const barberGetAllCustomerList = useSelector(state => state.barberGetAllCustomerList)
 
   const {
-    loading: adminGetAllCustomerListLoading,
-    resolve: adminGetAllCustomerListResolve,
+    loading: barberGetAllCustomerListLoading,
+    resolve: barberGetAllCustomerListResolve,
     getAllCustomers: AllCustomerList
-  } = adminGetAllCustomerList
+  } = barberGetAllCustomerList
 
   const darkMode = useSelector(darkmodeSelector)
 
@@ -55,17 +57,14 @@ const CustomerList = () => {
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><Notificationicon /></div>
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><EmailIcon /></div>
           </div>
 
           <div className={`customer_send_btn ${darkmodeOn && "dark"}`}>
-            <p>Send</p>
             <div><MessageIcon /></div>
           </div>
 
@@ -77,12 +76,12 @@ const CustomerList = () => {
 
       <div className={`customer_content_wrapper ${darkmodeOn && "dark"}`}>
         {
-          adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve ? (
+          barberGetAllCustomerListLoading && !barberGetAllCustomerListResolve ? (
             <div className='customer_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/>
             </div>
-          ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
+          ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
             <div className={`customer_content_body ${darkmodeOn && "dark"}`}>
               <div>
                 <input
@@ -108,12 +107,12 @@ const CustomerList = () => {
                 </div>
               ))}
             </div>
-          ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
+          ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
             <div className={`customer_content_body_error ${darkmodeOn && "dark"}`}>
               <p style={{ margin: "2rem" }}>Customers not available</p>
             </div>
           ) : (
-            !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve && (
+            !barberGetAllCustomerListLoading && !barberGetAllCustomerListResolve && (
               <div className={`customer_content_body_error ${darkmodeOn && "dark"}`}>
                 <p style={{ margin: "2rem" }}>Customers not available</p>
               </div>

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { ADMIN_ALL_SALON_SERVICES_FAIL, ADMIN_ALL_SALON_SERVICES_REQ, ADMIN_ALL_SALON_SERVICES_SUCCESS, ADMIN_APPROVE_BARBER_FAIL, ADMIN_APPROVE_BARBER_REQ, ADMIN_APPROVE_BARBER_SUCCESS, ADMIN_CREATE_BARBER_FAIL, ADMIN_CREATE_BARBER_REQ, ADMIN_CREATE_BARBER_SUCCESS, ADMIN_DELETE_BARBER_FAIL, ADMIN_DELETE_BARBER_REQ, ADMIN_DELETE_BARBER_SUCCESS, ADMIN_UPDATE_BARBER_FAIL, ADMIN_UPDATE_BARBER_REQ, ADMIN_UPDATE_BARBER_SUCCESS, CHANGE_ADMIN_BARBER_CLOCKSTATUS_FAIL, CHANGE_ADMIN_BARBER_CLOCKSTATUS_REQ, CHANGE_ADMIN_BARBER_CLOCKSTATUS_SUCCESS, CHANGE_ADMIN_BARBER_ONLINESTATUS_FAIL, CHANGE_ADMIN_BARBER_ONLINESTATUS_REQ, CHANGE_ADMIN_BARBER_ONLINESTATUS_SUCCESS, GET_ADMIN_BARBERLIST_FAIL, GET_ADMIN_BARBERLIST_REQ, GET_ADMIN_BARBERLIST_SUCCESS } from "../Constants/constants";
+import { ADMIN_ALL_SALON_SERVICES_FAIL, ADMIN_ALL_SALON_SERVICES_REQ, ADMIN_ALL_SALON_SERVICES_SUCCESS, ADMIN_APPROVE_BARBER_FAIL, ADMIN_APPROVE_BARBER_REQ, ADMIN_APPROVE_BARBER_SUCCESS, ADMIN_CREATE_BARBER_FAIL, ADMIN_CREATE_BARBER_REQ, ADMIN_CREATE_BARBER_SUCCESS, ADMIN_DELETE_BARBER_FAIL, ADMIN_DELETE_BARBER_REQ, ADMIN_DELETE_BARBER_SUCCESS, ADMIN_SEND_BARBER_MAIL_FAIL, ADMIN_SEND_BARBER_MAIL_REQ, ADMIN_SEND_BARBER_MAIL_SUCCESS, ADMIN_UPDATE_BARBER_FAIL, ADMIN_UPDATE_BARBER_REQ, ADMIN_UPDATE_BARBER_SUCCESS, CHANGE_ADMIN_BARBER_CLOCKSTATUS_FAIL, CHANGE_ADMIN_BARBER_CLOCKSTATUS_REQ, CHANGE_ADMIN_BARBER_CLOCKSTATUS_SUCCESS, CHANGE_ADMIN_BARBER_ONLINESTATUS_FAIL, CHANGE_ADMIN_BARBER_ONLINESTATUS_REQ, CHANGE_ADMIN_BARBER_ONLINESTATUS_SUCCESS, GET_ADMIN_BARBERLIST_FAIL, GET_ADMIN_BARBERLIST_REQ, GET_ADMIN_BARBERLIST_SUCCESS } from "../Constants/constants";
 
 export const getAdminBarberListAction = (salonId, signal) => async (dispatch) => {
     try {
@@ -284,4 +284,47 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
             },
         });
     }
+}
+
+
+export const adminSendBarberEmailAction = (maildata,setSubject,setMessage) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_SEND_BARBER_MAIL_REQ })
+
+        const { data } = await api.post(`/api/bulkMessageAndEmails/sendBulkEmails`, maildata)
+
+        dispatch({
+            type: ADMIN_SEND_BARBER_MAIL_SUCCESS,
+            payload: data
+        })
+
+        setSubject("")
+        setMessage("")
+        toast.success(data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    } catch (error) {
+
+        dispatch({
+            type: ADMIN_SEND_BARBER_MAIL_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+
 }
