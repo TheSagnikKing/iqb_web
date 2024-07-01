@@ -21,11 +21,11 @@ const SendEmail = () => {
         const maildata = {
             subject,
             message,
-            role:"Barber",
+            role: "Barber",
             recipientEmails
         }
         console.log(maildata)
-        dispatch(adminSendBarberEmailAction(maildata,setSubject,setMessage))
+        dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage))
 
     }
 
@@ -40,6 +40,24 @@ const SendEmail = () => {
             <p>Send Email</p>
             <div>
                 <div className='send_email_content'>
+                    <div>
+                        <p>From</p>
+                        <input
+                            type="text"
+                            value={"support@iqueuebarbers.com"}
+                        />
+                    </div>
+
+                    <div>
+                        <p>To</p>
+                        <div>
+                            <p>
+                            {
+                                recipientEmails?.map((e) => recipientEmails.length == 1 ? e : e + ", " )
+                            }
+                            </p>
+                        </div>
+                    </div>
                     <div>
                         <p>Subject</p>
                         <input
