@@ -91,11 +91,12 @@ export const getAllQueueListReducer = (state = {}, action) => {
                 resolve: false
             };
         case GET_ALL_QUEUELIST_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
                 resolve: true,
-                ...action.payload
+                queueList: action.payload.response
             };
         case GET_ALL_QUEUELIST_FAIL:
             return {
@@ -103,6 +104,16 @@ export const getAllQueueListReducer = (state = {}, action) => {
                 loading: false,
                 resolve: false,
                 error: action.payload
+            };
+
+        case "ADMIN_FILTER_BARBER_QUEUELIST":
+            const customerEmail = action.payload;
+            const filteredQueueList = state.queueList?.filter((q) => q.customerEmail !== customerEmail);
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                queueList: filteredQueueList
             };
         default:
             return state;

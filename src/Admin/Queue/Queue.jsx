@@ -36,7 +36,7 @@ const Queue = () => {
   const {
     loading: getAllQueueListLoading,
     resolve: getAllQueueListResolve,
-    response: queuelist
+    queueList: queuelist
   } = getAllQueueList
 
   const darkMode = useSelector(darkmodeSelector)
@@ -56,7 +56,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      dispatch(adminServeQueueAction(queueData, salonId))
+      dispatch(adminServeQueueAction(queueData, b.customerEmail))
     }
   }
 
@@ -73,7 +73,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      dispatch(adminCancelQueueAction(queueData, salonId))
+      dispatch(adminCancelQueueAction(queueData, b.customerEmail))
     }
 
   }

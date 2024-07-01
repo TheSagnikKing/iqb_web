@@ -13,7 +13,7 @@ export const getBarberQueueListReducer = (state = {}, action) => {
                 ...state,
                 loading: false,
                 resolve: true,
-                ...action.payload
+                queueList: action.payload.queueList
             };
         case GET_QUEUELIST_BARBERID_FAIL:
             return {
@@ -21,6 +21,15 @@ export const getBarberQueueListReducer = (state = {}, action) => {
                 loading: false,
                 resolve: false,
                 error: action.payload
+            };
+        case "FILTER_BARBER_QUEUELIST":
+            const customerEmail = action.payload;
+            const filteredQueueList = state.queueList?.filter((q) => q.customerEmail !== customerEmail);
+            return {
+                ...state,
+                loading: false,
+                resolve: true,
+                queueList: filteredQueueList
             };
         default:
             return state;

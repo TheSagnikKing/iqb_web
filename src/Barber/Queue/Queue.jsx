@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction'
+import { barberCancelQueueAction, barberServeQueueAction, getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction'
 
 const Queue = () => {
 
@@ -57,8 +57,7 @@ const Queue = () => {
     }
 
     if (confirm) {
-      console.log(queueData)
-      dispatch(adminServeQueueAction(queueData))
+      dispatch(barberServeQueueAction(queueData, b.customerEmail))
     }
   }
 
@@ -75,7 +74,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      dispatch(adminCancelQueueAction(queueData))
+      dispatch(barberCancelQueueAction(queueData, b.customerEmail))
     }
 
   }
@@ -100,7 +99,7 @@ const Queue = () => {
 
       <div className={`barber_queue_content_wrapper ${darkmodeOn && "dark"}`}>
 
-        {/* {
+        {
           getBarberQueueListLoading && !getBarberQueueListResolve ? (
             <div className='barber_queue_content_body'>
               <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -139,28 +138,7 @@ const Queue = () => {
               </div>
             )
           )
-        } */}
-
-        <div className={`barber_queue_content_body ${darkmodeOn && "dark"}`}>
-          <div>
-            <p>Name</p>
-            <p>Time Joined Q</p>
-            <p>Barber Name</p>
-            <p>Q Postion</p>
-            <p>Serve</p>
-            <p>Cancel</p>
-          </div>
-
-            <div className={`barber_queue_content_body_item ${darkmodeOn && "dark"}`}>
-              <p>b?.name</p>
-              <p>b?.timeJoinedQ</p>
-              <p>b?.barberName</p>
-              <p>b?.qPosition</p>
-              <div><button><ServeIcon /></button></div>
-              <div><button><DeleteIcon /></button></div>
-            </div>
-
-        </div>
+        }
 
       </div>
     </div>
