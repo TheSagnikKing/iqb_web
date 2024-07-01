@@ -58,6 +58,8 @@ const Calender = ({ value, setCurrentDate }) => {
           const date = index + 1;
           const isCurrentDate = date === value.getDate();
 
+          // console.log(value.getDate())
+
           // these code is if i want to display only specific dates and disable all other dates then these is the code--------IMPORTANT
           // Check if the clicked date is one of the allowed dates (21, 22, 23)
           // const isSpecialDate = [21, 22, 23].includes(date);
