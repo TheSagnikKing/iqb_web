@@ -154,7 +154,6 @@
 }
 
 .content {
-  /* width: calc(100vw - 28rem) !important; */
   height: 100vh;
   color: var(--primary-text-light-color2);
   padding-inline: 3rem;

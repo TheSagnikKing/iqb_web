@@ -12,7 +12,8 @@
     justify-content: center;
     text-align: center;
     gap: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    height: 95%;
 }
 .calender-header>div{
     height: 2.5rem;
@@ -76,4 +77,25 @@
 .calender-header.dark>div:nth-child(3):hover{
     background-color: var(--dark-mode-bg-color-1);
     color: var(--primary-text-light-color1);
+}
+
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .calender-box{
+        height: 30rem;
+    }
+
+    .calender-header{
+        height: 100%;
+    }
+}
+
+@media screen and (min-width:431px) and (max-width:768px) {
+    .calender-box{
+        height: 30rem;
+    }
+
+    .calender-header{
+        height: 100%;
+    }
 }

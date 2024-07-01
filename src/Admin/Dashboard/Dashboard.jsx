@@ -166,7 +166,7 @@ const Dashboard = () => {
   const {
     loading: getAllQueueListLoading,
     resolve: getAllQueueListResolve,
-    response: queuelist
+    queueList: queuelist
   } = getAllQueueList
 
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -213,11 +213,11 @@ const Dashboard = () => {
       setSalonChar(250);
     } else if (window.matchMedia("(min-width: 0px) and (max-width: 430px)").matches) {
       setSalonChar(150);
-    }else if (window.matchMedia("(min-width: 431px) and (max-width: 768px)").matches) {
+    } else if (window.matchMedia("(min-width: 431px) and (max-width: 768px)").matches) {
       setSalonChar(220);
-    }else if (window.matchMedia("(min-width: 769px) and (max-width: 1140px)").matches) {
+    } else if (window.matchMedia("(min-width: 769px) and (max-width: 1140px)").matches) {
       setSalonChar(280);
-    }else {
+    } else {
       setSalonChar(null); // or some other default value if needed
     }
   };
@@ -304,7 +304,7 @@ const Dashboard = () => {
           <div>
             <div>Salon Information</div>
             {
-              loading ?
+              adminGetDefaultSalonLoading ?
                 <div>
                   <Skeleton count={1} height={"3.8rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
@@ -324,114 +324,50 @@ const Dashboard = () => {
         </div>
         <div>
           <div>page</div>
-          <div>
-            <div>
-              <p>Queue List</p>
-              <div>
-                <Link to="/admin-queue" style={{ fontSize: "1.6rem", color: "var(--primary-text-light-color1)", textDecoration: "none" }}>See All</Link>
-              </div>
-            </div>
+          {
+            getAllQueueListLoading && !getAllQueueListResolve ?
+              <div className='dashboard_queuelist_loader_container'>
+                <div><p>QueueList</p></div>
+                <div><Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /></div>
+              </div> :
+              !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
+                <div className='dashboard_queuelist_container'>
+                  <div>
+                    <p>Customer</p>
+                    <p>Barber</p>
+                    <p>Q Position</p>
+                    <p>Services</p>
+                  </div>
 
-            {
-              getAllQueueListLoading && !getAllQueueListResolve ?
-                <div>
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                </div> :
-                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-                  <>
-                    <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
-                      <div>
-                        <p>Customer Name</p>
-                        <p>Barber Name</p>
-                        <p>Q Position</p>
-                        <p>Services</p>
+                  {
+                    queuelist?.map((q) => (
+                      <div key={q._id}>
+                        <p>{q.name}</p>
+                        <p>{q.barberName}</p>
+                        <p>{q.qPosition}</p>
+                        <p>{q.services?.map((s) => s.serviceName)}</p>
                       </div>
+                    ))
+                  }
+                </div> :
+                !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
+                  <div className='dashboard_queuelist_error_container'>
+                    <div><p>QueueList</p></div>
+                    <div><p>No queuelist available</p></div>
+                  </div> :
+                  !getAllQueueListLoading && !getAllQueueListResolve &&
 
-                      {
-                        queuelist?.map((q) => (
-                          <div key={q._id}>
-                            <p>{q.name}</p>
-                            <p>{q.barberName}</p>
-                            <p>{q.qPosition}</p>
-                            <p>{q.services?.map((s) => s.serviceName)}</p>
-                          </div>
-                        ))
-                      }
+                  <div className='dashboard_queuelist_error_container'>
+                    <div><p>QueueList</p></div>
+                    <div><p>No queuelist available</p></div>
+                  </div>
+          }
 
-                    </div>
-                  </> :
-                  !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
-                    !getAllQueueListLoading && !getAllQueueListResolve &&
-                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
-            }
-
-
-            {/* <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
-              <div>
-                <p>Customer Name</p>
-                <p>Barber Name</p>
-                <p>Q Position</p>
-                <p>Services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>{truncateText("Arghya Test Barber 1",20)}</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-              <div>
-                <p>q.name</p>
-                <p>q.barberName</p>
-                <p>q.qPosition</p>
-                <p>q.services</p>
-              </div>
-
-            </div> */}
-
-          </div>
         </div>
 
         <div
