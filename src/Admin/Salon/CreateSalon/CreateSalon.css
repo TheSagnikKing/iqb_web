@@ -1271,6 +1271,9 @@
     -o-border-radius: 1rem;
 }
 
+.salontype_input{
+    caret-color: transparent;
+}
 
 
 /* Dark Mode Css */

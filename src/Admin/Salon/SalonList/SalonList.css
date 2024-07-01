@@ -26,10 +26,11 @@
     width: 9rem;
     height: 100%;
     gap: 0rem;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
     border: none;
     border-radius: 6px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -40,6 +41,7 @@
 .salon_wrapper>div:nth-child(1)>button>p{
     font-weight: 500;
     font-size: 1.4rem;
+    color: var(--primary-text-light-color1);
 }
 
 .salon_wrapper>div:nth-child(1)>button>div{
@@ -61,7 +63,7 @@
 
 .salon_content_body{
     height: calc(88vh - 6rem);
-    width: 100%;
+    width: 100.5%;
     overflow-y: scroll;
 }
 
@@ -100,6 +102,7 @@
     z-index: 3;
     background-color: var(--primary-bg-color3);
     border-top-left-radius: 1.7rem;
+    border-top-right-radius: 1.7rem;
 }
 
 .salon_content_body>div:nth-child(1)>p{

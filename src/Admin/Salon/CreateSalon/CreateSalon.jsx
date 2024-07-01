@@ -600,7 +600,7 @@ const CreateSalon = () => {
       return { _id, blobUrl, name: file.name };
     });
 
-    setSalonImages(urls.filter((url) => url !== null));
+    setSalonImages([...salonImages, ...urls]);
   };
 
   const [mobilesalonlogo, setMobileSalonlogo] = useState("")
@@ -945,6 +945,24 @@ const CreateSalon = () => {
 
   const darkmodeOn = darkMode === "On"
 
+
+  const addservicedropHandler = () => {
+    if (country == "") {
+      toast.error("Please select a country", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      setOpenServices((prev) => !prev)
+    }
+
+  }
+
   return (
     <div className={`create_salon_wrapper ${darkmodeOn && "dark"}`}>
       <p>Create Salon</p>
@@ -1241,6 +1259,7 @@ const CreateSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               ref={salonTypeIconRef}
+              className='salontype_input'
             />
 
             {salonTypeDrop && <div ref={salonTypeDropRef}>
@@ -1266,7 +1285,7 @@ const CreateSalon = () => {
 
           <div className='add_services_drop'>
             <p>Add Your Services</p>
-            <button onClick={() => setOpenServices((prev) => !prev)} disabled={country == ""}>{openServices ? "-" : "+"}</button>
+            <button onClick={addservicedropHandler}>{openServices ? "-" : "+"}</button>
           </div>
 
           {

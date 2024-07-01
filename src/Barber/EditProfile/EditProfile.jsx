@@ -291,11 +291,11 @@ const EditProfile = () => {
                                     <p>Old Password</p>
                                     <div>
                                         <input
-                                            type={`${seePassword ? "text" : "password"}`}
+                                            type={`${seeOldPassword ? "text" : "password"}`}
                                             value={oldPassword}
                                             onChange={(e) => setOldPassword(e.target.value)}
                                         />
-                                        <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                     </div>
                                 </div>
 

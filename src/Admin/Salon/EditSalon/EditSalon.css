@@ -1309,6 +1309,11 @@
     -o-border-radius: 1rem;
 }
 
+.salontype_input{
+    caret-color: transparent;
+}
+
+
 /* Dark Mode Css */
 
 .edit_salon_wrapper.dark>p:nth-child(1) {

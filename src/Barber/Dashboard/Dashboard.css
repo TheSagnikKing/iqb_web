@@ -1062,11 +1062,12 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     background-color: var(--primary-bg-light-color1);
+    caret-color: transparent;
 }
 
 
 .barber_salon_info_container>div>textarea:focus {
-    outline: 2px solid var(--primary-bg-color3);
+    outline: none;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

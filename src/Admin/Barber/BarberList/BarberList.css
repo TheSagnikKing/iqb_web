@@ -32,10 +32,11 @@
     justify-content: space-evenly;
     width: 9rem;
     height: 100%;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--primary-bg-color3);
+    color: var(--primary-text-light-color1);
     border: none;
     border-radius: 6px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -43,6 +44,10 @@
     -o-border-radius: 6px;
     font-weight: 500;
     font-size: 1.4rem;
+}
+
+.admin_barber_wrapper>div:nth-child(1)>div>button>p{
+    color: var(--primary-text-light-color1);
 }
 
 .admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(1),
@@ -76,6 +81,7 @@
 }
 
 .admin_barber_content_body{
+    width: 100.5%;
     height: calc(88vh - 6rem);
     overflow-y: scroll;
     position: relative;
@@ -117,6 +123,7 @@
     z-index: 3;
     background-color: var(--primary-bg-color3);
     border-top-left-radius: 1.7rem;
+    border-top-right-radius: 1.7rem;
 }
 
 .admin_barber_content_body>div:nth-child(1)>p{

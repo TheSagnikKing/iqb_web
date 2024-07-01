@@ -150,6 +150,7 @@
 .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p {
     font-size: 1.4rem;
     text-align: center;
+    height: 7rem;
 }
 
 .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>button {
@@ -1007,6 +1008,10 @@
         border: none;
     }
 
+    .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p {
+        height: 6rem;
+    }
+
     /* Dark Css Style */
     .admin_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
@@ -1090,6 +1095,7 @@
     .queuelist_container{
         height: calc(25rem - 6rem) !important;
     }
+    
 }
 
 @media screen and (min-width:1141px) and (max-width:1250px) {
@@ -1132,6 +1138,12 @@
         width: 99.5%;
         margin-left: 0.5%;
     }
+
+    
+    .admin_dashboard_page_container>div:nth-child(1)>div:nth-child(2)>div:nth-child(2)>p{
+        height: 5rem;
+    }
+
 
     /* Dark Css Style */
     .admin_dashboard_page_container.dark {

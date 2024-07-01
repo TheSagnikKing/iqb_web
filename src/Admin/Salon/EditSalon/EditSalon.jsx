@@ -854,10 +854,22 @@ const EditSalon = () => {
     }
   }
 
-  // const mobileEditSelectedImageFileInputChange = (e) => {
-  //   console.log("hello")
-  //   console.log("omg ",selectedMobileEditImageObject)
-  // }
+  const addservicedropHandler = () => {
+    if (country == "") {
+      toast.error("Please select a country", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      setOpenServices((prev) => !prev)
+    }
+
+  }
 
   return (
     <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
@@ -1155,6 +1167,7 @@ const EditSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               ref={salonTypeIconRef}
+              className='salontype_input'
             />
 
             {salonTypeDrop && <div ref={salonTypeDropRef}>
@@ -1180,7 +1193,7 @@ const EditSalon = () => {
 
           <div className='add_services_drop'>
             <p>Add Your Services</p>
-            <button onClick={() => setOpenServices((prev) => !prev)} disabled={country == ""}>{openServices ? "-" : "+"}</button>
+            <button onClick={addservicedropHandler}>{openServices ? "-" : "+"}</button>
           </div>
 
           {

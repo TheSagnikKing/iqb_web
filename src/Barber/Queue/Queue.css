@@ -71,6 +71,7 @@
 }
 
 .barber_queue_content_body{
+    width: 100.5%;
     height: calc(88vh - 6rem);
     overflow-y: scroll;
     position: relative;
@@ -112,6 +113,7 @@
     z-index: 3;
     background-color: var(--primary-bg-color3);
     border-top-left-radius: 1.7rem;
+    border-top-right-radius: 1.7rem;
 }
 
 .barber_queue_content_body>div:nth-child(1)>p{
