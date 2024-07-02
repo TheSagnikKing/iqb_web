@@ -26,7 +26,7 @@ const SendEmail = () => {
             recipientEmails
         }
         console.log(maildata)
-        dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage,navigate,"/admin-barber"))
+        dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, navigate, "/admin-customer"))
 
     }
 
@@ -37,10 +37,10 @@ const SendEmail = () => {
     } = adminSendBarberEmail
 
     return (
-        <div className='send_email_container'>
+        <div className='send_customer_email_container'>
             <p>Send Email</p>
             <div>
-                <div className='send_email_content'>
+                <div className='send_customer_email_content'>
                     <div>
                         <p>From</p>
                         <input

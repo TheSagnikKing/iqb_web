@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./BarberList.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, EmailIcon, Notificationicon } from '../../../icons'
+import { DeleteIcon, EditIcon, EmailIcon, Notificationicon, MessageIcon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
@@ -177,6 +177,8 @@ const BarberList = () => {
   const [checkAllBarbers, setCheckAllBarbers] = useState(false)
   const [checkedBarbers, setCheckedBarbers] = useState({});
   const [checkedEmails, setCheckedEmails] = useState([]);
+  const [checkMobileNumbers, setCheckMobileNumber] = useState([])
+  const [checkBarberNames, setCheckBarberNames] = useState([])
 
   const barberEmailCheckedHandler = (barber) => {
     const isChecked = !checkedBarbers[barber._id];
@@ -187,8 +189,12 @@ const BarberList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, barber.mobileNumber])
+      setCheckBarberNames(prevNames => [...prevNames, barber.name])
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== barber.mobileNumber))
+      setCheckBarberNames(prevNames => prevNames.filter(name => name !== barber.name))
     }
   };
 
@@ -196,14 +202,20 @@ const BarberList = () => {
     setCheckAllBarbers((prev) => {
       if (!prev) {
         const barberEmails = BarberList.map((b) => b.email)
+        const barberMobileNumbers = BarberList.map((b) => b.mobileNumber)
+        const barberNames = BarberList.map((b) => b.name)
         const allCheckedBarbers = BarberList.reduce((acc, barber) => {
           acc[barber._id] = true;
           return acc;
         }, {});
         setCheckedEmails(barberEmails)
+        setCheckMobileNumber(barberMobileNumbers)
+        setCheckBarberNames(barberNames)
         setCheckedBarbers(allCheckedBarbers);
       } else {
         setCheckedEmails([])
+        setCheckMobileNumber([])
+        setCheckBarberNames([])
         setCheckedBarbers({});
       }
 
@@ -216,6 +228,13 @@ const BarberList = () => {
     navigate("/admin-barber/send-email", {state:checkedEmails})
   }
 
+  const sendMessageNavigate = () => {
+    navigate("/admin-barber/send-message", {state:{
+      checkMobileNumbers,
+      checkBarberNames
+    }})
+  }
+
   return (
     <div className={`admin_barber_wrapper ${darkmodeOn && "dark"}`}>
       <div>
@@ -225,8 +244,8 @@ const BarberList = () => {
             <div><EmailIcon /></div>
           </button>
 
-          <button onClick={() => { }}>
-            <div><Notificationicon /></div>
+          <button onClick={sendMessageNavigate}>
+            <div><MessageIcon /></div>
           </button>
 
           <button onClick={createbarberClicked}>

@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import "./SendEmail.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { adminSendBarberEmailAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { barberSendCustomerEmailAction } from '../../../Redux/Barber/Actions/BarberCustomersAction'
 
 const SendEmail = () => {
 
     const location = useLocation()
 
     const recipientEmails = location?.state
-
+    
     const [subject, setSubject] = useState("")
     const [message, setMessage] = useState("")
 
@@ -26,21 +26,21 @@ const SendEmail = () => {
             recipientEmails
         }
         console.log(maildata)
-        dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage,navigate,"/admin-barber"))
+        dispatch(barberSendCustomerEmailAction(maildata, setSubject, setMessage, navigate))
 
     }
 
-    const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+    const barberSendCustomerEmail = useSelector(state => state.barberSendCustomerEmail)
 
     const {
-        loading: adminSendBarberEmailLoading
-    } = adminSendBarberEmail
+        loading: barberSendCustomerEmailLoading
+    } = barberSendCustomerEmail
 
     return (
-        <div className='send_email_container'>
+        <div className='send_customer_email_container'>
             <p>Send Email</p>
             <div>
-                <div className='send_email_content'>
+                <div className='send_customer_email_content'>
                     <div>
                         <p>From</p>
                         <input
@@ -79,9 +79,9 @@ const SendEmail = () => {
                         ></textarea>
                     </div>
                     {
-                        adminSendBarberEmailLoading ?
+                        barberSendCustomerEmailLoading ?
                             <button><ButtonLoader /></button> :
-                            <button onClick={sendMailHandler} disabled={adminSendBarberEmailLoading}>Send</button>
+                            <button onClick={sendMailHandler}>Send</button>
                     }
                 </div>
 

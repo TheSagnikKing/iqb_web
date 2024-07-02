@@ -239,6 +239,7 @@
 
 .customer_search {
     display: flex;
+    height: 4rem;
 }
 
 .mobile_customer_search {
@@ -362,7 +363,7 @@
     }
 
     .customer_search {
-        display: none;
+        width: 16rem;
     }
 
     .mobile_customer_search {
@@ -408,7 +409,7 @@
     }
 
     .customer_search {
-        display: none;
+        width: 25rem;
     }
 
     .mobile_customer_search {

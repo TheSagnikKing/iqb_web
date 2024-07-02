@@ -3,7 +3,7 @@ import { AdminLoggedInMiddlewareReducer, AdminGoogleLoginReducer, AdminLogoutRed
 import { BarberGoogleLoginReducer, BarberGoogleSignupReducer, BarberLoggedInMiddlewareReducer, BarberLogoutReducer, BarberSigninReducer, BarberSignupEditReducer, BarberSignupReducer } from "./Barber/Reducers/AuthReducer"
 import { adminDragAdvertisementReducer, adminSalonStatusReducer, adminUpdateSalonInfoReducer, getAllAdvertisementReducer, getAllQueueListReducer,getDashboardAppointmentListReducer } from "./Admin/Reducers/DashboardReducer"
 import { adminCreateSalonReducer, adminDeleteSalonReducer, adminEditSalonReducer, adminUpdateSalonSettingsReducer, getAdminAllCitiesReducer, getAdminAllCountriesReducer, getAdminAllSalonIconReducer, getAdminAllTimezoneReducer, getAdminSalonImagesReducer, getAdminSalonListReducer, getAdminSalonLogoReducer } from "./Admin/Reducers/SalonReducer";
-import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer, changeAdminBarberClockStatusReducer, adminSendBarberEmailReducer } from "./Admin/Reducers/BarberReducer"
+import { getAdminBarberListReducer,changeAdminBarberOnlineStatusReducer, adminApproveBarberReducer,adminAllSalonServicesReducer,adminCreateBarberReducer, adminUpdateBarberReducer, adminDeleteBarberReducer, changeAdminBarberClockStatusReducer, adminSendBarberEmailReducer, adminSendBarberMessageReducer } from "./Admin/Reducers/BarberReducer"
 import { adminUpdateProfileReducer, adminSendVerifyEmailReducer, adminVerifiedEmailStatusReducer, adminUploadProfilePicReducer, adminSkipProfileReducer, adminUpdatePasswordReducer, adminVerifiedMobileStatusReducer, adminSendVerifyMobileReducer } from "./Admin/Reducers/AdminProfileReducer"
 import { adminGetAllCustomerListReducer } from "./Admin/Reducers/CustomerReducer";
 import { adminCancelQueueReducer, adminServeQueueReducer } from "./Admin/Reducers/QueueReducer";
@@ -13,7 +13,7 @@ import { barberConnectSalonReducer, barberDashboardSalonInfoReducer, barberGetSa
 import { barberForgetPasswordReducer, barberResetPasswordReducer } from "./Barber/Reducers/BarberPasswordReducer";
 import { getBarberQueueListReducer } from "./Barber/Reducers/BarberQueueReducer";
 import { barberSendVerifyEmailReducer, barberSendVerifyMobileReducer, barberSkipProfileReducer, barberUpdatePasswordReducer, barberUpdateProfileReducer, barberVerifiedEmailStatusReducer, barberVerifiedMobileStatusReducer } from "./Barber/Reducers/BarberProfileReducer";
-import { barberGetAllCustomerListReducer } from "./Barber/Reducers/BarberCustomerReducer";
+import { barberGetAllCustomerListReducer, barberSendCustomerEmailReducer, barberSendCustomerMessageReducer } from "./Barber/Reducers/BarberCustomerReducer";
 
 const rootReducer = combineReducers({
 
@@ -67,6 +67,7 @@ const rootReducer = combineReducers({
   adminUpdatePassword: adminUpdatePasswordReducer,
   adminVerifiedMobileStatus: adminVerifiedMobileStatusReducer,
   adminSendVerifyMobile: adminSendVerifyMobileReducer,
+  adminSendBarberMessage: adminSendBarberMessageReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,
@@ -92,7 +93,9 @@ const rootReducer = combineReducers({
   barberGetAllCustomerList:barberGetAllCustomerListReducer,
   barberUpdatePassword: barberUpdatePasswordReducer,
   barberSendVerifyMobile: barberSendVerifyMobileReducer,
-  barberVerifiedMobileStatus: barberVerifiedMobileStatusReducer
+  barberVerifiedMobileStatus: barberVerifiedMobileStatusReducer,
+  barberSendCustomerEmail: barberSendCustomerEmailReducer,
+  barberSendCustomerMessage: barberSendCustomerMessageReducer
 })
 
 const initialState = {};

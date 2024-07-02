@@ -1,51 +1,51 @@
 import React, { useState } from 'react'
-import "./SendEmail.css"
+import "./SendMessage.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { adminSendBarberEmailAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { barberSendCustomerMessageAction } from '../../../Redux/Barber/Actions/BarberCustomersAction'
 
-const SendEmail = () => {
+const SendMessage = () => {
 
     const location = useLocation()
 
-    const recipientEmails = location?.state
+    const recipientMobileNumbers = location?.state?.checkMobileNumbers
 
-    const [subject, setSubject] = useState("")
+    const recipentCustomerNames = location?.state?.checkCustomerNames
+
+
     const [message, setMessage] = useState("")
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const sendMailHandler = () => {
-        const maildata = {
-            subject,
-            message,
-            role: "Barber",
-            recipientEmails
+        const smsdata = {
+            smsBody: message,
+            numbers: recipientMobileNumbers
         }
-        console.log(maildata)
-        dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage,navigate,"/admin-barber"))
+        console.log(smsdata)
+        dispatch(barberSendCustomerMessageAction(smsdata, setMessage, navigate))
 
     }
 
-    const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+    const barberSendCustomerMessage = useSelector(state => state.barberSendCustomerMessage)
 
     const {
-        loading: adminSendBarberEmailLoading
-    } = adminSendBarberEmail
+        loading: barberSendCustomerMessageLoading
+    } = barberSendCustomerMessage
 
     return (
-        <div className='send_email_container'>
-            <p>Send Email</p>
+        <div className='send_customer_message_container'>
+            <p>Send Message</p>
             <div>
-                <div className='send_email_content'>
+                <div className='send_customer_message_content'>
                     <div>
                         <p>From</p>
                         <input
                             type="text"
-                            value={"support@iqueuebarbers.com"}
+                            value={"iqueuebarbers"}
                         />
                     </div>
 
@@ -54,12 +54,12 @@ const SendEmail = () => {
                         <div>
                             <p>
                             {
-                                recipientEmails?.map((e) => recipientEmails.length == 1 ? e : e + ", " )
+                                recipentCustomerNames?.map((e) => recipentCustomerNames.length == 1 ? e : e + ", " )
                             }
                             </p>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <p>Subject</p>
                         <input
                             type="text"
@@ -67,7 +67,7 @@ const SendEmail = () => {
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                         />
-                    </div>
+                    </div> */}
 
                     <div>
                         <p>Message</p>
@@ -79,9 +79,9 @@ const SendEmail = () => {
                         ></textarea>
                     </div>
                     {
-                        adminSendBarberEmailLoading ?
+                        barberSendCustomerMessageLoading ?
                             <button><ButtonLoader /></button> :
-                            <button onClick={sendMailHandler} disabled={adminSendBarberEmailLoading}>Send</button>
+                            <button onClick={sendMailHandler}>Send</button>
                     }
                 </div>
 
@@ -93,4 +93,4 @@ const SendEmail = () => {
     )
 }
 
-export default SendEmail
+export default SendMessage

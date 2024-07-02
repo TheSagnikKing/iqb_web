@@ -31,7 +31,11 @@ const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
 const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/SalonAppointmentSettings/SalonAppointmentSettings"))
 const AdminBarberSendEmail = React.lazy(() => import("./Admin/Barber/SendEmail/SendEmail"))
+const AdminBarberSendMessage = React.lazy(() => import("./Admin/Barber/SendMessage/SendMessage"))
 const AdminMobileSidebar = React.lazy(() => import("./components/Admin/MobileSidebar/MobileSidebar"))
+
+const AdminSendCustomerEmail = React.lazy(() => import("./Admin/Customer/SendEmail/SendEmail"))
+const AdminSendCustomerMessage = React.lazy(() => import("./Admin/Customer/SendMessage/SendMessage"))
 
 const BarberSidebar = React.lazy(() => import("./components/Barber/Sidebar/Sidebar"))
 const BarberMobileSidebar = React.lazy(() => import("./components/Barber/MobileSidebar/MobileSidebar"))
@@ -39,6 +43,8 @@ const BarberEditProfile = React.lazy(() => import("./Barber/EditProfile/EditProf
 const BarberSignupEditProfile = React.lazy(() => import("./Barber/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
 const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
+const BarberSendCustomerEmail = React.lazy(() => import("./Barber/Customers/SendEmail/SendEmail"))
+const BarberSendCustomerMessage = React.lazy(() => import("./Barber/Customers/SendMessage/SendMessage"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -102,7 +108,10 @@ const App = () => {
                 <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
                 <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
                 <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail/>}/>
+                <Route path="/admin-barber/send-message" element={<AdminBarberSendMessage/>}/>
                 <Route path="/admin-customer" element={<AdminCustomerList />} />
+                <Route path="/admin-customer/send-email" element={<AdminSendCustomerEmail/>}/>
+                <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage/>}/>
                 <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                 <Route path="/admin-queue" element={<AdminQueue />} />
                 <Route path="/drop" element={<Drop/>}/>
@@ -129,6 +138,8 @@ const App = () => {
                 <Route path="/barber-dashboard" element={<BarberDashboard />} />
                 <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
                 <Route path="/barber-customer" element={<BarberCustomer />} />
+                <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail/>}/>
+                <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage/>}/>
                 <Route path="/barber-queue" element={<BarberQueueList />} />
               </Route>
             </Route>
