@@ -1,4 +1,4 @@
-import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_SEND_VERIFY_EMAIL_FAIL, ADMIN_SEND_VERIFY_EMAIL_REQ, ADMIN_SEND_VERIFY_EMAIL_SUCCESS, ADMIN_SKIP_PROFILE_FAIL, ADMIN_SKIP_PROFILE_REQ, ADMIN_SKIP_PROFILE_SUCCESS, ADMIN_UPDATE_PROFILE_FAIL, ADMIN_UPDATE_PROFILE_REQ, ADMIN_UPDATE_PROFILE_SUCCESS, ADMIN_UPLOAD_PROFILE_PIC_FAIL, ADMIN_UPLOAD_PROFILE_PIC_REQ, ADMIN_UPLOAD_PROFILE_PIC_SUCCESS, ADMIN_VERIFIED_EMAIL_STATUS_FAIL, ADMIN_VERIFIED_EMAIL_STATUS_REQ, ADMIN_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants";
+import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_SEND_VERIFY_EMAIL_FAIL, ADMIN_SEND_VERIFY_EMAIL_REQ, ADMIN_SEND_VERIFY_EMAIL_SUCCESS, ADMIN_SEND_VERIFY_MOBILE_FAIL, ADMIN_SEND_VERIFY_MOBILE_REQ, ADMIN_SEND_VERIFY_MOBILE_SUCCESS, ADMIN_SKIP_PROFILE_FAIL, ADMIN_SKIP_PROFILE_REQ, ADMIN_SKIP_PROFILE_SUCCESS, ADMIN_UPDATE_PASSWORD_FAIL, ADMIN_UPDATE_PASSWORD_REQ, ADMIN_UPDATE_PASSWORD_SUCCESS, ADMIN_UPDATE_PROFILE_FAIL, ADMIN_UPDATE_PROFILE_REQ, ADMIN_UPDATE_PROFILE_SUCCESS, ADMIN_UPLOAD_PROFILE_PIC_FAIL, ADMIN_UPLOAD_PROFILE_PIC_REQ, ADMIN_UPLOAD_PROFILE_PIC_SUCCESS, ADMIN_VERIFIED_EMAIL_STATUS_FAIL, ADMIN_VERIFIED_EMAIL_STATUS_REQ, ADMIN_VERIFIED_EMAIL_STATUS_SUCCESS, ADMIN_VERIFIED_MOBILE_STATUS_FAIL, ADMIN_VERIFIED_MOBILE_STATUS_REQ, ADMIN_VERIFIED_MOBILE_STATUS_SUCCESS } from "../Constants/constants";
 import api from "../../api/Api";
 import toast from "react-hot-toast";
 
@@ -109,6 +109,37 @@ export const adminSendVerifyEmailAction = (verifyemail,setSendVerificationEmailM
     }
 }
 
+export const adminSendVerifyMobileAction = (verifyemail,setSendVerificationMobileModal) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_SEND_VERIFY_MOBILE_REQ })
+
+        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminMobile",{email:verifyemail})
+
+        dispatch({
+            type: ADMIN_SEND_VERIFY_MOBILE_SUCCESS,
+            payload: data
+        })
+
+        setSendVerificationMobileModal(true)
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_SEND_VERIFY_MOBILE_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
 export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_VERIFIED_EMAIL_STATUS_REQ })
@@ -150,6 +181,47 @@ export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificati
     }
 }
 
+export const adminVerifiedMobileStatusAction = (verifyemail,otp,setSendVerificationMobileModal,setMobileOtp,setChangeMobileVerifiedState) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_VERIFIED_MOBILE_STATUS_REQ })
+
+        const { data } = await api.post("/api/admin/changeMobileVerifiedStatus",{email:verifyemail,verificationCode:otp})
+
+        dispatch({
+            type: ADMIN_VERIFIED_MOBILE_STATUS_SUCCESS,
+            payload: data
+        })
+
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+
+        dispatch({
+            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:adminloggedindata
+        })
+
+        setChangeMobileVerifiedState(true)
+        setSendVerificationMobileModal(false)
+        setMobileOtp(["","","",""])
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_VERIFIED_MOBILE_STATUS_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
 export const adminUploadProfilePicAction = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPLOAD_PROFILE_PIC_REQ })
@@ -165,6 +237,56 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ADMIN_UPLOAD_PROFILE_PIC_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+
+export const adminUpdatePasswordAction = (profiledata,navigate) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_UPDATE_PASSWORD_REQ })
+
+        const { data } = await api.post("/api/admin/updateAdminPassword",profiledata)
+
+        dispatch({
+            type: ADMIN_UPDATE_PASSWORD_SUCCESS,
+            payload: data
+        })
+
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+
+        dispatch({
+            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:adminloggedindata
+        })
+
+        navigate("/admin-dashboard")
+
+        toast.success("Password matched successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_UPDATE_PASSWORD_FAIL,
             payload: error?.response?.data
         });
 

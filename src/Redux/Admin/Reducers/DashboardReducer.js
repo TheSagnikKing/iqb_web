@@ -91,7 +91,6 @@ export const getAllQueueListReducer = (state = {}, action) => {
                 resolve: false
             };
         case GET_ALL_QUEUELIST_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
                 loading: false,

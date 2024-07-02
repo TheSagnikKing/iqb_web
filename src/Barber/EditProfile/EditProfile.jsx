@@ -12,7 +12,7 @@ import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
-import { barberSendVerifyEmailAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction } from "../../Redux/Barber/Actions/BarberProfileAction"
+import { barberSendVerifyEmailAction, barberSendVerifyMobileAction, barberUpdatePasswordAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction, barberVerifiedMobileStatusAction } from "../../Redux/Barber/Actions/BarberProfileAction"
 import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
 
 const EditProfile = () => {
@@ -23,6 +23,7 @@ const EditProfile = () => {
     const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(barberProfile?.emailVerified)
+    const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(barberProfile?.mobileVerified)
 
     const [name, setName] = useState(barberProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(barberProfile?.dateOfBirth?.split('T')[0])
@@ -120,6 +121,37 @@ const EditProfile = () => {
         }
     };
 
+    const [sendVerificationMobileModal, setSendVerificationMobileModal] = useState(false)
+
+    const sendVerificationMobile = () => {
+        if (!changeMobileVerifiedState) {
+            dispatch(barberSendVerifyMobileAction(barberProfile?.email, setSendVerificationMobileModal ))
+        }
+    }
+
+    const [mobileotp, setMobileOtp] = useState(["", "", "", ""]);
+    const mobileotpinputRef = useRef([]);
+
+    const handleMobileOtpInputChange = (index, value) => {
+        const newOtp = [...mobileotp];
+        newOtp[index] = value;
+
+        if (value && index < mobileotp.length - 1) {
+            mobileotpinputRef.current[index + 1].focus();
+        }
+
+        setMobileOtp(newOtp);
+    };
+
+    const handleMobileKeyDown = (index, e) => {
+        if (e.key === "Backspace" && index > 0 && !mobileotp[index]) {
+            const newOtp = [...mobileotp];
+            newOtp[index - 1] = "";
+            mobileotpinputRef.current[index - 1].focus();
+            setMobileOtp(newOtp);
+        }
+    };
+
     const [gender, setGender] = useState(barberProfile?.gender)
     const [genderDrop, setGenderDrop] = useState(false)
 
@@ -185,6 +217,12 @@ const EditProfile = () => {
         dispatch(barberVerifiedEmailStatusAction(barberProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
+    const verifyMobileStatusClicked = () => {
+        const currentOtp = mobileotp?.join("")
+
+        dispatch(barberVerifiedMobileStatusAction(barberProfile?.email, currentOtp, setSendVerificationMobileModal, setMobileOtp, setChangeMobileVerifiedState))
+    }
+
     const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -212,27 +250,19 @@ const EditProfile = () => {
 
             const profiledata = {
                 email: barberProfile?.email,
-                dateOfBirth,
-                mobileNumber: Number(mobileNumber),
-                name,
-                gender,
                 password,
                 oldPassword
             }
 
-            dispatch(barberUpdateProfileAction(profiledata, navigate))
-
-            // toast.success("Password matched successfully", {
-            //     duration: 3000,
-            //     style: {
-            //         fontSize: "1.4rem",
-            //         borderRadius: '1rem',
-            //         background: '#333',
-            //         color: '#fff',
-            //     },
-            // });
+            dispatch(barberUpdatePasswordAction(profiledata, navigate))
         }
     }
+
+    const barberUpdatePassword = useSelector(state => state.barberUpdatePassword)
+
+    const {
+        loading: barberUpdatePasswordLoading
+    } = barberUpdatePassword
 
     const darkMode = useSelector(darkmodeSelector)
 
@@ -287,17 +317,23 @@ const EditProfile = () => {
                         openModal && <Modal setOpenModal={setOpenModal}>
                             <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                 <h1>Change your password</h1>
-                                <div>
-                                    <p>Old Password</p>
-                                    <div>
-                                        <input
-                                            type={`${seeOldPassword ? "text" : "password"}`}
-                                            value={oldPassword}
-                                            onChange={(e) => setOldPassword(e.target.value)}
-                                        />
-                                        <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-                                    </div>
-                                </div>
+
+                                {
+                                    barberProfile?.AuthType == "google" ?
+                                        <div></div> :
+                                        <div>
+                                            <p>Old Password</p>
+                                            <div>
+                                                <input
+                                                    type={`${seeOldPassword ? "text" : "password"}`}
+                                                    value={oldPassword}
+                                                    onChange={(e) => setOldPassword(e.target.value)}
+                                                />
+                                                <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                            </div>
+                                        </div>
+                                }
+
 
                                 <div>
                                     <p>Password</p>
@@ -323,14 +359,20 @@ const EditProfile = () => {
                                     </div>
                                 </div>
 
+
                                 <div>
-                                    <button onClick={updatePasswordHandler}>Update</button>
+                                    {
+                                        barberUpdatePasswordLoading ? <button style={{
+                                            display: "grid",
+                                            placeItems: "center"
+                                        }}><ButtonLoader /></button> : <button onClick={updatePasswordHandler}>Update</button>
+                                    }
                                 </div>
                             </div>
                         </Modal>
                     }
                 </div>
-                
+
                 <div>
                     <div>
                         <p>Email</p>
@@ -359,8 +401,12 @@ const EditProfile = () => {
                                     onChange={(phone) => setMobileNumber(phone)}
                                 />
                             </div>
-                            <button onClick={() => { }} title="Verified">
-                                <div><CheckIcon /></div>
+
+                            <button onClick={() => sendVerificationMobile()} title={changeMobileVerifiedState ? "Verified" : "NotVerified"} style={{
+                                background: changeMobileVerifiedState ? "limegreen" : "red"
+                            }}>
+                                <div>{changeMobileVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
+
                             </button>
                         </div>
 
@@ -438,6 +484,50 @@ const EditProfile = () => {
                                                     ref={(ref) => (otpinputRef.current[index] = ref)}
                                                     onChange={(e) => handleOtpInputChange(index, e.target.value)}
                                                     onKeyDown={(e) => handleKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            {
+                sendVerificationMobileModal && <div className='verify_email_wrapper'>
+                    <div className={`verify_email_content_wrapper ${darkmodeOn && "dark"}`}>
+                        <div>
+                            <button onClick={() => setSendVerificationMobileModal(false)}>X</button>
+                        </div>
+
+                        <div>
+                            <div>
+                                <img src="/email_verification.png" alt="" />
+                            </div>
+                            <div>
+                                <div>
+                                    <p>Check Your Mobile</p>
+                                    <p>An message with a verification code was just sent to your mobile number</p>
+
+                                    <div>
+                                        <p>{barberProfile?.mobileNumber}</p>
+                                        <button onClick={verifyMobileStatusClicked}>Verify</button>
+                                    </div>
+
+                                    <div>
+                                        {
+                                            mobileotp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+                                                    onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
+                                                    onKeyDown={(e) => handleMobileKeyDown(index, e)}
                                                 ></input>
                                             ))
                                         }

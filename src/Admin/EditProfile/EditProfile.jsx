@@ -4,7 +4,7 @@ import { CameraIcon, CheckIcon, Eyevisible, MobileCrossIcon, Notvisibleeye } fro
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminSendVerifyEmailAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
+import { adminSendVerifyEmailAction, adminSendVerifyMobileAction, adminUpdatePasswordAction, adminUpdateProfileAction, adminVerifiedEmailStatusAction, adminVerifiedMobileStatusAction } from '../../Redux/Admin/Actions/AdminProfileAction';
 import { useNavigate } from 'react-router-dom';
 import api from '../../Redux/api/Api';
 import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
@@ -21,7 +21,10 @@ const EditProfile = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
+    console.log(adminProfile)
+
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
+    const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(adminProfile?.mobileVerified)
 
     const [name, setName] = useState(adminProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
@@ -121,6 +124,40 @@ const EditProfile = () => {
         }
     };
 
+
+
+    const [sendVerificationMobileModal, setSendVerificationMobileModal] = useState(false)
+
+    const sendVerificationMobile = () => {
+        if (!changeMobileVerifiedState) {
+            dispatch(adminSendVerifyMobileAction(adminProfile?.email, setSendVerificationMobileModal))
+        }
+    }
+
+    const [mobileotp, setMobileOtp] = useState(["", "", "", ""]);
+    const mobileotpinputRef = useRef([]);
+
+    const handleMobileOtpInputChange = (index, value) => {
+        const newOtp = [...mobileotp];
+        newOtp[index] = value;
+
+        if (value && index < mobileotp.length - 1) {
+            mobileotpinputRef.current[index + 1].focus();
+        }
+
+        setMobileOtp(newOtp);
+    };
+
+    const handleMobileKeyDown = (index, e) => {
+        if (e.key === "Backspace" && index > 0 && !mobileotp[index]) {
+            const newOtp = [...mobileotp];
+            newOtp[index - 1] = "";
+            mobileotpinputRef.current[index - 1].focus();
+            setMobileOtp(newOtp);
+        }
+    };
+
+
     const [gender, setGender] = useState(adminProfile?.gender)
     const [genderDrop, setGenderDrop] = useState(false)
 
@@ -164,7 +201,6 @@ const EditProfile = () => {
             mobileNumber: Number(mobileNumber),
             name,
             gender,
-            password
         }
 
         console.log(profiledata)
@@ -177,6 +213,12 @@ const EditProfile = () => {
         const currentOtp = otp?.join("")
 
         dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
+    }
+
+    const verifyMobileStatusClicked = () => {
+        const currentOtp = mobileotp?.join("")
+
+        dispatch(adminVerifiedMobileStatusAction(adminProfile?.email, currentOtp, setSendVerificationMobileModal, setMobileOtp, setChangeMobileVerifiedState))
     }
 
     const [oldPassword, setOldPassword] = useState("")
@@ -206,27 +248,19 @@ const EditProfile = () => {
 
             const profiledata = {
                 email: adminProfile?.email,
-                dateOfBirth,
-                mobileNumber: Number(mobileNumber),
-                name,
-                gender,
                 password,
                 oldPassword
             }
 
-            dispatch(adminUpdateProfileAction(profiledata, navigate))
-
-            toast.success("Password matched successfully", {
-                duration: 3000,
-                style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '1rem',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
+            dispatch(adminUpdatePasswordAction(profiledata, navigate))
         }
     }
+
+    const adminUpdatePassword = useSelector(state => state.adminUpdatePassword)
+
+    const {
+        loading: adminUpdatePasswordLoading
+    } = adminUpdatePassword
 
     const darkMode = useSelector(darkmodeSelector)
 
@@ -281,17 +315,22 @@ const EditProfile = () => {
                         openModal && <Modal setOpenModal={setOpenModal}>
                             <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                 <h1>Change your password</h1>
-                                <div>
-                                    <p>Old Password</p>
+
+                                {adminProfile?.AuthType == "google" ?
+                                    <div></div> :
                                     <div>
-                                        <input
-                                            type={`${seePassword ? "text" : "password"}`}
-                                            value={oldPassword}
-                                            onChange={(e) => setOldPassword(e.target.value)}
-                                        />
-                                        <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        <p>Old Password</p>
+                                        <div>
+                                            <input
+                                                type={`${seePassword ? "text" : "password"}`}
+                                                value={oldPassword}
+                                                onChange={(e) => setOldPassword(e.target.value)}
+                                            />
+                                            <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
                                     </div>
-                                </div>
+                                }
+
 
                                 <div>
                                     <p>New Password</p>
@@ -318,7 +357,13 @@ const EditProfile = () => {
                                 </div>
 
                                 <div>
-                                    <button onClick={updatePasswordHandler}>Update</button>
+                                    {
+                                        adminUpdatePasswordLoading ? <button style={{
+                                            display: "grid",
+                                            placeItems: "center"
+                                        }}><ButtonLoader /></button> : <button onClick={updatePasswordHandler}>Update</button>
+                                    }
+
                                 </div>
                             </div>
                         </Modal>
@@ -353,8 +398,11 @@ const EditProfile = () => {
                                     onChange={(phone) => setMobileNumber(phone)}
                                 />
                             </div>
-                            <button onClick={() => { }} title="Verified">
-                                <div><CheckIcon /></div>
+                            <button onClick={() => sendVerificationMobile()} title={changeMobileVerifiedState ? "Verified" : "NotVerified"} style={{
+                                background: changeMobileVerifiedState ? "limegreen" : "red"
+                            }}>
+                                <div>{changeMobileVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
+
                             </button>
                         </div>
 
@@ -432,6 +480,50 @@ const EditProfile = () => {
                                                     ref={(ref) => (otpinputRef.current[index] = ref)}
                                                     onChange={(e) => handleOtpInputChange(index, e.target.value)}
                                                     onKeyDown={(e) => handleKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            {
+                sendVerificationMobileModal && <div className='verify_email_wrapper'>
+                    <div className={`verify_email_content_wrapper ${darkmodeOn && "dark"}`}>
+                        <div>
+                            <button onClick={() => setSendVerificationMobileModal(false)}>X</button>
+                        </div>
+
+                        <div>
+                            <div>
+                                <img src="/email_verification.png" alt="" />
+                            </div>
+                            <div>
+                                <div>
+                                    <p>Check Your Mobile</p>
+                                    <p>An message with a verification code was just sent to your mobile number</p>
+
+                                    <div>
+                                        <p>{adminProfile?.mobileNumber}</p>
+                                        <button onClick={verifyMobileStatusClicked}>Verify</button>
+                                    </div>
+
+                                    <div>
+                                        {
+                                            mobileotp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+                                                    onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
+                                                    onKeyDown={(e) => handleMobileKeyDown(index, e)}
                                                 ></input>
                                             ))
                                         }

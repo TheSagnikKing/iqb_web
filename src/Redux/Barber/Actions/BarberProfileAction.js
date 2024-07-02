@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 import api from "../../api/Api"
-import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, BARBER_SEND_VERIFY_EMAIL_FAIL, BARBER_SEND_VERIFY_EMAIL_REQ, BARBER_SEND_VERIFY_EMAIL_SUCCESS, BARBER_SKIP_PROFILE_FAIL, BARBER_SKIP_PROFILE_REQ, BARBER_SKIP_PROFILE_SUCCESS, BARBER_UPDATE_PROFILE_FAIL, BARBER_UPDATE_PROFILE_REQ, BARBER_UPDATE_PROFILE_SUCCESS, BARBER_VERIFIED_EMAIL_STATUS_FAIL, BARBER_VERIFIED_EMAIL_STATUS_REQ, BARBER_VERIFIED_EMAIL_STATUS_SUCCESS } from "../Constants/constants"
+import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS, BARBER_SEND_VERIFY_EMAIL_FAIL, BARBER_SEND_VERIFY_EMAIL_REQ, BARBER_SEND_VERIFY_EMAIL_SUCCESS, BARBER_SEND_VERIFY_MOBILE_FAIL, BARBER_SEND_VERIFY_MOBILE_REQ, BARBER_SEND_VERIFY_MOBILE_SUCCESS, BARBER_SKIP_PROFILE_FAIL, BARBER_SKIP_PROFILE_REQ, BARBER_SKIP_PROFILE_SUCCESS, BARBER_UPDATE_PASSWORD_FAIL, BARBER_UPDATE_PASSWORD_REQ, BARBER_UPDATE_PASSWORD_SUCCESS, BARBER_UPDATE_PROFILE_FAIL, BARBER_UPDATE_PROFILE_REQ, BARBER_UPDATE_PROFILE_SUCCESS, BARBER_VERIFIED_EMAIL_STATUS_FAIL, BARBER_VERIFIED_EMAIL_STATUS_REQ, BARBER_VERIFIED_EMAIL_STATUS_SUCCESS, BARBER_VERIFIED_MOBILE_STATUS_FAIL, BARBER_VERIFIED_MOBILE_STATUS_REQ, BARBER_VERIFIED_MOBILE_STATUS_SUCCESS } from "../Constants/constants"
 
 export const barberUpdateProfileAction = (profiledata,navigate) => async (dispatch) => {
     try {
@@ -109,6 +109,37 @@ export const barberSendVerifyEmailAction = (verifyemail,setSendVerificationEmail
     }
 }
 
+export const barberSendVerifyMobileAction = (verifyemail,setSendVerificationMobileModal) => async (dispatch) => {
+    try {
+        dispatch({ type: BARBER_SEND_VERIFY_MOBILE_REQ })
+
+        const { data } = await api.post("/api/barber/sendVerificationCodeForBarberMobile",{email:verifyemail})
+
+        dispatch({
+            type: BARBER_SEND_VERIFY_MOBILE_SUCCESS,
+            payload: data
+        })
+
+        setSendVerificationMobileModal(true)
+
+    } catch (error) {
+        dispatch({
+            type: BARBER_SEND_VERIFY_MOBILE_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
 export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_VERIFIED_EMAIL_STATUS_REQ })
@@ -120,13 +151,13 @@ export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificat
             payload: data
         })
 
-        // //calling this so that admin profile get updated and i dont have to refresh the page again
-        // const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:barberloggedindata } = await api.get('/api/barber/barberloggedin');
 
-        // dispatch({
-        //     type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-        //     payload:adminloggedindata
-        // })
+        dispatch({
+            type:BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:barberloggedindata
+        })
 
         setChangeEmailVerifiedState(true)
         setSendVerificationEmailModal(false)
@@ -135,6 +166,97 @@ export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificat
     } catch (error) {
         dispatch({
             type: BARBER_VERIFIED_EMAIL_STATUS_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+export const barberVerifiedMobileStatusAction = (verifyemail,otp,setSendVerificationMobileModal,setMobileOtp,setChangeMobileVerifiedState) => async (dispatch) => {
+    try {
+        dispatch({ type: BARBER_VERIFIED_MOBILE_STATUS_REQ })
+
+        const { data } = await api.post("/api/barber/changeBarberMobileVerifiedStatus",{email:verifyemail,verificationCode:otp})
+
+        dispatch({
+            type: BARBER_VERIFIED_MOBILE_STATUS_SUCCESS,
+            payload: data
+        })
+
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:barberloggedindata } = await api.get('/api/barber/barberloggedin');
+
+        dispatch({
+            type:BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:barberloggedindata
+        })
+
+        setChangeMobileVerifiedState(true)
+        setSendVerificationMobileModal(false)
+        setMobileOtp(["","","",""])
+
+    } catch (error) {
+        dispatch({
+            type: BARBER_VERIFIED_MOBILE_STATUS_FAIL,
+            payload: error?.response?.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+}
+
+
+export const barberUpdatePasswordAction = (profiledata,navigate) => async (dispatch) => {
+    try {
+        dispatch({ type: BARBER_UPDATE_PASSWORD_REQ })
+
+        const { data } = await api.post("/api/barber/updateBarberPassword",profiledata)
+
+        dispatch({
+            type: BARBER_UPDATE_PASSWORD_SUCCESS,
+            payload: data
+        })
+
+        //calling this so that admin profile get updated and i dont have to refresh the page again
+        const { data:barberloggedindata } = await api.get('/api/barber/barberloggedin');
+
+        dispatch({
+            type:BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload:barberloggedindata
+        })
+
+        navigate("/barber-dashboard")
+
+        toast.success("Password matched successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+
+    } catch (error) {
+        dispatch({
+            type: BARBER_UPDATE_PASSWORD_FAIL,
             payload: error?.response?.data
         });
 

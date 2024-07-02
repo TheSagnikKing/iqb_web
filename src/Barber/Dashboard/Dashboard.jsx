@@ -111,11 +111,11 @@ const Dashboard = () => {
       setSalonChar(250);
     } else if (window.matchMedia("(min-width: 0px) and (max-width: 430px)").matches) {
       setSalonChar(150);
-    }else if (window.matchMedia("(min-width: 431px) and (max-width: 768px)").matches) {
+    } else if (window.matchMedia("(min-width: 431px) and (max-width: 768px)").matches) {
       setSalonChar(220);
-    }else if (window.matchMedia("(min-width: 769px) and (max-width: 1140px)").matches) {
+    } else if (window.matchMedia("(min-width: 769px) and (max-width: 1140px)").matches) {
       setSalonChar(280);
-    }else {
+    } else {
       setSalonChar(null); // or some other default value if needed
     }
   };
@@ -311,7 +311,7 @@ const Dashboard = () => {
     if (barberProfile?.user[0]?.isApproved && salonId != 0) {
       dispatch(getAdminSalonImagesAction(salonId))
     }
-  }, [salonId,barberProfile])
+  }, [salonId, barberProfile])
 
   const getAdminSalonImages = useSelector(state => state.getAdminSalonImages)
 
@@ -330,99 +330,99 @@ const Dashboard = () => {
       <div className={`barber_connect_salon_container ${darkmodeOn && "dark"}`}>
         <h3>Connect To Your Salon</h3>
         {
-          barberProfile?.user[0]?.approvePendingMessage ? 
-          <div className='barber_approve_container'>
-            <div>
-              <h2>{barberProfile?.user[0]?.approvePendingMessage}</h2>
-              <button onClick={() => window.location.reload()}>Reload</button>
-            </div>
-          </div> :
-          <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
-          <div className={`barber_connect_salon_list ${darkmodeOn && "dark"}`}>
-            <h4>Choose Your Salon</h4>
-            <div>
+          barberProfile?.user[0]?.approvePendingMessage ?
+            <div className='barber_approve_container'>
               <div>
+                <h2>{barberProfile?.user[0]?.approvePendingMessage}</h2>
+                <button onClick={() => window.location.reload()}>Reload</button>
+              </div>
+            </div> :
+            <div className={`barber_connect_salon_list_container ${darkmodeOn && "dark"}`}>
+              <div className={`barber_connect_salon_list ${darkmodeOn && "dark"}`}>
+                <h4>Choose Your Salon</h4>
                 <div>
-                  <p>SalonID</p>
-                  <p>Salon Name</p>
-                  <p>Select</p>
-                </div>
+                  <div>
+                    <div>
+                      <p>SalonID</p>
+                      <p>Salon Name</p>
+                      <p>Select</p>
+                    </div>
 
-                {
-                  connectSalonListLoading && !connectSalonListResolve ?
-                    <>
-                      <Skeleton count={4} height={"5rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                        highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                    </> :
-                    !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length > 0 ?
-                      connectSalonListResponse?.map((s) => (
-                        <div key={s._id}>
-                          <p>{s.salonId}</p>
-                          <p>{s.salonName}</p>
+                    {
+                      connectSalonListLoading && !connectSalonListResolve ?
+                        <>
+                          <Skeleton count={4} height={"5rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                            highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                        </> :
+                        !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length > 0 ?
+                          connectSalonListResponse?.map((s) => (
+                            <div key={s._id}>
+                              <p>{s.salonId}</p>
+                              <p>{s.salonName}</p>
+                              {
+                                selectedSalonId == s.salonId ? <button style={{ background: "limegreen", color: "#fff" }}><CheckIcon /></button> : <button onClick={() => setSelectedSalonId(s.salonId)} style={{ fontSize: "2.2rem" }}>+</button>
+                              }
+
+                            </div>
+                          ))
+                          :
+                          !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length == 0 ?
+                            <div>
+                              <p>No Salons Available</p>
+                            </div> :
+                            !connectSalonListLoading && connectSalonListResolve &&
+                            <div>
+                              <p>No Salons Available</p>
+                            </div>
+                    }
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div className={`barber_list_services_list ${darkmodeOn && "dark"}`}>
+                <h4>List of Services</h4>
+                <div>
+                  <div>
+                    <div>
+                      <p>Services</p>
+                      <p>Type</p>
+                      <p>Price</p>
+                      <p>Select</p>
+                    </div>
+
+                    {
+                      selectedServiceList?.map((ser) => (
+                        <div key={ser._id}>
+                          <p>{ser.serviceName}</p>
+                          <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                          <p>{currentSelectedSalon?.currency}{" "}{ser.servicePrice}</p>
                           {
-                            selectedSalonId == s.salonId ? <button style={{ background: "limegreen", color: "#fff" }}><CheckIcon /></button> : <button onClick={() => setSelectedSalonId(s.salonId)} style={{ fontSize: "2.2rem" }}>+</button>
+                            barberSelectedServices.some((b) => b._id === ser._id) ?
+                              <button style={{ background: "red" }} onClick={() => deleteServiceHandler(ser)}><DeleteIcon /></button> : <button onClick={() => selectServiceHandler(ser)}>+</button>
                           }
 
                         </div>
                       ))
-                      :
-                      !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length == 0 ?
-                        <div>
-                          <p>No Salons Available</p>
-                        </div> :
-                        !connectSalonListLoading && connectSalonListResolve &&
-                        <div>
-                          <p>No Salons Available</p>
-                        </div>
-                }
+                    }
 
-
-              </div>
-            </div>
-          </div>
-
-          <div className={`barber_list_services_list ${darkmodeOn && "dark"}`}>
-            <h4>List of Services</h4>
-            <div>
-              <div>
-                <div>
-                  <p>Services</p>
-                  <p>Type</p>
-                  <p>Price</p>
-                  <p>Select</p>
+                  </div>
                 </div>
+              </div>
 
+              <div>
                 {
-                  selectedServiceList?.map((ser) => (
-                    <div key={ser._id}>
-                      <p>{ser.serviceName}</p>
-                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
-                      <p>{currentSelectedSalon?.currency}{" "}{ser.servicePrice}</p>
-                      {
-                        barberSelectedServices.some((b) => b._id === ser._id) ?
-                          <button style={{ background: "red" }} onClick={() => deleteServiceHandler(ser)}><DeleteIcon /></button> : <button onClick={() => selectServiceHandler(ser)}>+</button>
-                      }
-
-                    </div>
-                  ))
+                  barberConnectSalonLoading ? <button style={{
+                    display: "grid",
+                    placeItems: "center"
+                  }}><ButtonLoader /></button> : <button onClick={connectSalonClicked}>Connect Salon</button>
                 }
 
               </div>
             </div>
-          </div>
-
-          <div>
-            {
-              barberConnectSalonLoading ? <button style={{
-                display: "grid",
-                placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={connectSalonClicked}>Connect Salon</button>
-            }
-
-          </div>
-        </div>
         }
-        
+
       </div>
     </> : <>
       <div className={`barber_dashboard_page_container ${darkmodeOn && "dark"}`}>
@@ -437,7 +437,7 @@ const Dashboard = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
               /> :
               <div>
-                <h1 style={{visibility: barberName == "" && "hidden"}}>Welcome Back, {truncateText(barberName, 11)}</h1>
+                <h1 style={{ visibility: barberName == "" && "hidden" }}>Welcome Back, {truncateText(barberName, 11)}</h1>
               </div>
           }
 
@@ -467,107 +467,51 @@ const Dashboard = () => {
         </div>
         <div>
           <div>page</div>
-          <div>
-            <div>
-              <p>Queue List</p>
-              <div>
-                <Link to="/barber-queue" style={{ fontSize: "1.6rem", color: "var(--primary-text-light-color1)", textDecoration: "none" }}>See All</Link>
-              </div>
-            </div>
 
-            {
-              getBarberQueueListLoading && !getBarberQueueListResolve ?
-                <div>
+
+          {
+            getBarberQueueListLoading && !getBarberQueueListResolve ?
+              <div className='barber_dashboard_queuelist_loader_container'>
+                <div><p>QueueList</p></div>
+                <div><Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                   <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                   <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                  <Skeleton count={1} height={"3.5rem"} style={{ borderRadius: "5px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-                </div> :
-                !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length > 0 ?
-                  <>
-                    <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
-                      <div>
-                        <p>Customer Name</p>
-                        <p>Barber Name</p>
-                        <p>Q Position</p>
-                        <p>Services</p>
+                    highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /></div>
+              </div> :
+              !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length > 0 ?
+                <div className='barber_dashboard_queuelist_container'>
+                  <div>
+                    <p>Customer</p>
+                    <p>Barber</p>
+                    <p>Q Position</p>
+                    <p>Services</p>
+                  </div>
+
+                  {
+                    BarberQueueList?.map((q) => (
+                      <div key={q._id}>
+                        <p>{q.name}</p>
+                        <p>{q.barberName}</p>
+                        <p>{q.qPosition}</p>
+                        <p>{q.services?.map((s) => s.serviceName)}</p>
                       </div>
+                    ))
+                  }
+                </div> :
+                !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length == 0 ?
+                  <div className='barber_dashboard_queuelist_error_container'>
+                    <div><p>QueueList</p></div>
+                    <div><p>No queuelist available</p></div>
+                  </div> :
+                  !getBarberQueueListLoading && !getBarberQueueListResolve &&
 
-                      {
-                        BarberQueueList?.map((q) => (
-                          <div key={q?._id}>
-                            <p>{q?.name}</p>
-                            <p>{q?.barberName}</p>
-                            <p>{q?.qPosition}</p>
-                            <p>{q?.services?.map((s) => s.serviceName)}</p>
-                          </div>
-                        ))
-                      }
-
-                    </div>
-                  </> :
-                  !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length == 0 ?
-                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div> :
-                    !getBarberQueueListLoading && !getBarberQueueListResolve &&
-                    <div className={`queuelist_container_error ${darkmodeOn && "dark"}`}><p>Queue List not available</p></div>
-            }
-
-            {/* <>
-              <div className={`queuelist_container ${darkmodeOn && "dark"}`}>
-                <div>
-                  <p>Customer Name</p>
-                  <p>Barber Name</p>
-                  <p>Q Position</p>
-                  <p>Services</p>
-                </div>
-
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-                <div>
-                  <p>q.name</p>
-                  <p>q.barberName</p>
-                  <p>q.qPosition</p>
-                  <p>q.services?.map</p>
-                </div>
-
-              </div>
-            </> */}
-
-          </div>
+                  <div className='barber_dashboard_queuelist_error_container'>
+                    <div><p>QueueList</p></div>
+                    <div><p>No queuelist available</p></div>
+                  </div>
+          }
         </div>
 
         <div
