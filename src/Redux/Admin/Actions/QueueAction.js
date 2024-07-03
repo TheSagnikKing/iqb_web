@@ -1,9 +1,9 @@
 import toast from "react-hot-toast"
-import { ADMIN_BARBER_SERVED_QUEUE_REQ,ADMIN_BARBER_SERVED_QUEUE_SUCCESS,ADMIN_BARBER_SERVED_QUEUE_FAIL, ADMIN_CANCEL_QUEUE_REQ, ADMIN_CANCEL_QUEUE_SUCCESS, ADMIN_CANCEL_QUEUE_FAIL } from "../Constants/constants"
+import { ADMIN_BARBER_SERVED_QUEUE_REQ,ADMIN_BARBER_SERVED_QUEUE_SUCCESS,ADMIN_BARBER_SERVED_QUEUE_FAIL, ADMIN_CANCEL_QUEUE_REQ, ADMIN_CANCEL_QUEUE_SUCCESS, ADMIN_CANCEL_QUEUE_FAIL, GET_ALL_QUEUELIST_SUCCESS } from "../Constants/constants"
 import api from "../../api/Api"
 import { getAllQueueListAction } from "./DashboardAction"
 
-export const adminServeQueueAction = (barberqueuedata, id) => async (dispatch) => {
+export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
@@ -14,9 +14,11 @@ export const adminServeQueueAction = (barberqueuedata, id) => async (dispatch) =
             payload: data
         })
 
+        const { data:queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
+
         dispatch({
-            type: "ADMIN_FILTER_BARBER_QUEUELIST",
-            payload: id
+            type: GET_ALL_QUEUELIST_SUCCESS,
+            payload: queuelistdata
         })
 
     } catch (error) {
@@ -37,7 +39,7 @@ export const adminServeQueueAction = (barberqueuedata, id) => async (dispatch) =
     }
 }
 
-export const adminCancelQueueAction = (canceldata,id) => async (dispatch) => {
+export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CANCEL_QUEUE_REQ })
 
@@ -48,9 +50,11 @@ export const adminCancelQueueAction = (canceldata,id) => async (dispatch) => {
             payload: data
         })
 
+        const { data:queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
+
         dispatch({
-            type: "ADMIN_FILTER_BARBER_QUEUELIST",
-            payload: id
+            type: GET_ALL_QUEUELIST_SUCCESS,
+            payload: queuelistdata
         })
 
     } catch (error) {

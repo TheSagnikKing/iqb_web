@@ -38,11 +38,11 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
 
 }
 
-export const barberServeQueueAction = (barberqueuedata,id) => async (dispatch) => {
+export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_BARBER_SERVED_QUEUE_REQ })
 
-        const { data } = await api.post("/api/queue/barberServedQueue",barberqueuedata)
+        const { data } = await api.post("/api/queue/barberServedQueue", barberqueuedata)
 
         dispatch({
             type: BARBER_BARBER_SERVED_QUEUE_SUCCESS,
@@ -50,9 +50,14 @@ export const barberServeQueueAction = (barberqueuedata,id) => async (dispatch) =
         })
 
 
+        const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {
+            salonId,
+            barberId
+        })
+
         dispatch({
-            type: "FILTER_BARBER_QUEUELIST",
-            payload: id
+            type: GET_QUEUELIST_BARBERID_SUCCESS,
+            payload: queuelistdata
         })
 
     } catch (error) {
@@ -73,7 +78,7 @@ export const barberServeQueueAction = (barberqueuedata,id) => async (dispatch) =
     }
 }
 
-export const barberCancelQueueAction = (canceldata,id) => async (dispatch) => {
+export const barberCancelQueueAction = (canceldata, salonId, barberId) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_CANCEL_QUEUE_REQ })
 
@@ -85,9 +90,14 @@ export const barberCancelQueueAction = (canceldata,id) => async (dispatch) => {
         })
 
 
+        const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {
+            salonId,
+            barberId
+        })
+
         dispatch({
-            type: "FILTER_BARBER_QUEUELIST",
-            payload: id
+            type: GET_QUEUELIST_BARBERID_SUCCESS,
+            payload: queuelistdata
         })
 
     } catch (error) {
