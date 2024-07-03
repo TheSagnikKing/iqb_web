@@ -341,7 +341,7 @@ const Dashboard = () => {
                     <p>Customer</p>
                     <p>Barber</p>
                     <p>Q Position</p>
-                    <p>Time JoinedQ</p>
+                    <p>Join Time</p>
                   </div>
 
                   {
