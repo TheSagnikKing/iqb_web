@@ -305,13 +305,13 @@ const EditBarber = () => {
 
   // Delete service handler
   const deleteServiceHandler = (service) => {
-    const originalService = allSalonServices.find((s) => s._id === service._id);
+    const originalService = allSalonServices.find((s) => s.serviceId === service.serviceId);
 
     if (originalService) {
-      setCurrentBarberServices(currentBarberServices.filter((f) => f._id !== service._id));
+      setCurrentBarberServices(currentBarberServices.filter((f) => f.serviceId !== service.serviceId));
 
       setAllSalonServices(AllSalonServices.map((ser) =>
-        ser._id === service._id ? { ...ser, serviceEWT: originalService.serviceEWT } : ser
+        ser.serviceId === service.serviceId ? { ...ser, serviceEWT: originalService.serviceEWT } : ser
       ));
     }
   };
@@ -333,7 +333,7 @@ const EditBarber = () => {
     console.log(barberdata)
 
     // Dispatch action to create or update barber
-    dispatch(adminUpdateBarberAction(barberdata, navigate));
+    // dispatch(adminUpdateBarberAction(barberdata, navigate));
   };
 
 
@@ -349,13 +349,13 @@ const EditBarber = () => {
 
   const handleonChange = (e, service) => {
 
-    if (currentBarberServices.find((c) => c._id === service._id)) {
+    if (currentBarberServices.find((c) => c.serviceId === service.serviceId)) {
       setCurrentBarberServices(currentBarberServices.map((ser) =>
-        ser._id === service._id ? { ...ser, barberServiceEWT: Number(e.target.value) } : ser
+        ser.serviceId === service.serviceId ? { ...ser, barberServiceEWT: Number(e.target.value) } : ser
       ));
     } else {
       setAllSalonServices(allSalonServices.map((ser) =>
-        ser._id === service._id ? { ...ser, serviceEWT: Number(e.target.value) } : ser
+        ser.serviceId === service.serviceId ? { ...ser, serviceEWT: Number(e.target.value) } : ser
       ));
     }
   }
@@ -443,12 +443,12 @@ const EditBarber = () => {
                   <p>Est Wait Tm(mins)</p>
                   <input
                     type="text"
-                    value={currentBarberServices?.find((c) => c._id === s._id) ? currentBarberServices?.find((c) => c._id === s._id).barberServiceEWT : s.serviceEWT}
+                    value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
                     onChange={(e) => handleonChange(e, s)}
                   />
                 </div>
 
-                {currentBarberServices.find((c) => c._id === s._id) ? (
+                {currentBarberServices.find((c) => c.serviceId === s.serviceId) ? (
                   <div
                     style={{
                       background: "red"
