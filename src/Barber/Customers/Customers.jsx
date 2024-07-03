@@ -63,7 +63,15 @@ const CustomerList = () => {
     }
   };
 
-  const [page, setPage] = useState(currentPage);
+  // const [page, setPage] = useState(currentPage);
+
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (currentPage) {
+      setPage(currentPage)
+    }
+  }, [currentPage])
 
   const paginationLeftHandler = async () => {
     if (page > 1) {
@@ -83,7 +91,7 @@ const CustomerList = () => {
   const paginationRightHandler = async () => {
     if (page < totalPages) {
       try {
-        const { data } = await api.get(`/api/customer/getAllCustomersForBarber=${currentsalonId}&page=${page + 1}`);
+        const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${currentsalonId}&page=${page + 1}`);
         dispatch({
           type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,

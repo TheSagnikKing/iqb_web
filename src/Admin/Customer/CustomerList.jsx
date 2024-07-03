@@ -58,7 +58,13 @@ const CustomerList = () => {
     }
   };
 
-  const [page, setPage] = useState(currentPage);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if(currentPage){
+      setPage(currentPage)
+    }
+  },[currentPage])
 
   const paginationLeftHandler = async () => {
     if (page > 1) {
