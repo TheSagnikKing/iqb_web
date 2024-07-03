@@ -1405,6 +1405,15 @@
     font-size: 1.4rem;
 } */
 
+
+.barber_dashboard_queuelist_container.dark>div:not(:nth-child(1)){
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.barber_dashboard_queuelist_container.dark>div:not(:nth-child(1))>p{
+    color: var(--primary-text-light-color1);
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .barber_dashboard_page_container {
         grid-template-columns: minmax(35vw, 1fr);

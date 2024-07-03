@@ -830,6 +830,13 @@
     color: var(--primary-text-light-color1);
 }
 
+.dashboard_queuelist_container.dark>div:not(:nth-child(1)){
+    background-color: var(--dark-mode-bg-color-2);
+}
+
+.dashboard_queuelist_container.dark>div:not(:nth-child(1))>p{
+    color: var(--primary-text-light-color1);
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_dashboard_page_container {

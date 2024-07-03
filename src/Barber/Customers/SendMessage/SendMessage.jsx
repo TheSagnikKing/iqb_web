@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { barberSendCustomerMessageAction } from '../../../Redux/Barber/Actions/BarberCustomersAction'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const SendMessage = () => {
 
@@ -36,11 +37,16 @@ const SendMessage = () => {
         loading: barberSendCustomerMessageLoading
     } = barberSendCustomerMessage
 
+
+    const darkMode = useSelector(darkmodeSelector)
+
+    const darkmodeOn = darkMode === "On"
+
     return (
-        <div className='send_customer_message_container'>
+        <div className={`send_customer_message_container ${darkmodeOn && "dark"}`}>
             <p>Send Message</p>
             <div>
-                <div className='send_customer_message_content'>
+                <div className={`send_customer_message_content ${darkmodeOn && "dark"}`}>
                     <div>
                         <p>From</p>
                         <input

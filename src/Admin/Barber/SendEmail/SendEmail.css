@@ -148,6 +148,35 @@
     background: rgb(0, 98, 255) !important;
 }
 
+/* dark mode start */
+
+.send_email_container.dark>p{
+    color: var(--primary-text-light-color1);
+}
+
+.send_email_content.dark{
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.send_email_content.dark p{
+    color: var(--primary-text-light-color1);
+}
+
+.send_email_content.dark input,
+.send_email_content.dark textarea{
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
+}
+
+.send_email_content.dark input::placeholder,
+.send_email_content.dark textarea::placeholder{
+    color: var(--primary-text-light-color1);
+}
+
+.send_email_content.dark>div:nth-child(2)>div{
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
+}
 
 @media screen and (min-width: 0px) and (max-width:1140px) {
     .send_email_container>div:nth-child(2){

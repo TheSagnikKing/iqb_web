@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { adminSendBarberEmailAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const SendEmail = () => {
 
@@ -35,12 +36,17 @@ const SendEmail = () => {
     const {
         loading: adminSendBarberEmailLoading
     } = adminSendBarberEmail
+    
+
+    const darkMode = useSelector(darkmodeSelector)
+
+    const darkmodeOn = darkMode === "On"
 
     return (
-        <div className='send_email_container'>
+        <div className={`send_email_container ${darkmodeOn && "dark"}`}>
             <p>Send Email</p>
             <div>
-                <div className='send_email_content'>
+                <div className={`send_email_content ${darkmodeOn && "dark"}`}>
                     <div>
                         <p>From</p>
                         <input

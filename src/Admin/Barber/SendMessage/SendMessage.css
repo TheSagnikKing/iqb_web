@@ -149,6 +149,37 @@
 }
 
 
+/* dark mode start */
+
+.send_message_container.dark>p{
+    color: var(--primary-text-light-color1);
+}
+
+.send_message_container.dark>div>div:nth-child(1){
+    background-color: var(--dark-mode-bg-color-4);
+}
+
+.send_message_container.dark p{
+    color: var(--primary-text-light-color1);
+}
+
+.send_message_content.dark input,
+.send_message_content.dark textarea{
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
+}
+
+.send_message_content.dark input::placeholder,
+.send_message_content.dark textarea::placeholder{
+    color: var(--primary-text-light-color1);
+}
+
+.send_message_content.dark>div:nth-child(2)>div{
+    background-color: var(--dark-mode-bg-color-2);
+    color: var(--primary-text-light-color1);
+}
+
+
 @media screen and (min-width: 0px) and (max-width:1140px) {
     .send_message_container>div:nth-child(2){
         grid-template-columns: 1fr;

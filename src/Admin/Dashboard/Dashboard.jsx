@@ -336,7 +336,7 @@ const Dashboard = () => {
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /></div>
               </div> :
               !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
-                <div className='dashboard_queuelist_container'>
+                <div className={`dashboard_queuelist_container ${darkmodeOn && "dark"}`}>
                   <div>
                     <p>Customer</p>
                     <p>Barber</p>
@@ -358,13 +358,17 @@ const Dashboard = () => {
                 !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
                   <div className='dashboard_queuelist_error_container'>
                     <div><p>QueueList</p></div>
-                    <div><p>No queuelist available</p></div>
+                    <div><p style={{
+                      color: darkmodeOn ? "#fff" : "#000"
+                    }}>No queuelist available</p></div>
                   </div> :
                   !getAllQueueListLoading && !getAllQueueListResolve &&
 
                   <div className='dashboard_queuelist_error_container'>
                     <div><p>QueueList</p></div>
-                    <div><p>No queuelist available</p></div>
+                    <div><p style={{
+                      color: darkmodeOn ? "#fff" : "#000"
+                    }}>No queuelist available</p></div>
                   </div>
           }
 
