@@ -69,7 +69,7 @@ const CreateBarber = () => {
   const handleEWTChange = (serviceId, newValue) => {
     setServiceEWTValues({
       ...serviceEWTValues,
-      [serviceId]: newValue
+      [serviceId]: Number(newValue)
     });
   };
 
@@ -82,6 +82,8 @@ const CreateBarber = () => {
         barberServiceEWT: serviceEWTValues[service._id]
       }))
     };
+
+    console.log(barberdata)
 
     dispatch(adminCreateBarberAction(barberdata, navigate))
   };
