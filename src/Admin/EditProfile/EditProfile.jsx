@@ -312,7 +312,7 @@ const EditProfile = () => {
                         />
                     </div>
                     {
-                        openModal && <Modal setOpenModal={setOpenModal}>
+                        openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword}>
                             <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                 <h1>Change your password</h1>
 

@@ -45,6 +45,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     position: relative;
+    border: 1px solid black;
 }
 
 .admin_edit_profile_content_wrapper>div:nth-child(1)>div>img {

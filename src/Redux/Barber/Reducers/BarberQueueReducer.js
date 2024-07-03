@@ -23,8 +23,8 @@ export const getBarberQueueListReducer = (state = {}, action) => {
                 error: action.payload
             };
         case "FILTER_BARBER_QUEUELIST":
-            const customerEmail = action.payload;
-            const filteredQueueList = state.queueList?.filter((q) => q.customerEmail !== customerEmail);
+            const id = action.payload;
+            const filteredQueueList = state.queueList?.filter((q) => q._id !== id);
             return {
                 ...state,
                 loading: false,

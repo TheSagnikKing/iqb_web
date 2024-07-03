@@ -486,7 +486,7 @@ const Dashboard = () => {
                     <p>Customer</p>
                     <p>Barber</p>
                     <p>Q Position</p>
-                    <p>Services</p>
+                    <p>Time JoinedQ</p>
                   </div>
 
                   {
@@ -495,7 +495,7 @@ const Dashboard = () => {
                         <p>{q.name}</p>
                         <p>{q.barberName}</p>
                         <p>{q.qPosition}</p>
-                        <p>{q.services?.map((s) => s.serviceName)}</p>
+                        <p>{q.timeJoinedQ}</p>
                       </div>
                     ))
                   }

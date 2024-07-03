@@ -4,9 +4,12 @@ import './Modal.css';
 import { useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
-const Modal = ({children,setOpenModal}) => {
+const Modal = ({children,setOpenModal, setOldPassword, setPassword, setConfirmPassword}) => {
 
   const closeModal = () => {
+    setOldPassword("")
+    setPassword("")
+    setConfirmPassword("")
     setOpenModal(false)
   }
 

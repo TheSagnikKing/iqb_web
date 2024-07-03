@@ -3,7 +3,7 @@ import { ADMIN_BARBER_SERVED_QUEUE_REQ,ADMIN_BARBER_SERVED_QUEUE_SUCCESS,ADMIN_B
 import api from "../../api/Api"
 import { getAllQueueListAction } from "./DashboardAction"
 
-export const adminServeQueueAction = (barberqueuedata,customerEmail) => async (dispatch) => {
+export const adminServeQueueAction = (barberqueuedata, id) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
@@ -16,7 +16,7 @@ export const adminServeQueueAction = (barberqueuedata,customerEmail) => async (d
 
         dispatch({
             type: "ADMIN_FILTER_BARBER_QUEUELIST",
-            payload: customerEmail
+            payload: id
         })
 
     } catch (error) {
@@ -37,7 +37,7 @@ export const adminServeQueueAction = (barberqueuedata,customerEmail) => async (d
     }
 }
 
-export const adminCancelQueueAction = (canceldata,customerEmail) => async (dispatch) => {
+export const adminCancelQueueAction = (canceldata,id) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CANCEL_QUEUE_REQ })
 
@@ -50,7 +50,7 @@ export const adminCancelQueueAction = (canceldata,customerEmail) => async (dispa
 
         dispatch({
             type: "ADMIN_FILTER_BARBER_QUEUELIST",
-            payload: customerEmail
+            payload: id
         })
 
     } catch (error) {

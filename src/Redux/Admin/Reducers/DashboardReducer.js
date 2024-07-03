@@ -106,8 +106,8 @@ export const getAllQueueListReducer = (state = {}, action) => {
             };
 
         case "ADMIN_FILTER_BARBER_QUEUELIST":
-            const customerEmail = action.payload;
-            const filteredQueueList = state.queueList?.filter((q) => q.customerEmail !== customerEmail);
+            const id = action.payload;
+            const filteredQueueList = state.queueList?.filter((q) => q._id !== id);
             return {
                 ...state,
                 loading: false,

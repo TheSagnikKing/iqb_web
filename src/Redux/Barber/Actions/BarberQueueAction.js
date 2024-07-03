@@ -38,7 +38,7 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
 
 }
 
-export const barberServeQueueAction = (barberqueuedata,customerEmail) => async (dispatch) => {
+export const barberServeQueueAction = (barberqueuedata,id) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_BARBER_SERVED_QUEUE_REQ })
 
@@ -52,7 +52,7 @@ export const barberServeQueueAction = (barberqueuedata,customerEmail) => async (
 
         dispatch({
             type: "FILTER_BARBER_QUEUELIST",
-            payload: customerEmail
+            payload: id
         })
 
     } catch (error) {
@@ -73,7 +73,7 @@ export const barberServeQueueAction = (barberqueuedata,customerEmail) => async (
     }
 }
 
-export const barberCancelQueueAction = (canceldata,customerEmail) => async (dispatch) => {
+export const barberCancelQueueAction = (canceldata,id) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_CANCEL_QUEUE_REQ })
 
@@ -87,7 +87,7 @@ export const barberCancelQueueAction = (canceldata,customerEmail) => async (disp
 
         dispatch({
             type: "FILTER_BARBER_QUEUELIST",
-            payload: customerEmail
+            payload: id
         })
 
     } catch (error) {

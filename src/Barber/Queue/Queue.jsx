@@ -57,7 +57,7 @@ const Queue = () => {
     }
 
     if (confirm) {
-      dispatch(barberServeQueueAction(queueData, b.customerEmail))
+      dispatch(barberServeQueueAction(queueData, b._id))
     }
   }
 
@@ -74,7 +74,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      dispatch(barberCancelQueueAction(queueData, b.customerEmail))
+      dispatch(barberCancelQueueAction(queueData, b._id))
     }
 
   }
