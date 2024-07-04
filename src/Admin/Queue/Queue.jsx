@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./Queue.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, ServeIcon } from '../../icons'
+import { CrownIcon, DeleteIcon, ServeIcon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
@@ -56,7 +56,7 @@ const Queue = () => {
 
     if (confirm) {
       console.log(queueData)
-      dispatch(adminServeQueueAction(queueData,salonId))
+      dispatch(adminServeQueueAction(queueData, salonId))
     }
   }
 
@@ -112,6 +112,7 @@ const Queue = () => {
                     <p>Time Joined Q</p>
                     <p>Barber Name</p>
                     <p>Q Postion</p>
+                    <p>Type</p>
                     <p>Serve</p>
                     <p>Cancel</p>
                   </div>
@@ -122,6 +123,18 @@ const Queue = () => {
                       <p>{b.timeJoinedQ}</p>
                       <p>{b.barberName}</p>
                       <p>{b.qPosition}</p>
+                      <p>
+                        {b.serviceType === "VIP" ? <div
+                          style={{
+                            fontSize: "2rem",
+                            height: "100%",
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                          }}><CrownIcon /></div> : <div> -
+                        </div>}
+                      </p>
                       <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}><ServeIcon /></button></div>
                       <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}><DeleteIcon /></button></div>
                     </div>

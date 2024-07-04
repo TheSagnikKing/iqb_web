@@ -105,7 +105,7 @@
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.8fr 0.5fr 0.5fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
@@ -176,8 +176,8 @@
     align-items: center;
 }
 
-.barber_queue_content_body_item>div:nth-child(5)>button,
-.barber_queue_content_body_item>div:nth-child(6)>button
+.barber_queue_content_body_item>div:nth-child(6)>button,
+.barber_queue_content_body_item>div:nth-child(7)>button
 {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     width: 4.5rem;
@@ -195,12 +195,12 @@
     border: none;
 }
 
-.barber_queue_content_body_item>div:nth-child(5)>button{
+.barber_queue_content_body_item>div:nth-child(6)>button{
     background-color: rgb(50, 60, 205);
     color: var(--primary-text-light-color1);
 }
 
-.barber_queue_content_body_item>div:nth-child(6)>button{
+.barber_queue_content_body_item>div:nth-child(7)>button{
     background-color:red;
     color: var(--primary-text-light-color1);
 }
