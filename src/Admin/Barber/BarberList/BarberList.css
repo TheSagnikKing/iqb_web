@@ -81,9 +81,9 @@
 }
 
 .admin_barber_content_body{
-    width: 100.5%;
+    width: 100.3%;
     height: calc(88vh - 6rem);
-    overflow-y: scroll;
+    overflow: auto;
     position: relative;
 }
 
@@ -104,6 +104,10 @@
     background: rgb(0, 98, 255) !important;
 }
 
+.admin_barber_content_body::-webkit-scrollbar-corner{
+    background-color: transparent;
+}
+
 
 .admin_barber_content_body>div{
     min-height: 6rem;
@@ -111,7 +115,7 @@
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: 0.1fr  0.8fr 1fr 0.4fr 0.4fr 0.6fr 0.4fr 0.4fr;
+    grid-template-columns: 0.23fr  0.8fr 1fr 0.4fr 0.4fr 0.6fr 0.3fr 0.3fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;

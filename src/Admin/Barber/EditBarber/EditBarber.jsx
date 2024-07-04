@@ -333,7 +333,7 @@ const EditBarber = () => {
     console.log(barberdata)
 
     // Dispatch action to create or update barber
-    // dispatch(adminUpdateBarberAction(barberdata, navigate));
+    dispatch(adminUpdateBarberAction(barberdata, navigate));
   };
 
 

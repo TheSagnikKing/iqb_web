@@ -73,7 +73,7 @@
 .admin_queue_content_body{
     width: 100.5%;
     height: calc(88vh - 6rem);
-    overflow-y: scroll;
+    overflow: auto;
     position: relative;
 }
 
@@ -92,6 +92,10 @@
 
 .admin_queue_content_body::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
+}
+
+.admin_queue_content_body::-webkit-scrollbar-corner{
+    background-color: transparent;
 }
 
 

@@ -147,6 +147,10 @@
     background: rgb(0, 98, 255) !important;
 }
 
+.admin_barber_services_container::-webkit-scrollbar-corner{
+    background: transparent;
+}
+
 .admin_barber_services_container_item {
     min-height: 6rem;
     min-width: 90rem;

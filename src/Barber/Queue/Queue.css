@@ -72,8 +72,8 @@
 
 .barber_queue_content_body{
     width: 100.5%;
-    height: calc(88vh - 6rem);
-    overflow-y: scroll;
+    height: 100%;
+    overflow: auto;
     position: relative;
 }
 
@@ -93,6 +93,10 @@
 .barber_queue_content_body::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
 }
+
+.barber_queue_content_body::-webkit-scrollbar-corner{
+    background: transparent !important;
+} 
 
 
 .barber_queue_content_body>div{

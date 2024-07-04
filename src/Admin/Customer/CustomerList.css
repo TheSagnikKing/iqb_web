@@ -78,7 +78,7 @@
 .customer_content_body {
     height: 98%;
     width: 100.5%;
-    overflow-y: scroll;
+    overflow: auto;
 }
 
 .customer_content_body::-webkit-scrollbar {
@@ -96,6 +96,10 @@
 
 .customer_content_body::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
+}
+
+.customer_content_body::-webkit-scrollbar-corner{
+    background-color: transparent;
 }
 
 .customer_content_body>div {

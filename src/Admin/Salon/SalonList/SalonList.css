@@ -64,7 +64,7 @@
 .salon_content_body{
     height: calc(88vh - 6rem);
     width: 100.5%;
-    overflow-y: scroll;
+    overflow: auto;
 }
 
 .salon_content_body::-webkit-scrollbar {
@@ -82,6 +82,10 @@
 
 .salon_content_body::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 98, 255) !important;
+}
+
+.salon_content_body::-webkit-scrollbar-corner{
+    background-color: transparent;
 }
 
 .salon_content_body>div{

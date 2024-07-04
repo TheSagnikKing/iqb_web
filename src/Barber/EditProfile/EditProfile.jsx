@@ -274,7 +274,7 @@ const EditProfile = () => {
 
     return (
         <div className='barber_edit_profile'>
-            <p style={{ color: darkmodeOn && "var(--primary-text-light-color1)", marginLeft: "1%", paddingTop: "2rem", fontWeight: "bold" }}>Edit profile</p>
+            <p style={{ color: darkmodeOn && "var(--primary-text-light-color1)", marginLeft: "1%", paddingTop: "0.5rem", fontWeight: "bold" }}>Edit profile</p>
             <div className={`barber_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
                     {/* <p>Edit profile</p> */}
