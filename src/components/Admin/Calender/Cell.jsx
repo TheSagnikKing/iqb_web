@@ -10,7 +10,7 @@ const Cell = ({ className, children, onClick, isActive, isInitialActive }) => {
   return (
     <div 
       onClick={!isActive ? onClick : undefined}
-      className={`${className} ${isActive ? "active-cell" : `cells ${darkmodeOn && "dark"}`} ${isInitialActive && !isActive ? "initial-active-cell" : ""}`}
+      className={`${className} ${isActive ? "active-cell" : `cells ${darkmodeOn ? "dark" : ""}`} ${isInitialActive && !isActive ? `initial-active-cell ${darkmodeOn ? "dark" : ""}` : ""}`}
     >
       {children}
     </div>

@@ -120,10 +120,12 @@ const CustomerList = () => {
       setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
       setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, customer.mobileNumber]);
       setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
+      setCheckAllCustomers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
       setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== customer.mobileNumber));
       setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
+      setCheckAllCustomers(false)
     }
   };
 

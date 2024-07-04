@@ -5,6 +5,7 @@
     box-sizing: border-box;
     border-radius: 8px;
     overflow: hidden;
+    padding-block: 2rem;
 }
 
 .salonadv_header {
@@ -162,7 +163,7 @@
     -moz-border-radius: 0.6rem;
     -ms-border-radius: 0.6rem;
     -o-border-radius: 0.6rem;
-    width: 92%;
+    width: 95%;
 }
 
 .salonadv_task>div:nth-child(1){
@@ -284,6 +285,10 @@
     .salonadv_header>div>div:nth-child(1){
         width: 23rem;
     }
+
+    .salonadv_task{
+        width: 92%;
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
@@ -303,6 +308,10 @@
     .salonadv_header>div>div:nth-child(1){
         width: 25rem;
     }
+
+    .salonadv_task{
+        width: 92%;
+    }
 }
 
 
@@ -319,5 +328,9 @@
 
     .salonadv_header>div>div:nth-child(1){
         width: 25rem;
+    }
+
+    .salonadv_task{
+        width: 92%;
     }
 }

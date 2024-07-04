@@ -191,10 +191,12 @@ const BarberList = () => {
       setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
       setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, barber.mobileNumber])
       setCheckBarberNames(prevNames => [...prevNames, barber.name])
+      setCheckAllBarbers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
       setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== barber.mobileNumber))
       setCheckBarberNames(prevNames => prevNames.filter(name => name !== barber.name))
+      setCheckAllBarbers(false)
     }
   };
 

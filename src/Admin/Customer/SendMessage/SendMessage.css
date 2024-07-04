@@ -7,6 +7,7 @@
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+    line-height: 4rem;
 }
 
 .send_customer_message_container>div:nth-child(2){

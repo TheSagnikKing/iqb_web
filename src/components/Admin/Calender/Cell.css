@@ -17,6 +17,7 @@
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
+    box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
 }
 
 .initial-active-cell {
@@ -28,4 +29,8 @@
 .cells.dark:hover {
     background-color: var(--dark-mode-bg-color-1);
     color: var(--primary-text-light-color1);
+}
+
+.initial-active-cell.dark{
+    background-color: var(--dark-mode-bg-color-1);
 }

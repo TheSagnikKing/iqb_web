@@ -36,10 +36,8 @@
 }
 
 .barber_signup_container>div:nth-child(2)>div{
-    /* width: 80%; */
     width: 42rem;
     height: auto;
-    /* background-color: rgba(255, 0, 0, 0.239); */
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -108,7 +106,6 @@ iframe{
 }
 
 .barber_signup_container>div:nth-child(2)>div>div:nth-child(5){
-    /* background-color: rgba(4, 0, 255, 0.281); */
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -129,12 +126,12 @@ iframe{
     align-items: center;
     font-size: 1.6rem;
     font-weight: bold;
+    box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
 }
 
 .barber_signup_container>div:nth-child(2)>div>div:nth-child(6){
     height: 2.1rem;
     width: 100%;
-    /* background-color: rgba(128, 128, 128, 0.425); */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -152,11 +149,6 @@ iframe{
     font-size: 1.4rem;
     font-weight: 500;
 }
-
-.barber_signup_container>div:nth-child(2)>div>div:nth-child(7){
-    /* For google button */
-}
-
 
 .barber_signup_container>div:nth-child(2)>div>p:nth-child(8){
     font-size: 1.6rem;

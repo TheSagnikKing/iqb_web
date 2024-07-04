@@ -54,6 +54,8 @@ import Loader from './components/Loader/Loader';
 import Drop from './Admin/Demo/Drop';
 import Demo from './Admin/Demo/Demo';
 import Table from './Admin/Demo/Table';
+import { useSelector } from 'react-redux';
+import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 
 const App = () => {
 
@@ -73,12 +75,24 @@ const App = () => {
     };
   }, []);
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
 
   return (
     <>
       <Toaster />
       <BrowserRouter>
-        <React.Suspense fallback={<div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}><Loader /></div>}>
+        <React.Suspense fallback={<div 
+        style={{ 
+          width: "100vw", 
+          height: "100vh", 
+          display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center",
+          background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
+         }}><Loader /></div>}>
           <Routes>
 
             {/* Admin Auth Screens */}
