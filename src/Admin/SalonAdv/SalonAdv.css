@@ -121,6 +121,7 @@
     height: calc(100vh - 15rem);
     margin-top: 2rem;
     overflow: auto;
+    /* pointer-events:visibleStroke; */
 }
 
 .salonadv_column::-webkit-scrollbar {
@@ -161,6 +162,7 @@
     -moz-border-radius: 0.6rem;
     -ms-border-radius: 0.6rem;
     -o-border-radius: 0.6rem;
+    width: 92%;
 }
 
 .salonadv_task>div:nth-child(1){

@@ -225,7 +225,7 @@ const CustomerList = () => {
             <div>
               <input
                 type="checkbox"
-                style={{ accentColor: 'red', height: '1.6rem', width: '1.6rem' }}
+                style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
                 onChange={checkAllCustomersHandler}
                 checked={checkAllCustomers}
               />
@@ -239,7 +239,7 @@ const CustomerList = () => {
               <div key={s._id}>
                 <input
                   type="checkbox"
-                  style={{ accentColor: 'red', height: '1.6rem', width: '1.6rem' }}
+                  style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
                   checked={checkedCustomers[s._id] || false}
                   onChange={() => customerEmailCheckedHandler(s)}
                 />

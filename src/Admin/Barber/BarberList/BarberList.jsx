@@ -267,7 +267,7 @@ const BarberList = () => {
               <div>
                 <input
                   type="checkbox"
-                  style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                  style={{ accentColor: "red", height: "1.8rem", width: "1.8rem" }}
                   onChange={checkAllBarbersHandler}
                   checked={checkAllBarbers}
 
@@ -282,7 +282,7 @@ const BarberList = () => {
                 <div className='admin_barber_content_body_item' key={b._id}>
                   <input
                     type="checkbox"
-                    style={{ accentColor: "red", height: "1.6rem", width: "1.6rem" }}
+                    style={{ accentColor: "red", height: "1.8rem", width: "1.8rem" }}
                     checked={checkedBarbers[b._id] || false}
                     onChange={() => barberEmailCheckedHandler(b)}
                   />

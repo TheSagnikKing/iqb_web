@@ -238,6 +238,7 @@
     }
 
     .mobile_sidebar_inactive {
+        left: -72vw;
         opacity: 0;
         width: 0vw;
     }
@@ -359,6 +360,7 @@
     }
 
     .mobile_sidebar_inactive {
+        left: -72vw;
         opacity: 0;
         width: 0vw;
     }

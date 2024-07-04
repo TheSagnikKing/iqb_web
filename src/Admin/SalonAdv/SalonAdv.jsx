@@ -222,6 +222,8 @@ const SalonAdv = () => {
     }
   }, [advertisements, salonId, dispatch]);
 
+  
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor), // For Mobile

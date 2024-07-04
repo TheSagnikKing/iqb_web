@@ -717,6 +717,7 @@
     }
 
     .dashboard_mobile_sidebar_inactive {
+        left: -72vw;
         opacity: 0;
         width: 0vw;
     }
@@ -1087,6 +1088,7 @@
     }
 
     .dashboard_mobile_sidebar_inactive {
+        left: -72vw;
         opacity: 0;
         width: 0vw;
     }
