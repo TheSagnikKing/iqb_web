@@ -12,7 +12,8 @@
 }
 
 .admin_edit_profile_content_wrapper {
-    width: 100%;
+    width: 99%;
+    margin-inline: auto;
     height: auto;
     display: flex;
     flex-direction: column;
