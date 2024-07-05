@@ -562,7 +562,15 @@ const CreateSalon = () => {
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
     if (!allowedTypes.includes(uploadImage.type)) {
-      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 

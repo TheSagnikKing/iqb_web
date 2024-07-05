@@ -684,7 +684,8 @@ const Dashboard = () => {
           <div>
             <div><Calender value={currentDate} setCurrentDate={setCurrentDate} /></div>
             <div style={{
-              color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)"
+              color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-bg-light-color2)",
+              fontSize: "1.4rem"
             }}>
               Appointment not available
             </div>

@@ -122,7 +122,8 @@
     height: calc(100vh - 15rem);
     margin-top: 2rem;
     overflow: auto;
-    /* pointer-events:visibleStroke; */
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
 }
 
 .salonadv_column::-webkit-scrollbar {

@@ -25,23 +25,6 @@ const SalonAdv = () => {
 
   const [uploadAdvImages, setUploadAdvImages] = useState([])
 
-  // const handleAdvImageFileInputChange = async (e) => {
-  //   const uploadedFiles = e.target.files;
-
-  //   const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-
-  //   const files = Array.from(uploadedFiles).map((file) => {
-  //     if (!allowedTypes.includes(file.type)) {
-  //       alert("Please upload only valid image files (JPEG, WebP, PNG).");
-  //       return null;
-  //     }
-
-  //     return file
-  //   });
-
-  //   setUploadAdvImages(files)
-  // };
-
   const handleAdvImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
@@ -115,7 +98,7 @@ const SalonAdv = () => {
         });
 
         setUploadLoader(false)
-        setUploadAdvImages(null);
+        setUploadAdvImages([]);
         dispatch({
           type: "ADD_ADVETISEMENT",
           payload: imageResponse?.data?.response
@@ -284,7 +267,7 @@ const SalonAdv = () => {
               Files</p>
           </div>
           {
-            uploadLoader ? <button><ButtonLoader color="var(--primary-bg-color3)" /></button> :
+            uploadLoader ? <button><ButtonLoader color="#fff" /></button> :
               <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
                 <div><Uploadicon /></div>
                 <p>Upload</p>

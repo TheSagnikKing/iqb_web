@@ -55,7 +55,15 @@ const EditProfile = () => {
 
         const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
         if (!allowedTypes.includes(uploadImage.type)) {
-            alert("Please upload a valid image file (JPEG, WebP, PNG).");
+            toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
             return;
         }
 
@@ -276,7 +284,11 @@ const EditProfile = () => {
             <div className={`admin_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
                     {/* <p>Edit profile</p> */}
-                    <div>
+                    <div
+                        style={{
+                            border: uploadpicLoader && "none"
+                        }}
+                    >
                         {
                             uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
