@@ -205,3 +205,19 @@
         width: 35%;
     }
 }
+
+
+@media screen and (min-width: 1251px) and (max-width:1500px) {
+    .send_message_container>div:nth-child(2){
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .send_message_content>button{
+        width: 35%;
+    }
+
+    .send_message_content>div textarea{
+        min-height: 15rem;
+    }
+}

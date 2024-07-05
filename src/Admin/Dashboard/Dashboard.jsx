@@ -231,16 +231,33 @@ const Dashboard = () => {
   }, []);
 
 
-  const truncateText = (text, charecterLimit) => {
-    if (text?.length <= charecterLimit) {
+  // const truncateText = (text, charecterLimit) => {
+    
+  //   if (text?.length <= charecterLimit) {
+  //     return text;
+  //   }
+
+  //   let truncatedText = text?.slice(0, charecterLimit);
+
+  //   return truncatedText + '...'
+  // }
+
+  const truncateText = (text, characterLimit) => {
+    if (!text) return '';
+
+    console.log(text.length)
+    
+    if (text.length <= characterLimit) {
       return text;
     }
-
-    let truncatedText = text?.slice(0, charecterLimit);
-
-    return truncatedText + '...'
-  }
-
+  
+    // Truncate the text and add ellipsis
+    let truncatedText = text.slice(0, characterLimit);
+  
+    // Ensure ellipsis is added even if the last character is part of a long word
+    return truncatedText + '...';
+  };
+  
   const [openModal, setOpenModal] = useState(false)
 
   const updateSalonInfo = () => {
@@ -312,7 +329,7 @@ const Dashboard = () => {
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                 </div> :
                 <div>
-                  <p>{truncateText(salonDesc, salonChar)}</p>
+                  <p style={{wordBreak:"break-word"}}>{truncateText(salonDesc, salonChar)}</p>
                   <button onClick={() => setOpenModal(true)} disabled={adminGetDefaultSalonLoading == true ? true : false}>
                     <div><EditIcon /></div>
                     <p>Edit</p>
@@ -735,7 +752,12 @@ const Dashboard = () => {
             <div className={`salon_info_container ${darkmodeOn && "dark"}`}>
               <div>
                 <label htmlFor="salonInfo">Write about Salon Information</label>
-                <textarea id="salonInfo" name="salonInfo" value={salonDesc} onChange={(e) => setSalonDesc(e.target.value)}></textarea>
+                <textarea 
+                id="salonInfo" 
+                name="salonInfo" 
+                value={salonDesc} 
+                onChange={(e) => setSalonDesc(e.target.value)}
+                ></textarea>
               </div>
               {
                 adminUpdateSalonInfoLoading ?

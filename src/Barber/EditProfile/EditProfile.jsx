@@ -448,8 +448,8 @@ const EditProfile = () => {
                         />
 
                         {genderDrop && <div ref={genderDropRef}>
-                            <p onClick={() => setGenderHandler("male")}>male</p>
-                            <p onClick={() => setGenderHandler("female")}>female</p>
+                            <p onClick={() => setGenderHandler("Male")}>Male</p>
+                            <p onClick={() => setGenderHandler("Female")}>Female</p>
                             <p onClick={() => setGenderHandler("Other")}>Other</p>
                         </div>}
                     </div>

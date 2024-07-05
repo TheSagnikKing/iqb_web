@@ -81,18 +81,21 @@ const App = () => {
 
 
   return (
+    // <div style={{
+    //   background: darkmodeOn ? "var(--dark-mode-bg-color-1)" : "var(--primary-bg-light-color1)"
+    // }}>
     <>
       <Toaster />
       <BrowserRouter>
-        <React.Suspense fallback={<div 
-        style={{ 
-          width: "100vw", 
-          height: "100vh", 
-          display: "flex", 
-          justifyContent: "center", 
-          alignItems: "center",
-          background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
-         }}><Loader /></div>}>
+        <React.Suspense fallback={<div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
+          }}><Loader /></div>}>
           <Routes>
 
             {/* Admin Auth Screens */}
@@ -121,18 +124,18 @@ const App = () => {
                 <Route path="/admin-barber" element={<AdminBarberList />} />
                 <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
                 <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
-                <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail/>}/>
-                <Route path="/admin-barber/send-message" element={<AdminBarberSendMessage/>}/>
+                <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail />} />
+                <Route path="/admin-barber/send-message" element={<AdminBarberSendMessage />} />
                 <Route path="/admin-customer" element={<AdminCustomerList />} />
-                <Route path="/admin-customer/send-email" element={<AdminSendCustomerEmail/>}/>
-                <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage/>}/>
+                <Route path="/admin-customer/send-email" element={<AdminSendCustomerEmail />} />
+                <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage />} />
                 <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                 <Route path="/admin-queue" element={<AdminQueue />} />
-                <Route path="/drop" element={<Drop/>}/>
-                <Route path="/demo" element={<Demo/>}/>
-                <Route path='/table' element={<Table/>}/>
+                <Route path="/drop" element={<Drop />} />
+                <Route path="/demo" element={<Demo />} />
+                <Route path='/table' element={<Table />} />
               </Route>
-              
+
             </Route>
 
             {/* Barber Auth Screens */}
@@ -152,8 +155,8 @@ const App = () => {
                 <Route path="/barber-dashboard" element={<BarberDashboard />} />
                 <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
                 <Route path="/barber-customer" element={<BarberCustomer />} />
-                <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail/>}/>
-                <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage/>}/>
+                <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail />} />
+                <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage />} />
                 <Route path="/barber-queue" element={<BarberQueueList />} />
               </Route>
             </Route>
@@ -163,6 +166,7 @@ const App = () => {
         </React.Suspense>
       </BrowserRouter>
     </>
+    // </div>
   )
 }
 

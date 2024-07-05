@@ -58,6 +58,13 @@ const CustomerList = () => {
     }
   };
 
+  
+  const [checkAllCustomers, setCheckAllCustomers] = useState(false);
+  const [checkedCustomers, setCheckedCustomers] = useState({});
+  const [checkedEmails, setCheckedEmails] = useState([]);
+  const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
+  const [checkCustomerNames, setCheckCustomerNames] = useState([]);
+
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -74,9 +81,11 @@ const CustomerList = () => {
           type: GET_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,
         });
+        setCheckAllCustomers(false)
         setPage(prevPage => prevPage - 1);
       } catch (error) {
         console.error('Error fetching customers:', error);
+        setCheckAllCustomers(false)
       }
     }
   };
@@ -90,17 +99,13 @@ const CustomerList = () => {
           payload: data,
         });
         setPage(prevPage => prevPage + 1);
+        setCheckAllCustomers(false)
       } catch (error) {
         console.error('Error fetching customers:', error);
+        setCheckAllCustomers(false)
       }
     }
   };
-
-  const [checkAllCustomers, setCheckAllCustomers] = useState(false);
-  const [checkedCustomers, setCheckedCustomers] = useState({});
-  const [checkedEmails, setCheckedEmails] = useState([]);
-  const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
-  const [checkCustomerNames, setCheckCustomerNames] = useState([]);
 
   const customerEmailCheckedHandler = (customer) => {
     const isChecked = !checkedCustomers[customer._id];
@@ -147,9 +152,6 @@ const CustomerList = () => {
     });
   };
 
-  console.log('Customer Emails ', checkedEmails);
-  console.log('Customer MobileNumbers ', checkMobileNumbers);
-  console.log('Customer Names ', checkCustomerNames);
 
   const navigate = useNavigate();
 

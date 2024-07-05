@@ -455,7 +455,9 @@ const Dashboard = () => {
                     highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                 </div> :
                 <div>
-                  <p>{truncateText(salonDesc, salonChar)}</p>
+                  <p style={{
+                    wordBreak: "break-word"
+                  }}>{truncateText(salonDesc, salonChar)}</p>
                   <button onClick={() => setOpenModal(true)} disabled={barberDashboardSalonInfoLoading == true ? true : false}>
                     <div><ShowSalonInfo /></div>
                     <p>Show</p>

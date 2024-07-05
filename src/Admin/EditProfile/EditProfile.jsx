@@ -443,9 +443,13 @@ const EditProfile = () => {
                             }}
                         />
 
-                        {genderDrop && <div ref={genderDropRef}>
-                            <p onClick={() => setGenderHandler("male")}>male</p>
-                            <p onClick={() => setGenderHandler("female")}>female</p>
+                        {genderDrop && <div ref={genderDropRef}
+                        style={{
+                            background: darkmodeOn && "var(--dark-mode-bg-color-2)"
+                        }}
+                        >
+                            <p onClick={() => setGenderHandler("Male")}>Male</p>
+                            <p onClick={() => setGenderHandler("Female")}>Female</p>
                             <p onClick={() => setGenderHandler("Other")}>Other</p>
                         </div>}
                     </div>
