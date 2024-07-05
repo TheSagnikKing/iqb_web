@@ -582,19 +582,25 @@ const CreateSalon = () => {
 
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
-
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+    const generateUniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    const generateUniqueId = () => {
-      return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    };
+    const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
+
+    if (invalidFiles.length > 0) {
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
 
     const urls = Array.from(uploadedFiles).map((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null;
-      }
-
       const blobUrl = URL.createObjectURL(file);
       const _id = generateUniqueId();
       return { _id, blobUrl, name: file.name };
@@ -603,30 +609,31 @@ const CreateSalon = () => {
     setSalonImages([...salonImages, ...urls]);
   };
 
-  const [mobilesalonlogo, setMobileSalonlogo] = useState("")
 
-  const mobileSalonInputRef = useRef(null);
+  // const [mobilesalonlogo, setMobileSalonlogo] = useState("")
 
-  const handleMobileSalonLogoButtonClick = () => {
-    mobileSalonInputRef.current.click();
-  };
+  // const mobileSalonInputRef = useRef(null);
 
-  const handleMobileSalonFileInputChange = async (e) => {
-    const uploadImage = e.target.files[0]; // Get the uploaded file
+  // const handleMobileSalonLogoButtonClick = () => {
+  //   mobileSalonInputRef.current.click();
+  // };
 
-    const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-    if (!allowedTypes.includes(uploadImage.type)) {
-      alert("Please upload a valid image file (JPEG, WebP, PNG).");
-      return;
-    }
+  // const handleMobileSalonFileInputChange = async (e) => {
+  //   const uploadImage = e.target.files[0]; // Get the uploaded file
 
-    setMobileSalonlogo(uploadImage.name)
-  };
+  //   const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+  //   if (!allowedTypes.includes(uploadImage.type)) {
+  //     alert("Please upload a valid image file (JPEG, WebP, PNG).");
+  //     return;
+  //   }
+
+  //   setMobileSalonlogo(uploadImage.name)
+  // };
 
 
-  const [mobilesalonimagesnames, setMobileSalonimagesnames] = useState("")
+  // const [mobilesalonimagesnames, setMobileSalonimagesnames] = useState("")
 
-  const mobileSalonImageInputRef = useRef(null);
+  // const mobileSalonImageInputRef = useRef(null);
 
 
 
@@ -732,7 +739,15 @@ const CreateSalon = () => {
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
     if (!allowedTypes.includes(uploadImage.type)) {
-      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 
@@ -962,6 +977,14 @@ const CreateSalon = () => {
     }
 
   }
+
+  const [oldPassword, setOldPassword] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  const [seeOldPassword, setSeeOldPassword] = useState(false)
+  const [seePassword, setSeePassword] = useState(false)
+  const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
   return (
     <div className={`create_salon_wrapper ${darkmodeOn && "dark"}`}>
@@ -1560,7 +1583,7 @@ const CreateSalon = () => {
       </div>
 
       {
-        openModal && <Modal setOpenModal={setOpenModal}>
+        openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword} setSeeOldPassword={setSeeOldPassword} setSeePassword={setSeePassword} setSeeConfirmPassword={setSeeConfirmPassword}>
           <div>
             <img src={openBlobSalonImage?.blobUrl} alt="" />
           </div>

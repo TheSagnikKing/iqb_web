@@ -72,6 +72,7 @@
     -o-border-radius: 1rem;
     padding-inline: 1rem;
     font-size: 1.6rem;
+    caret-color: transparent;
 }
 
 .salon_appointment_content>div:nth-child(1)>div>input:focus{

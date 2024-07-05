@@ -11,6 +11,7 @@ import { adminDragAdvertisementAction, getAllAdvertisementAction } from '../../R
 import api from '../../Redux/api/Api';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 import Skeleton from 'react-loading-skeleton';
+import toast from 'react-hot-toast';
 
 const SalonAdv = () => {
 
@@ -24,24 +25,49 @@ const SalonAdv = () => {
 
   const [uploadAdvImages, setUploadAdvImages] = useState([])
 
+  // const handleAdvImageFileInputChange = async (e) => {
+  //   const uploadedFiles = e.target.files;
+
+  //   const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+  //   const files = Array.from(uploadedFiles).map((file) => {
+  //     if (!allowedTypes.includes(file.type)) {
+  //       alert("Please upload only valid image files (JPEG, WebP, PNG).");
+  //       return null;
+  //     }
+
+  //     return file
+  //   });
+
+  //   setUploadAdvImages(files)
+  // };
+
   const handleAdvImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
-
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-    const files = Array.from(uploadedFiles).map((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null;
-      }
+    // Check for invalid files
+    const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
+    if (invalidFiles.length > 0) {
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      setUploadAdvImages([]);
+      return;
+    }
 
-      return file
-    });
+    // Only process valid files
+    const validFiles = Array.from(uploadedFiles).filter(file => allowedTypes.includes(file.type));
 
-    setUploadAdvImages(files)
+    setUploadAdvImages(validFiles);
   };
 
-  // console.log(uploadAdvImages)
 
   const dispatch = useDispatch()
 
@@ -222,7 +248,7 @@ const SalonAdv = () => {
     }
   }, [advertisements, salonId, dispatch]);
 
-  
+
 
   const sensors = useSensors(
     useSensor(PointerSensor),

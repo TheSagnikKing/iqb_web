@@ -199,7 +199,6 @@ const SalonAppointmentSettings = () => {
                         <input
                             type="text"
                             value={`${startTime ? `${startTime} hr` : ''}`}
-                            onChange={(e) => setStartTime(e.target.value)}
                             onClick={() => startTimeDropHandler()}
                             ref={startTimeinputRef}
                         />
@@ -218,7 +217,6 @@ const SalonAppointmentSettings = () => {
                         <input
                             type="text"
                             value={`${endTime ? `${endTime} hr` : ''}`}
-                            onChange={(e) => setEndTime(e.target.value)}
                             onClick={() => endTimeDropHandler()}
                             ref={endTimeinputRef}
                         />
@@ -237,7 +235,6 @@ const SalonAppointmentSettings = () => {
                         <input
                             type="text"
                             value={`${intervalTime ? `${intervalTime} mins` : ''}`}
-                            onChange={(e) => setIntervalTime(e.target.value)}
                             onClick={() => intervalTimeDropHandler()}
                             ref={intervalTimeinputRef}
                         />

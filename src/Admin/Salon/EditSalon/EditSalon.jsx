@@ -48,20 +48,20 @@ const EditSalon = () => {
     }
   }, [currentSalon])
 
-  console.log("Hurrayy  ",AdminSalonImages)
-  console.log("Salon logo ",AdminSalonLogo)
+  console.log("Hurrayy  ", AdminSalonImages)
+  console.log("Salon logo ", AdminSalonLogo)
 
   useEffect(() => {
-    if(AdminSalonImages){
+    if (AdminSalonImages) {
       setSalonImages(AdminSalonImages)
     }
-  },[AdminSalonImages])
-  
+  }, [AdminSalonImages])
+
   useEffect(() => {
-    if(AdminSalonLogo){
+    if (AdminSalonLogo) {
       setSalonLogo(AdminSalonLogo?.salonLogo[0]?.url)
     }
-  },[AdminSalonLogo])
+  }, [AdminSalonLogo])
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
@@ -397,7 +397,7 @@ const EditSalon = () => {
 
   const [loading, setLoading] = useState(false)
 
-  
+
   const fileInputRef = useRef(null);
 
   const handleSalonLogoButtonClick = () => {
@@ -455,28 +455,33 @@ const EditSalon = () => {
 
   const [uploadSalonImages, setUploadSalonImages] = useState([])
 
+
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
-
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-    const files = Array.from(uploadedFiles).map((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload only valid image files (JPEG, WebP, PNG).");
-        return null;
-      }
+    // Check for invalid files
+    const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
+    if (invalidFiles.length > 0) {
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
 
-      return file;
-    });
+    const files = Array.from(uploadedFiles);
 
     const formData = new FormData();
-
     const SalonId = currentSalon?.salonId;
     formData.append('salonId', SalonId);
 
-    for (const file of files) { // <-- Corrected here
-      formData.append('gallery', file);
-    }
+    files.forEach(file => formData.append('gallery', file));
 
     try {
       const { data } = await api.post('/api/salon/uploadSalonImage', formData, {
@@ -485,7 +490,7 @@ const EditSalon = () => {
         },
       });
 
-      setSalonImages([...data?.response,...salonImages])
+      setSalonImages([...data?.response, ...salonImages]);
 
       toast.success("Salon images uploaded successfully", {
         duration: 3000,
@@ -508,6 +513,7 @@ const EditSalon = () => {
       });
     }
   };
+
 
   const [selectedLogo, setSelectedLogo] = useState({
     url: "",
@@ -650,7 +656,15 @@ const EditSalon = () => {
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
     if (!allowedTypes.includes(uploadImage.type)) {
-      alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 
@@ -871,13 +885,20 @@ const EditSalon = () => {
 
   }
 
+  const [oldPassword, setOldPassword] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  const [seeOldPassword, setSeeOldPassword] = useState(false)
+  const [seePassword, setSeePassword] = useState(false)
+  const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
   return (
     <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
       <p>Edit Salon</p>
       <div className={`edit_salon_content_wrapper ${darkmodeOn && "dark"}`}>
         <div>
           <div>
-            {/* <div><img src={salonImages[0]} alt="" /></div> */}
             <div><svg xmlns="http://www.w3.org/2000/svg" width="100%">
               <rect fill="#ffffff" width="540" height="450"></rect>
               <defs>
@@ -1414,9 +1435,6 @@ const EditSalon = () => {
               </button>
             </div>
 
-            {/* <div>
-              <p>{mobilesalonimagesnames && mobilesalonimagesnames.join(',  ')}</p>
-            </div> */}
           </div>
 
           <div>
@@ -1516,7 +1534,7 @@ const EditSalon = () => {
       }
 
       {
-        openModal && <Modal setOpenModal={setOpenModal}>
+        openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword} setSeeOldPassword={setSeeOldPassword} setSeePassword={setSeePassword} setSeeConfirmPassword={setSeeConfirmPassword}>
           <div>
             <img src={selectedEditImageObject?.url} alt="salon_image" />
           </div>

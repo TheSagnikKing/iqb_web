@@ -237,7 +237,7 @@ const EditProfile = () => {
 
     const updatePasswordHandler = () => {
         if (password !== confirmPassword) {
-            toast.error("Password donot match", {
+            toast.error("New and confirm password donot match", {
                 duration: 3000,
                 style: {
                     fontSize: "1.4rem",
@@ -314,7 +314,7 @@ const EditProfile = () => {
                         />
                     </div>
                     {
-                        openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword}>
+                        openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword} setSeeOldPassword={setSeeOldPassword} setSeePassword={setSeePassword} setSeeConfirmPassword={setSeeConfirmPassword}>
                             <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
                                 <h1>Change your password</h1>
 
@@ -428,9 +428,11 @@ const EditProfile = () => {
                         <input
                             type="text"
                             value={`${gender ? `${gender}` : ''}`}
-                            onChange={(e) => setGender(e.target.value)}
                             onClick={() => genderDropHandler()}
                             ref={genderinputRef}
+                            style={{
+                                caretColor: "transparent"
+                            }}
                         />
 
                         {genderDrop && <div ref={genderDropRef}>

@@ -1269,7 +1269,7 @@
     -o-border-radius: 1rem;
 }
 
-.salontype_input{
+.salontype_input {
     caret-color: transparent;
 }
 
@@ -1561,20 +1561,20 @@
         cursor: pointer;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1){
-        background-color:red;
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1) {
+        background-color: red;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2){
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2) {
         background-color: var(--primary-bg-color3);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>p{
+    .salon_image_update_item>div:nth-child(2)>div>button>p {
         font-size: 1.4rem;
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>div{
+    .salon_image_update_item>div:nth-child(2)>div>button>div {
         font-size: 1.4rem;
         display: flex;
         justify-content: center;
@@ -1601,7 +1601,7 @@
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item.dark{
+    .salon_image_update_item.dark {
         background-color: var(--dark-mode-bg-color-4);
     }
 }
@@ -1757,7 +1757,7 @@
 
     .add_services_drop_container>div:nth-child(6) {
         grid-template-columns: 1fr;
-    
+
     }
 
     .salon_image_update_item {
@@ -1808,20 +1808,20 @@
         cursor: pointer;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1){
-        background-color:red;
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1) {
+        background-color: red;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2){
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2) {
         background-color: var(--primary-bg-color3);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>p{
+    .salon_image_update_item>div:nth-child(2)>div>button>p {
         font-size: 1.4rem;
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>div{
+    .salon_image_update_item>div:nth-child(2)>div>button>div {
         font-size: 1.4rem;
         display: flex;
         justify-content: center;
@@ -1849,13 +1849,13 @@
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item.dark{
+    .salon_image_update_item.dark {
         background-color: var(--dark-mode-bg-color-4);
     }
 }
 
 @media screen and (min-width:769px) and (max-width:1140px) {
-    
+
     .salon_image_update_item {
         height: 35rem;
         border-radius: 1rem;
@@ -1904,20 +1904,20 @@
         cursor: pointer;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1){
-        background-color:red;
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1) {
+        background-color: red;
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2){
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2) {
         background-color: var(--primary-bg-color3);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>p{
+    .salon_image_update_item>div:nth-child(2)>div>button>p {
         font-size: 1.4rem;
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item>div:nth-child(2)>div>button>div{
+    .salon_image_update_item>div:nth-child(2)>div>button>div {
         font-size: 1.4rem;
         display: flex;
         justify-content: center;
@@ -1933,7 +1933,9 @@
         align-items: center;
         background-color: transparent !important;
         margin-bottom: 1rem !important;
+        padding: 0px !important;
     }
+
 
     .salon_images_wrapper>div:nth-child(2)>p {
         font-size: 1.6rem;
@@ -1956,7 +1958,7 @@
         font-weight: 500;
     }
 
-    .salon_image_update_item.dark{
+    .salon_image_update_item.dark {
         background-color: var(--dark-mode-bg-color-4);
     }
 }
@@ -2057,6 +2059,34 @@
     }
 
     .salon_images_wrapper>div:nth-child(2) {
+        width: 100%;
+        display: flex;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent !important;
+        margin-bottom: 1rem !important;
+        padding: 0px !important;
+    }
+
+    .salon_images_wrapper>div:nth-child(2)>button {
+        height: 4rem;
+        width: 25%;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-bg-color3);
+        color: var(--primary-text-light-color1);
+        box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    /* .salon_images_wrapper>div:nth-child(2) {
         min-height: 10rem !important;
         max-height: 10rem;
         width: 100%;
@@ -2093,6 +2123,75 @@
     .salon_images_wrapper>div:nth-child(2)>p {
         font-size: 1.6rem;
         line-height: 3rem;
+    } */
+
+    .salon_image_update_item {
+        height: 35rem;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+        display: grid;
+        grid-template-rows: 28rem 7rem;
+    }
+
+    .salon_image_update_item>div:nth-child(1) img {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    .salon_image_update_item>div:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div>button {
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 2rem;
+        -webkit-border-radius: 2rem;
+        -moz-border-radius: 2rem;
+        -ms-border-radius: 2rem;
+        -o-border-radius: 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        gap: 1rem;
+        cursor: pointer;
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(1) {
+        background-color: red;
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div>button:nth-child(2) {
+        background-color: var(--primary-bg-color3);
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div>button>p {
+        font-size: 1.4rem;
+        color: var(--primary-text-light-color1);
+    }
+
+    .salon_image_update_item>div:nth-child(2)>div>button>div {
+        font-size: 1.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--primary-text-light-color1);
     }
 
     /* Dark Css Style */
@@ -2114,7 +2213,11 @@
         color: var(--primary-text-light-color1);
     }
 
-    .salon_image_update_item.dark{
+    .salon_image_update_item.dark {
+        background-color: var(--dark-mode-bg-color-4);
+    }
+
+    .salon_image_update_item.dark {
         background-color: var(--dark-mode-bg-color-4);
     }
 }
