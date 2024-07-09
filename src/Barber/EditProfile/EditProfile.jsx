@@ -28,15 +28,15 @@ const EditProfile = () => {
     const [name, setName] = useState(barberProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(barberProfile?.dateOfBirth?.split('T')[0])
 
-    const [profilepic, setProfilepic] = useState("")
+    // const [profilepic, setProfilepic] = useState("")
 
-    useEffect(() => {
-        if (barberProfile && barberProfile?.profile[0]?.url) {
-            setProfilepic(barberProfile?.profile[0]?.url)
-        } else {
-            setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
-        }
-    }, [barberProfile])
+    // useEffect(() => {
+    //     if (barberProfile && barberProfile?.profile[0]?.url) {
+    //         setProfilepic(barberProfile?.profile[0]?.url)
+    //     } else {
+    //         setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+    //     }
+    // }, [barberProfile])
 
     const fileInputRef = useRef(null);
 
@@ -285,7 +285,6 @@ const EditProfile = () => {
             <p>Edit profile</p>
             <div className={`barber_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
                 <div>
-                    {/* <p>Edit profile</p> */}
                     <div
                         style={{
                             border: uploadpicLoader && "none"
@@ -293,7 +292,7 @@ const EditProfile = () => {
                     >
                         {
                             uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={`${profilepic}`} alt="" />
+                                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={barberProfile?.profile[0]?.url} alt="" />
                         }
 
                         <div>

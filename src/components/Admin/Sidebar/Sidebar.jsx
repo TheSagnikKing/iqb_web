@@ -16,16 +16,6 @@ const Sidebar = () => {
     response: adminGetDefaultSalonResponse = {} // Add default value
   } = adminGetDefaultSalon;
 
-  const [src, setSrc] = useState("");
-
-  useEffect(() => {
-    if (adminGetDefaultSalonResponse?.salonLogo?.[0]?.url) {
-      setSrc(adminGetDefaultSalonResponse.salonLogo[0].url);
-    } else {
-      setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg");
-    }
-  }, [adminGetDefaultSalonResponse]);
-
   const [showSidebar, setShowSidebar] = useState(true);
 
   const navigate = useNavigate();
@@ -44,7 +34,10 @@ const Sidebar = () => {
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
               <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
-                <img src={`${src}`} alt="salonLogo" />
+                <img
+                  src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
+                  alt="salonLogo"
+                />
               </div>
               <p style={{
                 color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"

@@ -29,16 +29,6 @@ const Sidebar = () => {
     response: barberGetSalonLogoResponse
   } = barberGetSalonLogo
 
-  const [salonLogo, setSalonLogo] = useState("")
-
-  useEffect(() => {
-    if (barberGetSalonLogoResponse && barberGetSalonLogoResponse?.salonLogo[0]?.url) {
-      setSalonLogo(barberGetSalonLogoResponse?.salonLogo[0]?.url)
-    } else {
-      setSalonLogo("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
-    }
-  }, [barberGetSalonLogoResponse])
-
   const [showSidebar, setShowSidebar] = useState(true)
 
   const navigate = useNavigate()
@@ -57,7 +47,11 @@ const Sidebar = () => {
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
             {showSidebar ? <div className='sidebar_top_salon'>
               <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
-                <img src={`${salonLogo}`} alt="" />
+                <img
+                  src={barberGetSalonLogoResponse?.salonLogo[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
+                  alt=""
+
+                />
               </div>
               <p style={{
                 color: darkmodeOn && "var(--primary-text-light-color1)"

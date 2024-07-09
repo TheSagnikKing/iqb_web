@@ -57,7 +57,7 @@ const SignupEditProfile = () => {
 
 
   const updateClicked = () => {
-    const profiledata = { email: barberdata?.email, mobileNumber:Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType };
+    const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType };
 
     console.log(profiledata)
     dispatch(BarberSignupEditAction(profiledata, navigate))
@@ -96,9 +96,9 @@ const SignupEditProfile = () => {
             {
               barberSkipProfileLoading ?
                 <button style={{
-                  display:"flex",
-                  justifyContent:"center",
-                  alignItems:"center"
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}><ButtonLoader /></button> :
                 <button onClick={() => skipClicked()}>Skip</button>
             }
@@ -142,7 +142,10 @@ const SignupEditProfile = () => {
           <div>
             <p>Mobile Number</p>
             <div>
-              <div>
+              <div style={{
+                background: "var(--bg-color3)",
+                borderRadius: "1rem"
+              }}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry="gb"
