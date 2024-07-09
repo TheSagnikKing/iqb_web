@@ -1,4 +1,4 @@
-.admin_barber_wrapper{
+.admin_barber_wrapper {
     height: calc(100vh - 6rem);
     width: 100%;
     padding-block: 2rem;
@@ -7,31 +7,31 @@
     gap: 1.5rem;
 }
 
-.admin_barber_wrapper>div:nth-child(1){
+.admin_barber_wrapper>div:nth-child(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 4rem;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>p{
+.admin_barber_wrapper>div:nth-child(1)>p {
     font-size: 2rem;
     font-weight: bold;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>div{
+.admin_barber_wrapper>div:nth-child(1)>div {
     display: flex;
     align-items: center;
     gap: 2rem;
     height: 100%;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>div>button{
+.admin_barber_wrapper>div:nth-child(1)>div>button {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 9rem;
-    height: 100%;
+    height: 4rem;
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
     border: none;
@@ -46,29 +46,29 @@
     font-size: 1.4rem;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>div>button>p{
+.admin_barber_wrapper>div:nth-child(1)>div>button>p {
     color: var(--primary-text-light-color1);
 }
 
 .admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(1),
-.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(2){
+.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(2) {
     width: 5rem;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>div>button>div{
+.admin_barber_wrapper>div:nth-child(1)>div>button>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(2)>div{
+.admin_barber_wrapper>div:nth-child(1)>div>button:nth-child(2)>div {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
 }
 
-.admin_barber_content_wrapper{
+.admin_barber_content_wrapper {
     width: 100%;
     height: 100%;
     border-radius: 1.7rem;
@@ -80,9 +80,9 @@
     background-color: var(--primary-bg-light-color1);
 }
 
-.admin_barber_content_body{
+.admin_barber_content_body {
     width: 100.3%;
-    height: calc(88vh - 6rem);
+    height: calc(86vh - 6rem);
     overflow: auto;
     position: relative;
 }
@@ -104,24 +104,24 @@
     background: rgb(0, 98, 255) !important;
 }
 
-.admin_barber_content_body::-webkit-scrollbar-corner{
+.admin_barber_content_body::-webkit-scrollbar-corner {
     background-color: transparent;
 }
 
 
-.admin_barber_content_body>div{
+.admin_barber_content_body>div {
     min-height: 6rem;
     min-width: 110rem;
     max-width: 100%;
     background-color: #efefef;
     display: grid;
-    grid-template-columns: 0.23fr  0.8fr 1fr 0.4fr 0.4fr 0.6fr 0.3fr 0.3fr;
+    grid-template-columns: 0.23fr 0.8fr 1fr 0.4fr 0.4fr 0.6fr 0.3fr 0.3fr;
     place-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
 }
 
-.admin_barber_content_body>div:nth-child(1){
+.admin_barber_content_body>div:nth-child(1) {
     position: sticky;
     top: 0;
     z-index: 3;
@@ -130,30 +130,31 @@
     border-top-right-radius: 1.7rem;
 }
 
-.admin_barber_content_body>div:nth-child(1)>p{
+.admin_barber_content_body>div:nth-child(1)>p {
     color: var(--primary-text-light-color1);
 }
 
-.admin_barber_content_body>div>p:nth-child(2){
+.admin_barber_content_body>div>p:nth-child(2) {
     position: sticky;
     left: 0;
     z-index: 2;
 }
 
 
-.admin_barber_content_body>div:not(:nth-child(1))>p:nth-child(2){
+.admin_barber_content_body>div:not(:nth-child(1))>p:nth-child(2) {
     background-color: #efefef;
 }
 
-.admin_barber_content_body>div:nth-child(1)>p:nth-child(2){
+.admin_barber_content_body>div:nth-child(1)>p:nth-child(2) {
     background-color: var(--primary-bg-color3);
     border-top-left-radius: 1.7rem;
 }
 
-.admin_barber_content_body>div:nth-child(2){
+.admin_barber_content_body>div:nth-child(2) {
     margin-top: 1rem;
 }
-.admin_barber_content_body>div>p{
+
+.admin_barber_content_body>div>p {
     height: 100%;
     width: 100%;
     display: flex;
@@ -164,7 +165,7 @@
     text-overflow: ellipsis;
 }
 
-.admin_barber_content_body_item>button{
+.admin_barber_content_body_item>button {
     width: 60%;
     height: 4rem;
     border-radius: 2rem;
@@ -179,7 +180,7 @@
     font-weight: 500;
 }
 
-.admin_barber_content_body_item>div{
+.admin_barber_content_body_item>div {
     height: 100%;
     width: 100%;
     display: flex;
@@ -188,8 +189,7 @@
 }
 
 .admin_barber_content_body_item>div:nth-child(7)>div,
-.admin_barber_content_body_item>div:nth-child(8)>div
-{
+.admin_barber_content_body_item>div:nth-child(8)>div {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     width: 4.5rem;
     height: 4.5rem;
@@ -205,17 +205,17 @@
     -o-border-radius: 50%;
 }
 
-.admin_barber_content_body_item>div:nth-child(7)>div{
+.admin_barber_content_body_item>div:nth-child(7)>div {
     background-color: var(--primary-bg-color3);
     color: var(--primary-text-light-color1);
 }
 
-.admin_barber_content_body_item>div:nth-child(8)>div{
+.admin_barber_content_body_item>div:nth-child(8)>div {
     background-color: red;
     color: var(--primary-text-light-color1);
 }
 
-.admin_barber_content_body_item>div:nth-child(4)>div{
+.admin_barber_content_body_item>div:nth-child(4)>div {
     width: 7rem;
     height: 2.5rem;
     border-radius: 2rem;
@@ -223,10 +223,10 @@
 }
 
 
-.barberlist_dashboard_toggle_btn{
+.barberlist_dashboard_toggle_btn {
     background-color: #fff;
     height: 2.1rem;
-    width:2.1rem;
+    width: 2.1rem;
     border-radius: 2rem;
     cursor: pointer;
     border: none;
@@ -239,7 +239,7 @@
     left: 0.2rem;
 }
 
-.barberlist_dashboard_toggle_active{
+.barberlist_dashboard_toggle_active {
     transform: translateX(4.4rem);
     transition: 300ms ease;
     -webkit-transform: translateX(4.4rem);
@@ -248,7 +248,7 @@
     -o-transform: translateX(4.4rem);
 }
 
-.barberlist_dashboard_toggle_inactive{
+.barberlist_dashboard_toggle_inactive {
     transform: translateX(-0.1rem);
     transition: 300ms ease;
     -webkit-transform: translateX(-0.1rem);
@@ -257,7 +257,7 @@
     -o-transform: translateX(-0.1rem);
 }
 
-.barberlist_dashboard_toggle_btn_text{
+.barberlist_dashboard_toggle_btn_text {
     position: absolute;
     top: 0px;
     height: 1.6rem;
@@ -269,7 +269,7 @@
 
 }
 
-.barberlist_dashboard_toggle_btn_text_active{
+.barberlist_dashboard_toggle_btn_text_active {
     position: absolute;
     left: 0.5rem;
     opacity: 1;
@@ -283,7 +283,7 @@
     /* background-color: red; */
 }
 
-.barberlist_dashboard_toggle_btn_text_inactive{
+.barberlist_dashboard_toggle_btn_text_inactive {
     position: absolute;
     right: 0.5rem;
     opacity: 1;
@@ -297,7 +297,7 @@
     /* background-color: rgb(234, 255, 0); */
 }
 
-.admin_barber_content_body_item>div:nth-child(5)>div{
+.admin_barber_content_body_item>div:nth-child(5)>div {
     width: 9rem;
     height: 2.5rem;
     border-radius: 2rem;
@@ -305,10 +305,10 @@
 }
 
 
-.barberlist_clock_dashboard_toggle_btn{
+.barberlist_clock_dashboard_toggle_btn {
     background-color: #fff;
     height: 2.1rem;
-    width:2.1rem;
+    width: 2.1rem;
     border-radius: 2rem;
     cursor: pointer;
     border: none;
@@ -321,7 +321,7 @@
     left: 0.2rem;
 }
 
-.barberlist_clock_dashboard_toggle_active{
+.barberlist_clock_dashboard_toggle_active {
     transform: translateX(6.4rem);
     transition: 300ms ease;
     -webkit-transform: translateX(6.4rem);
@@ -330,7 +330,7 @@
     -o-transform: translateX(6.4rem);
 }
 
-.barberlist_clock_dashboard_toggle_inactive{
+.barberlist_clock_dashboard_toggle_inactive {
     transform: translateX(-0.1rem);
     transition: 300ms ease;
     -webkit-transform: translateX(-0.1rem);
@@ -339,7 +339,7 @@
     -o-transform: translateX(-0.1rem);
 }
 
-.barberlist_clock_dashboard_toggle_btn_text{
+.barberlist_clock_dashboard_toggle_btn_text {
     position: absolute;
     top: 0px;
     height: 1.6rem;
@@ -351,7 +351,7 @@
 
 }
 
-.barberlist_clock_dashboard_toggle_btn_text_active{
+.barberlist_clock_dashboard_toggle_btn_text_active {
     position: absolute;
     left: 0.5rem;
     opacity: 1;
@@ -365,7 +365,7 @@
     /* background-color: red; */
 }
 
-.barberlist_clock_dashboard_toggle_btn_text_inactive{
+.barberlist_clock_dashboard_toggle_btn_text_inactive {
     position: absolute;
     right: 0.5rem;
     opacity: 1;
@@ -379,7 +379,7 @@
     /* background-color: rgb(234, 255, 0); */
 }
 
-.barber_content_body_error{
+.barber_content_body_error {
     width: 100%;
     height: 100%;
     display: grid;
@@ -388,48 +388,48 @@
 
 /* Dark Mode CSS Style */
 
-.admin_barber_content_wrapper.dark{
+.admin_barber_content_wrapper.dark {
     background-color: var(--dark-mode-bg-color-4);
 }
 
-.admin_barber_wrapper.dark>div:nth-child(1)>div>button{
+.admin_barber_wrapper.dark>div:nth-child(1)>div>button {
     background-color: var(--dark-mode-bg-color-4);
     color: var(--primary-text-light-color1);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
 }
 
-.admin_barber_wrapper.dark>div:nth-child(1)>div>button>p{
+.admin_barber_wrapper.dark>div:nth-child(1)>div>button>p {
     color: var(--primary-text-light-color1);
 }
 
-.admin_barber_content_body.dark>div:not(:nth-child(1)){
+.admin_barber_content_body.dark>div:not(:nth-child(1)) {
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.admin_barber_content_body.dark>div:not(:nth-child(1))>p{
+.admin_barber_content_body.dark>div:not(:nth-child(1))>p {
     color: var(--primary-text-light-color1);
 }
 
-.admin_barber_content_body.dark>div:not(:nth-child(1))>p:nth-child(2){
+.admin_barber_content_body.dark>div:not(:nth-child(1))>p:nth-child(2) {
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.admin_barber_wrapper.dark>div:nth-child(1)>p{
+.admin_barber_wrapper.dark>div:nth-child(1)>p {
     color: var(--primary-text-light-color1);
 }
 
-.barber_content_body_error.dark p{
+.barber_content_body_error.dark p {
     color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
-    .admin_barber_content_wrapper{
+    .admin_barber_content_wrapper {
         width: calc(100vw - 2rem);
     }
 }
 
-@media screen and (min-width:431px) and (max-width:1140px){
-    .admin_barber_content_wrapper{
+@media screen and (min-width:431px) and (max-width:1140px) {
+    .admin_barber_content_wrapper {
         width: calc(100vw - 2rem);
     }
 }

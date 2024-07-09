@@ -183,15 +183,15 @@ const DashboardHeader = () => {
 
     }, [adminProfile, dispatch]);
 
-    const [src, setSrc] = useState("");
+    // const [src, setSrc] = useState("");
 
-    useEffect(() => {
-        if (adminProfile && adminProfile?.profile[0]?.url) {
-            setSrc(adminProfile?.profile[0]?.url)
-        } else {
-            setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
-        }
-    }, [adminProfile])
+    // useEffect(() => {
+    //     if (adminProfile && adminProfile?.profile[0]?.url) {
+    //         setSrc(adminProfile?.profile[0]?.url)
+    //     } else {
+    //         setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+    //     }
+    // }, [adminProfile])
 
     const adminApplySalon = useSelector(state => state.adminApplySalon)
 
@@ -230,7 +230,7 @@ const DashboardHeader = () => {
         <div className={`admin_dashboard_header_wrapper ${darkmodeOn && "dark"}`}>
             <div className={`choose_salon_div ${darkmodeOn && "dark"}`}>
                 <p>Choose Salon</p>
-               
+
                 {
                     adminProfile?.salonId == 0 ?
                         <div>No Salon Present</div> :
@@ -285,7 +285,7 @@ const DashboardHeader = () => {
                         <button onClick={() => setMobileDrop(false)}>X</button>
                         <p>Choose Salon</p>
                         <div>
-                        <p>{adminSetSalon?.currentActiveSalon}</p>
+                            <p>{adminSetSalon?.currentActiveSalon}</p>
                         </div>
                         <div
                             className='mobile_dashboard_salon_list_dropdown'
@@ -347,9 +347,9 @@ const DashboardHeader = () => {
                         /> :
                         <div>
                             <img
-                                src={src}
+                                src={adminProfile?.profile[0]?.url}
                                 onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
-                                alt=''
+                                alt='admin-profile'
                                 onClick={() => setAdminEditDrop((prev) => !prev)}
                                 ref={adminEditIconRef}
                             />

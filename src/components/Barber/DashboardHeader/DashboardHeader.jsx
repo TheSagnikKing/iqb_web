@@ -44,15 +44,15 @@ const DashboardHeader = () => {
 
     const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
 
-    const [src, setSrc] = useState("");
+    // const [src, setSrc] = useState("");
 
-    useEffect(() => {
-        if (barberProfile && barberProfile?.profile[0]?.url) {
-            setSrc(barberProfile?.profile[0]?.url)
-        } else {
-            setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
-        }
-    }, [barberProfile])
+    // useEffect(() => {
+    //     if (barberProfile && barberProfile?.profile[0]?.url) {
+    //         setSrc(barberProfile?.profile[0]?.url)
+    //     } else {
+    //         setSrc("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
+    //     }
+    // }, [barberProfile])
 
     const [barberEditDrop, setBarberEditDrop] = useState(false)
 
@@ -153,9 +153,9 @@ const DashboardHeader = () => {
                 <div><Settingsicon /></div>
                 <div>
                     <img
-                        src={src}
+                        src={barberProfile?.profile[0]?.url}
                         onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
-                        alt=''
+                        alt='barber-profile'
                         onClick={() => setBarberEditDrop((prev) => !prev)}
                         ref={barberEditIconRef}
                     />

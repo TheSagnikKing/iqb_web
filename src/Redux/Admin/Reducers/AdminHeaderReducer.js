@@ -56,7 +56,7 @@ export const adminGetDefaultSalonReducer = (state = {}, action) => {
 
 
 const initialState = {
-    darkmode: localStorage.getItem("dark")
+    darkmode: localStorage.getItem("dark") || "Off"
 }
 
 export const colorReducer = (state = initialState, action) => {
@@ -98,8 +98,8 @@ export const adminSetSalonReducer = (state = {
     switch (action.type) {
         case "ADMIN_SET_SALON":
             return {
-                currentActiveSalon:action.payload.currentActiveSalon,
-                chooseSalonId:action.payload.chooseSalonId
+                currentActiveSalon: action.payload.currentActiveSalon,
+                chooseSalonId: action.payload.chooseSalonId
             };
         default:
             return state;

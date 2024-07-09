@@ -1,5 +1,4 @@
-
-.dashboard_main__modal__container{
+.dashboard_main__modal__container {
     position: absolute;
     top: 0;
     left: 0;
@@ -12,10 +11,10 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.dashboard_modal__content{
+.dashboard_modal__content {
     width: 70vw;
     height: 63vh;
     padding: 1rem;
@@ -27,7 +26,7 @@
     z-index: 2;
 }
 
-.dashboard_modal__content>div:nth-child(3){
+.dashboard_modal__content>div:nth-child(3) {
     margin-top: 0rem;
     height: 100%;
     border-radius: 1.7rem;
@@ -37,7 +36,7 @@
     -o-border-radius: 1.7rem;
 }
 
-.dashboard_modal__content>div:nth-child(3)>img{
+.dashboard_modal__content>div:nth-child(3)>img {
     height: 100%;
     width: 100%;
     background-position: center;
@@ -50,12 +49,12 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
 }
 
-.dashboard_modal__content>div:nth-child(4){
+.dashboard_modal__content>div:nth-child(4) {
     margin-top: 1.5rem;
     height: 5rem;
 }
 
-.dashboard_modal__content>div:nth-child(4)>div{
+.dashboard_modal__content>div:nth-child(4)>div {
     width: 43rem;
     height: 5rem;
     margin-left: auto;
@@ -64,7 +63,7 @@
     justify-content: space-between;
 }
 
-.dashboard_modal__content>div:nth-child(4)>div>button{
+.dashboard_modal__content>div:nth-child(4)>div>button {
     height: 100%;
     width: 20rem;
     border-radius: 3rem;
@@ -81,7 +80,7 @@
     align-items: center;
 }
 
-.dashboard_modal__content>div:nth-child(4)>div>button>div{
+.dashboard_modal__content>div:nth-child(4)>div>button>div {
     font-size: 1.8rem;
     display: flex;
     justify-content: center;
@@ -89,21 +88,21 @@
     color: var(--primary-text-light-color1);
 }
 
-.dashboard_modal__content>div:nth-child(4)>div>button>p{
+.dashboard_modal__content>div:nth-child(4)>div>button>p {
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--primary-text-light-color1);
 }
 
-.dashboard_modal__content>div:nth-child(4)>div>button:nth-child(1){
+.dashboard_modal__content>div:nth-child(4)>div>button:nth-child(1) {
     background-color: red;
 }
 
-.dashboard_modal__content>div:nth-child(4)>div>button:nth-child(2){
+.dashboard_modal__content>div:nth-child(4)>div>button:nth-child(2) {
     background-color: var(--primary-bg-color3);
 }
 
-.dashboard_modal__content>button{
+.dashboard_modal__content>button {
     position: absolute;
     right: 2rem;
     top: 2rem;
@@ -115,7 +114,7 @@
     align-items: center;
     border: none;
     background-color: var(--secondary-color);
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
     color: red;
     font-weight: 500;
     font-size: 1.6rem;
@@ -123,31 +122,39 @@
 
 /* Dark Css Style */
 
-.dashboard_modal__content.dark{
+.dashboard_modal__content.dark {
     background-color: var(--dark-mode-bg-color-2);
 }
 
-.dashboard_modal__content.dark>button:nth-child(1){
+.dashboard_modal__content.dark>button:nth-child(1) {
     background-color: var(--dark-mode-bg-color-4);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
-    .dashboard_modal__content{
+    .dashboard_modal__content {
         width: 90vw;
         height: 70vh;
     }
-    .salon_info_container>div>textarea{
+
+    .salon_info_container>div>textarea {
         height: 43vh;
     }
 }
 
-@media screen and (min-width:431px) and (max-width:1140px){
-    .dashboard_modal__content{
+@media screen and (min-width:431px) and (max-width:1140px) {
+    .dashboard_modal__content {
         width: 90vw;
         height: 70vh;
     }
-    .salon_info_container>div>textarea{
+
+    .salon_info_container>div>textarea {
         height: 43vh;
+    }
+}
+
+@media screen and (min-width:1141px) and (max-width:1600px) {
+    .dashboard_modal__content {
+        height: 67vh;
     }
 }
