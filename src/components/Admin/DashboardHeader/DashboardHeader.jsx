@@ -269,7 +269,12 @@ const DashboardHeader = () => {
                                     }
                                 </div>
                             </div>
-                            {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>}
+                            {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler}
+                                disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}
+                                style={{
+                                    cursor: adminProfile?.salonId == adminSetSalon?.chooseSalonId && "not-allowed"
+                                }}
+                            >Apply</button>}
                         </>
                 }
 

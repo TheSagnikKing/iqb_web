@@ -106,6 +106,7 @@ const SalonList = () => {
                 <p>Salon Name</p>
                 <p>Address</p>
                 <p>City</p>
+                <p>Salon Type</p>
               </div>
 
               {SalonList.map((s) => (
@@ -113,6 +114,7 @@ const SalonList = () => {
                   <p>{s?.salonName}</p>
                   <p>{s?.address}</p>
                   <p>{s?.city}</p>
+                  <p>{s?.salonType}</p>
                   <div>
                     <div onClick={() => editButtonClicked(s)}><EditIcon /></div>
                   </div>
