@@ -216,8 +216,4 @@
     .send_email_content>button {
         width: 35%;
     }
-
-    .send_email_content>div textarea {
-        min-height: 15rem;
-    }
 }

@@ -219,8 +219,4 @@
     .send_message_content>button {
         width: 35%;
     }
-
-    .send_message_content>div textarea {
-        min-height: 15rem;
-    }
 }
