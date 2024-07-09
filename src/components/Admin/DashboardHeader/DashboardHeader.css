@@ -391,6 +391,7 @@
         color: var(--primary-text-light-color1);
         background-color: var(--primary-bg-color3);
         font-size: 1.4rem;
+        margin-left: 1rem;
     }
 
     .chooseSalon_modal {
@@ -565,7 +566,7 @@
         -moz-transition: width 300ms ease;
         -ms-transition: width 300ms ease;
         -o-transition: width 300ms ease;
-}
+    }
 
     .dashboard_mobile_sidebar_active {
         width: 70vw;
@@ -760,6 +761,7 @@
         color: var(--primary-text-light-color1);
         background-color: var(--primary-bg-color3);
         font-size: 1.4rem;
+        margin-left: 1rem;
     }
 
     .chooseSalon_modal {
