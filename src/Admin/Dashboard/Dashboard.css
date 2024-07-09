@@ -215,7 +215,7 @@
 }
 
 .salononline_toggle_active {
-    transform: translateX(5rem);
+    transform: translateX(5rem) !important;
     transition: 300ms ease;
     -webkit-transform: translateX(5rem);
     -moz-transform: translateX(5rem);

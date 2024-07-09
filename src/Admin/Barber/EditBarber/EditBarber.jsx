@@ -296,7 +296,7 @@ const EditBarber = () => {
   const chooseServiceHandler = (service) => {
     const originalService = currentBarberServices.includes(service);
 
-    if(!originalService){
+    if (!originalService) {
       setCurrentBarberServices([...currentBarberServices, { ...service, barberServiceEWT: service.serviceEWT }]);
     }
 
@@ -414,6 +414,9 @@ const EditBarber = () => {
               placeholder='dd/mm/yy'
               value={dateOfBirth}
               onChange={(e) => setDateOfBirth(e.target.value)}
+              style={{
+                colorScheme: darkmodeOn ? "dark" : "light"
+              }}
             />
           </div>
         </div>

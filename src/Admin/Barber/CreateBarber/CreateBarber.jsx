@@ -161,6 +161,9 @@ const CreateBarber = () => {
               placeholder='dd/mm/yy'
               value={dateOfBirth}
               onChange={(e) => setDateOfBirth(e.target.value)}
+              style={{
+                colorScheme: darkmodeOn ? "dark" : "light"
+              }}
             />
           </div>
         </div>
@@ -176,7 +179,7 @@ const CreateBarber = () => {
           {
             adminAllSalonServicesLoading && !adminAllSalonServicesResolve ?
               <Skeleton count={4} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color2)" : "var(--lightmode-loader-bg-color)"}
-              highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}/> :
+                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /> :
               !adminAllSalonServicesLoading && adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
                 allSalonServices.map((s) => (
                   <div className={`admin_barber_services_container_item ${darkmodeOn && "dark"}`} key={s._id}>

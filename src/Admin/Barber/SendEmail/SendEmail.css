@@ -1,49 +1,52 @@
-.send_email_container{
+.send_email_container {
     height: 98%;
     padding-block: 2rem;
+    overflow: auto;
+    padding-left: 1rem;
 }
 
-.send_email_container>p{
+.send_email_container>p {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
     line-height: 4rem;
 }
 
-.send_email_container>div:nth-child(2){
+.send_email_container>div:nth-child(2) {
     height: calc(100% - 3.5rem);
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 4rem;
 }
 
-.send_email_container>div:nth-child(2)>div:nth-child(1){
-    box-shadow: 0px 0px 6px rgba(0,0,0,0.6);
+.send_email_container>div:nth-child(2)>div:nth-child(1) {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
     border-radius: 2rem;
     -webkit-border-radius: 2rem;
     -moz-border-radius: 2rem;
     -ms-border-radius: 2rem;
     -o-border-radius: 2rem;
     padding: 2rem;
+    height: 99%;
 }
 
-.send_email_content{
+.send_email_content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.send_email_content>div{
+.send_email_content>div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.send_email_content>div p{
+.send_email_content>div p {
     font-size: 1.6rem;
 }
 
-.send_email_content>div input{
+.send_email_content>div input {
     min-height: 4rem;
     background-color: var(--bg-color3);
     border: none;
@@ -56,12 +59,12 @@
     font-size: 1.6rem;
 }
 
-.send_email_content>div input:focus{
+.send_email_content>div input:focus {
     outline: 2px solid var(--primary-bg-color3);
 }
 
 
-.send_email_content>div textarea{
+.send_email_content>div textarea {
     min-height: 25rem;
     background-color: var(--bg-color3);
     border: none;
@@ -76,11 +79,11 @@
     overflow: auto;
 }
 
-.send_email_content>div textarea:focus{
+.send_email_content>div textarea:focus {
     outline: 2px solid var(--primary-bg-color3);
 }
 
-.send_email_content>button{
+.send_email_content>button {
     width: 40%;
     height: 4.5rem;
     font-size: 1.6rem;
@@ -100,7 +103,7 @@
     align-items: center;
 }
 
-.send_email_container>div:nth-child(2)>div:nth-child(2){
+.send_email_container>div:nth-child(2)>div:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,7 +114,7 @@
     height: 65%;
 }
 
-.send_email_content>div:nth-child(2)>div:nth-child(2){
+.send_email_content>div:nth-child(2)>div:nth-child(2) {
     min-height: 4rem;
     max-height: 10rem;
     background-color: var(--bg-color3);
@@ -127,7 +130,7 @@
     overflow: auto;
 }
 
-.send_email_content>div:nth-child(2)>div:nth-child(2)>p{
+.send_email_content>div:nth-child(2)>div:nth-child(2)>p {
     font-size: 1.6rem;
     font-weight: 400;
 }
@@ -151,70 +154,70 @@
 
 /* dark mode start */
 
-.send_email_container.dark>p{
+.send_email_container.dark>p {
     color: var(--primary-text-light-color1);
 }
 
-.send_email_content.dark{
+.send_email_content.dark {
     background-color: var(--dark-mode-bg-color-4);
 }
 
-.send_email_content.dark p{
+.send_email_content.dark p {
     color: var(--primary-text-light-color1);
 }
 
 .send_email_content.dark input,
-.send_email_content.dark textarea{
+.send_email_content.dark textarea {
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
 }
 
 .send_email_content.dark input::placeholder,
-.send_email_content.dark textarea::placeholder{
+.send_email_content.dark textarea::placeholder {
     color: var(--primary-text-light-color1);
 }
 
-.send_email_content.dark>div:nth-child(2)>div{
+.send_email_content.dark>div:nth-child(2)>div {
     background-color: var(--dark-mode-bg-color-2);
     color: var(--primary-text-light-color1);
 }
 
 @media screen and (min-width: 0px) and (max-width:1140px) {
-    .send_email_container>div:nth-child(2){
+    .send_email_container>div:nth-child(2) {
         grid-template-columns: 1fr;
     }
 
-    .send_email_container>div:nth-child(2)>div:nth-child(2){
+    .send_email_container>div:nth-child(2)>div:nth-child(2) {
         display: none;
     }
 
-    .send_email_content>button{
+    .send_email_content>button {
         width: 55%;
     }
 }
 
 @media screen and (min-width: 1141px) and (max-width:1250px) {
-    .send_email_container>div:nth-child(2){
+    .send_email_container>div:nth-child(2) {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
 
-    .send_email_content>button{
+    .send_email_content>button {
         width: 35%;
     }
 }
 
 @media screen and (min-width: 1251px) and (max-width:1500px) {
-    .send_email_container>div:nth-child(2){
+    .send_email_container>div:nth-child(2) {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
 
-    .send_email_content>button{
+    .send_email_content>button {
         width: 35%;
     }
 
-    .send_email_content>div textarea{
+    .send_email_content>div textarea {
         min-height: 15rem;
     }
 }

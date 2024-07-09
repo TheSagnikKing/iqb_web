@@ -428,6 +428,9 @@ const EditProfile = () => {
                             type="date"
                             value={dateOfBirth}
                             onChange={(e) => setDateofBirth(e.target.value)}
+                            style={{
+                                colorScheme: darkmodeOn ? "dark" : "light"
+                            }}
                         />
                     </div>
 
@@ -444,9 +447,9 @@ const EditProfile = () => {
                         />
 
                         {genderDrop && <div ref={genderDropRef}
-                        style={{
-                            background: darkmodeOn && "var(--dark-mode-bg-color-2)"
-                        }}
+                            style={{
+                                background: darkmodeOn && "var(--dark-mode-bg-color-2)"
+                            }}
                         >
                             <p onClick={() => setGenderHandler("Male")}>Male</p>
                             <p onClick={() => setGenderHandler("Female")}>Female</p>

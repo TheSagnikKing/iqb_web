@@ -432,6 +432,9 @@ const EditProfile = () => {
                             type="date"
                             value={dateOfBirth}
                             onChange={(e) => setDateofBirth(e.target.value)}
+                            style={{
+                                colorScheme: darkmodeOn ? "dark" : "light"
+                            }}
                         />
                     </div>
 
