@@ -189,12 +189,14 @@ const EditProfile = () => {
 
 
     const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber?.toString())
+    const [countryCode, setCountryCode] = useState("")
 
     const updateAdminProfile = () => {
         const profiledata = {
             email: adminProfile?.email,
             dateOfBirth,
             mobileNumber: Number(mobileNumber),
+            countryCode: Number(countryCode),
             name,
             gender,
         }
@@ -265,6 +267,12 @@ const EditProfile = () => {
     const [seeOldPassword, setSeeOldPassword] = useState(false)
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
+    const handlePhoneChange = (phone, meta) => {
+        setMobileNumber(phone)
+        const { country, inputValue } = meta;
+        setCountryCode(country?.dialCode)
+    };
 
     return (
         <div className={`admin_edit_profile ${darkmodeOn && "dark"}`}>
@@ -394,7 +402,7 @@ const EditProfile = () => {
                                     forceDialCode={true}
                                     defaultCountry="gb"
                                     value={mobileNumber}
-                                    onChange={(phone) => setMobileNumber(phone)}
+                                    onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                                 />
                             </div>
                             <button onClick={() => sendVerificationMobile()} title={changeMobileVerifiedState ? "Verified" : "NotVerified"} style={{

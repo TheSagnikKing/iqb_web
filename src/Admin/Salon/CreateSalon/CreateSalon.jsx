@@ -76,6 +76,7 @@ const CreateSalon = () => {
 
   const [postCode, setPostCode] = useState("")
   const [contactTel, setContactTel] = useState("")
+  const [dialCode, setDialCode] = useState("")
 
   const [webLink, setWebLink] = useState("")
   const [fbLink, setFbLink] = useState("")
@@ -801,6 +802,7 @@ const CreateSalon = () => {
       timeZone: timezone,
       postCode,
       contactTel: Number(contactTel),
+      countryCode: Number(dialCode),
       salonType,
       webLink,
       fbLink,
@@ -809,7 +811,6 @@ const CreateSalon = () => {
       tiktokLink,
       services: selectedServices,
     }
-
 
     const files = await Promise.all(
       salonImages?.map(async (imgObject) => {
@@ -993,6 +994,13 @@ const CreateSalon = () => {
   const [seeOldPassword, setSeeOldPassword] = useState(false)
   const [seePassword, setSeePassword] = useState(false)
   const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
+
+  const handlePhoneChange = (phone, meta) => {
+    setContactTel(phone)
+    const { country, inputValue } = meta;
+    setDialCode(country?.dialCode)
+  };
 
   return (
     <div className={`create_salon_wrapper ${darkmodeOn && "dark"}`}>
@@ -1307,7 +1315,7 @@ const CreateSalon = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={contactTel}
-                  onChange={(phone) => setContactTel(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

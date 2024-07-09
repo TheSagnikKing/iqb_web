@@ -13,15 +13,13 @@ const SignupEditProfile = () => {
   const location = useLocation()
   const admindata = location?.state?.newUser
 
-  console.log(admindata)
-
   const [name, setName] = useState("")
   const [dateOfBirth, setDateofBirth] = useState("")
   const [gender, setGender] = useState("")
   const [mobileNumber, setMobileNumber] = useState("")
+  const [countryCode, setCountryCode] = useState("")
 
   const navigate = useNavigate()
-
 
   const [genderDrop, setGenderDrop] = useState(false)
 
@@ -57,14 +55,14 @@ const SignupEditProfile = () => {
 
 
   const updateClicked = () => {
-    const profiledata = { email: admindata?.email, mobileNumber:Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType };
+    const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
 
     console.log(profiledata)
     dispatch(AdminSignupEditAction(profiledata, navigate))
   }
 
   const skipClicked = () => {
-    const profiledata = { email: admindata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: admindata?.salonId };
+    const profiledata = { email: admindata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: admindata?.salonId, countryCode: Number(countryCode) };
 
     dispatch(adminSkipProfileAction(profiledata, navigate))
   }
@@ -81,6 +79,13 @@ const SignupEditProfile = () => {
     loading: adminSkipProfileLoading
   } = adminSkipProfile
 
+  const handlePhoneChange = (phone, meta) => {
+    setMobileNumber(phone)
+    const { country, inputValue } = meta;
+    setCountryCode(country?.dialCode)
+  };
+
+
   return (
     <main className='admin_signup_edit_container'>
       <div>
@@ -94,15 +99,15 @@ const SignupEditProfile = () => {
           <div>
             <h1>Add Your Account Details</h1>
             {
-              adminSkipProfileLoading ? 
-              <button style={{
-                display:"flex",
-                justifyContent:"center",
-                alignItems:"center"
-              }}><ButtonLoader/></button> : 
-              <button onClick={() => skipClicked()}>Skip</button>
+              adminSkipProfileLoading ?
+                <button style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}><ButtonLoader /></button> :
+                <button onClick={() => skipClicked()}>Skip</button>
             }
-            
+
           </div>
 
           <div>
@@ -147,7 +152,8 @@ const SignupEditProfile = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={mobileNumber}
-                  onChange={(phone) => setMobileNumber(phone)}
+                  // onChange={(phone) => setMobileNumber(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

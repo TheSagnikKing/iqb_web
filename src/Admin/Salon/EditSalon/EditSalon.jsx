@@ -121,6 +121,7 @@ const EditSalon = () => {
 
   const [postCode, setPostCode] = useState(currentSalon?.postCode)
   const [contactTel, setContactTel] = useState(currentSalon?.contactTel.toString())
+  const [dialCode, setDialCode] = useState("")
   // currentSalon?.contactTel
   const [webLink, setWebLink] = useState(currentSalon?.webLink)
   const [fbLink, setFbLink] = useState(currentSalon?.fbLink)
@@ -622,6 +623,7 @@ const EditSalon = () => {
       timeZone: timezone,
       postCode,
       contactTel: Number(contactTel),
+      countryCode: Number(dialCode),
       salonType,
       webLink,
       fbLink,
@@ -900,6 +902,12 @@ const EditSalon = () => {
   const [seeOldPassword, setSeeOldPassword] = useState(false)
   const [seePassword, setSeePassword] = useState(false)
   const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
+  const handlePhoneChange = (phone, meta) => {
+    setContactTel(phone)
+    const { country, inputValue } = meta;
+    setDialCode(country?.dialCode)
+  };
 
   return (
     <div className={`edit_salon_wrapper ${darkmodeOn && "dark"}`}>
@@ -1213,7 +1221,7 @@ const EditSalon = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={contactTel}
-                  onChange={(phone) => setContactTel(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

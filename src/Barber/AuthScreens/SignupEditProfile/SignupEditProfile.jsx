@@ -20,6 +20,7 @@ const SignupEditProfile = () => {
   const [dateOfBirth, setDateofBirth] = useState("")
   const [gender, setGender] = useState("")
   const [mobileNumber, setMobileNumber] = useState("")
+  const [countryCode, setCountryCode] = useState("")
 
   const navigate = useNavigate()
 
@@ -57,14 +58,16 @@ const SignupEditProfile = () => {
 
 
   const updateClicked = () => {
-    const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType };
+    const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType, countryCode: Number(countryCode) };
 
     console.log(profiledata)
     dispatch(BarberSignupEditAction(profiledata, navigate))
   }
 
   const skipClicked = () => {
-    const profiledata = { email: barberdata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: barberdata?.salonId };
+    const profiledata = { email: barberdata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: barberdata?.salonId, countryCode: Number(countryCode) };
+
+    console.log(profiledata)
 
     dispatch(barberSkipProfileAction(profiledata, navigate))
   }
@@ -80,6 +83,12 @@ const SignupEditProfile = () => {
   const {
     loading: barberSkipProfileLoading,
   } = barberSkipProfile
+
+  const handlePhoneChange = (phone, meta) => {
+    setMobileNumber(phone)
+    const { country, inputValue } = meta;
+    setCountryCode(country?.dialCode)
+  };
 
   return (
     <main className='admin_signup_edit_container'>
@@ -150,7 +159,7 @@ const SignupEditProfile = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={mobileNumber}
-                  onChange={(phone) => setMobileNumber(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

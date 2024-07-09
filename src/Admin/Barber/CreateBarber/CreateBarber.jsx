@@ -19,6 +19,7 @@ const CreateBarber = () => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("")
   const [dateOfBirth, setDateOfBirth] = useState("");
 
   const AllSalonServicesControllerRef = useRef(new AbortController());
@@ -75,7 +76,7 @@ const CreateBarber = () => {
 
   const CreateBarberHandler = () => {
     const barberdata = {
-      name, email, nickName, mobileNumber: Number(mobileNumber), dateOfBirth,
+      name, email, nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth,
       salonId,
       barberServices: chooseServices.map(service => ({
         ...service,
@@ -97,6 +98,12 @@ const CreateBarber = () => {
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
+
+  const handlePhoneChange = (phone, meta) => {
+    setMobileNumber(phone)
+    const { country, inputValue } = meta;
+    setCountryCode(country?.dialCode)
+  };
 
   return (
     <div className={`admin_create_barber_wrapper ${darkmodeOn && "dark"}`}>
@@ -147,7 +154,7 @@ const CreateBarber = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={mobileNumber}
-                  onChange={(phone) => setMobileNumber(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

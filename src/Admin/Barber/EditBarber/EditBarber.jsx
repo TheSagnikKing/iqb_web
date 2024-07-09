@@ -277,6 +277,7 @@ const EditBarber = () => {
   const [email, setEmail] = useState(currentBarber?.email);
   const [nickName, setNickName] = useState(currentBarber?.nickName);
   const [mobileNumber, setMobileNumber] = useState(currentBarber?.mobileNumber.toString());
+  const [countryCode, setCountryCode] = useState("")
   const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth?.split('T')[0]);
   const [chooseServices, setChooseServices] = useState([]);
   const [serviceEWTValues, setServiceEWTValues] = useState({});
@@ -325,6 +326,7 @@ const EditBarber = () => {
       email,
       nickName,
       mobileNumber: Number(mobileNumber),
+      countryCode: Number(countryCode),
       dateOfBirth,
       salonId,
       barberServices: currentBarberServices
@@ -359,6 +361,12 @@ const EditBarber = () => {
       ));
     }
   }
+
+  const handlePhoneChange = (phone, meta) => {
+    setMobileNumber(phone)
+    const { country, inputValue } = meta;
+    setCountryCode(country?.dialCode)
+  };
 
   return (
     <div className={`admin_edit_barber_wrapper ${darkmodeOn && "dark"}`}>
@@ -400,7 +408,7 @@ const EditBarber = () => {
                   forceDialCode={true}
                   defaultCountry="gb"
                   value={mobileNumber}
-                  onChange={(phone) => setMobileNumber(phone)}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
 

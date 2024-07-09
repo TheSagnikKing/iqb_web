@@ -28,16 +28,6 @@ const EditProfile = () => {
     const [name, setName] = useState(barberProfile?.name)
     const [dateOfBirth, setDateofBirth] = useState(barberProfile?.dateOfBirth?.split('T')[0])
 
-    // const [profilepic, setProfilepic] = useState("")
-
-    // useEffect(() => {
-    //     if (barberProfile && barberProfile?.profile[0]?.url) {
-    //         setProfilepic(barberProfile?.profile[0]?.url)
-    //     } else {
-    //         setProfilepic("https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg")
-    //     }
-    // }, [barberProfile])
-
     const fileInputRef = useRef(null);
 
     const handleSalonLogoButtonClick = () => {
@@ -195,12 +185,14 @@ const EditProfile = () => {
 
 
     const [mobileNumber, setMobileNumber] = useState(barberProfile?.mobileNumber?.toString())
+    const [countryCode, setCountryCode] = useState("")
 
     const updateBarberProfile = () => {
         const profiledata = {
             email: barberProfile?.email,
             dateOfBirth,
             mobileNumber: Number(mobileNumber),
+            countryCode: Number(countryCode),
             name,
             gender,
             password
@@ -234,12 +226,6 @@ const EditProfile = () => {
     const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    // const barberUpdateProfile = useSelector(state => state.barberUpdateProfile)
-
-    // const {
-    //     loading: barberUpdateProfileLoading,
-    // } = barberUpdateProfile
 
     const [openModal, setOpenModal] = useState(false)
 
@@ -279,6 +265,13 @@ const EditProfile = () => {
     const [seeOldPassword, setSeeOldPassword] = useState(false)
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
+
+    const handlePhoneChange = (phone, meta) => {
+        setMobileNumber(phone)
+        const { country, inputValue } = meta;
+        setCountryCode(country?.dialCode)
+    };
+
 
     return (
         <div className={`barber_edit_profile ${darkmodeOn && "dark"}`}>
@@ -409,7 +402,7 @@ const EditProfile = () => {
                                     forceDialCode={true}
                                     defaultCountry="gb"
                                     value={mobileNumber}
-                                    onChange={(phone) => setMobileNumber(phone)}
+                                    onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                                 />
                             </div>
 

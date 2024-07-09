@@ -284,6 +284,7 @@ const SalonAdv = () => {
                 <Skeleton
                   key={index}
                   count={1}
+                  width={"95%"}
                   height={"35rem"}
                   style={{ borderRadius: "1.7rem" }}
                   baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
