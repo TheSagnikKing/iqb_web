@@ -51,7 +51,7 @@ const Sidebar = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <main className='container'>
+    <main className={`container ${darkmodeOn && "dark"}`}>
       <div className={`sidebar ${showSidebar ? "show" : "hide"} ${darkmodeOn && "dark"}`}>
         <div>
           <p className={showSidebar ? "titleActive" : "titleInActive"}>
