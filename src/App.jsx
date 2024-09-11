@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
+import { RiWifiOffLine } from "react-icons/ri";
+import "./App.css"
 
 const Public = React.lazy(() => import("./Public/Public"))
 const AdminSignin = React.lazy(() => import("./Admin/AuthScreens/Signin/Signin"))
@@ -57,6 +59,8 @@ import Table from './Admin/Demo/Table';
 import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 
+import { } from '../public/offline.png'
+
 const App = () => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -80,91 +84,134 @@ const App = () => {
   const darkmodeOn = darkMode === "On"
 
 
+
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+
   return (
     // <div style={{
     //   background: darkmodeOn ? "var(--dark-mode-bg-color-1)" : "var(--primary-bg-light-color1)"
     // }}>
     <>
-      <Toaster />
-      <BrowserRouter>
-        <React.Suspense fallback={<div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
-          }}><Loader /></div>}>
-          <Routes>
 
-            {/* Admin Auth Screens */}
-            <Route element={<ProtectedAdminAuthRoute />}>
-              <Route path="/" element={<Public />} />
-              <Route path="/adminsignin" element={<AdminSignin />} />
-              <Route path="/adminsignup" element={<AdminSignup />} />
-              <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
-              <Route path="/admincheckemail" element={<AdminCheckEmail />} />
-              <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
-              <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
-              <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
-            </Route>
+      {!isOnline ? (
+        <div style={{
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+          <div style={{ height: "200px", marginTop: "20px" }}>
+            <div style={{ fontSize: "45px", textAlign: "center" }}><RiWifiOffLine /></div>
+            <h1 style={{ color: "red", textAlign: "center" }}>You are offline</h1>
+            <h1 style={{ color: "red", textAlign: "center" }}>Please check your internet connection</h1>
+          </div>
+        </div >
+      ) : (
+        <>
+          <Toaster />
+          <BrowserRouter>
+            <React.Suspense fallback={<div
+              style={{
+                width: "100vw",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
+              }}><Loader /></div>}>
+              <Routes>
 
-            {/* Admin Main Pages  */}
-            <Route element={<ProtectedAdminRoute />}>
-              <Route element={isMobile ? <AdminMobileSidebar /> : <AdminSidebar />}>
-                <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/admin-dashboard/editprofile" element={<AdminEditProfile />} />
+                {/* Admin Auth Screens */}
+                <Route element={<ProtectedAdminAuthRoute />}>
+                  <Route path="/" element={<Public />} />
+                  <Route path="/adminsignin" element={<AdminSignin />} />
+                  <Route path="/adminsignup" element={<AdminSignup />} />
+                  <Route path="/adminforgotpassword" element={<AdminForgotPassword />} />
+                  <Route path="/admincheckemail" element={<AdminCheckEmail />} />
+                  <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
+                  <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
+                  <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
+                </Route>
 
-                <Route path="/admin-salon" element={<AdminSalonList />} />
-                <Route path="/admin-salon/createsalon" element={<AdminCreateSalon />} />
-                <Route path="/admin-salon/editsalon/:salonid" element={<AdminEditSalon />} />
-                <Route path="/admin-salon/appointment/:salonid" element={<AdminSalonAppointmentSettings />} />
+                {/* Admin Main Pages  */}
+                <Route element={<ProtectedAdminRoute />}>
+                  <Route element={isMobile ? <AdminMobileSidebar /> : <AdminSidebar />}>
+                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                    <Route path="/admin-dashboard/editprofile" element={<AdminEditProfile />} />
 
-                <Route path="/admin-barber" element={<AdminBarberList />} />
-                <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
-                <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
-                <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail />} />
-                <Route path="/admin-barber/send-message" element={<AdminBarberSendMessage />} />
-                <Route path="/admin-customer" element={<AdminCustomerList />} />
-                <Route path="/admin-customer/send-email" element={<AdminSendCustomerEmail />} />
-                <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage />} />
-                <Route path="/admin-advertise" element={<AdminSalonAdv />} />
-                <Route path="/admin-queue" element={<AdminQueue />} />
-                <Route path="/drop" element={<Drop />} />
-                <Route path="/demo" element={<Demo />} />
-                <Route path='/table' element={<Table />} />
-              </Route>
+                    <Route path="/admin-salon" element={<AdminSalonList />} />
+                    <Route path="/admin-salon/createsalon" element={<AdminCreateSalon />} />
+                    <Route path="/admin-salon/editsalon/:salonid" element={<AdminEditSalon />} />
+                    <Route path="/admin-salon/appointment/:salonid" element={<AdminSalonAppointmentSettings />} />
 
-            </Route>
+                    <Route path="/admin-barber" element={<AdminBarberList />} />
+                    <Route path="/admin-barber/createbarber" element={<AdminCreateBarber />} />
+                    <Route path="/admin-barber/editbarber/:salonid" element={<AdminEditBarber />} />
+                    <Route path="/admin-barber/send-email" element={<AdminBarberSendEmail />} />
+                    <Route path="/admin-barber/send-message" element={<AdminBarberSendMessage />} />
+                    <Route path="/admin-customer" element={<AdminCustomerList />} />
+                    <Route path="/admin-customer/send-email" element={<AdminSendCustomerEmail />} />
+                    <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage />} />
+                    <Route path="/admin-advertise" element={<AdminSalonAdv />} />
+                    <Route path="/admin-queue" element={<AdminQueue />} />
+                    <Route path="/drop" element={<Drop />} />
+                    <Route path="/demo" element={<Demo />} />
+                    <Route path='/table' element={<Table />} />
+                  </Route>
 
-            {/* Barber Auth Screens */}
-            <Route element={<ProtectedBarberAuthRoute />}>
-              <Route path="/" element={<Public />} />
-              <Route path="/barbersignin" element={<BarberSignin />} />
-              <Route path="/barbersignup" element={<BarberSignup />} />
-              <Route path="/barberforgotpassword" element={<BarberForgotPassword />} />
-              <Route path="/barbercheckemail" element={<BarberCheckEmail />} />
-              <Route path="/barberchangepassword/:token" element={<BarberChangePassword />} />
-              <Route path="/barberpasswordreset" element={<BarberPasswordReset />} />
-              <Route path="/barber-signupeditprofile" element={<BarberSignupEditProfile />} />
-            </Route>
+                </Route>
 
-            <Route element={<ProtectedBarberRoute />}>
-              <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
-                <Route path="/barber-dashboard" element={<BarberDashboard />} />
-                <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
-                <Route path="/barber-customer" element={<BarberCustomer />} />
-                <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail />} />
-                <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage />} />
-                <Route path="/barber-queue" element={<BarberQueueList />} />
-              </Route>
-            </Route>
+                {/* Barber Auth Screens */}
+                <Route element={<ProtectedBarberAuthRoute />}>
+                  <Route path="/" element={<Public />} />
+                  <Route path="/barbersignin" element={<BarberSignin />} />
+                  <Route path="/barbersignup" element={<BarberSignup />} />
+                  <Route path="/barberforgotpassword" element={<BarberForgotPassword />} />
+                  <Route path="/barbercheckemail" element={<BarberCheckEmail />} />
+                  <Route path="/barberchangepassword/:token" element={<BarberChangePassword />} />
+                  <Route path="/barberpasswordreset" element={<BarberPasswordReset />} />
+                  <Route path="/barber-signupeditprofile" element={<BarberSignupEditProfile />} />
+                </Route>
+
+                <Route element={<ProtectedBarberRoute />}>
+                  <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
+                    <Route path="/barber-dashboard" element={<BarberDashboard />} />
+                    <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
+                    <Route path="/barber-customer" element={<BarberCustomer />} />
+                    <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail />} />
+                    <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage />} />
+                    <Route path="/barber-queue" element={<BarberQueueList />} />
+                  </Route>
+                </Route>
 
 
-          </Routes>
-        </React.Suspense>
-      </BrowserRouter>
+              </Routes>
+            </React.Suspense>
+          </BrowserRouter>
+        </>
+      )}
+
     </>
     // </div>
   )
