@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import toast from 'react-hot-toast'
 
 const BarberList = () => {
 
@@ -189,12 +190,14 @@ const BarberList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
-      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, barber.mobileNumber])
+      // setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, barber.mobileNumber])
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)]);
       setCheckBarberNames(prevNames => [...prevNames, barber.name])
       setCheckAllBarbers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
-      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== barber.mobileNumber))
+      // setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== barber.mobileNumber))
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)));
       setCheckBarberNames(prevNames => prevNames.filter(name => name !== barber.name))
       setCheckAllBarbers(false)
     }
@@ -204,7 +207,8 @@ const BarberList = () => {
     setCheckAllBarbers((prev) => {
       if (!prev) {
         const barberEmails = BarberList.map((b) => b.email)
-        const barberMobileNumbers = BarberList.map((b) => b.mobileNumber)
+        // const barberMobileNumbers = BarberList.map((b) => b.mobileNumber)
+        const barberMobileNumbers = BarberList.map((b) => Number(`${b.mobileCountryCode}${b.mobileNumber}`));
         const barberNames = BarberList.map((b) => b.name)
         const allCheckedBarbers = BarberList.reduce((acc, barber) => {
           acc[barber._id] = true;
@@ -225,16 +229,46 @@ const BarberList = () => {
     })
   }
 
+  console.log(checkedEmails)
+  console.log(checkMobileNumbers)
 
   const sendEmailNavigate = () => {
-    navigate("/admin-barber/send-email", {state:checkedEmails})
+    if (checkedEmails.length > 0) {
+      navigate("/admin-barber/send-email", { state: checkedEmails })
+    } else {
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
   }
 
   const sendMessageNavigate = () => {
-    navigate("/admin-barber/send-message", {state:{
-      checkMobileNumbers,
-      checkBarberNames
-    }})
+    if (checkMobileNumbers.length > 0) {
+      navigate("/admin-barber/send-message", {
+        state: {
+          checkMobileNumbers,
+          checkBarberNames
+        }
+      })
+    }else {
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
   }
 
   return (

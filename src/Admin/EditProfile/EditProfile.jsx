@@ -188,8 +188,8 @@ const EditProfile = () => {
     }, []);
 
 
-    const [mobileNumber, setMobileNumber] = useState(adminProfile?.mobileNumber?.toString())
-    const [countryCode, setCountryCode] = useState("")
+    const [mobileNumber, setMobileNumber] = useState(`${adminProfile?.mobileCountryCode?.toString()}${adminProfile?.mobileNumber?.toString()}`)
+    const [countryCode, setCountryCode] = useState(adminProfile?.mobileCountryCode?.toString())
 
     const updateAdminProfile = () => {
         const profiledata = {
@@ -201,10 +201,7 @@ const EditProfile = () => {
             gender,
         }
 
-        console.log(profiledata)
-
         dispatch(adminUpdateProfileAction(profiledata, navigate))
-
     }
 
     const verifyEmailStatusClicked = () => {

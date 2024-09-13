@@ -52,6 +52,7 @@ const SendMessage = () => {
                         <input
                             type="text"
                             value={"iqueuebarbers"}
+                            readOnly
                         />
                     </div>
 

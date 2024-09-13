@@ -8,6 +8,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useNavigate } from 'react-router-dom'
 import api from '../../Redux/api/Api'
 import { GET_BARBER_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Barber/Constants/constants'
+import toast from 'react-hot-toast'
 
 const CustomerList = () => {
 
@@ -122,12 +123,12 @@ const CustomerList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
-      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, customer.mobileNumber]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
       setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
       setCheckAllCustomers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
-      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== customer.mobileNumber));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
       setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
       setCheckAllCustomers(false)
     }
@@ -137,7 +138,7 @@ const CustomerList = () => {
     setCheckAllCustomers((prev) => {
       if (!prev) {
         const customerEmails = AllCustomerList.map((c) => c.email);
-        const customerMobileNumbers = AllCustomerList.map((c) => c.mobileNumber);
+        const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
         const customerNames = AllCustomerList.map((c) => c.name);
         const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
           acc[customer._id] = true;
@@ -161,16 +162,42 @@ const CustomerList = () => {
   const navigate = useNavigate();
 
   const sendEmailNavigate = () => {
-    navigate('/barber-customer/send-email', { state: checkedEmails });
+    if (checkedEmails.length > 0) {
+      navigate('/barber-customer/send-email', { state: checkedEmails });
+    } else {
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
   };
 
   const sendMessageNavigate = () => {
-    navigate('/barber-customer/send-message', {
-      state: {
-        checkMobileNumbers,
-        checkCustomerNames,
-      },
-    });
+    if (checkMobileNumbers.length > 0) {
+      navigate('/barber-customer/send-message', {
+        state: {
+          checkMobileNumbers,
+          checkCustomerNames,
+        },
+      });
+    } else {
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
   };
 
   return (

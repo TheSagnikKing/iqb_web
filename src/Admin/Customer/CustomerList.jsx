@@ -8,6 +8,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import api from '../../Redux/api/Api';
 import { GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const CustomerList = () => {
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -58,7 +59,7 @@ const CustomerList = () => {
     }
   };
 
-  
+
   const [checkAllCustomers, setCheckAllCustomers] = useState(false);
   const [checkedCustomers, setCheckedCustomers] = useState({});
   const [checkedEmails, setCheckedEmails] = useState([]);
@@ -68,10 +69,10 @@ const CustomerList = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if(currentPage){
+    if (currentPage) {
       setPage(currentPage)
     }
-  },[currentPage])
+  }, [currentPage])
 
   const paginationLeftHandler = async () => {
     if (page > 1) {
@@ -116,12 +117,12 @@ const CustomerList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
-      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, customer.mobileNumber]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
       setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
       setCheckAllCustomers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
-      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== customer.mobileNumber));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
       setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
       setCheckAllCustomers(false)
     }
@@ -131,7 +132,7 @@ const CustomerList = () => {
     setCheckAllCustomers((prev) => {
       if (!prev) {
         const customerEmails = AllCustomerList.map((c) => c.email);
-        const customerMobileNumbers = AllCustomerList.map((c) => c.mobileNumber);
+        const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
         const customerNames = AllCustomerList.map((c) => c.name);
         const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
           acc[customer._id] = true;
@@ -156,16 +157,43 @@ const CustomerList = () => {
   const navigate = useNavigate();
 
   const sendEmailNavigate = () => {
-    navigate('/admin-customer/send-email', { state: checkedEmails });
+    if (checkedEmails.length > 0) {
+      navigate('/admin-customer/send-email', { state: checkedEmails });
+    } else {
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
   };
 
   const sendMessageNavigate = () => {
-    navigate('/admin-customer/send-message', {
-      state: {
-        checkMobileNumbers,
-        checkCustomerNames,
-      },
-    });
+    // console.table(checkMobileNumbers)
+    if (checkMobileNumbers.length > 0) {
+      navigate('/admin-customer/send-message', {
+        state: {
+          checkMobileNumbers,
+          checkCustomerNames,
+        },
+      });
+    }else{
+      toast.error("Atleast one customer needed", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+    
   };
 
   return (

@@ -115,13 +115,15 @@ const EditSalon = () => {
     }
   }
 
+  console.log("Current Salon is ",currentSalon)
+
   const [salonEmail, setSalonEmail] = useState(currentSalon?.salonEmail)
   const [salonName, setSalonName] = useState(currentSalon?.salonName)
   const [address, setAddress] = useState(currentSalon?.address)
 
   const [postCode, setPostCode] = useState(currentSalon?.postCode)
-  const [contactTel, setContactTel] = useState(currentSalon?.contactTel.toString())
-  const [dialCode, setDialCode] = useState("")
+  const [contactTel, setContactTel] = useState(`${currentSalon?.mobileCountryCode}${currentSalon?.contactTel.toString()}`)
+  const [dialCode, setDialCode] = useState(currentSalon?.mobileCountryCode)
   // currentSalon?.contactTel
   const [webLink, setWebLink] = useState(currentSalon?.webLink)
   const [fbLink, setFbLink] = useState(currentSalon?.fbLink)
@@ -634,7 +636,6 @@ const EditSalon = () => {
       salonId: currentSalon?.salonId
     }
 
-    console.log(salondata)
     dispatch(adminEditSalonAction(salondata, navigate))
   }
 

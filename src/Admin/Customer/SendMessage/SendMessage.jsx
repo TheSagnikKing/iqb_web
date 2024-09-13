@@ -13,6 +13,8 @@ const SendMessage = () => {
 
     const recipientMobileNumbers = location?.state?.checkMobileNumbers
 
+    console.log("Mobile Numbers ", recipientMobileNumbers)
+
     const recipentCustomerNames = location?.state?.checkCustomerNames
 
     const [message, setMessage] = useState("")
@@ -26,7 +28,7 @@ const SendMessage = () => {
             numbers: recipientMobileNumbers
         }
         console.log(smsdata)
-        dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-customer"))
+        // dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-customer"))
 
     }
 
@@ -50,6 +52,7 @@ const SendMessage = () => {
                         <input
                             type="text"
                             value={"iqueuebarbers"}
+                            readOnly
                         />
                     </div>
 

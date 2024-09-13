@@ -263,7 +263,7 @@ const EditBarber = () => {
     }
   }, [allSalonServices])
 
-  console.log("AllSalonServices ", AllSalonServices)
+  // console.log("AllSalonServices ", AllSalonServices)
 
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -272,12 +272,14 @@ const EditBarber = () => {
   const dispatch = useDispatch();
   const currentBarber = location?.state;
 
+  console.log("Current Barber ", currentBarber)
+
   // State variables
   const [name, setName] = useState(currentBarber?.name);
   const [email, setEmail] = useState(currentBarber?.email);
   const [nickName, setNickName] = useState(currentBarber?.nickName);
-  const [mobileNumber, setMobileNumber] = useState(currentBarber?.mobileNumber.toString());
-  const [countryCode, setCountryCode] = useState("")
+  const [mobileNumber, setMobileNumber] = useState(`${currentBarber?.mobileCountryCode}${currentBarber?.mobileNumber.toString()}`);
+  const [countryCode, setCountryCode] = useState(currentBarber?.mobileCountryCode)
   const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth?.split('T')[0]);
   const [chooseServices, setChooseServices] = useState([]);
   const [serviceEWTValues, setServiceEWTValues] = useState({});
