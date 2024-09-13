@@ -26,7 +26,7 @@ const SendMessage = () => {
             numbers: recipientMobileNumbers
         }
         console.log("Send Barber Mobile Number ",smsdata)
-        // dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-barber"))
+        dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-barber"))
 
     }
 
