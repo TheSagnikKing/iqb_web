@@ -15,6 +15,8 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { barberSendVerifyEmailAction, barberSendVerifyMobileAction, barberUpdatePasswordAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction, barberVerifiedMobileStatusAction } from "../../Redux/Barber/Actions/BarberProfileAction"
 import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+
 const EditProfile = () => {
 
     const dispatch = useDispatch()
@@ -184,23 +186,40 @@ const EditProfile = () => {
     }, []);
 
 
-    const [mobileNumber, setMobileNumber] = useState(barberProfile?.mobileNumber?.toString())
-    const [countryCode, setCountryCode] = useState("")
+    const [mobileNumber, setMobileNumber] = useState(`${barberProfile?.mobileCountryCode}${barberProfile?.mobileNumber?.toString()}`)
+
+    const [countryCode, setCountryCode] = useState(barberProfile?.mobileCountryCode)
+
+    const [invalidnumber, setInvalidNumber] = useState(false)
 
     const updateBarberProfile = () => {
-        const profiledata = {
-            email: barberProfile?.email,
-            dateOfBirth,
-            mobileNumber: Number(mobileNumber),
-            countryCode: Number(countryCode),
-            name,
-            gender,
-            password
+
+        if (invalidnumber) {
+            toast.error("Invalid Number", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        } else {
+            const profiledata = {
+                email: barberProfile?.email,
+                dateOfBirth,
+                mobileNumber: Number(mobileNumber),
+                countryCode: Number(countryCode),
+                name,
+                gender,
+                password
+            }
+
+            console.log(profiledata)
+
+            dispatch(barberUpdateProfileAction(profiledata, navigate))
         }
 
-        console.log(profiledata)
-
-        dispatch(barberUpdateProfileAction(profiledata, navigate))
     }
 
     const barberUpdateProfile = useSelector(state => state.barberUpdateProfile)
@@ -266,10 +285,29 @@ const EditProfile = () => {
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
+    const phoneUtil = PhoneNumberUtil.getInstance();
+
+    const isPhoneValid = (phone) => {
+        try {
+            return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+        } catch (error) {
+            return false;
+        }
+    };
+
+
     const handlePhoneChange = (phone, meta) => {
-        setMobileNumber(phone)
         const { country, inputValue } = meta;
-        setCountryCode(country?.dialCode)
+
+        const isValid = isPhoneValid(phone);
+
+        if (isValid) {
+            setMobileNumber(phone)
+            setCountryCode(country?.dialCode)
+            setInvalidNumber(false)
+        } else {
+            setInvalidNumber(true)
+        }
     };
 
 

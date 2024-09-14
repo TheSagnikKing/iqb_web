@@ -29,6 +29,8 @@ const Sidebar = () => {
     response: barberGetSalonLogoResponse
   } = barberGetSalonLogo
 
+  console.log(barberGetSalonLogoResponse?.salonLogo[0]?.url)
+
   const [showSidebar, setShowSidebar] = useState(true)
 
   const navigate = useNavigate()
@@ -54,8 +56,8 @@ const Sidebar = () => {
                 />
               </div>
               <p style={{
-                color: darkmodeOn && "var(--primary-text-light-color1)"
-              }}>IQB</p>
+                color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
+              }}>{barberGetSalonLogoResponse?.salonName}</p>
 
             </div> : ""}
           </p>

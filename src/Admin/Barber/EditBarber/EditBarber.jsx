@@ -250,6 +250,9 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+import toast from 'react-hot-toast';
+
 const EditBarber = () => {
 
   const [AllSalonServices, setAllSalonServices] = useState([])
@@ -319,25 +322,38 @@ const EditBarber = () => {
     }
   };
 
-
+  const [invalidnumber, setInvalidNumber] = useState(false)
 
   // Create barber handler
   const EditBarberHandler = () => {
-    const barberdata = {
-      name,
-      email,
-      nickName,
-      mobileNumber: Number(mobileNumber),
-      countryCode: Number(countryCode),
-      dateOfBirth,
-      salonId,
-      barberServices: currentBarberServices
-    };
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const barberdata = {
+        name,
+        email,
+        nickName,
+        mobileNumber: Number(mobileNumber),
+        countryCode: Number(countryCode),
+        dateOfBirth,
+        salonId,
+        barberServices: currentBarberServices
+      };
 
-    console.log(barberdata)
+      console.log(barberdata)
 
-    // Dispatch action to create or update barber
-    dispatch(adminUpdateBarberAction(barberdata, navigate));
+      // Dispatch action to create or update barber
+      dispatch(adminUpdateBarberAction(barberdata, navigate));
+    }
+
   };
 
 
@@ -364,11 +380,32 @@ const EditBarber = () => {
     }
   }
 
-  const handlePhoneChange = (phone, meta) => {
-    setMobileNumber(phone)
-    const { country, inputValue } = meta;
-    setCountryCode(country?.dialCode)
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
   };
+
+  const handlePhoneChange = (phone, meta) => {
+    const { country, inputValue } = meta;
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setMobileNumber(phone)
+      setCountryCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
+  };
+
+
+
 
   return (
     <div className={`admin_edit_barber_wrapper ${darkmodeOn && "dark"}`}>

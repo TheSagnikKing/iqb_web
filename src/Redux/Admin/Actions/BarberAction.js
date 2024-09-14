@@ -200,6 +200,8 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
             payload: data
         })
 
+        localStorage.setItem("salondata", JSON.stringify({}))
+
         navigate("/admin-barber")
     } catch (error) {
 
@@ -287,7 +289,7 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
 }
 
 
-export const adminSendBarberEmailAction = (maildata,setSubject,setMessage,navigate,routename) => async (dispatch) => {
+export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, navigate, routename) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_BARBER_MAIL_REQ })
 
@@ -332,7 +334,7 @@ export const adminSendBarberEmailAction = (maildata,setSubject,setMessage,naviga
 }
 
 
-export const adminSendBarberMessageAction = (smsdata,setMessage,navigate,routename) => async (dispatch) => {
+export const adminSendBarberMessageAction = (smsdata, setMessage, navigate, routename) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_BARBER_MESSAGE_REQ })
 

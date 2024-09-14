@@ -41,7 +41,7 @@ const Sidebar = () => {
               </div>
               <p style={{
                 color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
-              }}>IQB</p>
+              }}>{adminGetDefaultSalonResponse?.salonName}</p>
             </div> : ""}
           </p>
         </div>

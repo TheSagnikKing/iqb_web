@@ -15,6 +15,8 @@ import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+
 const CreateSalon = () => {
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
@@ -114,56 +116,56 @@ const CreateSalon = () => {
   };
 
 
-  const slidedata = [
-    {
-      _id: 1,
-      item: "https://static.vecteezy.com/system/resources/previews/024/284/257/original/beauty-salon-logo-design-free-vector.jpg"
-    },
-    {
-      _id: 2,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
-    },
-    {
-      _id: 3,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo%2C-berber-shop-logo-%282%29-design-template-f3e545ef9d52cb9e7ae3417ce224e7cc_screen.jpg?ts=1670083891"
-    },
-    {
-      _id: 4,
-      item: "https://i.etsystatic.com/25554738/r/il/e41d02/2658645383/il_1080xN.2658645383_98de.jpg"
-    },
-    {
-      _id: 5,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-template-template-design-a9bd85723adce8b0807a304e83ee311c_screen.jpg?ts=1646827983"
-    },
-    {
-      _id: 6,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJ5LX65c_fr-nkD6VUBrkBFmgSgZ3Z5pZmdcpcvpR3BG-qG_c58NAis2_8E7lw6cZtPE&usqp=CAU"
-    },
-    {
-      _id: 7,
-      item: "https://static.vecteezy.com/system/resources/previews/021/966/428/non_2x/beauty-logo-for-woman-logo-can-be-used-for-beauty-salon-cosmetic-spa-premium-vector.jpg"
-    },
-    {
-      _id: 8,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgyasp38zhIQ4j-x0Mo6xgd5SQmykEhuRt2-xOW6-oNw&s"
-    },
-    {
-      _id: 9,
-      item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
-    },
-    {
-      _id: 10,
-      item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY4Z0Y0uJHZp4dGFLekfimfc19sCFo6QN_reeW56TFuw&s"
-    },
-    {
-      _id: 11,
-      item: "https://pnclogosofficial.s3.us-west-2.amazonaws.com/2020/10/09153501/salon-logos-20-scaled.jpg"
-    },
-    {
-      _id: 12,
-      item: "https://previews.123rf.com/images/butenkow/butenkow1511/butenkow151100071/48324057-beauty-female-face-logo-design-cosmetic-salon-logo-design-creative-woman-face-vector.jpg"
-    },
-  ]
+  // const slidedata = [
+  //   {
+  //     _id: 1,
+  //     item: "https://static.vecteezy.com/system/resources/previews/024/284/257/original/beauty-salon-logo-design-free-vector.jpg"
+  //   },
+  //   {
+  //     _id: 2,
+  //     item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
+  //   },
+  //   {
+  //     _id: 3,
+  //     item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo%2C-berber-shop-logo-%282%29-design-template-f3e545ef9d52cb9e7ae3417ce224e7cc_screen.jpg?ts=1670083891"
+  //   },
+  //   {
+  //     _id: 4,
+  //     item: "https://i.etsystatic.com/25554738/r/il/e41d02/2658645383/il_1080xN.2658645383_98de.jpg"
+  //   },
+  //   {
+  //     _id: 5,
+  //     item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-template-template-design-a9bd85723adce8b0807a304e83ee311c_screen.jpg?ts=1646827983"
+  //   },
+  //   {
+  //     _id: 6,
+  //     item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJ5LX65c_fr-nkD6VUBrkBFmgSgZ3Z5pZmdcpcvpR3BG-qG_c58NAis2_8E7lw6cZtPE&usqp=CAU"
+  //   },
+  //   {
+  //     _id: 7,
+  //     item: "https://static.vecteezy.com/system/resources/previews/021/966/428/non_2x/beauty-logo-for-woman-logo-can-be-used-for-beauty-salon-cosmetic-spa-premium-vector.jpg"
+  //   },
+  //   {
+  //     _id: 8,
+  //     item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgyasp38zhIQ4j-x0Mo6xgd5SQmykEhuRt2-xOW6-oNw&s"
+  //   },
+  //   {
+  //     _id: 9,
+  //     item: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-cec2f4ebd3c26a13f805033c6b1e9776_screen.jpg?ts=1646827912"
+  //   },
+  //   {
+  //     _id: 10,
+  //     item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY4Z0Y0uJHZp4dGFLekfimfc19sCFo6QN_reeW56TFuw&s"
+  //   },
+  //   {
+  //     _id: 11,
+  //     item: "https://pnclogosofficial.s3.us-west-2.amazonaws.com/2020/10/09153501/salon-logos-20-scaled.jpg"
+  //   },
+  //   {
+  //     _id: 12,
+  //     item: "https://previews.123rf.com/images/butenkow/butenkow1511/butenkow151100071/48324057-beauty-female-face-logo-design-cosmetic-salon-logo-design-creative-woman-face-vector.jpg"
+  //   },
+  // ]
 
 
   const [salonType, setSalonType] = useState("")
@@ -664,7 +666,7 @@ const CreateSalon = () => {
 
   const addServiceHandler = () => {
 
-    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
+    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '' || selectedLogo.url === "" && selectedLogo.public_id === "") {
       toast.error("Please fill all the services", {
         duration: 3000,
         style: {
@@ -784,53 +786,70 @@ const CreateSalon = () => {
 
   const [uploadSalonImages, setUploadSalonImages] = useState("")
 
+  const [invalidnumber, setInvalidNumber] = useState(false)
+
   const createSalonHandler = async () => {
-    const salondata = {
-      adminEmail: email,
-      salonEmail,
-      salonName,
-      address,
-      location: {
-        type: "Point",
-        coordinates: {
-          longitude: Number(longitude),
-          latitude: Number(latitude)
-        }
-      },
-      country,
-      city,
-      timeZone: timezone,
-      postCode,
-      contactTel: Number(contactTel),
-      countryCode: Number(dialCode),
-      salonType,
-      webLink,
-      fbLink,
-      instraLink,
-      twitterLink,
-      tiktokLink,
-      services: selectedServices,
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const salondata = {
+        adminEmail: email,
+        salonEmail,
+        salonName,
+        address,
+        location: {
+          type: "Point",
+          coordinates: {
+            longitude: Number(longitude),
+            latitude: Number(latitude)
+          }
+        },
+        country,
+        city,
+        timeZone: timezone,
+        postCode,
+        contactTel: Number(contactTel),
+        countryCode: Number(dialCode),
+        salonType,
+        webLink,
+        fbLink,
+        instraLink,
+        twitterLink,
+        tiktokLink,
+        services: selectedServices,
+      }
+
+      // console.log(salondata)
+
+      const files = await Promise.all(
+        salonImages?.map(async (imgObject) => {
+          try {
+            const response = await fetch(imgObject.blobUrl);
+            const blob = await response.blob();
+
+            const file = new File([blob], imgObject.name, { type: blob.type });
+
+            return file;
+          } catch (error) {
+            console.error("Error converting blob URL to file:", error);
+            return null;
+          }
+        })
+      );
+
+      setUploadSalonImages(files)
+
+      dispatch(adminCreateSalonAction(salondata, navigate))
     }
 
-    const files = await Promise.all(
-      salonImages?.map(async (imgObject) => {
-        try {
-          const response = await fetch(imgObject.blobUrl);
-          const blob = await response.blob();
-
-          const file = new File([blob], imgObject.name, { type: blob.type });
-
-          return file;
-        } catch (error) {
-          console.error("Error converting blob URL to file:", error);
-          return null;
-        }
-      })
-    );
-
-    setUploadSalonImages(files)
-
-    dispatch(adminCreateSalonAction(salondata, navigate))
   }
 
   const adminCreateSalon = useSelector(state => state.adminCreateSalon)
@@ -996,10 +1015,31 @@ const CreateSalon = () => {
   const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
 
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
+  };
+
+
   const handlePhoneChange = (phone, meta) => {
-    setContactTel(phone)
+
     const { country, inputValue } = meta;
-    setDialCode(country?.dialCode)
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setContactTel(phone)
+      setDialCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
+
   };
 
   return (

@@ -45,14 +45,14 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
             type: BARBER_GOOGLE_SIGNUP_REQ
         });
 
-        const {data} = await api.post(`/api/barber/googleBarberSignUp?token=${token}`);
+        const { data } = await api.post(`/api/barber/googleBarberSignUp?token=${token}`);
 
         dispatch({
             type: BARBER_GOOGLE_SIGNUP_SUCCESS,
             payload: { message: "Barber signin successfully" }
         });
 
-        navigate("/barber-signupeditprofile",{state:data})
+        navigate("/barber-signupeditprofile", { state: data })
     } catch (error) {
 
         dispatch({
@@ -62,13 +62,13 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -79,7 +79,7 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
             type: BARBER_SIGNIN_REQ
         });
 
-        await api.post("/api/barber/login",signinData);
+        await api.post("/api/barber/login", signinData);
 
         dispatch({
             type: BARBER_SIGNIN_SUCCESS,
@@ -99,13 +99,13 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -116,14 +116,16 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
             type: BARBER_SIGNUP_REQ
         });
 
-        const {data} = await api.post("/api/barber/register",signupData);
+        const { data } = await api.post("/api/barber/register", signupData);
+
+        // console.log(data)
 
         dispatch({
             type: BARBER_SIGNUP_SUCCESS,
             payload: { message: "Barber signin successfully" }
         });
 
-        navigate("/barber-signupeditprofile",{state:data})
+        navigate("/barber-signupeditprofile", { state: data })
     } catch (error) {
 
         dispatch({
@@ -133,13 +135,13 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -150,7 +152,7 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
             type: BARBER_SIGNUP_EDIT_REQ
         });
 
-        const {data} = await api.put("/api/barber/updateBarberInfo",profiledata);
+        const { data } = await api.put("/api/barber/updateBarberInfo", profiledata);
 
         dispatch({
             type: BARBER_SIGNUP_EDIT_SUCCESS,
@@ -160,7 +162,7 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
         localStorage.setItem("userAdminLoggedIn", "false")
         localStorage.setItem("userBarberLoggedIn", "true")
 
-        navigate("/barber-dashboard",{state:data})
+        navigate("/barber-dashboard", { state: data })
     } catch (error) {
 
         dispatch({
@@ -170,13 +172,13 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };

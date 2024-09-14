@@ -333,7 +333,7 @@ const Dashboard = () => {
           barberProfile?.user[0]?.approvePendingMessage ?
             <div className='barber_approve_container'>
               <div>
-                <h2>{barberProfile?.user[0]?.approvePendingMessage}</h2>
+                <h2 style={{ color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"}}>{barberProfile?.user[0]?.approvePendingMessage}</h2>
                 <button onClick={() => window.location.reload()}>Reload</button>
               </div>
             </div> :

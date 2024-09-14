@@ -245,7 +245,7 @@ const SalonAdv = () => {
   return (
     <div className='salonadv_container'>
       <div className={`salonadv_header ${darkmodeOn && "dark"}`}>
-        <p>Advertisements</p>
+        <p>Advertisements <span>(Drag and drop)</span></p>
         <div>
           <div>
             <button
@@ -263,7 +263,7 @@ const SalonAdv = () => {
               />
             </button>
             <p>
-              {uploadAdvImages?.length}
+              {uploadAdvImages?.length}{" "}
               Files</p>
           </div>
           {

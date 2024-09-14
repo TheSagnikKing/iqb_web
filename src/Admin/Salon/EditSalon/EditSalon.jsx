@@ -15,6 +15,8 @@ import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 import SalonModal from '../../../components/Modal/SalonModal/SalonModal';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+
 const EditSalon = () => {
 
   const dispatch = useDispatch()
@@ -115,7 +117,7 @@ const EditSalon = () => {
     }
   }
 
-  console.log("Current Salon is ",currentSalon)
+  console.log("Current Salon is ", currentSalon)
 
   const [salonEmail, setSalonEmail] = useState(currentSalon?.salonEmail)
   const [salonName, setSalonName] = useState(currentSalon?.salonName)
@@ -542,7 +544,7 @@ const EditSalon = () => {
 
   const addServiceHandler = () => {
 
-    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '') {
+    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '' || selectedLogo.url === "" && selectedLogo.public_id === "") {
       toast.error("Please fill all the services", {
         duration: 3000,
         style: {
@@ -607,36 +609,53 @@ const EditSalon = () => {
 
   const navigate = useNavigate()
 
+  const [invalidnumber, setInvalidNumber] = useState(false)
+
   const editSalonHandler = () => {
-    const salondata = {
-      adminEmail: email,
-      salonEmail,
-      salonName,
-      address,
-      location: {
-        type: "Point",
-        coordinates: {
-          longitude: Number(longitude),
-          latitude: Number(latitude)
-        }
-      },
-      country,
-      city,
-      timeZone: timezone,
-      postCode,
-      contactTel: Number(contactTel),
-      countryCode: Number(dialCode),
-      salonType,
-      webLink,
-      fbLink,
-      instraLink,
-      twitterLink,
-      tiktokLink,
-      services: selectedServices,
-      salonId: currentSalon?.salonId
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const salondata = {
+        adminEmail: email,
+        salonEmail,
+        salonName,
+        address,
+        location: {
+          type: "Point",
+          coordinates: {
+            longitude: Number(longitude),
+            latitude: Number(latitude)
+          }
+        },
+        country,
+        city,
+        timeZone: timezone,
+        postCode,
+        contactTel: Number(contactTel),
+        countryCode: Number(dialCode),
+        salonType,
+        webLink,
+        fbLink,
+        instraLink,
+        twitterLink,
+        tiktokLink,
+        services: selectedServices,
+        salonId: currentSalon?.salonId
+      }
+
+      console.log(salondata)
+
+      dispatch(adminEditSalonAction(salondata, navigate))
     }
 
-    dispatch(adminEditSalonAction(salondata, navigate))
   }
 
   const adminEditSalon = useSelector(state => state.adminEditSalon)
@@ -904,10 +923,28 @@ const EditSalon = () => {
   const [seePassword, setSeePassword] = useState(false)
   const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handlePhoneChange = (phone, meta) => {
-    setContactTel(phone)
     const { country, inputValue } = meta;
-    setDialCode(country?.dialCode)
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setContactTel(phone)
+      setDialCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
   };
 
   return (

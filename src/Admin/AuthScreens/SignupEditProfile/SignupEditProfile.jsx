@@ -7,6 +7,9 @@ import { PhoneInput } from 'react-international-phone'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { adminSkipProfileAction } from '../../../Redux/Admin/Actions/AdminProfileAction'
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+import toast from 'react-hot-toast'
+
 const SignupEditProfile = () => {
 
   const dispatch = useDispatch()
@@ -53,12 +56,26 @@ const SignupEditProfile = () => {
     };
   }, []);
 
+  const [invalidnumber, setInvalidNumber] = useState(false)
 
   const updateClicked = () => {
-    const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
 
-    console.log(profiledata)
-    dispatch(AdminSignupEditAction(profiledata, navigate))
+      console.log(profiledata)
+      dispatch(AdminSignupEditAction(profiledata, navigate))
+    }
+
   }
 
   const skipClicked = () => {
@@ -79,10 +96,28 @@ const SignupEditProfile = () => {
     loading: adminSkipProfileLoading
   } = adminSkipProfile
 
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handlePhoneChange = (phone, meta) => {
-    setMobileNumber(phone)
     const { country, inputValue } = meta;
-    setCountryCode(country?.dialCode)
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setMobileNumber(phone)
+      setCountryCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
   };
 
 

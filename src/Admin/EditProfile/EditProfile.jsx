@@ -14,6 +14,8 @@ import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+
 const EditProfile = () => {
 
     const dispatch = useDispatch()
@@ -21,7 +23,7 @@ const EditProfile = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
-    console.log(adminProfile)
+    // console.log(adminProfile)
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
     const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(adminProfile?.mobileVerified)
@@ -191,17 +193,34 @@ const EditProfile = () => {
     const [mobileNumber, setMobileNumber] = useState(`${adminProfile?.mobileCountryCode?.toString()}${adminProfile?.mobileNumber?.toString()}`)
     const [countryCode, setCountryCode] = useState(adminProfile?.mobileCountryCode?.toString())
 
+    const [invalidnumber, setInvalidNumber] = useState(false)
+
     const updateAdminProfile = () => {
-        const profiledata = {
-            email: adminProfile?.email,
-            dateOfBirth,
-            mobileNumber: Number(mobileNumber),
-            countryCode: Number(countryCode),
-            name,
-            gender,
+        if (invalidnumber) {
+            toast.error("Invalid Number", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        } else {
+            const profiledata = {
+                email: adminProfile?.email,
+                dateOfBirth,
+                mobileNumber: Number(mobileNumber),
+                countryCode: Number(countryCode),
+                name,
+                gender,
+            }
+
+            console.log(profiledata)
+
+            dispatch(adminUpdateProfileAction(profiledata, navigate))
         }
 
-        dispatch(adminUpdateProfileAction(profiledata, navigate))
     }
 
     const verifyEmailStatusClicked = () => {
@@ -265,10 +284,30 @@ const EditProfile = () => {
     const [seePassword, setSeePassword] = useState(false)
     const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
 
+
+
+    const phoneUtil = PhoneNumberUtil.getInstance();
+
+    const isPhoneValid = (phone) => {
+        try {
+            return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+        } catch (error) {
+            return false;
+        }
+    };
+
     const handlePhoneChange = (phone, meta) => {
-        setMobileNumber(phone)
         const { country, inputValue } = meta;
-        setCountryCode(country?.dialCode)
+
+        const isValid = isPhoneValid(phone);
+
+        if (isValid) {
+            setMobileNumber(phone)
+            setCountryCode(country?.dialCode)
+            setInvalidNumber(false)
+        } else {
+            setInvalidNumber(true)
+        }
     };
 
     return (
@@ -521,8 +560,8 @@ const EditProfile = () => {
                                     <p>An message with a verification code was just sent to your mobile number</p>
 
                                     <div>
-                                        <p>{adminProfile?.mobileNumber}</p>
-                                        <button onClick={verifyMobileStatusClicked}>Verify</button>
+                                        <p>{adminProfile?.mobileCountryCode}{adminProfile?.mobileNumber}</p>
+                                        <button onClick={() => sendVerificationMobile()}>Resend</button>
                                     </div>
 
                                     <div>
@@ -540,6 +579,10 @@ const EditProfile = () => {
                                                 ></input>
                                             ))
                                         }
+                                    </div>
+
+                                    <div className='verify_btn_div'>
+                                        <button className='verifybtn' onClick={verifyMobileStatusClicked}>Verify</button>
                                     </div>
                                 </div>
                             </div>

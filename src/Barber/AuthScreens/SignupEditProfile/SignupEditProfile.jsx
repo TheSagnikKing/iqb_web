@@ -7,6 +7,9 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { BarberSignupEditAction } from '../../../Redux/Barber/Actions/AuthAction'
 import { barberSkipProfileAction } from '../../../Redux/Barber/Actions/BarberProfileAction'
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+import toast from 'react-hot-toast'
+
 const SignupEditProfile = () => {
 
   const dispatch = useDispatch()
@@ -56,12 +59,26 @@ const SignupEditProfile = () => {
     };
   }, []);
 
+  const [invalidnumber, setInvalidNumber] = useState(false)
 
   const updateClicked = () => {
-    const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType, countryCode: Number(countryCode) };
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType, countryCode: Number(countryCode) };
 
-    console.log(profiledata)
-    dispatch(BarberSignupEditAction(profiledata, navigate))
+      console.log(profiledata)
+      dispatch(BarberSignupEditAction(profiledata, navigate))
+    }
+
   }
 
   const skipClicked = () => {
@@ -84,10 +101,28 @@ const SignupEditProfile = () => {
     loading: barberSkipProfileLoading,
   } = barberSkipProfile
 
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handlePhoneChange = (phone, meta) => {
-    setMobileNumber(phone)
     const { country, inputValue } = meta;
-    setCountryCode(country?.dialCode)
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setMobileNumber(phone)
+      setCountryCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
   };
 
   return (

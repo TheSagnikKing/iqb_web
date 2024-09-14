@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import './Signin.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { Eyevisible,HomeIcon,Notvisibleeye } from '../../../icons'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch, useSelector } from 'react-redux'
-import {BarberGoogleloginAction, BarberSigninAction} from "../../../Redux/Barber/Actions/AuthAction"
+import { BarberGoogleloginAction, BarberSigninAction } from "../../../Redux/Barber/Actions/AuthAction"
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const Signin = () => {
 
-  const [email,setEmail] = useState("")
+  const location = useLocation("")
+  const queryParams = new URLSearchParams(location.search);
+  const urlemail = queryParams.get('email');
+
+  console.log(urlemail)
+
+  useEffect(() => {
+    if (urlemail) {
+      setEmail(urlemail)
+    }
+  }, [])
+
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const dispatch = useDispatch()
@@ -82,7 +94,7 @@ const Signin = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
+            <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>
 
           <div>
@@ -114,7 +126,7 @@ const Signin = () => {
 
           <p>Don't you have an account ? <Link to="/barbersignup">Sign up</Link></p>
         </div>
-        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
+        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon /></div>
       </div>
     </main>
   )

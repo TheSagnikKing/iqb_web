@@ -9,6 +9,9 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
+import { PhoneNumberUtil } from 'google-libphonenumber';
+import toast from 'react-hot-toast';
+
 const CreateBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
 
@@ -74,19 +77,42 @@ const CreateBarber = () => {
     });
   };
 
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("salondata")) || {};
+    setLocalbarberdata(storedData);
+  }, [name, email, nickName, dateOfBirth]);
+
+  const [localbarberdata, setLocalbarberdata] = useState({})
+
+  const [invalidnumber, setInvalidNumber] = useState(false)
+
   const CreateBarberHandler = () => {
-    const barberdata = {
-      name, email, nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth,
-      salonId,
-      barberServices: chooseServices.map(service => ({
-        ...service,
-        barberServiceEWT: serviceEWTValues[service._id]
-      }))
-    };
+    if (invalidnumber) {
+      toast.error("Invalid Number", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    } else {
+      const barberdata = {
+        name: localbarberdata.name, email: localbarberdata.email, nickName: localbarberdata.nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth: localbarberdata.dateOfBirth,
+        salonId,
+        barberServices: chooseServices.map(service => ({
+          ...service,
+          barberServiceEWT: serviceEWTValues[service._id]
+        }))
+      };
 
-    console.log(barberdata)
+      console.log(barberdata)
 
-    dispatch(adminCreateBarberAction(barberdata, navigate))
+      dispatch(adminCreateBarberAction(barberdata, navigate))
+    }
+
   };
 
   const adminCreateBarber = useSelector(state => state.adminCreateBarber)
@@ -99,11 +125,54 @@ const CreateBarber = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  const handlePhoneChange = (phone, meta) => {
-    setMobileNumber(phone)
-    const { country, inputValue } = meta;
-    setCountryCode(country?.dialCode)
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
+  const isPhoneValid = (phone) => {
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+    } catch (error) {
+      return false;
+    }
   };
+
+  const handlePhoneChange = (phone, meta, localname) => {
+    const { country, inputValue } = meta;
+
+    const isValid = isPhoneValid(phone);
+
+    if (isValid) {
+      setMobileNumber(phone)
+      setCountryCode(country?.dialCode)
+      setInvalidNumber(false)
+    } else {
+      setInvalidNumber(true)
+    }
+    // const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    // localStorage.setItem("salondata", JSON.stringify({
+    //   ...existingData,
+    //   [localname]: phone
+    // }));
+
+    // The tel package is causing the state to reset
+  };
+
+
+  const setHandler = (setState, value, localname) => {
+    setState(value);
+    console.log("Saving to localStorage:", localname, value);
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      [localname]: value
+    }));
+  }
+
+
+
+  console.log(localbarberdata)
 
   return (
     <div className={`admin_create_barber_wrapper ${darkmodeOn && "dark"}`}>
@@ -113,8 +182,9 @@ const CreateBarber = () => {
           <p>Barber Name</p>
           <input
             type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={localbarberdata.name}
+            // onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setHandler(setName, e.target.value, "name")}
           />
         </div>
 
@@ -122,8 +192,9 @@ const CreateBarber = () => {
           <p>Barber Email</p>
           <input
             type='text'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={localbarberdata.email}
+            // onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setHandler(setEmail, e.target.value, "email")}
           />
         </div>
 
@@ -131,8 +202,9 @@ const CreateBarber = () => {
           <p>Barber Nick Name</p>
           <input
             type='text'
-            value={nickName}
-            onChange={(e) => setNickName(e.target.value)}
+            value={localbarberdata.nickName}
+            // onChange={(e) => setNickName(e.target.value)}
+            onChange={(e) => setHandler(setNickName, e.target.value, "nickName")}
           />
         </div>
 
@@ -153,8 +225,9 @@ const CreateBarber = () => {
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry="gb"
-                  value={mobileNumber}
-                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+                  value={localbarberdata.mobileNumber}
+                  onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
+                // onChange={(phone, number) => setPhoneHandler(handlePhoneChange,phone, meta,mobileNumber )}
                 />
               </div>
 
@@ -166,8 +239,9 @@ const CreateBarber = () => {
             <input
               type='date'
               placeholder='dd/mm/yy'
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
+              value={localbarberdata.dateOfBirth}
+              // onChange={(e) => setDateOfBirth(e.target.value)}
+              onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth")}
               style={{
                 colorScheme: darkmodeOn ? "dark" : "light"
               }}
