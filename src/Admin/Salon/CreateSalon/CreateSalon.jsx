@@ -57,6 +57,13 @@ const CreateSalon = () => {
           const longitude = position.coords.longitude;
           setLatitude(latitude);
           setLongitude(longitude);
+          const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+          localStorage.setItem("salondata", JSON.stringify({
+            ...existingData,
+            latitude: latitude,
+            longitude: longitude
+          }));
         },
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
@@ -176,9 +183,38 @@ const CreateSalon = () => {
   }
 
   const salonTypeHandler = (value) => {
-    setSalonType(value)
+    setSalonType(value);
+    // console.log("Saving to localStorage:", localname, value);
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      salonType: value
+    }));
+    // setSalonType(value)
     setSalonTypeDrop(false)
   }
+
+  // useEffect(() => {
+  //   if(localsalondata?.country){
+  //     setCountry(localsalondata.country)
+  //   }
+  // },[])
+
+  const [localsalondata, setLocalSalondata] = useState({})
+
+  useEffect(() => {
+    if (localsalondata) {
+      setCountry(localsalondata?.country)
+      setCountryCode(localsalondata?.countrycode)
+      setCountryCurrency(localsalondata?.countryCurrency)
+      setCity(localsalondata?.city)
+      setTimezone(localsalondata?.timezone)
+      setLatitude(localsalondata?.latitude)
+      setLongitude(localsalondata?.longitude)
+    }
+  }, [localsalondata])
 
   const [countryCurrency, setCountryCurrency] = useState("")
 
@@ -187,6 +223,15 @@ const CreateSalon = () => {
   const [countrycode, setCountryCode] = useState("")
 
   const setCountryHandler = (value) => {
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      country: value.name,
+      countrycode: value.countryCode,
+      countryCurrency: value.currency
+    }));
+
     setCountryCode(value.countryCode)
     setCountry(value.name)
     setCountryCurrency(value.currency)
@@ -200,6 +245,13 @@ const CreateSalon = () => {
       clearTimeout(countryTimeout);
     }
     setCountry(value)
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      country: value
+    }));
 
     setCountryTimeout(setTimeout(() => {
       dispatch(getAdminAllCountriesAction(value));
@@ -247,6 +299,13 @@ const CreateSalon = () => {
   const [cityDrop, setCityDrop] = useState(false)
 
   const setCityHandler = (value) => {
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      city: value.name,
+    }));
+
     setCity(value.name)
     setCityDrop(false)
   }
@@ -259,6 +318,14 @@ const CreateSalon = () => {
     }
 
     setCity(value)
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      city: value
+    }));
+
     setCityTimeout(setTimeout(() => {
       dispatch(getAdminAllCitiesAction(value, countrycode));
     }, 500));
@@ -307,6 +374,14 @@ const CreateSalon = () => {
   }
 
   const setTimezoneHandler = (value) => {
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      timezone: value
+    }));
+
     setTimezone(value)
     setTimezoneDrop(false)
   }
@@ -693,33 +768,77 @@ const CreateSalon = () => {
 
     setSelectedServices([...selectedServices, service])
 
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      selectedServices: [
+        ...(localsalondata?.selectedServices ? localsalondata.selectedServices : selectedServices),
+        service
+      ]
+    }));
     setSelectedLogo({ url: "", public_id: "" })
     setServiceName("")
     setServicePrice("")
     setVipService(false)
     setServiceDesc("")
     setServiceEWT("")
+
   }
+
+
+  // const deleteServiceHandler = (index) => {
+  //   const currentService = localsalondata.selectedServices[index];
+
+  //   setSelectedLogo({
+  //     url: currentService.serviceIcon.url,
+  //     public_id: currentService.serviceIcon.public_id
+  //   })
+  //   setServiceName(currentService.serviceName)
+  //   setServicePrice(currentService.servicePrice)
+  //   setVipService(currentService.vipService)
+  //   setServiceDesc(currentService.serviceDesc)
+  //   setServiceEWT(currentService.serviceEWT)
+
+  //   const updatedServices = [...localsalondata.selectedServices];
+  //   updatedServices.splice(index, 1);
+
+  //   console.log("Updated Service ",updatedServices)
+
+  //   setSelectedServices(updatedServices);
+  // }
 
 
   const deleteServiceHandler = (index) => {
-    const currentService = selectedServices[index];
+    const currentService = localsalondata.selectedServices[index];
 
+    // Setting current service data
     setSelectedLogo({
       url: currentService.serviceIcon.url,
       public_id: currentService.serviceIcon.public_id
-    })
-    setServiceName(currentService.serviceName)
-    setServicePrice(currentService.servicePrice)
-    setVipService(currentService.vipService)
-    setServiceDesc(currentService.serviceDesc)
-    setServiceEWT(currentService.serviceEWT)
+    });
+    setServiceName(currentService.serviceName);
+    setServicePrice(currentService.servicePrice);
+    setVipService(currentService.vipService);
+    setServiceDesc(currentService.serviceDesc);
+    setServiceEWT(currentService.serviceEWT);
 
-    const updatedServices = [...selectedServices];
-    updatedServices.splice(index, 1);
+    // Removing the selected service
+    const updatedServices = [...localsalondata.selectedServices];
+    updatedServices.splice(index, 1);  // Remove service at the specified index
 
+    console.log("Updated Service ", updatedServices);
+
+    // Update the local state
     setSelectedServices(updatedServices);
-  }
+
+    // Update localStorage
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      selectedServices: updatedServices
+    }));
+  };
 
   const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
 
@@ -802,9 +921,9 @@ const CreateSalon = () => {
     } else {
       const salondata = {
         adminEmail: email,
-        salonEmail,
-        salonName,
-        address,
+        salonEmail: localsalondata.salonEmail,
+        salonName: localsalondata.salonName,
+        address: localsalondata.address,
         location: {
           type: "Point",
           coordinates: {
@@ -812,22 +931,22 @@ const CreateSalon = () => {
             latitude: Number(latitude)
           }
         },
-        country,
-        city,
-        timeZone: timezone,
-        postCode,
+        country: localsalondata.country,
+        city: localsalondata.city,
+        timeZone: localsalondata.timezone,
+        postCode: localsalondata.postCode,
         contactTel: Number(contactTel),
         countryCode: Number(dialCode),
-        salonType,
-        webLink,
-        fbLink,
-        instraLink,
-        twitterLink,
-        tiktokLink,
-        services: selectedServices,
+        salonType: localsalondata.salonType,
+        webLink: localsalondata.webLink,
+        fbLink: localsalondata.fbLink,
+        instraLink: localsalondata.instraLink,
+        twitterLink: localsalondata.twitterLink,
+        tiktokLink: localsalondata.tiktokLink,
+        services: localsalondata.selectedServices,
       }
 
-      // console.log(salondata)
+      console.log(salondata)
 
       const files = await Promise.all(
         salonImages?.map(async (imgObject) => {
@@ -851,6 +970,7 @@ const CreateSalon = () => {
     }
 
   }
+
 
   const adminCreateSalon = useSelector(state => state.adminCreateSalon)
 
@@ -1042,6 +1162,27 @@ const CreateSalon = () => {
 
   };
 
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("salondata")) || {};
+    setLocalSalondata(storedData);
+  }, [salonName, salonEmail, country, city, timezone, address, webLink, fbLink, instraLink, twitterLink, tiktokLink, postCode, salonType, selectedServices]);
+
+
+  const setHandler = (setState, value, localname) => {
+    setState(value);
+    console.log("Saving to localStorage:", localname, value);
+
+    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+    localStorage.setItem("salondata", JSON.stringify({
+      ...existingData,
+      [localname]: value
+    }));
+  }
+
+  console.log(localsalondata)
+
   return (
     <div className={`create_salon_wrapper ${darkmodeOn && "dark"}`}>
       <p>Create Salon</p>
@@ -1147,7 +1288,7 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>{salonName}</p>
+              <p>{localsalondata.salonName}</p>
               <p><span>{city}</span>{city && ",  "}<span>{country}</span></p>
             </div>
           </div>
@@ -1186,8 +1327,9 @@ const CreateSalon = () => {
             <p>Salon Name</p>
             <input
               type="text"
-              value={salonName}
-              onChange={(e) => setSalonName(e.target.value)}
+              value={localsalondata.salonName}
+              // onChange={(e) => setSalonName(e.target.value)}
+              onChange={(e) => setHandler(setSalonName, e.target.value, "salonName")}
             />
           </div>
 
@@ -1195,8 +1337,9 @@ const CreateSalon = () => {
             <p>Salon Email</p>
             <input
               type="text"
-              value={salonEmail}
-              onChange={(e) => setSalonEmail(e.target.value)}
+              value={localsalondata.salonEmail}
+              // onChange={(e) => setSalonEmail(e.target.value)}
+              onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail")}
             />
           </div>
 
@@ -1204,8 +1347,9 @@ const CreateSalon = () => {
             <p>Address</p>
             <input
               type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={localsalondata.address}
+              // onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => setHandler(setAddress, e.target.value, "address")}
             />
           </div>
 
@@ -1323,8 +1467,9 @@ const CreateSalon = () => {
               <p>Post Code</p>
               <input
                 type="text"
-                value={postCode}
-                onChange={(e) => setPostCode(e.target.value)}
+                value={localsalondata.postCode}
+                // onChange={(e) => setPostCode(e.target.value)}
+                onChange={(e) => setHandler(setPostCode, e.target.value, "postCode")}
               />
             </div>
           </div>
@@ -1335,7 +1480,8 @@ const CreateSalon = () => {
             <p>Salon Type</p>
             <input
               type="text"
-              value={`${salonType ? `${salonType}` : ''}`}
+              value={`${localsalondata.salonType ? `${localsalondata.salonType}` : ''}`}
+              // value={localsalondata.salonType}
               onClick={() => salonTypeDropHandler()}
               ref={salonTypeIconRef}
               className='salontype_input'
@@ -1526,7 +1672,7 @@ const CreateSalon = () => {
 
               <div className={`service_container ${darkmodeOn && "dark"}`}>
                 {
-                  selectedServices.map((ser, index) => (
+                  localsalondata?.selectedServices?.map((ser, index) => (
                     <div className={`service_container_item ${darkmodeOn && "dark"}`} key={index}>
                       <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
                       <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
@@ -1585,8 +1731,9 @@ const CreateSalon = () => {
             <p>Web Link</p>
             <input
               type="text"
-              value={webLink}
-              onChange={(e) => setWebLink(e.target.value)}
+              value={localsalondata.webLink}
+              // onChange={(e) => setWebLink(e.target.value)}
+              onChange={(e) => setHandler(setWebLink, e.target.value, "webLink")}
             />
           </div>
 
@@ -1594,8 +1741,9 @@ const CreateSalon = () => {
             <p>Facebook Link</p>
             <input
               type="text"
-              value={fbLink}
-              onChange={(e) => setFbLink(e.target.value)}
+              value={localsalondata.fbLink}
+              // onChange={(e) => setFbLink(e.target.value)}
+              onChange={(e) => setHandler(setFbLink, e.target.value, "fbLink")}
             />
           </div>
 
@@ -1603,8 +1751,9 @@ const CreateSalon = () => {
             <p>Instagram Link</p>
             <input
               type="text"
-              value={instraLink}
-              onChange={(e) => setInstraLink(e.target.value)}
+              value={localsalondata.instraLink}
+              // onChange={(e) => setInstraLink(e.target.value)}
+              onChange={(e) => setHandler(setInstraLink, e.target.value, "instraLink")}
             />
           </div>
 
@@ -1612,8 +1761,9 @@ const CreateSalon = () => {
             <p>Twitter Link</p>
             <input
               type="text"
-              value={twitterLink}
-              onChange={(e) => setTwitterLink(e.target.value)}
+              value={localsalondata.twitterLink}
+              // onChange={(e) => setTwitterLink(e.target.value)}
+              onChange={(e) => setHandler(setTwitterLink, e.target.value, "twitterLink")}
             />
           </div>
 
@@ -1621,8 +1771,9 @@ const CreateSalon = () => {
             <p>Tiktok Link</p>
             <input
               type="text"
-              value={tiktokLink}
-              onChange={(e) => setTiktokLink(e.target.value)}
+              value={localsalondata.tiktokLink}
+              // onChange={(e) => setTiktokLink(e.target.value)}
+              onChange={(e) => setHandler(setTiktokLink, e.target.value, "tiktokLink")}
             />
           </div>
 

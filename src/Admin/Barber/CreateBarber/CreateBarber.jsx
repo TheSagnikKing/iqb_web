@@ -79,7 +79,7 @@ const CreateBarber = () => {
 
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("salondata")) || {};
+    const storedData = JSON.parse(localStorage.getItem("barberdata")) || {};
     setLocalbarberdata(storedData);
   }, [name, email, nickName, dateOfBirth]);
 
@@ -136,7 +136,10 @@ const CreateBarber = () => {
   };
 
   const handlePhoneChange = (phone, meta, localname) => {
+    // console.log(meta)
     const { country, inputValue } = meta;
+
+    // console.log("svd", inputValue)
 
     const isValid = isPhoneValid(phone);
 
@@ -147,11 +150,12 @@ const CreateBarber = () => {
     } else {
       setInvalidNumber(true)
     }
-    // const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
 
-    // localStorage.setItem("salondata", JSON.stringify({
+    // const existingData = JSON.parse(localStorage.getItem("barberdata")) || {};
+
+    // localStorage.setItem("barberdata", JSON.stringify({
     //   ...existingData,
-    //   [localname]: phone
+    //   mobileNumber: inputValue
     // }));
 
     // The tel package is causing the state to reset
@@ -162,9 +166,9 @@ const CreateBarber = () => {
     setState(value);
     console.log("Saving to localStorage:", localname, value);
 
-    const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+    const existingData = JSON.parse(localStorage.getItem("barberdata")) || {};
 
-    localStorage.setItem("salondata", JSON.stringify({
+    localStorage.setItem("barberdata", JSON.stringify({
       ...existingData,
       [localname]: value
     }));
@@ -225,7 +229,7 @@ const CreateBarber = () => {
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry="gb"
-                  value={localbarberdata.mobileNumber}
+                  value={mobileNumber}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                 // onChange={(phone, number) => setPhoneHandler(handlePhoneChange,phone, meta,mobileNumber )}
                 />

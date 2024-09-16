@@ -213,6 +213,8 @@ export const adminCreateSalonAction = (salondata, navigate) => async (dispatch) 
             payload: adminloggedindata
         })
 
+        localStorage.setItem("salondata", JSON.stringify({}))
+
         navigate("/admin-salon")
 
     } catch (error) {

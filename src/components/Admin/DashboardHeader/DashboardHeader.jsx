@@ -284,6 +284,8 @@ const DashboardHeader = () => {
             <div className='mobile_choose_salon_div'>
                 <button onClick={() => setMobileDrop((prev) => !prev)}>Select Salon</button>
             </div>
+            
+            
             {
                 mobiledrop && <section className='chooseSalon_modal'>
                     <div className={`chooseSalon_model_content ${darkmodeOn && "dark"}`}>

@@ -56,6 +56,7 @@ import Loader from './components/Loader/Loader';
 import Drop from './Admin/Demo/Drop';
 import Demo from './Admin/Demo/Demo';
 import Table from './Admin/Demo/Table';
+
 import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 
@@ -175,8 +176,8 @@ const App = () => {
                     <Route path="/admin-customer/send-message" element={<AdminSendCustomerMessage />} />
                     <Route path="/admin-advertise" element={<AdminSalonAdv />} />
                     <Route path="/admin-queue" element={<AdminQueue />} />
-                    <Route path="/drop" element={<Drop />} />
-                    <Route path="/demo" element={<Demo />} />
+                    {/* <Route path="/drop" element={<Drop />} />
+                    <Route path="/demo" element={<Demo />} /> */}
                     <Route path='/table' element={<Table />} />
                   </Route>
 

@@ -308,7 +308,6 @@ const EditBarber = () => {
 
   };
 
-
   // Delete service handler
   const deleteServiceHandler = (service) => {
     const originalService = allSalonServices.find((s) => s.serviceId === service.serviceId);
