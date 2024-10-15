@@ -28,13 +28,13 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -45,14 +45,14 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
             type: ADMIN_GOOGLE_SIGNUP_REQ
         });
 
-        const {data} = await api.post(`/api/admin/googleAdminSignUp?token=${token}`);
+        const { data } = await api.post(`/api/admin/googleAdminSignUp?token=${token}`);
 
         dispatch({
             type: ADMIN_GOOGLE_SIGNUP_SUCCESS,
             payload: { message: "Admin signin successfully" }
         });
 
-        navigate("/admin-signupeditprofile",{state:data})
+        navigate("/admin-signupeditprofile", { state: data })
     } catch (error) {
 
         dispatch({
@@ -62,13 +62,13 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -79,7 +79,7 @@ export const AdminSigninAction = (signupData, navigate) => async (dispatch) => {
             type: ADMIN_SIGNIN_REQ
         });
 
-        await api.post("/api/admin/login",signupData);
+        await api.post("/api/admin/login", signupData);
 
         dispatch({
             type: ADMIN_SIGNIN_SUCCESS,
@@ -99,13 +99,13 @@ export const AdminSigninAction = (signupData, navigate) => async (dispatch) => {
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -117,14 +117,14 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
             type: ADMIN_SIGNUP_REQ
         });
 
-        const {data} = await api.post("/api/admin/register",signupData);
+        const { data } = await api.post("/api/admin/register", signupData);
 
         dispatch({
             type: ADMIN_SIGNUP_SUCCESS,
             payload: { message: "Admin signin successfully" }
         });
 
-        navigate("/admin-signupeditprofile",{state:data})
+        navigate("/admin-signupeditprofile", { state: data })
     } catch (error) {
 
         dispatch({
@@ -134,13 +134,13 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -152,7 +152,7 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
             type: ADMIN_SIGNUP_EDIT_REQ
         });
 
-        const {data} = await api.put("/api/admin/updateadminInfo",profiledata);
+        const { data } = await api.put("/api/admin/updateadminInfo", profiledata);
 
         dispatch({
             type: ADMIN_SIGNUP_EDIT_SUCCESS,
@@ -162,7 +162,7 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
         localStorage.setItem("userAdminLoggedIn", "true")
         localStorage.setItem("userBarberLoggedIn", "false")
 
-        navigate("/admin-dashboard",{state:data})
+        navigate("/admin-dashboard", { state: data })
     } catch (error) {
 
         dispatch({
@@ -172,13 +172,13 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
 
 
         toast.error(error?.response?.data?.message, {
-          duration: 3000,
-          style: {
-            fontSize: "1.4rem",
-            borderRadius: '1rem',
-            background: '#333',
-            color: '#fff',
-          },
+            duration: 3000,
+            style: {
+                fontSize: "1.4rem",
+                borderRadius: '1rem',
+                background: '#333',
+                color: '#fff',
+            },
         });
     }
 };
@@ -210,6 +210,8 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
 
         localStorage.setItem("userAdminLoggedIn", "false")
         localStorage.setItem("userBarberLoggedIn", "false")
+        localStorage.setItem("barberdata", JSON.stringify({}))
+        localStorage.setItem("salondata", JSON.stringify({}))
 
         // navigate("/adminsignin")
         navigate("/")

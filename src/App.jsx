@@ -61,6 +61,7 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 
 import { } from '../public/offline.png'
+import Dashboard from './components/DEMO/Dashboard';
 
 const App = () => {
 
@@ -153,6 +154,8 @@ const App = () => {
                   <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
                   <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
                   <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
+
+                  <Route path='/demodashboard' element={<Dashboard />} />
                 </Route>
 
                 {/* Admin Main Pages  */}
@@ -179,6 +182,7 @@ const App = () => {
                     {/* <Route path="/drop" element={<Drop />} />
                     <Route path="/demo" element={<Demo />} /> */}
                     <Route path='/table' element={<Table />} />
+
                   </Route>
 
                 </Route>

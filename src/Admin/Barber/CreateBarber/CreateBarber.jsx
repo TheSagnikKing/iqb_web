@@ -78,10 +78,19 @@ const CreateBarber = () => {
   };
 
 
+  // useEffect(() => {
+  //   const storedData = JSON.parse(localStorage.getItem("barberdata")) || {};
+  //   setLocalbarberdata(storedData);
+  // }, [name, email, nickName, dateOfBirth]);
+
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("barberdata")) || {};
-    setLocalbarberdata(storedData);
-  }, [name, email, nickName, dateOfBirth]);
+
+    setName(storedData.name)
+    setEmail(storedData.email)
+    setNickName(storedData.nickName)
+    setDateOfBirth(storedData.dateOfBirth)
+  }, []);
 
   const [localbarberdata, setLocalbarberdata] = useState({})
 
@@ -186,7 +195,7 @@ const CreateBarber = () => {
           <p>Barber Name</p>
           <input
             type='text'
-            value={localbarberdata.name}
+            value={name}
             // onChange={(e) => setName(e.target.value)}
             onChange={(e) => setHandler(setName, e.target.value, "name")}
           />
@@ -196,7 +205,7 @@ const CreateBarber = () => {
           <p>Barber Email</p>
           <input
             type='text'
-            value={localbarberdata.email}
+            value={email}
             // onChange={(e) => setEmail(e.target.value)}
             onChange={(e) => setHandler(setEmail, e.target.value, "email")}
           />
@@ -206,7 +215,7 @@ const CreateBarber = () => {
           <p>Barber Nick Name</p>
           <input
             type='text'
-            value={localbarberdata.nickName}
+            value={nickName}
             // onChange={(e) => setNickName(e.target.value)}
             onChange={(e) => setHandler(setNickName, e.target.value, "nickName")}
           />
@@ -243,7 +252,7 @@ const CreateBarber = () => {
             <input
               type='date'
               placeholder='dd/mm/yy'
-              value={localbarberdata.dateOfBirth}
+              value={dateOfBirth}
               // onChange={(e) => setDateOfBirth(e.target.value)}
               onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth")}
               style={{

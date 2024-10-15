@@ -200,7 +200,7 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
             payload: data
         })
 
-        localStorage.setItem("salondata", JSON.stringify({}))
+        localStorage.setItem("barberdata", JSON.stringify({}))
 
         navigate("/admin-barber")
     } catch (error) {
