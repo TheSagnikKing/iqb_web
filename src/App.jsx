@@ -62,6 +62,9 @@ import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 
 import { } from '../public/offline.png'
 
+
+import DemoDashboard from "./Admin/Demo/Dashboard/Dashboard"
+
 const App = () => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -153,6 +156,11 @@ const App = () => {
                   <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
                   <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
                   <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
+
+
+                  {/* Dashboard Page Route */}
+                  <Route path="/demodashboard" element={<DemoDashboard/>}/>
+                  
                 </Route>
 
                 {/* Admin Main Pages  */}
