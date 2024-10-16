@@ -251,7 +251,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <section style={{ display: "grid", gridTemplateColumns: "25rem 1fr" }}>
+            <section style={{ display: "grid", gridTemplateColumns: "25rem calc(100vw - 25rem)" }}>
                 <main className={style.sidebar}>
                     <h2>Sidebar</h2>
                     <button className={style.sidebar_btn}>{"<"}</button>
@@ -327,28 +327,94 @@ const Dashboard = () => {
                                     </div>
                                     <div className={style.report_container}>
 
-                                        <div>
-                                            <ResponsiveContainer width="100%" height="90%" style={{}}>
-                                                <BarChart width={150} height={40} data={data}>
-                                                    <Bar dataKey="uv" fill="#FDDA0D" stroke="#000000" strokeWidth={1} />
-                                                </BarChart>
-                                            </ResponsiveContainer>
-                                        </div>
+                                        <Carousel
+                                            showThumbs={false}
+                                            infiniteLoop={true}
+                                            autoPlay={true}
+                                            interval={2000}
+                                            showStatus={false}
+                                            showArrows={false}
+                                            stopOnHover={true}
+                                            swipeable={true}
+                                            renderIndicator={false}
+                                        >
 
-                                        <div>
-                                            <div>
-                                                <div></div>
-                                                <p>Monthly Report</p>
+                                            <div className={style.r_chart}>
+                                                <p>Salon Type One</p>
+                                                <div>
+                                                    <ResponsiveContainer width="100%" height="90%" style={{}}>
+                                                        <BarChart width={150} height={40} data={data}>
+                                                            <Bar dataKey="uv" fill="#FDDA0D" stroke="#000000" strokeWidth={1} />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </div>
+
+                                                <div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Monthly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Weekly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Daily Report</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <div></div>
-                                                <p>Weekly Report</p>
+
+                                            <div className={style.r_chart}>
+                                                <div>
+                                                    <ResponsiveContainer width="100%" height="90%" style={{}}>
+                                                        <BarChart width={150} height={40} data={data}>
+                                                            <Bar dataKey="uv" fill="red" stroke="#000000" strokeWidth={1} />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </div>
+
+                                                <div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Monthly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Weekly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Daily Report</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <div></div>
-                                                <p>Daily Report</p>
+
+                                            <div className={style.r_chart}>
+                                                <div>
+                                                    <ResponsiveContainer width="100%" height="90%" style={{}}>
+                                                        <BarChart width={150} height={40} data={data}>
+                                                            <Bar dataKey="uv" fill="royalblue" stroke="#000000" strokeWidth={1} />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </div>
+
+                                                <div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Monthly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Weekly Report</p>
+                                                    </div>
+                                                    <div>
+                                                        <div onClick={() => alert("Monthly Report")}></div>
+                                                        <p>Daily Report</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Carousel>
                                     </div>
                                 </div>
                             </div>
