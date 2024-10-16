@@ -262,9 +262,13 @@ const Dashboard = () => {
                         <div className={style.inner_container}>
                             <div className={style.dashboard_container_one}>
                                 <div className={style.saloninfo_container}>
-                                    <h2>Welcome, Adilson Jacinto</h2>
-                                    <p>Established in the year 2009, The Roose Parlour & Spa is a popular salon in Downtown Phoenix. From haircut, styling to color and other hair treatments, and spa services, the salon offers numerous services for its clients.
-                                    </p>
+                                    <div>
+                                        <h2>Welcome, Adilson Jacinto</h2>
+                                    </div>
+
+                                    <div>
+                                        <i>Established in the year 2009, The Roose Parlour & Spa is a popular salon in Downtown Phoenix. From haircut, styling to color and other hair treatments, and spa services, the salon offers numerous services for its clients.</i>
+                                    </div>
                                 </div>
                                 <div className={style.salonadv_container}>
                                     <Carousel
@@ -291,7 +295,7 @@ const Dashboard = () => {
                                 <div className={style.barber_report_container}>
                                     <div className={style.barberlist_container}>
                                         <div className={style.barberitem_header}>
-                                            <div><p>Barber Name</p></div>
+                                            <div><p>Barber</p></div>
                                             <div><p>Queue</p></div>
                                             <div><p>EWT</p></div>
                                         </div>

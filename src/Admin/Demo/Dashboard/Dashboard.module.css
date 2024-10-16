@@ -58,7 +58,7 @@
     height: 15vh;
     width: 100%;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
-    padding: 1.5rem 1rem;
+    padding-block: 1.5rem;
     border-radius: 6px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -68,14 +68,29 @@
 
     margin-bottom: 2rem;
 
-    &>h2 {
-        margin-bottom: 1rem;
-        font-size: 1.3vw;
+    &>div:nth-child(1) {
+        height: 30%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>h2 {
+            margin-bottom: 1rem;
+            font-size: 1.3vw;
+        }
     }
 
-    &>p {
-        font-size: 0.9vw;
-        font-weight: 500;
+    &>div:nth-child(2) {
+        height: 70%;
+        display: flex;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>i {
+            font-size: 0.9vw;
+            font-weight: 500;
+        }
     }
 }
 
@@ -121,19 +136,22 @@
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
+    padding-inline: 1rem;
 
     & div:nth-child(1) {
         width: 40%;
+        padding-left: 2rem;
     }
 
     & div {
         width: 30%;
-        display: grid;
-        place-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         & p {
-            font-size: 0.8vw;
-            font-weight: 500;
+            font-size: 0.9vw;
+            font-weight: 700;
         }
     }
 
@@ -161,8 +179,8 @@
         width: 40%;
 
         &>div {
-            height: 4.2rem;
-            width: 4.2rem;
+            height: 3.5rem;
+            width: 3.5rem;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -193,7 +211,7 @@
                 -o-border-radius: 50%;
                 background-color: limegreen;
                 top: -2px;
-                right: 2px;
+                right: 1px;
                 border: 1px solid #fff;
             }
         }
@@ -296,8 +314,8 @@
         place-items: center;
 
         & p {
-            font-size: 0.8vw;
-            font-weight: 500;
+            font-size: 0.9vw;
+            font-weight: 700;
         }
     }
 }
