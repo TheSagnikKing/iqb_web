@@ -251,7 +251,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <section style={{ display: "grid", gridTemplateColumns: "25rem calc(100vw - 25rem)" }}>
+            <section style={{ display: "grid", gridTemplateColumns: "18vw calc(100vw - 18vw)" }}>
                 <main className={style.sidebar}>
                     <h2>Sidebar</h2>
                     <button className={style.sidebar_btn}>{"<"}</button>
@@ -275,7 +275,7 @@ const Dashboard = () => {
                                         showThumbs={false}
                                         infiniteLoop={true}
                                         autoPlay={true}
-                                        interval={6000}
+                                        interval={2000}
                                         showStatus={false}
                                         showArrows={false}
                                         stopOnHover={false}
@@ -340,7 +340,7 @@ const Dashboard = () => {
                                         >
 
                                             <div className={style.r_chart}>
-                                                <p>Salon Type One</p>
+                                                <p>Report-Type One</p>
                                                 <div>
                                                     <ResponsiveContainer width="100%" height="90%" style={{}}>
                                                         <BarChart width={150} height={40} data={data}>
@@ -366,6 +366,7 @@ const Dashboard = () => {
                                             </div>
 
                                             <div className={style.r_chart}>
+                                                <p>Report-Type Two</p>
                                                 <div>
                                                     <ResponsiveContainer width="100%" height="90%" style={{}}>
                                                         <BarChart width={150} height={40} data={data}>
@@ -391,10 +392,11 @@ const Dashboard = () => {
                                             </div>
 
                                             <div className={style.r_chart}>
+                                                <p>Report-Type Three</p>
                                                 <div>
                                                     <ResponsiveContainer width="100%" height="90%" style={{}}>
                                                         <BarChart width={150} height={40} data={data}>
-                                                            <Bar dataKey="uv" fill="royalblue" stroke="#000000" strokeWidth={1} />
+                                                            <Bar dataKey="uv" fill="blue" stroke="#000000" strokeWidth={1} />
                                                         </BarChart>
                                                     </ResponsiveContainer>
                                                 </div>
@@ -414,6 +416,8 @@ const Dashboard = () => {
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </Carousel>
                                     </div>
                                 </div>
