@@ -1,8 +1,7 @@
 import React from 'react'
-import './MobileSidebar.css'
+import style from './MobileSidebar.module.css'
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from '../Header/Header.jsx'
-import DashboardHeader from '../DashboardHeader/DashboardHeader.jsx'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
 
@@ -15,14 +14,14 @@ const MobileSidebar = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <main className='container'>
-      <div className={`mobile_content ${darkmodeOn && "dark"}`}
+    <main className={style.container}>
+      <div className={`${style.mobile_content} ${darkmodeOn && style.dark}`}
         style={{
           width: "100%"
         }}
       >
         <div>
-          {location?.pathname === "/admin-dashboard" ? <DashboardHeader /> : <Header />}
+          <Header />
           <div><Outlet /></div>
         </div>
       </div>

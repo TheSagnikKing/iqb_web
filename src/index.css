@@ -80,6 +80,32 @@ p {
   -o-border-radius: 0.6vw;
 }
 
+.carousel .control-dots .dot {
+  background: #0866ff;
+}
+
+@media screen and (min-width: 0px) and (max-width:430px) {
+  .carousel * {
+
+    border-radius: 2vw;
+    -webkit-border-radius: 2vw;
+    -moz-border-radius: 2vw;
+    -ms-border-radius: 2vw;
+    -o-border-radius: 2vw;
+  }
+}
+
+
+@media screen and (min-width: 431px) and (max-width:768px) {
+  .carousel * {
+    border-radius: 1vw;
+    -webkit-border-radius: 1vw;
+    -moz-border-radius: 1vw;
+    -ms-border-radius: 1vw;
+    -o-border-radius: 1vw;
+}
+}
+
 @media((min-width:0px) and (max-width:576px)) {
   :root {
     /* font-size: 42%; */
