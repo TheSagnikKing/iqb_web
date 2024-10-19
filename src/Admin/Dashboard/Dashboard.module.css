@@ -1725,7 +1725,7 @@
         -moz-border-radius: 1vw;
         -ms-border-radius: 1vw;
         -o-border-radius: 1vw;
-}
+    }
 
     .salonadv_container {
         border-radius: 1vw;
@@ -1733,7 +1733,7 @@
         -moz-border-radius: 1vw;
         -ms-border-radius: 1vw;
         -o-border-radius: 1vw;
-}
+    }
 
     .salonadv_container_loader {
         border-radius: 1vw;
@@ -1741,7 +1741,7 @@
         -moz-border-radius: 1vw;
         -ms-border-radius: 1vw;
         -o-border-radius: 1vw;
-}
+    }
 
     .salonadv_container_error {
         border-radius: 1vw;
@@ -1749,7 +1749,171 @@
         -moz-border-radius: 1vw;
         -ms-border-radius: 1vw;
         -o-border-radius: 1vw;
+    }
+
+    .barberitem_header {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        &>div {
+            &>p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .barberitem {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        & div {
+            &>p {
+                font-size: 1.6vw;
+            }
+        }
+    }
+
+    .queue_header {
+        & div {
+            & p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .queue_item {
+        & div {
+            &>p {
+                /* font-size: clamp(1.6vw, 2vw, 1.8vw); */
+                /* font-size: 1.6vw; */
+                font-size: clamp(1.6vw, 1.6vw, 4vw);
+                font-weight: 500;
+            }
+        }
+    }
 }
+
+@media screen and (min-width: 769px) and (max-width:834px) {
+    .inner_container {
+        grid-template-columns: 1fr;
+    }
+
+    .barber_report_container {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .queuelists_container {
+        height: 40rem;
+        margin-bottom: 2rem;
+    }
+
+    .saloninfo_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 20vh;
+
+        &>div:nth-child(1) {
+            &>h2 {
+                font-size: 2.8vw;
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>i {
+                font-size: 1.8vw;
+            }
+        }
+    }
+
+    .barberlist_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .report_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 40vh;
+        width: calc(100vw - 2.6rem);
+
+        .r_chart {
+            height: calc(40vh - 2rem);
+
+            &>p:nth-child(1) {
+                font-size: 1.6vw;
+            }
+
+            &>div:nth-child(3) {
+
+                &>div {
+                    gap: 0.5rem;
+
+                    &>div {
+                        width: 1rem;
+                        height: 1rem;
+                        border-radius: 2px;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        -ms-border-radius: 2px;
+                        -o-border-radius: 2px;
+                    }
+
+                    &>p {
+                        font-size: 1.6vw;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .queuelists_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_loader {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_error {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
 
     .barberitem_header {
         &>div:nth-child(1) {

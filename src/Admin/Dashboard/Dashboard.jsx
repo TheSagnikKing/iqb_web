@@ -1444,18 +1444,18 @@ export default Dashboard
 //               /> :
 //               <div>
 //                 <h1 style={{ visibility: adminName == "" && "hidden" }}>Welcome Back, {truncateText(adminName, 11)}</h1>
-//                 <div
-//                   style={{
-//                     background: togglecheck ? "limegreen" : "#000",
-//                     outline: darkmodeOn ? "1px solid white" : "1px solid black"
-//                   }}
-//                 >
-//                   <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
-//                   <button
-//                     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
-//                     onClick={toggleHandler}
-//                   ></button>
-//                 </div>
+                // <div
+                //   style={{
+                //     background: togglecheck ? "limegreen" : "#000",
+                //     outline: darkmodeOn ? "1px solid white" : "1px solid black"
+                //   }}
+                // >
+                //   <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
+                //   <button
+                //     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
+                //     onClick={toggleHandler}
+                //   ></button>
+                // </div>
 //               </div>
 //           }
 

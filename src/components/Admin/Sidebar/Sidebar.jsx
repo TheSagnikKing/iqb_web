@@ -5,8 +5,11 @@ import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-d
 import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons';
 import Header from '../Header/Header.jsx';
 import Skeleton from 'react-loading-skeleton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js';
+import { IoMoon } from 'react-icons/io5';
+import { MdSunny } from 'react-icons/md';
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants.js';
 
 const Sidebar = () => {
   const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon);
@@ -19,10 +22,30 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(false);
 
   const darkMode = useSelector(darkmodeSelector);
+
+
+  const darkHandler = () => {
+    dispatch({ type: DARK_MODE_ON });
+    localStorage.setItem("dark", "On");
+  }
+
+  const lightHandler = () => {
+    dispatch({ type: DARK_MODE_OFF });
+    localStorage.setItem("dark", "Off");
+  }
+
+  const toggleHandler = () => {
+    if (darkMode == "Off") {
+      darkHandler()
+    } else {
+      lightHandler()
+    }
+  }
 
   const darkmodeOn = darkMode === "On";
 
@@ -58,6 +81,33 @@ const Sidebar = () => {
               }}>{m.title}</p>
             </div>
           ))}
+
+          <div className={style.menu_theme_container}>
+            {
+              showSidebar && <p>Theme</p>
+            }
+
+            {
+              darkmodeOn ?
+                <button onClick={toggleHandler}
+                  style={{
+                    background: "#000",
+                    color: "#fff"
+                  }}
+                >
+                  <IoMoon />
+                </button> :
+                <button onClick={toggleHandler}
+                  style={{
+                    background: "#fff",
+                    color: "#FF5733"
+                  }}
+                >
+                  <MdSunny />
+                </button>
+            }
+
+          </div>
         </div>
 
         <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>

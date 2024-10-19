@@ -12,11 +12,13 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants'
 import { IoMoon } from 'react-icons/io5'
 import { MdSunny } from 'react-icons/md'
+import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAction'
 
 const DashboardHeader = () => {
 
   const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
   const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
   const [salonlistdrop, setSalonlistdrop] = useState(false)
 
@@ -199,6 +201,21 @@ const DashboardHeader = () => {
     }
   }
 
+
+  const [togglecheck, setTogglecheck] = useState(false);
+
+  const salonStatusHandler = () => {
+    const newCheckValue = !togglecheck;
+    setTogglecheck(newCheckValue);
+
+    const salonStatusOnlineData = {
+      salonId,
+      isOnline: newCheckValue,
+    };
+
+    dispatch(adminSalonStatusAction(salonStatusOnlineData));
+  }
+
   const darkmodeOn = darkMode === "On"
 
   return (
@@ -206,7 +223,8 @@ const DashboardHeader = () => {
 
       {
         location?.pathname === "/admin-dashboard" ? (<div className={`${style.choose_salon_div} ${darkmodeOn && style.dark}`}>
-          <p>Choose Salon</p>
+          {/* <p>Choose Salon</p> */}
+          <p></p>
 
           {
             adminProfile?.salonId == 0 ?
@@ -235,7 +253,8 @@ const DashboardHeader = () => {
                               onClick={() => selectedActiveSalon(s)}
                               style={{
                                 background: s.salonId == adminProfile?.salonId && "#0866ff",
-                                color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                                color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)",
+                                boxShadow: s.salonId == adminProfile?.salonId && "0px 1px 6px rgba(0,0,0,0.2)"
                               }}
                             >{s.salonName}</p>
                           )) :
@@ -294,7 +313,7 @@ const DashboardHeader = () => {
                         key={s.id}
                         onClick={() => selectedActiveSalon(s)}
                         style={{
-                          background: s.salonId == adminProfile?.salonId && "var(--primary-bg-color3)",
+                          background: s.salonId == adminProfile?.salonId && "#0866ff",
                           color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
                         }}
                       >{s.salonName}</p>
@@ -311,8 +330,20 @@ const DashboardHeader = () => {
       }
       <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
 
+        <div
+          className={style.salon_toggle_btn_container}
+          style={{
+            outline: togglecheck ? "1px solid limegreen" : "1px solid red",
+          }}
+        >
+          <p className={`${style.salononline_toggle_btn_text} ${togglecheck ? style.salononline_toggle_btn_text_active : style.salononline_toggle_btn_text_inactive}`}>{togglecheck ? "Online" : "Offline"}</p>
+          <button
+            className={`${style.salononline_toggle_btn} ${togglecheck ? style.salononline_toggle_active : style.salononline_toggle_inactive}`}
+            onClick={salonStatusHandler}
+          ></button>
+        </div>
         <div><Notificationicon /></div>
-        <div><Settingsicon /></div>
+        {/* <div><Settingsicon /></div> */}
         {
           loading ?
             <Skeleton count={1}
@@ -412,7 +443,7 @@ const DashboardHeader = () => {
 
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
