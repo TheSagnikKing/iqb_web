@@ -788,7 +788,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import style from './Dashboard.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel';
 import { ChartIcon1, ChartIcon2, ChartIcon3, EditIcon, Threeverticaldots, UserIcon } from '../../icons';
 import { ResponsiveContainer, LineChart, Line, BarChart, Bar } from 'recharts'
@@ -1125,18 +1125,21 @@ const Dashboard = () => {
     },
   ];
 
+  const navigate = useNavigate()
 
   return (
     salonId == 0 ? (<>
-      <div className='admin_dashboard_page_container_two'>
-
-        <div>
-          <h1 style={{
-            color: darkmodeOn && "var(--primary-text-light-color1)"
-          }}>{adminName || email.split('@')[0]} , don't have any salon</h1>
-          <Link to="/admin-salon/createsalon">Create </Link>
+      <main className={style.dashboard}>
+        <div className={style.dashboard_body_intial}>
+          <div className={style.dashboard_intial_container}>
+            <p>Hey &#128075;, {adminName || email?.split('@')[0]}</p>
+            <div>
+              <p>You don't have any salon right now.</p>
+              <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </>) : (<>
       <main className={style.dashboard}>
         <main className={style.dashboard_body}>
@@ -1159,7 +1162,7 @@ const Dashboard = () => {
                         <Skeleton count={1} height={"4rem"} style={{ borderRadius: "3px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
-                      !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse.salonDesc.length > 0 ?
+                      !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonDesc?.length > 0 ?
                         <i>
                           {truncateText(salonDesc, 200)}
                         </i> :
@@ -1167,7 +1170,7 @@ const Dashboard = () => {
                           <i>
                             You currently have no salon information
                           </i> :
-                          !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse.salonDesc.length === 0 &&
+                          !adminGetDefaultSalonLoading && adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonDesc?.length === 0 &&
                           <i>
                             You currently have no salon information
                           </i>
@@ -1444,18 +1447,18 @@ export default Dashboard
 //               /> :
 //               <div>
 //                 <h1 style={{ visibility: adminName == "" && "hidden" }}>Welcome Back, {truncateText(adminName, 11)}</h1>
-                // <div
-                //   style={{
-                //     background: togglecheck ? "limegreen" : "#000",
-                //     outline: darkmodeOn ? "1px solid white" : "1px solid black"
-                //   }}
-                // >
-                //   <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
-                //   <button
-                //     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
-                //     onClick={toggleHandler}
-                //   ></button>
-                // </div>
+// <div
+//   style={{
+//     background: togglecheck ? "limegreen" : "#000",
+//     outline: darkmodeOn ? "1px solid white" : "1px solid black"
+//   }}
+// >
+//   <p className={`salononline_toggle_btn_text ${togglecheck ? 'salononline_toggle_btn_text_active' : 'salononline_toggle_btn_text_inactive'}`}>{togglecheck ? "Online" : "Offline"}</p>
+//   <button
+//     className={`salononline_toggle_btn ${togglecheck ? 'salononline_toggle_active' : 'salononline_toggle_inactive'}`}
+//     onClick={toggleHandler}
+//   ></button>
+// </div>
 //               </div>
 //           }
 

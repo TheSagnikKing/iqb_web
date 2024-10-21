@@ -82,7 +82,11 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className={style.menu_theme_container}>
+          <div className={style.menu_theme_container}
+          style={{
+            justifyContent: showSidebar ? "space-between" : "center"
+          }}
+          >
             {
               showSidebar && <p>Theme</p>
             }

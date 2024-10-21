@@ -47,6 +47,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .profile_wrapper>div:nth-child(3)>img {

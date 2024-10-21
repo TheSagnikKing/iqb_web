@@ -330,18 +330,22 @@ const DashboardHeader = () => {
       }
       <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
 
-        <div
-          className={style.salon_toggle_btn_container}
-          style={{
-            outline: togglecheck ? "1px solid limegreen" : "1px solid red",
-          }}
-        >
-          <p className={`${style.salononline_toggle_btn_text} ${togglecheck ? style.salononline_toggle_btn_text_active : style.salononline_toggle_btn_text_inactive}`}>{togglecheck ? "Online" : "Offline"}</p>
-          <button
-            className={`${style.salononline_toggle_btn} ${togglecheck ? style.salononline_toggle_active : style.salononline_toggle_inactive}`}
-            onClick={salonStatusHandler}
-          ></button>
-        </div>
+        {
+          adminProfile?.salonId == 0 ? <div></div> :
+            <div
+              className={style.salon_toggle_btn_container}
+              style={{
+                outline: togglecheck ? "1px solid limegreen" : "1px solid red",
+              }}
+            >
+              <p className={`${style.salononline_toggle_btn_text} ${togglecheck ? style.salononline_toggle_btn_text_active : style.salononline_toggle_btn_text_inactive}`}>{togglecheck ? "Online" : "Offline"}</p>
+              <button
+                className={`${style.salononline_toggle_btn} ${togglecheck ? style.salononline_toggle_active : style.salononline_toggle_inactive}`}
+                onClick={salonStatusHandler}
+              ></button>
+            </div>
+        }
+
         <div><Notificationicon /></div>
         {/* <div><Settingsicon /></div> */}
         {

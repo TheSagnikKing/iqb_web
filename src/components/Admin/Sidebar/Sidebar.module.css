@@ -223,10 +223,8 @@
 
 .menu_theme_container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-inline: 1rem;
-
+  
   &>p {
     font-size: 1vw;
     font-weight: bold;

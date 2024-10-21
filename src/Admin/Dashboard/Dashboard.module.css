@@ -1024,7 +1024,71 @@
 } */
 
 
+.dashboard_body_intial {
+    width: 100%;
+    height: calc(100vh - 6rem);
+    padding-inline: 0.3rem;
+    overflow: auto;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.dashboard_intial_container {
+    width: 40%;
+    background-color: #fff;
+    height: 26vh;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+    padding: 1rem;
+
+    &>p:nth-child(1) {
+        font-size: 1.8rem;
+        height: 4rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        align-content: center;
+        font-weight: 700;
+    }
+
+    &>div {
+        height: calc(100% - 4rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &>div>p:nth-child(1) {
+        height: 2rem;
+        font-size: 1.4rem;
+        margin-block: 1rem;
+    }
+
+    &>div>button {
+        height: 3.5rem;
+        width: 100%;
+        background-color: orange;
+        border-radius: 0.2vw;
+        -webkit-border-radius: 0.2vw;
+        -moz-border-radius: 0.2vw;
+        -ms-border-radius: 0.2vw;
+        -o-border-radius: 0.2vw;
+        background-color: #0866ff;
+        color: #fff;
+        font-size: 1.4rem;
+        border: none;
+        cursor: pointer;
+
+    }
+
+    &>div>button:hover{
+        background-color: #0867ffc2;
+    }
+}
 
 
 .dashboard {
@@ -1034,7 +1098,6 @@
 .dashboard_body {
     width: 100%;
     height: calc(100vh - 6rem);
-    /* padding-inline: 2rem; */
     padding-inline: 0.3rem;
     overflow: auto;
 }
@@ -1470,6 +1533,10 @@
 }
 
 @media screen and (min-width: 0px) and (max-width:430px) {
+    .dashboard_intial_container {
+        width: 90%;
+    }
+
     .inner_container {
         grid-template-columns: 1fr;
     }
@@ -1634,6 +1701,10 @@
 }
 
 @media screen and (min-width: 431px) and (max-width:768px) {
+    .dashboard_intial_container {
+        width: 80%;
+    }
+
     .inner_container {
         grid-template-columns: 1fr;
     }
@@ -1798,6 +1869,10 @@
 }
 
 @media screen and (min-width: 769px) and (max-width:834px) {
+    .dashboard_intial_container {
+        width: 50%;
+    }
+
     .inner_container {
         grid-template-columns: 1fr;
     }
