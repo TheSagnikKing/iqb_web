@@ -1290,7 +1290,7 @@ const Dashboard = () => {
                       <div>
                         <ResponsiveContainer width="100%" height="90%" style={{}}>
                           <BarChart width={150} height={40} data={data2}>
-                            <Bar dataKey="uv" fill="#FDDA0D" stroke="#000000" strokeWidth={1} />
+                            <Bar dataKey="uv" fill="rgba(255, 0, 0, 0.393)" stroke="#000000" strokeWidth={1} />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
@@ -1316,7 +1316,7 @@ const Dashboard = () => {
                       <div>
                         <ResponsiveContainer width="100%" height="90%" style={{}}>
                           <BarChart width={150} height={40} data={data}>
-                            <Bar dataKey="uv" fill="red" stroke="#000000" strokeWidth={1} />
+                            <Bar dataKey="uv" fill="rgba(255, 149, 0, 0.419)" stroke="#000000" strokeWidth={1} />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
@@ -1342,7 +1342,7 @@ const Dashboard = () => {
                       <div>
                         <ResponsiveContainer width="100%" height="90%" style={{}}>
                           <BarChart width={150} height={40} data={data}>
-                            <Bar dataKey="uv" fill="blue" stroke="#000000" strokeWidth={1} />
+                            <Bar dataKey="uv" fill="rgba(0, 0, 255, 0.438)" stroke="#000000" strokeWidth={1} />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
