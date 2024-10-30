@@ -283,38 +283,33 @@
     background-color: #fff;
     height: 2.2rem;
     width: 6rem;
-    border-radius: 2rem;
+    border-radius: 20px;
     cursor: pointer;
     border: none;
-    /* border: 1px solid #00000077; */
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
-    -webkit-border-radius: 2rem;
-    -moz-border-radius: 2rem;
-    -ms-border-radius: 2rem;
-    -o-border-radius: 2rem;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
     position: relative;
     display: flex;
-    /* align-items: center; */
-    /* position: absolute; */
-    /* top: 0px; */
 }
 
 .salononline_toggle_btn {
     background-color: #fff;
     height: 2rem;
     width: 2rem;
-    border-radius: 2rem;
     cursor: pointer;
     border: none;
-    /* border: 1px solid #00000077; */
-    -webkit-border-radius: 2rem;
-    -moz-border-radius: 2rem;
-    -ms-border-radius: 2rem;
-    -o-border-radius: 2rem;
     position: absolute;
     top: 0.1rem;
     left: 0.1rem;
     align-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 
 .salononline_toggle_active {
@@ -325,16 +320,15 @@
     -ms-transform: translateX(3.8rem) !important;
     -o-transform: translateX(3.8rem) !important;
     background-color: limegreen;
-    /* border: 1px solid limegreen; */
 }
 
 .salononline_toggle_inactive {
-    transform: translateX(0rem);
+    transform: translateX(0vw);
     transition: 300ms ease;
-    -webkit-transform: translateX(0rem);
-    -moz-transform: translateX(0rem);
-    -ms-transform: translateX(0rem);
-    -o-transform: translateX(0rem);
+    -webkit-transform: translateX(0vw);
+    -moz-transform: translateX(0vw);
+    -ms-transform: translateX(0vw);
+    -o-transform: translateX(0vw);
     background-color: red;
 }
 
@@ -346,7 +340,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.62vw;
+    font-size: 8px !important;
     font-weight: bold;
 
 }
@@ -805,13 +799,13 @@
         align-items: center;
         gap: 0rem;
 
-        &>div:nth-child(2){
+        &>div:nth-child(2) {
             width: 18rem;
             margin-right: 0.5rem;
             /* background-color: orange; */
         }
 
-        &>button:nth-child(3){
+        &>button:nth-child(3) {
             width: 7rem;
         }
     }
@@ -820,7 +814,7 @@
         display: none;
     }
 
-    .admin_dashboard_header_wrapper{
+    .admin_dashboard_header_wrapper {
         /* background-color: red; */
     }
 

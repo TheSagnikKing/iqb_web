@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './CustomerList.css';
+import style from './CustomerList.module.css';
 import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons';
 import Skeleton from 'react-loading-skeleton';
 import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction';
@@ -182,7 +182,7 @@ const CustomerList = () => {
           checkCustomerNames,
         },
       });
-    }else{
+    } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
         style: {
@@ -193,48 +193,50 @@ const CustomerList = () => {
         },
       });
     }
-    
+
   };
 
   return (
-    <div className={`customer_wrapper ${darkmodeOn && 'dark'}`}>
+    <div className={`${style.customer_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Customer List</p>
 
         <div>
-          <div className={`customer_search ${darkmodeOn && 'dark'}`}>
+          <div className={`${style.customer_search} ${darkmodeOn && style.dark}`}>
             <input
               type="text"
               placeholder='Search Customer'
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
+
+            <div onClick={searchCustomerhandler}><SearchIcon /></div>
           </div>
-          <div
-            className={`customer_send_btn ${darkmodeOn && 'dark'}`}
+
+          {/* <div
+            className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`}
             style={{ background: 'var(--primary-bg-color3)', color: '#fff' }}
             onClick={searchCustomerhandler}
           >
             <div><SearchIcon /></div>
-          </div>
+          </div> */}
 
-          <div className={`customer_send_btn ${darkmodeOn && 'dark'}`} onClick={sendEmailNavigate}>
+          <div className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
             <div><EmailIcon /></div>
           </div>
 
-          <div className={`customer_send_btn ${darkmodeOn && 'dark'}`} onClick={sendMessageNavigate}>
+          <div className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
           </div>
         </div>
 
-        {/* <div className='mobile_customer_search'><SearchIcon /></div> */}
       </div>
 
-      <div className={`customer_content_wrapper ${darkmodeOn && 'dark'}`}>
+      <div className={`${style.customer_content_wrapper} ${darkmodeOn && style.dark}`}>
         {adminGetAllCustomerListLoading || searchLoading ? (
-          <div className='customer_content_body'>
+          <div className={style.customer_content_body}>
             <Skeleton
-              count={9}
+              count={6}
               height={'6rem'}
               style={{ marginBottom: '1rem' }}
               baseColor={darkmodeOn ? 'var(--darkmode-loader-bg-color)' : 'var(--lightmode-loader-bg-color)'}
@@ -242,28 +244,34 @@ const CustomerList = () => {
             />
           </div>
         ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
-          <div className={`customer_content_body ${darkmodeOn && 'dark'}`}>
+          <div className={`${style.customer_content_body} ${darkmodeOn && style.dark}`}>
             <div>
-              <input
-                type="checkbox"
-                style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
-                onChange={checkAllCustomersHandler}
-                checked={checkAllCustomers}
-              />
+              <div>
+                <input
+                  type="checkbox"
+                  onChange={checkAllCustomersHandler}
+                  checked={checkAllCustomers}
+                />
+              </div>
               <p>Name</p>
               <p>Email</p>
               <p>Gender</p>
-              <p>Mobile Number</p>
+              <p>Mobile No.</p>
             </div>
 
-            {AllCustomerList.map((s) => (
-              <div key={s._id}>
-                <input
-                  type="checkbox"
-                  style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
-                  checked={checkedCustomers[s._id] || false}
-                  onChange={() => customerEmailCheckedHandler(s)}
-                />
+            {AllCustomerList.map((s, index) => (
+              <div key={s._id}
+                style={{
+                  borderBottom: AllCustomerList.length - 1 === index && "none"
+                }}
+              >
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={checkedCustomers[s._id] || false}
+                    onChange={() => customerEmailCheckedHandler(s)}
+                  />
+                </div>
                 <p>{s.name}</p>
                 <p>{s.email}</p>
                 <p>{s.gender}</p>
@@ -272,19 +280,19 @@ const CustomerList = () => {
             ))}
           </div>
         ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
-          <div className={`customer_content_body_error ${darkmodeOn && 'dark'}`}>
-            <p style={{ margin: '2rem' }}>Customers not available</p>
+          <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
+            <p>Customers not available</p>
           </div>
         ) : (
           !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve && (
-            <div className={`customer_content_body_error ${darkmodeOn && 'dark'}`}>
-              <p style={{ margin: '2rem' }}>Customers not available</p>
+            <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
+              <p>Customers not available</p>
             </div>
           )
         )}
       </div>
 
-      <div className='customer_pagination_wrapper'>
+      <div className={style.customer_pagination_wrapper}>
         <div>
           <div onClick={paginationLeftHandler}><LeftArrow /></div>
           <div onClick={paginationRightHandler} disabled={page === totalPages}><RightArrow /></div>

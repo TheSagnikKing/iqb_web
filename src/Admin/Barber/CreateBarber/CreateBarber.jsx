@@ -109,7 +109,7 @@ const CreateBarber = () => {
       });
     } else {
       const barberdata = {
-        name: localbarberdata.name, email: localbarberdata.email, nickName: localbarberdata.nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth: localbarberdata.dateOfBirth,
+        name: name, email: email, nickName: nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth: dateOfBirth, 
         salonId,
         barberServices: chooseServices.map(service => ({
           ...service,

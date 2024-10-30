@@ -14,6 +14,9 @@ export const adminApplySalonAction = (applySalondata) => async (dispatch) => {
             payload: data
         });
 
+        localStorage.setItem("barberdata", JSON.stringify({}))
+        localStorage.setItem("salondata", JSON.stringify({}))
+
         window.location.reload()
     } catch (error) {
 
@@ -50,7 +53,7 @@ export const adminGetDefaultSalonAction = (adminEmail, signal, adminSetSalon) =>
 
         dispatch({
             type: "ADMIN_SET_SALON",
-            payload:{
+            payload: {
                 currentActiveSalon: data?.response?.salonName,
                 chooseSalonId: data?.response?.salonId
             }

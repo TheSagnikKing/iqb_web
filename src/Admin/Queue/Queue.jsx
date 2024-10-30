@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import "./Queue.css"
+import style from "./Queue.module.css"
 
 import { useNavigate } from 'react-router-dom'
 import { CrownIcon, DeleteIcon, ServeIcon } from '../../icons'
@@ -91,22 +91,22 @@ const Queue = () => {
   } = adminCancelQueue
 
   return (
-    <div className={`admin_queue_wrapper ${darkmodeOn && "dark"}`}>
+    <div className={`${style.admin_queue_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Queue List</p>
       </div>
 
-      <div className={`admin_queue_content_wrapper ${darkmodeOn && "dark"}`}>
+      <div className={`${style.admin_queue_content_wrapper} ${darkmodeOn && style.dark}`}>
 
-        {
+        {/* {
           getAllQueueListLoading && !getAllQueueListResolve ?
-            <div className='admin_queue_content_body'>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+            <div className={style.admin_queue_content_body}>
+              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </div> :
             !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length > 0 ?
               <>
-                <div className={`admin_queue_content_body ${darkmodeOn && "dark"}`}>
+                <div className={`${style.admin_queue_content_body} ${darkmodeOn && style.dark}`}>
                   <div>
                     <p>Name</p>
                     <p>Time Joined Q</p>
@@ -117,39 +117,40 @@ const Queue = () => {
                     <p>Cancel</p>
                   </div>
 
-                  {queuelist?.map((b) => (
-                    <div className={`admin_queue_content_body_item ${darkmodeOn && "dark"}`} key={b._id}>
+                  {queuelist?.map((b, index) => (
+                    <div
+                      className={`${style.admin_queue_content_body_item} ${darkmodeOn && style.dark}`}
+                      key={b._id}
+                      style={{
+                        borderBottom: queuelist.length - 1 === index && "none"
+                      }}
+                    >
                       <p>{b.name}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b.barberName}</p>
                       <p>{b.qPosition}</p>
                       <p>
-                        {b.serviceType === "VIP" ? <div
-                          style={{
-                            fontSize: "2rem",
-                            height: "100%",
-                            width: "100%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center"
-                          }}><CrownIcon /></div> : <div> -
-                        </div>}
+                        {b.serviceType === "VIP" ? <div><CrownIcon /></div> : <div><CrownIcon /></div>}
                       </p>
-                      <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}><ServeIcon /></button></div>
-                      <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}><DeleteIcon /></button></div>
+                      <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
+                      <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Delete</button></div>
                     </div>
                   ))}
                 </div>
               </> :
               !getAllQueueListLoading && getAllQueueListResolve && queuelist?.length == 0 ?
-                <div className={`admin_queue_content_body_error ${darkmodeOn && "dark"}`}>
-                  <p style={{ margin: "2rem" }}>Queue not available</p>
+                <div className={`${style.admin_queue_content_body_error} ${darkmodeOn && style.dark}`}>
+                  <p>Queue not available</p>
                 </div> :
                 !getAllQueueListLoading && !getAllQueueListResolve &&
-                <div className={`admin_queue_content_body_error ${darkmodeOn && "dark"}`}>
-                  <p style={{ margin: "2rem" }}>Queue not available</p>
+                <div className={`${style.admin_queue_content_body_error} ${darkmodeOn && style.dark}`}>
+                  <p>Queue not available</p>
                 </div>
-        }
+        } */}
+
+        <div className={`${style.admin_queue_content_body_error} ${darkmodeOn && style.dark}`}>
+          <p>Queue not available</p>
+        </div>
 
       </div>
     </div>

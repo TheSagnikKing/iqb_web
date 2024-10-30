@@ -1,0 +1,371 @@
+.admin_queue_wrapper {
+    height: 90vh;
+    width: 100%;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.admin_queue_wrapper>div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.admin_queue_wrapper>div:nth-child(1)>p {
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+
+
+.admin_queue_content_wrapper {
+    width: 100%;
+    height: calc(90vh - 5rem - 4rem);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.admin_queue_content_body {
+    height: calc(90vh - 5rem - 4rem);
+    width: 100%;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #0867ff48;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255);
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.admin_queue_content_body>div {
+    min-height: 6rem;
+    min-width: 100rem;
+    max-width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr;
+    place-items: center;
+    font-size: 0.9vw;
+    font-weight: 500;
+}
+
+.admin_queue_content_body>div:nth-child(1) {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-weight: 600;
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_queue_content_body>div:nth-child(1)>p {
+    color: var(--primary-text-light-colo2);
+}
+
+.admin_queue_content_body>div>p:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.admin_queue_content_body>div:not(:nth-child(1))>p:nth-child(1) {
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_queue_content_body>div:nth-child(1)>p:nth-child(1) {
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_queue_content_body>div>p {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.admin_queue_content_body>div>p:nth-child(4),
+.admin_queue_content_body>div>p:nth-child(5),
+.admin_queue_content_body>div>p:nth-child(6),
+.admin_queue_content_body>div>p:nth-child(7) {
+    justify-content: center;
+}
+
+
+.admin_queue_content_body_item>div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.admin_queue_content_body_item>p:nth-child(5) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2vw;
+    height: 100%;
+    width: 100%;
+}
+
+.admin_queue_content_body_item>div:nth-last-child(1),
+.admin_queue_content_body_item>div:nth-last-child(2) {
+    justify-content: center;
+}
+
+.admin_queue_content_body_item>div:nth-child(6)>button,
+.admin_queue_content_body_item>div:nth-child(7)>button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9vw;
+}
+
+.admin_queue_content_body_item>div:nth-child(6)>button {
+    background-color: #0867ff25;
+    border: 1px solid #0866ff;
+    color: #0866ff;
+    font-weight: 500;
+
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+
+    &:hover {
+        background-color: #0866ff;
+        color: #fff;
+    }
+}
+
+.admin_queue_content_body_item>div:nth-child(7)>button {
+    background-color: rgba(255, 0, 0, 0.144);
+    border: 1px solid red;
+    color: red;
+    font-weight: 500;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+
+    &:hover {
+        background-color: red;
+        color: #fff;
+    }
+}
+
+
+.queuelist_dashboard_toggle_btn {
+    background-color: #fff;
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: none;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+}
+
+.queuelist_dashboard_toggle_active {
+    transform: translateX(2.6rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(2.6rem);
+    -moz-transform: translateX(2.6rem);
+    -ms-transform: translateX(2.6rem);
+    -o-transform: translateX(2.6rem);
+}
+
+.queuelist_dashboard_toggle_inactive {
+    transform: translateX(0rem);
+    transition: 300ms ease;
+    -webkit-transform: translateX(0rem);
+    -moz-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    -o-transform: translateX(0rem);
+}
+
+.queuelist_dashboard_toggle_btn_text {
+    position: absolute;
+    top: 0px;
+    height: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+}
+
+.queuelist_dashboard_toggle_btn_text_active {
+    left: 0.5rem;
+    opacity: 1;
+    color: #000;
+}
+
+.queuelist_dashboard_toggle_btn_text_inactive {
+    right: 0.5rem;
+    color: #fff;
+}
+
+.admin_queue_content_body_error {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: var(--primary-bg-light-color1);
+    border-radius: 1.7rem;
+    -webkit-border-radius: 1.7rem;
+    -moz-border-radius: 1.7rem;
+    -ms-border-radius: 1.7rem;
+    -o-border-radius: 1.7rem;
+}
+
+.admin_queue_content_body_error {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+
+    &>p {
+        font-size: 1.2vw;
+        font-weight: 500;
+    }
+}
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .admin_queue_wrapper>div:nth-child(1)>p {
+        font-size: 4vw;
+    }
+
+    .admin_queue_content_body>div {
+        font-size: 3vw;
+    }
+
+    .admin_queue_content_body_item>button {
+        font-size: 3vw;
+    }
+
+    .admin_queue_content_body_item>div:nth-child(6)>button,
+    .admin_queue_content_body_item>div:nth-child(7)>button {
+        font-size: 3vw;
+    }
+
+    .admin_queue_content_body_item>p:nth-child(5) {
+        font-size: 3vw;
+    }
+
+    .admin_queue_content_body_error {
+
+        &>p {
+            font-size: 3.5vw;
+            font-weight: 500;
+        }
+    }
+
+}
+
+@media screen and (min-width:431px) and (max-width:834px) {
+    .admin_queue_wrapper>div:nth-child(1)>p {
+        font-size: 2vw;
+    }
+
+    .admin_queue_content_body>div {
+        font-size: 1.6vw;
+    }
+
+    .admin_queue_content_body_item>button {
+        font-size: 1.6vw;
+    }
+
+    .admin_queue_content_body_item>div:nth-child(6)>button,
+    .admin_queue_content_body_item>div:nth-child(7)>button {
+        font-size: 1.6vw;
+    }
+
+    .admin_queue_content_body_item>p:nth-child(5) {
+        font-size: 1.6vw;
+    }
+
+    .admin_queue_content_body_error {
+
+        &>p {
+            font-size: 2.5vw;
+            font-weight: 500;
+        }
+    }
+}
+
+@media screen and (min-width:835px) and (max-width:1250px) {
+    .admin_queue_wrapper>div:nth-child(1)>p {
+        font-size: 1.8vw;
+    }
+
+    .admin_queue_content_body>div {
+        font-size: 1.2vw;
+    }
+
+    .admin_queue_content_body_item>button {
+        font-size: 1.2vw;
+    }
+
+    .admin_queue_content_body_item>div:nth-child(6)>button,
+    .admin_queue_content_body_item>div:nth-child(7)>button {
+        font-size: 1.2vw;
+    }
+
+    .admin_queue_content_body_item>p:nth-child(5) {
+        font-size: 1.2vw;
+    }
+
+    .admin_queue_content_body_error {
+
+        &>p {
+            font-size: 1.5vw;
+            font-weight: 500;
+        }
+    }
+}
