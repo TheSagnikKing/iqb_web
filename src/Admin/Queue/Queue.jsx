@@ -98,7 +98,7 @@ const Queue = () => {
 
       <div className={`${style.admin_queue_content_wrapper} ${darkmodeOn && style.dark}`}>
 
-        {/* {
+        {
           getAllQueueListLoading && !getAllQueueListResolve ?
             <div className={style.admin_queue_content_body}>
               <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -146,12 +146,7 @@ const Queue = () => {
                 <div className={`${style.admin_queue_content_body_error} ${darkmodeOn && style.dark}`}>
                   <p>Queue not available</p>
                 </div>
-        } */}
-
-        <div className={`${style.admin_queue_content_body_error} ${darkmodeOn && style.dark}`}>
-          <p>Queue not available</p>
-        </div>
-
+        }
       </div>
     </div>
   )

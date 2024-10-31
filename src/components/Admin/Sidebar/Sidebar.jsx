@@ -83,9 +83,9 @@ const Sidebar = () => {
           ))}
 
           <div className={style.menu_theme_container}
-          style={{
-            justifyContent: showSidebar ? "space-between" : "center"
-          }}
+            style={{
+              justifyContent: showSidebar ? "space-between" : "center"
+            }}
           >
             {
               showSidebar && <p>Theme</p>
@@ -93,20 +93,10 @@ const Sidebar = () => {
 
             {
               darkmodeOn ?
-                <button onClick={toggleHandler}
-                  style={{
-                    background: "#000",
-                    color: "#fff"
-                  }}
-                >
+                <button onClick={toggleHandler}>
                   <IoMoon />
                 </button> :
-                <button onClick={toggleHandler}
-                  style={{
-                    background: "#fff",
-                    color: "#FF5733"
-                  }}
-                >
+                <button onClick={toggleHandler}>
                   <MdSunny />
                 </button>
             }
@@ -119,7 +109,7 @@ const Sidebar = () => {
 
       <div className={`${style.content} ${darkmodeOn && style.dark}`}
         style={{
-          width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 5rem)",
+          width: showSidebar ? "calc(100vw - 20vw)" : "calc(100vw - 4vw)",
         }}
       >
         <div>

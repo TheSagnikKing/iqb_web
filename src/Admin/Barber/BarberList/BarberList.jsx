@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import "./BarberList.css"
+import style from "./BarberList.module.css"
 
 import { useNavigate } from 'react-router-dom'
 import { DeleteIcon, EditIcon, EmailIcon, Notificationicon, MessageIcon } from '../../../icons'
@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import toast from 'react-hot-toast'
+
+import Modal from '@mui/material/Modal';
+import { Box, Button, Typography } from '@mui/material'
 
 const BarberList = () => {
 
@@ -234,7 +237,7 @@ const BarberList = () => {
 
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
-      navigate("/admin-barber/send-email", { state: checkedEmails })
+      // navigate("/admin-barber/send-email", { state: checkedEmails })
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -257,7 +260,7 @@ const BarberList = () => {
           checkBarberNames
         }
       })
-    }else {
+    } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
         style: {
@@ -271,127 +274,145 @@ const BarberList = () => {
 
   }
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <div className={`admin_barber_wrapper ${darkmodeOn && "dark"}`}>
+    <div className={`${style.admin_barber_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Barber List</p>
         <div>
-          <button onClick={sendEmailNavigate}>
+          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
             <div><EmailIcon /></div>
           </button>
 
-          <button onClick={sendMessageNavigate}>
+          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
           </button>
 
-          <button onClick={createbarberClicked}>
+          <button onClick={createbarberClicked} className={`${style.create_barber_btn}`}>
             <p>Create</p>
             <div>+</div>
           </button>
         </div>
       </div>
 
-      <div className={`admin_barber_content_wrapper ${darkmodeOn && "dark"}`}>
+      <div className={`${style.admin_barber_content_wrapper} ${darkmodeOn && style.dark}`}>
         {
           getAdminBarberListLoading && !getAdminBarberListResolve ? (
-            <div className='admin_barber_content_body'>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+            <div className={style.admin_barber_content_body}>
+              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </div>
           ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
-            <div className={`admin_barber_content_body ${darkmodeOn && "dark"}`}>
+            <div className={`${style.admin_barber_content_body} ${darkmodeOn && style.dark}`}>
               <div>
-                <input
-                  type="checkbox"
-                  style={{ accentColor: "red", height: "1.8rem", width: "1.8rem" }}
-                  onChange={checkAllBarbersHandler}
-                  checked={checkAllBarbers}
-
-                />
+                <div>
+                  <input
+                    type="checkbox"
+                    onChange={checkAllBarbersHandler}
+                    checked={checkAllBarbers}
+                  />
+                </div>
                 <p>Barber Name</p>
                 <p>Email</p>
                 <p>isOnline</p>
                 <p>isClockIn</p>
+                <p>isApprove</p>
+                <p>Edit</p>
+                <p>Delete</p>
               </div>
 
-              {BarberList.map((b) => (
-                <div className='admin_barber_content_body_item' key={b._id}>
-                  <input
-                    type="checkbox"
-                    style={{ accentColor: "red", height: "1.8rem", width: "1.8rem" }}
-                    checked={checkedBarbers[b._id] || false}
-                    onChange={() => barberEmailCheckedHandler(b)}
-                  />
+              {BarberList?.map((b, index) => (
+                <div className={style.admin_barber_content_body_item}
+                  key={b._id}
+                  style={{
+                    borderBottom: BarberList?.length - 1 === index && "none"
+                  }}
+                >
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={checkedBarbers[b._id] || false}
+                      onChange={() => barberEmailCheckedHandler(b)}
+                    />
+                  </div>
                   <p>{b.name}</p>
                   <p>{b.email}</p>
-                  <div>
-                    <div
-                      style={{
-                        background: checkMap.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
-                        border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
-                      }}
-                    >
-                      <span className={`barberlist_toggle_btn_text ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_btn_text_active' : 'barberlist_dashboard_toggle_btn_text_inactive'}`}>{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</span>
-                      <button
-                        type="checkbox"
-                        className={`barberlist_dashboard_toggle_btn ${checkMap.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_dashboard_toggle_active' : 'barberlist_dashboard_toggle_inactive'}`}
-                        onClick={() => toggleHandler(b)}
-                      ></button>
 
-                    </div>
+                  <div>
+                    <button
+                      onClick={() => toggleHandler(b)}
+                      className={checkMap.get(`${b.salonId}-${b.barberId}`) ? style.barber_online_btn_active : style.barber_online_btn_inactive}
+                    >{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</button>
                   </div>
 
                   <div>
-                    <div
-                      style={{
-                        background: checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "limegreen" : "red",
-                        border: darkmodeOn ? "1px solid #fff" : "1px solid #000"
-                      }}
-                    >
-                      <span className={`barberlist_clock_toggle_btn_text ${checkMapClock.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_btn_text_active' : 'barberlist_clock_dashboard_toggle_btn_text_inactive'}`}>{checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "ClockIn" : "ClockOut"}</span>
-                      <button
-                        type="checkbox"
-                        className={`barberlist_clock_dashboard_toggle_btn ${checkMapClock.get(`${b.salonId}-${b.barberId}`) ? 'barberlist_clock_dashboard_toggle_active' : 'barberlist_clock_dashboard_toggle_inactive'}`}
-                        onClick={() => toggleClockHandler(b)}
-                      ></button>
-
-                    </div>
+                    <button
+                      onClick={() => toggleClockHandler(b)}
+                      className={checkMapClock.get(`${b.salonId}-${b.barberId}`) ? style.barber_clock_btn_active : style.barber_clock_btn_inactive}
+                    >{checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "Clock-In" : "Clock-Out"}</button>
                   </div>
-
-                  <button
-                    style={{
-                      background: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "gray" : "white",
-                      color: approveBarberMap.get(`${b.salonId}-${b.email}`) ? "#fff" : "#000"
-                    }}
-                    onClick={() => approveHandler(b)}
-                    disabled={adminApproveBarberLoading ? true : false}
-                  >
-                    {approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}
-                  </button>
 
                   <div>
-                    <div onClick={() => editButtonClicked(b)}><EditIcon /></div>
+                    <button
+                      onClick={() => approveHandler(b)}
+                      className={approveBarberMap.get(`${b.salonId}-${b.email}`) ? style.barber_approve_btn_active : style.barber_approve_btn_inactive}
+                      disabled={adminApproveBarberLoading ? true : false}
+                    >{approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}</button>
                   </div>
-                  <div>
-                    <div onClick={() => deleteButtonClicked(b)}><DeleteIcon /></div>
-                  </div>
+
+                  <div><button onClick={() => editButtonClicked(b)}>Edit</button></div>
+                  <div><button onClick={() => deleteButtonClicked(b)}>Delete</button></div>
+
                 </div>
               ))}
 
             </div>
           ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
-            <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
+            <div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
               <p style={{ margin: "2rem" }}>Barbers not available</p>
             </div>
           ) : (
             !getAdminBarberListLoading && !getAdminBarberListResolve && (
-              <div className={`barber_content_body_error ${darkmodeOn && "dark"}`}>
+              <div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
                 <p style={{ margin: "2rem" }}>Barbers not available</p>
               </div>
             )
           )
         }
       </div>
+
+      <div>
+        <Button onClick={handleOpen}>Open modal</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
+
     </div>
   )
 }

@@ -308,7 +308,7 @@
 
 }
 
-@media screen and (min-width:431px) and (max-width:834px) {
+@media screen and (min-width:430px) and (max-width:834px) {
     .admin_queue_wrapper>div:nth-child(1)>p {
         font-size: 2vw;
     }
@@ -339,7 +339,7 @@
     }
 }
 
-@media screen and (min-width:835px) and (max-width:1250px) {
+@media screen and (min-width:834px) and (max-width:1250px) {
     .admin_queue_wrapper>div:nth-child(1)>p {
         font-size: 1.8vw;
     }

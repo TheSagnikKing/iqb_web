@@ -221,13 +221,13 @@ const CustomerList = () => {
             <div><SearchIcon /></div>
           </div> */}
 
-          <div className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
+          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
             <div><EmailIcon /></div>
-          </div>
+          </button>
 
-          <div className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
+          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
-          </div>
+          </button>
         </div>
 
       </div>

@@ -33,11 +33,11 @@
     cursor: pointer;
     background-color: #0867ff25;
     border: 1px solid #0866ff;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
     transition: 0.3s all ease;
     -webkit-transition: 0.3s all ease;
     -moz-transition: 0.3s all ease;
@@ -114,7 +114,7 @@
 
 .salon_content_body>div {
     min-height: 6rem;
-    min-width: 110rem;
+    min-width: 90rem;
     max-width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     display: grid;
@@ -270,7 +270,7 @@
     .salon_wrapper>div:nth-child(1)>button {
         &>p {
             font-weight: 500;
-            font-size: 2.4vw;
+            font-size: 2.6vw;
             color: #0866ff;
         }
 
@@ -292,7 +292,7 @@
     }
 
     .salon_content_body_error {
-    
+
         &>p {
             font-size: 3.5vw;
             font-weight: 500;
@@ -300,7 +300,7 @@
     }
 }
 
-@media screen and (min-width:431px) and (max-width:768px) {
+@media screen and (min-width:430px) and (max-width:768px) {
     .salon_wrapper>div:nth-child(1)>p {
         font-size: 2vw;
     }
@@ -330,7 +330,7 @@
     }
 
     .salon_content_body_error {
-    
+
         &>p {
             font-size: 2.5vw;
             font-weight: 500;
@@ -338,7 +338,7 @@
     }
 }
 
-@media screen and (min-width:769px) and (max-width:834px) {
+@media screen and (min-width:768px) and (max-width:834px) {
     .salon_wrapper>div:nth-child(1)>p {
         font-size: 2vw;
     }
@@ -368,7 +368,7 @@
     }
 
     .salon_content_body_error {
-    
+
         &>p {
             font-size: 2vw;
             font-weight: 500;
@@ -376,7 +376,7 @@
     }
 }
 
-@media screen and (min-width:835px) and (max-width:1250px) {
+@media screen and (min-width:834px) and (max-width:1250px) {
 
     .salon_wrapper>div:nth-child(1)>p {
         font-size: 1.8vw;
@@ -407,7 +407,7 @@
     }
 
     .salon_content_body_error {
-    
+
         &>p {
             font-size: 1.5vw;
             font-weight: 500;

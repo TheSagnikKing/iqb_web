@@ -201,6 +201,21 @@ const DashboardHeader = () => {
     }
   }
 
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  useEffect(() => {
+    if (adminGetDefaultSalonResponse) {
+      setTogglecheck(adminGetDefaultSalonResponse?.isOnline)
+    }
+
+  }, [adminGetDefaultSalonResponse])
+
 
   const [togglecheck, setTogglecheck] = useState(false);
 
@@ -427,26 +442,17 @@ const DashboardHeader = () => {
           <p>Theme</p>
           {
             darkmodeOn ?
-              <button onClick={toggleHandler}
-                style={{
-                  background: "#000",
-                  color: "#fff"
-                }}
-              >
+              <button onClick={toggleHandler}>
                 <IoMoon />
               </button> :
-              <button onClick={toggleHandler}
-                style={{
-                  background: "#fff",
-                  color: "#FF5733"
-                }}
-              >
+              <button onClick={toggleHandler}>
                 <MdSunny />
               </button>
           }
 
         </div>
       </div>
+      
     </div >
   )
 }

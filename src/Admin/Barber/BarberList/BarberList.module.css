@@ -1,0 +1,579 @@
+.admin_barber_wrapper {
+    height: 90vh;
+    width: 100%;
+    padding: 2rem;
+    background-color: #fff;
+
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.admin_barber_wrapper>div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.admin_barber_wrapper>div:nth-child(1)>p {
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+
+.admin_barber_wrapper>div:nth-child(1)>div {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+}
+
+.barber_send_btn {
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    background-color: #0867ff25;
+    border: 1px solid #0866ff;
+    cursor: pointer;
+    color: #0866ff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+
+    &:hover {
+        background-color: #0866ff;
+
+        &>div {
+            color: var(--primary-text-light-color1);
+        }
+    }
+}
+
+.barber_send_btn>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    color: #0866ff;
+}
+
+.create_barber_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 8rem;
+    height: 3.2rem;
+    border: none;
+    cursor: pointer;
+    background-color: #0867ff25;
+    border: 1px solid #0866ff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+
+    &>p {
+        font-weight: 500;
+        font-size: 0.8vw;
+        color: #0866ff;
+    }
+
+    &>div {
+        font-size: 1vw;
+        font-weight: 500;
+        color: #0866ff;
+    }
+
+    &:hover {
+        background-color: #0866ff;
+
+        &>p {
+            color: #fff;
+        }
+
+        &>div {
+            color: #fff;
+        }
+    }
+}
+
+.admin_barber_content_wrapper {
+    width: 100%;
+    height: calc(90vh - 5rem - 4rem);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.admin_barber_content_body {
+    width: 100%;
+    height: calc(90vh - 5rem - 4rem);
+    overflow: auto;
+    position: relative;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #0867ff48;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255);
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+
+.admin_barber_content_body>div {
+    min-height: 6rem;
+    min-width: 90rem;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr 0.4fr 0.4fr 0.4fr;
+    font-size: 0.9vw;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.admin_barber_content_body>div>div:nth-child(1),
+.admin_barber_content_body>div>div:nth-child(2) {
+    display: flex;
+    align-items: center;
+
+    &>input {
+        width: 1.1vw;
+        height: 1.1vw;
+        accent-color: #0866ff;
+    }
+}
+
+.admin_barber_content_body>div:nth-child(1) {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-weight: 600;
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_barber_content_body>div:nth-child(1)>p {
+    color: var(--primary-text-light-color2);
+}
+
+.admin_barber_content_body>div>p:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+
+.admin_barber_content_body>div:not(:nth-child(1))>p:nth-child(2) {
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_barber_content_body>div:nth-child(1)>p:nth-child(2) {
+    background-color: var(--primary-bg-light-color1);
+}
+
+.admin_barber_content_body>div>p {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.admin_barber_content_body_item>div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(1),
+.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(2),
+.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(3) {
+    justify-content: center;
+}
+
+.admin_barber_content_body_item>div:nth-last-child(1),
+.admin_barber_content_body_item>div:nth-last-child(2),
+.admin_barber_content_body_item>div:nth-last-child(3) {
+    justify-content: center;
+}
+
+.admin_barber_content_body_item>div>button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9vw;
+}
+
+
+.admin_barber_content_body_item>div:nth-last-child(1) {
+    &>button {
+        background-color: #ff000025;
+        border: 1px solid red;
+        color: red;
+        font-weight: 500;
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            background-color: red;
+            color: #fff;
+        }
+    }
+}
+
+.admin_barber_content_body_item>div:nth-last-child(2) {
+    &>button {
+        background-color: #0867ff25;
+        border: 1px solid #0866ff;
+        color: #0866ff;
+        font-weight: 500;
+
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            background-color: #0866ff;
+            color: #fff;
+        }
+    }
+}
+
+.admin_barber_content_body_item>div:nth-last-child(3) {
+    &>button {
+        /* background-color: #ff770824;
+        border: 1px solid #ff7708;
+        color: #ff7708; */
+        font-weight: 500;
+
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            /* background-color: #ff7708; */
+            color: #fff;
+        }
+    }
+}
+
+.admin_barber_content_body_item>div:nth-last-child(4),
+.admin_barber_content_body_item>div:nth-last-child(5) {
+    &>button {
+        font-weight: 500;
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+.barber_online_btn_active,
+.barber_clock_btn_active {
+    background-color: rgba(50, 205, 50, 0.088);
+    border: 1px solid limegreen !important;
+    color: limegreen;
+
+    &:hover {
+        background-color: limegreen;
+        color: #fff;
+    }
+}
+
+.barber_online_btn_inactive,
+.barber_clock_btn_inactive {
+    background-color: #ff000025;
+    border: 1px solid red !important;
+    color: red;
+
+    &:hover {
+        background-color: red;
+        color: #fff;
+    }
+}
+
+.admin_barber_content_body_item>div:nth-last-child(4) {
+    &>button {
+        padding: 0.6rem 0px;
+        width: 9rem;
+    }
+}
+
+.admin_barber_content_body_item>div:nth-last-child(3) {
+    &>button {
+        padding: 0.6rem 0px;
+        width: 9rem;
+    }
+}
+
+.barber_approve_btn_active {
+    background-color: #ff770824;
+    border: 1px solid #ff7708 !important;
+    color: #ff7708;
+
+    &:hover {
+        background-color: #ff7708;
+        color: #fff;
+    }
+}
+
+.barber_approve_btn_inactive {
+    background-color: #7204551d;
+    border: 1px solid #720455 !important;
+    color: #720455;
+
+    &:hover {
+        background-color: #720455;
+        color: #fff;
+    }
+}
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .admin_barber_content_body>div {
+        grid-template-columns: 0.1fr 0.8fr 0.8fr 0.6fr 0.6fr 0.4fr 0.4fr 0.4fr;
+    }
+
+    .admin_barber_wrapper>div:nth-child(1)>p {
+        font-size: 4vw;
+    }
+
+    .barber_send_btn {
+        &>div {
+            font-weight: 500;
+            font-size: 3vw;
+        }
+    }
+
+    .create_barber_btn {
+        &>p {
+            font-weight: 500;
+            font-size: 2.6vw;
+        }
+
+        &>div {
+            font-weight: 500;
+            font-size: 3vw;
+        }
+    }
+
+    .admin_barber_content_body>div>div:nth-child(1),
+    .admin_barber_content_body>div>div:nth-child(2) {
+        display: flex;
+        align-items: center;
+
+        &>input {
+            width: 3vw;
+            height: 3vw;
+            accent-color: #0866ff;
+        }
+    }
+
+    .admin_barber_content_body>div {
+        font-size: 3vw;
+    }
+
+    .admin_barber_content_body_item>div>button {
+        font-size: 3vw;
+    }
+}
+
+@media screen and (min-width:430px) and (max-width:768px) {
+    .admin_barber_content_body>div {
+        grid-template-columns: 0.1fr 0.8fr 0.8fr 0.6fr 0.6fr 0.4fr 0.4fr 0.4fr;
+    }
+
+    .admin_barber_wrapper>div:nth-child(1)>p {
+        font-size: 2vw;
+    }
+
+    .barber_send_btn {
+        &>div {
+            font-weight: 500;
+            font-size: 2vw;
+        }
+    }
+
+    .create_barber_btn {
+        &>p {
+            font-weight: 500;
+            font-size: 1.4vw;
+        }
+
+        &>div {
+            font-weight: 500;
+            font-size: 2vw;
+        }
+    }
+
+    .admin_barber_content_body>div>div:nth-child(1),
+    .admin_barber_content_body>div>div:nth-child(2) {
+        display: flex;
+        align-items: center;
+
+        &>input {
+            width: 2vw;
+            height: 2vw;
+            accent-color: #0866ff;
+        }
+    }
+
+    .admin_barber_content_body>div {
+        font-size: 2vw;
+    }
+
+    .admin_barber_content_body_item>div>button {
+        font-size: 2vw;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:834px) {
+
+    .admin_barber_wrapper>div:nth-child(1)>p {
+        font-size: 2vw;
+    }
+
+    .barber_send_btn {
+        &>div {
+            font-weight: 500;
+            font-size: 1.6vw;
+        }
+    }
+
+    .create_barber_btn {
+        &>p {
+            font-weight: 500;
+            font-size: 1.4vw;
+        }
+
+        &>div {
+            font-weight: 500;
+            font-size: 1.6vw;
+        }
+    }
+
+    .admin_barber_content_body>div>div:nth-child(1),
+    .admin_barber_content_body>div>div:nth-child(2) {
+        display: flex;
+        align-items: center;
+
+        &>input {
+            width: 1.6vw;
+            height: 1.6vw;
+            accent-color: #0866ff;
+        }
+    }
+
+    .admin_barber_content_body>div {
+        font-size: 1.4vw;
+    }
+
+    .admin_barber_content_body_item>div>button {
+        font-size: 1.4vw;
+    }
+}
+
+@media screen and (min-width:834px) and (max-width:1250px) {
+
+    .admin_barber_wrapper>div:nth-child(1)>p {
+        font-size: 1.8vw;
+    }
+
+    .barber_send_btn {
+        &>div {
+            font-weight: 500;
+            font-size: 1.2vw;
+        }
+    }
+
+    .create_barber_btn {
+        &>p {
+            font-weight: 500;
+            font-size: 1vw;
+        }
+
+        &>div {
+            font-weight: 500;
+            font-size: 1.2vw;
+        }
+    }
+
+    .admin_barber_content_body>div>div:nth-child(1),
+    .admin_barber_content_body>div>div:nth-child(2) {
+        display: flex;
+        align-items: center;
+
+        &>input {
+            width: 1vw;
+            height: 1vw;
+            accent-color: #0866ff;
+        }
+    }
+
+    .admin_barber_content_body>div {
+        font-size: 1vw;
+    }
+
+    .admin_barber_content_body_item>div>button {
+        font-size: 1vw;
+    }
+}
