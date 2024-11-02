@@ -37,6 +37,10 @@ import { FaFile } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { RiVipCrownFill } from 'react-icons/ri'
+import { FiClock } from "react-icons/fi";
+import { MdAdd } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
+import { CiSaveDown2 } from "react-icons/ci";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -47,7 +51,7 @@ export const RightArrow = MdKeyboardArrowRight
 export const Admindashboardicon = MdDashboard
 export const Adminsalonicon = RiScissors2Fill
 export const Adminbarbericon = MdMan
-export const Admincustomericon =IoPersonCircle
+export const Admincustomericon = IoPersonCircle
 export const Adminqueueicon = FaUserGroup
 export const Adminadvertisementicon = RiAdvertisementFill
 export const Adminappointmenticon = BiSolidLike
@@ -84,3 +88,7 @@ export const FaFileIcon = FaFile
 export const HomeIcon = IoHome
 export const ShowSalonInfo = PiPaperPlaneRightFill
 export const CrownIcon = RiVipCrownFill
+export const ClockIcon = FiClock
+export const AddIcon = MdAdd
+export const CloseIcon = RxCross2
+export const SaveIcon = CiSaveDown2

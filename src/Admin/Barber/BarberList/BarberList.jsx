@@ -274,9 +274,9 @@ const BarberList = () => {
 
   }
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
   return (
     <div className={`${style.admin_barber_wrapper} ${darkmodeOn && style.dark}`}>
@@ -384,7 +384,7 @@ const BarberList = () => {
         }
       </div>
 
-      <div>
+      {/* <div>
         <Button onClick={handleOpen}>Open modal</Button>
         <Modal
           open={open}
@@ -411,7 +411,7 @@ const BarberList = () => {
             </Typography>
           </Box>
         </Modal>
-      </div>
+      </div> */}
 
     </div>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
-import "./ButtonLoader.css"
+import style from "./ButtonLoader.module.css"
 
 const ButtonLoader = ({color}) => {
   return (
-    <div className="btn-loader" style={{border:`4px solid ${color}`}}></div>
+    <div className={style.btn_loader}></div>
   )
 }
 
