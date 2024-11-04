@@ -953,6 +953,7 @@
 
             &:hover {
                 background-color: red;
+                color: #fff;
 
                 &>div {
                     color: var(--primary-text-light-color1);

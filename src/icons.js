@@ -41,6 +41,8 @@ import { FiClock } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { CiSaveDown2 } from "react-icons/ci";
+import { LuMail } from "react-icons/lu";
+import { LuMailWarning } from "react-icons/lu";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -92,3 +94,5 @@ export const ClockIcon = FiClock
 export const AddIcon = MdAdd
 export const CloseIcon = RxCross2
 export const SaveIcon = CiSaveDown2
+export const OtpMessageIcon = LuMail
+export const OtpEmailIcon = LuMailWarning

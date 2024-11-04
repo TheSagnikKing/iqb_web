@@ -328,10 +328,10 @@
 //                         <div>
 //                             <button onClick={() => handleSalonLogoButtonClick()}><CameraIcon /></button>
 //                             <input
-//                                 type="file"
-//                                 ref={fileInputRef}
-//                                 style={{ display: 'none' }}
-//                                 onChange={handleProfileFileInputChange}
+// type="file"
+// ref={fileInputRef}
+// style={{ display: 'none' }}
+// onChange={handleProfileFileInputChange}
 //                             />
 //                         </div>
 //                     </div>
@@ -342,8 +342,8 @@
 //                         <p>Name</p>
 //                         <input
 //                             type="text"
-//                             value={name}
-//                             onChange={(e) => setName(e.target.value)}
+// value={name}
+// onChange={(e) => setName(e.target.value)}
 //                         />
 //                     </div>
 
@@ -389,14 +389,14 @@
 
 //                                 <div>
 //                                     <p>Confirm Password</p>
-//                                     <div>
-//                                         <input
-//                                             type={`${seeConfirmPassword ? "text" : "password"}`}
-//                                             value={confirmPassword}
-//                                             onChange={(e) => setConfirmPassword(e.target.value)}
-//                                         />
-//                                         <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-//                                     </div>
+// <div>
+//     <input
+//         type={`${seeConfirmPassword ? "text" : "password"}`}
+//         value={confirmPassword}
+//         onChange={(e) => setConfirmPassword(e.target.value)}
+//     />
+//     <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+// </div>
 //                                 </div>
 
 //                                 <div>
@@ -437,8 +437,8 @@
 //                                 <PhoneInput
 //                                     forceDialCode={true}
 //                                     defaultCountry="gb"
-//                                     value={mobileNumber}
-//                                     onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+// value={mobileNumber}
+// onChange={(phone, meta) => handlePhoneChange(phone, meta)}
 //                                 />
 //                             </div>
 //                             <button onClick={() => sendVerificationMobile()} title={changeMobileVerifiedState ? "Verified" : "NotVerified"} style={{
@@ -564,22 +564,22 @@
 //                                         <button onClick={() => sendVerificationMobile()}>Resend</button>
 //                                     </div>
 
-//                                     <div>
-//                                         {
-//                                             mobileotp.map((digit, index) => (
-//                                                 <input
-//                                                     type="text"
-//                                                     key={index}
-//                                                     maxLength={1}
-//                                                     value={digit}
-//                                                     autoFocus={index === 0}
-//                                                     ref={(ref) => (mobileotpinputRef.current[index] = ref)}
-//                                                     onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
-//                                                     onKeyDown={(e) => handleMobileKeyDown(index, e)}
-//                                                 ></input>
-//                                             ))
-//                                         }
-//                                     </div>
+// <div>
+//     {
+//         mobileotp.map((digit, index) => (
+//             <input
+//                 type="text"
+//                 key={index}
+//                 maxLength={1}
+//                 value={digit}
+//                 autoFocus={index === 0}
+//                 ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+//                 onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
+//                 onKeyDown={(e) => handleMobileKeyDown(index, e)}
+//             ></input>
+//         ))
+//     }
+// </div>
 
 //                                     <div className='verify_btn_div'>
 //                                         <button className='verifybtn' onClick={verifyMobileStatusClicked}>Verify</button>
@@ -602,7 +602,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, Eyevisible, MobileCrossIcon, Notvisibleeye, SaveIcon } from '../../icons';
+import { CameraIcon, CheckIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -610,13 +610,14 @@ import { adminSendVerifyEmailAction, adminSendVerifyMobileAction, adminUpdatePas
 import { useNavigate } from 'react-router-dom';
 import api from '../../Redux/api/Api';
 import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Admin/Constants/constants';
-import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
-import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
+
+import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
+
 
 const EditProfile = () => {
 
@@ -625,13 +626,27 @@ const EditProfile = () => {
 
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
-    // console.log(adminProfile)
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(adminProfile?.emailVerified)
     const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(adminProfile?.mobileVerified)
 
-    const [name, setName] = useState(adminProfile?.name)
-    const [dateOfBirth, setDateofBirth] = useState(adminProfile?.dateOfBirth?.split('T')[0])
+    const [name, setName] = useState("")
+    const [dateOfBirth, setDateofBirth] = useState("")
+    const [gender, setGender] = useState("")
+    const [mobileNumber, setMobileNumber] = useState("")
+    const [countryCode, setCountryCode] = useState("")
+
+
+
+    useEffect(() => {
+        if (adminProfile) {
+            setMobileNumber(`${adminProfile?.mobileCountryCode?.toString()}${adminProfile?.mobileNumber?.toString()}`)
+            setName(adminProfile?.name)
+            setDateofBirth(adminProfile?.dateOfBirth?.split('T')[0])
+            setGender(adminProfile?.gender)
+            setCountryCode(adminProfile?.mobileCountryCode?.toString())
+        }
+    }, [adminProfile])
 
     const fileInputRef = useRef(null);
 
@@ -667,7 +682,7 @@ const EditProfile = () => {
 
         try {
             setUploadpicLoader(true)
-            const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
+            await api.post('/api/admin/uploadAdminProfilePicture', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -675,7 +690,6 @@ const EditProfile = () => {
 
             setUploadpicLoader(false)
 
-            // setProfilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
 
             const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
@@ -684,8 +698,6 @@ const EditProfile = () => {
                 payload: adminloggedindata
             })
 
-
-            // navigate("/admin-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
             console.error('Image upload failed:', error);
@@ -693,11 +705,10 @@ const EditProfile = () => {
         }
     };
 
-    const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
 
     const sendVerificationEmail = () => {
         if (!changeEmailVerifiedState) {
-            dispatch(adminSendVerifyEmailAction(adminProfile?.email, setSendVerificationEmailModal))
+            dispatch(adminSendVerifyEmailAction(adminProfile?.email, setOpenEmailModal))
         }
     }
 
@@ -725,12 +736,9 @@ const EditProfile = () => {
     };
 
 
-
-    const [sendVerificationMobileModal, setSendVerificationMobileModal] = useState(false)
-
     const sendVerificationMobile = () => {
         if (!changeMobileVerifiedState) {
-            dispatch(adminSendVerifyMobileAction(adminProfile?.email, setSendVerificationMobileModal))
+            dispatch(adminSendVerifyMobileAction(adminProfile?.email, setOpenMobileModal))
         }
     }
 
@@ -758,7 +766,7 @@ const EditProfile = () => {
     };
 
 
-    const [gender, setGender] = useState(adminProfile?.gender)
+    
     const [genderDrop, setGenderDrop] = useState(false)
 
     const genderDropHandler = () => {
@@ -770,31 +778,7 @@ const EditProfile = () => {
         setGenderDrop(false)
     }
 
-    const genderinputRef = useRef()
-    const genderDropRef = useRef()
-
-    useEffect(() => {
-        const handleClickGenderOutside = (event) => {
-            if (
-                genderinputRef.current &&
-                genderDropRef.current &&
-                !genderinputRef.current.contains(event.target) &&
-                !genderDropRef.current.contains(event.target)
-            ) {
-                setGenderDrop(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickGenderOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickGenderOutside);
-        };
-    }, []);
-
-
-    const [mobileNumber, setMobileNumber] = useState(`${adminProfile?.mobileCountryCode?.toString()}${adminProfile?.mobileNumber?.toString()}`)
-    const [countryCode, setCountryCode] = useState(adminProfile?.mobileCountryCode?.toString())
-
+    
     const [invalidnumber, setInvalidNumber] = useState(false)
 
     const updateAdminProfile = () => {
@@ -828,13 +812,13 @@ const EditProfile = () => {
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
 
-        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setSendVerificationEmailModal, setOtp, setChangeEmailVerifiedState))
+        dispatch(adminVerifiedEmailStatusAction(adminProfile?.email, currentOtp, setOpenEmailModal, setOtp, setChangeEmailVerifiedState))
     }
 
     const verifyMobileStatusClicked = () => {
         const currentOtp = mobileotp?.join("")
 
-        dispatch(adminVerifiedMobileStatusAction(adminProfile?.email, currentOtp, setSendVerificationMobileModal, setMobileOtp, setChangeMobileVerifiedState))
+        dispatch(adminVerifiedMobileStatusAction(adminProfile?.email, currentOtp, setOpenMobileModal, setMobileOtp, setChangeMobileVerifiedState))
     }
 
     const [oldPassword, setOldPassword] = useState("")
@@ -847,7 +831,7 @@ const EditProfile = () => {
         loading: adminUpdateProfileLoading,
     } = adminUpdateProfile
 
-    const [openModal, setOpenModal] = useState(false)
+    // const [openModal, setOpenModal] = useState(false)
 
     const updatePasswordHandler = () => {
         if (password !== confirmPassword) {
@@ -912,59 +896,307 @@ const EditProfile = () => {
         }
     };
 
+    const [openPasswordModal, setOpenPasswordModal] = useState(false)
+    const [openMobileModal, setOpenMobileModal] = useState(false)
+    const [openEmailModal, setOpenEmailModal] = useState(false)
+
     return (
         <main className={style.admin_edit_profile_container}>
             <div className={style.admin_edit_profile_container_left}>
                 <div><p>Your Profile</p></div>
                 <div className={style.admin_edit_profile_content_left}>
                     <div>
-                        <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-nature-scenery-free-image.jpeg?w=600&quality=80" alt="profile_pic" />
-                        <div className={style.upload_image_container}><CameraIcon /></div>
+
+                        {
+                            uploadpicLoader ? <Skeleton
+                                variant="rectangular"
+                                className={style.admin_profile_loader}
+                            /> : <img src={adminProfile?.profile[0]?.url} alt="profile" />
+                        }
+                        <button
+                            className={style.upload_image_container}
+                            onClick={() => handleSalonLogoButtonClick()}
+                        ><CameraIcon /></button>
+
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleProfileFileInputChange}
+                        />
                     </div>
-                    <p>Sagnik Nandy</p>
-                    <p>sagnik26@yopmail.com</p>
-                    <p>+91 6287387369</p>
-                    {/* <p>12-07-2000</p>
-                    <p>Male</p> */}
+
+                    <p>{name}</p>
+                    <p>{adminProfile?.email}</p>
                 </div>
             </div>
             <div className={style.admin_edit_profile_container_right}>
                 <div>
                     <p>Name</p>
-                    <input type="text" />
+                    <input
+                        type="text"
+                        placeholder='Enter Name'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                 </div>
 
                 <div>
                     <p>Email</p>
-                    <input type="text" />
+                    <div className={style.admin_edit_email_container}>
+                        <input
+                            type="text"
+                            placeholder='Enter Email'
+                            value={adminProfile?.email}
+                        />
+
+                        <button
+                            onClick={() => sendVerificationEmail()}
+                            className={changeEmailVerifiedState ? style.admin_verified_icon : style.admin_notverified_icon}
+                            title={changeEmailVerifiedState ? "Verified" : "NotVerified"}
+                            style={{
+                                cursor: changeEmailVerifiedState ? "not-allowed" : "pointer"
+                            }}
+                        >
+                            {changeEmailVerifiedState ? <CheckIcon /> : <CloseIcon />}
+
+                        </button>
+
+                    </div>
                 </div>
+
+                <Modal
+                    open={openEmailModal}
+                    onClose={() => setOpenEmailModal(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className={style.modal_email_mob_container}>
+                        <div><OtpEmailIcon /></div>
+
+                        <div>
+                            <p>Please check your email</p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.email}</span></p>
+                            <div>
+                                {
+                                    otp.map((digit, index) => (
+                                        <input
+                                            type="text"
+                                            key={index}
+                                            maxLength={1}
+                                            value={digit}
+                                            autoFocus={index === 0}
+                                            ref={(ref) => (otpinputRef.current[index] = ref)}
+                                            onChange={(e) => handleOtpInputChange(index, e.target.value)}
+                                            onKeyDown={(e) => handleKeyDown(index, e)}
+                                        ></input>
+                                    ))
+                                }
+                            </div>
+
+                            <p>Didn't get the code ? <span onClick={() => sendVerificationEmail()}>Click to resend</span></p>
+
+                            <div>
+                                <button onClick={() => setOpenEmailModal(false)}>Cancel</button>
+                                <button onClick={verifyEmailStatusClicked}>Verify</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </Modal>
 
                 <div>
                     <p>Password</p>
-                    <input type="text" />
+                    <input
+                        type="text"
+                        value="********"
+                        onClick={() => setOpenPasswordModal(true)}
+                    />
                 </div>
+
+                <Modal
+                    open={openPasswordModal}
+                    onClose={() => setOpenPasswordModal(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className={style.modal_container}>
+                        <div>
+                            <p>Change your password</p>
+                            <button onClick={() => setOpenPasswordModal(false)}><CloseIcon /></button>
+                        </div>
+                        <div className={style.modal_content_container}>
+
+                            <div>
+                                <p>Old Password</p>
+                                <div>
+                                    <input
+                                        type={`${seePassword ? "text" : "password"}`}
+                                        value={oldPassword}
+                                        onChange={(e) => setOldPassword(e.target.value)}
+                                        placeholder='Enter Old Password'
+                                    />
+                                    <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>New Password</p>
+                                <div>
+                                    <input
+                                        type={`${seeOldPassword ? "text" : "password"}`}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder='Enter New Password'
+                                    />
+                                    <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>Confirm Password</p>
+                                <div>
+                                    <input
+                                        type={`${seeConfirmPassword ? "text" : "password"}`}
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        placeholder='Enter Confirm Password'
+                                    />
+                                    <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                </div>
+                            </div>
+
+                            <button
+                                className={style.edit_modal_btn}
+                                onClick={updatePasswordHandler}
+                            >
+                                {
+                                    adminUpdatePasswordLoading ?
+                                        (
+                                            <ButtonLoader />
+                                        ) :
+                                        (
+                                            <>
+                                                <p>Save</p>
+                                                <div><SaveIcon /></div>
+                                            </>
+                                        )
+                                }
+
+                            </button>
+                        </div>
+                    </div>
+                </Modal >
 
                 <div>
                     <p>Mob. Number</p>
-                    <input type="text" />
+                    <div className={style.admin_edit_mobile_container}>
+                        <div>
+                            <PhoneInput
+                                forceDialCode={true}
+                                defaultCountry="gb"
+                                value={mobileNumber}
+                                onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
+                            />
+                        </div>
+
+                        <button
+                            onClick={() => sendVerificationMobile()}
+                            className={changeMobileVerifiedState ? style.admin_verified_icon : style.admin_notverified_icon}
+                            title={changeMobileVerifiedState ? "Verified" : "NotVerified"}
+                            style={{
+                                cursor: changeMobileVerifiedState ? "not-allowed" : "pointer"
+                            }}
+                        >
+                            {changeMobileVerifiedState ? <CheckIcon /> : <CloseIcon />}
+
+                        </button>
+                        {/* <div onClick={() => sendVerificationMobile()}><CloseIcon /></div> */}
+                    </div>
                 </div>
+
+                <Modal
+                    open={openMobileModal}
+                    onClose={() => setOpenMobileModal(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className={style.modal_email_mob_container}>
+                        <div><OtpMessageIcon /></div>
+
+                        <div>
+                            <p>Please check your message</p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.mobileCountryCode}{adminProfile?.mobileNumber}</span></p>
+                            <div>
+                                {
+                                    mobileotp.map((digit, index) => (
+                                        <input
+                                            type="text"
+                                            key={index}
+                                            maxLength={1}
+                                            value={digit}
+                                            autoFocus={index === 0}
+                                            ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+                                            onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
+                                            onKeyDown={(e) => handleMobileKeyDown(index, e)}
+                                        ></input>
+                                    ))
+                                }
+                            </div>
+
+                            <p>Didn't get the code ? <span onClick={() => sendVerificationMobile()}>Click to resend</span></p>
+
+                            <div>
+                                <button onClick={() => setOpenMobileModal(false)}>Cancel</button>
+                                <button onClick={verifyMobileStatusClicked}>Verify</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </Modal>
 
                 <div>
                     <p>Date of Birth</p>
-                    <input type="date" />
+                    <input
+                        type="date"
+                        value={dateOfBirth}
+                        onChange={(e) => setDateofBirth(e.target.value)}
+                    />
                 </div>
 
-                <div>
+                <div className={style.admin_edit_gender_container}>
                     <p>Gender</p>
-                    <input type="text" />
+                    <input
+                        type="text"
+                        value={`${gender ? `${gender}` : ''}`}
+                        onClick={() => genderDropHandler()}
+                    />
+
+                    {genderDrop &&
+                        <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
+                            <div>
+                                <p onClick={() => setGenderHandler("Male")}>Male</p>
+                                <p onClick={() => setGenderHandler("Female")}>Female</p>
+                                <p onClick={() => setGenderHandler("Other")}>Other</p>
+                            </div>
+                        </ClickAwayListener>}
+
                 </div>
 
-                <button className={style.edit_profile_btn}>
-                    <p>Save</p>
-                    <div><SaveIcon /></div>
+
+                <button className={style.edit_profile_btn} onClick={updateAdminProfile}>
+                    {
+                        adminUpdateProfileLoading ? (<ButtonLoader />) :
+                            <>
+                                <p>Save</p>
+                                <div><SaveIcon /></div>
+                            </>
+                    }
                 </button>
-            </div>
-        </main>
+            </div >
+        </main >
     )
 }
 

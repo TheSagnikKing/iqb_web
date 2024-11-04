@@ -2,11 +2,11 @@ import { ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_SEND_VERIFY_EMAIL_FAIL, ADMIN
 import api from "../../api/Api";
 import toast from "react-hot-toast";
 
-export const adminUpdateProfileAction = (profiledata,navigate) => async (dispatch) => {
+export const adminUpdateProfileAction = (profiledata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_PROFILE_REQ })
 
-        const { data } = await api.put("/api/admin/updateAdminAcoountDetails",profiledata)
+        const { data } = await api.put("/api/admin/updateAdminAcoountDetails", profiledata)
 
         dispatch({
             type: ADMIN_UPDATE_PROFILE_SUCCESS,
@@ -14,11 +14,11 @@ export const adminUpdateProfileAction = (profiledata,navigate) => async (dispatc
         })
 
         //calling this so that admin profile get updated and i dont have to refresh the page again
-        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
-            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-            payload:adminloggedindata
+            type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload: adminloggedindata
         })
 
         navigate("/admin-dashboard")
@@ -41,13 +41,13 @@ export const adminUpdateProfileAction = (profiledata,navigate) => async (dispatc
     }
 }
 
-export const adminSkipProfileAction = (profiledata,navigate) => async (dispatch) => {
+export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_SKIP_PROFILE_REQ
         });
 
-        const {data} = await api.put("/api/admin/updateadminInfo",profiledata);
+        const { data } = await api.put("/api/admin/updateadminInfo", profiledata);
 
         dispatch({
             type: ADMIN_SKIP_PROFILE_SUCCESS,
@@ -57,7 +57,7 @@ export const adminSkipProfileAction = (profiledata,navigate) => async (dispatch)
         localStorage.setItem("userAdminLoggedIn", "true")
         localStorage.setItem("userBarberLoggedIn", "false")
 
-        navigate("/admin-dashboard",{state:data})
+        navigate("/admin-dashboard", { state: data })
 
     } catch (error) {
         dispatch({
@@ -78,18 +78,18 @@ export const adminSkipProfileAction = (profiledata,navigate) => async (dispatch)
 }
 
 
-export const adminSendVerifyEmailAction = (verifyemail,setSendVerificationEmailModal) => async (dispatch) => {
+export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_VERIFY_EMAIL_REQ })
 
-        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminEmail",{email:verifyemail})
+        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminEmail", { email: verifyemail })
 
         dispatch({
             type: ADMIN_SEND_VERIFY_EMAIL_SUCCESS,
             payload: data
         })
 
-        setSendVerificationEmailModal(true)
+        setOpenEmailModal(true)
 
     } catch (error) {
         dispatch({
@@ -109,18 +109,18 @@ export const adminSendVerifyEmailAction = (verifyemail,setSendVerificationEmailM
     }
 }
 
-export const adminSendVerifyMobileAction = (verifyemail,setSendVerificationMobileModal) => async (dispatch) => {
+export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_VERIFY_MOBILE_REQ })
 
-        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminMobile",{email:verifyemail})
+        const { data } = await api.post("/api/admin/sendVerificationCodeForAdminMobile", { email: verifyemail })
 
         dispatch({
             type: ADMIN_SEND_VERIFY_MOBILE_SUCCESS,
             payload: data
         })
 
-        setSendVerificationMobileModal(true)
+        setOpenMobileModal(true)
 
     } catch (error) {
         dispatch({
@@ -140,11 +140,11 @@ export const adminSendVerifyMobileAction = (verifyemail,setSendVerificationMobil
     }
 }
 
-export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
+export const adminVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailModal, setOtp, setChangeEmailVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_VERIFIED_EMAIL_STATUS_REQ })
 
-        const { data } = await api.post("/api/admin/changeEmailVerifiedStatus",{email:verifyemail,verificationCode:otp})
+        const { data } = await api.post("/api/admin/changeEmailVerifiedStatus", { email: verifyemail, verificationCode: otp })
 
         dispatch({
             type: ADMIN_VERIFIED_EMAIL_STATUS_SUCCESS,
@@ -152,16 +152,16 @@ export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificati
         })
 
         //calling this so that admin profile get updated and i dont have to refresh the page again
-        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
-            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-            payload:adminloggedindata
+            type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload: adminloggedindata
         })
 
         setChangeEmailVerifiedState(true)
-        setSendVerificationEmailModal(false)
-        setOtp(["","","",""])
+        setOpenEmailModal(false)
+        setOtp(["", "", "", ""])
 
     } catch (error) {
         dispatch({
@@ -181,11 +181,11 @@ export const adminVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificati
     }
 }
 
-export const adminVerifiedMobileStatusAction = (verifyemail,otp,setSendVerificationMobileModal,setMobileOtp,setChangeMobileVerifiedState) => async (dispatch) => {
+export const adminVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobileModal, setMobileOtp, setChangeMobileVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_VERIFIED_MOBILE_STATUS_REQ })
 
-        const { data } = await api.post("/api/admin/changeMobileVerifiedStatus",{email:verifyemail,verificationCode:otp})
+        const { data } = await api.post("/api/admin/changeMobileVerifiedStatus", { email: verifyemail, verificationCode: otp })
 
         dispatch({
             type: ADMIN_VERIFIED_MOBILE_STATUS_SUCCESS,
@@ -193,16 +193,16 @@ export const adminVerifiedMobileStatusAction = (verifyemail,otp,setSendVerificat
         })
 
         //calling this so that admin profile get updated and i dont have to refresh the page again
-        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
-            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-            payload:adminloggedindata
+            type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload: adminloggedindata
         })
 
         setChangeMobileVerifiedState(true)
-        setSendVerificationMobileModal(false)
-        setMobileOtp(["","","",""])
+        setOpenMobileModal(false)
+        setMobileOtp(["", "", "", ""])
 
     } catch (error) {
         dispatch({
@@ -232,7 +232,7 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
             type: ADMIN_UPLOAD_PROFILE_PIC_SUCCESS,
             payload: data
         })
-        
+
 
     } catch (error) {
         dispatch({
@@ -253,11 +253,11 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
 }
 
 
-export const adminUpdatePasswordAction = (profiledata,navigate) => async (dispatch) => {
+export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_PASSWORD_REQ })
 
-        const { data } = await api.post("/api/admin/updateAdminPassword",profiledata)
+        const { data } = await api.post("/api/admin/updateAdminPassword", profiledata)
 
         dispatch({
             type: ADMIN_UPDATE_PASSWORD_SUCCESS,
@@ -265,11 +265,11 @@ export const adminUpdatePasswordAction = (profiledata,navigate) => async (dispat
         })
 
         //calling this so that admin profile get updated and i dont have to refresh the page again
-        const { data:adminloggedindata } = await api.get('/api/admin/adminloggedin');
+        const { data: adminloggedindata } = await api.get('/api/admin/adminloggedin');
 
         dispatch({
-            type:ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
-            payload:adminloggedindata
+            type: ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload: adminloggedindata
         })
 
         navigate("/admin-dashboard")
