@@ -289,7 +289,7 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
 }
 
 
-export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, navigate, routename) => async (dispatch) => {
+export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, setOpenBarberEmail) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_BARBER_MAIL_REQ })
 
@@ -312,7 +312,7 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, nav
             },
         });
 
-        navigate(routename)
+        setOpenBarberEmail(false)
     } catch (error) {
 
         dispatch({

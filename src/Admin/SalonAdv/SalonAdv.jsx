@@ -654,7 +654,7 @@ const SalonAdv = () => {
                   count={1}
                   width={"95%"}
                   height={"35rem"}
-                  style={{ borderRadius: "1.7rem" }}
+                  style={{ borderRadius: "6px" }}
                   baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                   highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                 />
@@ -670,6 +670,7 @@ const SalonAdv = () => {
                         <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
                       </>
                     ))}
+                    
                   </SortableContext>
 
                 </div>

@@ -153,13 +153,17 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./SalonList.module.css"
-import { DeleteIcon, EditIcon, Settingsicon } from '../../../icons'
+import { CloseIcon } from '../../../icons'
 import { useNavigate } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminDeleteSalonAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
+import { adminDeleteSalonAction, adminUpdateSalonSettingsAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 import toast from 'react-hot-toast'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+
+import Modal from '@mui/material/Modal';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { ClickAwayListener } from '@mui/material'
 
 const SalonList = () => {
 
@@ -223,13 +227,123 @@ const SalonList = () => {
     }
   }
 
-  const salonappointmentClicked = (salon) => {
-    navigate(`/admin-salon/appointment/${salon?.salonId}`, { state: salon })
-  }
+
 
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
+
+
+  const [openSalonSettings, setOpenSalonSettings] = useState(false)
+
+  // const [selectedSalon, setSelectedSalon] = useState("")
+  const [selectedSalonId, setSelectedSalonId] = useState(null)
+
+  const salonappointmentClicked = (salon) => {
+    // setSelectedSalon(salon)
+    setSelectedSalonId(salon?.salonId)
+    setStartTime(salon?.appointmentSettings?.appointmentStartTime)
+    setEndTime(salon?.appointmentSettings?.appointmentEndTime)
+    setIntervalTime(salon?.appointmentSettings?.intervalInMinutes)
+    // setSelectedSalon(salon?.salonName)
+    setOpenSalonSettings(true)
+  }
+
+  const [timeOptions, setTimeOptions] = useState([]);
+
+  const addLeadingZero = (num) => (num < 10 ? '0' : '') + num;
+
+  const generateTimeOptions = () => {
+    const options = [];
+
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const time = addLeadingZero(hour) + ':' + addLeadingZero(minute);
+        options.push({ value: time, label: time });
+      }
+    }
+
+    setTimeOptions(options);
+  };
+
+  useEffect(() => {
+    generateTimeOptions();
+  }, [])
+
+
+
+  const [startTime, setStartTime] = useState("")
+  const [startTimeDrop, setStartTimeDrop] = useState(false)
+
+  const startTimeDropHandler = () => {
+    setStartTimeDrop((prev) => !prev)
+  }
+
+  const setStartTimeHandler = (value) => {
+    setStartTime(value)
+    setStartTimeDrop(false)
+  }
+
+  const [endTime, setEndTime] = useState("")
+  const [endTimeDrop, setEndTimeDrop] = useState(false)
+
+  const endTimeDropHandler = () => {
+    setEndTimeDrop((prev) => !prev)
+  }
+
+  const setEndTimeHandler = (value) => {
+    setEndTime(value)
+    setEndTimeDrop(false)
+  }
+
+
+  const [intervalTimemin, setIntervalTimemin] = useState([])
+
+  const generateTimeIntervalInMinutes = () => {
+    const options = []
+    for (let i = 1; i <= 60; i++) {
+      options.push(i);
+    }
+
+    setIntervalTimemin(options)
+  }
+
+  useEffect(() => {
+    generateTimeIntervalInMinutes()
+  }, [])
+
+  const [intervalTime, setIntervalTime] = useState("")
+  const [intervalTimeDrop, setIntervalTimeDrop] = useState(false)
+
+  const intervalTimeDropHandler = () => {
+    setIntervalTimeDrop((prev) => !prev)
+  }
+
+  const setIntervalTimeHandler = (value) => {
+    setIntervalTime(value)
+    setIntervalTimeDrop(false)
+  }
+
+  const updateSalonAppointment = () => {
+    const appointmentdata = {
+      salonId: selectedSalonId,
+      appointmentSettings: {
+        startTime,
+        endTime,
+        intervalInMinutes: intervalTime
+      }
+    }
+
+    // console.log(appointmentdata)
+
+    dispatch(adminUpdateSalonSettingsAction(appointmentdata, setOpenSalonSettings, email))
+  }
+
+  const adminUpdateSalonSettings = useSelector(state => state.adminUpdateSalonSettings)
+
+  const {
+    loading: adminUpdateSalonSettingsLoading,
+  } = adminUpdateSalonSettings
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -299,6 +413,91 @@ const SalonList = () => {
             )
           )
         }
+
+
+        <Modal
+          open={openSalonSettings}
+          onClose={() => setOpenSalonSettings(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div className={style.modal_container}>
+            <div>
+              <p> Appointment Settings</p>
+              <button onClick={() => setOpenSalonSettings(false)}><CloseIcon /></button>
+            </div>
+
+            <div className={style.modal_content_container}>
+              <div className={style.time_container}>
+                <p>Start Time</p>
+                <input
+                  type="text"
+                  value={`${startTime ? `${startTime} hr` : ''}`}
+                  onClick={() => startTimeDropHandler()}
+                />
+
+                {startTimeDrop && (
+                  <ClickAwayListener onClickAway={() => setStartTimeDrop(false)}>
+                    <div className={style.time_drop_container}>
+                      {timeOptions.map((option) => (
+                        <p key={option.value} onClick={() => setStartTimeHandler(option.value)}>
+                          {option.value} hr
+                        </p>
+                      ))}
+                    </div>
+                  </ClickAwayListener>
+                )}
+              </div>
+
+
+              <div className={style.time_container}>
+                <p>End Time</p>
+                <input
+                  type="text"
+                  value={`${endTime ? `${endTime} hr` : ''}`}
+                  onClick={() => endTimeDropHandler()}
+                />
+
+                {endTimeDrop && (
+                  <ClickAwayListener onClickAway={() => setEndTimeHandler(false)}>
+                    <div className={style.time_drop_container}>
+                      {timeOptions.map((option) => (
+                        <p key={option.value} onClick={() => setEndTimeHandler(option.value)}>
+                          {option.value} hr
+                        </p>
+                      ))}
+                    </div>
+                  </ClickAwayListener>
+                )}
+              </div>
+
+
+              <div className={style.time_container}>
+                <p>Interval Time</p>
+                <input
+                  type="text"
+                  value={`${intervalTime ? `${intervalTime} mins` : ''}`}
+                  onClick={() => intervalTimeDropHandler()}
+                />
+
+                {intervalTimeDrop &&
+                  <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}><div className={style.time_drop_container}>
+                    {intervalTimemin.map((option) => (
+                      <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
+                        {option} mins
+                      </p>
+                    ))}
+                  </div>
+                  </ClickAwayListener>}
+              </div>
+
+              {
+                adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
+              }
+
+            </div>
+          </div>
+        </Modal>
 
       </div>
 

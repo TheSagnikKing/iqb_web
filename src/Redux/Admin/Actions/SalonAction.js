@@ -267,7 +267,7 @@ export const adminEditSalonAction = (salondata, navigate) => async (dispatch) =>
     }
 }
 
-export const adminUpdateSalonSettingsAction = (appointmentdata, navigate) => async (dispatch) => {
+export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSettings, email) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_UPDATE_SALON_SETTINGS_REQ })
 
@@ -278,7 +278,16 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, navigate) => asy
             payload: data
         })
 
-        navigate("/admin-salon")
+        setOpenSalonSettings(false)
+
+        const { data: salonlist_data } = await api.post(`/api/admin/getAllSalonsByAdmin`, {
+            adminEmail: email
+        })
+
+        dispatch({
+            type: GET_ADMIN_SALONLIST_SUCCESS,
+            payload: salonlist_data
+        })
 
     } catch (error) {
         dispatch({

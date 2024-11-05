@@ -385,13 +385,13 @@ const DashboardHeader = () => {
                 adminEditDrop && <div ref={adminEditDropRef}
                   className={`${style.profile_drop_container} ${darkmodeOn && style.dark}`}
                 >
-                  <div>
+                  <div onClick={() => navigate("/admin-dashboard/editprofile")}>
                     <div><ProfileIcon /></div>
-                    <div onClick={() => navigate("/admin-dashboard/editprofile")}>My Profile</div>
+                    <div>My Profile</div>
                   </div>
-                  <div>
+                  <div onClick={logoutHandler}>
                     <div><LogoutIcon /></div>
-                    <div onClick={logoutHandler}>Logout</div>
+                    <div>Logout</div>
                   </div>
 
                 </div>
@@ -452,7 +452,7 @@ const DashboardHeader = () => {
 
         </div>
       </div>
-      
+
     </div >
   )
 }

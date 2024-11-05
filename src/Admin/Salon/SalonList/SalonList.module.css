@@ -262,6 +262,214 @@
     }
 }
 
+
+.modal_container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: #fff;
+    border: none;
+    width: 40%;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        &>p {
+            font-size: 1.2vw;
+            font-weight: 600;
+        }
+
+        &>button {
+            margin-left: auto;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            background-color: #ff000025;
+            border: 1px solid red;
+            cursor: pointer;
+            color: red;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+
+            &:hover {
+                background-color: red;
+                color: #fff;
+
+                &>div {
+                    color: var(--primary-text-light-color1);
+                }
+            }
+        }
+    }
+
+
+    .modal_content_container {
+
+        &>div {
+            margin-bottom: 2rem;
+
+            &>p {
+                font-size: 1vw;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+
+            &>input {
+                height: 4rem;
+                width: 100%;
+                background-color: #EEEDED;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                -o-border-radius: 3px;
+                padding-inline: 1rem;
+                outline: none;
+                border: none;
+                font-size: 0.9vw;
+            }
+        }
+
+        .salon_settings_btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 12rem;
+            height: 4rem;
+            border: none;
+            cursor: pointer;
+            background-color: #0867ff25;
+            border: 1px solid #0866ff;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            margin-inline: auto;
+            /* margin-top: 4rem; */
+
+            font-weight: 500;
+            font-size: 1vw;
+            color: #0866ff;
+
+            &:hover {
+                background-color: #0866ff;
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+.time_container {
+    position: relative;
+}
+
+.time_drop_container {
+    z-index: 10;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    right: 0;
+    height: 25vh;
+    background-color: #fff;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    padding: 1rem;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #0867ff48;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 98, 255);
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    &>p {
+        line-height: 4rem;
+        margin-bottom: 1rem;
+        padding-inline: 1rem;
+        font-size: 0.9vw;
+        color: #000;
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            line-height: 4rem;
+            background-color: #0866ff;
+            margin-bottom: 1rem;
+            padding-inline: 1rem;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            color: #fff;
+            font-size: 0.9vw;
+            cursor: pointer;
+        }
+    }
+
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .salon_wrapper>div:nth-child(1)>p {
         font-size: 4vw;
@@ -297,6 +505,52 @@
             font-size: 3.5vw;
             font-weight: 500;
         }
+    }
+
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 4vw;
+            }
+
+            &>button {
+                height: 8vw;
+                width: 8vw;
+                font-size: 3vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 3vw;
+                }
+
+                &>input {
+                    font-size: 3vw;
+                }
+            }
+
+            .salon_settings_btn {
+                font-size: 3vw;
+            }
+        }
+
+    }
+
+    .time_drop_container {
+
+        &>p {
+            font-size: 3vw;
+        }
+
     }
 }
 
@@ -336,6 +590,53 @@
             font-weight: 500;
         }
     }
+
+
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 3vw;
+            }
+
+            &>button {
+                height: 6vw;
+                width: 6vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 2vw;
+                }
+
+                &>input {
+                    font-size: 2vw;
+                }
+            }
+
+            .salon_settings_btn {
+                font-size: 2vw;
+            }
+        }
+
+    }
+
+    .time_drop_container {
+
+        &>p {
+            font-size: 2vw;
+        }
+
+    }
 }
 
 @media screen and (min-width:768px) and (max-width:834px) {
@@ -374,6 +675,52 @@
             font-weight: 500;
         }
     }
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 2vw;
+            }
+
+            &>button {
+                height: 4vw;
+                width: 4vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 1.6vw;
+                }
+
+                &>input {
+                    font-size: 1.6vw;
+                }
+            }
+
+            .salon_settings_btn {
+                font-size: 1.6vw;
+            }
+        }
+
+    }
+
+    .time_drop_container {
+
+        &>p {
+            font-size: 1.6vw;
+        }
+
+    }
+
 }
 
 @media screen and (min-width:834px) and (max-width:1250px) {
@@ -412,5 +759,51 @@
             font-size: 1.5vw;
             font-weight: 500;
         }
+    }
+
+
+    .modal_container {
+        width: 65vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 1.6vw;
+            }
+
+            &>button {
+                height: 4vw;
+                width: 4vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 1.6vw;
+                }
+
+                &>input {
+                    font-size: 1.6vw;
+                }
+            }
+
+            .salon_settings_btn {
+                font-size: 1.6vw;
+            }
+        }
+
+    }
+
+    .time_drop_container {
+
+        &>p {
+            font-size: 1.6vw;
+        }
+
     }
 }

@@ -388,6 +388,182 @@
     }
 }
 
+
+
+.modal_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: #fff;
+    border: none;
+    width: 40%;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        &>p {
+            font-size: 1.2vw;
+            font-weight: 600;
+        }
+
+        &>button {
+            margin-left: auto;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            background-color: #ff000025;
+            border: 1px solid red;
+            cursor: pointer;
+            color: red;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+
+            &:hover {
+                background-color: red;
+                color: #fff;
+
+                &>div {
+                    color: var(--primary-text-light-color1);
+                }
+            }
+        }
+    }
+
+
+    .modal_content_container {
+
+        &>div {
+            margin-bottom: 2rem;
+
+            &>p {
+                font-size: 1vw;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+
+            &>input {
+                height: 4rem;
+                width: 100%;
+                background-color: #EEEDED;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                -o-border-radius: 3px;
+                padding-inline: 1rem;
+                outline: none;
+                border: none;
+                font-size: 0.9vw;
+            }
+
+            &>textarea {
+                width: 100%;
+                min-height: 20vh;
+                background-color: #EEEDED;
+                border: none;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                -o-border-radius: 3px;
+                padding: 1rem;
+                font-size: 0.9vw;
+                resize: none;
+                overflow: auto;
+                outline: none;
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                }
+
+                &:hover::-webkit-scrollbar {
+                    width: 6px;
+                    height: 7px;
+                }
+
+                &:hover::-webkit-scrollbar-track {
+                    background-color: transparent;
+                }
+
+                &:hover::-webkit-scrollbar-thumb {
+                    background: #0867ff48;
+                    border-radius: 6px;
+                }
+
+                &:hover::-webkit-scrollbar-thumb:hover {
+                    background: rgb(0, 98, 255);
+                }
+
+                &:hover::-webkit-scrollbar-corner {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .barber_send_btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 12rem;
+            height: 4rem;
+            border: none;
+            cursor: pointer;
+            background-color: #0867ff25;
+            border: 1px solid #0866ff;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            margin-inline: auto;
+            /* margin-top: 4rem; */
+
+            font-weight: 500;
+            font-size: 1vw;
+            color: #0866ff;
+
+            &:hover {
+                background-color: #0866ff;
+                color: #fff;
+            }
+        }
+    }
+
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_barber_content_body>div {
         grid-template-columns: 0.1fr 0.8fr 0.8fr 0.6fr 0.6fr 0.4fr 0.4fr 0.4fr;
@@ -435,6 +611,49 @@
     .admin_barber_content_body_item>div>button {
         font-size: 3vw;
     }
+
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 4vw;
+            }
+
+            &>button {
+                height: 8vw;
+                width: 8vw;
+                font-size: 3vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 3vw;
+                }
+
+                &>input {
+                    font-size: 3vw;
+                }
+
+                &>textarea {
+                    font-size: 3vw;
+                }
+            }
+
+            .barber_send_btn {
+                font-size: 3vw;
+            }
+        }
+
+    }
+
 }
 
 @media screen and (min-width:430px) and (max-width:768px) {
@@ -484,6 +703,47 @@
     .admin_barber_content_body_item>div>button {
         font-size: 2vw;
     }
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 3vw;
+            }
+
+            &>button {
+                height: 6vw;
+                width: 6vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 2vw;
+                }
+
+                &>input {
+                    font-size: 2vw;
+                }
+
+                &>textarea {
+                    font-size: 2vw;
+                }
+            }
+
+            .barber_send_btn {
+                font-size: 2vw;
+            }
+        }
+
+    }
 }
 
 @media screen and (min-width:768px) and (max-width:834px) {
@@ -530,6 +790,49 @@
     .admin_barber_content_body_item>div>button {
         font-size: 1.4vw;
     }
+
+
+
+    .modal_container {
+        width: 95vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 2vw;
+            }
+
+            &>button {
+                height: 4vw;
+                width: 4vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 1.6vw;
+                }
+
+                &>input {
+                    font-size: 1.6vw;
+                }
+
+                &>textarea {
+                    font-size: 1.6vw;
+                }
+            }
+
+            .barber_send_btn {
+                font-size: 1.6vw;
+            }
+        }
+
+    }
 }
 
 @media screen and (min-width:834px) and (max-width:1250px) {
@@ -575,5 +878,46 @@
 
     .admin_barber_content_body_item>div>button {
         font-size: 1vw;
+    }
+
+    .modal_container {
+        width: 65vw;
+
+        &>div:nth-child(1) {
+
+            &>p {
+                font-size: 1.6vw;
+            }
+
+            &>button {
+                height: 4vw;
+                width: 4vw;
+                font-size: 2vw;
+            }
+        }
+
+
+        .modal_content_container {
+
+            &>div {
+
+                &>p {
+                    font-size: 1.6vw;
+                }
+
+                &>input {
+                    font-size: 1.6vw;
+                }
+
+                &>textarea {
+                    font-size: 1.6vw;
+                }
+            }
+
+            .barber_send_btn {
+                font-size: 1.6vw;
+            }
+        }
+
     }
 }

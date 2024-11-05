@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./BarberList.module.css"
 
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, EmailIcon, Notificationicon, MessageIcon } from '../../../icons'
+import { DeleteIcon, EditIcon, EmailIcon, Notificationicon, MessageIcon, CloseIcon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminApproveBarberAction, adminDeleteBarberAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
+import { adminApproveBarberAction, adminDeleteBarberAction, adminSendBarberEmailAction, adminSendBarberMessageAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import toast from 'react-hot-toast'
 
 import Modal from '@mui/material/Modal';
-import { Box, Button, Typography } from '@mui/material'
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const BarberList = () => {
 
@@ -235,9 +235,14 @@ const BarberList = () => {
   console.log(checkedEmails)
   console.log(checkMobileNumbers)
 
+
+  const [openBarberEmail, setOpenBarberEmail] = useState(false)
+
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
       // navigate("/admin-barber/send-email", { state: checkedEmails })
+
+      setOpenBarberEmail(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -251,15 +256,40 @@ const BarberList = () => {
     }
 
   }
+
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+
+  const sendMailHandler = () => {
+    const maildata = {
+      subject,
+      message,
+      role: "Barber",
+      recipientEmails: checkedEmails
+    }
+    // console.log(maildata)
+    dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+
+  }
+
+  const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+
+  const {
+    loading: adminSendBarberEmailLoading
+  } = adminSendBarberEmail
+
+  const [openBarberMessage, setOpenBarberMessage] = useState(false)
+  const [barberMessage, setBarberMessage] = useState("")
 
   const sendMessageNavigate = () => {
     if (checkMobileNumbers.length > 0) {
-      navigate("/admin-barber/send-message", {
-        state: {
-          checkMobileNumbers,
-          checkBarberNames
-        }
-      })
+      // navigate("/admin-barber/send-message", {
+      //   state: {
+      //     checkMobileNumbers,
+      //     checkBarberNames
+      //   }
+      // })
+      setOpenBarberMessage(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -274,22 +304,144 @@ const BarberList = () => {
 
   }
 
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+  const sendMessageHandler = () => {
+    const smsdata = {
+      smsBody: barberMessage,
+      numbers: checkMobileNumbers
+    }
+    // console.log("Send Barber Mobile Number ", smsdata)
+    dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-barber"))
+  }
+
+  const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+
+  const {
+    loading: adminSendBarberMessageLoading
+  } = adminSendBarberMessage
+
 
   return (
     <div className={`${style.admin_barber_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Barber List</p>
         <div>
-          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
+          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
+            onClick={sendEmailNavigate}
+          >
             <div><EmailIcon /></div>
           </button>
+
+          <Modal
+            open={openBarberEmail}
+            onClose={() => setOpenBarberEmail(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Email</p>
+                <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"support@iqueuebarbers.com"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text" value={
+                    checkedEmails?.map((e) => " " + e)
+                  } />
+                </div>
+
+                <div>
+                  <p>Subject</p>
+                  <input
+                    type="text"
+                    placeholder='Enter Subject'
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberEmailLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMailHandler} disabled={adminSendBarberEmailLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
 
           <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
           </button>
+
+
+          <Modal
+            open={openBarberMessage}
+            onClose={() => setOpenBarberMessage(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Message</p>
+                <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"iqueuebarbers"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text" value={
+                    checkBarberNames?.map((e) => " " + e)
+                  } />
+                </div>
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={barberMessage}
+                    onChange={(e) => setBarberMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberMessageLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMessageHandler} disabled={adminSendBarberMessageLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
 
           <button onClick={createbarberClicked} className={`${style.create_barber_btn}`}>
             <p>Create</p>
@@ -383,35 +535,6 @@ const BarberList = () => {
           )
         }
       </div>
-
-      {/* <div>
-        <Button onClick={handleOpen}>Open modal</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-          }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
-      </div> */}
 
     </div>
   )
