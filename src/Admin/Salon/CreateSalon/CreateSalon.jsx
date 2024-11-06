@@ -1935,7 +1935,6 @@ const CreateSalon = () => {
     }
   }
 
-  const [image, setImage] = useState("")
   const [salonEmail, setSalonEmail] = useState("")
   const [salonName, setSalonName] = useState("")
   const [address, setAddress] = useState("")
@@ -2034,28 +2033,6 @@ const CreateSalon = () => {
     debounceSearch(searchTerm);
   }
 
-  const countryinputRef = useRef()
-  const countryDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickCountryOutside = (event) => {
-      if (
-        countryinputRef.current &&
-        countryDropRef.current &&
-        !countryinputRef.current.contains(event.target) &&
-        !countryDropRef.current.contains(event.target)
-      ) {
-        setCountryDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickCountryOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickCountryOutside);
-    };
-  }, []);
-
-
   const getAdminAllCountries = useSelector(state => state.getAdminAllCountries)
 
   const {
@@ -2093,26 +2070,6 @@ const CreateSalon = () => {
     debounceCitySearch(searchTerm, countrycode);
   }
 
-  const cityinputRef = useRef()
-  const cityDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickCityOutside = (event) => {
-      if (
-        cityinputRef.current &&
-        cityDropRef.current &&
-        !cityinputRef.current.contains(event.target) &&
-        !cityDropRef.current.contains(event.target)
-      ) {
-        setCityDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickCityOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickCityOutside);
-    };
-  }, []);
 
   const getAdminAllCities = useSelector(state => state.getAdminAllCities)
 
@@ -2149,192 +2106,6 @@ const CreateSalon = () => {
     response: AllTimezones
   } = getAdminAllTimezone
 
-  const timezoneinputRef = useRef()
-  const timezoneDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickTimezoneOutside = (event) => {
-      if (
-        timezoneinputRef.current &&
-        timezoneDropRef.current &&
-        !timezoneinputRef.current.contains(event.target) &&
-        !timezoneDropRef.current.contains(event.target)
-      ) {
-        setTimezoneDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickTimezoneOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickTimezoneOutside);
-    };
-  }, []);
-
-
-  const [startTime, setStartTime] = useState("")
-  const [startTimeDrop, setStartTimeDrop] = useState(false)
-
-  const startTimeDropHandler = () => {
-    setStartTimeDrop((prev) => !prev)
-  }
-
-  const setStartTimeHandler = (value) => {
-    setStartTime(value)
-    setStartTimeDrop(false)
-  }
-
-  const startTimeinputRef = useRef()
-  const startTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickStartTimeOutside = (event) => {
-      if (
-        startTimeinputRef.current &&
-        startTimeDropRef.current &&
-        !startTimeinputRef.current.contains(event.target) &&
-        !startTimeDropRef.current.contains(event.target)
-      ) {
-        setStartTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickStartTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickStartTimeOutside);
-    };
-  }, []);
-
-
-  const [endTime, setEndTime] = useState("")
-  const [endTimeDrop, setEndTimeDrop] = useState(false)
-
-  const endTimeDropHandler = () => {
-    setEndTimeDrop((prev) => !prev)
-  }
-
-  const setEndTimeHandler = (value) => {
-    setEndTime(value)
-    setEndTimeDrop(false)
-  }
-
-  const endTimeinputRef = useRef()
-  const endTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickEndTimeOutside = (event) => {
-      if (
-        endTimeinputRef.current &&
-        endTimeDropRef.current &&
-        !endTimeinputRef.current.contains(event.target) &&
-        !endTimeDropRef.current.contains(event.target)
-      ) {
-        setEndTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickEndTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickEndTimeOutside);
-    };
-  }, []);
-
-  const [timeOptions, setTimeOptions] = useState([]);
-
-  // Function to add leading zero for single-digit hours and minutes
-  const addLeadingZero = (num) => (num < 10 ? '0' : '') + num;
-
-  // Function to generate time options
-  const generateTimeOptions = () => {
-    const options = [];
-
-    // Loop through hours (0 to 23)
-    for (let hour = 0; hour < 24; hour++) {
-      // Loop through minutes (0 and 30)
-      for (let minute = 0; minute < 60; minute += 30) {
-        // Format the time as HH:mm
-        const time = addLeadingZero(hour) + ':' + addLeadingZero(minute);
-        options.push({ value: time, label: time });
-      }
-    }
-
-    setTimeOptions(options);
-  };
-
-
-  useEffect(() => {
-    generateTimeOptions();
-  }, []);
-
-
-  const [intervalTime, setIntervalTime] = useState("")
-  const [intervalTimeDrop, setIntervalTimeDrop] = useState(false)
-
-  const intervalTimeDropHandler = () => {
-    setIntervalTimeDrop((prev) => !prev)
-  }
-
-  const setIntervalTimeHandler = (value) => {
-    setIntervalTime(value)
-    setIntervalTimeDrop(false)
-  }
-
-  const intervalTimeinputRef = useRef()
-  const intervalTimeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickIntervalTimeOutside = (event) => {
-      if (
-        intervalTimeinputRef.current &&
-        intervalTimeDropRef.current &&
-        !intervalTimeinputRef.current.contains(event.target) &&
-        !intervalTimeDropRef.current.contains(event.target)
-      ) {
-        setIntervalTimeDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickIntervalTimeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickIntervalTimeOutside);
-    };
-  }, []);
-
-  const [intervalTimemin, setIntervalTimemin] = useState([])
-
-  const generateTimeIntervalInMinutes = () => {
-    const options = []
-    for (let i = 1; i <= 60; i++) {
-      options.push(i);
-    }
-
-    setIntervalTimemin(options)
-  }
-
-  useEffect(() => {
-    generateTimeIntervalInMinutes()
-  }, [])
-
-  const salonTypeIconRef = useRef()
-  const salonTypeDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickSalonTypeOutside = (event) => {
-      if (
-        salonTypeIconRef.current &&
-        salonTypeDropRef.current &&
-        !salonTypeIconRef.current.contains(event.target) &&
-        !salonTypeDropRef.current.contains(event.target)
-      ) {
-        setSalonTypeDrop(false)
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickSalonTypeOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickSalonTypeOutside);
-    };
-  }, []);
-
 
   const [vipService, setVipService] = useState(false)
   const [vipServiceDrop, setVipServiceDrop] = useState(false)
@@ -2348,29 +2119,6 @@ const CreateSalon = () => {
     setVipServiceDrop(false)
   }
 
-  const vipServiceIconRef = useRef()
-  const vipServiceDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickVipServiceOutside = (event) => {
-      if (
-        vipServiceIconRef.current &&
-        vipServiceDropRef.current &&
-        !vipServiceIconRef.current.contains(event.target) &&
-        !vipServiceDropRef.current.contains(event.target)
-      ) {
-        setVipServiceDrop(false)
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickVipServiceOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickVipServiceOutside);
-    };
-  }, []);
-
-
-  const [loading, setLoading] = useState(false)
 
   const [salonLogo, setSalonLogo] = useState("")
 
@@ -2537,8 +2285,6 @@ const CreateSalon = () => {
       selectedServices: updatedServices
     }));
   };
-
-  const [image2, setImage2] = useState("https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg")
 
 
   const [openModal, setOpenModal] = useState(false)
@@ -2822,14 +2568,6 @@ const CreateSalon = () => {
 
   }
 
-  const [oldPassword, setOldPassword] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-
-  const [seeOldPassword, setSeeOldPassword] = useState(false)
-  const [seePassword, setSeePassword] = useState(false)
-  const [seeConfirmPassword, setSeeConfirmPassword] = useState(false)
-
 
   const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -2980,16 +2718,19 @@ const CreateSalon = () => {
               <rect x="0" y="0" fill="url(#a)" width="100%" height="100%"></rect>
               <rect x="0" y="0" fill="url(#b)" width="100%" height="100%"></rect>
             </svg></div>
-            <div>
-              <img src={`${salonLogo}`} alt="" />
+
+            <div className={style.create_salon_logo_container}>
               <div>
-                <button onClick={() => handleSalonLogoButtonClick()}><CameraIcon /></button>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleSalonFileInputChange}
-                />
+                <img src={`${salonLogo}`} alt="" />
+                <div>
+                  <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleSalonFileInputChange}
+                  />
+                </div>
               </div>
             </div>
 
@@ -3091,7 +2832,6 @@ const CreateSalon = () => {
                 type="text"
                 value={country}
                 onChange={(e) => searchCountryHandler(e)}
-                ref={countryinputRef}
               />
 
               {countryDrop &&
@@ -3123,7 +2863,6 @@ const CreateSalon = () => {
                 type="text"
                 value={city}
                 onChange={(e) => searchCityHandler(e)}
-                ref={cityinputRef}
               />
 
               {cityDrop &&
@@ -3156,7 +2895,6 @@ const CreateSalon = () => {
                 type="text"
                 value={timezone}
                 onClick={() => timezoneDropHandler()}
-                ref={timezoneinputRef}
               />
 
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
@@ -3195,15 +2933,13 @@ const CreateSalon = () => {
             <input
               type="text"
               value={`${salonType ? `${salonType}` : ''}`}
-              // value={localsalondata.salonType}
               onClick={() => salonTypeDropHandler()}
-              ref={salonTypeIconRef}
               className='salontype_input'
             />
 
             {salonTypeDrop &&
               <ClickAwayListener onClickAway={() => setSalonTypeDrop(false)}>
-                <div ref={salonTypeDropRef}>
+                <div>
                   <p onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</p>
                   <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
                 </div>
@@ -3227,7 +2963,10 @@ const CreateSalon = () => {
 
           <div className={style.add_services_drop}>
             <p>Add Your Services</p>
-            <button onClick={addservicedropHandler}>{openServices ? "-" : "+"}</button>
+            <button
+              onClick={addservicedropHandler}
+              className={openServices ? style.add_services_btn_inactive : style.add_services_btn_active}
+            >{openServices ? "-" : "+"}</button>
           </div>
 
           {
@@ -3313,7 +3052,7 @@ const CreateSalon = () => {
                             SalonIcons?.map((s) => (
                               <div key={s._id} className={style.slider_item} onClick={() => logoselectHandler(s)}
                                 style={{
-                                  border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                                  border: selectedLogo?.url === s.url ? "2px solid var(--primary-bg-color3)" : "1px solid rgba(0,0,0,0.4)"
                                 }}
                               >
                                 <img src={s.url} alt="" />
@@ -3354,13 +3093,15 @@ const CreateSalon = () => {
                   type="text"
                   value={`${vipService ? 'VIP' : 'Regular'}`}
                   onClick={() => vipServiceDropHandler()}
-                  ref={vipServiceIconRef}
                 />
 
-                {vipServiceDrop && <div ref={vipServiceDropRef}>
-                  <p onClick={() => vipServiceHandler(false)}>Regular</p>
-                  <p onClick={() => vipServiceHandler(true)}>VIP</p>
-                </div>}
+                {vipServiceDrop &&
+                  <ClickAwayListener onClickAway={() => setVipServiceDrop(false)}>
+                    <div className={style.service_type_dropdown_container}>
+                      <p onClick={() => vipServiceHandler(false)}>Regular</p>
+                      <p onClick={() => vipServiceHandler(true)}>VIP</p>
+                    </div>
+                  </ClickAwayListener>}
               </div>
 
               <div>
@@ -3369,7 +3110,12 @@ const CreateSalon = () => {
                   <input
                     type="text"
                     value={servicePrice}
-                    onChange={(e) => setServicePrice(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setServicePrice(value);
+                      }
+                    }}
                   />
                 </div>
 
@@ -3378,7 +3124,12 @@ const CreateSalon = () => {
                   <input
                     type="text"
                     value={serviceEWT}
-                    onChange={(e) => setServiceEWT(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setServiceEWT(value);
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -3388,28 +3139,15 @@ const CreateSalon = () => {
               </div>
 
               <div className={`${style.service_container} ${darkmodeOn && style.dark}`}>
-                {/* {
-                  localsalondata?.selectedServices?.map((ser, index) => (
-                    <div className={`${style.service_container_item} ${darkmodeOn && style.dark}`} key={index}>
-                      <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="" /></div>
-                      <p style={{ minWidth: "0.5fr", maxWidth: "10rem" }}>{ser.serviceName}</p>
-                      <p style={{ minWidth: "1fr", maxWidth: "27rem" }}>{ser.serviceDesc}</p>
-                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
-                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{countryCurrency}{" "}{ser.servicePrice}</p>
-                      <p style={{ minWidth: "0.3fr", maxWidth: "10rem" }}>{ser.serviceEWT}min</p>
-                      <div onClick={() => deleteServiceHandler(index)}><DeleteIcon /></div>
-                    </div>
-                  ))
-                } */}
-
                 {
                   localsalondata?.selectedServices?.map((ser, index) => {
                     return (
-                      <div className={`${style.service_item}`}>
+                      <div className={`${style.service_item}`} key={index}>
                         <div className={`${style.service_item_top}`}>
-                          <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""}  alt="service icon" /></div>
+                          <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="service icon" /></div>
                           <div>
                             <p>{ser.serviceName}</p>
+                            <p>{ser.vipService ? "VIP" : "Regular"}</p>
                             <p>{ser.serviceDesc}</p>
                           </div>
                         </div>
@@ -3418,7 +3156,7 @@ const CreateSalon = () => {
                           <div>
                             <div>
                               <p>Service Price</p>
-                              <p>$ {ser.servicePrice}</p>
+                              <p>{countryCurrency}{" "} {ser.servicePrice}</p>
                             </div>
                           </div>
 
@@ -3434,7 +3172,7 @@ const CreateSalon = () => {
 
                         </div>
 
-                        {/* <button className={`${style.service_add_icon}`}><AddIcon /></button> */}
+
                         <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
                       </div>
                     )
@@ -3535,7 +3273,7 @@ const CreateSalon = () => {
               createSalonLoading ? <button className={style.create_salon_btn} style={{
                 display: "grid",
                 placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={createSalonHandler} className={style.submit_btn}>Create</button>
+              }}><ButtonLoader /></button> : <button onClick={createSalonHandler} className={style.create_salon_btn}>Create</button>
             }
           </div>
 

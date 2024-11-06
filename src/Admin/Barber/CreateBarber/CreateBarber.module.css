@@ -403,8 +403,6 @@
     width: 100%;
     overflow: auto;
     height: calc(85vh - 5rem - 4rem);
-    /* height: 54rem; */
-    /* background-color: red; */
 }
 
 .admin_create_barber_content_wrapper_left {
