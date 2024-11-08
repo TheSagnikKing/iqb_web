@@ -20,15 +20,7 @@
 }
 
 .admin_barber_wrapper>div:nth-child(1)>p {
-    /* font-size: 1.2vw; */
-    /* font-size: min(1.2vw, 0.8vw); */
-    /* font-size: clamp(0.6vw, 1.2vw, 18px); */
-
-    /* font-size: calc(0.7vw + 1rem); */
-
-    font-size: clamp(1.8rem, 0.2vw + 1.6rem, 3.2rem);
-
-    /* font-size: calc(1vw + 1rem); */
+    font-size: 1.2vw;
     font-weight: 600;
 }
 
@@ -73,8 +65,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* font-size: 1vw; */
-    font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+    font-size: 1vw;
+    /* font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem); */
     color: #0866ff;
 }
 
@@ -82,8 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* width: 8rem; */
-    /* width: clamp(8rem, 8rem + 0.6vw, 20rem); */
+    width: 8rem;
     padding-inline: 1.2rem;
     height: 3.2rem;
     border: none;
@@ -103,14 +94,14 @@
 
     &>p {
         font-weight: 500;
-        /* font-size: 0.8vw; */
-        font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+        font-size: 0.8vw;
+        /* font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem); */
         color: #0866ff;
     }
 
     &>div {
-        /* font-size: 1vw; */
-        font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+        font-size: 1vw;
+        /* font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem); */
         font-weight: 500;
         color: #0866ff;
     }
@@ -178,8 +169,8 @@
     max-width: 100%;
     display: grid;
     grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr) 0.4fr;
-    /* font-size: 0.9vw; */
-    font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+    font-size: 0.9vw;
+    /* font-size: clamp(1.2rem, 0.2vw + 1rem, 2rem); */
     font-weight: 500;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -190,10 +181,10 @@
     align-items: center;
 
     &>input {
-        /* width: 1.1vw;
-        height: 1.1vw; */
-        width: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
-        height: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+        width: 1.1vw;
+        height: 1.1vw; 
+        /* width: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+        height: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem); */
         accent-color: #0866ff;
     }
 }
@@ -265,8 +256,8 @@
     -o-border-radius: 20px;
     border: none;
     cursor: pointer;
-    /* font-size: 0.9vw; */
-    font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem);
+    font-size: 0.9vw;
+    /* font-size: clamp(1.2rem, 0.2vw + 1.2rem, 2.4rem); */
 }
 
 
@@ -581,7 +572,7 @@
 
 }
 
-/* @media screen and (min-width:0px) and (max-width:430px) {
+@media screen and (min-width:0px) and (max-width:430px) {
     .admin_barber_content_body>div {
         grid-template-columns: 0.1fr 0.8fr 0.8fr 0.6fr 0.6fr 0.4fr 0.4fr 0.4fr;
     }
@@ -937,4 +928,4 @@
         }
 
     }
-} */
+}

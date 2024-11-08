@@ -19,6 +19,15 @@ body {
   /* overflow: hidden; */
 }
 
+/* General Recommendations for Maximums
+Body Text: For regular body text, try not to go beyond 2.4rem or 2.6rem. Anything larger might start to look oversized on very large screens.
+Headings: For headings, you can be more flexible and go up to 3rem or 4rem for an impactful look on larger screens. Just ensure this doesn’t dominate the layout. */
+
+
+/* Small text (captions, subtext): clamp(1rem, 0.8rem + 0.4vw, 1.4rem)
+Body text: clamp(1.6rem, 1.2rem + 0.4vw, 2.4rem)
+Headings: clamp(2rem, 1.6rem + 0.4vw, 3.2rem) */
+
 :root {
   font-size: 62.5%;
 
@@ -269,3 +278,5 @@ p {
     height: 90vh;
   }
 }
+
+

@@ -501,141 +501,6 @@ const CreateBarber = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    // <div className={`${style.admin_create_barber_wrapper} ${darkmodeOn && style.dark}`}>
-    //   <p>Create Barber</p>
-    //   <div className={`${style.admin_create_barber_wrapper_container} ${darkmodeOn && style.dark}`}>
-    //     <div>
-    //       <p>Barber Name</p>
-    //       <input
-    //         type='text'
-    //         value={name}
-    //         onChange={(e) => setHandler(setName, e.target.value, "name")}
-    //       />
-    //     </div>
-
-    //     <div>
-    //       <p>Barber Email</p>
-    //       <input
-    //         type='text'
-    //         value={email}
-    //         onChange={(e) => setHandler(setEmail, e.target.value, "email")}
-    //       />
-    //     </div>
-
-    //     <div>
-    //       <p>Barber Nick Name</p>
-    //       <input
-    //         type='text'
-    //         value={nickName}
-    //         onChange={(e) => setHandler(setNickName, e.target.value, "nickName")}
-    //       />
-    //     </div>
-
-    //     <div>
-    //       <div>
-    //         <p>Mobile Number</p>
-    //         <div>
-    //           <div>
-    //             <PhoneInput
-    //               forceDialCode={true}
-    //               defaultCountry="gb"
-    //               value={mobileNumber}
-    //               onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
-    //             />
-    //           </div>
-
-    //         </div>
-    //       </div>
-
-    //       <div>
-    //         <p>Date of Birth</p>
-    //         <input
-    //           type='date'
-    //           placeholder='dd/mm/yy'
-    //           value={dateOfBirth}
-    //           onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth")}
-    //           style={{
-    //             colorScheme: darkmodeOn ? "dark" : "light"
-    //           }}
-    //         />
-    //       </div>
-    //     </div>
-
-    //     <p>Add Services</p>
-
-    //     <div className={`${style.admin_barber_services_container} ${darkmodeOn && style.dark}`}
-    //       style={{
-    //         marginBottom: "3rem",
-    //         background: adminAllSalonServicesLoading ? "var(--primary-bg-light-color1)" : "var(--bg-color3)"
-    //       }}
-    //     >
-    //       {
-    //         adminAllSalonServicesLoading && !adminAllSalonServicesResolve ?
-    //           <Skeleton count={4} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color2)" : "var(--lightmode-loader-bg-color)"}
-    //             highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} /> :
-    //           !adminAllSalonServicesLoading && adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
-    //             allSalonServices.map((s) => (
-    //               <div className={`${style.admin_barber_services_container_item} ${darkmodeOn && style.dark}`} key={s._id}>
-    //                 <div>
-    //                   <p>Service ID</p>
-    //                   <p>{s.serviceId}</p>
-    //                 </div>
-
-    //                 <div>
-    //                   <p>Service Name</p>
-    //                   <p>{s.serviceName}</p>
-    //                 </div>
-
-    //                 <div>
-    //                   <p>Est Wait Tm(mins)</p>
-    //                   <input
-    //                     type="text"
-    //                     value={serviceEWTValues[s._id]}
-    //                     onChange={(e) => handleEWTChange(s._id, e.target.value)}
-    //                   />
-    //                 </div>
-    //                 {
-    //                   chooseServices.find((c) => c._id === s._id) ?
-    //                     <div
-    //                       style={{
-    //                         background: "red"
-    //                       }}
-    //                       onClick={() => deleteServiceHandler(s)}
-    //                     ><DeleteIcon /></div> :
-    //                     <div
-    //                       style={{
-    //                         background: "var(--primary-bg-color3)"
-    //                       }}
-    //                       onClick={() => chooseServiceHandler(s)}
-    //                     >+</div>
-    //                 }
-    //               </div>
-    //             )) :
-    //             adminAllSalonServicesLoading && adminAllSalonServicesResolve && allSalonServices?.length == 0 ?
-    //               <div className={`${style.admin_barber_services_container_item_error} ${darkmodeOn && style.dark}`}>
-    //                 <p>No Salon Services Available</p>
-    //               </div> :
-    //               !adminAllSalonServicesLoading && !adminAllSalonServicesResolve &&
-    //               <div className={`${style.admin_barber_services_container_item_error} ${darkmodeOn && style.dark}`}>
-    //                 <p>No Salon Services Available</p>
-    //               </div>
-    //       }
-    //     </div>
-
-    //     <div>
-    //       {
-    //         adminCreateBarberLoading ? <button style={{
-    //           display: "grid",
-    //           placeItems: "center"
-    //         }}><ButtonLoader /></button> : <button onClick={CreateBarberHandler}>Submit</button>
-    //       }
-    //     </div>
-    //   </div>
-
-
-
-    // </div>
-
     <>
       <div className={`${style.admin_create_barber_wrapper} ${darkmodeOn && style.dark}`}>
 
@@ -662,6 +527,7 @@ const CreateBarber = () => {
                               <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                               <div>
                                 <p>{s?.serviceName}</p>
+                                <p>{s?.vipService ? "VIP" : "Regular"}</p>
                                 <p>{s?.serviceDesc}</p>
                               </div>
                             </div>
@@ -823,7 +689,6 @@ const CreateBarber = () => {
                 type='text'
                 value={chooseServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
-                onChange={(e) => setHandler(setEmail, e.target.value, "email")}
               />
             </div>
 
@@ -858,6 +723,7 @@ const CreateBarber = () => {
                             <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                             <div>
                               <p>{s?.serviceName}</p>
+                              <p>{s?.vipService ? "VIP" : "Regular"}</p>
                               <p>{s?.serviceDesc}</p>
                             </div>
                           </div>
