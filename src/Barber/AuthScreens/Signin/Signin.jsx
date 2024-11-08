@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Signin.css'
+import style from './Signin.module.css'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
@@ -68,16 +68,14 @@ const Signin = () => {
   } = BarberSignin
 
   return (
-    <main className='barber_signin_container'>
-      <div>
-        <div>
-          <img src="./signin.png" alt="barber_signin" />
-        </div>
+    <main className={style.barber_signin_container}>
+      <div className={style.barber_signin_left}>
+          <img src="./signin_un.png" alt="barber_signin" />
       </div>
 
-      <div>
+      <div className={style.barber_signin_right}>
         <div>
-          <h1>Sign In to your Barber Account</h1>
+          <p>Sign In to your Barber Account</p>
           <p>Welcome back Barber! please enter your details</p>
 
           <input
@@ -87,7 +85,7 @@ const Signin = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div>
+          <div className={style.password_container}>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
@@ -105,7 +103,7 @@ const Signin = () => {
             BarberSigninLoading ? <button style={{
               display: "grid",
               placeItems: "center"
-            }}><ButtonLoader /></button> : <button onClick={signinClicked}>Signin</button>
+            }} className={style.signin_btn}><ButtonLoader /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
           }
 
           <div>
@@ -119,14 +117,14 @@ const Signin = () => {
             onError={errorMessage}
             size='large'
             shape='circle'
-            width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
+            // width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
             logo_alignment='left'
             text='continue_with'
           />
 
           <p>Don't you have an account ? <Link to="/barbersignup">Sign up</Link></p>
         </div>
-        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon /></div>
+        <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>
     </main>
   )

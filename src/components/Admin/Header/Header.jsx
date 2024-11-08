@@ -438,7 +438,7 @@ const DashboardHeader = () => {
           <p>Logout</p>
         </div>
 
-        <div className={style.dashboard_theme_container}>
+        {/* <div className={style.dashboard_theme_container}>
           <p>Theme</p>
           {
             darkmodeOn ?
@@ -450,7 +450,7 @@ const DashboardHeader = () => {
               </button>
           }
 
-        </div>
+        </div> */}
       </div>
 
     </div >

@@ -190,57 +190,6 @@ const Signin = () => {
       </div>
 
       <div className={style.admin_signin_right}>
-        {/* <div>
-          <p>Sign In to your Admin Account</p>
-          <p>Welcome back Admin! please enter your details</p>
-
-          <input
-            type="email"
-            placeholder='Enter Your Email ID'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <div>
-            <input
-              type={visibleeye ? "text" : "password"}
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
-          </div>
-
-          <div>
-            <p onClick={forgotClicked}>Forgot Password ?</p>
-          </div>
-
-          {
-            AdminSigninLoading ? <button style={{
-              display: "grid",
-              placeItems: "center"
-            }}><ButtonLoader /></button> : <button onClick={signinClicked}>Signin</button>
-          }
-
-          <div>
-            <div />
-            <p>or</p>
-            <div />
-          </div>
-
-          <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            size='large'
-            shape='circle'
-            width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
-            logo_alignment='left'
-            text='continue_with'
-          />
-
-          <p>Don't you have an account ? <Link to="/adminsignup">Sign up</Link></p>
-        </div>
-        <button className={style.homeicon} onClick={() => navigate("/")}><HomeIcon/></button> */}
         <div>
           <p>Sign In to your Admin Account</p>
           <p>Welcome back Admin! please enter your details</p>

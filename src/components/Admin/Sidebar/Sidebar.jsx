@@ -82,7 +82,7 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className={style.menu_theme_container}
+          {/* <div className={style.menu_theme_container}
             style={{
               justifyContent: showSidebar ? "space-between" : "center"
             }}
@@ -101,7 +101,7 @@ const Sidebar = () => {
                 </button>
             }
 
-          </div>
+          </div> */}
         </div>
 
         <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>

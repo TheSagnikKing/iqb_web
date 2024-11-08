@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Signup.css'
+import style from './Signup.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
 import { GoogleLogin } from '@react-oauth/google'
@@ -52,16 +52,14 @@ const Signup = () => {
   } = AdminSignup
 
   return (
-    <main className='admin_signup_container'>
-      <div>
-        <div>
-          <img src="./signup.png" alt="admin_signup" />
-        </div>
+    <main className={style.admin_signup_container}>
+      <div className={style.admin_signup_left}>
+          <img src="./signup_un.png" alt="admin_signup" />
       </div>
 
-      <div>
+      <div className={style.admin_signup_right}>
         <div>
-          <h1>Sign Up to your Admin Account</h1>
+          <p>Sign Up to your Admin Account</p>
           <p>Welcome back Admin! please enter your details</p>
 
           <input
@@ -71,7 +69,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div>
+          <div className={style.password_container}>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
@@ -81,12 +79,15 @@ const Signup = () => {
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>
 
+          <p></p>
+
           {
             AdminSignupLoading ? <button style={{
               display: "grid",
               placeItems: "center"
-            }}><ButtonLoader /></button> : <button onClick={signupClicked}>Signup</button>
+            }} className={style.signup_btn}><ButtonLoader /></button> : <button onClick={signupClicked} className={style.signup_btn}>Signup</button>
           }
+
           <div>
             <div />
             <p>or</p>
@@ -98,14 +99,14 @@ const Signup = () => {
             onError={errorMessage}
             size='large'
             shape='circle'
-            width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
+            // width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
             logo_alignment='left'
             text='continue_with'
           />
 
           <p>Already a member ? <Link to="/adminsignin">Log In</Link></p>
         </div>
-        <div className='homeicon' onClick={() => navigate("/")}><HomeIcon/></div>
+        <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon/></div>
       </div>
     </main>
   )

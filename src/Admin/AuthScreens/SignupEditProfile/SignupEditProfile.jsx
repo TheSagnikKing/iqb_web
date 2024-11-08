@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './SignupEditProfile.css'
+import style from './SignupEditProfile.module.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AdminSignupEditAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -122,17 +122,17 @@ const SignupEditProfile = () => {
 
 
   return (
-    <main className='admin_signup_edit_container'>
+    <main className={style.admin_signup_edit_container}>
       <div>
         <div>
-          <img src="./signup.png" alt="admin_signup" />
+          <img src="./signin_un.png" alt="admin_signup" />
         </div>
       </div>
 
       <div>
         <div>
           <div>
-            <h1>Add Your Account Details</h1>
+            <p className={style.signup_head}>Add Your Account Details</p>
             {
               adminSkipProfileLoading ?
                 <button style={{

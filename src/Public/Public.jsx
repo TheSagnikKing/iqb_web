@@ -1,19 +1,19 @@
 import React from 'react'
-import './Public.css'
+import style from './Public.module.css'
 import { Link } from 'react-router-dom'
 
 const Public = () => {
     return (
-        <main className='public_main_container'>
-            <div className='public_main_content'>
+        <main className={style.public_main_container}>
+            <div className={style.public_main_content}>
 
                 <div>
-                    <img src="./public_img.png" alt="public_image" />
+                    <img src="./barber_public.png" alt="public_image" />
                 </div>
 
                 <div>
                     <div>
-                        <h1>welcome to iQueueBarbers</h1>
+                        <p>welcome to iQueueBarbers</p>
 
                         <div>
                             <Link to="/adminsignin">Admin Signin</Link>
