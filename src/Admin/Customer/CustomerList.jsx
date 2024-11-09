@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import style from './CustomerList.module.css';
-import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons';
+import { CloseIcon, DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons';
 import Skeleton from 'react-loading-skeleton';
 import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,10 @@ import api from '../../Redux/api/Api';
 import { GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+
+import Modal from '@mui/material/Modal';
+import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../Redux/Admin/Actions/BarberAction';
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const CustomerList = () => {
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -154,11 +158,15 @@ const CustomerList = () => {
   };
 
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const [openBarberEmail, setOpenBarberEmail] = useState(false)
 
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
-      navigate('/admin-customer/send-email', { state: checkedEmails });
+      // navigate('/admin-customer/send-email', { state: checkedEmails });
+
+      setOpenBarberEmail(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -172,16 +180,42 @@ const CustomerList = () => {
     }
 
   };
+
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+
+  const sendMailHandler = () => {
+    const maildata = {
+      subject,
+      message,
+      role: "Barber",
+      recipientEmails: checkedEmails
+    }
+    console.log(maildata)
+    dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+  }
+
+  const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+
+  const {
+    loading: adminSendBarberEmailLoading
+  } = adminSendBarberEmail
+
+
+  const [openBarberMessage, setOpenBarberMessage] = useState(false)
+  const [barberMessage, setBarberMessage] = useState("")
 
   const sendMessageNavigate = () => {
     // console.table(checkMobileNumbers)
     if (checkMobileNumbers.length > 0) {
-      navigate('/admin-customer/send-message', {
-        state: {
-          checkMobileNumbers,
-          checkCustomerNames,
-        },
-      });
+      // navigate('/admin-customer/send-message', {
+      //   state: {
+      //     checkMobileNumbers,
+      //     checkCustomerNames,
+      //   },
+      // });
+
+      setOpenBarberMessage(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -195,6 +229,22 @@ const CustomerList = () => {
     }
 
   };
+
+  const sendMessageHandler = () => {
+    const smsdata = {
+      smsBody: barberMessage,
+      numbers: checkMobileNumbers
+    }
+    console.log(smsdata)
+    dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+
+  }
+
+  const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+
+  const {
+    loading: adminSendBarberMessageLoading
+  } = adminSendBarberMessage
 
   return (
     <div className={`${style.customer_wrapper} ${darkmodeOn && style.dark}`}>
@@ -217,9 +267,120 @@ const CustomerList = () => {
             <div><EmailIcon /></div>
           </button>
 
+          <Modal
+            open={openBarberEmail}
+            onClose={() => setOpenBarberEmail(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Email</p>
+                <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"support@iqueuebarbers.com"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text"
+                    value={
+                      checkedEmails?.map((e) => " " + e)
+                    }
+                  />
+                </div>
+
+                <div>
+                  <p>Subject</p>
+                  <input
+                    type="text"
+                    placeholder='Enter Subject'
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberEmailLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMailHandler} disabled={adminSendBarberEmailLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
           <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
           </button>
+
+
+          <Modal
+            open={openBarberMessage}
+            onClose={() => setOpenBarberMessage(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Message</p>
+                <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"iqueuebarbers"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text" value={
+                    checkCustomerNames?.map((e) => " " + e)
+                  } />
+                </div>
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={barberMessage}
+                    onChange={(e) => setBarberMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberMessageLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMessageHandler} disabled={adminSendBarberMessageLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
         </div>
 
       </div>

@@ -3,11 +3,11 @@ import api from "../../api/Api";
 import { BARBER_SEND_CUSTOMER_MAIL_FAIL, BARBER_SEND_CUSTOMER_MAIL_REQ, BARBER_SEND_CUSTOMER_MAIL_SUCCESS, BARBER_SEND_CUSTOMER_MESSAGE_FAIL, BARBER_SEND_CUSTOMER_MESSAGE_REQ, BARBER_SEND_CUSTOMER_MESSAGE_SUCCESS, GET_BARBER_ALL_CUSTOMERLIST_FAIL, GET_BARBER_ALL_CUSTOMERLIST_REQ, GET_BARBER_ALL_CUSTOMERLIST_SUCCESS } from "../Constants/constants";
 
 
-export const barberGetAllCustomerListAction = (salonId,isApproved,signal) => async (dispatch) => {
+export const barberGetAllCustomerListAction = (salonId, isApproved, signal) => async (dispatch) => {
     try {
         dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
 
-        const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${salonId}&isApproved=${isApproved}`,{ signal })
+        const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${salonId}&isApproved=${isApproved}`, { signal })
 
         dispatch({
             type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
@@ -36,7 +36,7 @@ export const barberGetAllCustomerListAction = (salonId,isApproved,signal) => asy
 }
 
 
-export const barberSendCustomerEmailAction = (maildata,setSubject,setMessage,navigate) => async (dispatch) => {
+export const barberSendCustomerEmailAction = (maildata, setSubject, setMessage, setOpenBarberEmail) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_SEND_CUSTOMER_MAIL_REQ })
 
@@ -59,7 +59,7 @@ export const barberSendCustomerEmailAction = (maildata,setSubject,setMessage,nav
             },
         });
 
-        navigate("/barber-customer")
+        setOpenBarberEmail(false)
     } catch (error) {
 
         dispatch({
@@ -81,7 +81,7 @@ export const barberSendCustomerEmailAction = (maildata,setSubject,setMessage,nav
 }
 
 
-export const barberSendCustomerMessageAction = (smsdata,setMessage,navigate) => async (dispatch) => {
+export const barberSendCustomerMessageAction = (smsdata, setMessage, setOpenBarberMessage) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_SEND_CUSTOMER_MESSAGE_REQ })
 
@@ -103,7 +103,7 @@ export const barberSendCustomerMessageAction = (smsdata,setMessage,navigate) => 
             },
         });
 
-        navigate("/barber-customer")
+        setOpenBarberMessage(false)
     } catch (error) {
 
         dispatch({

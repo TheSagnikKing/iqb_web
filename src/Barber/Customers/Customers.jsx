@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./Customers.module.css"
-import { DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons'
+import { CloseIcon, DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
-import { barberGetAllCustomerListAction } from "../../Redux/Barber/Actions/BarberCustomersAction"
+import { barberGetAllCustomerListAction, barberSendCustomerEmailAction, barberSendCustomerMessageAction } from "../../Redux/Barber/Actions/BarberCustomersAction"
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useNavigate } from 'react-router-dom'
 import api from '../../Redux/api/Api'
 import { GET_BARBER_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Barber/Constants/constants'
 import toast from 'react-hot-toast'
+import Modal from '@mui/material/Modal';
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const CustomerList = () => {
 
@@ -161,9 +163,13 @@ const CustomerList = () => {
 
   const navigate = useNavigate();
 
+  const [openBarberEmail, setOpenBarberEmail] = useState(false)
+
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
-      navigate('/barber-customer/send-email', { state: checkedEmails });
+      // navigate('/barber-customer/send-email', { state: checkedEmails });
+
+      setOpenBarberEmail(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -177,15 +183,40 @@ const CustomerList = () => {
     }
 
   };
+
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+
+  const sendMailHandler = () => {
+    const maildata = {
+      subject,
+      message,
+      role: "Barber",
+      recipientEmails: checkedEmails
+    }
+    // console.log(maildata)
+    dispatch(barberSendCustomerEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+  }
+
+  const barberSendCustomerEmail = useSelector(state => state.barberSendCustomerEmail)
+
+  const {
+    loading: barberSendCustomerEmailLoading
+  } = barberSendCustomerEmail
+
+  const [openBarberMessage, setOpenBarberMessage] = useState(false)
+  const [barberMessage, setBarberMessage] = useState("")
 
   const sendMessageNavigate = () => {
     if (checkMobileNumbers.length > 0) {
-      navigate('/barber-customer/send-message', {
-        state: {
-          checkMobileNumbers,
-          checkCustomerNames,
-        },
-      });
+      // navigate('/barber-customer/send-message', {
+      //   state: {
+      //     checkMobileNumbers,
+      //     checkCustomerNames,
+      //   },
+      // });
+
+      setOpenBarberMessage(true)
     } else {
       toast.error("Atleast one customer needed", {
         duration: 3000,
@@ -200,106 +231,24 @@ const CustomerList = () => {
 
   };
 
+
+  const sendMessageHandler = () => {
+    const smsdata = {
+      smsBody: barberMessage,
+      numbers: checkMobileNumbers
+    }
+    console.log(smsdata)
+    dispatch(barberSendCustomerMessageAction(smsdata, setMessage, setOpenBarberMessage))
+
+  }
+
+  const barberSendCustomerMessage = useSelector(state => state.barberSendCustomerMessage)
+
+  const {
+    loading: barberSendCustomerMessageLoading
+  } = barberSendCustomerMessage
+
   return (
-    // <div className={`customer_wrapper ${darkmodeOn && "dark"}`}>
-    //   <div>
-    //     <p>Customer List</p>
-
-    //     <div>
-    //       <div className={`customer_search ${darkmodeOn && 'dark'}`}>
-    //         <input
-    //           type="text"
-    //           placeholder='Search'
-    //           value={search}
-    //           onChange={(e) => setSearch(e.target.value)}
-    //         />
-    //       </div>
-    //       <div
-    //         className={`customer_send_btn ${darkmodeOn && 'dark'}`}
-    //         style={{ background: 'var(--primary-bg-color3)', color: '#fff' }}
-    //         onClick={searchCustomerhandler}
-    //       >
-    //         <div><SearchIcon /></div>
-    //       </div>
-
-    //       <div className={`customer_send_btn ${darkmodeOn && 'dark'}`}
-    //         onClick={sendEmailNavigate}
-    //       >
-    //         <div><EmailIcon /></div>
-    //       </div>
-
-    //       <div className={`customer_send_btn ${darkmodeOn && 'dark'}`}
-    //         onClick={sendMessageNavigate}
-    //       >
-    //         <div><MessageIcon /></div>
-    //       </div>
-    //     </div>
-
-    //     {/* <div className='mobile_customer_search'><SearchIcon /></div> */}
-    //   </div>
-
-    //   <div className={`customer_content_wrapper ${darkmodeOn && 'dark'}`}>
-    //     {barberGetAllCustomerListLoading || searchLoading ? (
-    //       <div className='customer_content_body'>
-    //         <Skeleton
-    //           count={9}
-    //           height={'6rem'}
-    //           style={{ marginBottom: '1rem' }}
-    //           baseColor={darkmodeOn ? 'var(--darkmode-loader-bg-color)' : 'var(--lightmode-loader-bg-color)'}
-    //           highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--lightmode-loader-highlight-color)'}
-    //         />
-    //       </div>
-    //     ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
-    //       <div className={`customer_content_body ${darkmodeOn && 'dark'}`}>
-    //         <div>
-    //           <input
-    //             type="checkbox"
-    //             style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
-    //             onChange={checkAllCustomersHandler}
-    //             checked={checkAllCustomers}
-    //           />
-    //           <p>Name</p>
-    //           <p>Email</p>
-    //           <p>Gender</p>
-    //           <p>Mobile Number</p>
-    //         </div>
-
-    //         {AllCustomerList.map((s) => (
-    //           <div key={s._id}>
-    //             <input
-    //               type="checkbox"
-    //               style={{ accentColor: 'red', height: '1.8rem', width: '1.8rem' }}
-    //               checked={checkedCustomers[s._id] || false}
-    //               onChange={() => customerEmailCheckedHandler(s)}
-    //             />
-    //             <p>{s.name}</p>
-    //             <p>{s.email}</p>
-    //             <p>{s.gender}</p>
-    //             <p>{s.mobileNumber}</p>
-    //           </div>
-    //         ))}
-    //       </div>
-    //     ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
-    //       <div className={`customer_content_body_error ${darkmodeOn && 'dark'}`}>
-    //         <p style={{ margin: '2rem' }}>Customers not available</p>
-    //       </div>
-    //     ) : (
-    //       !barberGetAllCustomerListLoading && !barberGetAllCustomerListResolve && (
-    //         <div className={`customer_content_body_error ${darkmodeOn && 'dark'}`}>
-    //           <p style={{ margin: '2rem' }}>Customers not available</p>
-    //         </div>
-    //       )
-    //     )}
-    //   </div>
-
-    //   <div className='customer_pagination_wrapper'>
-    //     <div>
-    //       <div onClick={paginationLeftHandler}><LeftArrow /></div>
-    //       <div onClick={paginationRightHandler} disabled={page === totalPages}><RightArrow /></div>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className={`${style.customer_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Customer List</p>
@@ -320,9 +269,121 @@ const CustomerList = () => {
             <div><EmailIcon /></div>
           </button>
 
+
+          <Modal
+            open={openBarberEmail}
+            onClose={() => setOpenBarberEmail(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Email</p>
+                <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"support@iqueuebarbers.com"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text"
+                    value={
+                      checkedEmails?.map((e) => " " + e)
+                    }
+                  />
+                </div>
+
+                <div>
+                  <p>Subject</p>
+                  <input
+                    type="text"
+                    placeholder='Enter Subject'
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  barberSendCustomerEmailLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMailHandler} disabled={barberSendCustomerEmailLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
           <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
             <div><MessageIcon /></div>
           </button>
+
+
+          <Modal
+            open={openBarberMessage}
+            onClose={() => setOpenBarberMessage(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={style.modal_container}>
+              <div>
+                <p>Send Message</p>
+                <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"iqueuebarbers"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text" value={
+                    checkCustomerNames?.map((e) => " " + e)
+                  } />
+                </div>
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={barberMessage}
+                    onChange={(e) => setBarberMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  barberSendCustomerMessageLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMessageHandler} disabled={barberSendCustomerMessageLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
         </div>
 
       </div>

@@ -309,8 +309,7 @@ const BarberList = () => {
       smsBody: barberMessage,
       numbers: checkMobileNumbers
     }
-    // console.log("Send Barber Mobile Number ", smsdata)
-    dispatch(adminSendBarberMessageAction(smsdata, setMessage, navigate, "/admin-barber"))
+    dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
   }
 
   const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)

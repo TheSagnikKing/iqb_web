@@ -238,7 +238,7 @@ const DashboardHeader = () => {
 
       {
         location?.pathname === "/admin-dashboard" ? (<div className={`${style.choose_salon_div} ${darkmodeOn && style.dark}`}>
-        
+
           <p></p>
 
           {
@@ -429,7 +429,10 @@ const DashboardHeader = () => {
           ))
         }
 
-        <div onClick={() => navigate("/admin-dashboard/editprofile")} className={style.dashboard_mobile_item}>
+        <div onClick={() => {
+          setSidebarToggle(false)
+          navigate("/admin-dashboard/editprofile")
+        }} className={style.dashboard_mobile_item}>
           <div><ProfileIcon /></div>
           <p>Profile</p>
         </div>

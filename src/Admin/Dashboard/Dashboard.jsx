@@ -1190,8 +1190,8 @@ const Dashboard = () => {
                       <Carousel
                         showThumbs={false}
                         infiniteLoop={true}
-                        // autoPlay={true}
-                        interval={2000}
+                        autoPlay={true}
+                        interval={5000}
                         showStatus={false}
                         showArrows={false}
                         stopOnHover={false}
@@ -1277,7 +1277,7 @@ const Dashboard = () => {
                     showThumbs={false}
                     infiniteLoop={true}
                     autoPlay={true}
-                    interval={2000}
+                    interval={5000}
                     showStatus={false}
                     showArrows={false}
                     stopOnHover={true}

@@ -1029,7 +1029,6 @@
     height: calc(100vh - 6rem);
     padding-inline: 0.3rem;
     overflow: auto;
-    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;

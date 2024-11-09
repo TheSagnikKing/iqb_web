@@ -1,4 +1,4 @@
-.barber_dashboard_page_container {
+/* .barber_dashboard_page_container {
     display: grid;
     height: 98%;
     grid-template-columns: 1fr minmax(35vw, 1fr);
@@ -1504,5 +1504,1775 @@
 
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
+    }
+} */
+
+
+.barber_connect_salon_container {
+    height: 90vh;
+    width: 100%;
+    padding: 3rem;
+    background-color: #fff;
+
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+
+    &>p:nth-child(1) {
+        font-size: 1.2vw;
+        font-weight: 600;
+        height: 1rem;
+        /* background-color: red; */
+        margin-bottom: 2rem;
+    }
+}
+
+.barber_approve_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 3rem);
+
+    &>div {
+        &>p {
+            font-size: 1.2vw;
+            margin-bottom: 2rem;
+        }
+
+        &>button {
+            display: block;
+            margin-inline: auto;
+            padding: 0.8rem 3rem;
+            font-size: 1.2vw;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            border: 1px solid #0866ff;
+            color: #0866ff;
+            background-color: #0867ff25;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+
+            &:hover {
+                background-color: #0866ff;
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+
+
+
+.barber_connect_salon_list_container {
+    height: calc(100% - 3rem);
+}
+
+
+.barber_connect_salon_list {
+    height: 44%;
+    /* border: 1px solid red; */
+    margin-bottom: 2rem;
+    background-color: #eeeded;
+    padding: 1rem;
+
+    &>p {
+        font-size: 1vw;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        height: 2rem;
+    }
+
+    &>div:nth-child(2) {
+        height: calc(100% - 3rem);
+        overflow: auto;
+    }
+}
+
+.barber_connect_salon_list_header {
+    height: 5rem;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding-inline: 2rem;
+
+    &>p:nth-child(1) {
+        min-width: 4rem;
+        display: flex;
+        align-items: center;
+        font-size: 1vw;
+    }
+
+    &>p:nth-child(2) {
+        font-size: 1vw;
+        display: flex;
+        align-items: center;
+        min-width: 40%;
+    }
+
+    &>p:nth-child(3) {
+        min-width: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1vw;
+    }
+}
+
+.barber_connect_salon_list_body {
+    height: 5rem;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding-inline: 2rem;
+
+    &>div:nth-child(1) {
+        height: 4rem;
+        width: 4rem;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        display: flex;
+        align-items: center;
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+    }
+
+    &>p {
+        font-size: 1vw;
+        overflow: auto;
+        /* border: 1px solid black; */
+    }
+
+    &>div:nth-child(3) {
+        min-width: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.barber_connect_salon_list_error {
+    font-size: 1vw;
+    margin-top: 1rem;
+    background-color: #fff;
+    height: calc(100% - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_connect_btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: none;
+    background-color: #0867ff25;
+    color: #0866ff;
+    border: 1px solid #0866ff;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2vw;
+
+
+    &:hover {
+        background-color: #0866ff;
+        color: #fff;
+    }
+}
+
+.check_connect_btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: none;
+    background-color: rgba(50, 205, 50, 0.177);
+    color: limegreen;
+    border: 1px solid limegreen;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    &:hover {
+        background-color: limegreen;
+        color: #fff;
+    }
+}
+
+.barber_list_services_list {
+    height: 43%;
+    background-color: #eeeded;
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    &>p {
+        font-size: 1vw;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        height: 2rem;
+    }
+
+    &>div:nth-child(2) {
+        height: calc(100% - 3rem);
+        overflow: auto;
+        /* background-color: red; */
+    }
+}
+
+
+.service_item {
+    height: 16rem;
+    width: 100%;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    padding: 1rem;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.service_add_icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    background-color: #0867ff25;
+    border: 1px solid #0866ff;
+    cursor: pointer;
+    color: #0866ff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    font-size: 1.6rem;
+
+    &:hover {
+        background-color: #0866ff;
+        color: var(--primary-text-light-color1);
+    }
+}
+
+.service_delete_icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    background-color: #ff000025;
+    border: 1px solid red;
+    cursor: pointer;
+    color: red;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    font-size: 1.6rem;
+
+    &:hover {
+        background-color: red;
+        color: var(--primary-text-light-color1);
+    }
+}
+
+.service_item_top {
+    height: 60%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+
+    &>div:nth-child(1) {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+    }
+
+
+    &>div:nth-child(2) {
+        width: calc(100% - 7rem - 1rem);
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &>p:nth-child(1) {
+            font-size: 0.9vw;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        &>p:nth-child(2) {
+            font-size: 0.8vw;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        &>p:nth-child(3) {
+            font-size: 0.8vw;
+            font-weight: 500;
+            color: gray;
+        }
+    }
+}
+
+.service_item_bottom {
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &>div:nth-child(1) {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &>div {
+            &>p:nth-child(1) {
+                font-size: 0.8vw;
+                font-weight: 500;
+                color: gray;
+                margin-bottom: 0.9rem;
+                text-align: center;
+            }
+
+            &>p:nth-child(2) {
+                font-size: 1vw;
+                font-weight: 600;
+                text-align: center;
+            }
+        }
+    }
+
+    &>div:nth-child(2) {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &>div {
+            &>p:nth-child(1) {
+                font-size: 0.8vw;
+                font-weight: 500;
+                color: gray;
+                margin-bottom: 0.9rem;
+                text-align: center;
+            }
+
+            &>div:nth-child(2) {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+
+                &>div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1vw;
+                }
+
+                &>input {
+                    width: 6rem;
+                    border: none;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                    outline: none;
+                    font-size: 1vw;
+                    font-weight: 600;
+                    text-align: center;
+
+                    &:focus {
+                        border-bottom: 1px solid #0866ff;
+                    }
+                }
+
+                &>p {
+                    font-size: 1vw;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+.connect_btn {
+    width: 14rem;
+    height: 4rem;
+    display: block;
+    margin-inline: auto;
+    background-color: #0867ff25;
+    color: #0866ff;
+    border: 1px solid #0866ff;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    font-size: 1vw;
+    cursor: pointer;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    &:hover {
+        background-color: #0866ff;
+        color: #fff;
+    }
+}
+
+
+
+.dashboard {
+    background-color: #ebf5ff;
+}
+
+.dashboard_body {
+    width: 100%;
+    height: calc(100vh - 6rem);
+    padding-inline: 0.3rem;
+    overflow: auto;
+}
+
+.inner_container {
+    height: calc(100vh - 6rem);
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    gap: 2rem;
+}
+
+.dashboard_container_one {
+    height: 100%;
+}
+
+.saloninfo_container {
+    height: 15vh;
+    width: 100%;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    padding-block: 1.5rem;
+    background-color: #fff;
+
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+
+    margin-bottom: 2rem;
+
+    &>div:nth-child(1) {
+        height: 30%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>h2 {
+            margin-bottom: 1rem;
+            font-size: 1.3vw;
+        }
+    }
+
+    &>div:nth-child(2) {
+        height: 70%;
+        display: flex;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>i {
+            font-size: 0.9vw;
+            font-weight: 500;
+        }
+    }
+}
+
+.salonadv_container_loader {
+    height: 35vh;
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+}
+
+.salonadv_container_error {
+    height: 35vh;
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+
+    &>img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.6vw;
+        -webkit-border-radius: 0.6vw;
+        -moz-border-radius: 0.6vw;
+        -ms-border-radius: 0.6vw;
+        -o-border-radius: 0.6vw;
+        object-fit: contain;
+    }
+}
+
+.salonadv_container {
+    height: 35vh;
+    width: 100%;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    background-color: #fff;
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+}
+
+
+.barber_report_container {
+    height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem);
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: minmax(50rem, 1fr);
+    /* display: grid; */
+    /* grid-template-columns: minmax(20rem, 1.5fr) minmax(30rem, 2fr); */
+    /* gap: 2rem; */
+
+}
+
+.barberlist_container {
+    background-color: #fff;
+    height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem);
+    margin-bottom: 2rem;
+    width: 100%;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+}
+
+.barberlist_container_body_loading {
+    height: calc(100% - 8vh);
+}
+
+.barberlist_container_body_error {
+    height: calc(100% - 8vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>p {
+        font-size: 0.9vw;
+    }
+}
+
+.barberlist_container_body {
+    height: calc(100% - 8vh);
+    overflow: auto;
+    border-bottom-left-radius: 0.6vw;
+    border-bottom-right-radius: 0.6vw;
+}
+
+.barberitem_header {
+    height: 8vh;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    padding-inline: 1rem;
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 40%;
+
+        &>div {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            position: relative;
+        }
+    }
+
+    & div {
+        display: grid;
+        place-items: center;
+        width: 30%;
+
+        & p {
+            font-size: 0.8vw;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+}
+
+
+.barberitem {
+    height: 8vh;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    padding-inline: 1rem;
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 40%;
+
+        &>div {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            position: relative;
+
+            &>img {
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -o-border-radius: 50%;
+                object-fit: cover;
+                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+            }
+
+            &>div {
+                position: absolute;
+                width: 1rem;
+                height: 1rem;
+                border-radius: 50%;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -o-border-radius: 50%;
+                background-color: limegreen;
+                top: -2px;
+                right: 1px;
+                border: 1px solid #fff;
+            }
+        }
+    }
+
+    & div {
+        display: grid;
+        place-items: center;
+        width: 30%;
+
+        & p {
+            font-size: 0.8vw;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+
+.report_container {
+    height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem);
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 0.6vw;
+    background-color: #fff;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+
+    .r_chart {
+        height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem - 1.6vw);
+        width: 100%;
+
+        &>p:nth-child(1) {
+            height: 10%;
+            align-content: center;
+            font-size: 0.8vw;
+            font-weight: 500;
+        }
+
+        &>div:nth-child(2) {
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &>div:nth-child(3) {
+            padding-inline: 0.8vw;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+
+            &>div {
+                display: flex;
+                align-items: center;
+                gap: 0.6vw;
+
+
+                &>div {
+                    width: 0.8vw;
+                    height: 0.8vw;
+                    border-radius: 0.2vw;
+                    -webkit-border-radius: 0.2vw;
+                    -moz-border-radius: 0.2vw;
+                    -ms-border-radius: 0.2vw;
+                    -o-border-radius: 0.2vw;
+                    background-color: brown;
+                    cursor: pointer;
+                }
+
+                &>p {
+                    font-size: 0.7vw;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+.dashboard_container_two {
+    height: 100%;
+}
+
+.queuelists_container {
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6vw;
+    -webkit-border-radius: 0.6vw;
+    -moz-border-radius: 0.6vw;
+    -ms-border-radius: 0.6vw;
+    -o-border-radius: 0.6vw;
+    background-color: #fff;
+    height: calc(100vh - 6rem - 2rem);
+}
+
+.queue_header {
+    height: 8vh;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+
+    &>div:nth-child(1) {
+        flex: 0.7;
+    }
+
+    &>div:nth-child(4) {
+        flex: 0.7;
+    }
+
+    & div {
+        flex: 1;
+        display: grid;
+        place-items: center;
+
+        & p {
+            font-size: 0.9vw;
+            font-weight: 700;
+        }
+    }
+}
+
+.queue_body_loading {
+    height: calc(100% - 8vh);
+}
+
+.queue_body_error {
+    height: calc(100% - 8vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>p {
+        font-size: 0.9vw;
+    }
+}
+
+.queue_body {
+    height: calc(100% - 8vh);
+    overflow: auto;
+}
+
+
+.queue_item {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+
+    &>div:nth-child(1) {
+        flex: 0.7;
+    }
+
+    &>div:nth-child(4) {
+        flex: 0.7;
+    }
+
+    & div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &>p {
+            font-size: 0.8vw;
+            font-weight: 500;
+        }
+
+    }
+
+    & div:nth-child(2) {
+        flex: 1;
+    }
+}
+
+
+
+.carousel_item_container {
+    width: 100%;
+    height: 35vh;
+
+    &>img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.6vw;
+        -webkit-border-radius: 0.6vw;
+        -moz-border-radius: 0.6vw;
+        -ms-border-radius: 0.6vw;
+        -o-border-radius: 0.6vw;
+    }
+}
+
+
+@media screen and (min-width:0px) and (max-width:430px) {
+
+    .barber_connect_salon_list_header,
+    .barber_connect_salon_list_body {
+        &>p {
+            font-size: 2.8vw !important;
+        }
+    }
+
+    .barber_connect_salon_container {
+        padding: 2rem;
+
+        &>p:nth-child(1) {
+            font-size: 3.5vw;
+        }
+    }
+
+    .barber_list_services_list,
+    .barber_connect_salon_list {
+        &>p {
+            font-size: 3vw;
+        }
+    }
+
+    .service_item_top {
+        &>div:nth-child(2) {
+            &>p:nth-child(1) {
+                font-size: 3vw;
+            }
+
+            &>p:nth-child(2) {
+                font-size: 2.4vw;
+            }
+
+            &>p:nth-child(3) {
+                font-size: 2.4vw;
+            }
+        }
+    }
+
+    .service_item_bottom {
+        &>div:nth-child(1) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 2.8vw;
+                }
+
+                &>p:nth-child(2) {
+                    font-size: 3vw;
+                }
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 2.8vw;
+                }
+
+                &>div:nth-child(2) {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+
+                    &>div {
+                        font-size: 3vw;
+                    }
+
+                    &>input {
+                        font-size: 3vw;
+                    }
+
+                    &>p {
+                        font-size: 3vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .barber_connect_salon_list_body {
+        &>div:nth-child(3) {
+            &>button {
+                font-size: 3vw;
+            }
+        }
+    }
+
+    .barber_connect_salon_list_error {
+        font-size: 3vw;
+    }
+
+    .connect_btn {
+        font-size: 3vw;
+    }
+
+    .barber_approve_container {
+
+        &>div {
+            &>p {
+                font-size: 3vw;
+            }
+
+            &>button {
+                font-size: 3vw;
+            }
+        }
+    }
+
+
+    .inner_container {
+        grid-template-columns: 1fr;
+    }
+
+    .barber_report_container {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .queuelists_container {
+        height: 40rem;
+        margin-bottom: 2rem;
+    }
+
+    .saloninfo_container {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+        height: 20vh;
+
+        &>div:nth-child(1) {
+            &>h2 {
+                font-size: 3.8vw;
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>i {
+                font-size: 2.6vw;
+            }
+        }
+    }
+
+    .barberlist_container {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+    }
+
+    .report_container {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+
+        height: 40vh;
+
+        width: calc(100vw - 2.6rem);
+
+        .r_chart {
+            height: calc(40vh - 2rem);
+
+            &>p:nth-child(1) {
+                font-size: 2.6vw;
+            }
+
+            &>div:nth-child(3) {
+
+                &>div {
+                    gap: 0.5rem;
+
+                    &>div {
+                        width: 1rem;
+                        height: 1rem;
+                        border-radius: 2px;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        -ms-border-radius: 2px;
+                        -o-border-radius: 2px;
+                    }
+
+                    &>p {
+                        font-size: 2.6vw;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .queuelists_container {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+    }
+
+    .salonadv_container {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+    }
+
+    .salonadv_container_loader {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+    }
+
+    .salonadv_container_error {
+        border-radius: 2vw;
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        -ms-border-radius: 2vw;
+        -o-border-radius: 2vw;
+    }
+
+    .barberitem_header {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        &>div {
+            &>p {
+                font-size: 2.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .barberitem {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        & div {
+            &>p {
+                font-size: 2.6vw;
+            }
+        }
+    }
+
+    .queue_header {
+        & div {
+            & p {
+                font-size: 2.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .queue_item {
+        & div {
+            &>p {
+                font-size: 2.6vw;
+                font-weight: 500;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width:430px) and (max-width:576px) {
+
+    .barber_connect_salon_list_header,
+    .barber_connect_salon_list_body {
+        &>p {
+            font-size: 1.8vw !important;
+        }
+    }
+
+    .barber_connect_salon_container {
+        padding: 2rem;
+
+        &>p:nth-child(1) {
+            font-size: 2.5vw;
+        }
+    }
+
+    .barber_list_services_list,
+    .barber_connect_salon_list {
+        &>p {
+            font-size: 2vw;
+        }
+    }
+
+    .service_item_top {
+        &>div:nth-child(2) {
+            &>p:nth-child(1) {
+                font-size: 2vw;
+            }
+
+            &>p:nth-child(2) {
+                font-size: 1.4vw;
+            }
+
+            &>p:nth-child(3) {
+                font-size: 1.4vw;
+            }
+        }
+    }
+
+    .service_item_bottom {
+        &>div:nth-child(1) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 1.8vw;
+                }
+
+                &>p:nth-child(2) {
+                    font-size: 2vw;
+                }
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 1.8vw;
+                }
+
+                &>div:nth-child(2) {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+
+                    &>div {
+                        font-size: 2vw;
+                    }
+
+                    &>input {
+                        font-size: 2vw;
+                    }
+
+                    &>p {
+                        font-size: 2vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .barber_connect_salon_list_body {
+        &>div:nth-child(3) {
+            &>button {
+                font-size: 2vw;
+            }
+        }
+    }
+
+    .barber_connect_salon_list_error {
+        font-size: 2vw;
+    }
+
+    .connect_btn {
+        font-size: 2vw;
+    }
+
+    .barber_approve_container {
+
+        &>div {
+            &>p {
+                font-size: 2vw;
+            }
+
+            &>button {
+                font-size: 2vw;
+            }
+        }
+    }
+
+
+    .inner_container {
+        grid-template-columns: 1fr;
+    }
+
+    .barber_report_container {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .queuelists_container {
+        height: 40rem;
+        margin-bottom: 2rem;
+    }
+
+    .saloninfo_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 20vh;
+
+        &>div:nth-child(1) {
+            &>h2 {
+                font-size: 2.8vw;
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>i {
+                font-size: 1.8vw;
+            }
+        }
+    }
+
+    .barberlist_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .report_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 40vh;
+        width: calc(100vw - 2.6rem);
+
+        .r_chart {
+            height: calc(40vh - 2rem);
+
+            &>p:nth-child(1) {
+                font-size: 1.6vw;
+            }
+
+            &>div:nth-child(3) {
+
+                &>div {
+                    gap: 0.5rem;
+
+                    &>div {
+                        width: 1rem;
+                        height: 1rem;
+                        border-radius: 2px;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        -ms-border-radius: 2px;
+                        -o-border-radius: 2px;
+                    }
+
+                    &>p {
+                        font-size: 1.6vw;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .queuelists_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_loader {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_error {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .barberitem_header {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        &>div {
+            &>p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .barberitem {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        & div {
+            &>p {
+                font-size: 1.6vw;
+            }
+        }
+    }
+
+    .queue_header {
+        & div {
+            & p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .queue_item {
+        & div {
+            &>p {
+                /* font-size: clamp(1.6vw, 2vw, 1.8vw); */
+                /* font-size: 1.6vw; */
+                font-size: clamp(1.6vw, 1.6vw, 4vw);
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width:576px) and (max-width:768px) {
+
+    .barber_connect_salon_list_header,
+    .barber_connect_salon_list_body {
+        &>p {
+            font-size: 1.6vw !important;
+        }
+    }
+
+    .barber_connect_salon_container {
+        padding: 2rem;
+
+        &>p:nth-child(1) {
+            font-size: 2.3vw;
+        }
+    }
+
+    .barber_list_services_list,
+    .barber_connect_salon_list {
+        &>p {
+            font-size: 1.8vw;
+        }
+    }
+
+    .service_item_top {
+        &>div:nth-child(2) {
+            &>p:nth-child(1) {
+                font-size: 1.8vw;
+            }
+
+            &>p:nth-child(2) {
+                font-size: 1.2vw;
+            }
+
+            &>p:nth-child(3) {
+                font-size: 1.2vw;
+            }
+        }
+    }
+
+    .service_item_bottom {
+        &>div:nth-child(1) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 1.6vw;
+                }
+
+                &>p:nth-child(2) {
+                    font-size: 1.8vw;
+                }
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>div {
+                &>p:nth-child(1) {
+                    font-size: 1.6vw;
+                }
+
+                &>div:nth-child(2) {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+
+                    &>div {
+                        font-size: 1.8vw;
+                    }
+
+                    &>input {
+                        font-size: 1.8vw;
+                    }
+
+                    &>p {
+                        font-size: 1.8vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .barber_connect_salon_list_body {
+        &>div:nth-child(3) {
+            &>button {
+                font-size: 1.8vw;
+            }
+        }
+    }
+
+    .barber_connect_salon_list_error {
+        font-size: 1.8vw;
+    }
+
+    .connect_btn {
+        font-size: 1.8vw;
+    }
+
+    .barber_approve_container {
+
+        &>div {
+            &>p {
+                font-size: 1.8vw;
+            }
+
+            &>button {
+                font-size: 1.8vw;
+            }
+        }
+    }
+
+
+
+    .inner_container {
+        grid-template-columns: 1fr;
+    }
+
+    .barber_report_container {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .queuelists_container {
+        height: 40rem;
+        margin-bottom: 2rem;
+    }
+
+    .saloninfo_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 20vh;
+
+        &>div:nth-child(1) {
+            &>h2 {
+                font-size: 2.8vw;
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>i {
+                font-size: 1.8vw;
+            }
+        }
+    }
+
+    .barberlist_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .report_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+        height: 40vh;
+        width: calc(100vw - 2.6rem);
+
+        .r_chart {
+            height: calc(40vh - 2rem);
+
+            &>p:nth-child(1) {
+                font-size: 1.6vw;
+            }
+
+            &>div:nth-child(3) {
+
+                &>div {
+                    gap: 0.5rem;
+
+                    &>div {
+                        width: 1rem;
+                        height: 1rem;
+                        border-radius: 2px;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        -ms-border-radius: 2px;
+                        -o-border-radius: 2px;
+                    }
+
+                    &>p {
+                        font-size: 1.6vw;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .queuelists_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_loader {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .salonadv_container_error {
+        border-radius: 1vw;
+        -webkit-border-radius: 1vw;
+        -moz-border-radius: 1vw;
+        -ms-border-radius: 1vw;
+        -o-border-radius: 1vw;
+    }
+
+    .barberitem_header {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        &>div {
+            &>p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .barberitem {
+        &>div:nth-child(1) {
+            gap: 2rem;
+        }
+
+        & div {
+            &>p {
+                font-size: 1.6vw;
+            }
+        }
+    }
+
+    .queue_header {
+        & div {
+            & p {
+                font-size: 1.6vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .queue_item {
+        & div {
+            &>p {
+                /* font-size: clamp(1.6vw, 2vw, 1.8vw); */
+                /* font-size: 1.6vw; */
+                font-size: clamp(1.6vw, 1.6vw, 4vw);
+                font-weight: 500;
+            }
+        }
     }
 }

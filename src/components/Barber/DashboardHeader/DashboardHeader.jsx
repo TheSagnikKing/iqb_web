@@ -114,9 +114,9 @@ const DashboardHeader = () => {
                     </div>
                 </div> */}
 
-                { barberProfile?.isOnline ? <button className={style.barber_online_active}>Online</button> : <button className={style.barber_online_inactive}>Offline</button>}
-                
-                { barberProfile?.isClockedIn ? <button className={style.barber_clock_active}>Online</button> : <button className={style.barber_clock_inactive}>Offline</button>}
+                {barberProfile?.isOnline ? <button className={style.barber_online_active}>Online</button> : <button className={style.barber_online_inactive}>Offline</button>}
+
+                {barberProfile?.isClockedIn ? <button className={style.barber_clock_active}>Clock-In</button> : <button className={style.barber_clock_inactive}>Clock-Out</button>}
 
             </div>
 
@@ -149,13 +149,13 @@ const DashboardHeader = () => {
                             <div
                                 className={`${style.profile_drop_container} ${darkmodeOn && style.dark}`}
                             >
-                                <div>
+                                <div onClick={() => navigate("/barber-dashboard/editprofile")}>
                                     <div><ProfileIcon /></div>
-                                    <div onClick={() => navigate("/barber-dashboard/editprofile")}>My Profile</div>
+                                    <div>My Profile</div>
                                 </div>
-                                <div>
+                                <div onClick={logoutHandler}>
                                     <div><LogoutIcon /></div>
-                                    <div onClick={logoutHandler}>Logout</div>
+                                    <div>Logout</div>
                                 </div>
 
                             </div>
@@ -248,7 +248,11 @@ const DashboardHeader = () => {
                     ))
                 }
 
-                <div onClick={() => navigate("/barber-dashboard/editprofile")} className={style.dashboard_mobile_item}>
+                <div onClick={() => {
+                    navigate("/barber-dashboard/editprofile")
+                    setSidebarToggle(false)
+                }} className={style.dashboard_mobile_item}
+                >
                     <div><ProfileIcon /></div>
                     <p>Profile</p>
                 </div>

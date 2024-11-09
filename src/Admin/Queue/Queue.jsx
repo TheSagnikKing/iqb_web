@@ -133,7 +133,7 @@ const Queue = () => {
                         {b.serviceType === "VIP" ? <div><CrownIcon /></div> : <div><CrownIcon /></div>}
                       </p>
                       <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
-                      <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Delete</button></div>
+                      <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Cancel</button></div>
                     </div>
                   ))}
                 </div>

@@ -1381,7 +1381,7 @@
         -ms-border-radius: 20px;
         -o-border-radius: 20px;
         border: none;
-        cursor: pointer;
+        cursor: not-allowed;
         font-size: 0.9vw;
         transition: 0.3s all ease;
         -webkit-transition: 0.3s all ease;
@@ -1592,9 +1592,344 @@
         display: none;
     }
 
-    .barber_dashboard_btn_container{
-        &>button{
+    .barber_dashboard_btn_container {
+        &>button {
             font-size: 3vw;
+        }
+    }
+}
+
+@media screen and (min-width:430px) and (max-width:768px) {
+    .profile_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .choose_salon_div {
+        display: none;
+    }
+
+    .mobile_choose_salon_div {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2vw;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .dashboard_mobile_sidebar_container {
+        position: absolute;
+        top: 0px;
+        height: 100vh;
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        background-color: var(--primary-bg-light-color1);
+        padding: 2rem;
+        transition: width 300ms ease;
+        -webkit-transition: width 300ms ease;
+        -moz-transition: width 300ms ease;
+        -ms-transition: width 300ms ease;
+        -o-transition: width 300ms ease;
+        display: block;
+
+        &>button:nth-child(1) {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1.6vw;
+            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            color: red;
+            font-weight: bold;
+            background-color: var(--primary-bg-light-color1);
+            margin-bottom: 2rem;
+            margin-left: auto;
+        }
+
+        .dashboard_mobile_item {
+            background-color: transparent;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            padding-inline: 1rem;
+            height: 4rem;
+            width: 100%;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            align-items: center;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            cursor: pointer;
+
+            &>div {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.6vw;
+                color: #000;
+            }
+
+
+            &>p {
+                font-size: 1.6vw;
+                color: #000;
+            }
+        }
+
+        .dashboard_mobile_item.dashboard_mobile_item_active {
+            background-color: #0866ff;
+
+            &>div {
+                color: #fff;
+            }
+
+
+            &>p {
+                color: #fff;
+            }
+        }
+    }
+
+    .dashboard_mobile_sidebar_active {
+        width: 70vw;
+        left: -1rem;
+        display: block;
+    }
+
+    .dashboard_mobile_sidebar_inactive {
+        display: none;
+        width: 0vw;
+    }
+
+    .dashboard_theme_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>p {
+            font-size: 2vw;
+            font-weight: bold;
+        }
+
+        &>button {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border: none;
+            font-size: 2vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+
+    .profile_drop_container {
+        display: none;
+    }
+
+    .barber_dashboard_btn_container {
+        &>button {
+            font-size: 2vw;
+        }
+    }
+}
+
+
+@media screen and (min-width:768px) and (max-width:1140px) {
+    .profile_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .choose_salon_div {
+        display: none;
+    }
+
+    .mobile_choose_salon_div {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2vw;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .dashboard_mobile_sidebar_container {
+        position: absolute;
+        top: 0px;
+        height: 100vh;
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        background-color: var(--primary-bg-light-color1);
+        padding: 2rem;
+        transition: width 300ms ease;
+        -webkit-transition: width 300ms ease;
+        -moz-transition: width 300ms ease;
+        -ms-transition: width 300ms ease;
+        -o-transition: width 300ms ease;
+        display: block;
+
+        &>button:nth-child(1) {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1.2vw;
+            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            color: red;
+            font-weight: bold;
+            background-color: var(--primary-bg-light-color1);
+            margin-bottom: 2rem;
+            margin-left: auto;
+        }
+
+        .dashboard_mobile_item {
+            background-color: transparent;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            padding-inline: 1rem;
+            height: 4rem;
+            width: 100%;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            align-items: center;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            cursor: pointer;
+
+            &>div {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.2vw;
+                color: #000;
+            }
+
+
+            &>p {
+                font-size: 1.2vw;
+                color: #000;
+            }
+        }
+
+        .dashboard_mobile_item.dashboard_mobile_item_active {
+            background-color: #0866ff;
+
+            &>div {
+                color: #fff;
+            }
+
+
+            &>p {
+                color: #fff;
+            }
+        }
+    }
+
+    .dashboard_mobile_sidebar_active {
+        width: 70vw;
+        left: -1rem;
+        display: block;
+    }
+
+    .dashboard_mobile_sidebar_inactive {
+        display: none;
+        width: 0vw;
+    }
+
+    .dashboard_theme_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>p {
+            font-size: 1.4vw;
+            font-weight: bold;
+        }
+
+        &>button {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border: none;
+            font-size: 1.4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+
+    .profile_drop_container {
+        display: none;
+    }
+
+    .barber_dashboard_btn_container {
+        &>button {
+            font-size: 1.4vw;
         }
     }
 }

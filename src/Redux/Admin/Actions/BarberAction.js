@@ -334,7 +334,7 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
 }
 
 
-export const adminSendBarberMessageAction = (smsdata, setMessage, navigate, routename) => async (dispatch) => {
+export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberMessage) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_SEND_BARBER_MESSAGE_REQ })
 
@@ -356,7 +356,7 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, navigate, rout
             },
         });
 
-        navigate(routename)
+        setOpenBarberMessage(false)
     } catch (error) {
 
         dispatch({

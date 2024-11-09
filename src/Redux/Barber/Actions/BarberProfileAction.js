@@ -78,7 +78,7 @@ export const barberSkipProfileAction = (profiledata,navigate) => async (dispatch
     }
 }
 
-export const barberSendVerifyEmailAction = (verifyemail,setSendVerificationEmailModal) => async (dispatch) => {
+export const barberSendVerifyEmailAction = (verifyemail,setOpenEmailModal) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_SEND_VERIFY_EMAIL_REQ })
 
@@ -89,7 +89,7 @@ export const barberSendVerifyEmailAction = (verifyemail,setSendVerificationEmail
             payload: data
         })
 
-        setSendVerificationEmailModal(true)
+        setOpenEmailModal(true)
 
     } catch (error) {
         dispatch({
@@ -109,7 +109,7 @@ export const barberSendVerifyEmailAction = (verifyemail,setSendVerificationEmail
     }
 }
 
-export const barberSendVerifyMobileAction = (verifyemail,setSendVerificationMobileModal) => async (dispatch) => {
+export const barberSendVerifyMobileAction = (verifyemail,setOpenMobileModal) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_SEND_VERIFY_MOBILE_REQ })
 
@@ -120,7 +120,7 @@ export const barberSendVerifyMobileAction = (verifyemail,setSendVerificationMobi
             payload: data
         })
 
-        setSendVerificationMobileModal(true)
+        setOpenMobileModal(true)
 
     } catch (error) {
         dispatch({
@@ -140,7 +140,7 @@ export const barberSendVerifyMobileAction = (verifyemail,setSendVerificationMobi
     }
 }
 
-export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificationEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
+export const barberVerifiedEmailStatusAction = (verifyemail,otp,setOpenEmailModal,setOtp,setChangeEmailVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_VERIFIED_EMAIL_STATUS_REQ })
 
@@ -160,7 +160,7 @@ export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificat
         })
 
         setChangeEmailVerifiedState(true)
-        setSendVerificationEmailModal(false)
+        setOpenEmailModal(false)
         setOtp(["","","",""])
 
     } catch (error) {
@@ -181,7 +181,7 @@ export const barberVerifiedEmailStatusAction = (verifyemail,otp,setSendVerificat
     }
 }
 
-export const barberVerifiedMobileStatusAction = (verifyemail,otp,setSendVerificationMobileModal,setMobileOtp,setChangeMobileVerifiedState) => async (dispatch) => {
+export const barberVerifiedMobileStatusAction = (verifyemail,otp,setOpenMobileModal,setMobileOtp,setChangeMobileVerifiedState) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_VERIFIED_MOBILE_STATUS_REQ })
 
@@ -201,7 +201,7 @@ export const barberVerifiedMobileStatusAction = (verifyemail,otp,setSendVerifica
         })
 
         setChangeMobileVerifiedState(true)
-        setSendVerificationMobileModal(false)
+        setOpenMobileModal(false)
         setMobileOtp(["","","",""])
 
     } catch (error) {

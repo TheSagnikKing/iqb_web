@@ -337,7 +337,7 @@ const EditBarber = () => {
   const [name, setName] = useState(currentBarber?.name);
   const [email, setEmail] = useState(currentBarber?.email);
   const [nickName, setNickName] = useState(currentBarber?.nickName);
-  const [mobileNumber, setMobileNumber] = useState(`${currentBarber?.mobileCountryCode}${currentBarber?.mobileNumber.toString()}`);
+  const [mobileNumber, setMobileNumber] = useState(`${currentBarber?.mobileCountryCode}${currentBarber?.mobileNumber?.toString()}`);
   const [countryCode, setCountryCode] = useState(currentBarber?.mobileCountryCode)
   const [dateOfBirth, setDateOfBirth] = useState(currentBarber?.dateOfBirth?.split('T')[0]);
   const [chooseServices, setChooseServices] = useState([]);
@@ -591,7 +591,7 @@ const EditBarber = () => {
               <input
                 type='text'
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
                 placeholder='Enter Email'
               />
             </div>

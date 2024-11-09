@@ -766,7 +766,7 @@ const EditProfile = () => {
     };
 
 
-    
+
     const [genderDrop, setGenderDrop] = useState(false)
 
     const genderDropHandler = () => {
@@ -778,7 +778,7 @@ const EditProfile = () => {
         setGenderDrop(false)
     }
 
-    
+
     const [invalidnumber, setInvalidNumber] = useState(false)
 
     const updateAdminProfile = () => {
@@ -1127,7 +1127,7 @@ const EditProfile = () => {
 
                         <div>
                             <p>Please check your message</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.mobileCountryCode}{adminProfile?.mobileNumber}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.mobileNumber}</span></p>
                             <div>
                                 {
                                     mobileotp.map((digit, index) => (

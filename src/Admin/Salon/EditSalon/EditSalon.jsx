@@ -1751,7 +1751,7 @@ const EditSalon = () => {
   const [address, setAddress] = useState(currentSalon?.address)
 
   const [postCode, setPostCode] = useState(currentSalon?.postCode)
-  const [contactTel, setContactTel] = useState(`${currentSalon?.mobileCountryCode}${currentSalon?.contactTel.toString()}`)
+  const [contactTel, setContactTel] = useState(`${currentSalon?.mobileCountryCode}${currentSalon?.contactTel?.toString()}`)
   const [dialCode, setDialCode] = useState(currentSalon?.mobileCountryCode)
   // currentSalon?.contactTel
   const [webLink, setWebLink] = useState(currentSalon?.webLink)
@@ -2923,7 +2923,13 @@ const EditSalon = () => {
                   <input
                     type="text"
                     value={servicePrice}
-                    onChange={(e) => setServicePrice(e.target.value)}
+                    // onChange={(e) => setServicePrice(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setServicePrice(value);
+                      }
+                    }}
                   />
                 </div>
 
@@ -2932,7 +2938,13 @@ const EditSalon = () => {
                   <input
                     type="text"
                     value={serviceEWT}
-                    onChange={(e) => setServiceEWT(e.target.value)}
+                    // onChange={(e) => setServiceEWT(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setServiceEWT(value);
+                      }
+                    }}
                   />
                 </div>
               </div>

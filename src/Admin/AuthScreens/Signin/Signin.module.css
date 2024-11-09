@@ -430,7 +430,7 @@ iframe {
 
     .admin_signin_right {
         &>div:nth-child(1) {
-            width: 95vw;
+            width: 90vw;
         }
     }
 
