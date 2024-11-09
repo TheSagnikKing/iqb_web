@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Sidebar.css'
+import style from './Sidebar.module.css'
 import { menudata } from '../menudata.jsx'
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { LeftArrow, RightArrow } from '../../../icons'
@@ -43,58 +43,126 @@ const Sidebar = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <main className={`container ${darkmodeOn && "dark"}`}>
-      <div className={`sidebar ${showSidebar ? "show" : "hide"} ${darkmodeOn && "dark"}`}>
+    // <main className={`${style.container} ${darkmodeOn && style.dark}`}>
+    //   <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
+    //     <div>
+    //       <p className={showSidebar ? style.titleActive : style.titleInActive}>
+    //         {showSidebar ? <div className={style.sidebar_top_salon}>
+    //           <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
+    //             <img
+    //               src={barberGetSalonLogoResponse?.salonLogo[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
+    //               alt=""
+
+    //             />
+    //           </div>
+    //           <p style={{
+    //             color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
+    //           }}>{barberGetSalonLogoResponse?.salonName}</p>
+
+    //         </div> : ""}
+    //       </p>
+    //     </div>
+
+    //     <div className={style.menu_items_container}>
+    //       {menudata.map((m) => (
+    //         <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
+
+    //         >
+    //           <p style={{
+    //             color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
+    //           }}
+    //           >{m.icon}</p>
+    //           <p style={{
+    //             color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
+    //           }}>{m.title}</p>
+    //         </div>
+    //       ))}
+
+    //     </div>
+
+    //     <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
+    //   </div>
+
+    //   <div className={`${style.content} ${darkmodeOn && style.dark}`}
+    //     style={{
+    //       width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 7rem)"
+    //     }}
+    //   >
+    //     <div>
+    //       <DashboardHeader />
+    //       <div><Outlet /></div>
+    //     </div>
+    //   </div>
+
+    // </main>
+
+    <main className={`${style.container} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
         <div>
-          <p className={showSidebar ? "titleActive" : "titleInActive"}>
-            {showSidebar ? <div className='sidebar_top_salon'>
+          <p className={showSidebar ? style.titleActive : style.titleInActive}>
+            {showSidebar ? <div className={style.sidebar_top_salon}>
               <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
                 <img
                   src={barberGetSalonLogoResponse?.salonLogo[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
-                  alt=""
-
+                  alt="salonLogo"
                 />
               </div>
               <p style={{
                 color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
               }}>{barberGetSalonLogoResponse?.salonName}</p>
-
             </div> : ""}
           </p>
         </div>
 
-        <div className='menu_items_container'>
+        <div className={style.menu_items_container}>
           {menudata.map((m) => (
-            <div className={`menu_item ${location.pathname.includes(m.url) && `menu_item_active ${darkmodeOn && "dark"}`} ${darkmodeOn && "dark"}`} key={m.id} onClick={() => navigate(m?.url)}
-
+            <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
             >
               <p style={{
-                color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
+                color: location.pathname.includes(m.url) && "#fff"
               }}
               >{m.icon}</p>
               <p style={{
-                color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
+                color: location.pathname.includes(m.url) && "#fff"
               }}>{m.title}</p>
             </div>
           ))}
 
+          {/* <div className={style.menu_theme_container}
+            style={{
+              justifyContent: showSidebar ? "space-between" : "center"
+            }}
+          >
+            {
+              showSidebar && <p>Theme</p>
+            }
+
+            {
+              darkmodeOn ?
+                <button onClick={toggleHandler}>
+                  <IoMoon />
+                </button> :
+                <button onClick={toggleHandler}>
+                  <MdSunny />
+                </button>
+            }
+
+          </div> */}
         </div>
 
-        <button className='sidebar_toggle_btn' onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
+        <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
       </div>
 
-      <div className={`content ${darkmodeOn && "dark"}`}
+      <div className={`${style.content} ${darkmodeOn && style.dark}`}
         style={{
-          width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 7rem)"
+          width: showSidebar ? "calc(100vw - 20vw)" : "calc(100vw - 4vw)",
         }}
       >
         <div>
-          {/* {location?.pathname === "/barber-dashboard" ? <DashboardHeader /> : <h1>Header</h1>} */}
           <DashboardHeader />
           <div><Outlet /></div>
         </div>
       </div>
-
     </main>
   )
 }

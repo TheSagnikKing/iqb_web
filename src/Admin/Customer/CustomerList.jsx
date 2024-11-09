@@ -213,14 +213,6 @@ const CustomerList = () => {
             <div onClick={searchCustomerhandler}><SearchIcon /></div>
           </div>
 
-          {/* <div
-            className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`}
-            style={{ background: 'var(--primary-bg-color3)', color: '#fff' }}
-            onClick={searchCustomerhandler}
-          >
-            <div><SearchIcon /></div>
-          </div> */}
-
           <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
             <div><EmailIcon /></div>
           </button>

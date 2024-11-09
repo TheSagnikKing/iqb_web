@@ -1,39 +1,38 @@
-.barber_dashboard_header_wrapper {
+/* .barber_dashboard_header_wrapper {
     width: 100%;
     height: 6rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--primary-bg-light-color1);
+    background-color: #ebf5ff;
 }
 
-.barber_dashboard_header_wrapper>div:nth-child(1){
-    /* background-color: rgba(255, 0, 0, 0.239); */
+.barber_dashboard_header_wrapper>div:nth-child(1) {
     display: flex;
     align-items: center;
     gap: 1rem;
     height: 100%;
 }
 
-.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1){
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1) {
     width: 9rem;
     height: 2.5rem;
 }
 
-.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2){
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2) {
     width: 10rem;
     height: 2.5rem;
 }
 
 
-.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1){
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(1) {
     width: 9rem;
     height: 2rem;
     border-radius: 2rem;
     position: relative;
 }
 
-.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2){
+.barber_dashboard_header_wrapper>div:nth-child(1)>div:nth-child(2) {
     width: 11rem;
     height: 2rem;
     border-radius: 2rem;
@@ -457,8 +456,6 @@
 }
 
 
-/* Dark Mode Css */
-
 .barber_dashboard_header_wrapper.dark {
     background-color: var(--dark-mode-bg-color-1);
 }
@@ -832,7 +829,6 @@
         display: none;
     }
 
-    /* Dark mode css */
     .chooseSalon_model_content.dark {
         background-color: var(--dark-mode-bg-color-2);
     }
@@ -1199,7 +1195,6 @@
         -o-transform: translateX(-2rem);
     }
 
-    /* Dark mode css */
     .chooseSalon_model_content.dark {
         background-color: var(--dark-mode-bg-color-2);
     }
@@ -1238,5 +1233,368 @@
     .dashboard_mobile_sidebar_container.dark>button:nth-child(1) {
         background-color: var(--dark-mode-bg-color-4);
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+    }
+} */
+
+
+
+.barber_dashboard_header_wrapper {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ebf5ff;
+}
+
+.barber_dashboard_btn_container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profile_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2.3rem;
+}
+
+.profile_wrapper>div:nth-child(1) {
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.profile_wrapper>div:nth-child(2) {
+    height: 3.7rem;
+    width: 3.7rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.profile_wrapper>div:nth-child(2)>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.profile_drop_container {
+    position: absolute;
+    top: 5.5rem;
+    right: 2rem;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    background-color: var(--primary-bg-light-color1);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 13rem;
+    overflow: hidden;
+}
+
+.profile_drop_container>p {
+    min-height: 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    /* font-size: 1.2rem; */
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.profile_drop_container>div:hover {
+    background-color: #0866ff;
+    color: var(--primary-text-light-color1);
+    cursor: pointer;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.profile_drop_container>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    border-radius: 6px;
+    padding-inline: 0.8rem;
+    transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.profile_drop_container>div>div:nth-child(2) {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.profile_drop_container>div>div:nth-child(1) {
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+}
+
+.barber_dashboard_btn_container {
+    & button {
+        padding: 0.6rem 1.5rem;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9vw;
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    .barber_online_active,
+    .barber_clock_active {
+        background-color: rgba(50, 205, 50, 0.158);
+        border: 1px solid limegreen !important;
+        color: limegreen;
+
+        &:hover {
+            background-color: limegreen;
+            color: #fff;
+        }
+    }
+
+    .barber_online_inactive,
+    .barber_clock_inactive {
+        background-color: #ff000032;
+        border: 1px solid red !important;
+        color: red;
+
+        &:hover {
+            background-color: red;
+            color: #fff;
+        }
+    }
+
+}
+
+.mobile_choose_salon_div {
+    display: none;
+}
+
+.dashboard_mobile_menu {
+    display: none;
+}
+
+.dashboard_mobile_sidebar_container {
+    display: none;
+}
+
+@media screen and (min-width:0px) and (max-width:430px) {
+    .profile_wrapper>div:nth-child(1) {
+        display: none;
+    }
+
+    .choose_salon_div {
+        display: none;
+    }
+
+    .mobile_choose_salon_div {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        display: block;
+    }
+
+    .dashboard_mobile_menu {
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .dashboard_mobile_sidebar_container {
+        position: absolute;
+        top: 0px;
+        height: 100vh;
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        background-color: var(--primary-bg-light-color1);
+        padding: 2rem;
+        transition: width 300ms ease;
+        -webkit-transition: width 300ms ease;
+        -moz-transition: width 300ms ease;
+        -ms-transition: width 300ms ease;
+        -o-transition: width 300ms ease;
+        display: block;
+
+        &>button:nth-child(1) {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+            font-size: 3.6vw;
+            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            color: red;
+            font-weight: bold;
+            background-color: var(--primary-bg-light-color1);
+            margin-bottom: 2rem;
+            margin-left: auto;
+        }
+
+        .dashboard_mobile_item {
+            background-color: transparent;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            padding-inline: 1rem;
+            height: 4rem;
+            width: 100%;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            align-items: center;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            cursor: pointer;
+
+            &>div {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 3vw;
+                color: #000;
+            }
+
+
+            &>p {
+                font-size: 3vw;
+                color: #000;
+            }
+        }
+
+        .dashboard_mobile_item.dashboard_mobile_item_active {
+            background-color: #0866ff;
+
+            &>div {
+                color: #fff;
+            }
+
+
+            &>p {
+                color: #fff;
+            }
+        }
+    }
+
+    .dashboard_mobile_sidebar_active {
+        width: 70vw;
+        left: -1rem;
+        display: block;
+    }
+
+    .dashboard_mobile_sidebar_inactive {
+        display: none;
+        width: 0vw;
+    }
+
+    .dashboard_theme_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 1rem;
+
+        &>p {
+            font-size: 2.8vw;
+            font-weight: bold;
+        }
+
+        &>button {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border: none;
+            font-size: 4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+
+    .profile_drop_container {
+        display: none;
+    }
+
+    .barber_dashboard_btn_container{
+        &>button{
+            font-size: 3vw;
+        }
     }
 }

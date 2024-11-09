@@ -238,7 +238,7 @@ const DashboardHeader = () => {
 
       {
         location?.pathname === "/admin-dashboard" ? (<div className={`${style.choose_salon_div} ${darkmodeOn && style.dark}`}>
-          {/* <p>Choose Salon</p> */}
+        
           <p></p>
 
           {

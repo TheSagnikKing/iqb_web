@@ -433,7 +433,7 @@ const CreateBarber = () => {
 
       console.log("Create Barber Data ", barberdata)
 
-      // dispatch(adminCreateBarberAction(barberdata, navigate))
+      dispatch(adminCreateBarberAction(barberdata, navigate))
     }
 
   };

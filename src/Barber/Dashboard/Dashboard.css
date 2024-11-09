@@ -445,7 +445,6 @@
 
 
 
-/* Apply common scrollbar styles */
 .barber_dashboard_page_container>div:nth-child(5)>div:nth-child(2)>div:nth-child(2)>div>div:nth-child(2)::-webkit-scrollbar {
     width: 6px !important;
     height: 7px !important;
@@ -785,7 +784,6 @@
 .barber_connect_salon_list>div:nth-child(2)>div {
     height: calc(30rem - 2rem);
     background-color: transparent;
-    /* border: 1px solid black; */
     overflow: auto;
 }
 
@@ -855,7 +853,6 @@
 .barber_list_services_list>div:nth-child(2)>div {
     height: calc(30rem - 2rem);
     background-color: transparent;
-    /* border: 1px solid black; */
     overflow: auto;
 }
 
@@ -1070,8 +1067,6 @@
     -o-border-radius: 1.2rem;
 }
 
-/* Dark Mode css */
-
 .barber_salon_info_container.dark>div>label {
     color: var(--primary-text-light-color1);
 }
@@ -1210,36 +1205,6 @@
     color: var(--primary-text-light-color1);
 }
 
-/* .my_container {
-    height: 20rem;
-    width: 80%;
-    background-color: rgba(255, 0, 0, 0.448) !important;
-    overflow: auto;
-}
-
-.my_container_item {
-    background-color: green;
-}
-
-.my_container_item > div:nth-child(1) {
-    display: grid;
-    height: 4.5rem; 
-    grid-template-columns: repeat(5, 1fr);
-    position: sticky;
-    top: 0;
-    z-index: 1; 
-    background-color: inherit; 
-    font-size: 1.4rem;
-}
-
-.my_container_item > div:not(:nth-child(1)) {
-    background-color: var(--bg-color3);
-    display: grid;
-    height: 4.5rem;
-    grid-template-columns: repeat(5, 1fr);
-    font-size: 1.4rem;
-} */
-
 
 .barber_dashboard_queuelist_container.dark>div:not(:nth-child(1)) {
     background-color: var(--dark-mode-bg-color-2);
@@ -1358,7 +1323,7 @@
         width: 50%;
     }
 
-    /* Dark Css Style */
+
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
     }
@@ -1454,7 +1419,6 @@
         width: 55%;
     }
 
-    /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
     }
@@ -1511,7 +1475,6 @@
         background: rgb(0, 98, 255) !important;
     }
 
-    /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
     }
@@ -1539,7 +1502,6 @@
         background: rgb(0, 98, 255) !important;
     }
 
-    /* Dark Css Style */
     .barber_dashboard_page_container.dark {
         background: var(--dark-mode-bg-color-1);
     }
