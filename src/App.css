@@ -5,3 +5,33 @@
     justify-content: center;
     align-items: "center";
 }
+
+.error_boundary_container {
+    height: 90vh;
+    width: 100%;
+    padding: 2rem;
+    background-color: #fff;
+
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>div {
+        text-align: center;
+
+        &>div {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+        }
+
+        &>p {
+            font-size: 1.6rem;
+        }
+    }
+}

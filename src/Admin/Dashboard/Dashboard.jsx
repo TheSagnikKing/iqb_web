@@ -1243,13 +1243,17 @@ const Dashboard = () => {
 
 
                           {
-                            BarberList.map((barber, index) => {
+                            BarberList?.map((barber, index) => {
                               return (
                                 <div className={style.barberitem} key={barber._id}>
                                   <div>
                                     <div>
                                       <img src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg" alt="" />
-                                      <div></div>
+                                      <div
+                                        style={{
+                                          background: barber?.isOnline ? "limegreen" : "red"
+                                        }}
+                                      ></div>
                                     </div>
                                     <p>{barber.name.length > 6 ? `${barber.name.slice(0, 6).concat("...")}` : barber.name}</p>
                                   </div>

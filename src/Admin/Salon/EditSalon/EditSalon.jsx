@@ -1643,6 +1643,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 import Modal from '@mui/material/Modal';
 import { ClickAwayListener } from '@mui/material';
+import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
 
 const EditSalon = () => {
 
@@ -1748,6 +1749,7 @@ const EditSalon = () => {
 
   const [salonEmail, setSalonEmail] = useState(currentSalon?.salonEmail)
   const [salonName, setSalonName] = useState(currentSalon?.salonName)
+  const [salonDesc, setSalonDesc] = useState(currentSalon?.salonDesc)
   const [address, setAddress] = useState(currentSalon?.address)
 
   const [postCode, setPostCode] = useState(currentSalon?.postCode)
@@ -1969,8 +1971,19 @@ const EditSalon = () => {
       });
       console.log('Salon Logo Upload success:', imageResponse.data);
       setSalonLogo(imageUrl)
+
+      dispatch(adminGetDefaultSalonAction(email))
     } catch (error) {
-      console.error('Image upload failed:', error);
+      // console.error('Image upload failed:', error);
+      toast.error(error?.response?.data?.message, {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 
@@ -2137,6 +2150,7 @@ const EditSalon = () => {
         adminEmail: email,
         salonEmail,
         salonName,
+        salonDesc,
         address,
         location: {
           type: "Point",
@@ -2607,6 +2621,15 @@ const EditSalon = () => {
               type="text"
               value={salonEmail}
               onChange={(e) => setSalonEmail(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p>Salon Desc</p>
+            <input
+              type="text"
+              value={salonDesc}
+              onChange={(e) => setSalonDesc(e.target.value)}
             />
           </div>
 

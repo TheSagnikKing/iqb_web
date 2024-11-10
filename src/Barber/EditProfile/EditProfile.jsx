@@ -21,7 +21,6 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
 
 const EditProfile = () => {
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -84,12 +83,32 @@ const EditProfile = () => {
                 payload: barberloggedindata
             })
 
+            toast.success("Profile upload successfully", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
 
             // navigate("/barber-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
-            console.error('Image upload failed:', error);
-            setProfilepic("")
+            // console.log('Image upload failed:', error?.response?.data?.message);
+            // setProfilepic("")
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
         }
     };
 

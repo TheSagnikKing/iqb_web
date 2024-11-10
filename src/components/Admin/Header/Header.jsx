@@ -13,6 +13,7 @@ import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/cons
 import { IoMoon } from 'react-icons/io5'
 import { MdSunny } from 'react-icons/md'
 import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAction'
+import { ClickAwayListener } from '@mui/material'
 
 const DashboardHeader = () => {
 
@@ -245,41 +246,45 @@ const DashboardHeader = () => {
             adminProfile?.salonId == 0 ?
               <div>No Salon Present</div> :
               <>
-                <div>
-                  <p>{adminSetSalon?.currentActiveSalon}</p>
-                  <div onClick={() => setSalonlistdrop((prev) => !prev)}><DropdownIcon /></div>
-                  <div
-                    className={`${style.dashboard_salon_list_dropdown} ${darkmodeOn && style.dark}`}
-                    style={{
-                      opacity: salonlistdrop ? "1" : "0",
-                      zIndex: salonlistdrop ? "2" : "-1",
-                      transition: "300ms ease",
-                      height: SalonList?.length > 0 && SalonList?.length <= 4 ? "auto" : "15rem"
-                    }}
-                  >
+                <ClickAwayListener onClickAway={() => setSalonlistdrop(false)}>
+                  <div onClick={() => setSalonlistdrop((prev) => !prev)}>
+                    <p>{adminSetSalon?.currentActiveSalon}</p>
+                    <div>
+                      <DropdownIcon />
+                    </div>
 
-                    {
-                      getAdminSalonListLoading && !getAdminSalonListResolve ?
-                        <p>No Salon Present</p> :
-                        !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
-                          SalonList.map((s) => (
-                            <p
-                              key={s.id}
-                              onClick={() => selectedActiveSalon(s)}
-                              style={{
-                                background: s.salonId == adminProfile?.salonId && "#0866ff",
-                                color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)",
-                                boxShadow: s.salonId == adminProfile?.salonId && "0px 1px 6px rgba(0,0,0,0.2)"
-                              }}
-                            >{s.salonName}</p>
-                          )) :
-                          !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
-                            <p>No Salon Present</p> :
-                            !getAdminSalonListLoading && !getAdminSalonListResolve &&
-                            <p>No Salon Present</p>
-                    }
+                    <div
+                      className={`${style.dashboard_salon_list_dropdown} ${darkmodeOn && style.dark}`}
+                      style={{
+                        opacity: salonlistdrop ? "1" : "0",
+                        zIndex: salonlistdrop ? "2" : "-1",
+                        transition: "300ms ease",
+                        height: SalonList?.length > 0 && SalonList?.length <= 4 ? "auto" : "15rem"
+                      }}
+                    >
+                      {getAdminSalonListLoading ? (
+                        <p>Loading...</p>
+                      ) : !getAdminSalonListResolve || SalonList?.length === 0 ? (
+                        <p>No Salon Present</p>
+                      ) : (
+                        SalonList.map((s) => (
+                          <p
+                            key={s.id}
+                            onClick={() => selectedActiveSalon(s)}
+                            style={{
+                              background: s.salonId === adminProfile?.salonId ? "#0866ff" : undefined,
+                              color: s.salonId === adminProfile?.salonId ? "var(--primary-text-light-color1)" : undefined,
+                              boxShadow: s.salonId === adminProfile?.salonId ? "0px 1px 6px rgba(0,0,0,0.2)" : undefined,
+                            }}
+                          >
+                            {s.salonName}
+                          </p>
+                        ))
+                      )}
+                    </div>
                   </div>
-                </div>
+                </ClickAwayListener>
+
                 {!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler}
                   disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}
                   style={{
@@ -311,7 +316,7 @@ const DashboardHeader = () => {
             </div>
             <div
               className={style.mobile_dashboard_salon_list_dropdown}
-              ref={salonlistRef}
+              // ref={salonlistRef}
               style={{
                 opacity: 1,
                 zIndex: 2,

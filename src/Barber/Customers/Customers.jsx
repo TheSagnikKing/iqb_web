@@ -51,6 +51,7 @@ const CustomerList = () => {
   const [search, setSearch] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
 
+
   const searchCustomerhandler = async () => {
     setSearchLoading(true);
     try {
@@ -65,6 +66,14 @@ const CustomerList = () => {
       setSearchLoading(false);
     }
   };
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      searchCustomerhandler();
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [search]);
 
   // const [page, setPage] = useState(currentPage);
 
@@ -262,7 +271,7 @@ const CustomerList = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
 
-            <div onClick={searchCustomerhandler}><SearchIcon /></div>
+            <div><SearchIcon /></div>
           </div>
 
           <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>

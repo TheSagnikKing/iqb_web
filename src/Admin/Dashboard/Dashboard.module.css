@@ -1084,7 +1084,7 @@
 
     }
 
-    &>div>button:hover{
+    &>div>button:hover {
         background-color: #0867ffc2;
     }
 }
@@ -1697,6 +1697,13 @@
             }
         }
     }
+
+    .barberlist_container_body_error,
+    .queue_body_error {
+        &>p {
+            font-size: 3vw;
+        }
+    }
 }
 
 @media screen and (min-width: 431px) and (max-width:768px) {
@@ -1863,6 +1870,13 @@
                 font-size: clamp(1.6vw, 1.6vw, 4vw);
                 font-weight: 500;
             }
+        }
+    }
+
+    .barberlist_container_body_error,
+    .queue_body_error {
+        &>p {
+            font-size: 2vw;
         }
     }
 }

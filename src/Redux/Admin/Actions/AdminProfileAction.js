@@ -91,6 +91,16 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
 
         setOpenEmailModal(true)
 
+        toast.success("We have send a code to your email", {
+            duration: 3000,
+            style: {
+              fontSize: "1.4rem",
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+
     } catch (error) {
         dispatch({
             type: ADMIN_SEND_VERIFY_EMAIL_FAIL,
@@ -121,6 +131,17 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
         })
 
         setOpenMobileModal(true)
+
+
+        toast.success("We have send a sms to your mob No.", {
+            duration: 3000,
+            style: {
+              fontSize: "1.4rem",
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+            },
+          });
 
     } catch (error) {
         dispatch({

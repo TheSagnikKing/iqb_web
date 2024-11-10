@@ -473,7 +473,16 @@ const SalonAdv = () => {
         })
       } catch (error) {
         setUploadLoader(false)
-        console.error('Image upload failed:', error);
+        // console.error('Image upload failed:', error);
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          style: {
+            fontSize: "1.4rem",
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
         setUploadAdvImages([])
       }
     }
@@ -528,8 +537,17 @@ const SalonAdv = () => {
       })
 
     } catch (error) {
-      console.error('Image upload failed:', error);
+      // console.error('Image upload failed:', error);
       sethandleEditLoader(false)
+      toast.error(error?.response?.data?.message, {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 
@@ -585,7 +603,7 @@ const SalonAdv = () => {
   const adminDragAdvertisementControllerRef = useRef(new AbortController());
 
   useEffect(() => {
-    if (salonId && advertisements) {
+    if (salonId && advertisements && advertisements?.length > 0) {
       const controller = new AbortController();
       adminDragAdvertisementControllerRef.current = controller;
 
@@ -670,7 +688,7 @@ const SalonAdv = () => {
                         <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
                       </>
                     ))}
-                    
+
                   </SortableContext>
 
                 </div>

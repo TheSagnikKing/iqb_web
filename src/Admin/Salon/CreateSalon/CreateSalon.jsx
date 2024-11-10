@@ -1873,6 +1873,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 import Modal from '@mui/material/Modal';
 import { ClickAwayListener } from '@mui/material';
+import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
 
 const CreateSalon = () => {
 
@@ -1937,6 +1938,7 @@ const CreateSalon = () => {
 
   const [salonEmail, setSalonEmail] = useState("")
   const [salonName, setSalonName] = useState("")
+  const [salonDesc, setSalonDesc] = useState("")
   const [address, setAddress] = useState("")
 
   const [postCode, setPostCode] = useState("")
@@ -2131,8 +2133,10 @@ const CreateSalon = () => {
 
   const [uploadSalonLogo, setUploadSalonLogo] = useState("")
 
+
+
   const handleSalonFileInputChange = async (e) => {
-    const uploadImage = e.target.files[0]; // Get the uploaded file
+    const uploadImage = e.target.files[0];
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
     if (!allowedTypes.includes(uploadImage.type)) {
@@ -2148,11 +2152,27 @@ const CreateSalon = () => {
       return;
     }
 
+    // Check if the image size exceeds 2MB (2 * 1024 * 1024 bytes)
+    const maxSizeInBytes = 2 * 1024 * 1024;
+    if (uploadImage.size > maxSizeInBytes) {
+      toast.error("File size must be lower than 2mb", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
+
     const imageUrl = URL.createObjectURL(uploadImage);
 
     setSalonLogo(imageUrl);
-    setUploadSalonLogo(uploadImage)
+    setUploadSalonLogo(uploadImage);
   };
+
 
   const [salonImages, setSalonImages] = useState([])
 
@@ -2162,15 +2182,47 @@ const CreateSalon = () => {
     salonImagefileInputRef.current.click();
   };
 
+  // const handleSalonImageFileInputChange = async (e) => {
+  //   const uploadedFiles = e.target.files;
+  //   const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+  //   const generateUniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+  //   const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
+
+  //   if (invalidFiles.length > 0) {
+  //     toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+  //       duration: 3000,
+  //       style: {
+  //         fontSize: "1.4rem",
+  //         borderRadius: '10px',
+  //         background: '#333',
+  //         color: '#fff',
+  //       },
+  //     });
+  //     return;
+  //   }
+
+  //   const urls = Array.from(uploadedFiles).map((file) => {
+  //     const blobUrl = URL.createObjectURL(file);
+  //     const _id = generateUniqueId();
+  //     return { _id, blobUrl, name: file.name };
+  //   });
+
+  //   setSalonImages([...salonImages, ...urls]);
+  // };
+
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+    const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
     const generateUniqueId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
+    const invalidFiles = Array.from(uploadedFiles).filter(file =>
+      !allowedTypes.includes(file.type) || file.size > maxSizeInBytes
+    );
 
     if (invalidFiles.length > 0) {
-      toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+      toast.error("Please upload only valid image files (JPEG, WebP, PNG) under 2MB.", {
         duration: 3000,
         style: {
           fontSize: "1.4rem",
@@ -2190,7 +2242,6 @@ const CreateSalon = () => {
 
     setSalonImages([...salonImages, ...urls]);
   };
-
 
 
   const [selectedLogo, setSelectedLogo] = useState({
@@ -2307,10 +2358,46 @@ const CreateSalon = () => {
     currentEditSalonImageInputRef.current.click();
   };
 
+  // const handleEditSelectedImageFileInputChange = (e) => {
+  //   const uploadImage = e.target.files[0]; // Get the uploaded file
+
+  //   const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+
+  //   if (!allowedTypes.includes(uploadImage.type)) {
+  //     toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+  //       duration: 3000,
+  //       style: {
+  //         fontSize: "1.4rem",
+  //         borderRadius: '10px',
+  //         background: '#333',
+  //         color: '#fff',
+  //       },
+  //     });
+  //     return;
+  //   }
+
+  //   console.log(salonImages)
+  //   const imageUrl = URL.createObjectURL(uploadImage);
+
+  //   setOpenBlobSalonImage({
+  //     ...openBlobSalonImage,
+  //     blobUrl: imageUrl,
+  //     name: uploadImage.name
+  //   })
+
+  //   setSalonImages((images) =>
+  //     images.map((image) =>
+  //       image._id === openBlobSalonImage?._id ? { ...image, blobUrl: imageUrl, name: uploadImage.name } : image
+  //     )
+  //   );
+
+  // }
+
+
   const handleEditSelectedImageFileInputChange = (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
-
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
+    const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
 
     if (!allowedTypes.includes(uploadImage.type)) {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
@@ -2325,22 +2412,34 @@ const CreateSalon = () => {
       return;
     }
 
-    console.log(salonImages)
+    if (uploadImage.size > maxSizeInBytes) {
+      toast.error("File size must be lower than 2MB.", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
+
     const imageUrl = URL.createObjectURL(uploadImage);
 
     setOpenBlobSalonImage({
       ...openBlobSalonImage,
       blobUrl: imageUrl,
       name: uploadImage.name
-    })
+    });
 
     setSalonImages((images) =>
       images.map((image) =>
         image._id === openBlobSalonImage?._id ? { ...image, blobUrl: imageUrl, name: uploadImage.name } : image
       )
     );
+  };
 
-  }
 
 
   const navigate = useNavigate()
@@ -2364,6 +2463,7 @@ const CreateSalon = () => {
       const salondata = {
         adminEmail: email,
         salonEmail: salonEmail,
+        salonDesc: salonDesc,
         salonName: salonName,
         address: address,
         location: {
@@ -2507,6 +2607,8 @@ const CreateSalon = () => {
                 payload: data
               })
 
+              dispatch(adminGetDefaultSalonAction(email))
+
               toast.success("Salon logo uploaded successfully", {
                 duration: 3000,
                 style: {
@@ -2603,6 +2705,7 @@ const CreateSalon = () => {
     setLocalSalondata(storedData);
     setSalonName(storedData.salonName)
     setSalonEmail(storedData.salonEmail)
+    setSalonDesc(storedData.salonDesc)
     setAddress(storedData.address)
     setWebLink(storedData.webLink)
     setFbLink(storedData.fbLink)
@@ -2787,6 +2890,15 @@ const CreateSalon = () => {
               type="text"
               value={salonEmail}
               onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail")}
+            />
+          </div>
+
+          <div>
+            <p>Salon Desc</p>
+            <input
+              type="text"
+              value={salonDesc}
+              onChange={(e) => setHandler(setSalonDesc, e.target.value, "salonDesc")}
             />
           </div>
 

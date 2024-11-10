@@ -744,6 +744,10 @@
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
+    .salonadv_container {
+        padding: 2rem 0rem 2rem 0rem;
+    }
+
     .salonadv_column {
         grid-template-columns: 1fr;
         height: calc(100vh - 20rem);
@@ -806,7 +810,7 @@
     }
 
     .salonadv_column_error {
-    
+
         &>p {
             font-size: 3.5vw;
             font-weight: 500;
@@ -815,6 +819,10 @@
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
+    .salonadv_container {
+        padding: 2rem 0rem 2rem 1rem;
+    }
+
     .salonadv_column {
         grid-template-columns: 1fr;
         height: calc(100vh - 20rem);
@@ -878,7 +886,7 @@
     }
 
     .salonadv_column_error {
-    
+
         &>p {
             font-size: 1.5vw;
             font-weight: 500;

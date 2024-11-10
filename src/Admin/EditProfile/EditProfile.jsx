@@ -698,10 +698,30 @@ const EditProfile = () => {
                 payload: adminloggedindata
             })
 
+            toast.success("Profile upload successfully", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
         } catch (error) {
             setUploadpicLoader(false)
-            console.error('Image upload failed:', error);
-            setProfilepic("")
+            // console.log('Image upload failed:', error?.response?.data?.message);
+            // setProfilepic("")
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
         }
     };
 

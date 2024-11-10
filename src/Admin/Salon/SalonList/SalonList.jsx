@@ -417,7 +417,12 @@ const SalonList = () => {
 
         <Modal
           open={openSalonSettings}
-          onClose={() => setOpenSalonSettings(false)}
+          onClose={() => {
+            setEndTimeHandler(false)
+            setStartTimeHandler(false)
+            setIntervalTimeHandler(false)
+            setOpenSalonSettings(false)
+          }}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >

@@ -15,6 +15,7 @@ import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const CustomerList = () => {
+  
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
   const dispatch = useDispatch();
   const CustomerListControllerRef = useRef(new AbortController());
@@ -48,7 +49,24 @@ const CustomerList = () => {
   const [search, setSearch] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
 
+  // const searchCustomerhandler = async () => {
+  //   setSearchLoading(true);
+  //   try {
+  //     const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
+  //     dispatch({
+  //       type: GET_ALL_CUSTOMERLIST_SUCCESS,
+  //       payload: data,
+  //     });
+  //   } catch (error) {
+  //     console.error('Error searching customers:', error);
+  //   } finally {
+  //     setSearchLoading(false);
+  //   }
+  // };
+
   const searchCustomerhandler = async () => {
+
+    
     setSearchLoading(true);
     try {
       const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
@@ -62,6 +80,14 @@ const CustomerList = () => {
       setSearchLoading(false);
     }
   };
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      searchCustomerhandler();
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [search]);
 
 
   const [checkAllCustomers, setCheckAllCustomers] = useState(false);
