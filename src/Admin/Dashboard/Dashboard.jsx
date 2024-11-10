@@ -1248,7 +1248,7 @@ const Dashboard = () => {
                                 <div className={style.barberitem} key={barber._id}>
                                   <div>
                                     <div>
-                                      <img src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg" alt="" />
+                                      <img src={barber?.profile?.[0]?.url} alt="barber" />
                                       <div
                                         style={{
                                           background: barber?.isOnline ? "limegreen" : "red"

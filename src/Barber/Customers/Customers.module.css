@@ -837,8 +837,8 @@
         align-items: center;
 
         &>input {
-            width: 3vw;
-            height: 3vw;
+            width: 4vw;
+            height: 4vw;
             accent-color: #0866ff;
         }
     }
@@ -943,8 +943,8 @@
         align-items: center;
 
         &>input {
-            width: 2vw;
-            height: 2vw;
+            width: 3vw;
+            height: 3vw;
             accent-color: #0866ff;
         }
     }

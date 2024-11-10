@@ -2620,7 +2620,7 @@ const EditSalon = () => {
             <input
               type="text"
               value={salonEmail}
-              onChange={(e) => setSalonEmail(e.target.value)}
+              // onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
 
@@ -2670,10 +2670,10 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={country}
-                onChange={(e) => searchCountryHandler(e)}
+                // onChange={(e) => searchCountryHandler(e)}
               />
 
-              {countryDrop && <ClickAwayListener onClickAway={() => setCountryDrop(false)}><div>
+              {/* {countryDrop && <ClickAwayListener onClickAway={() => setCountryDrop(false)}><div>
                 {
                   getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
                     <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
@@ -2689,7 +2689,7 @@ const EditSalon = () => {
                         !getAdminAllCountriesLoading && !getAdminAllCountriesResolve &&
                         <p>No Countries</p>
                 }
-              </div></ClickAwayListener>}
+              </div></ClickAwayListener>} */}
 
             </div>
 
@@ -2698,10 +2698,10 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={city}
-                onChange={(e) => searchCityHandler(e)}
+                // onChange={(e) => searchCityHandler(e)}
               />
 
-              {cityDrop && <ClickAwayListener onClickAway={() => setCityDrop(false)}><div>
+              {/* {cityDrop && <ClickAwayListener onClickAway={() => setCityDrop(false)}><div>
                 {
                   getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
                     <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
@@ -2717,7 +2717,7 @@ const EditSalon = () => {
                         !getAdminAllCitiesLoading && !getAdminAllCitiesResolve &&
                         <p>No Cities</p>
                 }
-              </div></ClickAwayListener>}
+              </div></ClickAwayListener>} */}
             </div>
           </div>
 
@@ -2727,10 +2727,10 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={timezone}
-                onClick={() => timezoneDropHandler()}
+                // onClick={() => timezoneDropHandler()}
               />
 
-              {timezoneDrop &&
+              {/* {timezoneDrop &&
                 <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}>
                   <div>
                     {
@@ -2749,7 +2749,7 @@ const EditSalon = () => {
                             <p>No Timezone</p>
                     }
                   </div>
-                </ClickAwayListener>}
+                </ClickAwayListener>} */}
             </div>
 
             <div>
@@ -2757,7 +2757,7 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={postCode}
-                onChange={(e) => setPostCode(e.target.value)}
+                // onChange={(e) => setPostCode(e.target.value)}
               />
             </div>
           </div>
