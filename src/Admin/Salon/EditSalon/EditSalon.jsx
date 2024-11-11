@@ -1626,23 +1626,20 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { adminCreateSalonAction, adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
-// import Modal from '../../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
-import SalonModal from '../../../components/Modal/SalonModal/SalonModal';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-import Modal from '@mui/material/Modal';
-import { ClickAwayListener } from '@mui/material';
+import { ClickAwayListener, Modal } from '@mui/material';
 import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
 
 const EditSalon = () => {
@@ -1678,8 +1675,8 @@ const EditSalon = () => {
     }
   }, [currentSalon])
 
-  console.log("Hurrayy  ", AdminSalonImages)
-  console.log("Salon logo ", AdminSalonLogo)
+  // console.log("Hurrayy  ", AdminSalonImages)
+  // console.log("Salon logo ", AdminSalonLogo)
 
   useEffect(() => {
     if (AdminSalonImages) {
@@ -1694,7 +1691,7 @@ const EditSalon = () => {
   }, [AdminSalonLogo])
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
-  const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  // const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
   const SalonIconControllerRef = useRef(new AbortController());
 
@@ -1745,7 +1742,7 @@ const EditSalon = () => {
     }
   }
 
-  console.log("Current Salon is ", currentSalon)
+  // console.log("Current Salon is ", currentSalon)
 
   const [salonEmail, setSalonEmail] = useState(currentSalon?.salonEmail)
   const [salonName, setSalonName] = useState(currentSalon?.salonName)
@@ -1771,7 +1768,6 @@ const EditSalon = () => {
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 8
     },
@@ -1929,6 +1925,8 @@ const EditSalon = () => {
 
   const [uploadSalonLogo, setUploadSalonLogo] = useState("")
 
+  const [editSalonLogoLoader, setEditSalonLogoLoader] = useState(false)
+
   const handleSalonFileInputChange = async (e) => {
     const uploadImage = e.target.files[0]; // Get the uploaded file
 
@@ -1946,6 +1944,21 @@ const EditSalon = () => {
       return;
     }
 
+    const maxSizeInBytes = 2 * 1024 * 1024;
+    if (uploadImage.size > maxSizeInBytes) {
+      toast.error("File size must be lower than 2mb", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      // e.target.value = null;
+      return;
+    }
+
     const imageUrl = URL.createObjectURL(uploadImage);
 
     const formData = new FormData();
@@ -1954,6 +1967,8 @@ const EditSalon = () => {
     formData.append('salonLogo', uploadImage);
 
     try {
+
+      setEditSalonLogoLoader(true)
       const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -1969,8 +1984,9 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
-      console.log('Salon Logo Upload success:', imageResponse.data);
+      // console.log('Salon Logo Upload success:', imageResponse.data);
       setSalonLogo(imageUrl)
+      setEditSalonLogoLoader(false)
 
       dispatch(adminGetDefaultSalonAction(email))
     } catch (error) {
@@ -1984,6 +2000,8 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
+
+      setEditSalonLogoLoader(false)
     }
   };
 
@@ -1998,7 +2016,7 @@ const EditSalon = () => {
     const uploadedFiles = e.target.files;
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
-    // Check for invalid files
+
     const invalidFiles = Array.from(uploadedFiles).filter(file => !allowedTypes.includes(file.type));
     if (invalidFiles.length > 0) {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
@@ -2204,13 +2222,29 @@ const EditSalon = () => {
     currentEditSalonImageInputRef.current.click();
   };
 
+  const [handleEditSalonLoader, setHandleEditSalonLoader] = useState(false)
+
   const handleEditSelectedImageFileInputChange = async (e) => {
-    const uploadImage = e.target.files[0]; // Get the uploaded file
+    const uploadImage = e.target.files[0];
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
     if (!allowedTypes.includes(uploadImage.type)) {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
+
+    const maxSizeInBytes = 2 * 1024 * 1024;
+    if (uploadImage.size > maxSizeInBytes) {
+      toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
           fontSize: "1.4rem",
@@ -2231,6 +2265,7 @@ const EditSalon = () => {
       formData.append('salonId', currentSalon?.salonId)
 
       try {
+        setHandleEditSalonLoader(true)
         const { data: responseimage } = await api.put('/api/salon/updateSalonImages', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -2256,6 +2291,7 @@ const EditSalon = () => {
             color: '#fff',
           },
         });
+        setHandleEditSalonLoader(false)
       } catch (error) {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
@@ -2266,6 +2302,7 @@ const EditSalon = () => {
             color: '#fff',
           },
         });
+        setHandleEditSalonLoader(false)
       }
     }
   }
@@ -2363,15 +2400,29 @@ const EditSalon = () => {
     setSelectedMobileEditImageObject(imgObj)
   };
 
-
+  const [mobileEditSelectedimageLoader, setMobileEditSelectedImageLoader] = useState(false)
 
   const mobileEditSelectedImageFileInputChange = async (e) => {
-    const uploadImage = e.target.files[0]; // Get the uploaded file
+    const uploadImage = e.target.files[0];
 
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
 
     if (!allowedTypes.includes(uploadImage.type)) {
       alert("Please upload a valid image file (JPEG, WebP, PNG).");
+      return;
+    }
+
+    const maxSizeInBytes = 2 * 1024 * 1024;
+    if (uploadImage.size > maxSizeInBytes) {
+      toast.error("File size must be lower than 2mb", {
+        duration: 3000,
+        style: {
+          fontSize: "1.4rem",
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return;
     }
 
@@ -2384,6 +2435,9 @@ const EditSalon = () => {
       formData.append('salonId', currentSalon?.salonId)
 
       try {
+
+        setMobileEditSelectedImageLoader(selectedMobileEditImageObject._id);
+
         const { data: responseimage } = await api.put('/api/salon/updateSalonImages', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -2408,6 +2462,9 @@ const EditSalon = () => {
             color: '#fff',
           },
         });
+
+        setMobileEditSelectedImageLoader(null);
+
       } catch (error) {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
@@ -2418,6 +2475,8 @@ const EditSalon = () => {
             color: '#fff',
           },
         });
+
+        setMobileEditSelectedImageLoader(null);
       }
     }
   }
@@ -2555,18 +2614,28 @@ const EditSalon = () => {
             </svg></div>
 
             <div className={style.edit_salon_logo_container}>
-              <div>
-                <img src={`${salonLogo}`} alt="" />
-                <div>
-                  <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: 'none' }}
-                    onChange={handleSalonFileInputChange}
-                  />
-                </div>
-              </div>
+              {
+                editSalonLogoLoader ?
+                  <div>
+                    <Skeleton
+                      height={"13rem"}
+                      width={"13rem"}
+                      style={{ borderRadius: "50%" }}
+                    /></div> :
+                  <div>
+                    <img src={`${salonLogo}`} alt="" />
+                    <div>
+                      <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleSalonFileInputChange}
+                      />
+                    </div>
+                  </div>
+              }
+
             </div>
 
             <div>
@@ -2620,7 +2689,8 @@ const EditSalon = () => {
             <input
               type="text"
               value={salonEmail}
-              // onChange={(e) => setSalonEmail(e.target.value)}
+              readOnly
+            // onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
 
@@ -2648,6 +2718,7 @@ const EditSalon = () => {
               <input
                 type="number"
                 value={latitude}
+                readOnly
               />
             </div>
 
@@ -2656,6 +2727,7 @@ const EditSalon = () => {
               <input
                 type="number"
                 value={longitude}
+                readOnly
               />
             </div>
           </div>
@@ -2670,7 +2742,8 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={country}
-                // onChange={(e) => searchCountryHandler(e)}
+                readOnly
+              // onChange={(e) => searchCountryHandler(e)}
               />
 
               {/* {countryDrop && <ClickAwayListener onClickAway={() => setCountryDrop(false)}><div>
@@ -2698,7 +2771,8 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={city}
-                // onChange={(e) => searchCityHandler(e)}
+                readOnly
+              // onChange={(e) => searchCityHandler(e)}
               />
 
               {/* {cityDrop && <ClickAwayListener onClickAway={() => setCityDrop(false)}><div>
@@ -2727,7 +2801,8 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={timezone}
-                // onClick={() => timezoneDropHandler()}
+                readOnly
+              // onClick={() => timezoneDropHandler()}
               />
 
               {/* {timezoneDrop &&
@@ -2757,7 +2832,8 @@ const EditSalon = () => {
               <input
                 type="text"
                 value={postCode}
-                // onChange={(e) => setPostCode(e.target.value)}
+                readOnly
+              // onChange={(e) => setPostCode(e.target.value)}
               />
             </div>
           </div>
@@ -3145,16 +3221,23 @@ const EditSalon = () => {
             {
               salonImages?.map((s) => (
                 <div className={`${style.salon_image_update_item} ${darkmodeOn && style.dark}`} key={s._id}>
-                  <div>
-                    <img src={s.url} alt="image" />
-                  </div>
-                  <div>
+                  {
+                    mobileEditSelectedimageLoader === s._id ?
+                      <div><Skeleton width={"100%"} height={"100%"} /></div> :
+                      <div>
+                        <img src={s.url} alt="image" />
+                      </div>
+                  }
 
+                  <div>
                     <button onClick={() => mobiledeleteImage(s)}>
                       <div><DeleteIcon /></div>
                       <p>Delete</p>
                     </button>
-                    <button onClick={() => handleCurrentMobileEditSalonImageButtonClick(s)}>
+
+                    <button
+                      disabled={mobileEditSelectedimageLoader === s._id}
+                      onClick={() => handleCurrentMobileEditSalonImageButtonClick(s)}>
                       <div><EditIcon /></div>
                       <p>Update</p>
 
@@ -3165,6 +3248,7 @@ const EditSalon = () => {
                         onChange={(e) => mobileEditSelectedImageFileInputChange(e)}
                       />
                     </button>
+
                   </div>
                 </div>
               ))
@@ -3186,10 +3270,18 @@ const EditSalon = () => {
           </div>
 
           <div className={style.modal_content_container}>
-            <div><img src={selectedEditImageObject?.url} alt="salon image" /></div>
+            {
+              handleEditSalonLoader ?
+                <div><Skeleton width={"100%"} height={"100%"} /></div> :
+                <div><img src={selectedEditImageObject?.url} alt="salon image" /></div>
+            }
+
             <div>
               <div>
-                <button onClick={() => handleCurrentEditSalonImageButtonClick()}>
+                <button
+                  onClick={() => handleCurrentEditSalonImageButtonClick()}
+                  disabled={handleEditSalonLoader}
+                >
                   <div><EditIcon /></div>
                   <p>Update</p>
 

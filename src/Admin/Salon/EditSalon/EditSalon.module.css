@@ -2268,7 +2268,7 @@
         height: 13rem;
         width: 13rem;
         border: 1px solid rgba(0, 0, 0, 0.2);
-        background-color: #ededed;
+        /* background-color: #ededed; */
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;

@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import style from './CustomerList.module.css';
-import { CloseIcon, DeleteIcon, EmailIcon, LeftArrow, MessageIcon, Notificationicon, RightArrow, SearchIcon, Settingsicon } from '../../icons';
+import { CloseIcon, EmailIcon, LeftArrow, MessageIcon, RightArrow, SearchIcon } from '../../icons';
 import Skeleton from 'react-loading-skeleton';
 import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 import api from '../../Redux/api/Api';
-import { GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants';
-import { useNavigate } from 'react-router-dom';
+import { GET_ALL_CUSTOMERLIST_REQ, GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants';
 import toast from 'react-hot-toast';
-
 import Modal from '@mui/material/Modal';
 import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../Redux/Admin/Actions/BarberAction';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const CustomerList = () => {
-  
+
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
   const dispatch = useDispatch();
   const CustomerListControllerRef = useRef(new AbortController());
@@ -49,24 +47,9 @@ const CustomerList = () => {
   const [search, setSearch] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
 
-  // const searchCustomerhandler = async () => {
-  //   setSearchLoading(true);
-  //   try {
-  //     const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
-  //     dispatch({
-  //       type: GET_ALL_CUSTOMERLIST_SUCCESS,
-  //       payload: data,
-  //     });
-  //   } catch (error) {
-  //     console.error('Error searching customers:', error);
-  //   } finally {
-  //     setSearchLoading(false);
-  //   }
-  // };
-
   const searchCustomerhandler = async () => {
 
-    
+
     setSearchLoading(true);
     try {
       const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
@@ -107,6 +90,7 @@ const CustomerList = () => {
   const paginationLeftHandler = async () => {
     if (page > 1) {
       try {
+        dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
         const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
         dispatch({
           type: GET_ALL_CUSTOMERLIST_SUCCESS,
@@ -124,6 +108,7 @@ const CustomerList = () => {
   const paginationRightHandler = async () => {
     if (page < totalPages) {
       try {
+        dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
         const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
         dispatch({
           type: GET_ALL_CUSTOMERLIST_SUCCESS,
@@ -190,8 +175,6 @@ const CustomerList = () => {
 
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
-      // navigate('/admin-customer/send-email', { state: checkedEmails });
-
       setOpenBarberEmail(true)
     } else {
       toast.error("Atleast one customer needed", {
@@ -232,15 +215,7 @@ const CustomerList = () => {
   const [barberMessage, setBarberMessage] = useState("")
 
   const sendMessageNavigate = () => {
-    // console.table(checkMobileNumbers)
     if (checkMobileNumbers.length > 0) {
-      // navigate('/admin-customer/send-message', {
-      //   state: {
-      //     checkMobileNumbers,
-      //     checkCustomerNames,
-      //   },
-      // });
-
       setOpenBarberMessage(true)
     } else {
       toast.error("Atleast one customer needed", {
@@ -261,7 +236,7 @@ const CustomerList = () => {
       smsBody: barberMessage,
       numbers: checkMobileNumbers
     }
-    console.log(smsdata)
+    // console.log(smsdata)
     dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
 
   }
@@ -422,7 +397,7 @@ const CustomerList = () => {
               highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--lightmode-loader-highlight-color)'}
             />
           </div>
-        ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
+        ) : adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
           <div className={`${style.customer_content_body} ${darkmodeOn && style.dark}`}>
             <div>
               <div>
@@ -438,7 +413,7 @@ const CustomerList = () => {
               <p>Mobile No.</p>
             </div>
 
-            {AllCustomerList.map((s, index) => (
+            {AllCustomerList?.map((s, index) => (
               <div key={s._id}
                 style={{
                   borderBottom: AllCustomerList.length - 1 === index && "none"
@@ -458,17 +433,10 @@ const CustomerList = () => {
               </div>
             ))}
           </div>
-        ) : !adminGetAllCustomerListLoading && adminGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
-          <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
-            <p>Customers not available</p>
-          </div>
-        ) : (
-          !adminGetAllCustomerListLoading && !adminGetAllCustomerListResolve && (
-            <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
-              <p>Customers not available</p>
-            </div>
-          )
-        )}
+        ) : (<div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
+          <p>Customers not available</p>
+        </div>)}
+
       </div>
 
       <div className={style.customer_pagination_wrapper}>

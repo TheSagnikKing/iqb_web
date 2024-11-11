@@ -1,5 +1,5 @@
 import React from 'react'
-import "./PasswordReset.css"
+import style from "./PasswordReset.module.css"
 import { useNavigate } from 'react-router-dom'
 
 const PasswordReset = () => {
@@ -11,7 +11,7 @@ const PasswordReset = () => {
   }
 
   return (
-    <div className='password_reset_container'>
+    <div className={style.password_reset_container}>
         <div>
             <img src="/passwordReset_img.png" alt="passwordReset_img" />
             <p>Password Reset</p>

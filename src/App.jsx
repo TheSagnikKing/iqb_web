@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
-import { RiWifiOffLine } from "react-icons/ri";
 import { ErrorBoundary } from "react-error-boundary";
 import "./App.css"
 
@@ -33,21 +32,13 @@ const AdminEditProfile = React.lazy(() => import("./Admin/EditProfile/EditProfil
 const BarberDashboard = React.lazy(() => import("./Barber/Dashboard/Dashboard"))
 const AdminSignupEditProfile = React.lazy(() => import("./Admin/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const AdminSalonAppointmentSettings = React.lazy(() => import("./Admin/Salon/SalonAppointmentSettings/SalonAppointmentSettings"))
-const AdminBarberSendEmail = React.lazy(() => import("./Admin/Barber/SendEmail/SendEmail"))
-const AdminBarberSendMessage = React.lazy(() => import("./Admin/Barber/SendMessage/SendMessage"))
 const AdminMobileSidebar = React.lazy(() => import("./components/Admin/MobileSidebar/MobileSidebar"))
-
-const AdminSendCustomerEmail = React.lazy(() => import("./Admin/Customer/SendEmail/SendEmail"))
-const AdminSendCustomerMessage = React.lazy(() => import("./Admin/Customer/SendMessage/SendMessage"))
-
 const BarberSidebar = React.lazy(() => import("./components/Barber/Sidebar/Sidebar"))
 const BarberMobileSidebar = React.lazy(() => import("./components/Barber/MobileSidebar/MobileSidebar"))
 const BarberEditProfile = React.lazy(() => import("./Barber/EditProfile/EditProfile"))
 const BarberSignupEditProfile = React.lazy(() => import("./Barber/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
 const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
-const BarberSendCustomerEmail = React.lazy(() => import("./Barber/Customers/SendEmail/SendEmail"))
-const BarberSendCustomerMessage = React.lazy(() => import("./Barber/Customers/SendMessage/SendMessage"))
 
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
@@ -55,18 +46,11 @@ import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
 import ProtectedBarberRoute from "./Barber/ProtectedRoutes/ProtectedRoute"
 import ProtectedBarberAuthRoute from "./Barber/ProtectedRoutes/ProtectedAuthRoute"
 import Loader from './components/Loader/Loader';
-import Drop from './Admin/Demo/Drop';
-import Demo from './Admin/Demo/Demo';
-import Table from './Admin/Demo/Table';
-
 import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
+import ErrorPage from './ErrorPage/ErrorPage';
+import { ExclamationIcon, WifiIcon } from './icons';
 
-import { } from '../public/offline.png'
-
-
-import DemoDashboard from './Admin/Demo/Dashboard/Dashboard'
-import { BsExclamationCircle } from 'react-icons/bs';
 const App = () => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -105,7 +89,6 @@ const App = () => {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
@@ -116,12 +99,13 @@ const App = () => {
     return (
       <main className="error_boundary_container">
         <div>
-          <div><BsExclamationCircle /></div>
+          <div><ExclamationIcon /></div>
           <p>Oops ! Something went wrong</p>
         </div>
       </main>
     );
   };
+
 
   return (
     // <div style={{
@@ -130,17 +114,11 @@ const App = () => {
     <>
 
       {!isOnline ? (
-        <div style={{
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
-          <div style={{ height: "200px", marginTop: "20px" }}>
-            <div style={{ fontSize: "45px", textAlign: "center" }}><RiWifiOffLine /></div>
-            <h1 style={{ color: "red", textAlign: "center" }}>You are offline</h1>
-            <h1 style={{ color: "red", textAlign: "center" }}>Please check your internet connection</h1>
+        <div className="offline_container">
+          <div >
+            <div><WifiIcon /></div>
+            <p>You are <span>offline</span></p>
+            <p>Please check your internet connection</p>
           </div>
         </div >
       ) : (
@@ -159,7 +137,7 @@ const App = () => {
               <Routes>
 
                 {/* Admin Auth Screens */}
-                <Route element={<ProtectedAdminAuthRoute />}>
+                <Route element={<ErrorBoundary FallbackComponent={ErrorFallback}><ProtectedAdminAuthRoute /></ErrorBoundary>}>
                   <Route path="/" element={<Public />} />
                   <Route path="/adminsignin" element={<AdminSignin />} />
                   <Route path="/adminsignup" element={<AdminSignup />} />
@@ -168,8 +146,6 @@ const App = () => {
                   <Route path="/adminchangepassword/:token" element={<AdminChangePassword />} />
                   <Route path="/adminpasswordreset" element={<AdminPasswordReset />} />
                   <Route path="/admin-signupeditprofile" element={<AdminSignupEditProfile />} />
-
-                  <Route path="/demodashboard2" element={<DemoDashboard />} />
                 </Route>
 
                 {/* Admin Main Pages  */}
@@ -248,22 +224,7 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-                    <Route
-                      path="/admin-barber/send-email"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminBarberSendEmail />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/admin-barber/send-message"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminBarberSendMessage />
-                        </ErrorBoundary>
-                      }
-                    />
+
                     <Route
                       path="/admin-customer"
                       element={
@@ -272,22 +233,7 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-                    <Route
-                      path="/admin-customer/send-email"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminSendCustomerEmail />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/admin-customer/send-message"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminSendCustomerMessage />
-                        </ErrorBoundary>
-                      }
-                    />
+
                     <Route
                       path="/admin-advertise"
                       element={
@@ -304,19 +250,12 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-                    <Route
-                      path="/table"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <Table />
-                        </ErrorBoundary>
-                      }
-                    />
+
                   </Route>
                 </Route>
 
                 {/* Barber Auth Screens */}
-                <Route element={<ProtectedBarberAuthRoute />}>
+                <Route element={<ErrorBoundary FallbackComponent={ErrorFallback}><ProtectedBarberAuthRoute /></ErrorBoundary>}>
                   <Route path="/" element={<Public />} />
                   <Route path="/barbersignin" element={<BarberSignin />} />
                   <Route path="/barbersignup" element={<BarberSignup />} />
@@ -327,20 +266,7 @@ const App = () => {
                   <Route path="/barber-signupeditprofile" element={<BarberSignupEditProfile />} />
                 </Route>
 
-                {/* <Route element={<ProtectedBarberRoute />}>
-                  <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
-                    <Route path="/barber-dashboard" element={<BarberDashboard />} />
-                    <Route path="/barber-dashboard/editprofile" element={<BarberEditProfile />} />
-                    <Route path="/barber-customer" element={<BarberCustomer />} />
-                    <Route path="/barber-customer/send-email" element={<BarberSendCustomerEmail />} />
-                    <Route path="/barber-customer/send-message" element={<BarberSendCustomerMessage />} />
-                    <Route path="/barber-queue" element={<BarberQueueList />} />
-                  </Route>
-                </Route> */}
-
-
-                import {ErrorBoundary} from 'react-error-boundary';
-
+                {/* Barber Main Pages  */}
                 <Route element={<ProtectedBarberRoute />}>
                   <Route element={isMobile ? <BarberMobileSidebar /> : <BarberSidebar />}>
                     <Route
@@ -367,22 +293,7 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-                    <Route
-                      path="/barber-customer/send-email"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberSendCustomerEmail />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/barber-customer/send-message"
-                      element={
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberSendCustomerMessage />
-                        </ErrorBoundary>
-                      }
-                    />
+
                     <Route
                       path="/barber-queue"
                       element={
@@ -394,8 +305,7 @@ const App = () => {
                   </Route>
                 </Route>
 
-
-
+                <Route path="*" element={<ErrorPage />} />
 
               </Routes>
             </React.Suspense>
@@ -408,8 +318,5 @@ const App = () => {
   )
 }
 
-
-// signup kore -> your requested is pending. -> frontend e connectSalon page arghya link kore email send korbe->
-// open kore o connect korbe -> connect hoegele oke dashboarde send korbo
 
 export default App

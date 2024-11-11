@@ -1,0 +1,48 @@
+.error_page_container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>div {
+        &>p:nth-child(1) {
+            font-size: 15rem;
+            font-weight: 600;
+        }
+
+        &>p:nth-child(2) {
+            font-size: 1.8rem;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 4rem;
+        }
+
+        &>button {
+            width: 12rem;
+            height: 4rem;
+            display: block;
+            margin-inline: auto;
+            background-color: #0867ff25;
+            color: #0866ff;
+            border: 1px solid #0866ff;
+            transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            -moz-transition: 0.3s all ease;
+            -ms-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            font-size: 1.4rem;
+            cursor: pointer;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+
+            &:hover {
+                background-color: #0866ff;
+                color: #fff;
+            }
+        }
+    }
+}

@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./BarberList.module.css"
-
 import { useNavigate } from 'react-router-dom'
-import { DeleteIcon, EditIcon, EmailIcon, Notificationicon, MessageIcon, CloseIcon } from '../../../icons'
+import { EmailIcon, MessageIcon, CloseIcon } from '../../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminApproveBarberAction, adminDeleteBarberAction, adminSendBarberEmailAction, adminSendBarberMessageAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import toast from 'react-hot-toast'
-
-import Modal from '@mui/material/Modal';
+import { Modal } from '@mui/material';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const BarberList = () => {
@@ -42,10 +40,6 @@ const BarberList = () => {
     }
   }
 
-  const [checkMap, setCheckMap] = useState(new Map());
-
-  const [checkMapClock, setCheckMapClock] = useState(new Map())
-
   useEffect(() => {
     if (BarberList && BarberList.length > 0) {
       const initialCheckMap = new Map();
@@ -64,6 +58,8 @@ const BarberList = () => {
     }
   }, [BarberList]);
 
+  const [checkMap, setCheckMap] = useState(new Map());
+
   const toggleHandler = (b) => {
     setCheckMap(prevCheckMap => {
       const newCheckMap = new Map(prevCheckMap);
@@ -81,6 +77,8 @@ const BarberList = () => {
 
     dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
   }
+
+  const [checkMapClock, setCheckMapClock] = useState(new Map())
 
   const toggleClockHandler = (b) => {
     setCheckMapClock(prevCheckMapClock => {
@@ -193,13 +191,11 @@ const BarberList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
-      // setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, barber.mobileNumber])
       setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)]);
       setCheckBarberNames(prevNames => [...prevNames, barber.name])
       setCheckAllBarbers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
-      // setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== barber.mobileNumber))
       setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)));
       setCheckBarberNames(prevNames => prevNames.filter(name => name !== barber.name))
       setCheckAllBarbers(false)
@@ -210,7 +206,6 @@ const BarberList = () => {
     setCheckAllBarbers((prev) => {
       if (!prev) {
         const barberEmails = BarberList.map((b) => b.email)
-        // const barberMobileNumbers = BarberList.map((b) => b.mobileNumber)
         const barberMobileNumbers = BarberList.map((b) => Number(`${b.mobileCountryCode}${b.mobileNumber}`));
         const barberNames = BarberList.map((b) => b.name)
         const allCheckedBarbers = BarberList.reduce((acc, barber) => {
@@ -240,7 +235,6 @@ const BarberList = () => {
 
   const sendEmailNavigate = () => {
     if (checkedEmails.length > 0) {
-      // navigate("/admin-barber/send-email", { state: checkedEmails })
 
       setOpenBarberEmail(true)
     } else {
@@ -267,7 +261,6 @@ const BarberList = () => {
       role: "Barber",
       recipientEmails: checkedEmails
     }
-    // console.log(maildata)
     dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
 
   }
@@ -283,12 +276,6 @@ const BarberList = () => {
 
   const sendMessageNavigate = () => {
     if (checkMobileNumbers.length > 0) {
-      // navigate("/admin-barber/send-message", {
-      //   state: {
-      //     checkMobileNumbers,
-      //     checkBarberNames
-      //   }
-      // })
       setOpenBarberMessage(true)
     } else {
       toast.error("Atleast one customer needed", {
@@ -451,12 +438,12 @@ const BarberList = () => {
 
       <div className={`${style.admin_barber_content_wrapper} ${darkmodeOn && style.dark}`}>
         {
-          getAdminBarberListLoading && !getAdminBarberListResolve ? (
+          getAdminBarberListLoading ? (
             <div className={style.admin_barber_content_body}>
               <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </div>
-          ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length > 0 ? (
+          ) : getAdminBarberListResolve && BarberList?.length > 0 ? (
             <div className={`${style.admin_barber_content_body} ${darkmodeOn && style.dark}`}>
               <div>
                 <div>
@@ -521,17 +508,9 @@ const BarberList = () => {
               ))}
 
             </div>
-          ) : !getAdminBarberListLoading && getAdminBarberListResolve && BarberList?.length == 0 ? (
-            <div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
-              <p style={{ margin: "2rem" }}>Barbers not available</p>
-            </div>
-          ) : (
-            !getAdminBarberListLoading && !getAdminBarberListResolve && (
-              <div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
-                <p style={{ margin: "2rem" }}>Barbers not available</p>
-              </div>
-            )
-          )
+          ) : (<div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
+            <p>Barbers not available</p>
+          </div>)
         }
       </div>
 

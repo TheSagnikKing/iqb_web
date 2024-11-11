@@ -9,6 +9,7 @@ import { adminSkipProfileAction } from '../../../Redux/Admin/Actions/AdminProfil
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast'
+import { ClickAwayListener } from '@mui/material';
 
 const SignupEditProfile = () => {
 
@@ -34,27 +35,6 @@ const SignupEditProfile = () => {
     setGender(value)
     setGenderDrop(false)
   }
-
-  const genderinputRef = useRef()
-  const genderDropRef = useRef()
-
-  useEffect(() => {
-    const handleClickGenderOutside = (event) => {
-      if (
-        genderinputRef.current &&
-        genderDropRef.current &&
-        !genderinputRef.current.contains(event.target) &&
-        !genderDropRef.current.contains(event.target)
-      ) {
-        setGenderDrop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickGenderOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickGenderOutside);
-    };
-  }, []);
 
   const [invalidnumber, setInvalidNumber] = useState(false)
 
@@ -160,14 +140,13 @@ const SignupEditProfile = () => {
               type="text"
               value={`${gender ? `${gender}` : ''}`}
               onClick={() => genderDropHandler()}
-              ref={genderinputRef}
             />
 
-            {genderDrop && <div ref={genderDropRef}>
+            {genderDrop && <ClickAwayListener onClickAway={() => setGenderDrop(false)}><div>
               <p onClick={() => setGenderHandler("Male")}>Male</p>
               <p onClick={() => setGenderHandler("Female")}>Female</p>
               <p onClick={() => setGenderHandler("Other")}>Other</p>
-            </div>}
+            </div></ClickAwayListener>}
           </div>
 
           <div>

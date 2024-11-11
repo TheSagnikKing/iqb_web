@@ -231,6 +231,7 @@ const DashboardHeader = () => {
 
     dispatch(adminSalonStatusAction(salonStatusOnlineData));
   }
+  
 
   const darkmodeOn = darkMode === "On"
 

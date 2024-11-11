@@ -43,6 +43,8 @@ import { RxCross2 } from "react-icons/rx";
 import { CiSaveDown2 } from "react-icons/ci";
 import { LuMail } from "react-icons/lu";
 import { LuMailWarning } from "react-icons/lu";
+import { RiWifiOffLine } from "react-icons/ri";
+import { BsExclamationCircle } from 'react-icons/bs';
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -96,3 +98,5 @@ export const CloseIcon = RxCross2
 export const SaveIcon = CiSaveDown2
 export const OtpMessageIcon = LuMail
 export const OtpEmailIcon = LuMailWarning
+export const WifiIcon = RiWifiOffLine
+export const ExclamationIcon = BsExclamationCircle

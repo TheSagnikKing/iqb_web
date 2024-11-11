@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, CloseIcon, Eyevisible, MobileCrossIcon, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
-
+import { CameraIcon, CheckIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import api from '../../Redux/api/Api';
-// import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
-// import Modal from '../../components/Modal/Modal';
 import toast from 'react-hot-toast';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 
@@ -58,6 +55,20 @@ const EditProfile = () => {
             return;
         }
 
+        const maxSizeInBytes = 2 * 1024 * 1024;
+        if (uploadImage.size > maxSizeInBytes) {
+            toast.error("File size must be lower than 2mb", {
+                duration: 3000,
+                style: {
+                    fontSize: "1.4rem",
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return;
+        }
+
         const formData = new FormData();
 
         formData.append('email', barberProfile?.email);
@@ -93,12 +104,8 @@ const EditProfile = () => {
                 },
             });
 
-
-            // navigate("/barber-dashboard")
         } catch (error) {
             setUploadpicLoader(false)
-            // console.log('Image upload failed:', error?.response?.data?.message);
-            // setProfilepic("")
 
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
@@ -112,7 +119,6 @@ const EditProfile = () => {
         }
     };
 
-    const [sendVerificationEmailModal, setSendVerificationEmailModal] = useState(false)
 
     const sendVerificationEmail = () => {
         if (!changeEmailVerifiedState) {
@@ -185,28 +191,6 @@ const EditProfile = () => {
         setGenderDrop(false)
     }
 
-    const genderinputRef = useRef()
-    const genderDropRef = useRef()
-
-    useEffect(() => {
-        const handleClickGenderOutside = (event) => {
-            if (
-                genderinputRef.current &&
-                genderDropRef.current &&
-                !genderinputRef.current.contains(event.target) &&
-                !genderDropRef.current.contains(event.target)
-            ) {
-                setGenderDrop(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickGenderOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickGenderOutside);
-        };
-    }, []);
-
-
     const [mobileNumber, setMobileNumber] = useState(`${barberProfile?.mobileCountryCode}${barberProfile?.mobileNumber?.toString()}`)
 
     const [countryCode, setCountryCode] = useState(barberProfile?.mobileCountryCode)
@@ -248,7 +232,6 @@ const EditProfile = () => {
     const {
         loading: barberUpdateProfileLoading,
         resolve: barberUpdateProfileResolve,
-        // response: AllCustomerList
     } = barberUpdateProfile
 
     const verifyEmailStatusClicked = () => {
@@ -337,281 +320,6 @@ const EditProfile = () => {
     const [openEmailModal, setOpenEmailModal] = useState(false)
 
     return (
-        // <div className={`barber_edit_profile ${darkmodeOn && "dark"}`}>
-        //     <p>Edit profile</p>
-        //     <div className={`barber_edit_profile_content_wrapper ${darkmodeOn && "dark"}`}>
-        //         <div>
-        //             <div
-        //                 style={{
-        //                     border: uploadpicLoader && "none"
-        //                 }}
-        //             >
-        //                 {
-        //                     uploadpicLoader ? <Skeleton count={1} height={"12rem"} width={"12rem"} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-        //                         highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} style={{ borderRadius: "50%" }} /> : <img src={barberProfile?.profile[0]?.url} alt="" />
-        //                 }
-
-        //                 <div>
-        //                     <button onClick={() => handleSalonLogoButtonClick()}><CameraIcon /></button>
-        //                     <input
-        //                         type="file"
-        //                         ref={fileInputRef}
-        //                         style={{ display: 'none' }}
-        //                         onChange={handleProfileFileInputChange}
-        //                     />
-        //                 </div>
-        //             </div>
-        //         </div>
-
-        //         <div>
-        //             <div>
-        //                 <p>Name</p>
-        //                 <input
-        //                     type="text"
-        //                     value={name}
-        //                     onChange={(e) => setName(e.target.value)}
-        //                 />
-        //             </div>
-
-        //             <div onClick={() => setOpenModal(true)}>
-        //                 <p>Password</p>
-        //                 <input
-        //                     type="text"
-        //                     value="********"
-        //                 />
-        //             </div>
-        //             {
-        //                 openModal && <Modal setOpenModal={setOpenModal} setOldPassword={setOldPassword} setPassword={setPassword} setConfirmPassword={setConfirmPassword} setSeeOldPassword={setSeeOldPassword} setSeePassword={setSeePassword} setSeeConfirmPassword={setSeeConfirmPassword}>
-        //                     <div className={`password_modal_container ${darkmodeOn && "dark"}`}>
-        //                         <h1>Change your password</h1>
-
-        //                         {
-        //                             barberProfile?.AuthType == "google" ?
-        //                                 <div></div> :
-        //                                 <div>
-        //                                     <p>Old Password</p>
-        //                                     <div>
-        //                                         <input
-        //                                             type={`${seeOldPassword ? "text" : "password"}`}
-        //                                             value={oldPassword}
-        //                                             onChange={(e) => setOldPassword(e.target.value)}
-        //                                         />
-        //                                         <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-        //                                     </div>
-        //                                 </div>
-        //                         }
-
-
-        //                         <div>
-        //                             <p>Password</p>
-        //                             <div>
-        //                                 <input
-        //                                     type={`${seePassword ? "text" : "password"}`}
-        //                                     value={password}
-        //                                     onChange={(e) => setPassword(e.target.value)}
-        //                                 />
-        //                                 <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-        //                             </div>
-        //                         </div>
-
-        //                         <div>
-        //                             <p>Confirm Password</p>
-        //                             <div>
-        //                                 <input
-        //                                     type={`${seeConfirmPassword ? "text" : "password"}`}
-        //                                     value={confirmPassword}
-        //                                     onChange={(e) => setConfirmPassword(e.target.value)}
-        //                                 />
-        //                                 <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
-        //                             </div>
-        //                         </div>
-
-
-        //                         <div>
-        //                             {
-        //                                 barberUpdatePasswordLoading ? <button style={{
-        //                                     display: "grid",
-        //                                     placeItems: "center"
-        //                                 }}><ButtonLoader /></button> : <button onClick={updatePasswordHandler}>Update</button>
-        //                             }
-        //                         </div>
-        //                     </div>
-        //                 </Modal>
-        //             }
-        //         </div>
-
-        //         <div>
-        //             <div>
-        //                 <p>Email</p>
-        //                 <div>
-        //                     <input
-        //                         type="email"
-        //                         value={barberProfile?.email}
-        //                     />
-        //                     <button onClick={() => sendVerificationEmail()} title={changeEmailVerifiedState ? "Verified" : "NotVerified"} style={{
-        //                         background: changeEmailVerifiedState ? "limegreen" : "red"
-        //                     }}>
-        //                         <div>{changeEmailVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
-
-        //                     </button>
-        //                 </div>
-        //             </div>
-
-        //             <div className='barber_profile_mobile_container'>
-        //                 <p>Mobile Number</p>
-        //                 <div>
-        //                     <div>
-        //                         <PhoneInput
-        //                             forceDialCode={true}
-        //                             defaultCountry="gb"
-        //                             value={mobileNumber}
-        //                             onChange={(phone, meta) => handlePhoneChange(phone, meta)}
-        //                         />
-        //                     </div>
-
-        //                     <button onClick={() => sendVerificationMobile()} title={changeMobileVerifiedState ? "Verified" : "NotVerified"} style={{
-        //                         background: changeMobileVerifiedState ? "limegreen" : "red"
-        //                     }}>
-        //                         <div>{changeMobileVerifiedState ? <CheckIcon /> : <MobileCrossIcon />}</div>
-
-        //                     </button>
-        //                 </div>
-
-        //             </div>
-        //         </div>
-
-        //         <div>
-        //             <div>
-        //                 <p>Date of Birth</p>
-        //                 <input
-        //                     type="date"
-        //                     value={dateOfBirth}
-        //                     onChange={(e) => setDateofBirth(e.target.value)}
-        //                     style={{
-        //                         colorScheme: darkmodeOn ? "dark" : "light"
-        //                     }}
-        //                 />
-        //             </div>
-
-        //             <div>
-        //                 <p>Gender</p>
-        //                 <input
-        //                     type="text"
-        //                     value={`${gender ? `${gender}` : ''}`}
-        //                     onClick={() => genderDropHandler()}
-        //                     ref={genderinputRef}
-        //                     style={{
-        //                         caretColor: "transparent"
-        //                     }}
-        //                 />
-
-        //                 {genderDrop && <div ref={genderDropRef}>
-        //                     <p onClick={() => setGenderHandler("Male")}>Male</p>
-        //                     <p onClick={() => setGenderHandler("Female")}>Female</p>
-        //                     <p onClick={() => setGenderHandler("Other")}>Other</p>
-        //                 </div>}
-        //             </div>
-        //         </div>
-
-        //         <div>
-        //             {
-        //                 barberUpdateProfileLoading ? <button style={{
-        //                     display: "grid",
-        //                     placeItems: "center"
-        //                 }}><ButtonLoader /></button> : <button onClick={updateBarberProfile}>Update</button>
-        //             }
-        //         </div>
-        //     </div>
-
-        //     {
-        //         sendVerificationEmailModal && <div className='verify_email_wrapper'>
-        //             <div className={`verify_email_content_wrapper ${darkmodeOn && "dark"}`}>
-        //                 <div>
-        //                     <button onClick={() => setSendVerificationEmailModal(false)}>X</button>
-        //                 </div>
-
-        //                 <div>
-        //                     <div>
-        //                         <img src="/email_verification.png" alt="" />
-        //                     </div>
-        //                     <div>
-        //                         <div>
-        //                             <p>Check Your Email</p>
-        //                             <p>An email with a verification code was just sent to your email address</p>
-
-        //                             <div>
-        //                                 <p>{barberProfile?.email}</p>
-        //                                 <button onClick={verifyEmailStatusClicked}>Verify</button>
-        //                             </div>
-
-        //                             <div>
-        //                                 {
-        //                                     otp.map((digit, index) => (
-        //                                         <input
-        //                                             type="text"
-        //                                             key={index}
-        //                                             maxLength={1}
-        //                                             value={digit}
-        //                                             autoFocus={index === 0}
-        //                                             ref={(ref) => (otpinputRef.current[index] = ref)}
-        //                                             onChange={(e) => handleOtpInputChange(index, e.target.value)}
-        //                                             onKeyDown={(e) => handleKeyDown(index, e)}
-        //                                         ></input>
-        //                                     ))
-        //                                 }
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     }
-
-        //     {
-        //         sendVerificationMobileModal && <div className='verify_email_wrapper'>
-        //             <div className={`verify_email_content_wrapper ${darkmodeOn && "dark"}`}>
-        //                 <div>
-        //                     <button onClick={() => setSendVerificationMobileModal(false)}>X</button>
-        //                 </div>
-
-        //                 <div>
-        //                     <div>
-        //                         <img src="/email_verification.png" alt="" />
-        //                     </div>
-        //                     <div>
-        //                         <div>
-        //                             <p>Check Your Mobile</p>
-        //                             <p>An message with a verification code was just sent to your mobile number</p>
-
-        //                             <div>
-        //                                 <p>{barberProfile?.mobileNumber}</p>
-        //                                 <button onClick={verifyMobileStatusClicked}>Verify</button>
-        //                             </div>
-
-        //                             <div>
-        //                                 {
-        //                                     mobileotp.map((digit, index) => (
-        //                                         <input
-        //                                             type="text"
-        //                                             key={index}
-        //                                             maxLength={1}
-        //                                             value={digit}
-        //                                             autoFocus={index === 0}
-        //                                             ref={(ref) => (mobileotpinputRef.current[index] = ref)}
-        //                                             onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
-        //                                             onKeyDown={(e) => handleMobileKeyDown(index, e)}
-        //                                         ></input>
-        //                                     ))
-        //                                 }
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     }
-        // </div>
-
         <main className={style.barber_edit_profile_container}>
             <div className={style.barber_edit_profile_container_left}>
                 <div><p>Your Profile</p></div>
@@ -823,7 +531,6 @@ const EditProfile = () => {
                             {changeMobileVerifiedState ? <CheckIcon /> : <CloseIcon />}
 
                         </button>
-                        {/* <div onClick={() => sendVerificationMobile()}><CloseIcon /></div> */}
                     </div>
                 </div>
 

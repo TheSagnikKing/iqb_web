@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useNavigate } from 'react-router-dom'
 import api from '../../Redux/api/Api'
-import { GET_BARBER_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Barber/Constants/constants'
+import { GET_BARBER_ALL_CUSTOMERLIST_REQ, GET_BARBER_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Barber/Constants/constants'
 import toast from 'react-hot-toast'
 import Modal from '@mui/material/Modal';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
@@ -94,6 +94,7 @@ const CustomerList = () => {
   const paginationLeftHandler = async () => {
     if (page > 1) {
       try {
+        dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
         const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${currentsalonId}&page=${page - 1}`);
         dispatch({
           type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
@@ -111,6 +112,7 @@ const CustomerList = () => {
   const paginationRightHandler = async () => {
     if (page < totalPages) {
       try {
+        dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
         const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${currentsalonId}&page=${page + 1}`);
         dispatch({
           type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
