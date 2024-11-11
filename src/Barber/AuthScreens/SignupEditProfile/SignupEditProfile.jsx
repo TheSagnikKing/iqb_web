@@ -91,6 +91,8 @@ const SignupEditProfile = () => {
     }
   };
 
+  const [countryflag, setCountryFlag] = useState("gb")
+
   const handlePhoneChange = (phone, meta) => {
     const { country, inputValue } = meta;
 
@@ -99,6 +101,7 @@ const SignupEditProfile = () => {
     if (isValid) {
       setMobileNumber(phone)
       setCountryCode(country?.dialCode)
+      setCountryFlag(country?.iso2)
       setInvalidNumber(false)
     } else {
       setInvalidNumber(true)
@@ -171,7 +174,7 @@ const SignupEditProfile = () => {
               }}>
                 <PhoneInput
                   forceDialCode={true}
-                  defaultCountry="gb"
+                  defaultCountry={countryflag}
                   value={mobileNumber}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />

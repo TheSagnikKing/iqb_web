@@ -311,6 +311,8 @@ const EditProfile = () => {
         }
     };
 
+    const [countryflag, setCountryFlag] = useState("gb")
+
     const handlePhoneChange = (phone, meta) => {
         const { country, inputValue } = meta;
 
@@ -319,11 +321,13 @@ const EditProfile = () => {
         if (isValid) {
             setMobileNumber(phone)
             setCountryCode(country?.dialCode)
+            setCountryFlag(country?.iso2)
             setInvalidNumber(false)
         } else {
             setInvalidNumber(true)
         }
     };
+
 
     const [openPasswordModal, setOpenPasswordModal] = useState(false)
     const [openMobileModal, setOpenMobileModal] = useState(false)
@@ -527,7 +531,7 @@ const EditProfile = () => {
                         <div>
                             <PhoneInput
                                 forceDialCode={true}
-                                defaultCountry="gb"
+                                defaultCountry={countryflag}
                                 value={mobileNumber}
                                 onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                             />

@@ -142,17 +142,18 @@ const CreateBarber = () => {
     }
   };
 
-  const handlePhoneChange = (phone, meta, localname) => {
-    // console.log(meta)
-    const { country, inputValue } = meta;
+  const [countryflag, setCountryFlag] = useState("gb")
 
-    // console.log("svd", inputValue)
+  const handlePhoneChange = (phone, meta, localname) => {
+
+    const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
 
     if (isValid) {
       setMobileNumber(phone)
       setCountryCode(country?.dialCode)
+      setCountryFlag(country?.iso2)
       setInvalidNumber(false)
     } else {
       setInvalidNumber(true)
@@ -311,7 +312,7 @@ const CreateBarber = () => {
                 <div>
                   <PhoneInput
                     forceDialCode={true}
-                    defaultCountry="gb"
+                    defaultCountry={countryflag}
                     value={mobileNumber}
                     onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                   />

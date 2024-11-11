@@ -52,7 +52,7 @@ const SignupEditProfile = () => {
     } else {
       const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
 
-      console.log(profiledata)
+      // console.log(profiledata)
       dispatch(AdminSignupEditAction(profiledata, navigate))
     }
 
@@ -86,6 +86,8 @@ const SignupEditProfile = () => {
     }
   };
 
+  const [countryflag, setCountryFlag] = useState("gb")
+
   const handlePhoneChange = (phone, meta) => {
     const { country, inputValue } = meta;
 
@@ -94,6 +96,7 @@ const SignupEditProfile = () => {
     if (isValid) {
       setMobileNumber(phone)
       setCountryCode(country?.dialCode)
+      setCountryFlag(country?.iso2)
       setInvalidNumber(false)
     } else {
       setInvalidNumber(true)
@@ -164,7 +167,7 @@ const SignupEditProfile = () => {
               <div>
                 <PhoneInput
                   forceDialCode={true}
-                  defaultCountry="gb"
+                  defaultCountry={countryflag}
                   value={mobileNumber}
                   // onChange={(phone) => setMobileNumber(phone)}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}

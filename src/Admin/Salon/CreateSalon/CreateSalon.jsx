@@ -434,7 +434,7 @@ const CreateSalon = () => {
     setServiceEWT(currentService.serviceEWT);
 
     const updatedServices = [...localsalondata.selectedServices];
-    updatedServices.splice(index, 1); 
+    updatedServices.splice(index, 1);
 
     setSelectedServices(updatedServices);
 
@@ -469,9 +469,9 @@ const CreateSalon = () => {
 
 
   const handleEditSelectedImageFileInputChange = (e) => {
-    const uploadImage = e.target.files[0]; 
+    const uploadImage = e.target.files[0];
     const allowedTypes = ["image/jpeg", "image/webp", "image/png"];
-    const maxSizeInBytes = 2 * 1024 * 1024; 
+    const maxSizeInBytes = 2 * 1024 * 1024;
 
     if (!allowedTypes.includes(uploadImage.type)) {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
@@ -562,7 +562,7 @@ const CreateSalon = () => {
         services: localsalondata.selectedServices,
       }
 
-      console.log("Salondata ", salondata)
+      // console.log("Salondata ", salondata)
 
       const files = await Promise.all(
         salonImages?.map(async (imgObject) => {
@@ -755,6 +755,7 @@ const CreateSalon = () => {
     }
   };
 
+  const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta) => {
 
@@ -765,6 +766,7 @@ const CreateSalon = () => {
     if (isValid) {
       setContactTel(phone)
       setDialCode(country?.dialCode)
+      setCountryFlag(country?.iso2)
       setInvalidNumber(false)
     } else {
       setInvalidNumber(true)
@@ -1138,7 +1140,7 @@ const CreateSalon = () => {
               <div>
                 <PhoneInput
                   forceDialCode={true}
-                  defaultCountry="gb"
+                  defaultCountry={countryflag}
                   value={contactTel}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />

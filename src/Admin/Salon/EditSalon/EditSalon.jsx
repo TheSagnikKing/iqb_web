@@ -2508,6 +2508,8 @@ const EditSalon = () => {
     }
   };
 
+  const [countryflag, setCountryFlag] = useState("gb")
+
   const handlePhoneChange = (phone, meta) => {
     const { country, inputValue } = meta;
 
@@ -2516,6 +2518,7 @@ const EditSalon = () => {
     if (isValid) {
       setContactTel(phone)
       setDialCode(country?.dialCode)
+      setCountryFlag(country?.iso2)
       setInvalidNumber(false)
     } else {
       setInvalidNumber(true)
@@ -2864,7 +2867,7 @@ const EditSalon = () => {
               <div>
                 <PhoneInput
                   forceDialCode={true}
-                  defaultCountry="gb"
+                  defaultCountry={countryflag}
                   value={contactTel}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
