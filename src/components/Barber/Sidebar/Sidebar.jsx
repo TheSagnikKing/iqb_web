@@ -43,63 +43,10 @@ const Sidebar = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    // <main className={`${style.container} ${darkmodeOn && style.dark}`}>
-    //   <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
-    //     <div>
-    //       <p className={showSidebar ? style.titleActive : style.titleInActive}>
-    //         {showSidebar ? <div className={style.sidebar_top_salon}>
-    //           <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
-    //             <img
-    //               src={barberGetSalonLogoResponse?.salonLogo[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
-    //               alt=""
-
-    //             />
-    //           </div>
-    //           <p style={{
-    //             color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
-    //           }}>{barberGetSalonLogoResponse?.salonName}</p>
-
-    //         </div> : ""}
-    //       </p>
-    //     </div>
-
-    //     <div className={style.menu_items_container}>
-    //       {menudata.map((m) => (
-    //         <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
-
-    //         >
-    //           <p style={{
-    //             color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
-    //           }}
-    //           >{m.icon}</p>
-    //           <p style={{
-    //             color: location.pathname.includes(m.url) && " var(--primary-bg-color3)"
-    //           }}>{m.title}</p>
-    //         </div>
-    //       ))}
-
-    //     </div>
-
-    //     <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>
-    //   </div>
-
-    //   <div className={`${style.content} ${darkmodeOn && style.dark}`}
-    //     style={{
-    //       width: showSidebar ? "calc(100vw - 28rem)" : "calc(100vw - 7rem)"
-    //     }}
-    //   >
-    //     <div>
-    //       <DashboardHeader />
-    //       <div><Outlet /></div>
-    //     </div>
-    //   </div>
-
-    // </main>
-
     <main className={`${style.container} ${darkmodeOn && style.dark}`}>
       <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
         <div>
-          <p className={showSidebar ? style.titleActive : style.titleInActive}>
+          <div className={showSidebar ? style.titleActive : style.titleInActive}>
             {showSidebar ? <div className={style.sidebar_top_salon}>
               <div onClick={() => navigate("/barber-dashboard")} style={{ cursor: "pointer" }}>
                 <img
@@ -111,17 +58,17 @@ const Sidebar = () => {
                 color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
               }}>{barberGetSalonLogoResponse?.salonName}</p>
             </div> : ""}
-          </p>
+          </div>
         </div>
 
         <div className={style.menu_items_container}>
           {menudata.map((m) => (
             <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
             >
-              <p style={{
+              <div style={{
                 color: location.pathname.includes(m.url) && "#fff"
               }}
-              >{m.icon}</p>
+              >{m.icon}</div>
               <p style={{
                 color: location.pathname.includes(m.url) && "#fff"
               }}>{m.title}</p>
@@ -158,10 +105,10 @@ const Sidebar = () => {
           width: showSidebar ? "calc(100vw - 20vw)" : "calc(100vw - 4vw)",
         }}
       >
-        <div>
+        {/* <div> */}
           <DashboardHeader />
           <div><Outlet /></div>
-        </div>
+        {/* </div> */}
       </div>
     </main>
   )

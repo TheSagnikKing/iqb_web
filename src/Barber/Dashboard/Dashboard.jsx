@@ -266,7 +266,7 @@ const Dashboard = () => {
                           alignContent: "center",
                           paddingTop: "1rem"
                         }}>
-                          <Skeleton count={1} height={"4rem"} style={{ borderRadius: "3px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          <Skeleton count={1} height={"6rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                             highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                         </div> :
                         barberDashboardSalonInfoResolve && barberDashboardSalonInfoResponse ?
@@ -429,7 +429,7 @@ const Dashboard = () => {
                   {
                     getBarberQueueListLoading ?
                       <div className={style.queue_body_loading}>
-                        <Skeleton count={9} height={"8vh"} style={{}} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
                       getBarberQueueListResolve && BarberQueueList?.length > 0 ?

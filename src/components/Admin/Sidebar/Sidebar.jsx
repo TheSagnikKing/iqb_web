@@ -53,7 +53,7 @@ const Sidebar = () => {
     <main className={`${style.container} ${darkmodeOn && style.dark}`}>
       <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
         <div>
-          <p className={showSidebar ? style.titleActive : style.titleInActive}>
+          <div className={showSidebar ? style.titleActive : style.titleInActive}>
             {showSidebar ? <div className={style.sidebar_top_salon}>
               <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
                 <img
@@ -65,17 +65,17 @@ const Sidebar = () => {
                 color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
               }}>{adminGetDefaultSalonResponse?.salonName}</p>
             </div> : ""}
-          </p>
+          </div>
         </div>
 
         <div className={style.menu_items_container}>
           {menudata.map((m) => (
             <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
             >
-              <p style={{
+              <div style={{
                 color: location.pathname.includes(m.url) && "#fff"
               }}
-              >{m.icon}</p>
+              >{m.icon}</div>
               <p style={{
                 color: location.pathname.includes(m.url) && "#fff"
               }}>{m.title}</p>
@@ -112,10 +112,8 @@ const Sidebar = () => {
           width: showSidebar ? "calc(100vw - 20vw)" : "calc(100vw - 4vw)",
         }}
       >
-        {/* <div> */}
           <Header />
           <div><Outlet /></div>
-        {/* </div> */}
       </div>
     </main>
   );

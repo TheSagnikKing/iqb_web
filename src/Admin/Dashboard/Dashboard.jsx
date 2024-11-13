@@ -228,7 +228,7 @@ const Dashboard = () => {
                         alignContent: "center",
                         paddingTop: "1rem"
                       }}>
-                        <Skeleton count={1} height={"4rem"} style={{ borderRadius: "3px" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        <Skeleton count={1} height={"6rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
                       adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonDesc?.length > 0 ?
@@ -294,7 +294,7 @@ const Dashboard = () => {
                   {
                     getAdminBarberListLoading ?
                       <div className={style.barberlist_container_body_loading}>
-                        <Skeleton count={2} height={"8vh"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        <Skeleton count={2} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
                       getAdminBarberListResolve && BarberList?.length > 0 ?
@@ -421,7 +421,7 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-
+                
                   </Carousel>
                 </div>
               </div>
@@ -440,7 +440,7 @@ const Dashboard = () => {
                 {
                   getAllQueueListLoading ?
                     <div className={style.queue_body_loading}>
-                      <Skeleton count={8} height={"8vh"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      <Skeleton count={8} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                         highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div> :
                     getAllQueueListResolve && queuelist?.length > 0 ?
@@ -456,8 +456,8 @@ const Dashboard = () => {
                                 }}
                               >
                                 <div><p>{queue.qPosition}</p></div>
-                                <div><p>{queue.name}</p></div>
-                                <div><p>{queue.barberName}</p></div>
+                                <div><p>{queue.name.length > 6 ? `${queue.name.slice(0, 6).concat("...")}` : queue.name}</p></div>
+                                <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
                                 <div><p>{queue.customerEWT} mins</p></div>
                               </div>
                             )

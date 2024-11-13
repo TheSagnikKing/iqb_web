@@ -2,7 +2,7 @@
     /*theextra2remisforpaddingbottom*/
     height: var(--list-wrapper-height);
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
     background-color: #fff;
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
