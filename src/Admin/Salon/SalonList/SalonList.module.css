@@ -1,13 +1,14 @@
 .salon_wrapper {
-    height: 90vh;
+    /*theextra2remisforpaddingbottom*/
+    height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
     background-color: #fff;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
 }
 
 .salon_wrapper>div:nth-child(1) {
@@ -19,7 +20,7 @@
 }
 
 .salon_wrapper>div:nth-child(1)>p {
-    font-size: 1.2vw;
+    font-size: var(--list-primary-text);
     font-weight: 600;
 }
 
@@ -27,31 +28,31 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 8rem;
-    height: 3.2rem;
+    gap: 1em;
+    padding: var(--list-header-btn-padding);
     border: none;
     cursor: pointer;
     background-color: #0867ff25;
-    border: 1px solid #0866ff;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    border: 0.1rem solid #0866ff;
+    transition: var(--btn-transition);
+    border-radius: var(--list-btn-border-radius);
+    -webkit-border-radius: var(--list-btn-border-radius);
+    -moz-border-radius: var(--list-btn-border-radius);
+    -ms-border-radius: var(--list-btn-border-radius);
+    -o-border-radius: var(--list-btn-border-radius);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
 
     &>p {
         font-weight: 500;
-        font-size: 0.8vw;
+        font-size: var(--list-header-btn-text);
         color: #0866ff;
     }
 
     &>div {
-        font-size: 1vw;
+        font-size: var(--list-header-btn-icon);
         font-weight: 500;
         color: #0866ff;
     }
@@ -71,22 +72,23 @@
 
 .salon_content_wrapper {
     width: 100%;
-    height: calc(90vh - 5rem - 4rem);
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+    height: var(--list-wrapper-common-height);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+    background-color: #fff;
 }
 
 .salon_content_body {
-    height: calc(90vh - 5rem - 4rem);
+    height: var(--list-wrapper-common-height);
     width: 100%;
     overflow: auto;
 
     &::-webkit-scrollbar {
-        width: 6px;
-        height: 7px;
+        width: 0.6rem;
+        height: 0.7rem;
     }
 
     &::-webkit-scrollbar-track {
@@ -95,11 +97,11 @@
 
     &::-webkit-scrollbar-thumb {
         background: #0867ff48;
-        border-radius: 6px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        -ms-border-radius: 6px;
-        -o-border-radius: 6px;
+        border-radius: var(--list-wrapper-border-radius);
+        -webkit-border-radius: var(--list-wrapper-border-radius);
+        -moz-border-radius: var(--list-wrapper-border-radius);
+        -ms-border-radius: var(--list-wrapper-border-radius);
+        -o-border-radius: var(--list-wrapper-border-radius);
     }
 
     &::-webkit-scrollbar-thumb:hover {
@@ -116,11 +118,11 @@
     min-height: 6rem;
     min-width: 90rem;
     max-width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: 0.8fr 0.8fr 0.8fr 0.6fr 0.5fr 0.5fr 0.5fr;
     place-items: center;
-    font-size: 0.9vw;
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
@@ -128,8 +130,8 @@
     position: sticky;
     top: 0;
     z-index: 3;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: var(--list-wrapper-border-radius);
+    border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
     background-color: var(--primary-bg-light-color1);
 }
@@ -186,28 +188,27 @@
 .salon_content_body>div>div:nth-child(5)>button,
 .salon_content_body>div>div:nth-child(6)>button,
 .salon_content_body>div>div:nth-child(7)>button {
-    padding: 0.6rem 1.5rem;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
+    padding: var(--list-wrapper-btn-padding);
+    border-radius: var(--list-btn-border-radius);
+    -webkit-border-radius: var(--list-btn-border-radius);
+    -moz-border-radius: var(--list-btn-border-radius);
+    -ms-border-radius: var(--list-btn-border-radius);
+    -o-border-radius: var(--list-btn-border-radius);
     border: none;
     cursor: pointer;
-    font-size: 0.9vw;
+    font-size: var(--list-content-body-text);
 }
 
 .salon_content_body>div>div:nth-child(5)>button {
     background-color: #0867ff25;
-    border: 1px solid #0866ff;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     font-weight: 500;
-
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
 
     &:hover {
         background-color: #0866ff;
@@ -217,14 +218,14 @@
 
 .salon_content_body>div>div:nth-child(6)>button {
     background-color: rgba(255, 0, 0, 0.144);
-    border: 1px solid red;
+    border: 0.1rem solid red;
     color: red;
     font-weight: 500;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
 
     &:hover {
         background-color: red;
@@ -234,15 +235,14 @@
 
 .salon_content_body>div>div:nth-child(7)>button {
     background-color: #7204551d;
-    border: 1px solid #720455;
+    border: 0.1rem solid #720455;
     color: #720455;
     font-weight: 500;
-
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
 
     &:hover {
         background-color: #720455;
@@ -257,7 +257,7 @@
     place-items: center;
 
     &>p {
-        font-size: 1.2vw;
+        font-size: var(--list-content-error-text);
         font-weight: 500;
     }
 }
@@ -276,12 +276,11 @@
     background-color: #fff;
     border: none;
     width: 40%;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
-
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
 
     &>div:nth-child(1) {
         display: flex;
@@ -290,7 +289,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: 1.2vw;
+            font-size: var(--list-modal-header-text);
             font-weight: 600;
         }
 
@@ -302,7 +301,7 @@
             justify-content: center;
             width: 3.2rem;
             background-color: #ff000025;
-            border: 1px solid red;
+            border: 0.1rem solid red;
             cursor: pointer;
             color: red;
             border-radius: 50%;
@@ -310,12 +309,12 @@
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
-            transition: 0.3s all ease;
-            -webkit-transition: 0.3s all ease;
-            -moz-transition: 0.3s all ease;
-            -ms-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
-            font-size: 1.8rem;
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            font-size: var(--list-modal-header-icon);
             margin-bottom: 1rem;
 
             &:hover {
@@ -336,7 +335,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: 1vw;
+                font-size: var(--list-modal-content-text);
                 font-weight: 500;
                 margin-bottom: 1rem;
             }
@@ -345,15 +344,15 @@
                 height: 4rem;
                 width: 100%;
                 background-color: #EEEDED;
-                border-radius: 3px;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                -ms-border-radius: 3px;
-                -o-border-radius: 3px;
+                border-radius: var(--input-border-radius);
+                -webkit-border-radius: var(--input-border-radius);
+                -moz-border-radius: var(--input-border-radius);
+                -ms-border-radius: var(--input-border-radius);
+                -o-border-radius: var(--input-border-radius);
                 padding-inline: 1rem;
                 outline: none;
                 border: none;
-                font-size: 0.9vw;
+                font-size: var(--list-modal-content-text);
             }
         }
 
@@ -361,27 +360,25 @@
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-            width: 12rem;
-            height: 4rem;
             border: none;
             cursor: pointer;
+            width: var(--mdl-sbt-btn-width);
+            height: var(--mdl-sbt-btn-height);
             background-color: #0867ff25;
-            border: 1px solid #0866ff;
-            border-radius: 20px;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            -ms-border-radius: 20px;
-            -o-border-radius: 20px;
-            transition: 0.3s all ease;
-            -webkit-transition: 0.3s all ease;
-            -moz-transition: 0.3s all ease;
-            -ms-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
+            border: 0.1rem solid #0866ff;
+            border-radius: var(--list-btn-border-radius);
+            -webkit-border-radius: var(--list-btn-border-radius);
+            -moz-border-radius: var(--list-btn-border-radius);
+            -ms-border-radius: var(--list-btn-border-radius);
+            -o-border-radius: var(--list-btn-border-radius);
+            transition:var(--btn-transition);
+            -webkit-transition:var(--btn-transition);
+            -moz-transition:var(--btn-transition);
+            -ms-transition:var(--btn-transition);
+            -o-transition:var(--btn-transition);
             margin-inline: auto;
-            /* margin-top: 4rem; */
-
+            font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
-            font-size: 1vw;
             color: #0866ff;
 
             &:hover {
@@ -405,18 +402,18 @@
     right: 0;
     height: 25vh;
     background-color: #fff;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
+    box-shadow: var(--cmmn-box-shadow-y);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
     padding: 1rem;
     overflow: auto;
 
     &::-webkit-scrollbar {
-        width: 6px;
-        height: 7px;
+        width: 0.6rem;
+        height: 0.7rem;
     }
 
     &::-webkit-scrollbar-track {
@@ -425,11 +422,11 @@
 
     &::-webkit-scrollbar-thumb {
         background: #0867ff48;
-        border-radius: 6px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        -ms-border-radius: 6px;
-        -o-border-radius: 6px;
+        border-radius: var(--list-wrapper-border-radius);
+        -webkit-border-radius: var(--list-wrapper-border-radius);
+        -moz-border-radius: var(--list-wrapper-border-radius);
+        -ms-border-radius: var(--list-wrapper-border-radius);
+        -o-border-radius: var(--list-wrapper-border-radius);
     }
 
     &::-webkit-scrollbar-thumb:hover {
@@ -444,366 +441,45 @@
         line-height: 4rem;
         margin-bottom: 1rem;
         padding-inline: 1rem;
-        font-size: 0.9vw;
+        font-size: var(--list-modal-content-text);
         color: #000;
-        transition: 0.3s all ease;
-        -webkit-transition: 0.3s all ease;
-        -moz-transition: 0.3s all ease;
-        -ms-transition: 0.3s all ease;
-        -o-transition: 0.3s all ease;
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
 
         &:hover {
             line-height: 4rem;
             background-color: #0866ff;
             margin-bottom: 1rem;
             padding-inline: 1rem;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -o-border-radius: 3px;
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
             color: #fff;
-            font-size: 0.9vw;
             cursor: pointer;
         }
     }
 
 }
 
-@media screen and (min-width:0px) and (max-width:430px) {
-    .salon_wrapper>div:nth-child(1)>p {
-        font-size: 4vw;
-    }
-
-    .salon_wrapper>div:nth-child(1)>button {
-        &>p {
-            font-weight: 500;
-            font-size: 2.6vw;
-            color: #0866ff;
-        }
-
-        &>div {
-            font-size: 3vw;
-            font-weight: 500;
-            color: #0866ff;
-        }
-    }
-
-    .salon_content_body>div {
-        font-size: 3vw;
-    }
-
-    .salon_content_body>div>div:nth-child(5)>button,
-    .salon_content_body>div>div:nth-child(6)>button,
-    .salon_content_body>div>div:nth-child(7)>button {
-        font-size: 3vw;
-    }
-
-    .salon_content_body_error {
-
-        &>p {
-            font-size: 3.5vw;
-            font-weight: 500;
-        }
-    }
-
-
-    .modal_container {
-        width: 95vw;
-
-        &>div:nth-child(1) {
-
-            &>p {
-                font-size: 4vw;
-            }
-
-            &>button {
-                height: 8vw;
-                width: 8vw;
-                font-size: 3vw;
-            }
-        }
-
-
-        .modal_content_container {
-
-            &>div {
-
-                &>p {
-                    font-size: 3vw;
-                }
-
-                &>input {
-                    font-size: 3vw;
-                }
-            }
-
-            .salon_settings_btn {
-                font-size: 3vw;
-            }
-        }
-
-    }
-
-    .time_drop_container {
-
-        &>p {
-            font-size: 3vw;
-        }
-
+@media screen and (min-width:0px) and (max-width:430px){
+    .modal_container{
+        width: 90%;
     }
 }
 
-@media screen and (min-width:430px) and (max-width:768px) {
-    .salon_wrapper>div:nth-child(1)>p {
-        font-size: 2vw;
-    }
-
-    .salon_wrapper>div:nth-child(1)>button {
-        &>p {
-            font-weight: 500;
-            font-size: 1.4vw;
-            color: #0866ff;
-        }
-
-        &>div {
-            font-size: 2vw;
-            font-weight: 500;
-            color: #0866ff;
-        }
-    }
-
-    .salon_content_body>div {
-        font-size: 1.6vw;
-    }
-
-    .salon_content_body>div>div:nth-child(5)>button,
-    .salon_content_body>div>div:nth-child(6)>button,
-    .salon_content_body>div>div:nth-child(7)>button {
-        font-size: 1.6vw;
-    }
-
-    .salon_content_body_error {
-
-        &>p {
-            font-size: 2.5vw;
-            font-weight: 500;
-        }
-    }
-
-
-
-    .modal_container {
-        width: 95vw;
-
-        &>div:nth-child(1) {
-
-            &>p {
-                font-size: 3vw;
-            }
-
-            &>button {
-                height: 6vw;
-                width: 6vw;
-                font-size: 2vw;
-            }
-        }
-
-
-        .modal_content_container {
-
-            &>div {
-
-                &>p {
-                    font-size: 2vw;
-                }
-
-                &>input {
-                    font-size: 2vw;
-                }
-            }
-
-            .salon_settings_btn {
-                font-size: 2vw;
-            }
-        }
-
-    }
-
-    .time_drop_container {
-
-        &>p {
-            font-size: 2vw;
-        }
-
+@media screen and (min-width:431px) and (max-width:768px){
+    .modal_container{
+        width: 70%;
     }
 }
 
-@media screen and (min-width:768px) and (max-width:834px) {
-    .salon_wrapper>div:nth-child(1)>p {
-        font-size: 2vw;
-    }
-
-    .salon_wrapper>div:nth-child(1)>button {
-        &>p {
-            font-weight: 500;
-            font-size: 1.4vw;
-            color: #0866ff;
-        }
-
-        &>div {
-            font-size: 2vw;
-            font-weight: 500;
-            color: #0866ff;
-        }
-    }
-
-    .salon_content_body>div {
-        font-size: 1.6vw;
-    }
-
-    .salon_content_body>div>div:nth-child(5)>button,
-    .salon_content_body>div>div:nth-child(6)>button,
-    .salon_content_body>div>div:nth-child(7)>button {
-        font-size: 1.6vw;
-    }
-
-    .salon_content_body_error {
-
-        &>p {
-            font-size: 2vw;
-            font-weight: 500;
-        }
-    }
-
-    .modal_container {
-        width: 95vw;
-
-        &>div:nth-child(1) {
-
-            &>p {
-                font-size: 2vw;
-            }
-
-            &>button {
-                height: 4vw;
-                width: 4vw;
-                font-size: 2vw;
-            }
-        }
-
-
-        .modal_content_container {
-
-            &>div {
-
-                &>p {
-                    font-size: 1.6vw;
-                }
-
-                &>input {
-                    font-size: 1.6vw;
-                }
-            }
-
-            .salon_settings_btn {
-                font-size: 1.6vw;
-            }
-        }
-
-    }
-
-    .time_drop_container {
-
-        &>p {
-            font-size: 1.6vw;
-        }
-
-    }
-
-}
-
-@media screen and (min-width:834px) and (max-width:1250px) {
-
-    .salon_wrapper>div:nth-child(1)>p {
-        font-size: 1.8vw;
-    }
-
-    .salon_wrapper>div:nth-child(1)>button {
-        &>p {
-            font-weight: 500;
-            font-size: 1vw;
-            color: #0866ff;
-        }
-
-        &>div {
-            font-size: 1.4;
-            font-weight: 500;
-            color: #0866ff;
-        }
-    }
-
-    .salon_content_body>div {
-        font-size: 1.2vw;
-    }
-
-    .salon_content_body>div>div:nth-child(5)>button,
-    .salon_content_body>div>div:nth-child(6)>button,
-    .salon_content_body>div>div:nth-child(7)>button {
-        font-size: 1.2vw;
-    }
-
-    .salon_content_body_error {
-
-        &>p {
-            font-size: 1.5vw;
-            font-weight: 500;
-        }
-    }
-
-
-    .modal_container {
-        width: 65vw;
-
-        &>div:nth-child(1) {
-
-            &>p {
-                font-size: 1.6vw;
-            }
-
-            &>button {
-                height: 4vw;
-                width: 4vw;
-                font-size: 2vw;
-            }
-        }
-
-
-        .modal_content_container {
-
-            &>div {
-
-                &>p {
-                    font-size: 1.6vw;
-                }
-
-                &>input {
-                    font-size: 1.6vw;
-                }
-            }
-
-            .salon_settings_btn {
-                font-size: 1.6vw;
-            }
-        }
-
-    }
-
-    .time_drop_container {
-
-        &>p {
-            font-size: 1.6vw;
-        }
-
+@media screen and (min-width:769px) and (max-width:1140px){
+    .modal_container{
+        width: 50%;
     }
 }

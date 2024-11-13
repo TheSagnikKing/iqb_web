@@ -320,7 +320,7 @@ const SalonAdv = () => {
                   count={1}
                   width={"95%"}
                   height={"35rem"}
-                  style={{ borderRadius: "6px" }}
+                  style={{ borderRadius: "0.6rem" }}
                   baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                   highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                 />

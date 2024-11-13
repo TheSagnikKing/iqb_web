@@ -225,9 +225,9 @@ const SalonList = () => {
                     borderBottom: SalonList.length - 1 === index && "none"
                   }}
                 >
-                  <p>{s?.salonName.length > 19 ? s?.salonName.slice(0, 19) + "..." : s?.salonName}</p>
-                  <p>{s?.address.length > 19 ? s?.address.slice(0, 19) + "..." : s?.address}</p>
-                  <p>{s?.city.length > 19 ? s?.city.slice(0, 19) + "..." : s?.city}</p>
+                  <p>{s?.salonName.length > 18 ? s?.salonName.slice(0, 18) + "..." : s?.salonName}</p>
+                  <p>{s?.address.length > 18 ? s?.address.slice(0, 18) + "..." : s?.address}</p>
+                  <p>{s?.city.length > 18 ? s?.city.slice(0, 18) + "..." : s?.city}</p>
                   <p>{s?.salonType}</p>
                   <div>
                     <button onClick={() => editButtonClicked(s)}>Edit</button>

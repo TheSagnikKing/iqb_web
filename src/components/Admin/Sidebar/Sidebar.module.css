@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
   background-color: #ebf5ff;
-  color: rgba(0, 0, 255, 0.438);
+  /* background-color: rgba(255, 0, 0, 0.433); */
 }
 
 .sidebar {
@@ -59,7 +59,7 @@
 }
 
 .show {
-  width: 18vw;
+  width: 20vw;
   height: 100vh;
 }
 
@@ -97,18 +97,19 @@
   padding-block: 0rem;
   width: 90%;
   margin: auto;
-  height: auto;
+  height: calc(100vh - 8rem);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-top: 1rem;
+  overflow: auto;
 }
 
 .menu_item {
   width: 100%;
+  min-height: 4.5rem;
   height: 4.5rem;
   background-color: transparent;
-  border-radius: 3px;
+  border-radius:0.3rem;
   padding-inline: 1rem;
   display: flex;
   gap: 2rem;
@@ -119,16 +120,17 @@
   -moz-transition: 0.3s all ease;
   -ms-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
+  -webkit-border-radius:0.3rem;
+  -moz-border-radius:0.3rem;
+  -ms-border-radius:0.3rem;
+  -o-border-radius:0.3rem;
 }
 
 .menu_item p {
   color: var(--primary-text-light-color2);
-  font-size: 1vw;
-  font-weight: 500;
+  /* font-size: 1vw; */
+  font-size: clamp(1.4rem, 1.2rem + 0.2vw, 3rem);
+  font-weight: 600;
 }
 
 .menu_item:hover {
@@ -154,12 +156,13 @@
 
 
 .content {
-  width: calc(100vw - 20vw);
+  /* width: calc(100vw - 20vw); */
   height: 100vh;
   color: var(--primary-text-light-color2);
   padding-inline: 2rem;
   font-weight: 500;
   background-color: #ebf5ff;
+  /* background-color: blue; */
 }
 
 .sidebar_top_salon {

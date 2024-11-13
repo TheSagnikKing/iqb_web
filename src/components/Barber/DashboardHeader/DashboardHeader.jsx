@@ -228,40 +228,40 @@ const DashboardHeader = () => {
                 ref={MobileIconDropRef}
             >
                 <button onClick={() => setSidebarToggle(false)}><MobileCrossIcon /></button>
+                <main className={style.dashboard_mobile_siderbar_content_container}>
+                    {
+                        menudata.map((m) => (
+                            <div
+                                key={m.id}
+                                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
+                                onClick={() => {
+                                    navigate(m?.url)
+                                    setSidebarToggle(false)
+                                }}
+                            >
+                                <div style={{
+                                }}>{m.icon}</div>
+                                <p
+                                    style={{
+                                    }}>{m.title}</p>
+                            </div>
+                        ))
+                    }
 
-                {
-                    menudata.map((m) => (
-                        <div
-                            key={m.id}
-                            className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
-                            onClick={() => {
-                                navigate(m?.url)
-                                setSidebarToggle(false)
-                            }}
-                        >
-                            <div style={{
-                            }}>{m.icon}</div>
-                            <p
-                                style={{
-                                }}>{m.title}</p>
-                        </div>
-                    ))
-                }
+                    <div onClick={() => {
+                        navigate("/barber-dashboard/editprofile")
+                        setSidebarToggle(false)
+                    }} className={style.dashboard_mobile_item}
+                    >
+                        <div><ProfileIcon /></div>
+                        <p>Profile</p>
+                    </div>
+                    <div onClick={logoutHandler} className={style.dashboard_mobile_item}>
+                        <div><LogoutIcon /></div>
+                        <p>Logout</p>
+                    </div>
 
-                <div onClick={() => {
-                    navigate("/barber-dashboard/editprofile")
-                    setSidebarToggle(false)
-                }} className={style.dashboard_mobile_item}
-                >
-                    <div><ProfileIcon /></div>
-                    <p>Profile</p>
-                </div>
-                <div onClick={logoutHandler} className={style.dashboard_mobile_item}>
-                    <div><LogoutIcon /></div>
-                    <p>Logout</p>
-                </div>
-
-                {/* <div className={style.dashboard_theme_container}>
+                    {/* <div className={style.dashboard_theme_container}>
           <p>Theme</p>
           {
             darkmodeOn ?
@@ -274,7 +274,9 @@ const DashboardHeader = () => {
           }
 
         </div> */}
+                </main>
             </div>
+
         </div>
     )
 }

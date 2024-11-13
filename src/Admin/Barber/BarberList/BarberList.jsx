@@ -476,8 +476,9 @@ const BarberList = () => {
                       onChange={() => barberEmailCheckedHandler(b)}
                     />
                   </div>
-                  <p>{b.name}</p>
-                  <p>{b.email}</p>
+
+                  <p>{b?.name.length > 18 ? b?.name.slice(0, 18) + "..." : b?.name}</p>
+                  <p>{b?.email.length > 18 ? b?.email.slice(0, 18) + "..." : b?.email}</p>
 
                   <div>
                     <button

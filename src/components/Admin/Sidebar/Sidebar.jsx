@@ -112,10 +112,10 @@ const Sidebar = () => {
           width: showSidebar ? "calc(100vw - 20vw)" : "calc(100vw - 4vw)",
         }}
       >
-        <div>
+        {/* <div> */}
           <Header />
           <div><Outlet /></div>
-        </div>
+        {/* </div> */}
       </div>
     </main>
   );

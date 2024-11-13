@@ -125,9 +125,9 @@ const Queue = () => {
                         borderBottom: queuelist.length - 1 === index && "none"
                       }}
                     >
-                      <p>{b.name}</p>
+                      <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>
                       <p>{b.timeJoinedQ}</p>
-                      <p>{b.barberName}</p>
+                      <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.qPosition}</p>
                       <p>
                         {b.serviceType === "VIP" ? <div><CrownIcon /></div> : <div>-</div>}

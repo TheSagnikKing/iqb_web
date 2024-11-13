@@ -231,7 +231,7 @@ const DashboardHeader = () => {
 
     dispatch(adminSalonStatusAction(salonStatusOnlineData));
   }
-  
+
 
   const darkmodeOn = darkMode === "On"
 
@@ -416,38 +416,40 @@ const DashboardHeader = () => {
       >
         <button onClick={() => setSidebarToggle(false)}><MobileCrossIcon /></button>
 
-        {
-          menudata.map((m) => (
-            <div
-              key={m.id}
-              className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
-              onClick={() => {
-                navigate(m?.url)
-                setSidebarToggle(false)
-              }}
-            >
-              <div style={{
-              }}>{m.icon}</div>
-              <p
-                style={{
-                }}>{m.title}</p>
-            </div>
-          ))
-        }
+        <main className={style.dashboard_mobile_siderbar_content_container}>
+          {
+            menudata.map((m) => (
+              <div
+                key={m.id}
+                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
+                onClick={() => {
+                  navigate(m?.url)
+                  setSidebarToggle(false)
+                }}
+              >
+                <div style={{
+                }}>{m.icon}</div>
+                <p
+                  style={{
+                  }}>{m.title}</p>
+              </div>
+            ))
+          }
 
-        <div onClick={() => {
-          setSidebarToggle(false)
-          navigate("/admin-dashboard/editprofile")
-        }} className={style.dashboard_mobile_item}>
-          <div><ProfileIcon /></div>
-          <p>Profile</p>
-        </div>
-        <div onClick={() => dispatch(AdminLogoutAction(navigate))} className={style.dashboard_mobile_item}>
-          <div><LogoutIcon /></div>
-          <p>Logout</p>
-        </div>
 
-        {/* <div className={style.dashboard_theme_container}>
+          <div onClick={() => {
+            setSidebarToggle(false)
+            navigate("/admin-dashboard/editprofile")
+          }} className={style.dashboard_mobile_item}>
+            <div><ProfileIcon /></div>
+            <p>Profile</p>
+          </div>
+          <div onClick={() => dispatch(AdminLogoutAction(navigate))} className={style.dashboard_mobile_item}>
+            <div><LogoutIcon /></div>
+            <p>Logout</p>
+          </div>
+
+          {/* <div className={style.dashboard_theme_container}>
           <p>Theme</p>
           {
             darkmodeOn ?
@@ -460,6 +462,8 @@ const DashboardHeader = () => {
           }
 
         </div> */}
+
+        </main>
       </div>
 
     </div >

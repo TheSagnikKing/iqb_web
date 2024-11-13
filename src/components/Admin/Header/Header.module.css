@@ -649,6 +649,11 @@
         }
     }
 
+    .dashboard_mobile_siderbar_content_container{
+        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        overflow: auto;
+    }
+
     .dashboard_mobile_sidebar_active {
         width: 70vw;
         left: -1rem;
@@ -1297,6 +1302,11 @@
             }
         }
 
+        .dashboard_mobile_siderbar_content_container{
+            height: calc(100vh - calc(3rem + 2rem) - 2rem);
+            overflow: auto;
+        }
+
         .dashboard_mobile_item.dashboard_mobile_item_active {
             background-color: #0866ff;
 
@@ -1626,6 +1636,11 @@
                 font-size: 1.4vw;
                 color: #000;
             }
+        }
+
+        .dashboard_mobile_siderbar_content_container{
+            height: calc(100vh - calc(3rem + 2rem) - 2rem);
+            overflow: auto;
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
