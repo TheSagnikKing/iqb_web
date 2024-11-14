@@ -392,7 +392,7 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_email_mob_container}>
+                    <div className={style.modal_common_container}>
                         <div><OtpEmailIcon /></div>
 
                         <div>
@@ -542,7 +542,7 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_email_mob_container}>
+                    <div className={style.modal_common_container}>
                         <div><OtpMessageIcon /></div>
 
                         <div>

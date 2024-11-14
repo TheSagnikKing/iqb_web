@@ -3120,7 +3120,7 @@ const EditSalon = () => {
           </div>
 
 
-          <div
+          {/* <div
             className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}
           >
             <div>
@@ -3142,6 +3142,40 @@ const EditSalon = () => {
               <p>Update Salon Images</p>
 
               <button onClick={() => setOpenMobileUpdateModal(true)}>
+                Update
+              </button>
+            </div>
+
+          </div> */}
+
+          <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
+            <div>
+              <p style={{
+                fontSize: "var(--list-content-body-text)",
+                fontWeight: "600"
+              }}>Select Salon Images</p>
+
+              <button onClick={() => handleSalonImageButtonClick()}
+                style={{ fontSize: "var(--list-content-body-text)" }}>
+                Upload
+                <input
+                  type="file"
+                  ref={salonImagefileInputRef}
+                  style={{ display: 'none' }}
+                  multiple
+                  onChange={handleSalonImageFileInputChange}
+                />
+              </button>
+            </div>
+
+
+            <div>
+              <p style={{
+                fontSize: "var(--list-content-body-text)",
+                fontWeight: "600"
+              }}>Update Salon Images</p>
+
+              <button onClick={() => setOpenMobileUpdateModal(true)} style={{ fontSize: "var(--list-content-body-text)" }}>
                 Update
               </button>
             </div>

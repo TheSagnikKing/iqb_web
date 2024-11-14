@@ -16,6 +16,25 @@ export const getAllAdvertisementAction = (salonId, signal) => async (dispatch) =
 
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_ALL_ADVERTISEMENT_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_ALL_ADVERTISEMENT_FAIL,
@@ -25,8 +44,8 @@ export const getAllAdvertisementAction = (salonId, signal) => async (dispatch) =
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -48,14 +67,32 @@ export const getAllQueueListAction = (salonId, signal) => async (dispatch) => {
         })
     } catch (error) {
 
-        if (error.name !== 'CanceledError') {
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_ALL_QUEUELIST_FAIL,
+                payload: "Something went wrong !"
+            });
 
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+        if (error.name !== 'CanceledError') {
 
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -85,6 +122,25 @@ export const getDashboardAppointmentListAction = (salonId, currentDate, signal) 
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_DASHBOARD_APPOINTMENT_LIST_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_DASHBOARD_APPOINTMENT_LIST_FAIL,
@@ -94,8 +150,8 @@ export const getDashboardAppointmentListAction = (salonId, currentDate, signal) 
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -123,6 +179,26 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
             payload: barberlist
         })
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: SALON_ONLINE_STATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: SALON_ONLINE_STATUS_FAIL,
             payload: error?.response?.data
@@ -131,8 +207,8 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -157,6 +233,26 @@ export const adminUpdateSalonInfoAction = (salonupdatedata, setOpenModal, setSal
         setSalonDesc(data?.response)
         setOpenModal(false)
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_UPDATE_SALON_INFO_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_UPDATE_SALON_INFO_FAIL,
             payload: error?.response?.data
@@ -165,8 +261,8 @@ export const adminUpdateSalonInfoAction = (salonupdatedata, setOpenModal, setSal
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -190,21 +286,39 @@ export const adminDragAdvertisementAction = (salonId, advertisements, signal) =>
         })
     } catch (error) {
 
-        if (error.name !== 'CanceledError') {
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_DRAG_ADVERTISEMENT_FAIL,
+                payload: "Something went wrong !"
+            });
 
-            toast.error(error?.response?.data?.message, {
+            toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
             });
 
+            return;
+        }
+
+        if (error.name !== 'CanceledError') {
             dispatch({
                 type: ADMIN_DRAG_ADVERTISEMENT_FAIL,
                 payload: error?.response?.data
+            });
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
             });
         }
 

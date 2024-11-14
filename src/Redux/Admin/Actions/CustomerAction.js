@@ -14,6 +14,26 @@ export const adminGetAllCustomerListAction = (salonId,signal) => async (dispatch
         })
     } catch (error) {
 
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_ALL_CUSTOMERLIST_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_ALL_CUSTOMERLIST_FAIL,
@@ -23,8 +43,8 @@ export const adminGetAllCustomerListAction = (salonId,signal) => async (dispatch
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },

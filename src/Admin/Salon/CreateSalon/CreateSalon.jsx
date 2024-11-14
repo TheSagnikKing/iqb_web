@@ -1392,9 +1392,13 @@ const CreateSalon = () => {
 
           <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
-              <p>Select Salon Images</p>
+              <p style={{
+                 fontSize: "var(--list-content-body-text)",
+                 fontWeight: "600"
+              }}>Select Salon Images</p>
 
-              <button onClick={() => handleSalonImageButtonClick()}>
+              <button onClick={() => handleSalonImageButtonClick()}
+                style={{ fontSize: "var(--list-content-body-text)"}}>
                 Upload
                 <input
                   type="file"

@@ -21,12 +21,11 @@
 }
 
 .profile_wrapper>div:nth-child(1) {
-    height: 3rem;
-    width: 3rem;
+    padding: 0.6em 0.6em;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: var(--list-content-body-text);
     cursor: pointer;
     background-color: #fff;
     border-radius: 50%;
@@ -44,7 +43,7 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--cmmn-box-shadow-y);
     cursor: pointer;
 }
 
@@ -62,19 +61,19 @@
     position: absolute;
     top: 5.5rem;
     right: 2rem;
-    border-radius: 5px;
     padding: 1rem;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--cmmn-box-shadow-y);
     z-index: 100;
     background-color: var(--primary-bg-light-color1);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
     width: 13rem;
     overflow: hidden;
 }
@@ -85,12 +84,11 @@
     display: flex;
     align-items: center;
     padding-inline: 1rem;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    /* font-size: 1.2rem; */
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
     cursor: pointer;
     font-weight: 500;
 }
@@ -99,7 +97,6 @@
     background-color: #0866ff;
     color: var(--primary-text-light-color1);
     cursor: pointer;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
 }
 
 .profile_drop_container>div {
@@ -108,48 +105,50 @@
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    border-radius: 6px;
     padding-inline: 0.8rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
 }
 
 .profile_drop_container>div>div:nth-child(2) {
-    font-size: 1.3rem;
+    font-size: var(--list-modal-header-normal-font);
     font-weight: 500;
 }
 
 .profile_drop_container>div>div:nth-child(1) {
     display: grid;
     place-items: center;
-    font-size: 1.3rem;
+    font-size: var(--list-modal-header-normal-font);
+    font-weight: 500;
 }
 
 .barber_dashboard_btn_container {
     & button {
-        padding: 0.6rem 1.5rem;
-        border-radius: 20px;
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        -ms-border-radius: 20px;
-        -o-border-radius: 20px;
+        height: 3.5rem;
+        width: 9rem;
+        border-radius: var(--list-btn-border-radius);
+        -webkit-border-radius: var(--list-btn-border-radius);
+        -moz-border-radius: var(--list-btn-border-radius);
+        -ms-border-radius: var(--list-btn-border-radius);
+        -o-border-radius: var(--list-btn-border-radius);
         border: none;
         cursor: not-allowed;
-        font-size: 0.9vw;
-        transition: 0.3s all ease;
-        -webkit-transition: 0.3s all ease;
-        -moz-transition: 0.3s all ease;
-        -ms-transition: 0.3s all ease;
-        -o-transition: 0.3s all ease;
-
-        &:hover {
+        font-size: var(--list-modal-header-normal-font);
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
+        
+        &:hover{
             color: #fff;
         }
     }
@@ -157,7 +156,7 @@
     .barber_online_active,
     .barber_clock_active {
         background-color: rgba(50, 205, 50, 0.158);
-        border: 1px solid limegreen !important;
+        border: 0.1rem solid limegreen !important;
         color: limegreen;
 
         &:hover {
@@ -169,7 +168,7 @@
     .barber_online_inactive,
     .barber_clock_inactive {
         background-color: #ff000032;
-        border: 1px solid red !important;
+        border: 0.1rem solid red !important;
         color: red;
 
         &:hover {
@@ -180,9 +179,6 @@
 
 }
 
-.mobile_choose_salon_div {
-    display: none;
-}
 
 .dashboard_mobile_menu {
     display: none;
@@ -197,25 +193,15 @@
         display: none;
     }
 
-    .choose_salon_div {
-        display: none;
-    }
-
-    .mobile_choose_salon_div {
-        display: block;
-    }
-
     .dashboard_mobile_menu {
         display: block;
     }
 
     .dashboard_mobile_menu {
-        height: 2.5rem;
-        width: 2.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 4vw;
+        font-size: var(--list-modal-header-icon);
         font-weight: bold;
         cursor: pointer;
     }
@@ -224,7 +210,7 @@
         position: absolute;
         top: 0px;
         height: 100vh;
-        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
         padding: 2rem;
@@ -236,8 +222,7 @@
         display: block;
 
         &>button:nth-child(1) {
-            height: 3rem;
-            width: 3rem;
+            padding: 0.6em 0.6em;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -248,8 +233,8 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: 3.6vw;
-            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            font-size: var(--list-modal-header-icon);
+            box-shadow: var(--cmmn-box-shadow-y);
             color: red;
             font-weight: bold;
             background-color: var(--primary-bg-light-color1);
@@ -265,38 +250,33 @@
             padding-inline: 1rem;
             height: 4rem;
             width: 100%;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -o-border-radius: 3px;
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
             align-items: center;
-            transition: 0.3s all ease;
-            -webkit-transition: 0.3s all ease;
-            -moz-transition: 0.3s all ease;
-            -ms-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div {
+            &>div{
                 height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 3vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
 
 
             &>p {
-                font-size: 3vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
-        }
-
-        .dashboard_mobile_siderbar_content_container{
-            height: calc(100vh - calc(3rem + 2rem) - 2rem);
-            overflow: auto;
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
@@ -311,6 +291,11 @@
                 color: #fff;
             }
         }
+    }
+
+    .dashboard_mobile_siderbar_content_container{
+        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        overflow: auto;
     }
 
     .dashboard_mobile_sidebar_active {
@@ -331,8 +316,8 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: 2.8vw;
-            font-weight: bold;
+            font-size: var(--list-content-body-text);
+            font-weight: 600;
         }
 
         &>button {
@@ -344,7 +329,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: 4vw;
+            font-size: var(--list-content-body-text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -356,38 +341,22 @@
     .profile_drop_container {
         display: none;
     }
-
-    .barber_dashboard_btn_container {
-        &>button {
-            font-size: 3vw;
-        }
-    }
 }
 
-@media screen and (min-width:430px) and (max-width:768px) {
+@media screen and (min-width:431px) and (max-width:768px) {
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
 
-    .choose_salon_div {
-        display: none;
-    }
-
-    .mobile_choose_salon_div {
-        display: block;
-    }
-
     .dashboard_mobile_menu {
         display: block;
     }
 
     .dashboard_mobile_menu {
-        height: 2.5rem;
-        width: 2.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 2vw;
+        font-size: var(--list-modal-header-icon);
         font-weight: bold;
         cursor: pointer;
     }
@@ -396,7 +365,7 @@
         position: absolute;
         top: 0px;
         height: 100vh;
-        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
         padding: 2rem;
@@ -408,8 +377,7 @@
         display: block;
 
         &>button:nth-child(1) {
-            height: 3rem;
-            width: 3rem;
+            padding: 0.6em 0.6em;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -420,8 +388,8 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: 1.6vw;
-            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            font-size: var(--list-modal-header-icon);
+            box-shadow: var(--cmmn-box-shadow-y);
             color: red;
             font-weight: bold;
             background-color: var(--primary-bg-light-color1);
@@ -437,38 +405,33 @@
             padding-inline: 1rem;
             height: 4rem;
             width: 100%;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -o-border-radius: 3px;
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
             align-items: center;
-            transition: 0.3s all ease;
-            -webkit-transition: 0.3s all ease;
-            -moz-transition: 0.3s all ease;
-            -ms-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div {
+            &>div{
                 height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 1.6vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
 
 
             &>p {
-                font-size: 1.6vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
-        }
-
-        .dashboard_mobile_siderbar_content_container{
-            height: calc(100vh - calc(3rem + 2rem) - 2rem);
-            overflow: auto;
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
@@ -485,8 +448,13 @@
         }
     }
 
+    .dashboard_mobile_siderbar_content_container{
+        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        overflow: auto;
+    }
+
     .dashboard_mobile_sidebar_active {
-        width: 70vw;
+        width: 50vw;
         left: -1rem;
         display: block;
     }
@@ -503,8 +471,8 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: 2vw;
-            font-weight: bold;
+            font-size: var(--list-content-body-text);
+            font-weight: 600;
         }
 
         &>button {
@@ -516,7 +484,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: 2vw;
+            font-size: var(--list-content-body-text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -528,39 +496,22 @@
     .profile_drop_container {
         display: none;
     }
-
-    .barber_dashboard_btn_container {
-        &>button {
-            font-size: 2vw;
-        }
-    }
 }
 
-
-@media screen and (min-width:768px) and (max-width:1140px) {
+@media screen and (min-width:769px) and (max-width:1140px) {
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
 
-    .choose_salon_div {
-        display: none;
-    }
-
-    .mobile_choose_salon_div {
-        display: block;
-    }
-
     .dashboard_mobile_menu {
         display: block;
     }
 
     .dashboard_mobile_menu {
-        height: 2.5rem;
-        width: 2.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.2vw;
+        font-size: var(--list-modal-header-icon);
         font-weight: bold;
         cursor: pointer;
     }
@@ -569,7 +520,7 @@
         position: absolute;
         top: 0px;
         height: 100vh;
-        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
         padding: 2rem;
@@ -581,8 +532,7 @@
         display: block;
 
         &>button:nth-child(1) {
-            height: 3rem;
-            width: 3rem;
+            padding: 0.6em 0.6em;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -593,8 +543,8 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: 1.2vw;
-            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+            font-size: var(--list-modal-header-icon);
+            box-shadow: var(--cmmn-box-shadow-y);
             color: red;
             font-weight: bold;
             background-color: var(--primary-bg-light-color1);
@@ -610,38 +560,33 @@
             padding-inline: 1rem;
             height: 4rem;
             width: 100%;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -o-border-radius: 3px;
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
             align-items: center;
-            transition: 0.3s all ease;
-            -webkit-transition: 0.3s all ease;
-            -moz-transition: 0.3s all ease;
-            -ms-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div {
+            &>div{
                 height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 1.2vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
 
 
             &>p {
-                font-size: 1.2vw;
+                font-size: var(--list-modal-content-text);
                 color: #000;
             }
-        }
-
-        .dashboard_mobile_siderbar_content_container{
-            height: calc(100vh - calc(3rem + 2rem) - 2rem);
-            overflow: auto;
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
@@ -658,8 +603,13 @@
         }
     }
 
+    .dashboard_mobile_siderbar_content_container{
+        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        overflow: auto;
+    }
+
     .dashboard_mobile_sidebar_active {
-        width: 70vw;
+        width: 30vw;
         left: -1rem;
         display: block;
     }
@@ -676,8 +626,8 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: 1.4vw;
-            font-weight: bold;
+            font-size: var(--list-content-body-text);
+            font-weight: 600;
         }
 
         &>button {
@@ -689,7 +639,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: 1.4vw;
+            font-size: var(--list-content-body-text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -700,11 +650,5 @@
 
     .profile_drop_container {
         display: none;
-    }
-
-    .barber_dashboard_btn_container {
-        &>button {
-            font-size: 1.4vw;
-        }
     }
 }

@@ -14,6 +14,25 @@ export const getAdminBarberListAction = (salonId, signal) => async (dispatch) =>
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_ADMIN_BARBERLIST_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_ADMIN_BARBERLIST_FAIL,
@@ -23,8 +42,8 @@ export const getAdminBarberListAction = (salonId, signal) => async (dispatch) =>
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -46,6 +65,25 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: CHANGE_ADMIN_BARBER_ONLINESTATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: CHANGE_ADMIN_BARBER_ONLINESTATUS_FAIL,
             payload: error?.response?.data
@@ -54,8 +92,8 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -93,6 +131,26 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
 
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
         dispatch({
             type: CHANGE_ADMIN_BARBER_CLOCKSTATUS_FAIL,
             payload: error?.response?.data
@@ -101,8 +159,8 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -130,6 +188,25 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_APPROVE_BARBER_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_APPROVE_BARBER_FAIL,
             payload: error?.response?.data
@@ -138,8 +215,8 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -169,6 +246,25 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_ALL_SALON_SERVICES_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: ADMIN_ALL_SALON_SERVICES_FAIL,
@@ -178,8 +274,8 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -205,6 +301,25 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
         navigate("/admin-barber")
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_CREATE_BARBER_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_CREATE_BARBER_FAIL,
             payload: error?.response?.data
@@ -213,8 +328,8 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -236,6 +351,26 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
         navigate("/admin-barber")
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_UPDATE_BARBER_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
         dispatch({
             type: ADMIN_UPDATE_BARBER_FAIL,
             payload: error?.response?.data
@@ -244,8 +379,8 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -271,6 +406,25 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
 
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_DELETE_BARBER_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_DELETE_BARBER_FAIL,
             payload: error?.response?.data
@@ -279,8 +433,8 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -305,8 +459,8 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -314,6 +468,25 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
 
         setOpenBarberEmail(false)
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SEND_BARBER_MAIL_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
 
         dispatch({
             type: ADMIN_SEND_BARBER_MAIL_FAIL,
@@ -323,8 +496,8 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -349,8 +522,8 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -358,6 +531,25 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
 
         setOpenBarberMessage(false)
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SEND_BARBER_MESSAGE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
 
         dispatch({
             type: ADMIN_SEND_BARBER_MESSAGE_FAIL,
@@ -367,8 +559,8 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },

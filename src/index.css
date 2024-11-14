@@ -15,19 +15,6 @@
 
 /* #222831,#3E3232,#FC6736,#561C24,#720455 */
 
-body {
-  /* overflow: hidden; */
-}
-
-/* General Recommendations for Maximums
-Body Text: For regular body text, try not to go beyond 2.4rem or 2.6rem. Anything larger might start to look oversized on very large screens.
-Headings: For headings, you can be more flexible and go up to 3rem or 4rem for an impactful look on larger screens. Just ensure this doesn’t dominate the layout. */
-
-
-/* Small text (captions, subtext): clamp(1rem, 0.8rem + 0.4vw, 1.4rem)
-Body text: clamp(1.6rem, 1.2rem + 0.4vw, 2.4rem)
-Headings: clamp(2rem, 1.6rem + 0.4vw, 3.2rem) */
-
 :root {
   font-size: 62.5%;
   
@@ -119,11 +106,11 @@ p {
 
 
 .carousel * {
-  border-radius: 0.6vw;
-  -webkit-border-radius: 0.6vw;
-  -moz-border-radius: 0.6vw;
-  -ms-border-radius: 0.6vw;
-  -o-border-radius: 0.6vw;
+  border-radius: 0.6rem;
+  -webkit-border-radius: 0.6rem;
+  -moz-border-radius: 0.6rem;
+  -ms-border-radius: 0.6rem;
+  -o-border-radius: 0.6rem;
 }
 
 .carousel .control-dots .dot {
@@ -138,7 +125,7 @@ p {
   width: 100%;
   background-color: transparent;
   border: none;
-  font-size: 0.9vw;
+  font-size: var(--list-content-body-text);
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
@@ -175,86 +162,32 @@ p {
 }
 
 .react-multiple-carousel__arrow::before {
-  font-size: 1.2rem !important;
+  font-size: var(--list-modal-content-icon) !important;
   font-weight: bold !important;
 }
 
-@media screen and (min-width: 0px) and (max-width:430px) {
-  .carousel * {
 
-    border-radius: 2vw;
-    -webkit-border-radius: 2vw;
-    -moz-border-radius: 2vw;
-    -ms-border-radius: 2vw;
-    -o-border-radius: 2vw;
-  }
-
-  .react-international-phone-input-container .react-international-phone-input {
-    font-size: 3vw;
-  }
-
-}
-
-
-@media screen and (min-width: 431px) and (max-width:768px) {
-  .carousel * {
-    border-radius: 1vw;
-    -webkit-border-radius: 1vw;
-    -moz-border-radius: 1vw;
-    -ms-border-radius: 1vw;
-    -o-border-radius: 1vw;
-  }
-
-  .react-international-phone-input-container .react-international-phone-input {
-    font-size: 1.8vw;
-  }
-}
-
-@media screen and (min-width:768px) and (max-width:1140px){
-  .react-international-phone-input-container .react-international-phone-input {
-    font-size: 1.2vw;
-  }
-}
-
-@media((min-width:0px) and (max-width:576px)) {
+@media screen and (min-width:1921px) and (max-width:2250px){
   :root {
-    /* font-size: 55%; */
+    font-size: 72.5%;
   }
 }
 
-@media((min-width:577px) and (max-width:768px)) {
+@media screen and (min-width:2261px) and (max-width:2580px){
   :root {
-    /* font-size: 58%; */
+    font-size: 82.5%;
   }
 }
 
-@media((min-width:769px) and (max-width:992px)) {
+@media screen and (min-width:2581px) and (max-width:3000px){
   :root {
-    /* font-size: 58%; */
+    font-size: 92.5%;
   }
 }
 
-@media((min-width:993px) and (max-width:1200px)) {
+@media screen and (min-width:3001px){
   :root {
-    /* font-size: 62.5%; */
-  }
-}
-
-@media screen and (min-width:1921px) and (max-width:2200px){
-  :root {
-    font-size: 80%;
-  }
-}
-
-@media screen and (min-width:2201px) and (max-width:2560px){
-  :root {
-    font-size: 90%;
-  }
-}
-
-@media screen and (min-width:2561px){
-  :root {
-    font-size: 110%;
+    font-size: 102.5%;
   }
 }
 

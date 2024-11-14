@@ -197,8 +197,8 @@ const CreateBarber = () => {
           {
             adminAllSalonServicesLoading ?
               (<div className={`${style.admin_create_barber_content_wrapper_right_loading}`}>
-                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "6px" }} />
-                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "6px" }} />
+                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
               </div>) :
               adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
                 (

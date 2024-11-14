@@ -1,5 +1,5 @@
 import toast from "react-hot-toast"
-import { ADMIN_BARBER_SERVED_QUEUE_REQ,ADMIN_BARBER_SERVED_QUEUE_SUCCESS,ADMIN_BARBER_SERVED_QUEUE_FAIL, ADMIN_CANCEL_QUEUE_REQ, ADMIN_CANCEL_QUEUE_SUCCESS, ADMIN_CANCEL_QUEUE_FAIL, GET_ALL_QUEUELIST_SUCCESS } from "../Constants/constants"
+import { ADMIN_BARBER_SERVED_QUEUE_REQ, ADMIN_BARBER_SERVED_QUEUE_SUCCESS, ADMIN_BARBER_SERVED_QUEUE_FAIL, ADMIN_CANCEL_QUEUE_REQ, ADMIN_CANCEL_QUEUE_SUCCESS, ADMIN_CANCEL_QUEUE_FAIL, GET_ALL_QUEUELIST_SUCCESS } from "../Constants/constants"
 import api from "../../api/Api"
 import { getAllQueueListAction } from "./DashboardAction"
 
@@ -7,14 +7,14 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
-        const { data } = await api.post("/api/queue/barberServedQueue",barberqueuedata)
+        const { data } = await api.post("/api/queue/barberServedQueue", barberqueuedata)
 
         dispatch({
             type: ADMIN_BARBER_SERVED_QUEUE_SUCCESS,
             payload: data
         })
 
-        const { data:queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
+        const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 
         dispatch({
             type: GET_ALL_QUEUELIST_SUCCESS,
@@ -22,6 +22,26 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
         })
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_BARBER_SERVED_QUEUE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_BARBER_SERVED_QUEUE_FAIL,
             payload: error?.response?.data
@@ -30,8 +50,8 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -39,7 +59,7 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
     }
 }
 
-export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) => {
+export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CANCEL_QUEUE_REQ })
 
@@ -50,7 +70,7 @@ export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) =
             payload: data
         })
 
-        const { data:queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
+        const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 
         dispatch({
             type: GET_ALL_QUEUELIST_SUCCESS,
@@ -58,6 +78,26 @@ export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) =
         })
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_CANCEL_QUEUE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_CANCEL_QUEUE_FAIL,
             payload: error?.response?.data
@@ -66,8 +106,8 @@ export const adminCancelQueueAction = (canceldata,salonId) => async (dispatch) =
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
