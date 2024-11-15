@@ -15,6 +15,25 @@ export const barberGetAllCustomerListAction = (salonId, isApproved, signal) => a
         })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_BARBER_ALL_CUSTOMERLIST_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_BARBER_ALL_CUSTOMERLIST_FAIL,
@@ -24,8 +43,8 @@ export const barberGetAllCustomerListAction = (salonId, isApproved, signal) => a
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -52,15 +71,35 @@ export const barberSendCustomerEmailAction = (maildata, setSubject, setMessage, 
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
         setOpenBarberEmail(false)
+
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SEND_CUSTOMER_MAIL_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
 
         dispatch({
             type: BARBER_SEND_CUSTOMER_MAIL_FAIL,
@@ -70,8 +109,8 @@ export const barberSendCustomerEmailAction = (maildata, setSubject, setMessage, 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -93,18 +132,40 @@ export const barberSendCustomerMessageAction = (smsdata, setMessage, setOpenBarb
         })
 
         setMessage("")
+
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
         setOpenBarberMessage(false)
+
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SEND_CUSTOMER_MESSAGE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
 
         dispatch({
             type: BARBER_SEND_CUSTOMER_MESSAGE_FAIL,
@@ -114,8 +175,8 @@ export const barberSendCustomerMessageAction = (smsdata, setMessage, setOpenBarb
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },

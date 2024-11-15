@@ -63,8 +63,8 @@ const EditProfile = () => {
             toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -77,8 +77,8 @@ const EditProfile = () => {
             toast.error("File size must be lower than 2mb", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -113,8 +113,8 @@ const EditProfile = () => {
             toast.success("Profile upload successfully", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -123,11 +123,26 @@ const EditProfile = () => {
         } catch (error) {
             setUploadpicLoader(false)
 
+            if (error?.response?.status === 500) {
+     
+                toast.error("Something went wrong !", {
+                    duration: 3000,
+                    style: {
+                        fontSize: "var(--list-modal-header-normal-font)",
+                        borderRadius: '0.3rem',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                });
+    
+                return;
+            }
+
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -216,8 +231,8 @@ const EditProfile = () => {
             toast.error("Invalid Number", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -232,7 +247,7 @@ const EditProfile = () => {
                 gender,
             }
 
-            console.log(profiledata)
+            // console.log(profiledata)
 
             dispatch(adminUpdateProfileAction(profiledata, navigate))
         }
@@ -267,8 +282,8 @@ const EditProfile = () => {
             toast.error("New and confirm password donot match", {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '1rem',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },

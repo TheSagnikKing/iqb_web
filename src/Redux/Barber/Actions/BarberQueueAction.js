@@ -18,6 +18,25 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
 
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_QUEUELIST_BARBERID_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: GET_QUEUELIST_BARBERID_FAIL,
@@ -27,8 +46,8 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "1.4rem",
-                    borderRadius: '10px',
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
                 },
@@ -61,6 +80,26 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
         })
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_BARBER_SERVED_QUEUE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_BARBER_SERVED_QUEUE_FAIL,
             payload: error?.response?.data
@@ -69,8 +108,8 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -101,6 +140,26 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
         })
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_CANCEL_QUEUE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_CANCEL_QUEUE_FAIL,
             payload: error?.response?.data
@@ -109,8 +168,8 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },

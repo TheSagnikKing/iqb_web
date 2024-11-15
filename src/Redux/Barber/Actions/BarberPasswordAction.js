@@ -16,14 +16,34 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_FORGET_PASSWORD_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_FORGET_PASSWORD_FAIL,
             payload: error?.response?.data
@@ -32,8 +52,8 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -55,6 +75,26 @@ export const barberResetPasswordAction = (password,token,navigate) => async (dis
         navigate("/barberpasswordreset")
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_RESET_PASSWORD_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_RESET_PASSWORD_FAIL,
             payload: error?.response?.data
@@ -63,8 +103,8 @@ export const barberResetPasswordAction = (password,token,navigate) => async (dis
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },

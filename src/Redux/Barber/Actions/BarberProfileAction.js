@@ -24,6 +24,26 @@ export const barberUpdateProfileAction = (profiledata, navigate) => async (dispa
         navigate("/barber-dashboard")
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_UPDATE_PROFILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_UPDATE_PROFILE_FAIL,
             payload: error?.response?.data
@@ -32,8 +52,8 @@ export const barberUpdateProfileAction = (profiledata, navigate) => async (dispa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -60,6 +80,25 @@ export const barberSkipProfileAction = (profiledata, navigate) => async (dispatc
         navigate("/barber-dashboard", { state: data })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SKIP_PROFILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_SKIP_PROFILE_FAIL,
             payload: error.response.data
@@ -69,8 +108,8 @@ export const barberSkipProfileAction = (profiledata, navigate) => async (dispatc
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -94,14 +133,35 @@ export const barberSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => a
         toast.success("We have send a code to your email", {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SEND_VERIFY_EMAIL_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
         dispatch({
             type: BARBER_SEND_VERIFY_EMAIL_FAIL,
             payload: error?.response?.data
@@ -110,8 +170,8 @@ export const barberSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => a
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -135,14 +195,34 @@ export const barberSendVerifyMobileAction = (verifyemail, setOpenMobileModal) =>
         toast.success("We have send a sms to your mob No.", {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SEND_VERIFY_MOBILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_SEND_VERIFY_MOBILE_FAIL,
             payload: error?.response?.data
@@ -151,8 +231,8 @@ export const barberSendVerifyMobileAction = (verifyemail, setOpenMobileModal) =>
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -184,6 +264,26 @@ export const barberVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMo
         setOtp(["", "", "", ""])
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_VERIFIED_EMAIL_STATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_VERIFIED_EMAIL_STATUS_FAIL,
             payload: error?.response?.data
@@ -192,8 +292,8 @@ export const barberVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMo
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -225,6 +325,26 @@ export const barberVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobile
         setMobileOtp(["", "", "", ""])
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_VERIFIED_MOBILE_STATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_VERIFIED_MOBILE_STATUS_FAIL,
             payload: error?.response?.data
@@ -233,8 +353,8 @@ export const barberVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobile
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -267,14 +387,34 @@ export const barberUpdatePasswordAction = (profiledata, navigate) => async (disp
         toast.success("Password matched successfully", {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_UPDATE_PASSWORD_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_UPDATE_PASSWORD_FAIL,
             payload: error?.response?.data
@@ -283,8 +423,8 @@ export const barberUpdatePasswordAction = (profiledata, navigate) => async (disp
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
