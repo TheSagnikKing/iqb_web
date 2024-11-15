@@ -21,6 +21,25 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
         navigate("/admin-dashboard")
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_GOOGLE_SIGNIN_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_GOOGLE_SIGNIN_FAIL,
             payload: error.response.data
@@ -30,8 +49,8 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -55,6 +74,25 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
         navigate("/admin-signupeditprofile", { state: data })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_GOOGLE_SIGNUP_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_GOOGLE_SIGNUP_FAIL,
             payload: error.response.data
@@ -64,8 +102,8 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -92,6 +130,25 @@ export const AdminSigninAction = (signupData, navigate) => async (dispatch) => {
         navigate("/admin-dashboard")
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SIGNIN_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SIGNIN_FAIL,
             payload: error.response.data
@@ -101,8 +158,8 @@ export const AdminSigninAction = (signupData, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -127,6 +184,26 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
         navigate("/admin-signupeditprofile", { state: data })
     } catch (error) {
 
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SIGNUP_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SIGNUP_FAIL,
             payload: error.response.data
@@ -136,8 +213,8 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -165,6 +242,25 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
         navigate("/admin-dashboard", { state: data })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SIGNUP_EDIT_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SIGNUP_EDIT_FAIL,
             payload: error.response.data
@@ -174,8 +270,8 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -186,17 +282,6 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
 export const AdminLogoutAction = (navigate) => async (dispatch) => {
 
     try {
-
-        // dispatch({
-        //     type: ADMIN_SIGNIN_FAIL,
-        //     payload: {}
-        // })
-
-        // dispatch({
-        //     type: ADMIN_SIGNUP_FAIL,
-        //     payload: {}
-        // })
-
         dispatch({
             type: ADMIN_LOGOUT_REQ
         })
@@ -216,9 +301,40 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
         // navigate("/adminsignin")
         navigate("/")
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_LOGOUT_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_LOGOUT_FAIL,
             payload: error.response.data
         })
+
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
     }
 }

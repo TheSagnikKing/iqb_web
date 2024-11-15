@@ -24,6 +24,26 @@ export const adminUpdateProfileAction = (profiledata, navigate) => async (dispat
         navigate("/admin-dashboard")
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_UPDATE_PROFILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_UPDATE_PROFILE_FAIL,
             payload: error?.response?.data
@@ -32,8 +52,8 @@ export const adminUpdateProfileAction = (profiledata, navigate) => async (dispat
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -60,6 +80,26 @@ export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch
         navigate("/admin-dashboard", { state: data })
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SKIP_PROFILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SKIP_PROFILE_FAIL,
             payload: error?.response?.data
@@ -68,8 +108,8 @@ export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -94,14 +134,34 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
         toast.success("We have send a code to your email", {
             duration: 3000,
             style: {
-              fontSize: "1.4rem",
-              borderRadius: '10px',
-              background: '#333',
-              color: '#fff',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
             },
           });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SEND_VERIFY_EMAIL_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SEND_VERIFY_EMAIL_FAIL,
             payload: error?.response?.data
@@ -110,8 +170,8 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -136,14 +196,34 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
         toast.success("We have send a sms to your mob No.", {
             duration: 3000,
             style: {
-              fontSize: "1.4rem",
-              borderRadius: '10px',
-              background: '#333',
-              color: '#fff',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
             },
           });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_SEND_VERIFY_MOBILE_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_SEND_VERIFY_MOBILE_FAIL,
             payload: error?.response?.data
@@ -152,8 +232,8 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -185,6 +265,27 @@ export const adminVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMod
         setOtp(["", "", "", ""])
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_VERIFIED_EMAIL_STATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
         dispatch({
             type: ADMIN_VERIFIED_EMAIL_STATUS_FAIL,
             payload: error?.response?.data
@@ -193,8 +294,8 @@ export const adminVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMod
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -226,6 +327,26 @@ export const adminVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobileM
         setMobileOtp(["", "", "", ""])
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_VERIFIED_MOBILE_STATUS_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_VERIFIED_MOBILE_STATUS_FAIL,
             payload: error?.response?.data
@@ -234,8 +355,8 @@ export const adminVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobileM
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -256,6 +377,26 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
 
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_UPLOAD_PROFILE_PIC_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_UPLOAD_PROFILE_PIC_FAIL,
             payload: error?.response?.data
@@ -264,8 +405,8 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -298,14 +439,34 @@ export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispa
         toast.success("Password matched successfully", {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
         });
 
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: ADMIN_UPDATE_PASSWORD_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: ADMIN_UPDATE_PASSWORD_FAIL,
             payload: error?.response?.data
@@ -314,8 +475,8 @@ export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '10px',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },

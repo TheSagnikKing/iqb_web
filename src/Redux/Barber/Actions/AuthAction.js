@@ -22,6 +22,25 @@ export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => 
 
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_GOOGLE_SIGNIN_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_GOOGLE_SIGNIN_FAIL,
             payload: error.response.data
@@ -30,8 +49,8 @@ export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -55,6 +74,25 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
         navigate("/barber-signupeditprofile", { state: data })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_GOOGLE_SIGNUP_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_GOOGLE_SIGNUP_FAIL,
             payload: error.response.data
@@ -64,8 +102,8 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -92,6 +130,27 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
         navigate("/barber-dashboard")
     } catch (error) {
 
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SIGNIN_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
         dispatch({
             type: BARBER_SIGNIN_FAIL,
             payload: error.response.data
@@ -101,8 +160,8 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -118,15 +177,33 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
 
         const { data } = await api.post("/api/barber/register", signupData);
 
-        // console.log(data)
-
         dispatch({
             type: BARBER_SIGNUP_SUCCESS,
             payload: { message: "Barber signin successfully" }
         });
 
         navigate("/barber-signupeditprofile", { state: data })
+
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SIGNUP_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
 
         dispatch({
             type: BARBER_SIGNUP_FAIL,
@@ -137,8 +214,8 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -165,6 +242,25 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
         navigate("/barber-dashboard", { state: data })
     } catch (error) {
 
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_SIGNUP_EDIT_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_SIGNUP_EDIT_FAIL,
             payload: error.response.data
@@ -174,8 +270,8 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "1.4rem",
-                borderRadius: '1rem',
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
             },
@@ -186,16 +282,6 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
 export const BarberLogoutAction = (navigate) => async (dispatch) => {
 
     try {
-
-        // dispatch({
-        //     type: ADMIN_SIGNIN_FAIL,
-        //     payload: {}
-        // })
-
-        // dispatch({
-        //     type: ADMIN_SIGNUP_FAIL,
-        //     payload: {}
-        // })
 
         dispatch({
             type: BARBER_LOGOUT_REQ
@@ -214,9 +300,39 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
         // navigate("/barbersignin")
         navigate("/")
     } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: BARBER_LOGOUT_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
         dispatch({
             type: BARBER_LOGOUT_FAIL,
-            payload: error.response.data
+            payload: error?.response?.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
     }
 }
