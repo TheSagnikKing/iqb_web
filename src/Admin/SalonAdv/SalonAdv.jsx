@@ -39,7 +39,7 @@ const SalonAdv = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       setUploadAdvImages([]);
       return;
@@ -104,6 +104,22 @@ const SalonAdv = () => {
           payload: imageResponse?.data?.response
         })
       } catch (error) {
+
+        if (error?.response?.status === 500) {
+          toast.error("Something went wrong !", {
+            duration: 3000,
+            style: {
+              fontSize: "var(--list-modal-header-normal-font)",
+              borderRadius: '0.3rem',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+
+          return;
+        }
+
+
         setUploadLoader(false)
         // console.error('Image upload failed:', error);
         toast.error(error?.response?.data?.message, {
@@ -113,7 +129,7 @@ const SalonAdv = () => {
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-        },
+          },
         });
         setUploadAdvImages([])
       }
@@ -155,7 +171,7 @@ const SalonAdv = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -185,6 +201,22 @@ const SalonAdv = () => {
       })
 
     } catch (error) {
+
+      if (error?.response?.status === 500) {
+        toast.error("Something went wrong !", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+        return;
+      }
+
+
       // console.error('Image upload failed:', error);
       sethandleEditLoader(null)
       toast.error(error?.response?.data?.message, {
@@ -194,7 +226,7 @@ const SalonAdv = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     }
   };
@@ -220,6 +252,22 @@ const SalonAdv = () => {
         })
 
       } catch (error) {
+
+        if (error?.response?.status === 500) {
+          toast.error("Something went wrong !", {
+            duration: 3000,
+            style: {
+              fontSize: "var(--list-modal-header-normal-font)",
+              borderRadius: '0.3rem',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+
+          return;
+        }
+
+
         setDeleteLoader(false)
         console.log(error)
       }
