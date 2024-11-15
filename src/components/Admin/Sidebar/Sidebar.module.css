@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: 100svh;
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;
@@ -12,7 +12,7 @@
   border-right: 1px solid rgba(0, 0, 0, 0.2);
   background-color: var(--primary-bg-light-color1);
   color: var(--primary-text-light-color1);
-  height: 100vh;
+  height: 100svh;
   position: relative;
   transition: var(--btn-transition);
   -webkit-transition: var(--btn-transition);
@@ -59,7 +59,7 @@
 
 .show {
   width: 20vw;
-  height: 100vh;
+  height: 100svh;
 }
 
 .hide {
@@ -163,7 +163,7 @@
 
 
 .content {
-  height: 100vh;
+  height: 100svh;
   color: var(--primary-text-light-color2);
   padding-inline: 2rem;
   font-weight: 500;

@@ -209,7 +209,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -294,7 +294,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 
@@ -364,7 +364,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -449,7 +449,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 
@@ -519,7 +519,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -604,7 +604,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 

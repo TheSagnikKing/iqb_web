@@ -558,7 +558,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -643,7 +643,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 
@@ -731,7 +731,7 @@
         right: -1rem;
         bottom: 0px;
         width: 100vw;
-        height: 100vh;
+        height: 100svh;
         background-color: rgba(128, 128, 128, 0.313);
         z-index: 1000;
         display: flex;
@@ -891,7 +891,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -976,7 +976,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 
@@ -1065,7 +1065,7 @@
         right: -1rem;
         bottom: 0px;
         width: 100vw;
-        height: 100vh;
+        height: 100svh;
         background-color: rgba(128, 128, 128, 0.313);
         z-index: 1000;
         display: flex;
@@ -1225,7 +1225,7 @@
     .dashboard_mobile_sidebar_container {
         position: absolute;
         top: 0px;
-        height: 100vh;
+        height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
         background-color: var(--primary-bg-light-color1);
@@ -1310,7 +1310,7 @@
     }
 
     .dashboard_mobile_siderbar_content_container{
-        height: calc(100vh - calc(3rem + 2rem) - 2rem);
+        height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
 
