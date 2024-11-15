@@ -17,32 +17,14 @@ const ChangePassword = () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
-
-  // const ChangePasswordHandler = () => {
-  //   if (password == confirmPassword) {
-  //     dispatch(barberResetPasswordAction(password, params?.token, navigate))
-  //   } else {
-  //     toast.error("Password donot match", {
-  //       duration: 3000,
-  //       style: {
-  //         fontSize: "1.4rem",
-  //         borderRadius: '10px',
-  //         background: '#333',
-  //         color: '#fff',
-  //       },
-  //     });
-  //   }
-  // }
-
-
   const ChangePasswordHandler = () => {
 
     if (!password || !confirmPassword) {
       toast.error("Please fill out both password fields.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },
@@ -54,8 +36,8 @@ const ChangePassword = () => {
       toast.error("Password must be at least 8 characters long.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },
@@ -63,27 +45,12 @@ const ChangePassword = () => {
       return;
     }
 
-    // Optional: Validate password complexity (e.g., at least one number, one letter)
-    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    // if (!passwordRegex.test(password)) {
-    //   toast.error("Password must contain at least one letter and one number.", {
-    //     duration: 3000,
-    //     style: {
-    //       fontSize: "1.4rem",
-    //       borderRadius: '1rem',
-    //       background: '#333',
-    //       color: '#fff',
-    //     },
-    //   });
-    //   return;
-    // }
-
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },
@@ -115,25 +82,6 @@ const ChangePassword = () => {
           <p>In order to protect your account, make sure your password</p>
           <p>Point 1</p>
           <p>Point 2</p>
-
-          {/* <div>
-            <label htmlFor="">New Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="">Confirm Password</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div> */}
-
 
           <div className={style.password_container}>
             <input

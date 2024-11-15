@@ -58,11 +58,11 @@ const SalonList = () => {
       toast.error("You are currently in this salon", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       const confirm = window.confirm("Are you sure ?")

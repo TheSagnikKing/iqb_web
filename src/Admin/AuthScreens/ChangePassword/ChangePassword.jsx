@@ -23,8 +23,8 @@ const ChangePassword = () => {
       toast.error("Please fill out both password fields.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },
@@ -36,8 +36,8 @@ const ChangePassword = () => {
       toast.error("Password must be at least 8 characters long.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },
@@ -64,8 +64,8 @@ const ChangePassword = () => {
       toast.error("Passwords do not match.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '1rem',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },

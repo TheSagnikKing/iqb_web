@@ -1935,11 +1935,11 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -1949,11 +1949,11 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       // e.target.value = null;
       return;
@@ -1978,11 +1978,11 @@ const EditSalon = () => {
       toast.success("Salon logo uploaded successfully", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       // console.log('Salon Logo Upload success:', imageResponse.data);
       setSalonLogo(imageUrl)
@@ -2022,11 +2022,11 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -2051,21 +2051,21 @@ const EditSalon = () => {
       toast.success("Salon images uploaded successfully", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } catch (error) {
       toast.error(error?.response?.data?.message, {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     }
   };
@@ -2091,11 +2091,11 @@ const EditSalon = () => {
       toast.error("Please fill all the services", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -2157,11 +2157,11 @@ const EditSalon = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       const salondata = {
@@ -2233,11 +2233,11 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -2247,11 +2247,11 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -2285,22 +2285,22 @@ const EditSalon = () => {
         toast.success("Image updated successfully", {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
         setHandleEditSalonLoader(false)
       } catch (error) {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
         setHandleEditSalonLoader(false)
       }
@@ -2323,22 +2323,22 @@ const EditSalon = () => {
         toast.success("Image deleted successfully", {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
 
       } catch (error) {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
       }
     }
@@ -2369,22 +2369,22 @@ const EditSalon = () => {
         toast.success("Image deleted successfully", {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
 
       } catch (error) {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
       }
     }
@@ -2417,11 +2417,11 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -2456,11 +2456,11 @@ const EditSalon = () => {
         toast.success("Image updated successfully", {
           duration: 3000,
           style: {
-            fontSize: "1.4rem",
-            borderRadius: '10px',
+            fontSize: "var(--list-modal-header-normal-font)",
+            borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
-          },
+        },
         });
 
         setMobileEditSelectedImageLoader(null);
@@ -2486,11 +2486,11 @@ const EditSalon = () => {
       toast.error("Please select a country", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       setOpenServices((prev) => !prev)

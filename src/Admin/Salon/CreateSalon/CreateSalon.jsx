@@ -286,11 +286,11 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -301,11 +301,11 @@ const CreateSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -339,11 +339,11 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG) under 2MB.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -379,11 +379,11 @@ const CreateSalon = () => {
       toast.error("Please fill all the services", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -477,11 +477,11 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -490,11 +490,11 @@ const CreateSalon = () => {
       toast.error("File size must be lower than 2MB.", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
       return;
     }
@@ -527,11 +527,11 @@ const CreateSalon = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       const salondata = {
@@ -686,21 +686,21 @@ const CreateSalon = () => {
               toast.success("Salon logo uploaded successfully", {
                 duration: 3000,
                 style: {
-                  fontSize: "1.4rem",
-                  borderRadius: '10px',
+                  fontSize: "var(--list-modal-header-normal-font)",
+                  borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
-                },
+              },
               });
             } catch (error) {
               toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                  fontSize: "1.4rem",
-                  borderRadius: '10px',
+                  fontSize: "var(--list-modal-header-normal-font)",
+                  borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
-                },
+              },
               });
               setSalonLogo("")
               setUploadSalonLogo("")
@@ -732,11 +732,11 @@ const CreateSalon = () => {
       toast.error("Please select a country", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       setOpenServices((prev) => !prev)

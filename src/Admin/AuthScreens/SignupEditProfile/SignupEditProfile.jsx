@@ -43,8 +43,8 @@ const SignupEditProfile = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
         },

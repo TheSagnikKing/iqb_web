@@ -99,53 +99,6 @@ const Queue = () => {
 
       <div className={`${style.barber_queue_content_wrapper} ${darkmodeOn && style.dark}`}>
 
-        {/* {
-          getBarberQueueListLoading && !getBarberQueueListResolve ? (
-            <div className={style.barber_queue_content_body}>
-              <Skeleton count={9} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
-            </div>
-          ) : !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length > 0 ? (
-            <div className={`${style.barber_queue_content_body} ${darkmodeOn && style.dark}`}>
-              <div>
-                <p>Name</p>
-                <p>Time Joined Q</p>
-                <p>Barber Name</p>
-                <p>Q Postion</p>
-                <p>Type</p>
-                <p>Serve</p>
-                <p>Cancel</p>
-              </div>
-
-              {BarberQueueList.map((b) => (
-                <div className={`${style.barber_queue_content_body_item} ${darkmodeOn && style.dark}`} key={b._id}>
-                  <p>{b?.name}</p>
-                  <p>{b?.timeJoinedQ}</p>
-                  <p>{b?.barberName}</p>
-                  <p>{b?.qPosition}</p>
-                  <p>
-                    {b.serviceType === "VIP" ? <div><CrownIcon /></div> : <div><CrownIcon /></div>}
-                  </p>
-                  <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
-                  <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Delete</button></div>
-                </div>
-              ))}
-            </div>
-          ) : !getBarberQueueListLoading && getBarberQueueListResolve && BarberQueueList?.length == 0 ? (
-            <div className={`${style.barber_queue_content_body_error}${darkmodeOn && style.dark}`}>
-              <p style={{ margin: "2rem" }}>Queue not available</p>
-            </div>
-          ) : (
-            !getBarberQueueListLoading && !getBarberQueueListResolve && (
-              <div className={`${style.barber_queue_content_body_error} ${darkmodeOn && style.dark}`}>
-                <p style={{ margin: "2rem" }}>Queue not available</p>
-              </div>
-            )
-          )
-        } */}
-
-
-
         {
           getBarberQueueListLoading && !getBarberQueueListResolve ?
             <div className={style.barber_queue_content_body}>

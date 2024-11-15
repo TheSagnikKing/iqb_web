@@ -18,7 +18,7 @@ const SignupEditProfile = () => {
 
   const barberdata = location?.state?.newUser
 
-  console.log(barberdata)
+  // console.log(barberdata)
 
   const [name, setName] = useState("")
   const [dateOfBirth, setDateofBirth] = useState("")
@@ -46,11 +46,11 @@ const SignupEditProfile = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "1.4rem",
-          borderRadius: '10px',
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-        },
+      },
       });
     } else {
       const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType, countryCode: Number(countryCode) };

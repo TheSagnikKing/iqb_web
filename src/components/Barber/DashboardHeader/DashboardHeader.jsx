@@ -85,35 +85,7 @@ const DashboardHeader = () => {
     return (
         <div className={`${style.barber_dashboard_header_wrapper} ${darkmodeOn && style.dark}`}>
             <div className={style.barber_dashboard_btn_container}>
-                {/* <div
-                    style={{
-                        background: barberProfile?.isOnline ? "limegreen" : "red",
-                        outline: darkmodeOn ? "1px solid white" : "1px solid black"
-                    }}
-                >
-
-                    <div>
-                        <p className={`${style.barber_header_salononline_toggle_btn_text} ${barberProfile?.isOnline ? style.barber_headersalononline_toggle_btn_text_active : style.barber_headersalononline_toggle_btn_text_inactive}`}>{barberProfile?.isOnline ? "Online" : "Offline"}</p>
-                        <button
-                            className={`${style.barber_headersalononline_toggle_btn} ${barberProfile?.isOnline ? style.barber_headersalononline_toggle_active : style.barber_headersalononline_toggle_inactive}`}
-                        ></button>
-                    </div>
-
-                </div>
-                <div
-                    style={{
-                        background: barberProfile?.isClockedIn ? "limegreen" : "red",
-                        outline: darkmodeOn ? "1px solid white" : "1px solid black"
-                    }}
-                >
-                    <div>
-                        <p className={`${style.barber_header_salonclock_toggle_btn_text} ${barberProfile?.isClockedIn ? style.barber_headersalonclock_toggle_btn_text_active : style.barber_headersalonclock_toggle_btn_text_inactive}`}>{barberProfile?.isClockedIn ? "ClockedIn" : "ClockedOut"}</p>
-                        <button
-                            className={`${style.barber_headersalonclock_toggle_btn} ${barberProfile?.isClockedIn ? style.barber_headersalonclock_toggle_active : style.barber_headersalonclock_toggle_inactive}`}
-                        ></button>
-                    </div>
-                </div> */}
-
+            
                 {barberProfile?.isOnline ? <button className={style.barber_online_active}>Online</button> : <button className={style.barber_online_inactive}>Offline</button>}
 
                 {barberProfile?.isClockedIn ? <button className={style.barber_clock_active}>Clock-In</button> : <button className={style.barber_clock_inactive}>Clock-Out</button>}
@@ -122,18 +94,7 @@ const DashboardHeader = () => {
 
 
             <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
-                {/* <div
-                    style={{
-                        background: currentmode ? "#FF8A08" : "#000"
-                    }}
-                >
-                    <p className={`${style.toggle_btn_text} ${currentmode ? style.toggle_btn_text_active : style.toggle_btn_text_inactive}`}>{currentmode ? <Sunicon /> : <MoonIcon />}</p>
-                    <button
-                        className={`${style.toggle_btn} ${currentmode ? style.toggle_active : style.toggle_inactive}`}
-                        onClick={toggleHandler}
-                    ></button>
-                </div> */}
-
+                
                 <div><Notificationicon /></div>
                 <div>
                     <img
