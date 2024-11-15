@@ -205,14 +205,14 @@ iframe{
 
 
 .admin_signin_container {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
 .admin_signin_left {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -227,7 +227,7 @@ iframe{
 }
 
 .admin_signin_right {
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;

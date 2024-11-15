@@ -1,5 +1,5 @@
 .public_main_container {
-    height: 100vh;
+    height: 100svh;
     width: 100vw;
 }
 
@@ -108,7 +108,7 @@
     }
 
     .public_main_content>div:nth-child(1) {
-        height: 60vh;
+        height: 60svh;
         border-right: 0px;
     }
 
@@ -118,7 +118,7 @@
     }
 
     .public_main_content>div:nth-child(2) {
-        height: 40vh;
+        height: 40svh;
         align-items: flex-start;
     }
 

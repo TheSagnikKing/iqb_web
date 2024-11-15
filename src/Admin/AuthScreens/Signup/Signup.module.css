@@ -1,12 +1,12 @@
 .admin_signup_container {
-    height: 100vh;
+    height: 100svh;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
 }
 
 .admin_signup_left {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
 }
 
 .admin_signup_right {
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;

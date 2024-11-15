@@ -68,8 +68,8 @@
   --list-wrapper-btn-padding: 0.5em 1.2em;
 
   /* heights */
-  --list-wrapper-height: calc(100vh - 6rem - 2rem);
-  --list-wrapper-common-height: calc(calc(100vh - 6rem - 2rem) - 5rem - 4rem);
+  --list-wrapper-height: calc(100svh - 6rem - 2rem);
+  --list-wrapper-common-height: calc(calc(100svh - 6rem - 2rem) - 5rem - 4rem);
 
   /* border-Radius */
   --list-wrapper-border-radius: 0.6rem;
