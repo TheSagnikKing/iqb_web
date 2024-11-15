@@ -15,6 +15,8 @@ import toast from 'react-hot-toast';
 
 const SalonAdv = () => {
 
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
   const advImagefileInputRef = useRef(null);
@@ -191,7 +193,7 @@ const SalonAdv = () => {
         },
       });
 
-      console.log('update success:', imageResponse.data);
+      // console.log('update success:', imageResponse.data);
       setPublicId("")
       setMongoid("")
       sethandleEditLoader(null)
@@ -269,7 +271,7 @@ const SalonAdv = () => {
 
 
         setDeleteLoader(false)
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -328,34 +330,38 @@ const SalonAdv = () => {
     <div className={style.salonadv_container}>
       <div className={`${style.salonadv_header} ${darkmodeOn && style.dark}`}>
         <p>Advertisements with Drag-and-Drop</p>
-        <div>
-          <div>
-            <button
-              onClick={() => handleAdvImageButtonClick()}
-            >
-              <div><FaFileIcon /></div>
-              <p>Choose Files</p>
 
-              <input
-                type="file"
-                ref={advImagefileInputRef}
-                style={{ display: 'none' }}
-                multiple
-                onChange={handleAdvImageFileInputChange}
-              />
-            </button>
-            <p>
-              {uploadAdvImages?.length}{" "}
-              Files</p>
-          </div>
-          {
-            uploadLoader ? <button><ButtonLoader color="#fff" /></button> :
-              <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
-                <p>Upload</p>
-                <div><Uploadicon /></div>
+        {
+          adminProfile?.salonId !== 0 && (<div>
+            <div>
+              <button
+                onClick={() => handleAdvImageButtonClick()}
+              >
+                <div><FaFileIcon /></div>
+                <p>Choose Files</p>
+  
+                <input
+                  type="file"
+                  ref={advImagefileInputRef}
+                  style={{ display: 'none' }}
+                  multiple
+                  onChange={handleAdvImageFileInputChange}
+                />
               </button>
-          }
-        </div>
+              <p>
+                {uploadAdvImages?.length}{" "}
+                Files</p>
+            </div>
+            {
+              uploadLoader ? <button><ButtonLoader color="#fff" /></button> :
+                <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
+                  <p>Upload</p>
+                  <div><Uploadicon /></div>
+                </button>
+            }
+          </div>)
+        }
+        
 
       </div>
       <div className={style.salonadv_list_container}>

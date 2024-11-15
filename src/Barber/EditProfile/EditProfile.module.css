@@ -137,7 +137,6 @@
         align-items: center;
         justify-content: space-evenly;
         gap: 1em;
-        /* padding: var(--list-header-btn-padding); */
         width: 10rem;
         height: 4rem;
         border: none;
@@ -749,11 +748,16 @@
 
 
         &>div:nth-child(1) {
-            height: 20rem;
-            width: 20rem;
+            height: 15rem;
+            width: 15rem;
             margin-inline: auto;
         }
 
+    }
+
+    .barber_profile_loader {
+        height: 15rem !important;
+        width: 15rem !important;
     }
 
 
@@ -780,11 +784,16 @@
 
 
         &>div:nth-child(1) {
-            height: 25rem;
-            width: 25rem;
+            height: 20rem;
+            width: 20rem;
             margin-inline: auto;
         }
 
+    }
+
+    .barber_profile_loader {
+        height: 20rem !important;
+        width: 20rem !important;
     }
 
 

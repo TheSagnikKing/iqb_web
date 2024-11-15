@@ -26,15 +26,15 @@
 
 .salonadv_header>div {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .salonadv_header>div>button {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1em;
-    padding: var(--list-header-btn-padding);
+    justify-content: space-evenly;
+    width: 10rem;
+    height: 4rem;
     border: none;
     cursor: pointer;
     background-color: #0867ff25;

@@ -284,7 +284,7 @@ const Dashboard = () => {
                 {
                   getAdminSalonImagesLoading ?
                     <div className={style.salonadv_container_loader}>
-                      <Skeleton count={1} height={"35vh"} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      <Skeleton count={1}  className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                         highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div> :
                     getAdminSalonImagesResolve && AdminSalonImages?.length > 0 ?
@@ -445,8 +445,8 @@ const Dashboard = () => {
                                   }}
                                 >
                                   <div><p>{queue.qPosition}</p></div>
-                                  <div><p>{queue.name}</p></div>
-                                  <div><p>{queue.barberName}</p></div>
+                                  <div><p>{queue.name.length > 6 ? `${queue.name.slice(0, 6).concat("...")}` : queue.name}</p></div>
+                                <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
                                   <div><p>{queue.customerEWT} mins</p></div>
                                 </div>
                               )

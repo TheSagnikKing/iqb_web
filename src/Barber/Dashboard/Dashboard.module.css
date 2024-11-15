@@ -144,6 +144,52 @@
     align-items: center;
 }
 
+.barber_approve_container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>div {
+        &>p {
+            font-size: var(--list-content-body-text);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        &>button {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 1em;
+            width: 10rem;
+            height: 4rem;
+            border: none;
+            cursor: pointer;
+            background-color: #0867ff25;
+            border: 0.1rem solid #0866ff;
+            color: #0866ff;
+            transition: var(--btn-transition);
+            border-radius: var(--list-btn-border-radius);
+            -webkit-border-radius: var(--list-btn-border-radius);
+            -moz-border-radius: var(--list-btn-border-radius);
+            -ms-border-radius: var(--list-btn-border-radius);
+            -o-border-radius: var(--list-btn-border-radius);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            margin-inline: auto;
+            font-size: var(--list-content-body-text);
+
+            &:hover {
+                background-color: #0866ff;
+                color: #fff;
+            }
+        }
+    }
+}
+
 .add_connect_btn {
     width: 3.5rem;
     height: 3.5rem;
@@ -441,7 +487,7 @@
     -ms-border-radius: var(--list-btn-border-radius);
     -o-border-radius: var(--list-btn-border-radius);
 
-    &:hover{
+    &:hover {
         background-color: #0866ff;
         color: #fff;
     }
@@ -451,13 +497,13 @@
 
 .dashboard_body {
     width: 100%;
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     overflow: auto;
 }
 
 .inner_container {
     /* padding-inline: 0.3rem; */
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     display: grid;
     grid-template-columns: 3fr 1.8fr;
     gap: 2rem;
@@ -469,7 +515,7 @@
 
 .saloninfo_container {
     min-height: 12rem;
-    height: 15vh;
+    height: 15svh;
     width: 100%;
     /* box-shadow: var(--cmmn-box-shadow-y); */
     padding-block: 1.5rem;
@@ -510,7 +556,7 @@
 
 .salonadv_container_loader {
     min-height: 25rem;
-    height: 35vh;
+    height: 35svh;
     width: 100%;
     margin-bottom: 2rem;
     border-radius: var(--list-wrapper-border-radius);
@@ -547,7 +593,7 @@
 
 .salonadv_container {
     min-height: 25rem;
-    height: 35vh;
+    height: 35svh;
     width: 100%;
     /* box-shadow: var(--cmmn-box-shadow-y); */
     margin-bottom: 2rem;
@@ -558,6 +604,18 @@
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
 }
+
+
+.dashboard_advertise_loader {
+    min-height: 25rem !important;
+    height: 35svh !important;
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+}
+
 
 .carousel_item_container {
     width: 100%;
@@ -578,7 +636,7 @@
 
 .barber_report_container {
     min-height: 25rem;
-    height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem);
+    height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
     margin-bottom: 2rem;
     display: grid;
     grid-template-columns: minmax(20rem, 1fr);
@@ -588,7 +646,7 @@
 
 .report_container {
     min-height: 25rem;
-    height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem);
+    height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
     /* box-shadow: var(--cmmn-box-shadow-y); */
     padding: 1rem;
     border-radius: var(--list-wrapper-border-radius);
@@ -600,7 +658,7 @@
 
     .r_chart {
         min-height: calc(25rem - 2rem);
-        height: calc(100vh - 6rem - 15vh - 35vh - 4rem - 2rem - 1.6vw);
+        height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem - 1.6vw);
         width: 100%;
 
         &>p:nth-child(1) {
@@ -665,7 +723,7 @@
     -o-border-radius: var(--list-wrapper-border-radius);
     background-color: #fff;
     min-height: 66rem;
-    height: calc(100vh - 6rem - 2rem);
+    height: calc(100svh - 6rem - 2rem);
 }
 
 .queue_header {
@@ -766,16 +824,16 @@
     }
 
     .saloninfo_container {
-        height: 20vh;
+        height: 20svh;
     }
 
 
     .report_container {
-        height: 40vh;
+        height: 40svh;
         width: calc(100vw - 2.6rem);
 
         .r_chart {
-            height: calc(40vh - 2rem);
+            height: calc(40svh - 2rem);
 
             &>div:nth-child(3) {
 

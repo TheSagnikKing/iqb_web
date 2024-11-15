@@ -246,7 +246,7 @@ const Dashboard = () => {
               {
                 getAllAdvertisementLoading ?
                   <div className={style.salonadv_container_loader}>
-                    <Skeleton count={1} height={"35vh"} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                    <Skeleton count={1} className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                       highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                   </div> :
                   getAllAdvertisementResolve && advertisements?.length > 0 ?

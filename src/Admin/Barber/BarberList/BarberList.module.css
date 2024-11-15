@@ -27,12 +27,12 @@
 .admin_barber_wrapper>div:nth-child(1)>div {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     height: 100%;
 }
 
 .barber_send_btn {
-    padding: 0.9em 0.9rem;
+    padding: 0.6em 0.6em;
     display: flex;
     align-items: center;
     justify-content: center;

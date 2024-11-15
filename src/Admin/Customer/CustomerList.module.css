@@ -52,7 +52,7 @@
 }
 
 .customer_search>div {
-    padding: 0.9em 0.9rem;
+    padding: 0.6em 0.6em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@
 }
 
 .customer_send_btn {
-    padding: 0.9em 0.9rem;
+    padding: 0.6em 0.6em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -249,7 +249,7 @@
 .customer_wrapper>div:nth-child(1)>div:nth-child(2) {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 
