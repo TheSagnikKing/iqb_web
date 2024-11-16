@@ -24,20 +24,25 @@ const CreateBarber = () => {
   const [countryCode, setCountryCode] = useState("")
   const [dateOfBirth, setDateOfBirth] = useState("");
 
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
   const AllSalonServicesControllerRef = useRef(new AbortController());
 
   useEffect(() => {
-    const controller = new AbortController();
-    AllSalonServicesControllerRef.current = controller;
+    if (adminProfile?.salonId !== 0) {
+      const controller = new AbortController();
+      AllSalonServicesControllerRef.current = controller;
 
-    dispatch(adminAllSalonServicesAction(salonId, controller.signal));
+      dispatch(adminAllSalonServicesAction(salonId, controller.signal));
 
-    return () => {
-      if (AllSalonServicesControllerRef.current) {
-        AllSalonServicesControllerRef.current.abort();
-      }
-    };
-  }, [salonId, dispatch]);
+      return () => {
+        if (AllSalonServicesControllerRef.current) {
+          AllSalonServicesControllerRef.current.abort();
+        }
+      };
+    }
+
+  }, [salonId, dispatch, adminProfile]);
 
   const adminAllSalonServices = useSelector(state => state.adminAllSalonServices);
 
@@ -103,7 +108,7 @@ const CreateBarber = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     } else {
       const barberdata = {

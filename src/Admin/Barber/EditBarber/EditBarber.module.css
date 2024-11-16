@@ -179,7 +179,7 @@
 }
 
 .service_item {
-    height: 16rem;
+    height: 20rem;
     width: 100%;
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
