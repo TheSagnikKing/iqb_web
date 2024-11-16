@@ -30,7 +30,7 @@ const ForgotPassword = () => {
 
       <div className={style.forgot_container_right}>
         <div>
-          <h1>Forgot Password</h1>
+          <p>Forgot Password</p>
 
           <input
             type="email"

@@ -1,17 +1,17 @@
 .barber_signup_edit_container {
-    height: 100vh;
+    height: 100svh;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
 }
 
 .barber_signup_edit_container>div:nth-child(1)>div {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
 }
 
 .barber_signup_edit_container>div:nth-child(1)>div>img {
@@ -20,14 +20,14 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2) {
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div {
-    width: 90%;
+    width: 70%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
 }
 
 .signup_head {
-    font-size: clamp(2rem, 1.5rem + 0.4vw, 3rem) !important;
+    font-size: var(--list-primary-text) !important;
     font-weight: 600;
 }
 
@@ -46,24 +46,25 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div>p {
-    font-size: clamp(1.2rem, 0.7rem + 0.4vw, 2.2rem);
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div>input {
-    height: clamp(4rem, 2rem + 1vw, 6.5rem);
+    height: 4rem;
     width: 100%;
     background-color: var(--bg-color3);
     border: none;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
     padding-inline: 1rem;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
     outline: none;
 }
+
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1) {
     display: flex;
@@ -74,9 +75,9 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
-    height: clamp(4rem, 2rem + 1vw, 6.5rem);
-    width: 35%;
-    border: 1px solid #0866ff;
+    height:4rem;
+    width: 12rem;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
     outline: none;
@@ -84,19 +85,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    font-size: var(--list-content-body-text);
 
-    &:hover {
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
@@ -111,8 +112,8 @@
     top: 7.2rem;
     width: 100%;
     height: auto;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 0.6rem;
+    box-shadow: var(--cmmn-box-shadow-y);
+    border-radius: var(--list-wrapper-border-radius);
     padding: 1rem;
     background-color: var(--primary-bg-light-color1);
     z-index: 3;
@@ -120,18 +121,19 @@
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
-    -webkit-border-radius: 0.6rem;
-    -moz-border-radius: 0.6rem;
-    -ms-border-radius: 0.6rem;
-    -o-border-radius: 0.6rem;
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+    border: 0.1rem solid rgba(0, 0, 0, 0.2);
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3)>div>p {
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
     padding-inline: 1rem;
-    min-height: 3.5rem;
+    min-height: 4rem;
     display: grid;
     align-items: center;
+    font-size: var(--list-content-body-text);
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3)>div>p:hover {
@@ -139,43 +141,22 @@
     color: var(--primary-text-light-color1);
     cursor: pointer;
     font-weight: 500;
-    min-height: 3.5rem;
+    min-height: 4rem;
     display: grid;
     align-items: center;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
 }
 
 
-.react-international-phone-input-container .react-international-phone-input {
-    width: 100%;
-    background-color: var(--bg-color3) !important;
-    min-height: 4rem !important;
-    border: none !important;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-}
-
-.react-international-phone-input-container .react-international-phone-country-selector-button {
-    background-color: var(--bg-color3) !important;
-    min-height: 4rem !important;
-    width: 6rem !important;
-    border: none !important;
-    border-top-left-radius: 1rem !important;
-    border-bottom-left-radius: 1rem !important;
-}
-
-.react-international-phone-country-selector-dropdown {
-    width: 30rem !important;
-}
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) {
     display: flex;
@@ -185,9 +166,9 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) button {
-    height: clamp(4rem, 2rem + 1vw, 6.5rem);
-    width: 20%;
-    border: 1px solid #0866ff;
+    height: 4rem;
+    width: 10rem;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
     outline: none;
@@ -195,25 +176,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
-
-    &:hover {
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    font-size: var(--list-content-body-text);
+    
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
 }
 
-@media((min-width:0px) and (max-width:576px)) {
+@media screen and (min-width:0px) and (max-width:430px){
     .barber_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -222,12 +203,12 @@
         display: none;
     }
 
-    .barber_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
-        width: 40%;
+    .barber_signup_edit_container>div:nth-child(2)>div{
+        width: 85vw;
     }
 }
 
-@media((min-width:577px) and (max-width:768px)) {
+@media screen and (min-width:431px) and (max-width:768px){
     .barber_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -235,9 +216,13 @@
     .barber_signup_edit_container>div:nth-child(1) {
         display: none;
     }
+
+    .barber_signup_edit_container>div:nth-child(2)>div{
+        width: 65vw;
+    }
 }
 
-@media((min-width:769px) and (max-width:992px)) {
+@media screen and (min-width:769px) and (max-width:1000px){
     .barber_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -245,10 +230,8 @@
     .barber_signup_edit_container>div:nth-child(1) {
         display: none;
     }
-}
 
-@media((min-width:993px) and (max-width:1200px)) {
-    .barber_signup_edit_container {
-        grid-template-columns: 0.9fr 1fr;
+    .barber_signup_edit_container>div:nth-child(2)>div{
+        width: 45vw;
     }
 }

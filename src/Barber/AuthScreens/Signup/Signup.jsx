@@ -61,7 +61,7 @@ const Signup = () => {
 
       <div className={style.barber_signup_right}>
         <div>
-          <h1>Sign Up to your Barber Account</h1>
+          <p>Sign Up to your Barber Account</p>
           <p>Welcome back Barber! please enter your details</p>
 
           <input

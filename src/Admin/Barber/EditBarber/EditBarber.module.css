@@ -406,7 +406,7 @@
 
     &>p {
         font-size: var(--list-content-error-text);
-        font-weight: 600;
+        font-weight: 500;
     }
 }
 

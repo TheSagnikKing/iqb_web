@@ -1,6 +1,6 @@
 .offline_container {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     display: grid;
     align-items: center;
 
@@ -21,7 +21,7 @@
             margin-bottom: 2rem;
             text-align: center;
 
-            &>span{
+            &>span {
                 color: red;
                 font-weight: 600;
             }
@@ -30,20 +30,18 @@
 }
 
 .error_boundary_container {
-    height: 90vh;
+    height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
     background-color: #fff;
-
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
 
     &>div {
         text-align: center;
@@ -54,7 +52,8 @@
         }
 
         &>p {
-            font-size: 1.6rem;
+            font-size: var(--list-modal-content-text);
+            font-weight: 500;
         }
     }
 }

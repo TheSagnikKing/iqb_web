@@ -1,209 +1,3 @@
-/* .admin_signin_container{
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.admin_signin_container>div:nth-child(1)>div{
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: 2px solid var(--border-color-1);
-}
-
-.admin_signin_container>div:nth-child(1)>div>img{
-    width: 100%;
-    height: 100%;
-}
-
-.admin_signin_container>div:nth-child(2){
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.homeicon{
-    position: absolute;
-    top: 4rem;
-    left: 4rem;
-    font-size: 4rem;
-    cursor: pointer;
-}
-
-.admin_signin_container>div:nth-child(2)>div{
-    width: 42rem;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-}
-
-iframe{
-    margin: 0px !important;
-}
-
-.admin_signin_container>div:nth-child(2)>div>h1{
-    font-size: 2rem;
-}
-
-.admin_signin_container>div:nth-child(2)>div>p:nth-child(2){
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-.admin_signin_container>div:nth-child(2)>div>input:nth-child(3){
-    height: 4.4rem;
-    width: 100%;
-    border-radius: 6.5rem;
-    background-color: var(--bg-color3);
-    font-size: 1.6rem;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    padding-inline: 1rem;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(4){
-    height: 4.4rem;
-    width: 100%;
-    border-radius: 6.5rem;
-    background-color: var(--bg-color3);
-    font-size: 1.6rem;
-    font-weight: 500;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(4)>div{
-    width: 4.4rem;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top-right-radius: 6.5rem;
-    border-bottom-right-radius: 6.5rem;
-    font-size: 2rem;
-    cursor: pointer;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(4)>input{
-    width: calc(100% - 4.4rem);
-    height: 100%;
-    border: none;
-    outline: none;
-    padding-inline: 1rem;
-    background:transparent;
-    border-top-left-radius: 6.5rem;
-    border-bottom-left-radius: 6.5rem;
-    font-size: 1.6rem;
-    font-weight: 500;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(5){
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(5)>p{
-    font-size: 1.4rem;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.admin_signin_container>div:nth-child(2)>div>button:nth-child(6){
-    height: 4rem;
-    width: 100%;
-    background-color: var(--primary-bg-color3);
-    color: var(--primary-text-light-color1);
-    border-radius: 5.5rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;
-    font-weight: bold;
-    box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7){
-    height: 2.1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>div{
-    height: 1px;
-    width: 100%;
-    background-color: var(--primary-bg-light-color2);
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>p{
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-
-.admin_signin_container>div:nth-child(2)>div>p:nth-child(9){
-    font-size: 1.6rem;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 2rem;
-}
-
-@media((min-width:0px) and (max-width:576px)) {
-    .admin_signin_container{
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_container>div:nth-child(1){
-        display: none;
-    }
-
-    .admin_signin_container>div:nth-child(2)>div{
-        width: 40rem;
-    }
-}
-
-@media((min-width:577px) and (max-width:768px)) {
-    .admin_signin_container{
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_container>div:nth-child(1){
-        display: none;
-    }
-}
-
-@media((min-width:769px) and (max-width:992px)) {
-    .admin_signin_container{
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_container>div:nth-child(1){
-        display: none;
-    }
-}
-
-@media((min-width:993px) and (max-width:1200px)) {
-    .admin_signin_container{
-        grid-template-columns: 0.9fr 1fr;
-    }
-} */
-
-
 .admin_signin_container {
     height: 100svh;
     width: 100%;
@@ -217,7 +11,7 @@ iframe{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
 
     &>img {
         width: 90%;
@@ -243,46 +37,46 @@ iframe{
 
 
         &>p {
-            font-size: clamp(2rem, 1.5rem + 0.4vw, 3rem);
+            font-size: var(--list-primary-text);
             font-weight: 600;
         }
 
         &>p:nth-child(2) {
-            font-size: clamp(1.2rem, 0.7rem + 0.4vw, 2.2rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
         }
 
         &>input:nth-child(3) {
-            height: clamp(4rem, 2rem + 1vw, 6.5rem);
+            height: 4rem;
             width: 100%;
             background-color: var(--bg-color3);
-            font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
             border: none;
             outline: none;
             padding-inline: 1rem;
-            border-radius: 0.3rem;
-            -webkit-border-radius: 0.3rem;
-            -moz-border-radius: 0.3rem;
-            -ms-border-radius: 0.3rem;
-            -o-border-radius: 0.3rem;
-        }
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+}
 
         &>div:nth-child(4) {
-            height: clamp(4rem, 2rem + 1vw, 6.5rem);
+            height: 4rem;
             width: 100%;
             background-color: var(--bg-color3);
-            font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 0.3rem;
-            -webkit-border-radius: 0.3rem;
-            -moz-border-radius: 0.3rem;
-            -ms-border-radius: 0.3rem;
-            -o-border-radius: 0.3rem;
-        }
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+}
     }
 
 }
@@ -291,28 +85,27 @@ iframe{
     position: absolute;
     top: 3rem;
     left: 3rem;
-    width: clamp(4.4rem, 3.5rem + 1vw, 6.5rem);
-    height: clamp(4.4rem, 3.5rem + 1vw, 6.5rem);
+    padding: 0.6em 0.6em;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     cursor: pointer;
-    border: 1px solid #0866ff;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    font-size: var(--list-content-body-text);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &:hover {
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
@@ -323,29 +116,29 @@ iframe {
 }
 
 .password_container {
-    height: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
+    height: 4rem;
 }
 
 .password_container>div {
-    width: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
-    height: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
+    width: 4rem;
+    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: clamp(1.4rem, 1.2rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
 }
 
 .password_container>input {
-    width: calc(100% - 4.4rem);
+    width: calc(100% - 4rem);
     height: 100%;
     border: none;
     outline: none;
     padding-inline: 1rem;
     background: transparent;
-    border-top-left-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    border-top-left-radius: var(--input-border-radius);
+    border-bottom-left-radius: var(--input-border-radius);
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
@@ -355,7 +148,7 @@ iframe {
     justify-content: flex-end;
 
     &>p {
-        font-size: clamp(1.2rem, 0.7rem + 0.4vw, 2.2rem);
+        font-size: var(--list-header-btn-text);
         cursor: pointer;
         font-weight: 500;
     }
@@ -363,9 +156,9 @@ iframe {
 
 
 .signin_btn {
-    height: clamp(4rem, 2rem + 1vw, 6.5rem);
+    height: 4rem;
     width: 100%;
-    border: 1px solid #0866ff;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
     outline: none;
@@ -373,26 +166,26 @@ iframe {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    font-size: var(--list-content-body-text);
 
-    &:hover {
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
 }
 
 .admin_signin_container>div:nth-child(2)>div>div:nth-child(7) {
-    height: clamp(2.4rem, 1.9rem + 0.4vw, 3.6rem);
+    height: 4rem;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -402,19 +195,19 @@ iframe {
 }
 
 .admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>div {
-    height: 1px;
+    height: 0.1rem;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
 .admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>p {
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
 
 .admin_signin_container>div:nth-child(2)>div>p:nth-child(9) {
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
     text-align: center;
     margin-top: 2rem;
 }
@@ -430,18 +223,12 @@ iframe {
 
     .admin_signin_right {
         &>div:nth-child(1) {
-            width: 90vw;
+            width: 85vw;
         }
-    }
-
-
-    .homeicon {
-        left: 3vw;
-        top: 3vw;
     }
 }
 
-@media screen and (min-width:430px) and (max-width:768px) {
+@media screen and (min-width:431px) and (max-width:768px) {
     .admin_signin_container {
         grid-template-columns: 1fr;
     }
@@ -455,10 +242,9 @@ iframe {
             width: 65vw;
         }
     }
-
 }
 
-@media screen and (min-width:768px) and (max-width:992px) {
+@media screen and (min-width:769px) and (max-width:1000px) {
     .admin_signin_container {
         grid-template-columns: 1fr;
     }
@@ -469,16 +255,17 @@ iframe {
 
     .admin_signin_right {
         &>div:nth-child(1) {
-            width: 50vw;
+            width: 45vw;
         }
     }
 }
 
-@media screen and (min-width:992px) and (max-width:1250px) {
+@media screen and (min-width:1001px) and (max-width:1250px) {
 
     .admin_signin_right {
         &>div:nth-child(1) {
-            width: 60%;
+            width: 65%;
         }
     }
 }
+

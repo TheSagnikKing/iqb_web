@@ -93,10 +93,9 @@ const ChangePassword = () => {
 
       <div className={style.change_password_container_right}>
         <div>
-          <h1>Change Password</h1>
-          <p>In order to protect your account, make sure your password</p>
-          <p>Point 1</p>
-          <p>Point 2</p>
+          <p>Change Password</p>
+          <p>Use at least 8 characters with a mix of letters, numbers, and symbols.</p>
+          <p>Keep it unique and avoid reusing passwords.</p>
 
           <div className={style.password_container}>
             <input

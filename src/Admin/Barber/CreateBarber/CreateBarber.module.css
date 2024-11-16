@@ -35,8 +35,6 @@
 .admin_create_barber_content_wrapper_left {
     width: 100%;
     overflow: auto;
-    /* background-color: red; */
-    /* height: calc(85vh - 5rem - 4rem); */
     height: calc(calc(var(--list-wrapper-height)) - 5rem - 4rem);
 }
 
@@ -408,7 +406,7 @@
 
     &>p {
         font-size: var(--list-content-error-text);
-        font-weight: 600;
+        font-weight: 500;
     }
 }
 

@@ -8,11 +8,11 @@ const CheckEmail = () => {
 
   return (
     <div className='check_email_container'>
-        <div><img src="/forgot_img.png" alt="forgot_image" /></div>
+        <div><img src="./signup_un.png" alt="forgot_image" /></div>
 
         <div>
             <div>
-                <h1>Check Email</h1>
+                <p>Check Email</p>
                 <p>We have sent a password reset link to abcd@gmail.com</p>                
                 
                 <button onClick={() => {}}>Resend</button>

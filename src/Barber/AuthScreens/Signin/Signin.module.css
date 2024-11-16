@@ -1,17 +1,17 @@
 .barber_signin_container {
-    height: 100vh;
-    width: 100vw;
+    height: 100svh;
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .barber_signin_left {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
 
     &>img {
         width: 90%;
@@ -21,7 +21,7 @@
 }
 
 .barber_signin_right {
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,46 +37,46 @@
 
 
         &>p {
-            font-size: clamp(2rem, 1.5rem + 0.4vw, 3rem);
+            font-size: var(--list-primary-text);
             font-weight: 600;
         }
 
         &>p:nth-child(2) {
-            font-size: clamp(1.2rem, 0.7rem + 0.4vw, 2.2rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
         }
 
         &>input:nth-child(3) {
-            height: clamp(4rem, 2rem + 1vw, 6.5rem);
+            height: 4rem;
             width: 100%;
             background-color: var(--bg-color3);
-            font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
             border: none;
             outline: none;
             padding-inline: 1rem;
-            border-radius: 0.3rem;
-            -webkit-border-radius: 0.3rem;
-            -moz-border-radius: 0.3rem;
-            -ms-border-radius: 0.3rem;
-            -o-border-radius: 0.3rem;
-        }
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+}
 
         &>div:nth-child(4) {
-            height: clamp(4rem, 2rem + 1vw, 6.5rem);
+            height: 4rem;
             width: 100%;
             background-color: var(--bg-color3);
-            font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+            font-size: var(--list-content-body-text);
             font-weight: 500;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 0.3rem;
-            -webkit-border-radius: 0.3rem;
-            -moz-border-radius: 0.3rem;
-            -ms-border-radius: 0.3rem;
-            -o-border-radius: 0.3rem;
-        }
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+}
     }
 
 }
@@ -85,28 +85,27 @@
     position: absolute;
     top: 3rem;
     left: 3rem;
-    width: clamp(4.4rem, 3.5rem + 1vw, 6.5rem);
-    height: clamp(4.4rem, 3.5rem + 1vw, 6.5rem);
+    padding: 0.6em 0.6em;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     cursor: pointer;
-    border: 1px solid #0866ff;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
+    font-size: var(--list-content-body-text);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &:hover {
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
@@ -117,29 +116,29 @@ iframe {
 }
 
 .password_container {
-    height: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
+    height: 4rem;
 }
 
 .password_container>div {
-    width: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
-    height: clamp(4.4rem, 3.9rem + 0.4vw, 5.6rem);
+    width: 4rem;
+    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: clamp(1.4rem, 1.2rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
 }
 
 .password_container>input {
-    width: calc(100% - 4.4rem);
+    width: calc(100% - 4rem);
     height: 100%;
     border: none;
     outline: none;
     padding-inline: 1rem;
     background: transparent;
-    border-top-left-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    border-top-left-radius: var(--input-border-radius);
+    border-bottom-left-radius: var(--input-border-radius);
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
@@ -149,7 +148,7 @@ iframe {
     justify-content: flex-end;
 
     &>p {
-        font-size: clamp(1.2rem, 0.7rem + 0.4vw, 2.2rem);
+        font-size: var(--list-header-btn-text);
         cursor: pointer;
         font-weight: 500;
     }
@@ -157,9 +156,9 @@ iframe {
 
 
 .signin_btn {
-    height: clamp(4rem, 2rem + 1vw, 6.5rem);
+    height: 4rem;
     width: 100%;
-    border: 1px solid #0866ff;
+    border: 0.1rem solid #0866ff;
     color: #0866ff;
     background-color: #0867ff25;
     outline: none;
@@ -167,26 +166,26 @@ iframe {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -moz-transition: 0.3s all ease;
-    -ms-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    font-size: clamp(1.4rem, 0.6rem + 0.4vw, 2.4rem);
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    font-size: var(--list-content-body-text);
 
-    &:hover {
+    &:hover{
         background-color: #0866ff;
         color: #fff;
     }
 }
 
 .barber_signin_container>div:nth-child(2)>div>div:nth-child(7) {
-    height: clamp(2.4rem, 1.9rem + 0.4vw, 3.6rem);
+    height: 4rem;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -196,19 +195,19 @@ iframe {
 }
 
 .barber_signin_container>div:nth-child(2)>div>div:nth-child(7)>div {
-    height: 1px;
+    height: 0.1rem;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
 .barber_signin_container>div:nth-child(2)>div>div:nth-child(7)>p {
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
     font-weight: 500;
 }
 
 
 .barber_signin_container>div:nth-child(2)>div>p:nth-child(9) {
-    font-size: clamp(1.4rem, 0.9rem + 0.4vw, 2.4rem);
+    font-size: var(--list-content-body-text);
     text-align: center;
     margin-top: 2rem;
 }
@@ -224,18 +223,12 @@ iframe {
 
     .barber_signin_right {
         &>div:nth-child(1) {
-            width: 90vw;
+            width: 85vw;
         }
-    }
-
-
-    .homeicon {
-        left: 3vw;
-        top: 3vw;
     }
 }
 
-@media screen and (min-width:430px) and (max-width:768px) {
+@media screen and (min-width:431px) and (max-width:768px) {
     .barber_signin_container {
         grid-template-columns: 1fr;
     }
@@ -249,10 +242,9 @@ iframe {
             width: 65vw;
         }
     }
-
 }
 
-@media screen and (min-width:768px) and (max-width:992px) {
+@media screen and (min-width:769px) and (max-width:1000px) {
     .barber_signin_container {
         grid-template-columns: 1fr;
     }
@@ -263,16 +255,17 @@ iframe {
 
     .barber_signin_right {
         &>div:nth-child(1) {
-            width: 50vw;
+            width: 45vw;
         }
     }
 }
 
-@media screen and (min-width:992px) and (max-width:1250px) {
+@media screen and (min-width:1001px) and (max-width:1250px) {
 
     .barber_signin_right {
         &>div:nth-child(1) {
-            width: 60%;
+            width: 65%;
         }
     }
 }
+
