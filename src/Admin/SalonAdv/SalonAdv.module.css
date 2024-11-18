@@ -204,7 +204,6 @@
 .salonadv_task>div:nth-child(1) {
     height: 83%;
     width: 100%;
-    background-color: red;
 }
 
 .salonadv_task>div:nth-child(1)>img {
