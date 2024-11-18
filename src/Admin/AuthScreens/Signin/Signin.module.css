@@ -226,6 +226,11 @@ iframe {
             width: 85vw;
         }
     }
+
+    .homeicon{
+        top: 3svh;
+        left: 5vw;
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
@@ -242,6 +247,8 @@ iframe {
             width: 65vw;
         }
     }
+
+    
 }
 
 @media screen and (min-width:769px) and (max-width:1000px) {
