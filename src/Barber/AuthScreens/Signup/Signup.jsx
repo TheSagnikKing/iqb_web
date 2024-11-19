@@ -43,9 +43,14 @@ const Signup = () => {
 
   const signupClicked = () => {
     const barbersignupdata = { email, password }
-    console.log(barbersignupdata)
     dispatch(BarberSignupAction(barbersignupdata, navigate))
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      signupClicked();
+    }
+  };
 
   const BarberSignup = useSelector(state => state.BarberSignup)
 
@@ -69,6 +74,7 @@ const Signup = () => {
             placeholder='Enter Your Email ID'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
 
           <div className={style.password_container}>
@@ -77,6 +83,7 @@ const Signup = () => {
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye/>}</div>
           </div>

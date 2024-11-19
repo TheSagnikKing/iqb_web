@@ -54,12 +54,16 @@ const SignupEditProfile = () => {
       });
     } else {
       const profiledata = { email: barberdata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: barberdata?.salonId, AuthType: barberdata?.AuthType, countryCode: Number(countryCode) };
-
-      console.log(profiledata)
       dispatch(BarberSignupEditAction(profiledata, navigate))
     }
 
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      updateClicked();
+    }
+  };
 
   const skipClicked = () => {
     const profiledata = { email: barberdata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: barberdata?.salonId, countryCode: Number(countryCode) };
@@ -138,6 +142,7 @@ const SignupEditProfile = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -147,6 +152,7 @@ const SignupEditProfile = () => {
               type="text"
               value={`${gender ? `${gender}` : ''}`}
               onClick={() => genderDropHandler()}
+              onKeyDown={handleKeyPress}
             />
 
             {genderDrop && <ClickAwayListener onClickAway={() => setGenderDrop(false)}><div>
@@ -162,6 +168,7 @@ const SignupEditProfile = () => {
               type="date"
               value={dateOfBirth}
               onChange={(e) => setDateofBirth(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -177,6 +184,7 @@ const SignupEditProfile = () => {
                   defaultCountry={countryflag}
                   value={mobileNumber}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+                  onKeyDown={handleKeyPress}
                 />
               </div>
 

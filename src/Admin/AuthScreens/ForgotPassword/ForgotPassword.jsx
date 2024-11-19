@@ -17,6 +17,12 @@ const ForgotPassword = () => {
     dispatch(adminForgetPasswordAction(email))
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      mailHandler();
+    }
+  };
+
   const adminForgetPassword = useSelector(state => state.adminForgetPassword)
 
   const {
@@ -36,6 +42,7 @@ const ForgotPassword = () => {
             placeholder='Enter Your Email ID'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
 
           {

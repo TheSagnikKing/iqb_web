@@ -61,6 +61,12 @@ const ChangePassword = () => {
     dispatch(barberResetPasswordAction(password, params?.token, navigate))
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      ChangePasswordHandler();
+    }
+  };
+
 
   const barberResetPassword = useSelector(state => state.barberResetPassword)
 
@@ -88,6 +94,7 @@ const ChangePassword = () => {
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>
@@ -98,6 +105,7 @@ const ChangePassword = () => {
               placeholder='Confirm Password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye2((prev) => !prev)}>{visibleeye2 ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>

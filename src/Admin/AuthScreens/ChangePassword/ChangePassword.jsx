@@ -76,6 +76,11 @@ const ChangePassword = () => {
     dispatch(adminResetPasswordAction(password, params?.token, navigate));
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      ChangePasswordHandler();
+    }
+  };
 
   const adminResetPassword = useSelector(state => state.adminResetPassword)
 
@@ -103,6 +108,7 @@ const ChangePassword = () => {
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>
@@ -113,6 +119,7 @@ const ChangePassword = () => {
               placeholder='Confirm Password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye2((prev) => !prev)}>{visibleeye2 ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>

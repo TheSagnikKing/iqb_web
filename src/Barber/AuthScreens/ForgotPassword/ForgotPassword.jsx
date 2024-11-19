@@ -18,6 +18,12 @@ const ForgotPassword = () => {
     // navigate("/barbercheckemail")
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      mailHandler();
+    }
+  };
+
   const barberForgetPassword = useSelector(state => state.barberForgetPassword)
 
   const {
@@ -37,6 +43,7 @@ const ForgotPassword = () => {
             placeholder='Enter Your Email ID'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
 
           {

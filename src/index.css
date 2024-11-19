@@ -323,3 +323,35 @@ p {
     height: 90svh;
   }
 }
+
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+*:hover::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.7rem;
+}
+
+*:hover::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: #0867ff48;
+  border-radius: var(--list-wrapper-border-radius);
+  -webkit-border-radius: var(--list-wrapper-border-radius);
+  -moz-border-radius: var(--list-wrapper-border-radius);
+  -ms-border-radius: var(--list-wrapper-border-radius);
+  -o-border-radius: var(--list-wrapper-border-radius);
+}
+
+*:hover::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 98, 255);
+}
+
+*:hover::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

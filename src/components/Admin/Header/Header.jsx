@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./Header.module.css"
 import Skeleton from 'react-loading-skeleton'
-import { Adminqueueicon, DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
+import { DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
 import { menudata } from '../menudata'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
@@ -10,10 +10,8 @@ import { getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonActio
 import { adminApplySalonAction, adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants'
-import { IoMoon } from 'react-icons/io5'
-import { MdSunny } from 'react-icons/md'
 import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAction'
-import { ClickAwayListener } from '@mui/material'
+import { ClickAwayListener, Modal } from '@mui/material'
 
 const DashboardHeader = () => {
 
@@ -307,7 +305,7 @@ const DashboardHeader = () => {
       }
 
 
-      {
+      {/* {
         mobiledrop && <section className={style.chooseSalon_modal}>
           <div className={`${style.chooseSalon_model_content} ${darkmodeOn && style.dark}`}>
             <button onClick={() => setMobileDrop(false)}>X</button>
@@ -317,7 +315,6 @@ const DashboardHeader = () => {
             </div>
             <div
               className={style.mobile_dashboard_salon_list_dropdown}
-              // ref={salonlistRef}
               style={{
                 opacity: 1,
                 zIndex: 2,
@@ -351,7 +348,57 @@ const DashboardHeader = () => {
             
           </div>
         </section>
-      }
+      } */}
+
+      <Modal
+        open={mobiledrop}
+        onClose={() => setMobileDrop(false)}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <section className={style.chooseSalon_modal}>
+          <div className={`${style.chooseSalon_model_content} ${darkmodeOn && style.dark}`}>
+            <button onClick={() => setMobileDrop(false)}>X</button>
+            <p>Choose Salon</p>
+            <div>
+              <p>{adminSetSalon?.currentActiveSalon}</p>
+            </div>
+            <div
+              className={style.mobile_dashboard_salon_list_dropdown}
+              style={{
+                opacity: 1,
+                zIndex: 2,
+                transition: "300ms ease",
+                height: SalonList?.length > 0 && SalonList?.length <= 4 ? "auto" : "20rem"
+              }}
+            >
+              {
+                getAdminSalonListLoading && !getAdminSalonListResolve ?
+                  <p>No Salon Present</p> :
+                  !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
+                    SalonList.map((s) => (
+                      <p
+                        key={s.id}
+                        onClick={() => selectedActiveSalon(s)}
+                        style={{
+                          background: s.salonId == adminProfile?.salonId && "#0866ff",
+                          color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                        }}
+                      >{s.salonName}</p>
+                    )) :
+                    !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ?
+                      <p>No Salon Present</p> :
+                      !getAdminSalonListLoading && !getAdminSalonListResolve &&
+                      <p>No Salon Present</p>
+              }
+            </div>
+            {
+              adminProfile?.salonId !== 0 && (!getAdminSalonListLoading && getAdminSalonListResolve && <button onClick={applySelectedSalonHandler} disabled={adminProfile?.salonId == adminSetSalon?.chooseSalonId || adminApplySalonLoading ? true : false}>Apply</button>)
+            }
+
+          </div>
+        </section>
+      </Modal>
       <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
 
         {

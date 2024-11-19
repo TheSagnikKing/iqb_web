@@ -46,6 +46,12 @@ const Signin = () => {
     dispatch(AdminSigninAction(adminsignindata, navigate))
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      signinClicked();
+    }
+  };
+
   const forgotClicked = () => {
     navigate("/adminforgotpassword")
   }
@@ -72,6 +78,7 @@ const Signin = () => {
             placeholder='Enter Your Email ID'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
 
           <div className={style.password_container}>
@@ -80,6 +87,7 @@ const Signin = () => {
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
           </div>

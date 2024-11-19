@@ -64,6 +64,12 @@ const SignupEditProfile = () => {
     dispatch(adminSkipProfileAction(profiledata, navigate))
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      updateClicked();
+    }
+  };
+
   const AdminSignupEdit = useSelector(state => state.AdminSignupEdit)
 
   const {
@@ -134,6 +140,7 @@ const SignupEditProfile = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -143,6 +150,7 @@ const SignupEditProfile = () => {
               type="text"
               value={`${gender ? `${gender}` : ''}`}
               onClick={() => genderDropHandler()}
+              onKeyDown={handleKeyPress}
             />
 
             {genderDrop && <ClickAwayListener onClickAway={() => setGenderDrop(false)}><div>
@@ -158,6 +166,7 @@ const SignupEditProfile = () => {
               type="date"
               value={dateOfBirth}
               onChange={(e) => setDateofBirth(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -169,7 +178,7 @@ const SignupEditProfile = () => {
                   forceDialCode={true}
                   defaultCountry={countryflag}
                   value={mobileNumber}
-                  // onChange={(phone) => setMobileNumber(phone)}
+                  onKeyDown={handleKeyPress}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
