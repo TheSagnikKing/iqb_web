@@ -129,9 +129,11 @@ const Queue = () => {
                       <p>{b.timeJoinedQ}</p>
                       <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.qPosition}</p>
-                      <p>
-                        {b.serviceType === "VIP" ? <div><CrownIcon /></div> : <div>-</div>}
-                      </p>
+                      <div>
+                        {
+                          b.serviceType === "VIP" ? <CrownIcon /> : "-"
+                        }
+                      </div>
                       <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
                       <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Cancel</button></div>
                     </div>

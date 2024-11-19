@@ -384,6 +384,7 @@ const EditProfile = () => {
                             type="text"
                             placeholder='Enter Email'
                             value={barberProfile?.email}
+                            readOnly
                         />
 
                         <button
@@ -448,6 +449,7 @@ const EditProfile = () => {
                         type="text"
                         value="********"
                         onClick={() => setOpenPasswordModal(true)}
+                        readOnly
                     />
                 </div>
 
@@ -514,7 +516,7 @@ const EditProfile = () => {
                                         ) :
                                         (
                                             <>
-                                                <p>Save</p>
+                                                <p style={{ color: "#0866ff"}}>Save</p>
                                                 <div><SaveIcon /></div>
                                             </>
                                         )
@@ -607,6 +609,7 @@ const EditProfile = () => {
                         type="text"
                         value={`${gender ? `${gender}` : ''}`}
                         onClick={() => genderDropHandler()}
+                        readOnly
                     />
 
                     {genderDrop &&

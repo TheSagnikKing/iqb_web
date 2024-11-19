@@ -268,7 +268,7 @@ const DashboardHeader = () => {
                       ) : (
                         SalonList.map((s) => (
                           <p
-                            key={s.id}
+                            key={s._id}
                             onClick={() => selectedActiveSalon(s)}
                             style={{
                               background: s.salonId === adminProfile?.salonId ? "#0866ff" : undefined,
@@ -378,7 +378,7 @@ const DashboardHeader = () => {
                   !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ?
                     SalonList.map((s) => (
                       <p
-                        key={s.id}
+                        key={s._id}
                         onClick={() => selectedActiveSalon(s)}
                         style={{
                           background: s.salonId == adminProfile?.salonId && "#0866ff",
@@ -490,7 +490,8 @@ const DashboardHeader = () => {
           <div onClick={() => {
             setSidebarToggle(false)
             navigate("/admin-dashboard/editprofile")
-          }} className={style.dashboard_mobile_item}>
+          }} 
+          className={style.dashboard_mobile_item}>
             <div><ProfileIcon /></div>
             <p>Profile</p>
           </div>

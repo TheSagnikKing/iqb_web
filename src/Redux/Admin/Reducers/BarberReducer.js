@@ -9,7 +9,6 @@ export const getAdminBarberListReducer = (state = {}, action) => {
                 resolve: false
             };
         case GET_ADMIN_BARBERLIST_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
                 loading: false,

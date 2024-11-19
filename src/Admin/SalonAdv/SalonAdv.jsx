@@ -373,7 +373,7 @@ const SalonAdv = () => {
                   key={index}
                   count={1}
                   width={"95%"}
-                  height={"35rem"}
+                  height={"30rem"}
                   style={{ borderRadius: "0.6rem" }}
                   baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                   highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
@@ -386,9 +386,9 @@ const SalonAdv = () => {
                 <div className={`${style.salonadv_column} ${darkmodeOn && style.dark}`}>
                   <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
                     {advertisements.map((adv) => (
-                      <>
-                        <Adv key={adv._id} id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
-                      </>
+                      <React.Fragment key={adv._id}>
+                        <Adv id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
+                      </React.Fragment>
                     ))}
 
                   </SortableContext>

@@ -118,6 +118,15 @@
     text-overflow: ellipsis;
 }
 
+.barber_queue_content_body_item>div:nth-last-child(3){
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--list-content-body-text);
+}
+
 .barber_queue_content_body>div>p:nth-child(4),
 .barber_queue_content_body>div>p:nth-child(5),
 .barber_queue_content_body>div>p:nth-child(6),
