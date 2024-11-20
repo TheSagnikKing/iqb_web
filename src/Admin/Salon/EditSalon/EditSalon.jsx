@@ -517,6 +517,12 @@ const EditSalon = () => {
     setServiceId(0)
   }
 
+  const handleKeyPressAddServices = (e) => {
+    if (e.key === "Enter") {
+      addServiceHandler();
+    }
+  };
+
 
   const deleteServiceHandler = (index) => {
     const currentService = selectedServices[index];
@@ -584,12 +590,18 @@ const EditSalon = () => {
         salonId: currentSalon?.salonId
       }
 
-      console.log(salondata)
+      // console.log(salondata)
 
       dispatch(adminEditSalonAction(salondata, navigate))
     }
 
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      editSalonHandler();
+    }
+  };
 
   const adminEditSalon = useSelector(state => state.adminEditSalon)
 
@@ -1139,6 +1151,7 @@ const EditSalon = () => {
               type="text"
               value={salonName}
               onChange={(e) => setSalonName(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1148,6 +1161,7 @@ const EditSalon = () => {
               type="text"
               value={salonEmail}
               readOnly
+              onKeyDown={handleKeyPress}
             // onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
@@ -1158,6 +1172,7 @@ const EditSalon = () => {
               type="text"
               value={salonDesc}
               onChange={(e) => setSalonDesc(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1167,6 +1182,7 @@ const EditSalon = () => {
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1177,6 +1193,7 @@ const EditSalon = () => {
                 type="number"
                 value={latitude}
                 readOnly
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -1186,6 +1203,7 @@ const EditSalon = () => {
                 type="number"
                 value={longitude}
                 readOnly
+                onKeyDown={handleKeyPress}
               />
             </div>
           </div>
@@ -1201,6 +1219,7 @@ const EditSalon = () => {
                 type="text"
                 value={country}
                 readOnly
+                onKeyDown={handleKeyPress}
               // onChange={(e) => searchCountryHandler(e)}
               />
 
@@ -1230,6 +1249,7 @@ const EditSalon = () => {
                 type="text"
                 value={city}
                 readOnly
+                onKeyDown={handleKeyPress}
               // onChange={(e) => searchCityHandler(e)}
               />
 
@@ -1260,6 +1280,7 @@ const EditSalon = () => {
                 type="text"
                 value={timezone}
                 readOnly
+                onKeyDown={handleKeyPress}
               // onClick={() => timezoneDropHandler()}
               />
 
@@ -1291,6 +1312,7 @@ const EditSalon = () => {
                 type="text"
                 value={postCode}
                 readOnly
+                onKeyDown={handleKeyPress}
               // onChange={(e) => setPostCode(e.target.value)}
               />
             </div>
@@ -1305,6 +1327,7 @@ const EditSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               className={style.salontype_input}
+              onKeyDown={handleKeyPress}
             />
 
             {salonTypeDrop &&
@@ -1319,7 +1342,7 @@ const EditSalon = () => {
           <div>
             <p>Mobile Number</p>
             <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div>
+              <div onKeyDown={handleKeyPress}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry={countryflag}
@@ -1445,6 +1468,7 @@ const EditSalon = () => {
                   type="text"
                   value={serviceName}
                   onChange={(e) => setServiceName(e.target.value)}
+                  onKeyDown={handleKeyPressAddServices}
                 />
               </div>
 
@@ -1454,6 +1478,7 @@ const EditSalon = () => {
                   type="text"
                   value={serviceDesc}
                   onChange={(e) => setServiceDesc(e.target.value)}
+                  onKeyDown={handleKeyPressAddServices}
                 />
               </div>
 
@@ -1463,6 +1488,7 @@ const EditSalon = () => {
                   type="text"
                   value={`${vipService ? 'VIP' : 'Regular'}`}
                   onClick={() => vipServiceDropHandler()}
+                  onKeyDown={handleKeyPressAddServices}
                 />
 
                 {vipServiceDrop &&
@@ -1487,6 +1513,7 @@ const EditSalon = () => {
                         setServicePrice(value);
                       }
                     }}
+                    onKeyDown={handleKeyPressAddServices}
                   />
                 </div>
 
@@ -1502,6 +1529,7 @@ const EditSalon = () => {
                         setServiceEWT(value);
                       }
                     }}
+                    onKeyDown={handleKeyPressAddServices}
                   />
                 </div>
               </div>
@@ -1643,6 +1671,7 @@ const EditSalon = () => {
               type="text"
               value={webLink}
               onChange={(e) => setWebLink(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1652,6 +1681,7 @@ const EditSalon = () => {
               type="text"
               value={fbLink}
               onChange={(e) => setFbLink(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1661,6 +1691,7 @@ const EditSalon = () => {
               type="text"
               value={instraLink}
               onChange={(e) => setInstraLink(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1670,6 +1701,7 @@ const EditSalon = () => {
               type="text"
               value={twitterLink}
               onChange={(e) => setTwitterLink(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1679,6 +1711,7 @@ const EditSalon = () => {
               type="text"
               value={tiktokLink}
               onChange={(e) => setTiktokLink(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
 

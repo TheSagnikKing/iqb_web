@@ -127,6 +127,12 @@ const CreateBarber = () => {
 
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      CreateBarberHandler();
+    }
+  };
+
   const adminCreateBarber = useSelector(state => state.adminCreateBarber)
 
   const {
@@ -288,6 +294,7 @@ const CreateBarber = () => {
                 value={name}
                 placeholder='Enter Name'
                 onChange={(e) => setHandler(setName, e.target.value, "name")}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -298,6 +305,7 @@ const CreateBarber = () => {
                 value={email}
                 placeholder='Enter Email'
                 onChange={(e) => setHandler(setEmail, e.target.value, "email")}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -308,13 +316,14 @@ const CreateBarber = () => {
                 value={nickName}
                 placeholder='Enter Nick Name'
                 onChange={(e) => setHandler(setNickName, e.target.value, "nickName")}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
             <div>
               <p>Mob. Number</p>
               <div>
-                <div>
+                <div onKeyDown={handleKeyPress}>
                   <PhoneInput
                     forceDialCode={true}
                     defaultCountry={countryflag}
@@ -336,6 +345,7 @@ const CreateBarber = () => {
                 style={{
                   colorScheme: darkmodeOn ? "dark" : "light"
                 }}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -345,6 +355,7 @@ const CreateBarber = () => {
                 type='text'
                 value={chooseServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
+                onKeyDown={handleKeyPress}
               />
             </div>
 

@@ -113,6 +113,11 @@ const EditBarber = () => {
 
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      EditBarberHandler();
+    }
+  };
 
   const adminUpdateBarber = useSelector(state => state.adminUpdateBarber)
 
@@ -275,6 +280,7 @@ const EditBarber = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder='Enter Name'
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -284,6 +290,7 @@ const EditBarber = () => {
                 type='text'
                 value={email}
                 placeholder='Enter Email'
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -294,13 +301,14 @@ const EditBarber = () => {
                 value={nickName}
                 onChange={(e) => setNickName(e.target.value)}
                 placeholder='Enter Nick Name'
+                onKeyDown={handleKeyPress}
               />
             </div>
 
             <div>
               <p>Mob. Number</p>
               <div>
-                <div>
+                <div onKeyDown={handleKeyPress}>
                   <PhoneInput
                     forceDialCode={true}
                     defaultCountry={countryflag}
@@ -322,6 +330,7 @@ const EditBarber = () => {
                 style={{
                   colorScheme: darkmodeOn ? "dark" : "light"
                 }}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -331,6 +340,7 @@ const EditBarber = () => {
                 type='text'
                 value={currentBarberServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
+                onKeyDown={handleKeyPress}
               />
             </div>
 

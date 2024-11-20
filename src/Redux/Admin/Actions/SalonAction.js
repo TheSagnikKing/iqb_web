@@ -16,7 +16,7 @@ export const getAdminSalonListAction = (email, signal) => async (dispatch) => {
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: GET_ADMIN_SALONLIST_FAIL,
                 payload: "Something went wrong !"
@@ -67,7 +67,7 @@ export const getAdminAllSalonIconAction = (signal) => async (dispatch) => {
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GETALLSALON_ICONS_FAIL,
                 payload: "Something went wrong !"
@@ -119,7 +119,7 @@ export const getAdminAllCountriesAction = (countryname) => async (dispatch) => {
 
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GET_ALL_COUNTRIES_FAIL,
                 payload: "Something went wrong !"
@@ -167,7 +167,7 @@ export const getAdminAllCitiesAction = (cityname, countrycode) => async (dispatc
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GET_ALL_CITIES_FAIL,
                 payload: "Something went wrong !"
@@ -216,7 +216,7 @@ export const getAdminAllTimezoneAction = (countrycode) => async (dispatch) => {
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GET_ALL_TIMEZONES_FAIL,
                 payload: "Something went wrong !"
@@ -269,7 +269,7 @@ export const adminDeleteSalonAction = (salonId, salonmongoid) => async (dispatch
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_DELETE_SALON_FAIL,
                 payload: "Something went wrong !"
@@ -338,7 +338,7 @@ export const adminCreateSalonAction = (salondata, navigate) => async (dispatch) 
 
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_CREATE_SALON_FAIL,
                 payload: "Something went wrong !"
@@ -390,7 +390,7 @@ export const adminEditSalonAction = (salondata, navigate) => async (dispatch) =>
 
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_EDIT_SALON_FAIL,
                 payload: "Something went wrong !"
@@ -450,7 +450,7 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSett
 
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_UPDATE_SALON_SETTINGS_FAIL,
                 payload: "Something went wrong !"
@@ -500,7 +500,7 @@ export const getAdminSalonImagesAction = (salonId) => async (dispatch) => {
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GET_SALON_IMAGES_FAIL,
                 payload: "Something went wrong !"
@@ -553,7 +553,7 @@ export const getAdminSalonLogoAction = (salonId) => async (dispatch) => {
         })
     } catch (error) {
 
-        if(error?.response?.status === 500){
+        if (error?.response?.status === 500) {
             dispatch({
                 type: ADMIN_GET_SALON_LOGO_FAIL,
                 payload: "Something went wrong !"

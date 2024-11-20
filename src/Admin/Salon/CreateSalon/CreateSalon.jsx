@@ -420,6 +420,12 @@ const CreateSalon = () => {
 
   }
 
+  const handleKeyPressAddServices = (e) => {
+    if (e.key === "Enter") {
+      addServiceHandler();
+    }
+  };
+
   const deleteServiceHandler = (index) => {
     const currentService = localsalondata.selectedServices[index];
 
@@ -586,6 +592,12 @@ const CreateSalon = () => {
     }
 
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      createSalonHandler();
+    }
+  };
 
 
   const adminCreateSalon = useSelector(state => state.adminCreateSalon)
@@ -957,6 +969,7 @@ const CreateSalon = () => {
               type="text"
               value={salonName}
               onChange={(e) => setHandler(setSalonName, e.target.value, "salonName")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -966,6 +979,7 @@ const CreateSalon = () => {
               type="text"
               value={salonEmail}
               onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -975,6 +989,7 @@ const CreateSalon = () => {
               type="text"
               value={salonDesc}
               onChange={(e) => setHandler(setSalonDesc, e.target.value, "salonDesc")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -984,6 +999,7 @@ const CreateSalon = () => {
               type="text"
               value={address}
               onChange={(e) => setHandler(setAddress, e.target.value, "address")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -995,6 +1011,7 @@ const CreateSalon = () => {
                 value={latitude}
                 readOnly
                 style={{ outline: "none" }}
+                onKeyDown={handleKeyPress}
               />
             </div>
 
@@ -1005,6 +1022,7 @@ const CreateSalon = () => {
                 value={longitude}
                 readOnly
                 style={{ outline: "none" }}
+                onKeyDown={handleKeyPress}
               />
             </div>
           </div>
@@ -1020,6 +1038,7 @@ const CreateSalon = () => {
                 type="text"
                 value={country}
                 onChange={(e) => searchCountryHandler(e)}
+                onKeyDown={handleKeyPress}
               />
 
               {countryDrop &&
@@ -1051,6 +1070,7 @@ const CreateSalon = () => {
                 type="text"
                 value={city}
                 onChange={(e) => searchCityHandler(e)}
+                onKeyDown={handleKeyPress}
               />
 
               {cityDrop &&
@@ -1083,6 +1103,7 @@ const CreateSalon = () => {
                 type="text"
                 value={timezone}
                 onClick={() => timezoneDropHandler()}
+                onKeyDown={handleKeyPress}
               />
 
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
@@ -1110,6 +1131,7 @@ const CreateSalon = () => {
                 type="text"
                 value={postCode}
                 onChange={(e) => setHandler(setPostCode, e.target.value, "postCode")}
+                onKeyDown={handleKeyPress}
               />
             </div>
           </div>
@@ -1123,6 +1145,7 @@ const CreateSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               className='salontype_input'
+              onKeyDown={handleKeyPress}
             />
 
             {salonTypeDrop &&
@@ -1137,7 +1160,7 @@ const CreateSalon = () => {
           <div>
             <p>Mobile Number</p>
             <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div>
+              <div onKeyDown={handleKeyPress}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry={countryflag}
@@ -1263,6 +1286,7 @@ const CreateSalon = () => {
                   type="text"
                   value={serviceName}
                   onChange={(e) => setServiceName(e.target.value)}
+                  onKeyDown={handleKeyPressAddServices}
                 />
               </div>
 
@@ -1272,6 +1296,7 @@ const CreateSalon = () => {
                   type="text"
                   value={serviceDesc}
                   onChange={(e) => setServiceDesc(e.target.value)}
+                  onKeyDown={handleKeyPressAddServices}
                 />
               </div>
 
@@ -1281,6 +1306,7 @@ const CreateSalon = () => {
                   type="text"
                   value={`${vipService ? 'VIP' : 'Regular'}`}
                   onClick={() => vipServiceDropHandler()}
+                  onKeyDown={handleKeyPressAddServices}
                 />
 
                 {vipServiceDrop &&
@@ -1304,6 +1330,7 @@ const CreateSalon = () => {
                         setServicePrice(value);
                       }
                     }}
+                    onKeyDown={handleKeyPressAddServices}
                   />
                 </div>
 
@@ -1318,6 +1345,7 @@ const CreateSalon = () => {
                         setServiceEWT(value);
                       }
                     }}
+                    onKeyDown={handleKeyPressAddServices}
                   />
                 </div>
               </div>
@@ -1421,6 +1449,7 @@ const CreateSalon = () => {
               type="text"
               value={webLink}
               onChange={(e) => setHandler(setWebLink, e.target.value, "webLink")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1430,6 +1459,7 @@ const CreateSalon = () => {
               type="text"
               value={fbLink}
               onChange={(e) => setHandler(setFbLink, e.target.value, "fbLink")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1439,6 +1469,7 @@ const CreateSalon = () => {
               type="text"
               value={instraLink}
               onChange={(e) => setHandler(setInstraLink, e.target.value, "instraLink")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1448,6 +1479,7 @@ const CreateSalon = () => {
               type="text"
               value={twitterLink}
               onChange={(e) => setHandler(setTwitterLink, e.target.value, "twitterLink")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 
@@ -1457,6 +1489,7 @@ const CreateSalon = () => {
               type="text"
               value={tiktokLink}
               onChange={(e) => setHandler(setTiktokLink, e.target.value, "tiktokLink")}
+              onKeyDown={handleKeyPress}
             />
           </div>
 

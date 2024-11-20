@@ -108,7 +108,7 @@ const EditProfile = () => {
             setUploadpicLoader(false)
 
             if (error?.response?.status === 500) {
-     
+
                 toast.error("Something went wrong !", {
                     duration: 3000,
                     style: {
@@ -118,7 +118,7 @@ const EditProfile = () => {
                         color: '#fff',
                     },
                 });
-    
+
                 return;
             }
 
@@ -162,6 +162,10 @@ const EditProfile = () => {
             otpinputRef.current[index - 1].focus();
             setOtp(newOtp);
         }
+
+        if (e.key === "Enter") {
+            verifyEmailStatusClicked();
+        }
     };
 
 
@@ -191,6 +195,10 @@ const EditProfile = () => {
             newOtp[index - 1] = "";
             mobileotpinputRef.current[index - 1].focus();
             setMobileOtp(newOtp);
+        }
+
+        if (e.key === "Enter") {
+            verifyMobileStatusClicked();
         }
     };
 
@@ -235,12 +243,18 @@ const EditProfile = () => {
                 password
             }
 
-            console.log(profiledata)
+            // console.log(profiledata)
 
             dispatch(barberUpdateProfileAction(profiledata, navigate))
         }
 
     }
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            updateBarberProfile();
+        }
+    };
 
     const barberUpdateProfile = useSelector(state => state.barberUpdateProfile)
 
@@ -289,6 +303,12 @@ const EditProfile = () => {
             dispatch(barberUpdatePasswordAction(profiledata, navigate))
         }
     }
+
+    const handleKeyPressPasswordHandler = (e) => {
+        if (e.key === "Enter") {
+            updatePasswordHandler();
+        }
+    };
 
     const barberUpdatePassword = useSelector(state => state.barberUpdatePassword)
 
@@ -374,6 +394,7 @@ const EditProfile = () => {
                         placeholder='Enter Name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
 
@@ -385,6 +406,7 @@ const EditProfile = () => {
                             placeholder='Enter Email'
                             value={barberProfile?.email}
                             readOnly
+                            onKeyDown={handleKeyPress}
                         />
 
                         <button
@@ -474,6 +496,7 @@ const EditProfile = () => {
                                         value={oldPassword}
                                         onChange={(e) => setOldPassword(e.target.value)}
                                         placeholder='Enter Old Password'
+                                        onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -487,6 +510,7 @@ const EditProfile = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='Enter New Password'
+                                        onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -500,6 +524,7 @@ const EditProfile = () => {
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         placeholder='Enter Confirm Password'
+                                        onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -516,7 +541,7 @@ const EditProfile = () => {
                                         ) :
                                         (
                                             <>
-                                                <p style={{ color: "#0866ff"}}>Save</p>
+                                                <p style={{ color: "#0866ff" }}>Save</p>
                                                 <div><SaveIcon /></div>
                                             </>
                                         )
@@ -600,6 +625,7 @@ const EditProfile = () => {
                         type="date"
                         value={dateOfBirth}
                         onChange={(e) => setDateofBirth(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
 
@@ -610,6 +636,7 @@ const EditProfile = () => {
                         value={`${gender ? `${gender}` : ''}`}
                         onClick={() => genderDropHandler()}
                         readOnly
+                        onKeyDown={handleKeyPress}
                     />
 
                     {genderDrop &&

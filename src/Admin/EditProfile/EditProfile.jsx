@@ -124,7 +124,7 @@ const EditProfile = () => {
             setUploadpicLoader(false)
 
             if (error?.response?.status === 500) {
-     
+
                 toast.error("Something went wrong !", {
                     duration: 3000,
                     style: {
@@ -134,7 +134,7 @@ const EditProfile = () => {
                         color: '#fff',
                     },
                 });
-    
+
                 return;
             }
 
@@ -178,6 +178,10 @@ const EditProfile = () => {
             otpinputRef.current[index - 1].focus();
             setOtp(newOtp);
         }
+
+        if (e.key === "Enter") {
+            verifyEmailStatusClicked();
+        }
     };
 
 
@@ -207,6 +211,10 @@ const EditProfile = () => {
             newOtp[index - 1] = "";
             mobileotpinputRef.current[index - 1].focus();
             setMobileOtp(newOtp);
+        }
+
+        if (e.key === "Enter") {
+            verifyMobileStatusClicked();
         }
     };
 
@@ -253,6 +261,19 @@ const EditProfile = () => {
         }
 
     }
+
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            updateAdminProfile();
+        }
+    };
+
+    const handleKeyPressPassword = (e) => {
+        if (e.key === "Enter") {
+            updatePasswordHandler();
+        }
+    };
 
     const verifyEmailStatusClicked = () => {
         const currentOtp = otp?.join("")
@@ -389,6 +410,7 @@ const EditProfile = () => {
                         placeholder='Enter Name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
 
@@ -489,6 +511,7 @@ const EditProfile = () => {
                                         value={oldPassword}
                                         onChange={(e) => setOldPassword(e.target.value)}
                                         placeholder='Enter Old Password'
+                                        onKeyDown={handleKeyPressPassword}
                                     />
                                     <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -502,6 +525,7 @@ const EditProfile = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='Enter New Password'
+                                        onKeyDown={handleKeyPressPassword}
                                     />
                                     <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -515,6 +539,7 @@ const EditProfile = () => {
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         placeholder='Enter Confirm Password'
+                                        onKeyDown={handleKeyPressPassword}
                                     />
                                     <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
@@ -542,7 +567,7 @@ const EditProfile = () => {
                 <div>
                     <p>Mob. Number</p>
                     <div className={style.admin_edit_mobile_container}>
-                        <div>
+                        <div onKeyDown={handleKeyPress}>
                             <PhoneInput
                                 forceDialCode={true}
                                 defaultCountry={countryflag}
@@ -613,6 +638,7 @@ const EditProfile = () => {
                         type="date"
                         value={dateOfBirth}
                         onChange={(e) => setDateofBirth(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
 
@@ -623,6 +649,7 @@ const EditProfile = () => {
                         value={`${gender ? `${gender}` : ''}`}
                         onClick={() => genderDropHandler()}
                         readOnly
+                        onKeyDown={handleKeyPress}
                     />
 
                     {genderDrop &&
