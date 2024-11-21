@@ -111,13 +111,13 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
     }
 };
 
-export const AdminSigninAction = (signupData, navigate) => async (dispatch) => {
+export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_SIGNIN_REQ
         });
 
-        await api.post("/api/admin/login", signupData);
+        await api.post("/api/admin/login", signinData );
 
         dispatch({
             type: ADMIN_SIGNIN_SUCCESS,
