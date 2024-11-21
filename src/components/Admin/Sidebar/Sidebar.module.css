@@ -141,7 +141,7 @@
 
   &:hover {
     background-color: #0866ff;
-  
+
     &>p,
     &>div {
       color: #fff;
@@ -177,7 +177,6 @@
 }
 
 .sidebar_top_salon>div:nth-child(1) {
-  border: 0.1rem solid rgb(40, 40, 40);
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -188,6 +187,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: var(--cmmn-box-shadow-y);
 }
 
 .sidebar_top_salon>div:nth-child(1)>img {
@@ -198,7 +198,6 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-  box-shadow: 0px 0.1rem 0.6rem rgba(0, 0, 0, 0.4);
 }
 
 .sidebar_top_salon>p:nth-child(2) {

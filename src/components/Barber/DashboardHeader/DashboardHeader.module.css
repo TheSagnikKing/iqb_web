@@ -20,7 +20,7 @@
     gap: 2.3rem;
 }
 
-.profile_wrapper>div:nth-child(1) {
+/* .profile_wrapper>div:nth-child(1) {
     padding: 0.6em 0.6em;
     display: flex;
     justify-content: center;
@@ -33,9 +33,9 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-}
+} */
 
-.profile_wrapper>div:nth-child(2) {
+.profile_wrapper>div:nth-child(1) {
     height: 3.7rem;
     width: 3.7rem;
     border-radius: 50%;
@@ -47,7 +47,7 @@
     cursor: pointer;
 }
 
-.profile_wrapper>div:nth-child(2)>img {
+.profile_wrapper>div:nth-child(1)>img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -147,8 +147,8 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        
-        &:hover{
+
+        &:hover {
             color: #fff;
         }
     }
@@ -263,7 +263,7 @@
             -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div{
+            &>div {
                 height: 100%;
                 display: flex;
                 justify-content: center;
@@ -293,7 +293,7 @@
         }
     }
 
-    .dashboard_mobile_siderbar_content_container{
+    .dashboard_mobile_siderbar_content_container {
         height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
@@ -418,7 +418,7 @@
             -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div{
+            &>div {
                 height: 100%;
                 display: flex;
                 justify-content: center;
@@ -448,7 +448,7 @@
         }
     }
 
-    .dashboard_mobile_siderbar_content_container{
+    .dashboard_mobile_siderbar_content_container {
         height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }
@@ -573,7 +573,7 @@
             -o-transition: var(--btn-transition);
             cursor: pointer;
 
-            &>div{
+            &>div {
                 height: 100%;
                 display: flex;
                 justify-content: center;
@@ -603,7 +603,7 @@
         }
     }
 
-    .dashboard_mobile_siderbar_content_container{
+    .dashboard_mobile_siderbar_content_container {
         height: calc(100svh - calc(3rem + 2rem) - 2rem);
         overflow: auto;
     }

@@ -85,7 +85,7 @@ const DashboardHeader = () => {
     return (
         <div className={`${style.barber_dashboard_header_wrapper} ${darkmodeOn && style.dark}`}>
             <div className={style.barber_dashboard_btn_container}>
-            
+
                 {barberProfile?.isOnline ? <button className={style.barber_online_active}>Online</button> : <button className={style.barber_online_inactive}>Offline</button>}
 
                 {barberProfile?.isClockedIn ? <button className={style.barber_clock_active}>Clock-In</button> : <button className={style.barber_clock_inactive}>Clock-Out</button>}
@@ -94,8 +94,8 @@ const DashboardHeader = () => {
 
 
             <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
-                
-                <div><Notificationicon /></div>
+
+                {/* <div><Notificationicon /></div> */}
                 <div>
                     <img
                         src={barberProfile?.profile[0]?.url}

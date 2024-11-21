@@ -358,7 +358,7 @@ const DashboardHeader = () => {
       >
         <section className={style.chooseSalon_modal}>
           <div className={`${style.chooseSalon_model_content} ${darkmodeOn && style.dark}`}>
-            <button onClick={() => setMobileDrop(false)}>X</button>
+            <button onClick={() => setMobileDrop(false)}><MobileCrossIcon /></button>
             <p>Choose Salon</p>
             <div>
               <p>{adminSetSalon?.currentActiveSalon}</p>
@@ -417,7 +417,7 @@ const DashboardHeader = () => {
             </div>
         }
 
-        <div><Notificationicon /></div>
+        {/* <div><Notificationicon /></div> */}
         {/* <div><Settingsicon /></div> */}
         {
           loading ?
@@ -490,8 +490,8 @@ const DashboardHeader = () => {
           <div onClick={() => {
             setSidebarToggle(false)
             navigate("/admin-dashboard/editprofile")
-          }} 
-          className={style.dashboard_mobile_item}>
+          }}
+            className={style.dashboard_mobile_item}>
             <div><ProfileIcon /></div>
             <p>Profile</p>
           </div>

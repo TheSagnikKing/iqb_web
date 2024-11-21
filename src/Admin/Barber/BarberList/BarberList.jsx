@@ -245,7 +245,7 @@ const BarberList = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     }
 
@@ -264,6 +264,12 @@ const BarberList = () => {
     dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
 
   }
+
+  const handleKeyPressMail = (e) => {
+    if (e.key === "Enter") {
+      sendMailHandler();
+    }
+  };
 
   const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
 
@@ -285,7 +291,7 @@ const BarberList = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     }
 
@@ -298,6 +304,12 @@ const BarberList = () => {
     }
     dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
   }
+
+  const handleKeyPressMessage = (e) => {
+    if (e.key === "Enter") {
+      sendMessageHandler();
+    }
+  };
 
   const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
 
@@ -336,6 +348,7 @@ const BarberList = () => {
                     type="text"
                     value={"support@iqueuebarbers.com"}
                     readOnly
+                    onKeyDown={handleKeyPressMail}
                   />
                 </div>
 
@@ -343,7 +356,9 @@ const BarberList = () => {
                   <p>To</p>
                   <input type="text" value={
                     checkedEmails?.map((e) => " " + e)
-                  } />
+                  }
+                    onKeyDown={handleKeyPressMail}
+                  />
                 </div>
 
                 <div>
@@ -353,6 +368,7 @@ const BarberList = () => {
                     placeholder='Enter Subject'
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
+                    onKeyDown={handleKeyPressMail}
                   />
                 </div>
 
@@ -364,6 +380,7 @@ const BarberList = () => {
                     placeholder='Enter Message'
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyPressMail}
                   ></textarea>
                 </div>
 
@@ -400,6 +417,7 @@ const BarberList = () => {
                     type="text"
                     value={"iqueuebarbers"}
                     readOnly
+                    onKeyDown={handleKeyPressMessage}
                   />
                 </div>
 
@@ -407,7 +425,9 @@ const BarberList = () => {
                   <p>To</p>
                   <input type="text" value={
                     checkBarberNames?.map((e) => " " + e)
-                  } />
+                  }
+                    onKeyDown={handleKeyPressMessage}
+                  />
                 </div>
 
                 <div>
@@ -417,6 +437,7 @@ const BarberList = () => {
                     placeholder='Enter Message'
                     value={barberMessage}
                     onChange={(e) => setBarberMessage(e.target.value)}
+                    onKeyDown={handleKeyPressMessage}
                   ></textarea>
                 </div>
 

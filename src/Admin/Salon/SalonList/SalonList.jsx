@@ -179,6 +179,12 @@ const SalonList = () => {
     dispatch(adminUpdateSalonSettingsAction(appointmentdata, setOpenSalonSettings, email))
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      updateSalonAppointment();
+    }
+  };
+
   const adminUpdateSalonSettings = useSelector(state => state.adminUpdateSalonSettings)
 
   const {
@@ -279,6 +285,7 @@ const SalonList = () => {
                   type="text"
                   value={`${startTime ? `${startTime} hr` : ''}`}
                   onClick={() => startTimeDropHandler()}
+                  onKeyDown={handleKeyPress}
                 />
 
                 {startTimeDrop && (
@@ -301,6 +308,7 @@ const SalonList = () => {
                   type="text"
                   value={`${endTime ? `${endTime} hr` : ''}`}
                   onClick={() => endTimeDropHandler()}
+                  onKeyDown={handleKeyPress}
                 />
 
                 {endTimeDrop && (
@@ -323,6 +331,7 @@ const SalonList = () => {
                   type="text"
                   value={`${intervalTime ? `${intervalTime} mins` : ''}`}
                   onClick={() => intervalTimeDropHandler()}
+                  onKeyDown={handleKeyPress}
                 />
 
                 {intervalTimeDrop &&
