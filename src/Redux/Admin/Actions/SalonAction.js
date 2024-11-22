@@ -143,15 +143,15 @@ export const getAdminAllCountriesAction = (countryname) => async (dispatch) => {
             payload: error?.response?.data
         });
 
-        toast.error(error?.response?.data?.message, {
-            duration: 3000,
-            style: {
-                fontSize: "var(--list-modal-header-normal-font)",
-                borderRadius: '0.3rem',
-                background: '#333',
-                color: '#fff',
-            },
-        });
+        // toast.error(error?.response?.data?.message, {
+        //     duration: 3000,
+        //     style: {
+        //         fontSize: "var(--list-modal-header-normal-font)",
+        //         borderRadius: '0.3rem',
+        //         background: '#333',
+        //         color: '#fff',
+        //     },
+        // });
     }
 }
 
@@ -192,15 +192,15 @@ export const getAdminAllCitiesAction = (cityname, countrycode) => async (dispatc
             payload: error?.response?.data
         });
 
-        toast.error(error?.response?.data?.message, {
-            duration: 3000,
-            style: {
-                fontSize: "var(--list-modal-header-normal-font)",
-                borderRadius: '0.3rem',
-                background: '#333',
-                color: '#fff',
-            },
-        });
+        // toast.error(error?.response?.data?.message, {
+        //     duration: 3000,
+        //     style: {
+        //         fontSize: "var(--list-modal-header-normal-font)",
+        //         borderRadius: '0.3rem',
+        //         background: '#333',
+        //         color: '#fff',
+        //     },
+        // });
     }
 }
 

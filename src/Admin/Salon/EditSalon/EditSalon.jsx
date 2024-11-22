@@ -1146,7 +1146,7 @@ const EditSalon = () => {
 
         <div>
           <div>
-            <p>Salon Name</p>
+            <p>Name</p>
             <input
               type="text"
               value={salonName}
@@ -1156,7 +1156,7 @@ const EditSalon = () => {
           </div>
 
           <div>
-            <p>Salon Email</p>
+            <p>Email</p>
             <input
               type="text"
               value={salonEmail}
@@ -1167,7 +1167,7 @@ const EditSalon = () => {
           </div>
 
           <div>
-            <p>Salon Desc</p>
+            <p>Desc</p>
             <input
               type="text"
               value={salonDesc}
@@ -1321,7 +1321,7 @@ const EditSalon = () => {
           <div />
 
           <div>
-            <p>Salon Type</p>
+            <p>Type</p>
             <input
               type="text"
               value={`${salonType ? `${salonType}` : ''}`}
@@ -1636,7 +1636,7 @@ const EditSalon = () => {
               <p style={{
                 fontSize: "var(--list-content-body-text)",
                 fontWeight: "600"
-              }}>Select Salon Images</p>
+              }}>Select Images</p>
 
               <button onClick={() => handleSalonImageButtonClick()}
                 style={{ fontSize: "var(--list-content-body-text)" }}>
@@ -1656,7 +1656,7 @@ const EditSalon = () => {
               <p style={{
                 fontSize: "var(--list-content-body-text)",
                 fontWeight: "600"
-              }}>Update Salon Images</p>
+              }}>Update Images</p>
 
               <button onClick={() => setOpenMobileUpdateModal(true)} style={{ fontSize: "var(--list-content-body-text)" }}>
                 Update
@@ -1738,7 +1738,7 @@ const EditSalon = () => {
       >
         <div className={style.mobile_modal_container}>
           <div>
-            <p>Salon Images</p>
+            <p>Images</p>
             <button onClick={() => setOpenMobileUpdateModal(false)}><CloseIcon /></button>
           </div>
 

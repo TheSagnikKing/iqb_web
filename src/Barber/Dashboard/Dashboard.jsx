@@ -16,12 +16,12 @@ const Dashboard = () => {
 
   const dispatch = useDispatch()
 
-  const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
-  const email = useSelector(state => state.BarberLoggedInMiddleware.barberEmail)
-  const barberName = useSelector(state => state.BarberLoggedInMiddleware.barberName)
-  const barberId = useSelector(state => state.BarberLoggedInMiddleware.barberId)
+  const salonId = useSelector(state => state.BarberLoggedInMiddleware?.barberSalonId)
+  const email = useSelector(state => state.BarberLoggedInMiddleware?.barberEmail)
+  const barberName = useSelector(state => state.BarberLoggedInMiddleware?.barberName)
+  const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
 
-  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata)
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata)
 
   useEffect(() => {
     if (barberProfile?.user[0]?.isApproved == false) {
@@ -266,7 +266,7 @@ const Dashboard = () => {
                           alignContent: "center",
                           paddingTop: "1rem"
                         }}>
-                          <Skeleton count={1} height={"6rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          <Skeleton count={1} height={"4rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                             highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                         </div> :
                         barberDashboardSalonInfoResolve && barberDashboardSalonInfoResponse ?
@@ -284,7 +284,7 @@ const Dashboard = () => {
                 {
                   getAdminSalonImagesLoading ?
                     <div className={style.salonadv_container_loader}>
-                      <Skeleton count={1}  className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      <Skeleton count={1} className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                         highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div> :
                     getAdminSalonImagesResolve && AdminSalonImages?.length > 0 ?
@@ -446,7 +446,7 @@ const Dashboard = () => {
                                 >
                                   <div><p>{queue.qPosition}</p></div>
                                   <div><p>{queue.name.length > 6 ? `${queue.name.slice(0, 6).concat("...")}` : queue.name}</p></div>
-                                <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
+                                  <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
                                   <div><p>{queue.customerEWT} mins</p></div>
                                 </div>
                               )
@@ -480,52 +480,6 @@ const Dashboard = () => {
                 <div className={`${style.barber_connect_salon_list} ${darkmodeOn && style.dark}`}>
                   <p>Choose Your Salon</p>
                   <div>
-
-                    {/* {
-                      connectSalonListResponse?.map((s) => {
-                        return (
-                          <div className={`service_item`} key={s._id}>
-                            <div className={`service_item_top`}>
-                              <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
-                              <div>
-                                <p>{s?.serviceName}</p>
-                                <p>{s?.vipService ? "VIP" : "Regular"}</p>
-                                <p>{s?.serviceDesc}</p>
-                              </div>
-                            </div>
-                            <div className={`service_item_bottom`}>
-                              <div>
-                                <div>
-                                  <p>Service Price</p>
-                                  <p>{s?.servicePrice}</p>
-                                </div>
-                              </div>
-
-                              <div>
-                                <div>
-                                  <p>Est Wait Time</p>
-                                  <div>
-                                    <div><ClockIcon /></div>
-                                    <input
-                                      type="text"
-                                    />
-                                    <p>mins</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                            </div>
-
-                            {
-                              selectedSalonId == s.salonId ?
-                                (<button className={`service_delete_icon`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                (<button className={`service_add_icon`} onClick={() => setSelectedSalonId(s.salonId)}><AddIcon /></button>)
-                            }
-
-                          </div>
-                        )
-                      })
-                    } */}
 
                     <div className={style.barber_connect_salon_list_header}>
                       <p>Salon Logo</p>
@@ -631,8 +585,6 @@ const Dashboard = () => {
 
         </div>
       </>
-
-    // barberProfile?.user[0]?.isApproved ? <h1>yes</h1> : <div>No</div>
   )
 }
 

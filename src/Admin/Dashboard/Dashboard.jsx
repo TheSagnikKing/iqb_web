@@ -228,7 +228,7 @@ const Dashboard = () => {
                         alignContent: "center",
                         paddingTop: "1rem"
                       }}>
-                        <Skeleton count={1} height={"6rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        <Skeleton count={1} height={"4rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
                       adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonDesc?.length > 0 ?

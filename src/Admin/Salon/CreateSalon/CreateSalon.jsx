@@ -290,7 +290,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -305,7 +305,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -343,7 +343,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -383,7 +383,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -487,7 +487,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -500,7 +500,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
       return;
     }
@@ -537,7 +537,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     } else {
       const salondata = {
@@ -702,7 +702,7 @@ const CreateSalon = () => {
                   borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
-              },
+                },
               });
             } catch (error) {
               toast.error(error?.response?.data?.message, {
@@ -712,7 +712,7 @@ const CreateSalon = () => {
                   borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
-              },
+                },
               });
               setSalonLogo("")
               setUploadSalonLogo("")
@@ -748,7 +748,7 @@ const CreateSalon = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     } else {
       setOpenServices((prev) => !prev)
@@ -963,7 +963,7 @@ const CreateSalon = () => {
 
         <div>
           <div>
-            <p>Salon Name</p>
+            <p>Name</p>
 
             <input
               type="text"
@@ -974,7 +974,7 @@ const CreateSalon = () => {
           </div>
 
           <div>
-            <p>Salon Email</p>
+            <p>Email</p>
             <input
               type="text"
               value={salonEmail}
@@ -984,7 +984,7 @@ const CreateSalon = () => {
           </div>
 
           <div>
-            <p>Salon Desc</p>
+            <p>Desc</p>
             <input
               type="text"
               value={salonDesc}
@@ -1045,19 +1045,26 @@ const CreateSalon = () => {
                 <ClickAwayListener onClickAway={() => setCountryDrop(false)}>
                   <div>
                     {
-                      getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
-                        <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                        !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
+                      getAdminAllCountriesLoading ?
+                        <Skeleton count={2}
+                          height={"4rem"}
+                          width={"100%"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          style={{
+                            borderRadius: "0.3rem",
+                            marginBottom: "1rem"
+                          }}
+                        /> :
+                        getAdminAllCountriesResolve && AllCountries?.length > 0 ?
 
-                          AllCountries.map((c) => (
+                          AllCountries?.map((c) => (
                             <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
                           ))
-
                           :
-                          !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length == 0 ?
-                            <p>No Countries</p> :
-                            !getAdminAllCountriesLoading && !getAdminAllCountriesResolve &&
-                            <p>No Countries</p>
+                          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+                            <p style={{ fontSize: "var(--list-content-error-text)" }}>No countries available</p>
+                          </div>
                     }
                   </div>
                 </ClickAwayListener>}
@@ -1077,19 +1084,26 @@ const CreateSalon = () => {
                 <ClickAwayListener onClickAway={() => setCityDrop(false)}>
                   <div>
                     {
-                      getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
-                        <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                        !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
+                      getAdminAllCitiesLoading ?
+                        <Skeleton count={2}
+                          height={"4rem"}
+                          width={"100%"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          style={{
+                            borderRadius: "0.3rem",
+                            marginBottom: "1rem"
+                          }}
+                        /> :
+                        getAdminAllCitiesResolve && AllCities?.length > 0 ?
 
                           AllCities.map((c) => (
                             <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
                           ))
-
                           :
-                          !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length == 0 ?
-                            <p>No Cities</p> :
-                            !getAdminAllCitiesLoading && !getAdminAllCitiesResolve &&
-                            <p>No Cities</p>
+                          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+                            <p style={{ fontSize: "var(--list-content-error-text)" }}>No city available</p>
+                          </div>
                     }
                   </div>
                 </ClickAwayListener>}
@@ -1139,7 +1153,7 @@ const CreateSalon = () => {
           <div />
 
           <div>
-            <p>Salon Type</p>
+            <p>Type</p>
             <input
               type="text"
               value={`${salonType ? `${salonType}` : ''}`}
@@ -1401,7 +1415,7 @@ const CreateSalon = () => {
           }
 
           <div className={`${style.salon_logo_wrapper} ${darkmodeOn && style.dark}`}>
-            <p>Select Salon Logo</p>
+            <p>Select Logo</p>
             <div>
               <button onClick={() => handleSalonLogoButtonClick()}>
                 Upload
@@ -1421,12 +1435,12 @@ const CreateSalon = () => {
           <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
               <p style={{
-                 fontSize: "var(--list-content-body-text)",
-                 fontWeight: "600"
-              }}>Select Salon Images</p>
+                fontSize: "var(--list-content-body-text)",
+                fontWeight: "600"
+              }}>Select Images</p>
 
               <button onClick={() => handleSalonImageButtonClick()}
-                style={{ fontSize: "var(--list-content-body-text)"}}>
+                style={{ fontSize: "var(--list-content-body-text)" }}>
                 Upload
                 <input
                   type="file"

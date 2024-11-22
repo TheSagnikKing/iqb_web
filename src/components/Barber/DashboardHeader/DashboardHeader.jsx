@@ -43,7 +43,7 @@ const DashboardHeader = () => {
 
     const darkmodeOn = darkMode === "On"
 
-    const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
+    const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata?.user[0])
 
     const [src, setSrc] = useState("");
 

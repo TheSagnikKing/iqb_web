@@ -116,7 +116,6 @@ const Signin = () => {
             onError={errorMessage}
             size="large"
             shape="circle"
-            // width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
             logo_alignment='left'
             text='continue_with'
           />
