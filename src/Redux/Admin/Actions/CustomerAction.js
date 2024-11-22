@@ -6,7 +6,7 @@ export const adminGetAllCustomerListAction = (salonId,signal) => async (dispatch
     try {
         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
 
-        const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${salonId}`,{ signal })
+        const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${salonId}`,{ signal })
 
         dispatch({
             type: GET_ALL_CUSTOMERLIST_SUCCESS,

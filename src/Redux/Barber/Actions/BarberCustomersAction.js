@@ -7,7 +7,7 @@ export const barberGetAllCustomerListAction = (salonId, isApproved, signal) => a
     try {
         dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
 
-        const { data } = await api.get(`/api/customer/getAllCustomersForBarber?salonId=${salonId}&isApproved=${isApproved}`, { signal })
+        const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${salonId}&isApproved=${isApproved}`, { signal })
 
         dispatch({
             type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,

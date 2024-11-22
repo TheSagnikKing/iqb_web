@@ -52,7 +52,7 @@ const CustomerList = () => {
 
     setSearchLoading(true);
     try {
-      const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
+      const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
       dispatch({
         type: GET_ALL_CUSTOMERLIST_SUCCESS,
         payload: data,
@@ -91,7 +91,7 @@ const CustomerList = () => {
     if (page > 1) {
       try {
         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-        const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
+        const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
         dispatch({
           type: GET_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,
@@ -109,7 +109,7 @@ const CustomerList = () => {
     if (page < totalPages) {
       try {
         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-        const { data } = await api.get(`/api/customer/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
+        const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
         dispatch({
           type: GET_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,
@@ -184,7 +184,7 @@ const CustomerList = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     }
 
@@ -225,7 +225,7 @@ const CustomerList = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     }
 
