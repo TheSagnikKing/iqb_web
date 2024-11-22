@@ -177,7 +177,7 @@ const CustomerList = () => {
     if (checkedEmails.length > 0) {
       setOpenBarberEmail(true)
     } else {
-      toast.error("Atleast one customer needed", {
+      toast.error("Please select a customer", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -200,7 +200,7 @@ const CustomerList = () => {
       role: "Barber",
       recipientEmails: checkedEmails
     }
-    console.log(maildata)
+    // console.log(maildata)
     dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
   }
 
@@ -218,7 +218,7 @@ const CustomerList = () => {
     if (checkMobileNumbers.length > 0) {
       setOpenBarberMessage(true)
     } else {
-      toast.error("Atleast one customer needed", {
+      toast.error("Please select a customer", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",

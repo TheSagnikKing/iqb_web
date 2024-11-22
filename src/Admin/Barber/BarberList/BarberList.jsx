@@ -227,8 +227,8 @@ const BarberList = () => {
     })
   }
 
-  console.log(checkedEmails)
-  console.log(checkMobileNumbers)
+  // console.log(checkedEmails)
+  // console.log(checkMobileNumbers)
 
 
   const [openBarberEmail, setOpenBarberEmail] = useState(false)
@@ -238,7 +238,7 @@ const BarberList = () => {
 
       setOpenBarberEmail(true)
     } else {
-      toast.error("Atleast one customer needed", {
+      toast.error("Please select a barber", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -284,7 +284,7 @@ const BarberList = () => {
     if (checkMobileNumbers.length > 0) {
       setOpenBarberMessage(true)
     } else {
-      toast.error("Atleast one customer needed", {
+      toast.error("Please select a barber", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -450,7 +450,12 @@ const BarberList = () => {
             </div>
           </Modal>
 
-          <button onClick={createbarberClicked} className={`${style.create_barber_btn}`}>
+          <button onClick={createbarberClicked} className={`${style.create_barber_btn}`}
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+          >
             <p>Create</p>
             <div>+</div>
           </button>

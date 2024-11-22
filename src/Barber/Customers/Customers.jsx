@@ -229,7 +229,7 @@ const CustomerList = () => {
 
       setOpenBarberMessage(true)
     } else {
-      toast.error("Atleast one customer needed", {
+      toast.error("Please select a customer", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -248,7 +248,7 @@ const CustomerList = () => {
       smsBody: barberMessage,
       numbers: checkMobileNumbers
     }
-    console.log(smsdata)
+    // console.log(smsdata)
     dispatch(barberSendCustomerMessageAction(smsdata, setMessage, setOpenBarberMessage))
 
   }
