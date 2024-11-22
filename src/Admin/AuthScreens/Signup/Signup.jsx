@@ -16,6 +16,7 @@ const Signup = () => {
   const navigate = useNavigate()
 
   const responseMessage = (response) => {
+    // console.log(response)
     dispatch(AdminGoogleSignupAction(response.credential, navigate))
   }
 
@@ -59,7 +60,7 @@ const Signup = () => {
   return (
     <main className={style.admin_signup_container}>
       <div className={style.admin_signup_left}>
-          <img src="./signup_un.png" alt="admin_signup" />
+        <img src="./signup_un.png" alt="admin_signup" />
       </div>
 
       <div className={style.admin_signup_right}>
@@ -113,7 +114,7 @@ const Signup = () => {
 
           <p>Already a member ? <Link to="/adminsignin">Log In</Link></p>
         </div>
-        <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon/></div>
+        <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>
     </main>
   )

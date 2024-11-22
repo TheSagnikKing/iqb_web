@@ -17,7 +17,7 @@ const Signin = () => {
   const navigate = useNavigate()
 
   const responseMessage = (response) => {
-    console.log(response)
+    // console.log(response)
     dispatch(AdminGoogleloginAction(response.credential, navigate))
   }
 
