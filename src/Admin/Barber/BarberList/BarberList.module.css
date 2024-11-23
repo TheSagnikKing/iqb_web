@@ -164,7 +164,8 @@
     min-width: 90rem;
     max-width: 100%;
     display: grid;
-    grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr) 0.4fr;
+    /* grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr) 0.4fr; */
+    grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr);
     font-size: var(--list-content-body-text);
     font-weight: 500;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
@@ -253,7 +254,7 @@
 }
 
 
-.admin_barber_content_body_item>div:nth-last-child(1) {
+/* .admin_barber_content_body_item>div:nth-last-child(1) {
     &>button {
         background-color: #ff000025;
         border: 0.1rem solid red;
@@ -270,9 +271,9 @@
             color: #fff;
         }
     }
-}
+} */
 
-.admin_barber_content_body_item>div:nth-last-child(2) {
+.admin_barber_content_body_item>div:nth-last-child(1) {
     &>button {
         background-color: #0867ff25;
         border: 0.1rem solid #0866ff;
@@ -292,7 +293,7 @@
     }
 }
 
-.admin_barber_content_body_item>div:nth-last-child(3) {
+.admin_barber_content_body_item>div:nth-last-child(2) {
     &>button {
         font-weight: 500;
         transition: var(--btn-transition);
@@ -307,8 +308,8 @@
     }
 }
 
-.admin_barber_content_body_item>div:nth-last-child(4),
-.admin_barber_content_body_item>div:nth-last-child(5) {
+.admin_barber_content_body_item>div:nth-last-child(3),
+.admin_barber_content_body_item>div:nth-last-child(4) {
     &>button {
         font-weight: 500;
         transition: var(--btn-transition);
@@ -347,14 +348,14 @@
     }
 }
 
-.admin_barber_content_body_item>div:nth-last-child(4) {
+.admin_barber_content_body_item>div:nth-last-child(3) {
     &>button {
         padding: 0.5em 0rem;
         width: 10rem;
     }
 }
 
-.admin_barber_content_body_item>div:nth-last-child(3) {
+.admin_barber_content_body_item>div:nth-last-child(2) {
     &>button {
         padding: 0.5em 0em;
         width: 10rem;
@@ -573,20 +574,20 @@
     }
 }
 
-@media screen and (min-width:0px) and (max-width:430px){
-    .modal_container{
+@media screen and (min-width:0px) and (max-width:430px) {
+    .modal_container {
         width: 90%;
     }
 }
 
-@media screen and (min-width:431px) and (max-width:768px){
-    .modal_container{
+@media screen and (min-width:431px) and (max-width:768px) {
+    .modal_container {
         width: 70%;
     }
 }
 
-@media screen and (min-width:769px) and (max-width:1140px){
-    .modal_container{
+@media screen and (min-width:769px) and (max-width:1140px) {
+    .modal_container {
         width: 50%;
     }
 }

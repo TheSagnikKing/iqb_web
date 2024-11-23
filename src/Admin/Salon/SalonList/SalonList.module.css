@@ -120,7 +120,8 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 0.8fr 0.8fr 0.8fr 0.6fr 0.5fr 0.5fr 0.5fr;
+    /* grid-template-columns: 0.8fr 0.8fr 0.8fr 0.6fr 0.5fr 0.5fr 0.5fr; */
+    grid-template-columns: 0.8fr 0.8fr 0.8fr 0.6fr 0.5fr 0.5fr;
     place-items: center;
     font-size: var(--list-content-body-text);
     font-weight: 500;
@@ -216,7 +217,7 @@
     }
 }
 
-.salon_content_body>div>div:nth-child(6)>button {
+/* .salon_content_body>div>div:nth-child(6)>button {
     background-color: rgba(255, 0, 0, 0.144);
     border: 0.1rem solid red;
     color: red;
@@ -231,9 +232,9 @@
         background-color: red;
         color: #fff;
     }
-}
+} */
 
-.salon_content_body>div>div:nth-child(7)>button {
+.salon_content_body>div>div:nth-child(6)>button {
     background-color: #7204551d;
     border: 0.1rem solid #720455;
     color: #720455;
@@ -371,11 +372,11 @@
             -moz-border-radius: var(--list-btn-border-radius);
             -ms-border-radius: var(--list-btn-border-radius);
             -o-border-radius: var(--list-btn-border-radius);
-            transition:var(--btn-transition);
-            -webkit-transition:var(--btn-transition);
-            -moz-transition:var(--btn-transition);
-            -ms-transition:var(--btn-transition);
-            -o-transition:var(--btn-transition);
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
             margin-inline: auto;
             font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
@@ -466,20 +467,20 @@
 
 }
 
-@media screen and (min-width:0px) and (max-width:430px){
-    .modal_container{
+@media screen and (min-width:0px) and (max-width:430px) {
+    .modal_container {
         width: 90%;
     }
 }
 
-@media screen and (min-width:431px) and (max-width:768px){
-    .modal_container{
+@media screen and (min-width:431px) and (max-width:768px) {
+    .modal_container {
         width: 70%;
     }
 }
 
-@media screen and (min-width:769px) and (max-width:1140px){
-    .modal_container{
+@media screen and (min-width:769px) and (max-width:1140px) {
+    .modal_container {
         width: 50%;
     }
 }

@@ -485,7 +485,7 @@ const BarberList = () => {
                 <p>isClockIn</p>
                 <p>isApprove</p>
                 <p>Edit</p>
-                <p>Delete</p>
+                {/* <p>Delete</p> */}
               </div>
 
               {BarberList?.map((b, index) => (
@@ -529,7 +529,7 @@ const BarberList = () => {
                   </div>
 
                   <div><button onClick={() => editButtonClicked(b)}>Edit</button></div>
-                  <div><button onClick={() => deleteButtonClicked(b)}>Delete</button></div>
+                  {/* <div><button onClick={() => deleteButtonClicked(b)}>Delete</button></div> */}
 
                 </div>
               ))}

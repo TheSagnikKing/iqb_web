@@ -62,7 +62,7 @@ const SalonList = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     } else {
       const confirm = window.confirm("Are you sure ?")
@@ -221,7 +221,7 @@ const SalonList = () => {
                 <p>City</p>
                 <p>Salon Type</p>
                 <p>Edit</p>
-                <p>Delete</p>
+                {/* <p>Delete</p> */}
                 <p>Setting</p>
               </div>
 
@@ -238,9 +238,9 @@ const SalonList = () => {
                   <div>
                     <button onClick={() => editButtonClicked(s)}>Edit</button>
                   </div>
-                  <div>
+                  {/* <div>
                     <button onClick={() => deleteSalonHandler(s.salonId, s._id)}>Delete</button>
-                  </div>
+                  </div> */}
                   <div>
                     <button onClick={() => salonappointmentClicked(s)}>Setting</button>
                   </div>
