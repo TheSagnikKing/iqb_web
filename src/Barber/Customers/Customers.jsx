@@ -55,7 +55,7 @@ const CustomerList = () => {
   const searchCustomerhandler = async () => {
     setSearchLoading(true);
     try {
-      const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&name=${search}`);
+      const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&isApproved=${barberProfile?.user[0]?.isApproved}&name=${search}`);
       dispatch({
         type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
         payload: data,
@@ -95,7 +95,7 @@ const CustomerList = () => {
     if (page > 1) {
       try {
         dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
-        const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&page=${page - 1}`);
+        const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&isApproved=${barberProfile?.user[0]?.isApproved}&page=${page - 1}`);
         dispatch({
           type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,
@@ -113,7 +113,7 @@ const CustomerList = () => {
     if (page < totalPages) {
       try {
         dispatch({ type: GET_BARBER_ALL_CUSTOMERLIST_REQ })
-        const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&page=${page + 1}`);
+        const { data } = await api.get(`/api/customers/getAllCustomersForBarber?salonId=${currentsalonId}&isApproved=${barberProfile?.user[0]?.isApproved}&page=${page + 1}`);
         dispatch({
           type: GET_BARBER_ALL_CUSTOMERLIST_SUCCESS,
           payload: data,
