@@ -73,7 +73,7 @@ const Queue = () => {
     }
 
     if (confirm) {
-      console.log(queueData)
+      // console.log(queueData)
       dispatch(barberCancelQueueAction(queueData, salonId, b.barberId))
     }
 

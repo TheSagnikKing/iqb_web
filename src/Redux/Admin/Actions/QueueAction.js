@@ -14,6 +14,16 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
             payload: data
         })
 
+        toast.success("Customer serve successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+
         const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 
         dispatch({
@@ -69,6 +79,16 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
             type: ADMIN_CANCEL_QUEUE_SUCCESS,
             payload: data
         })
+
+        toast.success("Customer cancel successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
 
         const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 

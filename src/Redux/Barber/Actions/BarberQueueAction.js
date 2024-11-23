@@ -68,6 +68,16 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
             payload: data
         })
 
+        toast.success("Customer serve successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+
 
         const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {
             salonId,
@@ -127,6 +137,16 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
             type: BARBER_CANCEL_QUEUE_SUCCESS,
             payload: data
         })
+
+        toast.success("Customer cancel successfully", {
+            duration: 3000,
+            style: {
+                fontSize: "var(--list-modal-header-normal-font)",
+                borderRadius: '0.3rem',
+                background: '#333',
+                color: '#fff',
+            },
+        });
 
 
         const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {

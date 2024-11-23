@@ -55,7 +55,7 @@ const Queue = () => {
     }
 
     if (confirm) {
-      console.log(queueData)
+      // console.log(queueData)
       dispatch(adminServeQueueAction(queueData, salonId))
     }
   }
@@ -72,7 +72,7 @@ const Queue = () => {
     }
 
     if (confirm) {
-      console.log(queueData)
+      // console.log(queueData)
       dispatch(adminCancelQueueAction(queueData, salonId))
     }
 

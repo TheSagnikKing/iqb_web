@@ -177,7 +177,7 @@
     -o-border-radius: var(--list-wrapper-border-radius);
 }
 
-.dashboard_advertise_loader{
+.dashboard_advertise_loader {
     min-height: 25rem !important;
     height: 35svh !important;
     border-radius: var(--list-wrapper-border-radius);
@@ -325,6 +325,7 @@
                 -o-border-radius: 50%;
                 object-fit: cover;
                 box-shadow: var(--cmmn-box-shadow-y);
+                font-size: clamp(1rem, 0.6rem + 0.2vw, 2.6rem);
             }
 
             &>div {
@@ -572,5 +573,3 @@
         }
     }
 }
-
-
