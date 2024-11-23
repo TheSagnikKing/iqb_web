@@ -366,8 +366,7 @@ const CreateBarber = () => {
                   display: "grid",
                   placeItems: "center"
                 }}><ButtonLoader /></button> : <button className={`${style.create_barber_btn}`} onClick={CreateBarberHandler}>
-                <p>Create</p>
-                <div>+</div>
+                Create
               </button>
             }
 

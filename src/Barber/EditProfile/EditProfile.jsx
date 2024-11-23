@@ -351,7 +351,6 @@ const EditProfile = () => {
         }
     };
 
-
     const [openPasswordModal, setOpenPasswordModal] = useState(false)
     const [openMobileModal, setOpenMobileModal] = useState(false)
     const [openEmailModal, setOpenEmailModal] = useState(false)
@@ -540,10 +539,7 @@ const EditProfile = () => {
                                             <ButtonLoader />
                                         ) :
                                         (
-                                            <>
-                                                <p style={{ color: "#0866ff" }}>Save</p>
-                                                <div><SaveIcon /></div>
-                                            </>
+                                            "Save"
                                         )
                                 }
 
@@ -555,7 +551,7 @@ const EditProfile = () => {
                 <div>
                     <p>Mob. Number</p>
                     <div className={style.barber_edit_mobile_container}>
-                        <div>
+                        <div onKeyDown={handleKeyPress}>
                             <PhoneInput
                                 forceDialCode={true}
                                 defaultCountry={countryflag}
@@ -654,10 +650,7 @@ const EditProfile = () => {
                 <button className={style.edit_profile_btn} onClick={updateBarberProfile}>
                     {
                         barberUpdateProfileLoading ? (<ButtonLoader />) :
-                            <>
-                                <p>Save</p>
-                                <div><SaveIcon /></div>
-                            </>
+                            "Save"
                     }
                 </button>
             </div >

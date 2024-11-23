@@ -667,10 +667,7 @@ const EditProfile = () => {
                 <button className={style.edit_profile_btn} onClick={updateAdminProfile}>
                     {
                         adminUpdateProfileLoading ? (<ButtonLoader />) :
-                            <>
-                                <p>Save</p>
-                                <div><SaveIcon /></div>
-                            </>
+                            "Save"
                     }
                 </button>
             </div >

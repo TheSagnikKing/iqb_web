@@ -154,29 +154,13 @@
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
         margin-inline: auto;
+        color: #0866ff;
+        font-size: var(--list-content-body-text);
 
-        &>p {
-            font-weight: 500;
-            font-size: var(--list-content-body-text);
-            color: #0866ff;
-        }
-
-        &>div {
-            font-size: var(--list-content-body-text);
-            font-weight: 500;
-            color: #0866ff;
-        }
 
         &:hover {
             background-color: #0866ff;
-
-            &>p {
-                color: #fff;
-            }
-
-            &>div {
-                color: #fff;
-            }
+            color: #fff;
         }
     }
 }
@@ -807,5 +791,3 @@
     }
 
 }
-
-

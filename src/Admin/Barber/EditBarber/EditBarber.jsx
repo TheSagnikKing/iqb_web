@@ -351,8 +351,7 @@ const EditBarber = () => {
                   display: "grid",
                   placeItems: "center"
                 }}><ButtonLoader /></button> : <button className={`${style.edit_barber_btn}`} onClick={EditBarberHandler}>
-                <p>Save</p>
-                <div>+</div>
+                Update
               </button>
             }
 

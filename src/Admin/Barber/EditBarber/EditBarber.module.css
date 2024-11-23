@@ -91,29 +91,12 @@
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
     margin-inline: auto;
-
-    &>p {
-        font-weight: 500;
-        font-size: var(--list-header-btn-text);
-        color: #0866ff;
-    }
-
-    &>div {
-        font-size: var(--list-header-btn-icon);
-        font-weight: 500;
-        color: #0866ff;
-    }
+    font-size: var(--list-header-btn-text);
+    color: #0866ff;
 
     &:hover {
         background-color: #0866ff;
-
-        &>p {
-            color: #fff;
-        }
-
-        &>div {
-            color: #fff;
-        }
+        color: #fff;
     }
 }
 
@@ -167,7 +150,7 @@
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
         -o-border-radius: var(--list-wrapper-border-radius);
-}
+    }
 
     &::-webkit-scrollbar-thumb:hover {
         background: rgb(0, 98, 255);
@@ -211,14 +194,14 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    transition:var(--btn-transition);
-    -webkit-transition:var(--btn-transition);
-    -moz-transition:var(--btn-transition);
-    -ms-transition:var(--btn-transition);
-    -o-transition:var(--btn-transition);
-    font-size: var( --list-modal-header-icon);
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    font-size: var(--list-modal-header-icon);
 
-    &:hover{
+    &:hover {
         background-color: #0866ff;
         color: var(--primary-text-light-color1);
     }
@@ -247,9 +230,9 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var( --list-modal-header-icon);
+    font-size: var(--list-modal-header-icon);
 
-    &:hover{
+    &:hover {
         background-color: red;
         color: var(--primary-text-light-color1);
     }
@@ -332,7 +315,7 @@
             }
 
             &>p:nth-child(2) {
-                font-size:var(--list-primary-text);
+                font-size: var(--list-primary-text);
                 font-weight: 600;
                 text-align: center;
             }
@@ -462,16 +445,16 @@
         -moz-border-radius: var(--list-btn-border-radius);
         -ms-border-radius: var(--list-btn-border-radius);
         -o-border-radius: var(--list-btn-border-radius);
-        transition:var(--btn-transition);
-        -webkit-transition:var(--btn-transition);
-        -moz-transition:var(--btn-transition);
-        -ms-transition:var(--btn-transition);
-        -o-transition:var(--btn-transition);
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
         font-weight: 500;
         font-size: var(--list-modal-header-normal-font);
         color: #0866ff;
-        
-        &:hover{
+
+        &:hover {
             background-color: #0866ff;
             color: #fff;
         }
@@ -498,7 +481,7 @@
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
 
-        &>button:nth-child(1){
+        &>button:nth-child(1) {
             margin-left: auto;
             height: 3.2rem;
             display: flex;
@@ -522,7 +505,7 @@
             font-size: var(--list-modal-header-icon);
             margin-bottom: 1rem;
 
-            &:hover{
+            &:hover {
                 background-color: red;
                 color: #fff;
 
@@ -554,7 +537,7 @@
                 -moz-border-radius: var(--list-wrapper-border-radius);
                 -ms-border-radius: var(--list-wrapper-border-radius);
                 -o-border-radius: var(--list-wrapper-border-radius);
-}
+            }
 
             &::-webkit-scrollbar-thumb:hover {
                 background: rgb(0, 98, 255);
@@ -599,16 +582,16 @@
         -moz-border-radius: var(--list-btn-border-radius);
         -ms-border-radius: var(--list-btn-border-radius);
         -o-border-radius: var(--list-btn-border-radius);
-        transition:var(--btn-transition);
-        -webkit-transition:var(--btn-transition);
-        -moz-transition:var(--btn-transition);
-        -ms-transition:var(--btn-transition);
-        -o-transition:var(--btn-transition);
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
         font-weight: 500;
         font-size: var(--list-modal-header-normal-font);
         color: #0866ff;
-        
-        &:hover{
+
+        &:hover {
             background-color: #0866ff;
             color: #fff;
         }
@@ -635,7 +618,7 @@
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
 
-        &>button:nth-child(1){
+        &>button:nth-child(1) {
             margin-left: auto;
             height: 3.2rem;
             display: flex;
@@ -659,7 +642,7 @@
             font-size: var(--list-modal-header-icon);
             margin-bottom: 1rem;
 
-            &:hover{
+            &:hover {
                 background-color: red;
                 color: #fff;
 
@@ -691,7 +674,7 @@
                 -moz-border-radius: var(--list-wrapper-border-radius);
                 -ms-border-radius: var(--list-wrapper-border-radius);
                 -o-border-radius: var(--list-wrapper-border-radius);
-}
+            }
 
             &::-webkit-scrollbar-thumb:hover {
                 background: rgb(0, 98, 255);
@@ -736,16 +719,16 @@
         -moz-border-radius: var(--list-btn-border-radius);
         -ms-border-radius: var(--list-btn-border-radius);
         -o-border-radius: var(--list-btn-border-radius);
-        transition:var(--btn-transition);
-        -webkit-transition:var(--btn-transition);
-        -moz-transition:var(--btn-transition);
-        -ms-transition:var(--btn-transition);
-        -o-transition:var(--btn-transition);
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
         font-weight: 500;
         font-size: var(--list-modal-header-normal-font);
         color: #0866ff;
-        
-        &:hover{
+
+        &:hover {
             background-color: #0866ff;
             color: #fff;
         }
@@ -772,7 +755,7 @@
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
 
-        &>button:nth-child(1){
+        &>button:nth-child(1) {
             margin-left: auto;
             height: 3.2rem;
             display: flex;
@@ -796,7 +779,7 @@
             font-size: var(--list-modal-header-icon);
             margin-bottom: 1rem;
 
-            &:hover{
+            &:hover {
                 background-color: red;
                 color: #fff;
 
@@ -828,7 +811,7 @@
                 -moz-border-radius: var(--list-wrapper-border-radius);
                 -ms-border-radius: var(--list-wrapper-border-radius);
                 -o-border-radius: var(--list-wrapper-border-radius);
-}
+            }
 
             &::-webkit-scrollbar-thumb:hover {
                 background: rgb(0, 98, 255);
