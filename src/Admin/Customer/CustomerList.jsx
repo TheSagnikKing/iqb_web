@@ -264,7 +264,7 @@ const CustomerList = () => {
             <div onClick={searchCustomerhandler}><SearchIcon /></div>
           </div>
 
-          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate}>
+          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate} title='Email'>
             <div><EmailIcon /></div>
           </button>
 
@@ -329,7 +329,7 @@ const CustomerList = () => {
             </div>
           </Modal>
 
-          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
+          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate} title='Message'>
             <div><MessageIcon /></div>
           </button>
 

@@ -135,11 +135,27 @@ const EditProfile = () => {
     };
 
 
+    const mobileEmailTimeoutRef = useRef(30);
+    const LOCAL_EMAIL_STORAGE_KEY = "lastEmailVerificationTime";
+
     const sendVerificationEmail = () => {
         if (!changeEmailVerifiedState) {
+            const lastCallTime = localStorage.getItem(LOCAL_EMAIL_STORAGE_KEY);
+            const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+
+            if (lastCallTime && currentTime - lastCallTime < mobileEmailTimeoutRef.current) {
+                const timeLeft = mobileEmailTimeoutRef.current - (currentTime - lastCallTime);
+                alert(`Please wait ${timeLeft} seconds before resending.`);
+                return;
+            }
+
+            // Save the current timestamp to localStorage
+            localStorage.setItem(LOCAL_EMAIL_STORAGE_KEY, currentTime);
+
             dispatch(barberSendVerifyEmailAction(barberProfile?.email, setOpenEmailModal))
         }
-    }
+    };
+
 
     const [otp, setOtp] = useState(["", "", "", ""]);
     const otpinputRef = useRef([]);
@@ -169,11 +185,26 @@ const EditProfile = () => {
     };
 
 
+    const mobileTimeoutRef = useRef(30);
+    const LOCAL_STORAGE_KEY = "lastMobileVerificationTime";
+
     const sendVerificationMobile = () => {
         if (!changeMobileVerifiedState) {
+            const lastCallTime = localStorage.getItem(LOCAL_STORAGE_KEY);
+            const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+
+            if (lastCallTime && currentTime - lastCallTime < mobileTimeoutRef.current) {
+                const timeLeft = mobileTimeoutRef.current - (currentTime - lastCallTime);
+                alert(`Please wait ${timeLeft} seconds before resending.`);
+                return;
+            }
+
+            // Save the current timestamp to localStorage
+            localStorage.setItem(LOCAL_STORAGE_KEY, currentTime);
+
             dispatch(barberSendVerifyMobileAction(barberProfile?.email, setOpenMobileModal))
         }
-    }
+    };
 
     const [mobileotp, setMobileOtp] = useState(["", "", "", ""]);
     const mobileotpinputRef = useRef([]);

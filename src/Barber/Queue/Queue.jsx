@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { barberCancelQueueAction, barberServeQueueAction, getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction'
+import toast from 'react-hot-toast'
 
 const Queue = () => {
 
@@ -46,6 +47,18 @@ const Queue = () => {
   const darkmodeOn = darkMode === "On"
 
   const serveQHandler = (b) => {
+    if (b.qPosition !== 1) {
+      return toast.error("Queue position is not 1", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
     const confirm = window.confirm("Are you Sure ?")
 
     const queueData = {

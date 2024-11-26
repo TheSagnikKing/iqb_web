@@ -325,6 +325,7 @@ const BarberList = () => {
         <div>
           <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
             onClick={sendEmailNavigate}
+            title='Email'
           >
             <div><EmailIcon /></div>
           </button>
@@ -393,7 +394,9 @@ const BarberList = () => {
             </div>
           </Modal>
 
-          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}>
+          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate}
+            title='Message'
+          >
             <div><MessageIcon /></div>
           </button>
 
