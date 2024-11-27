@@ -40,16 +40,6 @@ export const getAllAdvertisementAction = (salonId, signal) => async (dispatch) =
                 type: GET_ALL_ADVERTISEMENT_FAIL,
                 payload: error?.response?.data
             });
-
-            toast.error(error?.response?.data?.message, {
-                duration: 3000,
-                style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
-                    borderRadius: '0.3rem',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
         }
     }
 };
@@ -172,7 +162,7 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
             payload: data
         })
 
-        const { data:barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
+        const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
 
         dispatch({
             type: GET_ADMIN_BARBERLIST_SUCCESS,

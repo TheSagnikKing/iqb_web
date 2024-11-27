@@ -189,6 +189,31 @@
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
+
+    .barber_online_active,
+    .barber_clock_active {
+        background-color: rgba(50, 205, 50, 0.158);
+        border: 0.1rem solid limegreen !important;
+        color: limegreen;
+
+        &:hover {
+            background-color: rgba(50, 205, 50, 0.158) !important;
+            color: limegreen !important;
+        }
+    }
+
+    .barber_online_inactive,
+    .barber_clock_inactive {
+        background-color: #ff000032;
+        border: 0.1rem solid red !important;
+        color: red;
+
+        &:hover {
+            background-color: #ff000032 !important;
+            color: red !important;
+        }
+    }
+
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
@@ -344,6 +369,31 @@
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
+
+    .barber_online_active,
+    .barber_clock_active {
+        background-color: rgba(50, 205, 50, 0.158);
+        border: 0.1rem solid limegreen !important;
+        color: limegreen;
+
+        &:hover {
+            background-color: rgba(50, 205, 50, 0.158) !important;
+            color: limegreen !important;
+        }
+    }
+
+    .barber_online_inactive,
+    .barber_clock_inactive {
+        background-color: #ff000032;
+        border: 0.1rem solid red !important;
+        color: red;
+
+        &:hover {
+            background-color: #ff000032 !important;
+            color: red !important;
+        }
+    }
+
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
@@ -499,6 +549,31 @@
 }
 
 @media screen and (min-width:769px) and (max-width:1140px) {
+
+    .barber_online_active,
+    .barber_clock_active {
+        background-color: rgba(50, 205, 50, 0.158);
+        border: 0.1rem solid limegreen !important;
+        color: limegreen;
+
+        &:hover {
+            background-color: rgba(50, 205, 50, 0.158) !important;
+            color: limegreen !important;
+        }
+    }
+
+    .barber_online_inactive,
+    .barber_clock_inactive {
+        background-color: #ff000032;
+        border: 0.1rem solid red !important;
+        color: red;
+
+        &:hover {
+            background-color: #ff000032 !important;
+            color: red !important;
+        }
+    }
+
     .profile_wrapper>div:nth-child(1) {
         display: none;
     }
