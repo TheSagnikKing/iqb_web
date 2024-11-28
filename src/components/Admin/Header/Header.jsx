@@ -180,8 +180,6 @@ const DashboardHeader = () => {
 
   const darkMode = useSelector(darkmodeSelector)
 
-  console.log("Dark Mode ", darkMode)
-
   const darkHandler = () => {
     dispatch({ type: DARK_MODE_ON });
     localStorage.setItem("dark", "On");
@@ -441,7 +439,10 @@ const DashboardHeader = () => {
                 adminEditDrop && <div ref={adminEditDropRef}
                   className={`${style.profile_drop_container} ${darkmodeOn && style.dark}`}
                 >
-                  <div onClick={() => navigate("/admin-dashboard/editprofile")}>
+                  <div onClick={() => {
+                    navigate("/admin-dashboard/editprofile")
+                    setAdminEditDrop(false)
+                  }}>
                     <div><ProfileIcon /></div>
                     <div>My Profile</div>
                   </div>

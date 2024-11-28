@@ -85,8 +85,6 @@ const Dashboard = () => {
       const controller = new AbortController();
       appointmentlistcontrollerRef.current = controller;
 
-      console.log(formattedDate)
-
       dispatch(getDashboardAppointmentListAction(salonId, formattedDate, controller.signal));
 
       return () => {
@@ -440,7 +438,7 @@ const Dashboard = () => {
                 {
                   getAllQueueListLoading ?
                     <div className={style.queue_body_loading}>
-                      <Skeleton count={8} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                      <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                         highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div> :
                     getAllQueueListResolve && queuelist?.length > 0 ?

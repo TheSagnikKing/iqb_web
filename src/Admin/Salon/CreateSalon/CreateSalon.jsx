@@ -458,7 +458,6 @@ const CreateSalon = () => {
 
   const selectedSalonImageClicked = async (imgObject) => {
     try {
-      console.log(imgObject)
       setOpenBlobSalonImage(imgObject)
       setOpenModal(true)
     } catch (error) {

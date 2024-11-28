@@ -429,7 +429,7 @@ const Dashboard = () => {
                   {
                     getBarberQueueListLoading ?
                       <div className={style.queue_body_loading}>
-                        <Skeleton count={8} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                        <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
                       getBarberQueueListResolve && BarberQueueList?.length > 0 ?

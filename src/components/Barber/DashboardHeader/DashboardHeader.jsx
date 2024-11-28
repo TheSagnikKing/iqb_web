@@ -110,7 +110,10 @@ const DashboardHeader = () => {
                             <div
                                 className={`${style.profile_drop_container} ${darkmodeOn && style.dark}`}
                             >
-                                <div onClick={() => navigate("/barber-dashboard/editprofile")}>
+                                <div onClick={() => {
+                                    navigate("/barber-dashboard/editprofile")
+                                    setBarberEditDrop(false)
+                                }}>
                                     <div><ProfileIcon /></div>
                                     <div>My Profile</div>
                                 </div>
