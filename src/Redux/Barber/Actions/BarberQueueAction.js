@@ -42,16 +42,6 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
                 type: GET_QUEUELIST_BARBERID_FAIL,
                 payload: error?.response?.data
             });
-
-            toast.error(error?.response?.data?.message, {
-                duration: 3000,
-                style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
-                    borderRadius: '0.3rem',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
         }
     }
 

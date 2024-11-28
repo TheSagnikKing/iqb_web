@@ -2,11 +2,11 @@ import { GET_ALL_CUSTOMERLIST_FAIL, GET_ALL_CUSTOMERLIST_REQ, GET_ALL_CUSTOMERLI
 import toast from "react-hot-toast";
 import api from "../../api/Api";
 
-export const adminGetAllCustomerListAction = (salonId,signal) => async (dispatch) => {
+export const adminGetAllCustomerListAction = (salonId, signal) => async (dispatch) => {
     try {
         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
 
-        const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${salonId}`,{ signal })
+        const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${salonId}`, { signal })
 
         dispatch({
             type: GET_ALL_CUSTOMERLIST_SUCCESS,
@@ -38,16 +38,6 @@ export const adminGetAllCustomerListAction = (salonId,signal) => async (dispatch
             dispatch({
                 type: GET_ALL_CUSTOMERLIST_FAIL,
                 payload: error?.response?.data
-            });
-
-            toast.error(error?.response?.data?.message, {
-                duration: 3000,
-                style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
-                    borderRadius: '0.3rem',
-                    background: '#333',
-                    color: '#fff',
-                },
             });
         }
 

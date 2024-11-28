@@ -78,16 +78,6 @@ export const getAllQueueListAction = (salonId, signal) => async (dispatch) => {
 
         if (error.name !== 'CanceledError') {
 
-            toast.error(error?.response?.data?.message, {
-                duration: 3000,
-                style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
-                    borderRadius: '0.3rem',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
-
             dispatch({
                 type: GET_ALL_QUEUELIST_FAIL,
                 payload: error?.response?.data
