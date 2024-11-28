@@ -191,12 +191,12 @@ const BarberList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, barber.email]);
-      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${barber?.mobileCountryCode}${barber?.mobileNumber}`)]);
       setCheckBarberNames(prevNames => [...prevNames, barber.name])
       setCheckAllBarbers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== barber.email));
-      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${barber.mobileCountryCode}${barber.mobileNumber}`)));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${barber?.mobileCountryCode}${barber?.mobileNumber}`)));
       setCheckBarberNames(prevNames => prevNames.filter(name => name !== barber.name))
       setCheckAllBarbers(false)
     }
@@ -206,7 +206,7 @@ const BarberList = () => {
     setCheckAllBarbers((prev) => {
       if (!prev) {
         const barberEmails = BarberList.map((b) => b.email)
-        const barberMobileNumbers = BarberList.map((b) => Number(`${b.mobileCountryCode}${b.mobileNumber}`));
+        const barberMobileNumbers = BarberList.map((b) => Number(`${b?.mobileCountryCode}${b?.mobileNumber}`));
         const barberNames = BarberList.map((b) => b.name)
         const allCheckedBarbers = BarberList.reduce((acc, barber) => {
           acc[barber._id] = true;

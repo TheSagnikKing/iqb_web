@@ -136,12 +136,12 @@ const CustomerList = () => {
 
     if (isChecked) {
       setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
-      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer?.mobileCountryCode}${customer?.mobileNumber}`)]);
       setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
       setCheckAllCustomers(false)
     } else {
       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
-      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer?.mobileCountryCode}${customer?.mobileNumber}`)));
       setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
       setCheckAllCustomers(false)
     }
@@ -151,7 +151,7 @@ const CustomerList = () => {
     setCheckAllCustomers((prev) => {
       if (!prev) {
         const customerEmails = AllCustomerList.map((c) => c.email);
-        const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
+        const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c?.mobileCountryCode}${c?.mobileNumber}`));
         const customerNames = AllCustomerList.map((c) => c.name);
         const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
           acc[customer._id] = true;
@@ -441,8 +441,8 @@ const CustomerList = () => {
                 </div>
                 <p>{s?.name.length > 18 ? `${s.name.slice(0, 18)}...` : s.name}</p>
                 <p>{s?.email.length > 18 ? `${s.email.slice(0, 18)}...` : s.email}</p>
-                <p>{s.gender}</p>
-                <p>{s.mobileNumber}</p>
+                <p>{s?.gender}</p>
+                <p>{s?.mobileNumber}</p>
               </div>
             ))}
           </div>
