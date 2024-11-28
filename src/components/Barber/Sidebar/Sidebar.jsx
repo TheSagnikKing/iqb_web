@@ -42,6 +42,8 @@ const Sidebar = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  console.log("Barber Salon Name ", barberGetSalonLogoResponse?.salonName)
+
   return (
     <main className={`${style.container} ${darkmodeOn && style.dark}`}>
       <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
@@ -106,8 +108,8 @@ const Sidebar = () => {
         }}
       >
         {/* <div> */}
-          <DashboardHeader />
-          <div><Outlet /></div>
+        <DashboardHeader />
+        <div><Outlet /></div>
         {/* </div> */}
       </div>
     </main>

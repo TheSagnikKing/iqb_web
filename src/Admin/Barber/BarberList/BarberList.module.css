@@ -1,5 +1,4 @@
 .admin_barber_wrapper {
-    /*theextra2remisforpaddingbottom*/
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
@@ -161,11 +160,10 @@
 
 .admin_barber_content_body>div {
     min-height: 6rem;
-    min-width: 90rem;
+    min-width: 79rem;
     max-width: 100%;
     display: grid;
-    /* grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr) 0.4fr; */
-    grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.4fr minmax(12rem, 0.4fr) minmax(12rem, 0.4fr);
+    grid-template-columns: 0.1fr 0.8fr 0.8fr 0.5fr 0.5fr 0.5fr 0.5fr;
     font-size: var(--list-content-body-text);
     font-weight: 500;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
@@ -175,12 +173,28 @@
 .admin_barber_content_body>div>div:nth-child(2) {
     display: flex;
     align-items: center;
+    min-width: 3rem;
 
     &>input {
         width: var(--list-content-body-text);
         height: var(--list-content-body-text);
         accent-color: #0866ff;
     }
+}
+
+
+.admin_barber_content_body>div>p {
+    min-width: 14rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.admin_barber_content_body>div>div {
+    min-width: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .admin_barber_content_body>div:nth-child(1) {
@@ -229,17 +243,6 @@
     align-items: center;
 }
 
-.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(1),
-.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(2),
-.admin_barber_content_body>div:nth-child(1)>p:nth-last-child(3) {
-    justify-content: center;
-}
-
-.admin_barber_content_body_item>div:nth-last-child(1),
-.admin_barber_content_body_item>div:nth-last-child(2),
-.admin_barber_content_body_item>div:nth-last-child(3) {
-    justify-content: center;
-}
 
 .admin_barber_content_body_item>div>button {
     padding: var(--list-wrapper-btn-padding);

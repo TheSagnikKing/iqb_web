@@ -482,12 +482,12 @@ const BarberList = () => {
                     checked={checkAllBarbers}
                   />
                 </div>
-                <p>Barber Name</p>
+                <p>Name</p>
                 <p>Email</p>
-                <p>isOnline</p>
-                <p>isClockIn</p>
-                <p>isApprove</p>
-                <p>Edit</p>
+                <div><p>isOnline</p></div>
+                <div><p>isClockIn</p></div>
+                <div><p>isApprove</p></div>
+                <div><p>Edit</p></div>
                 {/* <p>Delete</p> */}
               </div>
 

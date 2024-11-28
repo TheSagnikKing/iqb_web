@@ -221,13 +221,13 @@ const Dashboard = () => {
                 <div>
                   {
                     adminGetDefaultSalonLoading ?
-                      <div 
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        alignContent: "center",
-                        paddingTop: "1rem"
-                      }}>
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          paddingTop: "2rem",
+                          paddingInline: "1rem"
+                        }}>
                         <Skeleton count={1} height={"4rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                           highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                       </div> :
@@ -421,7 +421,7 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                
+
                   </Carousel>
                 </div>
               </div>

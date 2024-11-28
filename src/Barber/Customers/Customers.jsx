@@ -439,8 +439,8 @@ const CustomerList = () => {
                     onChange={() => customerEmailCheckedHandler(s)}
                   />
                 </div>
-                <p>{s.name}</p>
-                <p>{s.email}</p>
+                <p>{s?.name.length > 18 ? `${s.name.slice(0, 18)}...` : s.name}</p>
+                <p>{s?.email.length > 18 ? `${s.email.slice(0, 18)}...` : s.email}</p>
                 <p>{s.gender}</p>
                 <p>{s.mobileNumber}</p>
               </div>

@@ -202,7 +202,7 @@
 
 .sidebar_top_salon>p:nth-child(2) {
   font-weight: 500;
-  font-size: var(--list-primary-text);
+  font-size: var(--list-content-body-text);
 }
 
 .mobile_content {

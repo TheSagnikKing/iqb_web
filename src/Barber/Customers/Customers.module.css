@@ -144,25 +144,36 @@
 
 .customer_content_body>div {
     min-height: 6rem;
-    min-width: 50rem;
+    min-width: 64rem;
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.5fr;
+    gap: 1rem;
     font-size: var(--list-content-body-text);
     font-weight: 500;
 }
+
 
 .customer_content_body>div>div:nth-child(1),
 .customer_content_body>div>div:nth-child(2) {
     display: flex;
     align-items: center;
+    min-width: 2rem;
 
     &>input {
         width: var(--list-content-body-text);
         height: var(--list-content-body-text);
         accent-color: #0866ff;
     }
+}
+
+.customer_content_body>div>p {
+    min-width: 16rem;
+}
+
+.customer_content_body>div>p:nth-last-child(2) {
+    min-width: 10rem;
 }
 
 .customer_content_body>div:nth-child(1) {
@@ -441,34 +452,34 @@
     }
 }
 
-@media screen and (min-width:0px) and (max-width:430px){
-    
-    .modal_container{
+@media screen and (min-width:0px) and (max-width:430px) {
+
+    .modal_container {
         width: 90%;
     }
 }
 
 
-@media screen and (min-width:431px) and (max-width:768px){
-    .modal_container{
+@media screen and (min-width:431px) and (max-width:768px) {
+    .modal_container {
         width: 70%;
     }
 }
 
-@media screen and (min-width:769px) and (max-width:1140px){
-    .modal_container{
+@media screen and (min-width:769px) and (max-width:1140px) {
+    .modal_container {
         width: 50%;
     }
 }
 
-@media screen and (min-width:0px) and (max-width:500px){
+@media screen and (min-width:0px) and (max-width:500px) {
     .customer_wrapper>div:nth-child(1) {
         display: block;
         height: 6rem;
     }
 
     .customer_content_wrapper,
-    .customer_content_body{
+    .customer_content_body {
         height: calc(calc(var(--list-wrapper-height)) - 6rem - 4rem - 4rem);
     }
 }

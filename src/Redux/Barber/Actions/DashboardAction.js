@@ -173,6 +173,8 @@ export const barberGetSalonLogoAction = (salonId) => async (dispatch) => {
             salonId
         })
 
+        
+
         dispatch({
             type: GET_BARBER_SALON_LOGO_SUCCESS,
             payload: data
