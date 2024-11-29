@@ -260,7 +260,7 @@ const Dashboard = () => {
                         swipeable={false}
                       >
                         {
-                          advertisements.map((item) => {
+                          advertisements?.slice(0, 5)?.map((item) => {
                             return (
                               <div className={style.carousel_item_container} key={item._id}>
                                 <img src={item.url} alt="image_item" />
