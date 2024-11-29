@@ -491,7 +491,12 @@ const EditProfile = () => {
                                             value={digit}
                                             autoFocus={index === 0}
                                             ref={(ref) => (otpinputRef.current[index] = ref)}
-                                            onChange={(e) => handleOtpInputChange(index, e.target.value)}
+                                            onChange={(e) => {
+                                                if (/^\d*$/.test(e.target.value)) {
+                                                    handleOtpInputChange(index, e.target.value)
+                                                }
+                                            }
+                                            }
                                             onKeyDown={(e) => handleKeyDown(index, e)}
                                         ></input>
                                     ))
@@ -642,7 +647,12 @@ const EditProfile = () => {
                                             value={digit}
                                             autoFocus={index === 0}
                                             ref={(ref) => (mobileotpinputRef.current[index] = ref)}
-                                            onChange={(e) => handleMobileOtpInputChange(index, e.target.value)}
+                                            onChange={(e) => {
+                                                if (/^\d*$/.test(e.target.value)) {
+                                                    handleMobileOtpInputChange(index, e.target.value)
+                                                }
+                                            }
+                                            }
                                             onKeyDown={(e) => handleMobileKeyDown(index, e)}
                                         ></input>
                                     ))
