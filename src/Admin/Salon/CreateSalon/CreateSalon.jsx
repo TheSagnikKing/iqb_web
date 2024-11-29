@@ -388,6 +388,32 @@ const CreateSalon = () => {
       return;
     }
 
+
+    if (serviceName.length < 1 || serviceName.length > 25) {
+      return toast.error("Service Name must be between 1 to 25 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
+
+    if (serviceDesc.length < 1 || serviceDesc.length > 50) {
+      return toast.error("Service Description must be between 1 to 50 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
     const service = {
       serviceIcon: {
         url: selectedLogo.url,

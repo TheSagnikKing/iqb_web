@@ -72,10 +72,10 @@ const BarberList = () => {
     const barberOnlineData = {
       barberId: b.barberId,
       salonId: b.salonId,
-      isOnline: !checkMap.get(`${b.salonId}-${b.barberId}`) || false
+      isOnline: !checkMap?.get(`${b.salonId}-${b.barberId}`) || false
     };
 
-    dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap.get(`${b.salonId}-${b.barberId}`)));
+    dispatch(changeAdminBarberOnlineStatusAction(barberOnlineData, setCheckMap, b, checkMap?.get(`${b.salonId}-${b.barberId}`)));
   }
 
   const [checkMapClock, setCheckMapClock] = useState(new Map())
@@ -92,10 +92,10 @@ const BarberList = () => {
     const barberClockData = {
       barberId: b.barberId,
       salonId: b.salonId,
-      isClockedIn: !checkMapClock.get(`${b.salonId}-${b.barberId}`) || false
+      isClockedIn: !checkMapClock?.get(`${b.salonId}-${b.barberId}`) || false
     };
 
-    dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock.get(`${b.salonId}-${b.barberId}`), setCheckMap));
+    dispatch(changeAdminBarberClockStatusAction(barberClockData, setCheckMapClock, b, checkMapClock?.get(`${b.salonId}-${b.barberId}`), setCheckMap));
   }
 
 
@@ -142,10 +142,10 @@ const BarberList = () => {
     const approvedata = {
       salonId: b.salonId,
       email: b.email,
-      isApproved: !approveBarberMap.get(`${b.salonId}-${b.email}`) || false
+      isApproved: !approveBarberMap?.get(`${b.salonId}-${b.email}`) || false
     };
 
-    dispatch(adminApproveBarberAction(approvedata, setApproveBarberMap, b, approveBarberMap.get(`${b.salonId}-${b.email}`)))
+    dispatch(adminApproveBarberAction(approvedata, setApproveBarberMap, b, approveBarberMap?.get(`${b.salonId}-${b.email}`), setCheckMap, setCheckMapClock))
   }
 
   const adminApproveBarber = useSelector(state => state.adminApproveBarber)
@@ -512,23 +512,23 @@ const BarberList = () => {
                   <div>
                     <button
                       onClick={() => toggleHandler(b)}
-                      className={checkMap.get(`${b.salonId}-${b.barberId}`) ? style.barber_online_btn_active : style.barber_online_btn_inactive}
-                    >{checkMap.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</button>
+                      className={checkMap?.get(`${b.salonId}-${b.barberId}`) ? style.barber_online_btn_active : style.barber_online_btn_inactive}
+                    >{checkMap?.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</button>
                   </div>
 
                   <div>
                     <button
                       onClick={() => toggleClockHandler(b)}
-                      className={checkMapClock.get(`${b.salonId}-${b.barberId}`) ? style.barber_clock_btn_active : style.barber_clock_btn_inactive}
-                    >{checkMapClock.get(`${b.salonId}-${b.barberId}`) ? "Clock-In" : "Clock-Out"}</button>
+                      className={checkMapClock?.get(`${b.salonId}-${b.barberId}`) ? style.barber_clock_btn_active : style.barber_clock_btn_inactive}
+                    >{checkMapClock?.get(`${b.salonId}-${b.barberId}`) ? "Clock-In" : "Clock-Out"}</button>
                   </div>
 
                   <div>
                     <button
                       onClick={() => approveHandler(b)}
-                      className={approveBarberMap.get(`${b.salonId}-${b.email}`) ? style.barber_approve_btn_active : style.barber_approve_btn_inactive}
+                      className={approveBarberMap?.get(`${b.salonId}-${b.email}`) ? style.barber_approve_btn_active : style.barber_approve_btn_inactive}
                       disabled={adminApproveBarberLoading ? true : false}
-                    >{approveBarberMap.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}</button>
+                    >{approveBarberMap?.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}</button>
                   </div>
 
                   <div><button onClick={() => editButtonClicked(b)}>Edit</button></div>

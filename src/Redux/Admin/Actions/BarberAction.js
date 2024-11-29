@@ -93,7 +93,6 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
         setCheckMap((prevCheckMap) => {
             const newCheckMap = new Map(prevCheckMap);
             const key = `${b.salonId}-${b.barberId}`;
-            console.log(key)
             newCheckMap.set(key, originalIsOnline);
             return newCheckMap;
         });
@@ -166,7 +165,7 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
     }
 }
 
-export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, originalIsOnline) => async (dispatch) => {
+export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, originalIsOnline, setCheckMap, setCheckMapClock) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_APPROVE_BARBER_REQ })
 
@@ -176,6 +175,25 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
             type: ADMIN_APPROVE_BARBER_SUCCESS,
             payload: data
         })
+
+        setCheckMap((prevCheckMap) => {
+            if (approvedata?.isApproved === false) {
+                const newCheckMap = new Map(prevCheckMap);
+                const key = `${b.salonId}-${b.barberId}`;
+                newCheckMap.set(key, false);
+                return newCheckMap
+            }
+        });
+
+        setCheckMapClock((prevCheckMap) => {
+            if (approvedata?.isApproved === false) {
+                const newCheckMap = new Map(prevCheckMap);
+                const key = `${b.salonId}-${b.barberId}`;
+                newCheckMap.set(key, false);
+                return newCheckMap
+            }
+        });
+
     } catch (error) {
 
         if (error?.response?.status === 500) {
