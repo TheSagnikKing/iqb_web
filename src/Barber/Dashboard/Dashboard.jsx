@@ -11,6 +11,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { barberConnectSalonAction, barberDashboardSalonInfoAction, barberSalonStatusAction, connectSalonListAction } from '../../Redux/Barber/Actions/DashboardAction';
 import { getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueueAction';
 import { getAdminSalonImagesAction } from '../../Redux/Admin/Actions/SalonAction';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
 
@@ -67,12 +68,14 @@ const Dashboard = () => {
 
 
   const [selectedServiceList, setSelectedServiceList] = useState([])
+  const [oldSalonServicelist, setOldSalonServiceList] = useState([])
 
   useEffect(() => {
     if (selectedSalonId) {
       const selectedSalonServices = connectSalonListResponse.find((s) => s.salonId === selectedSalonId)?.services
 
       setSelectedServiceList(selectedSalonServices)
+      setOldSalonServiceList(selectedSalonServices)
       setBarberSelectedServices([])
     }
 
@@ -81,20 +84,72 @@ const Dashboard = () => {
   const [barberSelectedServices, setBarberSelectedServices] = useState([])
 
   const selectServiceHandler = (ser) => {
-    const servicepresent = barberSelectedServices.find((s) => s._id === ser._id)
-
-    if (!servicepresent) {
-      const serviceWithEWT = { ...ser, barberServiceEWT: Number(ser.serviceEWT) };
-
-      setBarberSelectedServices([...barberSelectedServices, serviceWithEWT]);
-    }
+    setBarberSelectedServices([...barberSelectedServices, { ...ser, barberServiceEWT: Number(ser.serviceEWT), serviceEWT: Number(ser.serviceEWT) }])
   }
 
+  // const deleteServiceHandler = (ser) => {
+
+  //   setSelectedServiceList((prev) => {
+  //     const updatedArray = oldSalonServicelist.map((service) => {
+  //       return service.serviceId === ser.serviceId ? { ...service, serviceEWT: service.serviceEWT } : service
+  //     })
+  //     return updatedArray
+  //   })
+  //   setBarberSelectedServices((services) => services.filter((s) => s._id !== ser._id))
+  // }
+
   const deleteServiceHandler = (ser) => {
-    setBarberSelectedServices((services) => services.filter((s) => s._id !== ser._id))
+    setSelectedServiceList((prev) => {
+      const updatedArray = prev.map((service) => {
+        // Only reset the serviceEWT of the service being deleted
+        if (service.serviceId === ser.serviceId) {
+          const originalService = oldSalonServicelist.find(
+            (oldService) => oldService.serviceId === service.serviceId
+          );
+          return { ...service, serviceEWT: originalService?.serviceEWT || service.serviceEWT };
+        }
+        return service;
+      });
+      return updatedArray;
+    });
+
+    setBarberSelectedServices((services) =>
+      services.filter((s) => s._id !== ser._id)
+    );
+  };
+
+
+  const handleBarberEwt = (serId, value) => {
+    const newValue = value.replace(/[^0-9]/g, '');
+
+    setSelectedServiceList((prev) => {
+      const updatedArray = prev.map((service) => {
+        return service.serviceId === serId ? { ...service, serviceEWT: Number(newValue) } : service
+      })
+      return updatedArray
+    })
+
+    setBarberSelectedServices((prev) => {
+      const updatedArray = prev.map((service) => {
+        return service.serviceId === serId ? { ...service, barberServiceEWT: Number(newValue), serviceEWT: Number(newValue) } : service
+      })
+      return updatedArray
+    })
   }
 
   const connectSalonClicked = () => {
+    if (barberSelectedServices.length === 0) {
+      return toast.error("Please provide a service", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
     const connectSalondata = {
       barberServices: barberSelectedServices,
       email,
@@ -102,7 +157,6 @@ const Dashboard = () => {
     }
 
     dispatch(barberConnectSalonAction(connectSalondata))
-    // console.log(connectSalondata)
   }
 
   const barberConnectSalon = useSelector(state => state.barberConnectSalon)
@@ -548,7 +602,12 @@ const Dashboard = () => {
                                   <p>Est Wait Time</p>
                                   <div>
                                     <div><ClockIcon /></div>
-                                    <p>{s?.serviceEWT}</p>
+                                    {/* <p>{s?.serviceEWT}</p> */}
+                                    <input
+                                      type="text"
+                                      value={s?.serviceEWT}
+                                      onChange={(e) => handleBarberEwt(s?.serviceId, e.target.value)}
+                                    />
                                     <p>mins</p>
                                   </div>
                                 </div>

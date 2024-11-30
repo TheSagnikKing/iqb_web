@@ -531,7 +531,12 @@ const BarberList = () => {
                     >{approveBarberMap?.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}</button>
                   </div>
 
-                  <div><button onClick={() => editButtonClicked(b)}>Edit</button></div>
+                  <div><button onClick={() => editButtonClicked(b)}
+                    disabled={approveBarberMap?.get(`${b.salonId}-${b.email}`) === false}
+                    style={{
+                      cursor: approveBarberMap?.get(`${b.salonId}-${b.email}`) === false && "not-allowed"
+                    }}
+                  >Edit</button></div>
                   {/* <div><button onClick={() => deleteButtonClicked(b)}>Delete</button></div> */}
 
                 </div>

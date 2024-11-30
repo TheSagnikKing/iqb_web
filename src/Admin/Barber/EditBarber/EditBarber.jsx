@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from "./EditBarber.module.css";
 import { AddIcon, ClockIcon, CloseIcon, DeleteIcon } from '../../../icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminAllSalonServicesAction,  adminUpdateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
+import { adminAllSalonServicesAction, adminUpdateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import { PhoneInput } from 'react-international-phone';
@@ -91,7 +91,7 @@ const EditBarber = () => {
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
-      },
+        },
       });
     } else {
       const barberdata = {
@@ -129,7 +129,7 @@ const EditBarber = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  
+
   const handleonChange = (e, service) => {
     const newValue = e.target.value.replace(/[^0-9]/g, ''); // Allow only digits
 

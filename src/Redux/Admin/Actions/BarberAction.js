@@ -176,23 +176,25 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
             payload: data
         })
 
-        setCheckMap((prevCheckMap) => {
-            if (approvedata?.isApproved === false) {
-                const newCheckMap = new Map(prevCheckMap);
-                const key = `${b.salonId}-${b.barberId}`;
-                newCheckMap.set(key, false);
-                return newCheckMap
-            }
-        });
+        window.location.reload()
 
-        setCheckMapClock((prevCheckMap) => {
-            if (approvedata?.isApproved === false) {
-                const newCheckMap = new Map(prevCheckMap);
-                const key = `${b.salonId}-${b.barberId}`;
-                newCheckMap.set(key, false);
-                return newCheckMap
-            }
-        });
+        // setCheckMap((prevCheckMap) => {
+        //     if (approvedata?.isApproved === false) {
+        //         const newCheckMap = new Map(prevCheckMap);
+        //         const key = `${b.salonId}-${b.barberId}`;
+        //         newCheckMap.set(key, false);
+        //         return newCheckMap
+        //     }
+        // });
+
+        // setCheckMapClock((prevCheckMap) => {
+        //     if (approvedata?.isApproved === false) {
+        //         const newCheckMap = new Map(prevCheckMap);
+        //         const key = `${b.salonId}-${b.barberId}`;
+        //         newCheckMap.set(key, false);
+        //         return newCheckMap
+        //     }
+        // });
 
     } catch (error) {
 

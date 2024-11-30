@@ -435,6 +435,20 @@
         justify-content: center;
         align-items: center;
 
+        & input {
+            width: 6rem;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            outline: none;
+            font-size: var(--list-primary-text);
+            font-weight: 600;
+            text-align: center;
+
+            &:focus {
+                border-bottom: 1px solid #0866ff;
+            }
+        }
+
         &>div {
             &>p:nth-child(1) {
                 font-size: var(--list-content-body-text);

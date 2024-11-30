@@ -225,7 +225,7 @@ const DashboardHeader = () => {
       isOnline: newCheckValue,
     };
 
-    dispatch(adminSalonStatusAction(salonStatusOnlineData));
+    dispatch(adminSalonStatusAction(salonStatusOnlineData, setTogglecheck, newCheckValue));
   }
 
 

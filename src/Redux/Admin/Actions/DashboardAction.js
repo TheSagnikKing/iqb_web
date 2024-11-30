@@ -141,7 +141,7 @@ export const getDashboardAppointmentListAction = (salonId, currentDate, signal) 
     }
 }
 
-export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
+export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheckValue) => async (dispatch) => {
     try {
         dispatch({ type: SALON_ONLINE_STATUS_REQ })
 
@@ -183,6 +183,8 @@ export const adminSalonStatusAction = (salonStatusdata) => async (dispatch) => {
             type: SALON_ONLINE_STATUS_FAIL,
             payload: error?.response?.data
         });
+
+        setTogglecheck(!newCheckValue)
 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
