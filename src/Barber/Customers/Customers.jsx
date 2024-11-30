@@ -410,7 +410,7 @@ const CustomerList = () => {
               highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--lightmode-loader-highlight-color)'}
             />
           </div>
-        ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
+        ) : barberGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
           <div className={`${style.customer_content_body} ${darkmodeOn && style.dark}`}>
             <div>
               <div>
@@ -446,16 +446,10 @@ const CustomerList = () => {
               </div>
             ))}
           </div>
-        ) : !barberGetAllCustomerListLoading && barberGetAllCustomerListResolve && AllCustomerList?.length === 0 ? (
+        ) : (
           <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
             <p>Customers not available</p>
           </div>
-        ) : (
-          !barberGetAllCustomerListLoading && !barberGetAllCustomerListResolve && (
-            <div className={`${style.customer_content_body_error} ${darkmodeOn && style.dark}`}>
-              <p>Customers not available</p>
-            </div>
-          )
         )}
       </div>
 

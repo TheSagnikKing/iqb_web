@@ -339,7 +339,7 @@ const SalonAdv = () => {
               >
                 <div><FaFileIcon /></div>
                 <p>Choose Files</p>
-  
+
                 <input
                   type="file"
                   ref={advImagefileInputRef}
@@ -361,12 +361,12 @@ const SalonAdv = () => {
             }
           </div>)
         }
-        
+
 
       </div>
       <div className={style.salonadv_list_container}>
         {
-          getAllAdvertisementLoading && !getAllAdvertisementResolve ?
+          getAllAdvertisementLoading ?
             <div className={style.salonadv_column}>
               {[...Array(6)].map((_, index) => (
                 <Skeleton
@@ -380,7 +380,7 @@ const SalonAdv = () => {
                 />
               ))}
             </div> :
-            !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length > 0 ?
+            getAllAdvertisementResolve && advertisements?.length > 0 ?
 
               <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
                 <div className={`${style.salonadv_column} ${darkmodeOn && style.dark}`}>
@@ -395,11 +395,7 @@ const SalonAdv = () => {
 
                 </div>
               </DndContext> :
-              !getAllAdvertisementLoading && getAllAdvertisementResolve && advertisements?.length == 0 ?
-                <div className={`${style.salonadv_column_error} ${darkmodeOn && style.dark}`}><p>No Advertisment Avaialble</p></div> :
-                !getAllAdvertisementLoading && !getAllAdvertisementResolve &&
-                <div className={`${style.salonadv_column_error} ${darkmodeOn && style.dark}`}><p>No Advertisment Avaialble</p></div>
-
+              <div className={`${style.salonadv_column_error} ${darkmodeOn && style.dark}`}><p>No Advertisment Avaialble</p></div>
         }
 
       </div>

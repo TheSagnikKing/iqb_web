@@ -204,7 +204,7 @@ const SalonList = () => {
       <div className={`${style.salon_content_wrapper} ${darkmodeOn && style.dark}`}>
 
         {
-          getAdminSalonListLoading && !getAdminSalonListResolve ? (
+          getAdminSalonListLoading ? (
             <div className={`${style.salon_content_body} ${darkmodeOn && style.dark}`}>
               <Skeleton
                 count={6}
@@ -213,7 +213,7 @@ const SalonList = () => {
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
                 style={{ marginBottom: "1rem" }} />
             </div>
-          ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length > 0 ? (
+          ) : getAdminSalonListResolve && SalonList?.length > 0 ? (
             <div className={`${style.salon_content_body} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Salon Name</p>
@@ -247,16 +247,10 @@ const SalonList = () => {
                 </div>
               ))}
             </div>
-          ) : !getAdminSalonListLoading && getAdminSalonListResolve && SalonList?.length == 0 ? (
-            <div className={`${style.salon_content_body_error} ${darkmodeOn && style.dark}`}>
-              <p style={{ margin: "2rem" }}>Salons not available</p>
-            </div>
           ) : (
-            !getAdminSalonListLoading && !getAdminSalonListResolve && (
-              <div className={`${style.salon_content_body_error} ${darkmodeOn && style.dark}`}>
-                <p>No salon available</p>
-              </div>
-            )
+            <div className={`${style.salon_content_body_error} ${darkmodeOn && style.dark}`}>
+              <p>No salon available</p>
+            </div>
           )
         }
 
