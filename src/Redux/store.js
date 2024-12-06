@@ -11,7 +11,7 @@ import { adminGetDefaultSalonReducer,adminApplySalonReducer, colorReducer, admin
 import { adminForgetPasswordReducer, adminResetPasswordReducer } from "./Admin/Reducers/AdminPasswordReducer";
 import { barberConnectSalonReducer, barberDashboardSalonInfoReducer, barberGetSalonLogoReducer, barberSalonStatusReducer, connectSalonListReducer } from "./Barber/Reducers/DashboardReducer";
 import { barberForgetPasswordReducer, barberResetPasswordReducer } from "./Barber/Reducers/BarberPasswordReducer";
-import { getBarberQueueListReducer } from "./Barber/Reducers/BarberQueueReducer";
+import { getBarberQueueListHistoryReducer, getBarberQueueListReducer } from "./Barber/Reducers/BarberQueueReducer";
 import { barberSendVerifyEmailReducer, barberSendVerifyMobileReducer, barberSkipProfileReducer, barberUpdatePasswordReducer, barberUpdateProfileReducer, barberVerifiedEmailStatusReducer, barberVerifiedMobileStatusReducer } from "./Barber/Reducers/BarberProfileReducer";
 import { barberGetAllCustomerListReducer, barberSendCustomerEmailReducer, barberSendCustomerMessageReducer } from "./Barber/Reducers/BarberCustomerReducer";
 
@@ -95,7 +95,8 @@ const rootReducer = combineReducers({
   barberSendVerifyMobile: barberSendVerifyMobileReducer,
   barberVerifiedMobileStatus: barberVerifiedMobileStatusReducer,
   barberSendCustomerEmail: barberSendCustomerEmailReducer,
-  barberSendCustomerMessage: barberSendCustomerMessageReducer
+  barberSendCustomerMessage: barberSendCustomerMessageReducer,
+  getBarberQueueListHistory: getBarberQueueListHistoryReducer
 })
 
 const initialState = {};

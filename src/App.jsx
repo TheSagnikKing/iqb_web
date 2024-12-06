@@ -50,6 +50,7 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
+import QueHistory from './Barber/QueHistory/QueHistory';
 
 const App = () => {
 
@@ -285,11 +286,19 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-                    <Route
+                    {/* <Route
                       path="/barber-customer"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
                           <BarberCustomer />
+                        </ErrorBoundary>
+                      }
+                    /> */}
+                    <Route
+                      path="/barber-quehistory"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <QueHistory />
                         </ErrorBoundary>
                       }
                     />

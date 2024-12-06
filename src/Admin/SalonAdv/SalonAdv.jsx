@@ -105,6 +105,15 @@ const SalonAdv = () => {
           type: "ADD_ADVETISEMENT",
           payload: imageResponse?.data?.response
         })
+        toast.success("Advertisement uploaded successfully", {
+          duration: 3000,
+            style: {
+              fontSize: "var(--list-modal-header-normal-font)",
+              borderRadius: '0.3rem',
+              background: '#333',
+              color: '#fff',
+            },
+        })
       } catch (error) {
 
         if (error?.response?.status === 500) {
@@ -346,6 +355,7 @@ const SalonAdv = () => {
                   style={{ display: 'none' }}
                   multiple
                   onChange={handleAdvImageFileInputChange}
+                  disabled={uploadLoader ? true : false}
                 />
               </button>
               <p>

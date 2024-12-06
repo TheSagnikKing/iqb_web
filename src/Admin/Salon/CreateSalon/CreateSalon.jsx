@@ -125,6 +125,8 @@ const CreateSalon = () => {
 
   const [salonType, setSalonType] = useState("")
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
+  
+  const [salonNameError, setSalonNameError] = useState("")
 
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
@@ -183,9 +185,24 @@ const CreateSalon = () => {
   const {
     loading: getAdminAllCountriesLoading,
     resolve: getAdminAllCountriesResolve,
+    error: getAdminAllCountriesError,
     response: AllCountries
   } = getAdminAllCountries
 
+  // console.log("AllCountries ", AllCountries)
+  // console.log("getAdminAllCountriesError ", getAdminAllCountriesError)
+  // console.log("getAdminAllCountriesError ", getAdminAllCountriesError?.message)
+
+  // !Object.keys(getAdminAllCountriesError || {}).length
+
+  useEffect(() => {
+    if (!!Object.keys(getAdminAllCountriesError || {}).length) {
+      setCountry("")
+      setCity("")
+      setTimezone("")
+      setCountryCode("")
+    }
+  }, [getAdminAllCountriesError])
 
   const [city, setCity] = useState("")
   const [cityDrop, setCityDrop] = useState(false)
@@ -221,8 +238,18 @@ const CreateSalon = () => {
   const {
     loading: getAdminAllCitiesLoading,
     resolve: getAdminAllCitiesResolve,
-    response: AllCities
+    response: AllCities,
+    error: getAdminAllCitiesError,
   } = getAdminAllCities
+
+  console.log("Get All Cities ", AllCities)
+  console.log("All Cities Error ", getAdminAllCitiesError)
+
+  useEffect(() => {
+    if (!!Object.keys(getAdminAllCitiesError || {}).length) {
+      setCity("")
+    }
+  }, [getAdminAllCitiesError])
 
   const [timezone, setTimezone] = useState("")
   const [timezoneDrop, setTimezoneDrop] = useState(false)
@@ -554,6 +581,9 @@ const CreateSalon = () => {
   const [invalidnumber, setInvalidNumber] = useState(false)
 
   const createSalonHandler = async () => {
+    if(!salonName){
+      return setSalonNameError("Please enter salon name")
+    }
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -591,6 +621,7 @@ const CreateSalon = () => {
         twitterLink: twitterLink,
         tiktokLink: tiktokLink,
         services: localsalondata.selectedServices,
+        code: countrycode
       }
 
       // console.log("Salondata ", salondata)
@@ -765,7 +796,7 @@ const CreateSalon = () => {
 
 
   const addservicedropHandler = () => {
-    if (country == "") {
+    if (!countrycode) {
       toast.error("Please select a country", {
         duration: 3000,
         style: {
@@ -780,6 +811,14 @@ const CreateSalon = () => {
     }
 
   }
+
+  useEffect(() => {
+    if(countrycode){
+      setOpenServices(true)
+    }else{
+      setOpenServices(false)
+    }
+  },[countrycode])
 
 
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -993,9 +1032,16 @@ const CreateSalon = () => {
             <input
               type="text"
               value={salonName}
-              onChange={(e) => setHandler(setSalonName, e.target.value, "salonName")}
+              onChange={(e) => {
+                setSalonNameError("")
+                setHandler(setSalonName, e.target.value, "salonName")
+              }}
               onKeyDown={handleKeyPress}
+              style={{
+                // border: salonNameError ? "0.1rem solid red" : "none"
+              }}
             />
+            {/* <p style={{ color: "red", fontSize: "12px"}}>{salonNameError}</p> */}
           </div>
 
           <div>
@@ -1058,7 +1104,10 @@ const CreateSalon = () => {
 
           <div>
             <div>
-              <p>Country</p>
+              <p>Country <span style={{
+                fontWeight: "500",
+                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
+              }}>{"( * Please select from dropdown )"}</span></p>
               <input
                 type="text"
                 value={country}
@@ -1097,15 +1146,19 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>City</p>
+              <p>City <span style={{
+                fontWeight: "500",
+                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
+              }}>{"( * Please select from dropdown )"}</span></p>
               <input
                 type="text"
                 value={city}
                 onChange={(e) => searchCityHandler(e)}
                 onKeyDown={handleKeyPress}
+                disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
               />
 
-              {cityDrop &&
+              {cityDrop && !Object.keys(getAdminAllCountriesError).length &&
                 <ClickAwayListener onClickAway={() => setCityDrop(false)}>
                   <div>
                     {
@@ -1137,12 +1190,16 @@ const CreateSalon = () => {
 
           <div>
             <div>
-              <p>Time Zone</p>
+            <p>Timezone <span style={{
+                fontWeight: "500",
+                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
+              }}>{"( * Please select from dropdown )"}</span></p>
               <input
                 type="text"
                 value={timezone}
                 onClick={() => timezoneDropHandler()}
                 onKeyDown={handleKeyPress}
+                disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
               />
 
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
@@ -1212,11 +1269,12 @@ const CreateSalon = () => {
           </div>
 
           <div className={style.add_services_drop}>
-            <p>Add Your Services</p>
-            <button
+            {/* <p>Add Your Services</p> */}
+            {/* <button
               onClick={addservicedropHandler}
               className={openServices ? style.add_services_btn_inactive : style.add_services_btn_active}
-            >{openServices ? "-" : "+"}</button>
+            >{openServices ? "-" : "+"}</button> */}
+            <button onClick={addservicedropHandler} className={style.addservices_btn}>Add Services</button>
           </div>
 
           {

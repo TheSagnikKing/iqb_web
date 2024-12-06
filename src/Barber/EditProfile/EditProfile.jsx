@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
+import { CameraIcon, CheckIcon, ClockIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -386,6 +386,8 @@ const EditProfile = () => {
     const [openMobileModal, setOpenMobileModal] = useState(false)
     const [openEmailModal, setOpenEmailModal] = useState(false)
 
+    const [editServiceModal, setEditServiceModal] = useState(false)
+
     return (
         <main className={style.barber_edit_profile_container}>
             <div className={style.barber_edit_profile_container_left}>
@@ -417,6 +419,128 @@ const EditProfile = () => {
                 </div>
             </div>
             <div className={style.barber_edit_profile_container_right}>
+                <button onClick={() => setEditServiceModal(true)}>Edit services</button>
+
+                <Modal
+                    open={editServiceModal}
+                    onClose={() => setEditServiceModal(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className={style.edit_modal_container}>
+                        <div>
+                            <p>Edit Services</p>
+                            <button onClick={() => setEditServiceModal(false)}><CloseIcon /></button>
+                        </div>
+
+                        {/* <main className={`${style.edit_modal_content_container_loading}`}>
+                            <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                            <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                        </main> */}
+
+                        {/* <main className={`${style.edit_modal_content_container_error}`}>
+                            <p>No services available</p>
+                        </main> */}
+
+                        <main className={style.edit_modal_content_container}>
+                            <div className={`${style.service_item}`}>
+                                <div className={`${style.service_item_top}`}>
+                                    <div><img src={""} alt="service icon" /></div>
+                                    <div>
+                                        <p>serviceName</p>
+                                        <p>"Regular"</p>
+                                        <p>serviceDesc</p>
+                                    </div>
+                                </div>
+                                <div className={`${style.service_item_bottom}`}>
+                                    <div>
+                                        <div>
+                                            <p>Service Price</p>
+                                            <p>$30</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <p>Est Wait Time</p>
+                                            <div>
+                                                <div><ClockIcon /></div>
+                                                <input
+                                                    type="text"
+                                                    value={30}
+                                                    // value={serviceEWTValues[s._id]}
+                                                    // onChange={(e) => {
+                                                    //     const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
+                                                    //     handleEWTChange(s._id, value);
+                                                    // }}
+                                                />
+                                                <p>mins</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {/* {
+                                    chooseServices.find((c) => c._id === s._id) ?
+                                        (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
+                                        (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                } */}
+
+                            </div>
+
+                            <div className={`${style.service_item}`}>
+                                <div className={`${style.service_item_top}`}>
+                                    <div><img src={""} alt="service icon" /></div>
+                                    <div>
+                                        <p>serviceName</p>
+                                        <p>"Regular"</p>
+                                        <p>serviceDesc</p>
+                                    </div>
+                                </div>
+                                <div className={`${style.service_item_bottom}`}>
+                                    <div>
+                                        <div>
+                                            <p>Service Price</p>
+                                            <p>$30</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <p>Est Wait Time</p>
+                                            <div>
+                                                <div><ClockIcon /></div>
+                                                <input
+                                                    type="text"
+                                                    value={30}
+                                                    // value={serviceEWTValues[s._id]}
+                                                    // onChange={(e) => {
+                                                    //     const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
+                                                    //     handleEWTChange(s._id, value);
+                                                    // }}
+                                                />
+                                                <p>mins</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {/* {
+                                    chooseServices.find((c) => c._id === s._id) ?
+                                        (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
+                                        (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                } */}
+
+                            </div>
+                        </main>
+
+
+                        <button>Save</button>
+                    </div>
+                </Modal>
+
                 <div>
                     <p>Name</p>
                     <input

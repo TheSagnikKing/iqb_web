@@ -7,11 +7,17 @@ export const menudata = [
         icon: <Admindashboardicon />,
         url: "/barber-dashboard"
     },
+    // {
+    //     id: 2,
+    //     title: "Customers",
+    //     icon: <Admincustomericon />,
+    //     url: "/barber-customer"
+    // },
     {
         id: 2,
-        title: "Customers",
-        icon: <Admincustomericon />,
-        url: "/barber-customer"
+        title: "Queue History",
+        icon: <Adminbarbericon />,
+        url: "/barber-quehistory"
     },
     {
         id: 3,

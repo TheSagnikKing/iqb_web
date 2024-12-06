@@ -62,59 +62,118 @@ export const getAdminAllSalonIconReducer = (state = {}, action) => {
     }
 }
 
-export const getAdminAllCountriesReducer = (state = {}, action) => {
+
+const CountryInitialState = {
+    loading: false,
+    resolve: false,
+    response: {},
+    error: {}
+};
+
+export const getAdminAllCountriesReducer = (state = CountryInitialState, action) => {
     switch (action.type) {
         case ADMIN_GET_ALL_COUNTRIES_REQ:
             return {
                 ...state,
                 loading: true,
-                resolve: false
+                resolve: false,
+                error: {}, // Reset error when a new request is initiated,
+                response: {}
             };
+
         case ADMIN_GET_ALL_COUNTRIES_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 resolve: true,
-                ...action.payload
+                response: action.payload?.response || {}, // Safely access payload properties
+                error: {} // Clear any previous errors on success
             };
+
         case ADMIN_GET_ALL_COUNTRIES_FAIL:
             return {
                 ...state,
                 loading: false,
                 resolve: false,
-                error: action.payload
+                error: action.payload, // Handle error appropriately
+                response: {}
             };
+
         default:
             return state;
     }
-}
+};
 
-export const getAdminAllCitiesReducer = (state = {}, action) => {
+
+
+const CityInitialState = {
+    loading: false,
+    resolve: false,
+    response: {},
+    error: {}
+};
+
+export const getAdminAllCitiesReducer = (state = CityInitialState, action) => {
     switch (action.type) {
         case ADMIN_GET_ALL_CITIES_REQ:
             return {
                 ...state,
                 loading: true,
-                resolve: false
+                resolve: false,
+                error: {}, // Reset error when a new request is initiated,
+                response: {}
             };
+
         case ADMIN_GET_ALL_CITIES_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 resolve: true,
-                ...action.payload
+                response: action.payload?.response || {}, // Safely access payload properties
+                error: {} // Clear any previous errors on success
             };
+
         case ADMIN_GET_ALL_CITIES_FAIL:
             return {
                 ...state,
                 loading: false,
                 resolve: false,
-                error: action.payload
+                error: action.payload, // Handle error appropriately
+                response: {}
             };
+
         default:
             return state;
     }
-}
+};
+
+
+// export const getAdminAllCitiesReducer = (state = {}, action) => {
+//     switch (action.type) {
+//         case ADMIN_GET_ALL_CITIES_REQ:
+//             return {
+//                 ...state,
+//                 loading: true,
+//                 resolve: false
+//             };
+//         case ADMIN_GET_ALL_CITIES_SUCCESS:
+//             return {
+//                 ...state,
+//                 loading: false,
+//                 resolve: true,
+//                 ...action.payload
+//             };
+//         case ADMIN_GET_ALL_CITIES_FAIL:
+//             return {
+//                 ...state,
+//                 loading: false,
+//                 resolve: false,
+//                 error: action.payload
+//             };
+//         default:
+//             return state;
+//     }
+// }
 
 export const getAdminAllTimezoneReducer = (state = {}, action) => {
     switch (action.type) {
