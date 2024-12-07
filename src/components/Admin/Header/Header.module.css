@@ -166,7 +166,7 @@
 }
 
 .dashboard_salon_list_dropdown>p:hover {
-    background-color: #0866ff;
+    background-color: #000;
     color: var(--primary-text-light-color1);
     cursor: pointer;
     font-weight: 500;
@@ -178,7 +178,7 @@
     height: 3rem;
     cursor: pointer;
     border: none;
-    background-color: #0866ff;
+    background-color: #000;
     color: var(--primary-text-light-color1);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
@@ -248,7 +248,7 @@
 }
 
 .profile_drop_container>div:hover {
-    background-color: #0866ff;
+    background-color: #000;
     color: var(--primary-text-light-color1);
     cursor: pointer;
 }
@@ -383,7 +383,7 @@
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
         color: #fff;
-        background-color: #0866ff;
+        background-color: #000;
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -530,7 +530,7 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
     }
 
@@ -539,7 +539,7 @@
         width: 70%;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
         cursor: pointer;
         font-weight: 500;
@@ -635,7 +635,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;
@@ -720,7 +720,7 @@
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
         color: #fff;
-        background-color: #0866ff;
+        background-color: #000;
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -868,7 +868,7 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
     }
 
@@ -877,7 +877,7 @@
         width: 70%;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
         cursor: pointer;
         font-weight: 500;
@@ -973,7 +973,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;
@@ -1059,7 +1059,7 @@
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
         color: #fff;
-        background-color: #0866ff;
+        background-color: #000;
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -1206,7 +1206,7 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
     }
 
@@ -1215,7 +1215,7 @@
         width: 70%;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
         cursor: pointer;
         font-weight: 500;
@@ -1311,7 +1311,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;

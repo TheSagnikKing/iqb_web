@@ -53,7 +53,7 @@
 }
 
 .sidebar_toggle_btn:hover {
-  background-color: #0866ff;
+  background-color: #000;
   color: var(--primary-text-light-color1);
 }
 
@@ -140,7 +140,7 @@
   }
 
   &:hover {
-    background-color: #0866ff;
+    background-color: #000;
 
     &>p,
     &>div {
@@ -151,7 +151,7 @@
 
 
 .menu_item_active {
-  background-color: #0866ff;
+  background-color: #000;
 }
 
 .menu_item>p:nth-child(1) {

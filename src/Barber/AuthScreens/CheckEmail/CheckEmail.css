@@ -62,8 +62,8 @@
 .check_email_container>div:nth-child(2)>div>button {
     height: 4rem;
     width: 100%;
-    border: 0.1rem solid #0866ff;
-    color: #0866ff;
+    border: 0.1rem solid #000;
+    color: #000;
     background-color: #0867ff25;
     outline: none;
     cursor: pointer;
@@ -83,7 +83,7 @@
     font-size: var(--list-content-body-text);
 
     &:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: #fff;
     }
 }

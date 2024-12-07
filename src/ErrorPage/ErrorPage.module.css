@@ -24,8 +24,8 @@
             display: block;
             margin-inline: auto;
             background-color: #0867ff25;
-            color: #0866ff;
-            border: 1px solid #0866ff;
+            color: #000;
+            border: 1px solid #000;
             transition: 0.3s all ease;
             -webkit-transition: 0.3s all ease;
             -moz-transition: 0.3s all ease;
@@ -40,7 +40,7 @@
             -o-border-radius: 20px;
 
             &:hover {
-                background-color: #0866ff;
+                background-color: #000;
                 color: #fff;
             }
         }

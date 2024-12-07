@@ -94,7 +94,7 @@
 }
 
 .profile_drop_container>div:hover {
-    background-color: #0866ff;
+    background-color: #000;
     color: var(--primary-text-light-color1);
     cursor: pointer;
 }
@@ -305,7 +305,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;
@@ -485,7 +485,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;
@@ -665,7 +665,7 @@
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #0866ff;
+            background-color: #000;
 
             &>div {
                 color: #fff;

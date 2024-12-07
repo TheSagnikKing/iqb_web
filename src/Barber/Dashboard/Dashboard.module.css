@@ -167,8 +167,8 @@
             border: none;
             cursor: pointer;
             background-color: #0867ff25;
-            border: 0.1rem solid #0866ff;
-            color: #0866ff;
+            border: 0.1rem solid #000;
+            color: #000;
             transition: var(--btn-transition);
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
@@ -183,7 +183,7 @@
             font-size: var(--list-content-body-text);
 
             &:hover {
-                background-color: #0866ff;
+                background-color: #000;
                 color: #fff;
             }
         }
@@ -195,8 +195,8 @@
     height: 3.5rem;
     border: none;
     background-color: #0867ff25;
-    color: #0866ff;
-    border: 0.1rem solid #0866ff;
+    color: #000;
+    border: 0.1rem solid #000;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
@@ -211,7 +211,7 @@
     font-size: var(--list-header-btn-icon);
 
     &:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: #fff;
     }
 }
@@ -291,9 +291,9 @@
     justify-content: center;
     width: 3.2rem;
     background-color: #0867ff25;
-    border: 0.1rem solid #0866ff;
+    border: 0.1rem solid #000;
     cursor: pointer;
-    color: #0866ff;
+    color: #000;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -307,7 +307,7 @@
     font-size: var(--list-header-btn-text);
 
     &:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: var(--primary-text-light-color1);
     }
 }
@@ -445,7 +445,7 @@
             text-align: center;
 
             &:focus {
-                border-bottom: 1px solid #0866ff;
+                border-bottom: 1px solid #000;
             }
         }
 
@@ -486,8 +486,8 @@
     display: block;
     margin-inline: auto;
     background-color: #0867ff25;
-    color: #0866ff;
-    border: 0.1rem solid #0866ff;
+    color: #000;
+    border: 0.1rem solid #000;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
@@ -502,7 +502,7 @@
     -o-border-radius: var(--list-btn-border-radius);
 
     &:hover {
-        background-color: #0866ff;
+        background-color: #000;
         color: #fff;
     }
 }

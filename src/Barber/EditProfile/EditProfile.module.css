@@ -125,11 +125,11 @@
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
         background-color: #0867ff25;
-        border: 0.1rem solid #0866ff;
-        color: #0866ff;
+        border: 0.1rem solid #000;
+        color: #000;
 
         &:hover {
-            background-color: #0866ff;
+            background-color: #000;
             color: #fff;
         }
     }
@@ -169,7 +169,7 @@
         border: none;
         cursor: pointer;
         background-color: #0867ff25;
-        border: 0.1rem solid #0866ff;
+        border: 0.1rem solid #000;
         transition: var(--btn-transition);
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);
@@ -181,12 +181,12 @@
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
         margin-inline: auto;
-        color: #0866ff;
+        color: #000;
         font-size: var(--list-content-body-text);
 
 
         &:hover {
-            background-color: #0866ff;
+            background-color: #000;
             color: #fff;
         }
     }
@@ -229,7 +229,7 @@
             bottom: 1rem;
             height: 4rem;
             width: 4rem;
-            background-color: #0866ff;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -458,7 +458,7 @@
             cursor: pointer;
 
             &:hover {
-                background-color: #0866ff;
+                background-color: #000;
                 color: #fff;
             }
         }
@@ -585,7 +585,7 @@
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
             background-color: #0867ff25;
-            border: 0.1rem solid #0866ff;
+            border: 0.1rem solid #000;
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
             -moz-border-radius: var(--list-btn-border-radius);
@@ -599,10 +599,10 @@
             margin-inline: auto;
             font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
-            color: #0866ff;
+            color: #000;
 
             &:hover {
-                background-color: #0866ff;
+                background-color: #000;
                 color: #fff;
             }
         }
@@ -634,7 +634,7 @@
         width: 5rem;
         font-size: clamp(5rem, 4.6rem + 0.4vw, 10rem);
         margin-inline: auto;
-        color: #0866ff;
+        color: #000;
         margin-bottom: 1rem;
     }
 
@@ -665,14 +665,14 @@
                 height: 6rem;
                 text-align: center;
                 font-size: clamp(3rem, 2.6rem + 0.4vw, 6rem);
-                border: 0.1rem solid #0866ff;
+                border: 0.1rem solid #000;
                 outline: none;
                 border-radius: var(--list-wrapper-border-radius);
                 -webkit-border-radius: var(--list-wrapper-border-radius);
                 -moz-border-radius: var(--list-wrapper-border-radius);
                 -ms-border-radius: var(--list-wrapper-border-radius);
                 -o-border-radius: var(--list-wrapper-border-radius);
-                color: #0866ff;
+                color: #000;
                 font-weight: 500;
             }
         }
@@ -683,7 +683,7 @@
             text-align: center;
 
             &>span {
-                color: #0866ff;
+                color: #000;
                 text-decoration: underline;
                 cursor: pointer;
             }
@@ -734,11 +734,11 @@
 
             &>button:nth-child(2) {
                 background-color: #0867ff25;
-                border: 0.1rem solid #0866ff;
-                color: #0866ff;
+                border: 0.1rem solid #000;
+                color: #000;
 
                 &:hover {
-                    background-color: #0866ff;
+                    background-color: #000;
                     color: #fff;
                 }
             }
@@ -843,9 +843,9 @@
             justify-content: center;
             width: 3.2rem;
             background-color: #0867ff25;
-            border: 0.1rem solid #0866ff;
+            border: 0.1rem solid #000;
             cursor: pointer;
-            color: #0866ff;
+            color: #000;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -859,7 +859,7 @@
             font-size: var(--list-modal-header-icon);
 
             &:hover {
-                background-color: #0866ff;
+                background-color: #000;
                 color: var(--primary-text-light-color1);
             }
         }
@@ -1017,7 +1017,7 @@
                             text-align: center;
 
                             &:focus {
-                                border-bottom: 1px solid #0866ff;
+                                border-bottom: 1px solid #000;
                             }
                         }
 

@@ -123,7 +123,7 @@ p {
 }
 
 .carousel .control-dots .dot {
-  background: #0866ff;
+  background: #000;
 }
 
 .react-international-phone-input-container {
@@ -281,8 +281,8 @@ p {
   -ms-border-radius: 3rem;
   -o-border-radius: 3rem;
   border: none;
-  border: 0.1rem solid #0866ff;
-  color: #0866ff;
+  border: 0.1rem solid #000;
+  color: #000;
   background-color: #0867ff25;
   transition: var(--btn-transition);
   -webkit-transition: var(--btn-transition);
@@ -291,7 +291,7 @@ p {
   -o-transition: var(--btn-transition);
 
   &:hover{
-    background-color: #0866ff;
+    background-color: #000;
     color: #fff;
   }
 }

@@ -77,8 +77,8 @@
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
     height:4rem;
     width: 12rem;
-    border: 0.1rem solid #0866ff;
-    color: #0866ff;
+    border: 0.1rem solid #000;
+    color: #000;
     background-color: #0867ff25;
     outline: none;
     cursor: pointer;
@@ -98,7 +98,7 @@
     font-size: var(--list-content-body-text);
 
     &:hover{
-        background-color: #0866ff;
+        background-color: #000;
         color: #fff;
     }
 }
@@ -168,8 +168,8 @@
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) button {
     height: 4rem;
     width: 10rem;
-    border: 0.1rem solid #0866ff;
-    color: #0866ff;
+    border: 0.1rem solid #000;
+    color: #000;
     background-color: #0867ff25;
     outline: none;
     cursor: pointer;
@@ -189,7 +189,7 @@
     font-size: var(--list-content-body-text);
     
     &:hover{
-        background-color: #0866ff;
+        background-color: #000;
         color: #fff;
     }
 }
