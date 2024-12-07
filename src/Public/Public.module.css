@@ -1,6 +1,7 @@
 .public_main_container {
     height: 100svh;
     width: 100vw;
+    overflow: hidden;
 }
 
 .public_main_content {
@@ -19,8 +20,10 @@
 }
 
 .public_main_content>div:nth-child(1)>img {
-    width: 90%;
-    height: 60%;
+    /* width: 90%;
+    height: 60%; */
+    width: 100%;
+    height: 100%;
 }
 
 .public_main_content>div:nth-child(2) {

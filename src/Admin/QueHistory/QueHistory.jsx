@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from "./QueHistory.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { CheckIcon, CloseIcon, CrownIcon } from '../../icons'
+import { CheckIcon, CloseIcon, CrownIcon, SearchIcon } from '../../icons'
 import { getAdminQueueListHistoryAction } from '../../Redux/Admin/Actions/QueueAction'
 
 const QueHistory = () => {
@@ -40,14 +40,32 @@ const QueHistory = () => {
         queueListHistory: AdminQueueListHistory
     } = getAdminQueueListHistory
 
+    const [search, setSearch] = useState('')
+
+    const searchCustomerhandler = () => {
+        console.log(search)
+    }
+
     return (
         <div className={`${style.quehistory_wrapper}`}>
             <div>
                 <p>Queue History</p>
+
+                <div className={`${style.customer_search} ${darkmodeOn && style.dark}`}>
+                    <input
+                        type="text"
+                        placeholder='Search Customer'
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+
+                    <div onClick={searchCustomerhandler}><SearchIcon /></div>
+                </div>
+
             </div>
 
             <div className={`${style.quehistory_wrapper_content}`}>
-                
+
                 {
                     getAdminQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
                         <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -78,11 +96,11 @@ const QueHistory = () => {
                                             <p>{b?.timeJoinedQ}</p>
                                             <p>{b?.barberName}</p>
                                             <div><p>{b?.qPosition}</p></div>
-                                            <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon/>}</p></div>
+                                            <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div>
-                                            {
-                                                b?.isAdmin ? (<p style={{ color: "green"}}><CheckIcon/></p>) : (<p style={{ fontSize: "2rem", fontWeight: "700", color:"red"}}><CloseIcon/></p>)
-                                            }
+                                                {
+                                                    b?.isAdmin ? (<p style={{ color: "green" }}><CheckIcon /></p>) : (<p style={{ fontSize: "2rem", fontWeight: "700", color: "red" }}><CloseIcon /></p>)
+                                                }
                                             </div>
                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
                                         </div>
