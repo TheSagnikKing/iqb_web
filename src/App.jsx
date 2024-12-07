@@ -39,6 +39,8 @@ const BarberEditProfile = React.lazy(() => import("./Barber/EditProfile/EditProf
 const BarberSignupEditProfile = React.lazy(() => import("./Barber/AuthScreens/SignupEditProfile/SignupEditProfile"))
 const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
 const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
+const BarberQueHistory = React.lazy(() => import("./Barber/QueHistory/QueHistory"))
+const AdminQueHistory = React.lazy(() => import("./Admin/QueHistory/QueHistory"))
 
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
@@ -50,7 +52,6 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
-import QueHistory from './Barber/QueHistory/QueHistory';
 
 const App = () => {
 
@@ -252,6 +253,15 @@ const App = () => {
                       }
                     />
 
+                    <Route
+                      path="/admin-quehistory"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminQueHistory />
+                        </ErrorBoundary>
+                      }
+                    />
+
                   </Route>
                 </Route>
 
@@ -298,7 +308,7 @@ const App = () => {
                       path="/barber-quehistory"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <QueHistory />
+                          <BarberQueHistory />
                         </ErrorBoundary>
                       }
                     />

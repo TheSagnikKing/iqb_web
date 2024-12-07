@@ -1,4 +1,4 @@
-import { Adminadvertisementicon, Adminbarbericon, Admincustomericon, Admindashboardicon, Adminqueueicon, Adminsalonicon } from "../../icons";
+import { Adminadvertisementicon, Adminbarbericon, Admincustomericon, Admindashboardicon, Adminqueueicon, Adminsalonicon, HistoryIcon } from "../../icons";
 
 export const menudata = [
     {
@@ -13,16 +13,17 @@ export const menudata = [
     //     icon: <Admincustomericon />,
     //     url: "/barber-customer"
     // },
+    
     {
         id: 2,
-        title: "Queue History",
-        icon: <Adminbarbericon />,
-        url: "/barber-quehistory"
-    },
-    {
-        id: 3,
         title: "QueueList",
         icon: <Adminqueueicon />,
         url: "/barber-queue"
+    },
+    {
+        id: 3,
+        title: "Queue History",
+        icon: <HistoryIcon />,
+        url: "/barber-quehistory"
     },
 ]

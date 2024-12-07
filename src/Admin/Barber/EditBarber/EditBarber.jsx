@@ -19,7 +19,12 @@ const EditBarber = () => {
   const [AllSalonServices, setAllSalonServices] = useState([])
   // Redux selectors
   const adminAllSalonServices = useSelector(state => state.adminAllSalonServices);
-  const { loading: adminAllSalonServicesLoading, resolve: adminAllSalonServicesResolve, response: allSalonServices } = adminAllSalonServices;
+
+  const { 
+    loading: adminAllSalonServicesLoading, 
+    resolve: adminAllSalonServicesResolve, 
+    response: allSalonServices 
+  } = adminAllSalonServices;
 
   useEffect(() => {
     if (allSalonServices) {

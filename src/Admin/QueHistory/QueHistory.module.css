@@ -71,7 +71,7 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.8fr 0.8fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1fr;
     place-items: center;
     font-size: var(--list-content-body-text);
     font-weight: 500;

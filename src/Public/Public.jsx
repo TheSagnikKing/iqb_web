@@ -13,7 +13,7 @@ const Public = () => {
 
                 <div>
                     <div>
-                        <p>welcome to iQueueBarbers</p>
+                        <p>welcome to iQueueBookname</p>
 
                         <div>
                             <Link to="/adminsignin">Admin Signin</Link>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, ClockIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
+import { AddIcon, CameraIcon, CheckIcon, ClockIcon, CloseIcon, DeleteIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -16,12 +16,15 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 
 import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
+import { getAllSalonServicesBarberAction } from '../../Redux/Barber/Actions/BarberQueueAction';
 
 const EditProfile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
+
+    console.log(barberProfile?.salonId)
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(barberProfile?.emailVerified)
     const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(barberProfile?.mobileVerified)
@@ -271,7 +274,8 @@ const EditProfile = () => {
                 countryCode: Number(countryCode),
                 name,
                 gender,
-                password
+                password,
+                barberServices: currentBarberServices
             }
 
             // console.log(profiledata)
@@ -388,6 +392,71 @@ const EditProfile = () => {
 
     const [editServiceModal, setEditServiceModal] = useState(false)
 
+    useEffect(() => {
+        if (barberProfile) {
+            dispatch(getAllSalonServicesBarberAction(barberProfile?.salonId))
+        }
+    }, [barberProfile, dispatch])
+
+    const getAllSalonServicesBarber = useSelector(state => state.getAllSalonServicesBarber)
+
+    const {
+        loading: getAllSalonServicesBarberLoading,
+        resolve: getAllSalonServicesBarberResolve,
+        response: getAllSalonServicesBarberData
+    } = getAllSalonServicesBarber
+
+    useEffect(() => {
+        if (getAllSalonServicesBarberData) {
+            setAllSalonServices(getAllSalonServicesBarberData?.response?.services)
+        }
+    }, [getAllSalonServicesBarberData])
+
+
+    const [AllSalonServices, setAllSalonServices] = useState([])
+
+    const [currentBarberServices, setCurrentBarberServices] = useState(barberProfile?.barberServices)
+
+
+    // Choose service handler
+    const chooseServiceHandler = (service) => {
+        const originalService = currentBarberServices.includes(service);
+
+        if (!originalService) {
+            setCurrentBarberServices([...currentBarberServices, { ...service, barberServiceEWT: service.serviceEWT }]);
+        }
+
+    };
+
+    // Delete service handler
+    const deleteServiceHandler = (service) => {
+        const originalService = getAllSalonServicesBarberData?.response?.services.find((s) => s.serviceId === service.serviceId);
+
+        if (originalService) {
+            setCurrentBarberServices(currentBarberServices.filter((f) => f.serviceId !== service.serviceId));
+
+            setAllSalonServices(AllSalonServices.map((ser) =>
+                ser.serviceId === service.serviceId ? { ...ser, serviceEWT: originalService.serviceEWT } : ser
+            ));
+        }
+    };
+
+    const handleonChange = (e, service) => {
+        const newValue = e.target.value.replace(/[^0-9]/g, ''); // Allow only digits
+
+        const numericValue = newValue === '' ? '' : Number(newValue);
+
+        if (currentBarberServices.find((c) => c.serviceId === service.serviceId)) {
+            setCurrentBarberServices(currentBarberServices.map((ser) =>
+                ser.serviceId === service.serviceId ? { ...ser, barberServiceEWT: numericValue } : ser
+            ));
+        } else {
+            setAllSalonServices(getAllSalonServicesBarberData?.response?.services.map((ser) =>
+                ser.serviceId === service.serviceId ? { ...ser, serviceEWT: numericValue } : ser
+            ));
+        }
+    };
+
     return (
         <main className={style.barber_edit_profile_container}>
             <div className={style.barber_edit_profile_container_left}>
@@ -433,111 +502,70 @@ const EditProfile = () => {
                             <button onClick={() => setEditServiceModal(false)}><CloseIcon /></button>
                         </div>
 
-                        {/* <main className={`${style.edit_modal_content_container_loading}`}>
-                            <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
-                            <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
-                        </main> */}
+                        {
+                            getAllSalonServicesBarberLoading ? (
+                                <main className={`${style.edit_modal_content_container_loading}`}>
+                                    <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                                    <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                                </main>
+                            ) :
+                                getAllSalonServicesBarberData?.response?.services?.length > 0 ?
+                                    (<main className={style.edit_modal_content_container}>
+                                        {
+                                            AllSalonServices.map((s) => {
+                                                return (
+                                                    <div className={`${style.service_item}`} key={s?._id}>
+                                                        <div className={`${style.service_item_top}`}>
+                                                            <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
+                                                            <div>
+                                                                <p>{s?.serviceName}</p>
+                                                                <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                                                <p>{s?.serviceDesc}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className={`${style.service_item_bottom}`}>
+                                                            <div>
+                                                                <div>
+                                                                    <p>Service Price</p>
+                                                                    <p>{getAllSalonServicesBarberData?.response?.currency}{s?.servicePrice}</p>
+                                                                </div>
+                                                            </div>
 
-                        {/* <main className={`${style.edit_modal_content_container_error}`}>
-                            <p>No services available</p>
-                        </main> */}
+                                                            <div>
+                                                                <div>
+                                                                    <p>Est Wait Time</p>
+                                                                    <div>
+                                                                        <div><ClockIcon /></div>
+                                                                        <input
+                                                                            type="text"
+                                                                            value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
+                                                                            onChange={(e) => handleonChange(e, s)}
+                                                                        />
+                                                                        <p>mins</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                        <main className={style.edit_modal_content_container}>
-                            <div className={`${style.service_item}`}>
-                                <div className={`${style.service_item_top}`}>
-                                    <div><img src={""} alt="service icon" /></div>
-                                    <div>
-                                        <p>serviceName</p>
-                                        <p>"Regular"</p>
-                                        <p>serviceDesc</p>
-                                    </div>
-                                </div>
-                                <div className={`${style.service_item_bottom}`}>
-                                    <div>
-                                        <div>
-                                            <p>Service Price</p>
-                                            <p>$30</p>
-                                        </div>
-                                    </div>
+                                                        </div>
 
-                                    <div>
-                                        <div>
-                                            <p>Est Wait Time</p>
-                                            <div>
-                                                <div><ClockIcon /></div>
-                                                <input
-                                                    type="text"
-                                                    value={30}
-                                                    // value={serviceEWTValues[s._id]}
-                                                    // onChange={(e) => {
-                                                    //     const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
-                                                    //     handleEWTChange(s._id, value);
-                                                    // }}
-                                                />
-                                                <p>mins</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                {/* {
-                                    chooseServices.find((c) => c._id === s._id) ?
-                                        (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                        (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
-                                } */}
-
-                            </div>
-
-                            <div className={`${style.service_item}`}>
-                                <div className={`${style.service_item_top}`}>
-                                    <div><img src={""} alt="service icon" /></div>
-                                    <div>
-                                        <p>serviceName</p>
-                                        <p>"Regular"</p>
-                                        <p>serviceDesc</p>
-                                    </div>
-                                </div>
-                                <div className={`${style.service_item_bottom}`}>
-                                    <div>
-                                        <div>
-                                            <p>Service Price</p>
-                                            <p>$30</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Est Wait Time</p>
-                                            <div>
-                                                <div><ClockIcon /></div>
-                                                <input
-                                                    type="text"
-                                                    value={30}
-                                                    // value={serviceEWTValues[s._id]}
-                                                    // onChange={(e) => {
-                                                    //     const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
-                                                    //     handleEWTChange(s._id, value);
-                                                    // }}
-                                                />
-                                                <p>mins</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                {/* {
-                                    chooseServices.find((c) => c._id === s._id) ?
-                                        (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                        (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
-                                } */}
-
-                            </div>
-                        </main>
+                                                        {
+                                                            currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
+                                                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
+                                                                (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                                        }
+                                                    </div>
+                                                )
+                                            })
+                                        }
 
 
-                        <button>Save</button>
+
+                                    </main>) :
+                                    (<main className={`${style.edit_modal_content_container_error}`}>
+                                        <p>No services available</p>
+                                    </main>)
+                        }
+
                     </div>
                 </Modal>
 
@@ -809,6 +837,16 @@ const EditProfile = () => {
                             </div>
                         </ClickAwayListener>}
 
+                </div>
+
+                <div>
+                    <p>Selected Services</p>
+                    <input
+                        type='text'
+                        value={currentBarberServices?.map((s) => " " + s.serviceName)}
+                        placeholder='Your Services'
+                        onKeyDown={handleKeyPress}
+                    />
                 </div>
 
 

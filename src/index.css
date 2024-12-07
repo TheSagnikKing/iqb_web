@@ -15,6 +15,11 @@
 
 /* #222831,#3E3232,#FC6736,#561C24,#720455 */
 
+html {
+  /* filter: invert(1) hue-rotate(180deg) brightness(1);
+  -webkit-filter: invert(1) hue-rotate(180deg) brightness(1); */
+}
+
 :root {
   font-size: 62.5%;
 

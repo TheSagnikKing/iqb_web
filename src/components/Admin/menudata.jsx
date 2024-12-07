@@ -1,4 +1,4 @@
-import { Admindashboardicon, Adminsalonicon, Adminbarbericon, Admincustomericon, Adminadvertisementicon, Adminqueueicon, Adminappointmenticon, Adminreporticon } from "../../icons";
+import { Admindashboardicon, Adminsalonicon, Adminbarbericon, Admincustomericon, Adminadvertisementicon, Adminqueueicon, Adminappointmenticon, Adminreporticon, HistoryIcon } from "../../icons";
 
 export const menudata = [
     {
@@ -36,6 +36,12 @@ export const menudata = [
         title: "Queuelist",
         icon: <Adminqueueicon />,
         url: "/admin-queue"
+    },
+    {
+        id: 7,
+        title: "Queue History",
+        icon: <HistoryIcon />,
+        url: "/admin-quehistory"
     },
     // {
     //     id: 7,

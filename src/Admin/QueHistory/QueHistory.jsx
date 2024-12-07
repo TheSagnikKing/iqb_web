@@ -3,8 +3,8 @@ import style from "./QueHistory.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { CrownIcon } from '../../icons'
-import { getBarberQueueListHistoryAction } from '../../Redux/Barber/Actions/BarberQueueAction'
+import { CheckIcon, CloseIcon, CrownIcon } from '../../icons'
+import { getAdminQueueListHistoryAction } from '../../Redux/Admin/Actions/QueueAction'
 
 const QueHistory = () => {
 
@@ -12,9 +12,7 @@ const QueHistory = () => {
 
     const darkmodeOn = darkMode === "On"
 
-
-    const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
-    const barberId = useSelector(state => state.BarberLoggedInMiddleware.barberId)
+    const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
     const dispatch = useDispatch()
 
@@ -24,23 +22,23 @@ const QueHistory = () => {
         const controller = new AbortController();
         queuelistcontrollerRef.current = controller;
 
-        dispatch(getBarberQueueListHistoryAction(salonId, barberId, controller.signal));
+        dispatch(getAdminQueueListHistoryAction(salonId, controller.signal));
 
         return () => {
             if (queuelistcontrollerRef.current) {
                 queuelistcontrollerRef.current.abort();
             }
         };
-    }, [salonId, barberId, dispatch]);
+    }, [salonId, dispatch]);
 
 
-    const getBarberQueueListHistory = useSelector(state => state.getBarberQueueListHistory)
+    const getAdminQueueListHistory = useSelector(state => state.getAdminQueueListHistory)
 
     const {
-        loading: getBarberQueueListHistoryLoading,
-        resolve: getBarberQueueListHistoryResolve,
-        queueListHistory: BarberQueueListHistory
-    } = getBarberQueueListHistory
+        loading: getAdminQueueListHistoryLoading,
+        resolve: getAdminQueueListHistoryResolve,
+        queueListHistory: AdminQueueListHistory
+    } = getAdminQueueListHistory
 
     return (
         <div className={`${style.quehistory_wrapper}`}>
@@ -51,11 +49,11 @@ const QueHistory = () => {
             <div className={`${style.quehistory_wrapper_content}`}>
                 
                 {
-                    getBarberQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
+                    getAdminQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
                         <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                             highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div>) :
-                        getBarberQueueListHistoryResolve && BarberQueueListHistory?.length > 0 ? (
+                        getAdminQueueListHistoryResolve && AdminQueueListHistory?.length > 0 ? (
                             <>
                                 <div className={`${style.quehistory_wrapper_content_body} ${darkmodeOn && style.dark}`}>
                                     <div>
@@ -64,15 +62,16 @@ const QueHistory = () => {
                                         <p>Barber Name</p>
                                         <div><p>Q Postion</p></div>
                                         <div><p>Type</p></div>
+                                        <div><p>isAdmin</p></div>
                                         <div><p>Status</p></div>
                                     </div>
 
-                                    {BarberQueueListHistory?.map((b, index) => (
+                                    {AdminQueueListHistory?.map((b, index) => (
                                         <div
                                             className={`${style.barber_queue_history_content_body_item} ${darkmodeOn && style.dark}`}
                                             key={b?._id}
                                             style={{
-                                                borderBottom: BarberQueueListHistory.length - 1 === index && "none"
+                                                borderBottom: AdminQueueListHistory.length - 1 === index && "none"
                                             }}
                                         >
                                             <p>{b?.customerName}</p>
@@ -80,6 +79,11 @@ const QueHistory = () => {
                                             <p>{b?.barberName}</p>
                                             <div><p>{b?.qPosition}</p></div>
                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon/>}</p></div>
+                                            <div>
+                                            {
+                                                b?.isAdmin ? (<p style={{ color: "green"}}><CheckIcon/></p>) : (<p style={{ fontSize: "2rem", fontWeight: "700", color:"red"}}><CloseIcon/></p>)
+                                            }
+                                            </div>
                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
                                         </div>
                                     ))}

@@ -812,7 +812,7 @@
     }
 
     .edit_modal_content_container {
-        height: 40rem;
+        height: 45rem;
         padding: 1.5rem;
         margin-bottom: 2rem;
         background-color: #EEEDED;
@@ -832,7 +832,7 @@
             position: relative;
             border: 0.1rem solid rgba(0, 0, 0, 0.2);
         }
-        
+
         .service_add_icon {
             position: absolute;
             top: 1.5rem;
@@ -857,13 +857,13 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             font-size: var(--list-modal-header-icon);
-        
+
             &:hover {
                 background-color: #0866ff;
                 color: var(--primary-text-light-color1);
             }
         }
-        
+
         .service_delete_icon {
             position: absolute;
             top: 1.5rem;
@@ -888,7 +888,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             font-size: var(--list-modal-header-icon);
-        
+
             &:hover {
                 background-color: red;
                 color: var(--primary-text-light-color1);
@@ -900,7 +900,7 @@
             border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-        
+
             &>div:nth-child(1) {
                 width: 6rem;
                 height: 6rem;
@@ -910,7 +910,7 @@
                 -ms-border-radius: 50%;
                 -o-border-radius: 50%;
                 border: 0.1rem solid rgba(0, 0, 0, 0.2);
-        
+
                 &>img {
                     width: 100%;
                     height: 100%;
@@ -921,26 +921,26 @@
                     -o-border-radius: 50%;
                 }
             }
-        
+
             &>div:nth-child(2) {
                 width: calc(100% - 7rem - 1rem);
                 margin-left: 1rem;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-        
+
                 &>p:nth-child(1) {
                     font-size: var(--list-content-body-text);
                     font-weight: 600;
                     margin-bottom: 0.5rem;
                 }
-        
+
                 &>p:nth-child(2) {
                     font-size: var(--list-header-btn-text);
                     font-weight: 500;
                     margin-bottom: 0.5rem;
                 }
-        
+
                 &>p:nth-child(3) {
                     font-size: var(--list-header-btn-text);
                     font-weight: 500;
@@ -948,20 +948,20 @@
                 }
             }
         }
-        
+
         .service_item_bottom {
             height: 40%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-        
+
             &>div:nth-child(1) {
                 height: 100%;
                 flex: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-        
+
                 &>div {
                     &>p:nth-child(1) {
                         font-size: var(--list-content-body-text);
@@ -970,7 +970,7 @@
                         margin-bottom: 0.9rem;
                         text-align: center;
                     }
-        
+
                     &>p:nth-child(2) {
                         font-size: var(--list-primary-text);
                         font-weight: 600;
@@ -978,14 +978,14 @@
                     }
                 }
             }
-        
+
             &>div:nth-child(2) {
                 height: 100%;
                 flex: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-        
+
                 &>div {
                     &>p:nth-child(1) {
                         font-size: var(--list-content-body-text);
@@ -994,19 +994,19 @@
                         margin-bottom: 0.9rem;
                         text-align: center;
                     }
-        
+
                     &>div:nth-child(2) {
                         display: flex;
                         align-items: center;
                         gap: 0.8rem;
-        
+
                         &>div {
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             font-size: var(--list-primary-text);
                         }
-        
+
                         &>input {
                             width: 6rem;
                             border: none;
@@ -1015,12 +1015,12 @@
                             font-size: var(--list-primary-text);
                             font-weight: 600;
                             text-align: center;
-        
+
                             &:focus {
                                 border-bottom: 1px solid #0866ff;
                             }
                         }
-        
+
                         &>p {
                             font-size: var(--list-primary-text);
                             font-weight: 600;
@@ -1066,30 +1066,6 @@
         }
     }
 
-    &>button {
-        background-color: #0867ff25;
-        border: 0.1rem solid #0866ff;
-        color: #0866ff;
-        padding: var(--list-header-btn-padding);
-        transition: var(--btn-transition);
-        border-radius: var(--list-btn-border-radius);
-        -webkit-border-radius: var(--list-btn-border-radius);
-        -moz-border-radius: var(--list-btn-border-radius);
-        -ms-border-radius: var(--list-btn-border-radius);
-        -o-border-radius: var(--list-btn-border-radius);
-        -webkit-transition: var(--btn-transition);
-        -moz-transition: var(--btn-transition);
-        -ms-transition: var(--btn-transition);
-        -o-transition: var(--btn-transition);
-        cursor: pointer;
-        display: block;
-        margin-inline: auto;
-
-        &:hover {
-            background-color: #0866ff;
-            color: #fff;
-        }
-    }
 }
 
 
@@ -1127,6 +1103,22 @@
         width: 95vw;
     }
 
+    .barber_edit_profile_container_right {
+       
+        &>button:nth-child(1) {
+            margin: auto;
+        }
+    }
+
+    .edit_modal_container {
+        width: 95vw;
+        padding: 1rem;
+
+        .edit_modal_content_container{
+            padding: 0.8rem;
+        }
+    }
+    
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
@@ -1163,4 +1155,31 @@
         width: 75vw;
     }
 
+    .barber_edit_profile_container_right {
+       
+        &>button:nth-child(1) {
+            margin: auto;
+        }
+    }
+
+    .edit_modal_container {
+        width: 75vw;
+        padding: 1rem;
+
+        .edit_modal_content_container{
+            padding: 0.8rem;
+        }
+    }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    .edit_modal_container {
+        width: 55vw;
+        padding: 1rem;
+
+        .edit_modal_content_container{
+            padding: 0.8rem;
+        }
+    }
 }
