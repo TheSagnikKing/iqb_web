@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./Queue.module.css"
 
 import { useNavigate } from 'react-router-dom'
-import { CrownIcon, DeleteIcon, ServeIcon } from '../../icons'
+import { CrownIcon, DeleteIcon, SearchIcon, ServeIcon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
@@ -39,6 +39,33 @@ const Queue = () => {
     resolve: getAllQueueListResolve,
     queueList: queuelist
   } = getAllQueueList
+
+  const [copyQueueList, setCopyQueueList] = useState([])
+
+  useEffect(() => {
+    if (queuelist && queuelist.length > 0) {
+      setCopyQueueList(queuelist)
+    }
+  }, [queuelist])
+
+  const [search, setSearch] = useState("")
+
+  const searchHandler = (value) => {
+    setSearch(value)
+    const searchValue = value.toLowerCase().trim();
+
+    if (!search) {
+      setCopyQueueList(queuelist)
+    } else {
+      setCopyQueueList((prev) => {
+        const filteredArray = queuelist.filter((queue) => {
+          return queue.name.toLowerCase().includes(searchValue) ||
+          queue.barberName.toLowerCase().includes(search)
+        })
+        return filteredArray
+      })
+    }
+  }
 
   const darkMode = useSelector(darkmodeSelector)
 
@@ -106,6 +133,18 @@ const Queue = () => {
     <div className={`${style.admin_queue_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Queue List</p>
+
+        <div className={`${style.customer_search} ${darkmodeOn && style.dark}`}>
+          <input
+            type="text"
+            placeholder='Search Queue'
+            value={search}
+            onChange={(e) => searchHandler(e.target.value)}
+          />
+
+          <div><SearchIcon /></div>
+        </div>
+
       </div>
 
       <div className={`${style.admin_queue_content_wrapper} ${darkmodeOn && style.dark}`}>
@@ -116,7 +155,7 @@ const Queue = () => {
               <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                 highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
             </div> :
-            getAllQueueListResolve && queuelist?.length > 0 ?
+            getAllQueueListResolve && copyQueueList?.length > 0 ?
               <>
                 <div className={`${style.admin_queue_content_body} ${darkmodeOn && style.dark}`}>
                   <div>
@@ -129,12 +168,12 @@ const Queue = () => {
                     <p>Cancel</p>
                   </div>
 
-                  {queuelist?.map((b, index) => (
+                  {copyQueueList?.map((b, index) => (
                     <div
                       className={`${style.admin_queue_content_body_item} ${darkmodeOn && style.dark}`}
                       key={b._id}
                       style={{
-                        borderBottom: queuelist.length - 1 === index && "none"
+                        borderBottom: copyQueueList.length - 1 === index && "none"
                       }}
                     >
                       <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>

@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, EditIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, EditIcon, SearchIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
-import { GET_ADMIN_SALONLIST_SUCCESS } from '../../../Redux/Admin/Constants/constants';
+import { ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_SUCCESS, GET_ADMIN_SALONLIST_SUCCESS } from '../../../Redux/Admin/Constants/constants';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
@@ -125,7 +125,7 @@ const CreateSalon = () => {
 
   const [salonType, setSalonType] = useState("")
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
-  
+
   const [salonNameError, setSalonNameError] = useState("")
 
   const salonTypeDropHandler = () => {
@@ -161,26 +161,12 @@ const CreateSalon = () => {
     setCountryDrop(false)
   }
 
-  const [countryTimeout, setCountryTimeout] = useState(null);
-
-  const debounceSearch = (value) => {
-    if (countryTimeout) {
-      clearTimeout(countryTimeout);
-    }
-    setCountry(value)
-
-    setCountryTimeout(setTimeout(() => {
-      dispatch(getAdminAllCountriesAction(value));
-    }, 500));
-  };
-
-  const searchCountryHandler = (e) => {
-    const searchTerm = e.target.value;
-    setCountryDrop(true)
-    debounceSearch(searchTerm);
-  }
 
   const getAdminAllCountries = useSelector(state => state.getAdminAllCountries)
+
+  useEffect(() => {
+    dispatch(getAdminAllCountriesAction(""));
+  }, [])
 
   const {
     loading: getAdminAllCountriesLoading,
@@ -189,20 +175,39 @@ const CreateSalon = () => {
     response: AllCountries
   } = getAdminAllCountries
 
-  // console.log("AllCountries ", AllCountries)
-  // console.log("getAdminAllCountriesError ", getAdminAllCountriesError)
-  // console.log("getAdminAllCountriesError ", getAdminAllCountriesError?.message)
-
-  // !Object.keys(getAdminAllCountriesError || {}).length
+  const [copyCountriesdata, setCopyCountriesdata] = useState([])
 
   useEffect(() => {
-    if (!!Object.keys(getAdminAllCountriesError || {}).length) {
-      setCountry("")
-      setCity("")
-      setTimezone("")
-      setCountryCode("")
+    if (AllCountries) {
+      setCopyCountriesdata(AllCountries)
     }
-  }, [getAdminAllCountriesError])
+  }, [AllCountries])
+
+  const [searchCountry, setSearchCountry] = useState("")
+
+  const searchCountryHandler = (value) => {
+    setSearchCountry(value)
+    const searchValue = value.toLowerCase().trim()
+
+    if (!searchCountry) {
+      setCopyCountriesdata(AllCountries)
+    } else {
+      const filteredCountries = AllCountries.filter((country) => {
+        return country.name.toLowerCase().includes(searchValue)
+      })
+
+      setCopyCountriesdata(filteredCountries)
+    }
+  }
+
+  // useEffect(() => {
+  //   if (!!Object.keys(getAdminAllCountriesError || {}).length) {
+  //     setCountry("")
+  //     setCity("")
+  //     setTimezone("")
+  //     setCountryCode("")
+  //   }
+  // }, [getAdminAllCountriesError])
 
   const [city, setCity] = useState("")
   const [cityDrop, setCityDrop] = useState(false)
@@ -212,26 +217,15 @@ const CreateSalon = () => {
     setCityDrop(false)
   }
 
-  const [cityTimeout, setCityTimeout] = useState(null);
+  const [countryCodePresent, setCountryCodePresent] = useState(false)
 
-  const debounceCitySearch = (value, countrycode) => {
-    if (cityTimeout) {
-      clearTimeout(cityTimeout);
+  useEffect(() => {
+    if (countrycode) {
+      dispatch(getAdminAllCitiesAction("", countrycode));
+      dispatch(getAdminAllTimezoneAction(countrycode))
+      setCountryCodePresent(true)
     }
-
-    setCity(value)
-
-    setCityTimeout(setTimeout(() => {
-      dispatch(getAdminAllCitiesAction(value, countrycode));
-    }, 500));
-  };
-
-  const searchCityHandler = (e) => {
-    const searchTerm = e.target.value;
-    setCityDrop(true)
-    debounceCitySearch(searchTerm, countrycode);
-  }
-
+  }, [countrycode, dispatch])
 
   const getAdminAllCities = useSelector(state => state.getAdminAllCities)
 
@@ -242,14 +236,40 @@ const CreateSalon = () => {
     error: getAdminAllCitiesError,
   } = getAdminAllCities
 
-  console.log("Get All Cities ", AllCities)
-  console.log("All Cities Error ", getAdminAllCitiesError)
+
+
+  const [copyCitiesData, setCopyCitiesData] = useState([]);
+  const [searchCity, setSearchCity] = useState("");
 
   useEffect(() => {
-    if (!!Object.keys(getAdminAllCitiesError || {}).length) {
-      setCity("")
+    if (AllCities) {
+      setCopyCitiesData(AllCities);
     }
-  }, [getAdminAllCitiesError])
+  }, [AllCities]);
+
+  const searchCityHandler = (value) => {
+    setSearchCity(value);
+    const searchValue = value.toLowerCase().trim();
+
+    if (!searchValue) {
+      setCopyCitiesData(AllCities);
+    } else {
+      const filteredCities = AllCities.filter((city) =>
+        city.name.toLowerCase().includes(searchValue)
+      );
+      setCopyCitiesData(filteredCities);
+    }
+  };
+
+
+  // console.log("Get All Cities ", AllCities)
+  // console.log("All Cities Error ", getAdminAllCitiesError)
+
+  // useEffect(() => {
+  //   if (!!Object.keys(getAdminAllCitiesError || {}).length) {
+  //     setCity("")
+  //   }
+  // }, [getAdminAllCitiesError])
 
   const [timezone, setTimezone] = useState("")
   const [timezoneDrop, setTimezoneDrop] = useState(false)
@@ -264,11 +284,17 @@ const CreateSalon = () => {
     setTimezoneDrop(false)
   }
 
-  useEffect(() => {
-    if (countrycode) {
-      dispatch(getAdminAllTimezoneAction(countrycode))
-    }
-  }, [countrycode, dispatch])
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch({})
+  //   }
+  // },[])
+
+  // useEffect(() => {
+  //   if (countrycode) {
+  //     dispatch(getAdminAllTimezoneAction(countrycode))
+  //   }
+  // }, [countrycode, dispatch])
 
   const getAdminAllTimezone = useSelector(state => state.getAdminAllTimezone)
 
@@ -581,7 +607,7 @@ const CreateSalon = () => {
   const [invalidnumber, setInvalidNumber] = useState(false)
 
   const createSalonHandler = async () => {
-    if(!salonName){
+    if (!salonName) {
       return setSalonNameError("Please enter salon name")
     }
     if (invalidnumber) {
@@ -813,12 +839,12 @@ const CreateSalon = () => {
   }
 
   useEffect(() => {
-    if(countrycode){
+    if (countrycode) {
       setOpenServices(true)
-    }else{
+    } else {
       setOpenServices(false)
     }
-  },[countrycode])
+  }, [countrycode])
 
 
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -882,6 +908,19 @@ const CreateSalon = () => {
     }));
   }
 
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: ADMIN_GET_ALL_CITIES_SUCCESS,
+        payload: []
+      })
+
+      dispatch({
+        type: ADMIN_GET_ALL_TIMEZONES_SUCCESS,
+        payload: []
+      })
+    };
+  }, [dispatch]);
 
   return (
     <div className={`${style.create_salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -1104,20 +1143,28 @@ const CreateSalon = () => {
 
           <div>
             <div>
-              <p>Country <span style={{
-                fontWeight: "500",
-                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
-              }}>{"( * Please select from dropdown )"}</span></p>
+              <p>Country</p>
               <input
                 type="text"
                 value={country}
-                onChange={(e) => searchCountryHandler(e)}
-                onKeyDown={handleKeyPress}
+                onClick={() => setCountryDrop(true)}
+                readOnly
+                style={{ border: !countryCodePresent && "0.1rem solid red" }}
               />
 
               {countryDrop &&
                 <ClickAwayListener onClickAway={() => setCountryDrop(false)}>
                   <div>
+                    <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                      <input
+                        type="text"
+                        placeholder='Search Country'
+                        value={searchCountry}
+                        onChange={(e) => searchCountryHandler(e.target.value)}
+                      />
+
+                      <div><SearchIcon /></div>
+                    </div>
                     {
                       getAdminAllCountriesLoading ?
                         <Skeleton count={2}
@@ -1130,9 +1177,9 @@ const CreateSalon = () => {
                             marginBottom: "1rem"
                           }}
                         /> :
-                        getAdminAllCountriesResolve && AllCountries?.length > 0 ?
+                        getAdminAllCountriesResolve && copyCountriesdata?.length > 0 ?
 
-                          AllCountries?.map((c) => (
+                          copyCountriesdata?.map((c) => (
                             <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
                           ))
                           :
@@ -1146,21 +1193,28 @@ const CreateSalon = () => {
             </div>
 
             <div>
-              <p>City <span style={{
-                fontWeight: "500",
-                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
-              }}>{"( * Please select from dropdown )"}</span></p>
+              <p>City</p>
               <input
                 type="text"
                 value={city}
-                onChange={(e) => searchCityHandler(e)}
-                onKeyDown={handleKeyPress}
-                disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
+                onClick={() => setCityDrop(true)}
+                readOnly
+                style={{ border: !countryCodePresent && "0.1rem solid red" }}
               />
 
-              {cityDrop && !Object.keys(getAdminAllCountriesError).length &&
+              {cityDrop &&
                 <ClickAwayListener onClickAway={() => setCityDrop(false)}>
                   <div>
+                    <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                      <input
+                        type="text"
+                        placeholder='Search City'
+                        value={searchCity}
+                        onChange={(e) => searchCityHandler(e.target.value)}
+                      />
+
+                      <div><SearchIcon /></div>
+                    </div>
                     {
                       getAdminAllCitiesLoading ?
                         <Skeleton count={2}
@@ -1173,9 +1227,9 @@ const CreateSalon = () => {
                             marginBottom: "1rem"
                           }}
                         /> :
-                        getAdminAllCitiesResolve && AllCities?.length > 0 ?
+                        getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
 
-                          AllCities.map((c) => (
+                          copyCitiesData.map((c) => (
                             <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
                           ))
                           :
@@ -1190,33 +1244,31 @@ const CreateSalon = () => {
 
           <div>
             <div>
-            <p>Timezone <span style={{
-                fontWeight: "500",
-                fontSize: "clamp(12px, 10px + 0.2vw, 24px)"
-              }}>{"( * Please select from dropdown )"}</span></p>
+              <p>Timezone</p>
               <input
                 type="text"
                 value={timezone}
                 onClick={() => timezoneDropHandler()}
-                onKeyDown={handleKeyPress}
-                disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
+                readOnly
+                style={{ border: !countryCodePresent && "0.1rem solid red" }}
+              // onKeyDown={handleKeyPress}
+              // disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
               />
 
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
                 {
-                  getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
+                  getAdminAllTimezoneLoading ?
                     <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                    !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
+                    getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
                       AllTimezones.map((c) => (
                         <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
                       ))
 
                       :
-                      !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length == 0 ?
-                        <p>No Timezone</p> :
-                        !getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve &&
-                        <p>No Timezone</p>
+                      <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+                        <p style={{ fontSize: "var(--list-content-error-text)" }}>No timezone available</p>
+                      </div>
                 }
               </div></ClickAwayListener>}
             </div>
@@ -1269,11 +1321,6 @@ const CreateSalon = () => {
           </div>
 
           <div className={style.add_services_drop}>
-            {/* <p>Add Your Services</p> */}
-            {/* <button
-              onClick={addservicedropHandler}
-              className={openServices ? style.add_services_btn_inactive : style.add_services_btn_active}
-            >{openServices ? "-" : "+"}</button> */}
             <button onClick={addservicedropHandler} className={style.addservices_btn}>Add Services</button>
           </div>
 

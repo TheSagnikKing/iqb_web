@@ -14,7 +14,7 @@ const Public = () => {
 
                 <div>
                     <div>
-                        <p>welcome to iQueueBookname</p>
+                        <p>welcome to iQueueBook</p>
 
                         <div>
                             <Link to="/adminsignin">Admin Signin</Link>

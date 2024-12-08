@@ -40,11 +40,32 @@ const QueHistory = () => {
         queueListHistory: AdminQueueListHistory
     } = getAdminQueueListHistory
 
+    const [copyAdminQueueHistory, setCopyAdminQueueHistory] = useState([])
+
+    useEffect(() => {
+        if (AdminQueueListHistory && AdminQueueListHistory.length > 0) {
+            setCopyAdminQueueHistory(AdminQueueListHistory)
+        }
+    }, [AdminQueueListHistory])
+
     const [search, setSearch] = useState('')
 
-    const searchCustomerhandler = () => {
-        console.log(search)
-    }
+    const searchCustomHandler = (value) => {
+        setSearch(value);
+        const searchValue = value.toLowerCase().trim();
+
+        if (!searchValue) {
+            setCopyAdminQueueHistory(AdminQueueListHistory);
+        } else {
+            const filteredArray = AdminQueueListHistory.filter((queue) => {
+                return (
+                    queue.barberName.toLowerCase().includes(searchValue) ||
+                    queue.customerName.toLowerCase().includes(searchValue)
+            )
+            });
+            setCopyAdminQueueHistory(filteredArray);
+        }
+    };
 
     return (
         <div className={`${style.quehistory_wrapper}`}>
@@ -54,12 +75,12 @@ const QueHistory = () => {
                 <div className={`${style.customer_search} ${darkmodeOn && style.dark}`}>
                     <input
                         type="text"
-                        placeholder='Search Customer'
+                        placeholder='Search Queue'
                         value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onChange={(e) => searchCustomHandler(e.target.value)}
                     />
 
-                    <div onClick={searchCustomerhandler}><SearchIcon /></div>
+                    <div><SearchIcon /></div>
                 </div>
 
             </div>
@@ -71,7 +92,7 @@ const QueHistory = () => {
                         <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
                             highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
                     </div>) :
-                        getAdminQueueListHistoryResolve && AdminQueueListHistory?.length > 0 ? (
+                        getAdminQueueListHistoryResolve && copyAdminQueueHistory?.length > 0 ? (
                             <>
                                 <div className={`${style.quehistory_wrapper_content_body} ${darkmodeOn && style.dark}`}>
                                     <div>
@@ -84,12 +105,12 @@ const QueHistory = () => {
                                         <div><p>Status</p></div>
                                     </div>
 
-                                    {AdminQueueListHistory?.map((b, index) => (
+                                    {copyAdminQueueHistory?.map((b, index) => (
                                         <div
                                             className={`${style.barber_queue_history_content_body_item} ${darkmodeOn && style.dark}`}
                                             key={b?._id}
                                             style={{
-                                                borderBottom: AdminQueueListHistory.length - 1 === index && "none"
+                                                borderBottom: copyAdminQueueHistory.length - 1 === index && "none"
                                             }}
                                         >
                                             <p>{b?.customerName}</p>
