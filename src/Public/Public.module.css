@@ -6,7 +6,7 @@
 
 .public_main_content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     height: 100%;
 }
 
@@ -17,6 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
 }
 
 .public_main_content>div:nth-child(1)>img {
@@ -83,7 +84,7 @@
     }
 }
 
-@media screen and (min-width:0px) and (max-width:430px) {
+/* @media screen and (min-width:0px) and (max-width:430px) {
     .public_main_content {
         grid-template-columns: 1fr;
     }
@@ -140,4 +141,4 @@
         height: 40svh;
         align-items: flex-start;
     }
-}
+} */

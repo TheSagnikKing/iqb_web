@@ -97,9 +97,98 @@ const CreateBarber = () => {
   }, []);
 
 
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [nickNameError, setNickNameError] = useState("");
+  const [invalidNumberError, setInvalidNumberError] = useState("");
+  const [dateOfBirthError, setDateOfBirthError] = useState("");
+  const [servicesError, setServicesError] = useState("");
+
   const [invalidnumber, setInvalidNumber] = useState(false)
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const CreateBarberHandler = () => {
+
+    if (!name) {
+      toast.error("Please enter name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Please enter name")
+    }
+
+    if (name.length === 0 || name.length > 20) {
+      toast.error("Name must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Name must be between 1 to 20 characters");
+    }
+
+    if (!email) {
+      toast.error("Please enter email", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setEmailError("Please enter email")
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email format", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setEmailError("Invalid email format");
+    }
+
+    if (!nickName) {
+      toast.error("Please enter nickname", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNickNameError("Please enter nickname")
+    }
+
+    if (nickName.length === 0 || nickName.length > 20) {
+      toast.error("Nickname must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNickNameError("Nickname must be between 1 to 20 characters");
+    }
+
+
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -110,20 +199,48 @@ const CreateBarber = () => {
           color: '#fff',
         },
       });
-    } else {
-      const barberdata = {
-        name: name, email: email, nickName: nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth: dateOfBirth,
-        salonId,
-        barberServices: chooseServices.map(service => ({
-          ...service,
-          barberServiceEWT: serviceEWTValues[service._id]
-        }))
-      };
 
-      // console.log("Create Barber Data ", barberdata)
-
-      dispatch(adminCreateBarberAction(barberdata, navigate))
+      return setInvalidNumberError("Invalid Number")
     }
+
+    if (!dateOfBirth) {
+      toast.error("Please select date of birth", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
+      return setDateOfBirthError("Please select date of birth")
+    }
+
+    if(chooseServices.length === 0){
+      toast.error("Please provide a service", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
+      return setServicesError("Please provide a service")
+    }
+
+    const barberdata = {
+      name: name, email: email, nickName: nickName, mobileNumber: Number(mobileNumber), countryCode: Number(countryCode), dateOfBirth: dateOfBirth,
+      salonId,
+      barberServices: chooseServices.map(service => ({
+        ...service,
+        barberServiceEWT: serviceEWTValues[service._id]
+      }))
+    };
+
+    dispatch(adminCreateBarberAction(barberdata, navigate))
 
   };
 
@@ -156,7 +273,7 @@ const CreateBarber = () => {
   const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta, localname) => {
-
+    setInvalidNumberError("")
     const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
@@ -172,7 +289,8 @@ const CreateBarber = () => {
   };
 
 
-  const setHandler = (setState, value, localname) => {
+  const setHandler = (setState, value, localname, errorState) => {
+    errorState("")
     setState(value);
     // console.log("Saving to localStorage:", localname, value);
 
@@ -293,9 +411,11 @@ const CreateBarber = () => {
                 type='text'
                 value={name}
                 placeholder='Enter Name'
-                onChange={(e) => setHandler(setName, e.target.value, "name")}
+                onChange={(e) => setHandler(setName, e.target.value, "name", setNameError)}
                 onKeyDown={handleKeyPress}
+                style={{ border: nameError && "0.1rem solid red" }}
               />
+              <p className={style.error_message}>{nameError}</p>
             </div>
 
             <div>
@@ -304,9 +424,11 @@ const CreateBarber = () => {
                 type='text'
                 value={email}
                 placeholder='Enter Email'
-                onChange={(e) => setHandler(setEmail, e.target.value, "email")}
+                onChange={(e) => setHandler(setEmail, e.target.value, "email", setEmailError)}
                 onKeyDown={handleKeyPress}
+                style={{ border: emailError && "0.1rem solid red" }}
               />
+              <p className={style.error_message}>{emailError}</p>
             </div>
 
             <div>
@@ -315,15 +437,19 @@ const CreateBarber = () => {
                 type='text'
                 value={nickName}
                 placeholder='Enter Nick Name'
-                onChange={(e) => setHandler(setNickName, e.target.value, "nickName")}
+                onChange={(e) => setHandler(setNickName, e.target.value, "nickName", setNickNameError)}
                 onKeyDown={handleKeyPress}
+                style={{ border: nickNameError && "0.1rem solid red" }}
               />
+              <p className={style.error_message}>{nickNameError}</p>
             </div>
 
             <div>
               <p>Mob. Number</p>
               <div>
-                <div onKeyDown={handleKeyPress}>
+                <div 
+                onKeyDown={handleKeyPress} 
+                style={{ border: invalidNumberError && "0.1rem solid red" }}>
                   <PhoneInput
                     forceDialCode={true}
                     defaultCountry={countryflag}
@@ -331,8 +457,8 @@ const CreateBarber = () => {
                     onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                   />
                 </div>
-
               </div>
+              <p className={style.error_message}>{invalidNumberError}</p>
             </div>
 
             <div>
@@ -341,12 +467,14 @@ const CreateBarber = () => {
                 type='date'
                 placeholder='DD/MM/YY'
                 value={dateOfBirth}
-                onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth")}
+                onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth", setDateOfBirthError)}
                 style={{
-                  colorScheme: darkmodeOn ? "dark" : "light"
+                  colorScheme: darkmodeOn ? "dark" : "light",
+                  border: dateOfBirthError && "0.1rem solid red"
                 }}
                 onKeyDown={handleKeyPress}
               />
+              <p className={style.error_message}>{dateOfBirthError}</p>
             </div>
 
             <div>
@@ -355,8 +483,10 @@ const CreateBarber = () => {
                 type='text'
                 value={chooseServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
-                onKeyDown={handleKeyPress}
+                readOnly
+                style={{ border: servicesError && "0.1rem solid red"}}
               />
+              <p className={style.error_message}>{servicesError}</p>
             </div>
 
             {

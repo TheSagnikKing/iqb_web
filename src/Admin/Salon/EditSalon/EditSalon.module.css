@@ -55,19 +55,21 @@
     border: 0.1rem solid rgba(0, 0, 0, 0.2);
 }
 
+
 .edit_salon_content_wrapper>div:nth-child(1)>div:nth-child(1)>div:nth-child(1) {
-    background-color: var(--primary-bg-color3);
-    height: 12rem;
+    background-color: #d7d7d7;
+    height: 15rem;
     border-top-left-radius: var(--list-wrapper-border-radius);
     border-top-right-radius: var(--list-wrapper-border-radius);
+
+    &>img {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: var(--list-wrapper-border-radius);
+        border-top-right-radius: var(--list-wrapper-border-radius);
+    }
 }
 
-.edit_salon_content_wrapper>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)>svg {
-    border-top-left-radius: var(--list-wrapper-border-radius);
-    border-top-right-radius: var(--list-wrapper-border-radius);
-    width: 100%;
-    height: 100%;
-}
 
 .edit_salon_logo_container {
     background-color: #fff;
@@ -1565,6 +1567,37 @@
     caret-color: transparent;
 }
 
+.addservices_btn {
+    width: 12rem !important;
+    height: 4rem !important;
+    font-size: var(--list-content-error-text);
+    margin-inline: auto;
+    cursor: pointer;
+    border-radius: var(--list-btn-border-radius) !important;
+    -webkit-border-radius: var(--list-btn-border-radius) !important;
+    -moz-border-radius: var(--list-btn-border-radius) !important;
+    -ms-border-radius: var(--list-btn-border-radius) !important;
+    -o-border-radius: var(--list-btn-border-radius) !important;
+    background-color: #0867ff25;
+    border: 0.1rem solid #000;
+    color: #000;
+    transition: var(--btn-transition);
+    -webkit-transition: var(--btn-transition);
+    -moz-transition: var(--btn-transition);
+    -ms-transition: var(--btn-transition);
+    -o-transition: var(--btn-transition);
+    margin-top: 1rem;
+
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.error_message {
+    font-size: 1.2rem !important;
+    color: red;
+}
 
 @media screen and (min-width: 0px) and (max-width: 1140px) {
     .edit_salon_content_wrapper>div:nth-child(1) {

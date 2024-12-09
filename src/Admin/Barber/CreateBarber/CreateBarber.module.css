@@ -44,11 +44,13 @@
 
     &>div {
         margin-bottom: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
 
         &>p {
             font-size: var(--list-content-body-text);
             font-weight: 600;
-            margin-bottom: 1rem;
             line-height: 1.5rem;
         }
 
@@ -413,6 +415,10 @@
     display: none;
 }
 
+.error_message {
+    font-size: 1.2rem !important;
+    color: red;
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .mobile_modal {

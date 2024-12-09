@@ -20,10 +20,10 @@ const EditBarber = () => {
   // Redux selectors
   const adminAllSalonServices = useSelector(state => state.adminAllSalonServices);
 
-  const { 
-    loading: adminAllSalonServicesLoading, 
-    resolve: adminAllSalonServicesResolve, 
-    response: allSalonServices 
+  const {
+    loading: adminAllSalonServicesLoading,
+    resolve: adminAllSalonServicesResolve,
+    response: allSalonServices
   } = adminAllSalonServices;
 
   useEffect(() => {
@@ -84,10 +84,71 @@ const EditBarber = () => {
     }
   };
 
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [nickNameError, setNickNameError] = useState("");
+  const [invalidNumberError, setInvalidNumberError] = useState("");
+  const [dateOfBirthError, setDateOfBirthError] = useState("");
+  const [servicesError, setServicesError] = useState("");
+
   const [invalidnumber, setInvalidNumber] = useState(false)
 
-
   const EditBarberHandler = () => {
+
+    if (!name) {
+      toast.error("Please enter name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Please enter name")
+    }
+
+    if (name.length === 0 || name.length > 20) {
+      toast.error("Name must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Name must be between 1 to 20 characters");
+    }
+
+
+    if (!nickName) {
+      toast.error("Please enter nickname", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNickNameError("Please enter nickname")
+    }
+
+    if (nickName.length === 0 || nickName.length > 20) {
+      toast.error("Nickname must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNickNameError("Nickname must be between 1 to 20 characters");
+    }
+
+
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -98,23 +159,50 @@ const EditBarber = () => {
           color: '#fff',
         },
       });
-    } else {
-      const barberdata = {
-        name,
-        email,
-        nickName,
-        mobileNumber: Number(mobileNumber),
-        countryCode: Number(countryCode),
-        dateOfBirth,
-        salonId,
-        barberServices: currentBarberServices
-      };
 
-      // console.log(barberdata)
-
-      // Dispatch action to create or update barber
-      dispatch(adminUpdateBarberAction(barberdata, navigate));
+      return setInvalidNumberError("Invalid Number")
     }
+
+    if (!dateOfBirth) {
+      toast.error("Please select date of birth", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
+      return setDateOfBirthError("Please select date of birth")
+    }
+
+    if (currentBarberServices.length === 0) {
+      toast.error("Please provide a service", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
+      return setServicesError("Please provide a service")
+    }
+
+    const barberdata = {
+      name,
+      email,
+      nickName,
+      mobileNumber: Number(mobileNumber),
+      countryCode: Number(countryCode),
+      dateOfBirth,
+      salonId,
+      barberServices: currentBarberServices
+    };
+
+    dispatch(adminUpdateBarberAction(barberdata, navigate));
 
   };
 
@@ -165,6 +253,7 @@ const EditBarber = () => {
   const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta) => {
+    setInvalidNumberError("")
     const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
@@ -283,10 +372,15 @@ const EditBarber = () => {
               <input
                 type='text'
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setNameError("")
+                  setName(e.target.value)
+                }}
                 placeholder='Enter Name'
                 onKeyDown={handleKeyPress}
+                style={{ border: nameError && "0.1rem solid red" }}
               />
+              <p className={style.error_message}>{nameError}</p>
             </div>
 
             <div>
@@ -295,7 +389,7 @@ const EditBarber = () => {
                 type='text'
                 value={email}
                 placeholder='Enter Email'
-                onKeyDown={handleKeyPress}
+                readOnly
               />
             </div>
 
@@ -304,16 +398,24 @@ const EditBarber = () => {
               <input
                 type='text'
                 value={nickName}
-                onChange={(e) => setNickName(e.target.value)}
+                onChange={(e) => {
+                  setNickNameError("")
+                  setNickName(e.target.value)
+                }}
                 placeholder='Enter Nick Name'
                 onKeyDown={handleKeyPress}
+                style={{ border: nickNameError && "0.1rem solid red" }}
               />
+               <p className={style.error_message}>{nickNameError}</p>
             </div>
 
             <div>
               <p>Mob. Number</p>
               <div>
-                <div onKeyDown={handleKeyPress}>
+                <div 
+                onKeyDown={handleKeyPress}
+                style={{ border: invalidNumberError && "0.1rem solid red" }}
+                >
                   <PhoneInput
                     forceDialCode={true}
                     defaultCountry={countryflag}
@@ -321,8 +423,8 @@ const EditBarber = () => {
                     onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                   />
                 </div>
-
               </div>
+              <p className={style.error_message}>{invalidNumberError}</p>
             </div>
 
             <div>
@@ -331,12 +433,17 @@ const EditBarber = () => {
                 type='date'
                 placeholder='dd/mm/yy'
                 value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.target.value)}
+                onChange={(e) => {
+                  setDateOfBirthError("")
+                  setDateOfBirth(e.target.value)
+                }}
                 style={{
-                  colorScheme: darkmodeOn ? "dark" : "light"
+                  colorScheme: darkmodeOn ? "dark" : "light",
+                  border: dateOfBirthError && "0.1rem solid red"
                 }}
                 onKeyDown={handleKeyPress}
               />
+              <p className={style.error_message}>{dateOfBirthError}</p>
             </div>
 
             <div>
@@ -345,8 +452,10 @@ const EditBarber = () => {
                 type='text'
                 value={currentBarberServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
-                onKeyDown={handleKeyPress}
+                readOnly
+                style={{ border: servicesError && "0.1rem solid red"}}
               />
+              <p className={style.error_message}>{servicesError}</p>
             </div>
 
             {

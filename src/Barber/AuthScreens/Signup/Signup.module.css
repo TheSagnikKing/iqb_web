@@ -2,7 +2,7 @@
     height: 100svh;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 
 .barber_signup_left {
@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
+    display: none;
 
     &>img {
         width: 90%;
@@ -29,7 +30,7 @@
     width: 100%;
 
     &>div:nth-child(1) {
-        width: 45%;
+        width: 30%;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -256,7 +257,7 @@ iframe {
 
     .barber_signup_right {
         &>div:nth-child(1) {
-            width: 65%;
+            width: 30%;
         }
     }
 }

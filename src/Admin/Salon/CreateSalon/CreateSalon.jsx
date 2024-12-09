@@ -65,6 +65,8 @@ const CreateSalon = () => {
             latitude: latitude,
             longitude: longitude
           }));
+
+          setSalonCoordinateError("")
         },
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
@@ -127,6 +129,22 @@ const CreateSalon = () => {
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
   const [salonNameError, setSalonNameError] = useState("")
+  const [salonEmailError, setSalonEmailError] = useState("")
+  const [salonDescError, setSalonDescError] = useState("")
+  const [salonAddressError, setSalonAddressError] = useState("")
+  const [salonCoordinateError, setSalonCoordinateError] = useState("")
+  const [countryError, setCountryError] = useState("")
+  const [cityError, setCityError] = useState("")
+  const [timezoneError, setTimezoneError] = useState("")
+  const [postCodeError, setPostCodeError] = useState("")
+  const [salonTypeError, setSalonTypeError] = useState("")
+  const [invalidNumberError, setInvalidNumberError] = useState("")
+
+  const [serviceIconError, setServiceIconError] = useState("")
+  const [serviceNameError, setServiceNameError] = useState("")
+  const [serviceDescError, setServiceDescError] = useState("")
+  const [servicePriceError, setServicePriceError] = useState("")
+  const [serviceEwtError, setServiceEwtError] = useState("")
 
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
@@ -141,7 +159,7 @@ const CreateSalon = () => {
       ...existingData,
       salonType: value
     }));
-
+    setSalonTypeError("")
     setSalonTypeDrop(false)
   }
 
@@ -159,6 +177,7 @@ const CreateSalon = () => {
     setCountry(value.name)
     setCountryCurrency(value.currency)
     setCountryDrop(false)
+    setCountryError("")
   }
 
 
@@ -200,14 +219,6 @@ const CreateSalon = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (!!Object.keys(getAdminAllCountriesError || {}).length) {
-  //     setCountry("")
-  //     setCity("")
-  //     setTimezone("")
-  //     setCountryCode("")
-  //   }
-  // }, [getAdminAllCountriesError])
 
   const [city, setCity] = useState("")
   const [cityDrop, setCityDrop] = useState(false)
@@ -215,6 +226,7 @@ const CreateSalon = () => {
   const setCityHandler = (value) => {
     setCity(value.name)
     setCityDrop(false)
+    setCityError("")
   }
 
   const [countryCodePresent, setCountryCodePresent] = useState(false)
@@ -262,15 +274,6 @@ const CreateSalon = () => {
   };
 
 
-  // console.log("Get All Cities ", AllCities)
-  // console.log("All Cities Error ", getAdminAllCitiesError)
-
-  // useEffect(() => {
-  //   if (!!Object.keys(getAdminAllCitiesError || {}).length) {
-  //     setCity("")
-  //   }
-  // }, [getAdminAllCitiesError])
-
   const [timezone, setTimezone] = useState("")
   const [timezoneDrop, setTimezoneDrop] = useState(false)
 
@@ -282,19 +285,9 @@ const CreateSalon = () => {
 
     setTimezone(value)
     setTimezoneDrop(false)
+    setTimezoneError("")
   }
 
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch({})
-  //   }
-  // },[])
-
-  // useEffect(() => {
-  //   if (countrycode) {
-  //     dispatch(getAdminAllTimezoneAction(countrycode))
-  //   }
-  // }, [countrycode, dispatch])
 
   const getAdminAllTimezone = useSelector(state => state.getAdminAllTimezone)
 
@@ -417,6 +410,7 @@ const CreateSalon = () => {
   })
 
   const logoselectHandler = (serviceImg) => {
+    setServiceIconError("")
     setSelectedLogo({
       url: serviceImg.url,
       public_id: serviceImg.public_id
@@ -428,8 +422,8 @@ const CreateSalon = () => {
 
   const addServiceHandler = () => {
 
-    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '' || selectedLogo.url === "" && selectedLogo.public_id === "") {
-      toast.error("Please fill all the services", {
+    if (!selectedLogo.url) {
+      toast.error("Please select service icon", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -438,12 +432,24 @@ const CreateSalon = () => {
           color: '#fff',
         },
       });
-      return;
+      return setServiceIconError("Please select service icon")
     }
 
+    if (!serviceName) {
+      toast.error("Please enter service name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceNameError("Please enter service name")
+    }
 
     if (serviceName.length < 1 || serviceName.length > 25) {
-      return toast.error("Service Name must be between 1 to 25 charecters", {
+      toast.error("Service name must be between 1 to 25 charecters", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -452,11 +458,12 @@ const CreateSalon = () => {
           color: '#fff',
         },
       });
+
+      return setServiceNameError("Service Name must be between 1 to 25 charecters")
     }
 
-
-    if (serviceDesc.length < 1 || serviceDesc.length > 50) {
-      return toast.error("Service Description must be between 1 to 50 charecters", {
+    if (!serviceDesc) {
+      toast.error("Please enter service description", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -465,6 +472,46 @@ const CreateSalon = () => {
           color: '#fff',
         },
       });
+      return setServiceDescError("Please enter service description")
+    }
+
+    if (serviceDesc.length < 1 || serviceDesc.length > 50) {
+      toast.error("Service description must be between 1 to 50 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceDescError("Service description must be between 1 to 50 charecters")
+    }
+
+    if (!servicePrice) {
+      toast.error("Please enter service price", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServicePriceError("Please enter service price")
+    }
+
+    if (!serviceEWT) {
+      toast.error("Please enter service EWT", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceEwtError("Please enter service EWT")
     }
 
     const service = {
@@ -606,10 +653,191 @@ const CreateSalon = () => {
 
   const [invalidnumber, setInvalidNumber] = useState(false)
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const createSalonHandler = async () => {
     if (!salonName) {
+      toast.error("Please enter salon name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
       return setSalonNameError("Please enter salon name")
     }
+
+    if (salonName.length === 0 || salonName.length > 20) {
+      toast.error("Salon Name must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonNameError("Salon Name must be between 1 to 20 characters");
+    }
+
+    if (!salonEmail) {
+      toast.error("Please enter salon email", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonEmailError("Please enter salon email")
+    }
+
+    if (!emailRegex.test(salonEmail)) {
+      toast.error("Invalid email format", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setSalonEmailError("Invalid email format");
+    }
+
+    if (!salonDesc) {
+      toast.error("Please enter salon description", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonDescError("Please enter salon description")
+    }
+
+    if (salonDesc.length === 0 || salonDesc.length > 20) {
+      toast.error("Salon Description must be between 1 to 35 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonDescError("Salon Description must be between 1 to 35 characters");
+    }
+
+    if (!address) {
+      toast.error("Please enter salon address", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonAddressError("Please enter salon address")
+    }
+
+    if (!longitude && !latitude) {
+      toast.error("Coordinates is not present", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonCoordinateError("Coordinates is not present")
+    }
+
+    if (!country) {
+      toast.error("Please select country", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setCountryError("Please select country")
+    }
+
+    if (!city) {
+      toast.error("Please select city", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setCityError("Please select city")
+    }
+
+    if (!timezone) {
+      toast.error("Please select timezone", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setTimezoneError("Please select timezone")
+    }
+
+    if (!postCode) {
+      toast.error("Please enter postcode", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setPostCodeError("Please enter postcode")
+    }
+
+    if (postCode.length === 0 || postCode.length > 10) {
+      toast.error("Postcode must be between 0 to 10 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setPostCodeError("Postcode must be between 0 to 10 charecters")
+    }
+
+    if (!salonType) {
+      toast.error("Please select salon type", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonTypeError("Please select salon type")
+    }
+
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -620,58 +848,62 @@ const CreateSalon = () => {
           color: '#fff',
         },
       });
-    } else {
-      const salondata = {
-        adminEmail: email,
-        salonEmail: salonEmail,
-        salonDesc: salonDesc,
-        salonName: salonName,
-        address: address,
-        location: {
-          type: "Point",
-          coordinates: {
-            longitude: Number(longitude),
-            latitude: Number(latitude)
-          }
-        },
-        country: country,
-        city: city,
-        timeZone: timezone,
-        postCode: postCode,
-        contactTel: Number(contactTel),
-        countryCode: Number(dialCode),
-        salonType: salonType,
-        webLink: webLink,
-        fbLink: fbLink,
-        instraLink: instraLink,
-        twitterLink: twitterLink,
-        tiktokLink: tiktokLink,
-        services: localsalondata.selectedServices,
-        code: countrycode
-      }
 
-      // console.log("Salondata ", salondata)
-
-      const files = await Promise.all(
-        salonImages?.map(async (imgObject) => {
-          try {
-            const response = await fetch(imgObject.blobUrl);
-            const blob = await response.blob();
-
-            const file = new File([blob], imgObject.name, { type: blob.type });
-
-            return file;
-          } catch (error) {
-            console.error("Error converting blob URL to file:", error);
-            return null;
-          }
-        })
-      );
-
-      setUploadSalonImages(files)
-
-      dispatch(adminCreateSalonAction(salondata, navigate))
+      return setInvalidNumberError("Invalid Number")
     }
+
+
+    const salondata = {
+      adminEmail: email,
+      salonEmail: salonEmail,
+      salonDesc: salonDesc,
+      salonName: salonName,
+      address: address,
+      location: {
+        type: "Point",
+        coordinates: {
+          longitude: Number(longitude),
+          latitude: Number(latitude)
+        }
+      },
+      country: country,
+      city: city,
+      timeZone: timezone,
+      postCode: postCode,
+      contactTel: Number(contactTel),
+      countryCode: Number(dialCode),
+      salonType: salonType,
+      webLink: webLink,
+      fbLink: fbLink,
+      instraLink: instraLink,
+      twitterLink: twitterLink,
+      tiktokLink: tiktokLink,
+      services: localsalondata.selectedServices,
+      code: countrycode
+    }
+
+    // console.log("Salondata ", salondata)
+
+    const files = await Promise.all(
+      salonImages?.map(async (imgObject) => {
+        try {
+          const response = await fetch(imgObject.blobUrl);
+          const blob = await response.blob();
+
+          const file = new File([blob], imgObject.name, { type: blob.type });
+
+          return file;
+        } catch (error) {
+          console.error("Error converting blob URL to file:", error);
+          return null;
+        }
+      })
+    );
+
+    setUploadSalonImages(files)
+
+    dispatch(adminCreateSalonAction(salondata, navigate))
+
 
   }
 
@@ -860,7 +1092,7 @@ const CreateSalon = () => {
   const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta) => {
-
+    setInvalidNumberError("")
     const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
@@ -896,7 +1128,8 @@ const CreateSalon = () => {
     setLongitude(storedData.longitude)
   }, [selectedServices]);
 
-  const setHandler = (setState, value, localname) => {
+  const setHandler = (setState, value, localname, setError) => {
+    setError("")
     setState(value);
     console.log("Saving to localStorage:", localname, value);
 
@@ -928,90 +1161,11 @@ const CreateSalon = () => {
       <div className={`${style.create_salon_content_wrapper} ${darkmodeOn && style.dark}`}>
         <div>
           <div>
-            <div><svg xmlns="http://www.w3.org/2000/svg" width="100%">
-              <rect fill="#ffffff" width="540" height="450"></rect>
-              <defs>
-                <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="0" y2="100%" gradientTransform="rotate(222,648,379)">
-                  <stop offset="0" stop-color="#ffffff"></stop>
-                  <stop offset="1" stop-color="var(--primary-bg-color3)"></stop>
-                </linearGradient>
-                <pattern patternUnits="userSpaceOnUse" id="b" width="300" height="250" x="0" y="0" viewBox="0 0 1080 900">
-                  <g fill-opacity="0.5">
-                    <polygon fill="#444" points="90 150 0 300 180 300"></polygon>
-                    <polygon points="90 150 180 0 0 0"></polygon>
-                    <polygon fill="#AAA" points="270 150 360 0 180 0"></polygon>
-                    <polygon fill="#DDD" points="450 150 360 300 540 300"></polygon>
-                    <polygon fill="#999" points="450 150 540 0 360 0"></polygon>
-                    <polygon points="630 150 540 300 720 300"></polygon>
-                    <polygon fill="#DDD" points="630 150 720 0 540 0"></polygon>
-                    <polygon fill="#444" points="810 150 720 300 900 300"></polygon>
-                    <polygon fill="#FFF" points="810 150 900 0 720 0"></polygon>
-                    <polygon fill="#DDD" points="990 150 900 300 1080 300"></polygon>
-                    <polygon fill="#444" points="990 150 1080 0 900 0"></polygon>
-                    <polygon fill="#DDD" points="90 450 0 600 180 600"></polygon>
-                    <polygon points="90 450 180 300 0 300"></polygon>
-                    <polygon fill="#666" points="270 450 180 600 360 600"></polygon>
-                    <polygon fill="#AAA" points="270 450 360 300 180 300"></polygon>
-                    <polygon fill="#DDD" points="450 450 360 600 540 600"></polygon>
-                    <polygon fill="#999" points="450 450 540 300 360 300"></polygon>
-                    <polygon fill="#999" points="630 450 540 600 720 600"></polygon>
-                    <polygon fill="#FFF" points="630 450 720 300 540 300"></polygon>
-                    <polygon points="810 450 720 600 900 600"></polygon>
-                    <polygon fill="#DDD" points="810 450 900 300 720 300"></polygon>
-                    <polygon fill="#AAA" points="990 450 900 600 1080 600"></polygon>
-                    <polygon fill="#444" points="990 450 1080 300 900 300"></polygon>
-                    <polygon fill="#222" points="90 750 0 900 180 900"></polygon>
-                    <polygon points="270 750 180 900 360 900"></polygon>
-                    <polygon fill="#DDD" points="270 750 360 600 180 600"></polygon>
-                    <polygon points="450 750 540 600 360 600"></polygon>
-                    <polygon points="630 750 540 900 720 900"></polygon>
-                    <polygon fill="#444" points="630 750 720 600 540 600"></polygon>
-                    <polygon fill="#AAA" points="810 750 720 900 900 900"></polygon>
-                    <polygon fill="#666" points="810 750 900 600 720 600"></polygon>
-                    <polygon fill="#999" points="990 750 900 900 1080 900"></polygon>
-                    <polygon fill="#999" points="180 0 90 150 270 150"></polygon>
-                    <polygon fill="#444" points="360 0 270 150 450 150"></polygon>
-                    <polygon fill="#FFF" points="540 0 450 150 630 150"></polygon>
-                    <polygon points="900 0 810 150 990 150"></polygon>
-                    <polygon fill="#222" points="0 300 -90 450 90 450"></polygon>
-                    <polygon fill="#FFF" points="0 300 90 150 -90 150"></polygon>
-                    <polygon fill="#FFF" points="180 300 90 450 270 450"></polygon>
-                    <polygon fill="#666" points="180 300 270 150 90 150"></polygon>
-                    <polygon fill="#222" points="360 300 270 450 450 450"></polygon>
-                    <polygon fill="#FFF" points="360 300 450 150 270 150"></polygon>
-                    <polygon fill="#444" points="540 300 450 450 630 450"></polygon>
-                    <polygon fill="#222" points="540 300 630 150 450 150"></polygon>
-                    <polygon fill="#AAA" points="720 300 630 450 810 450"></polygon>
-                    <polygon fill="#666" points="720 300 810 150 630 150"></polygon>
-                    <polygon fill="#FFF" points="900 300 810 450 990 450"></polygon>
-                    <polygon fill="#999" points="900 300 990 150 810 150"></polygon>
-                    <polygon points="0 600 -90 750 90 750"></polygon>
-                    <polygon fill="#666" points="0 600 90 450 -90 450"></polygon>
-                    <polygon fill="#AAA" points="180 600 90 750 270 750"></polygon>
-                    <polygon fill="#444" points="180 600 270 450 90 450"></polygon>
-                    <polygon fill="#444" points="360 600 270 750 450 750"></polygon>
-                    <polygon fill="#999" points="360 600 450 450 270 450"></polygon>
-                    <polygon fill="#666" points="540 600 630 450 450 450"></polygon>
-                    <polygon fill="#222" points="720 600 630 750 810 750"></polygon>
-                    <polygon fill="#FFF" points="900 600 810 750 990 750"></polygon>
-                    <polygon fill="#222" points="900 600 990 450 810 450"></polygon>
-                    <polygon fill="#DDD" points="0 900 90 750 -90 750"></polygon>
-                    <polygon fill="#444" points="180 900 270 750 90 750"></polygon>
-                    <polygon fill="#FFF" points="360 900 450 750 270 750"></polygon>
-                    <polygon fill="#AAA" points="540 900 630 750 450 750"></polygon>
-                    <polygon fill="#FFF" points="720 900 810 750 630 750"></polygon>
-                    <polygon fill="#222" points="900 900 990 750 810 750"></polygon>
-                    <polygon fill="#222" points="1080 300 990 450 1170 450"></polygon>
-                    <polygon fill="#FFF" points="1080 300 1170 150 990 150"></polygon>
-                    <polygon points="1080 600 990 750 1170 750"></polygon>
-                    <polygon fill="#666" points="1080 600 1170 450 990 450"></polygon>
-                    <polygon fill="#DDD" points="1080 900 1170 750 990 750"></polygon>
-                  </g>
-                </pattern>
-              </defs>
-              <rect x="0" y="0" fill="url(#a)" width="100%" height="100%"></rect>
-              <rect x="0" y="0" fill="url(#b)" width="100%" height="100%"></rect>
-            </svg></div>
+            <div>
+              {
+                salonImages?.[0] && <img src={salonImages?.[0]?.blobUrl} alt="cover-img" />
+              }
+            </div>
 
             <div className={style.create_salon_logo_container}>
               <div>
@@ -1072,15 +1226,14 @@ const CreateSalon = () => {
               type="text"
               value={salonName}
               onChange={(e) => {
-                setSalonNameError("")
-                setHandler(setSalonName, e.target.value, "salonName")
+                setHandler(setSalonName, e.target.value, "salonName", setSalonNameError)
               }}
               onKeyDown={handleKeyPress}
               style={{
-                // border: salonNameError ? "0.1rem solid red" : "none"
+                border: salonNameError ? "0.1rem solid red" : "none"
               }}
             />
-            {/* <p style={{ color: "red", fontSize: "12px"}}>{salonNameError}</p> */}
+            <p className={style.error_message}>{salonNameError}</p>
           </div>
 
           <div>
@@ -1088,9 +1241,13 @@ const CreateSalon = () => {
             <input
               type="text"
               value={salonEmail}
-              onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail")}
+              onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail", setSalonEmailError)}
               onKeyDown={handleKeyPress}
+              style={{
+                border: salonEmailError ? "0.1rem solid red" : "none"
+              }}
             />
+            <p className={style.error_message}>{salonEmailError}</p>
           </div>
 
           <div>
@@ -1098,9 +1255,13 @@ const CreateSalon = () => {
             <input
               type="text"
               value={salonDesc}
-              onChange={(e) => setHandler(setSalonDesc, e.target.value, "salonDesc")}
+              onChange={(e) => setHandler(setSalonDesc, e.target.value, "salonDesc", setSalonDescError)}
               onKeyDown={handleKeyPress}
+              style={{
+                border: salonDescError ? "0.1rem solid red" : "none"
+              }}
             />
+            <p className={style.error_message}>{salonDescError}</p>
           </div>
 
           <div>
@@ -1108,9 +1269,13 @@ const CreateSalon = () => {
             <input
               type="text"
               value={address}
-              onChange={(e) => setHandler(setAddress, e.target.value, "address")}
+              onChange={(e) => setHandler(setAddress, e.target.value, "address", setSalonAddressError)}
               onKeyDown={handleKeyPress}
+              style={{
+                border: salonAddressError ? "0.1rem solid red" : "none"
+              }}
             />
+            <p className={style.error_message}>{salonAddressError}</p>
           </div>
 
           <div>
@@ -1120,7 +1285,7 @@ const CreateSalon = () => {
                 type="text"
                 value={latitude}
                 readOnly
-                style={{ outline: "none" }}
+                style={{ outline: "none", border: salonCoordinateError ? "0.1rem solid red" : "none" }}
                 onKeyDown={handleKeyPress}
               />
             </div>
@@ -1131,10 +1296,11 @@ const CreateSalon = () => {
                 type="text"
                 value={longitude}
                 readOnly
-                style={{ outline: "none" }}
+                style={{ outline: "none", border: salonCoordinateError ? "0.1rem solid red" : "none" }}
                 onKeyDown={handleKeyPress}
               />
             </div>
+            <p className={style.error_message}>{salonCoordinateError}</p>
           </div>
 
           <div>
@@ -1149,9 +1315,11 @@ const CreateSalon = () => {
                 value={country}
                 onClick={() => setCountryDrop(true)}
                 readOnly
-                style={{ border: !countryCodePresent && "0.1rem solid red" }}
+                style={{
+                  border: countryError ? "0.1rem solid red" : "none"
+                }}
               />
-
+              <p className={style.error_message}>{countryError}</p>
               {countryDrop &&
                 <ClickAwayListener onClickAway={() => setCountryDrop(false)}>
                   <div>
@@ -1199,8 +1367,11 @@ const CreateSalon = () => {
                 value={city}
                 onClick={() => setCityDrop(true)}
                 readOnly
-                style={{ border: !countryCodePresent && "0.1rem solid red" }}
+                style={{ border: (!countryCodePresent || cityError) ? "0.1rem solid red" : undefined }}
               />
+              {
+                !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{cityError}</p>
+              }
 
               {cityDrop &&
                 <ClickAwayListener onClickAway={() => setCityDrop(false)}>
@@ -1250,11 +1421,12 @@ const CreateSalon = () => {
                 value={timezone}
                 onClick={() => timezoneDropHandler()}
                 readOnly
-                style={{ border: !countryCodePresent && "0.1rem solid red" }}
-              // onKeyDown={handleKeyPress}
-              // disabled={!!Object.keys(getAdminAllCountriesError || {}).length || !countrycode}
+                style={{ border: (!countryCodePresent || timezoneError) ? "0.1rem solid red" : undefined }}
               />
-
+              {
+                !countryCodePresent ? <p className={style.error_message}>Please select country</p> :  <p className={style.error_message}>{timezoneError}</p>
+              }
+             
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
                 {
                   getAdminAllTimezoneLoading ?
@@ -1278,9 +1450,18 @@ const CreateSalon = () => {
               <input
                 type="text"
                 value={postCode}
-                onChange={(e) => setHandler(setPostCode, e.target.value, "postCode")}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!/^[a-zA-Z0-9]*$/.test(value)) {
+                    setPostCodeError("Postcode must only contain letters and numbers");
+                    return
+                  }
+                  setHandler(setPostCode, value, "postCode", setPostCodeError)
+                }}
                 onKeyDown={handleKeyPress}
+                style={{ border: postCodeError && "0.1rem solid red" }}
               />
+              <p className={style.error_message}>{postCodeError}</p>
             </div>
           </div>
 
@@ -1293,7 +1474,8 @@ const CreateSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               className='salontype_input'
-              onKeyDown={handleKeyPress}
+              readOnly
+              style={{ border: salonTypeError && "0.1rem solid red" }}
             />
 
             {salonTypeDrop &&
@@ -1303,21 +1485,24 @@ const CreateSalon = () => {
                   <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
                 </div>
               </ClickAwayListener>}
+            <p className={style.error_message}>{salonTypeError}</p>
           </div>
 
           <div>
             <p>Mobile Number</p>
             <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div onKeyDown={handleKeyPress}>
+              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red" }}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry={countryflag}
                   value={contactTel}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
+
               </div>
 
             </div>
+            <p className={style.error_message}>{invalidNumberError}</p>
           </div>
 
           <div className={style.add_services_drop}>
@@ -1407,7 +1592,7 @@ const CreateSalon = () => {
                             SalonIcons?.map((s) => (
                               <div key={s._id} className={style.slider_item} onClick={() => logoselectHandler(s)}
                                 style={{
-                                  border: selectedLogo?.url === s.url ? "2px solid var(--primary-bg-color3)" : "1px solid rgba(0,0,0,0.4)"
+                                  border: serviceIconError ? "0.1rem solid red" : selectedLogo?.url === s.url ? "2px solid var(--primary-bg-color3)" : "1px solid rgba(0,0,0,0.4)"
                                 }}
                               >
                                 <img src={s.url} alt="" />
@@ -1422,6 +1607,7 @@ const CreateSalon = () => {
                   }
 
                 </div>
+                <p className={style.error_message}>{serviceIconError}</p>
               </div>
 
               <div>
@@ -1429,9 +1615,14 @@ const CreateSalon = () => {
                 <input
                   type="text"
                   value={serviceName}
-                  onChange={(e) => setServiceName(e.target.value)}
+                  onChange={(e) => {
+                    setServiceNameError("")
+                    setServiceName(e.target.value)
+                  }}
                   onKeyDown={handleKeyPressAddServices}
+                  style={{ border: serviceNameError && "0.1rem solid red" }}
                 />
+                <p className={style.error_message}>{serviceNameError}</p>
               </div>
 
               <div>
@@ -1439,9 +1630,14 @@ const CreateSalon = () => {
                 <input
                   type="text"
                   value={serviceDesc}
-                  onChange={(e) => setServiceDesc(e.target.value)}
+                  onChange={(e) => {
+                    setServiceDescError("")
+                    setServiceDesc(e.target.value)
+                  }}
                   onKeyDown={handleKeyPressAddServices}
+                  style={{ border: serviceDescError && "0.1rem solid red" }}
                 />
+                <p className={style.error_message}>{serviceDescError}</p>
               </div>
 
               <div>
@@ -1450,7 +1646,7 @@ const CreateSalon = () => {
                   type="text"
                   value={`${vipService ? 'VIP' : 'Regular'}`}
                   onClick={() => vipServiceDropHandler()}
-                  onKeyDown={handleKeyPressAddServices}
+                  readOnly
                 />
 
                 {vipServiceDrop &&
@@ -1469,13 +1665,16 @@ const CreateSalon = () => {
                     type="text"
                     value={servicePrice}
                     onChange={(e) => {
+                      setServicePriceError("")
                       const value = e.target.value;
                       if (/^\d*$/.test(value)) {
                         setServicePrice(value);
                       }
                     }}
                     onKeyDown={handleKeyPressAddServices}
+                    style={{ border: servicePriceError && "0.1rem solid red" }}
                   />
+                  <p className={style.error_message}>{servicePriceError}</p>
                 </div>
 
                 <div>
@@ -1484,13 +1683,16 @@ const CreateSalon = () => {
                     type="text"
                     value={serviceEWT}
                     onChange={(e) => {
+                      setServiceEwtError("")
                       const value = e.target.value;
                       if (/^\d*$/.test(value)) {
                         setServiceEWT(value);
                       }
                     }}
                     onKeyDown={handleKeyPressAddServices}
+                    style={{ border: serviceEwtError && "0.1rem solid red" }}
                   />
+                  <p className={style.error_message}>{serviceEwtError}</p>
                 </div>
               </div>
 

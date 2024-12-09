@@ -1065,7 +1065,34 @@
             font-weight: 500;
         }
     }
-
+    
+    &>button {
+        width: 10rem;
+        height: 4rem;
+        background-color: #0867ff25;
+        border: 0.1rem solid #000;
+        color: #000;
+        padding: var(--list-header-btn-padding);
+        transition: var(--btn-transition);
+        border-radius: var(--list-btn-border-radius);
+        -webkit-border-radius: var(--list-btn-border-radius);
+        -moz-border-radius: var(--list-btn-border-radius);
+        -ms-border-radius: var(--list-btn-border-radius);
+        -o-border-radius: var(--list-btn-border-radius);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-inline: auto;
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    }
 }
 
 

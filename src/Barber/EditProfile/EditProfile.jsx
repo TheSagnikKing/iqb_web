@@ -566,6 +566,13 @@ const EditProfile = () => {
                                     </main>)
                         }
 
+                        <button onClick={updateBarberProfile}>
+                            {
+                                barberUpdateProfileLoading ? (<ButtonLoader />) :
+                                    "Save"
+                            }
+                        </button>
+
                     </div>
                 </Modal>
 

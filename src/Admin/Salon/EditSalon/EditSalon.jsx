@@ -169,6 +169,21 @@ const EditSalon = () => {
   const [salonType, setSalonType] = useState(currentSalon?.salonType)
   const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
+
+
+  const [salonNameError, setSalonNameError] = useState("")
+  const [salonDescError, setSalonDescError] = useState("")
+  const [salonAddressError, setSalonAddressError] = useState("")
+  const [invalidNumberError, setInvalidNumberError] = useState("")
+
+  const [serviceIconError, setServiceIconError] = useState("")
+  const [serviceNameError, setServiceNameError] = useState("")
+  const [serviceDescError, setServiceDescError] = useState("")
+  const [servicePriceError, setServicePriceError] = useState("")
+  const [serviceEwtError, setServiceEwtError] = useState("")
+
+
+
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
   }
@@ -468,6 +483,7 @@ const EditSalon = () => {
   })
 
   const logoselectHandler = (serviceImg) => {
+    setServiceIconError("")
     setSelectedLogo({
       url: serviceImg.url,
       public_id: serviceImg.public_id
@@ -478,8 +494,8 @@ const EditSalon = () => {
 
   const addServiceHandler = () => {
 
-    if (serviceName === '' || serviceDesc === '' || servicePrice === '' || serviceEWT === '' || selectedLogo.url === "" && selectedLogo.public_id === "") {
-      toast.error("Please fill all the services", {
+    if (!selectedLogo.url) {
+      toast.error("Please select service icon", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -488,12 +504,24 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
-      return;
+      return setServiceIconError("Please select service icon")
     }
 
+    if (!serviceName) {
+      toast.error("Please enter service name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceNameError("Please enter service name")
+    }
 
     if (serviceName.length < 1 || serviceName.length > 25) {
-      return toast.error("Service Name must be between 1 to 25 charecters", {
+      toast.error("Service name must be between 1 to 25 charecters", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -502,11 +530,12 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
+
+      return setServiceNameError("Service Name must be between 1 to 25 charecters")
     }
 
-
-    if (serviceDesc.length < 1 || serviceDesc.length > 50) {
-      return toast.error("Service Description must be between 1 to 50 charecters", {
+    if (!serviceDesc) {
+      toast.error("Please enter service description", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -515,6 +544,46 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
+      return setServiceDescError("Please enter service description")
+    }
+
+    if (serviceDesc.length < 1 || serviceDesc.length > 50) {
+      toast.error("Service description must be between 1 to 50 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceDescError("Service description must be between 1 to 50 charecters")
+    }
+
+    if (!servicePrice) {
+      toast.error("Please enter service price", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServicePriceError("Please enter service price")
+    }
+
+    if (!serviceEWT) {
+      toast.error("Please enter service EWT", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceEwtError("Please enter service EWT")
     }
 
     const service = {
@@ -576,6 +645,71 @@ const EditSalon = () => {
   const [invalidnumber, setInvalidNumber] = useState(false)
 
   const editSalonHandler = () => {
+    if (!salonName) {
+      toast.error("Please enter salon name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonNameError("Please enter salon name")
+    }
+
+    if (salonName.length === 0 || salonName.length > 20) {
+      toast.error("Salon Name must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonNameError("Salon Name must be between 1 to 20 characters");
+    }
+
+    if (!salonDesc) {
+      toast.error("Please enter salon description", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonDescError("Please enter salon description")
+    }
+
+    if (salonDesc.length === 0 || salonDesc.length > 20) {
+      toast.error("Salon Description must be between 1 to 35 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonDescError("Salon Description must be between 1 to 35 characters");
+    }
+
+    if (!address) {
+      toast.error("Please enter salon address", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setSalonAddressError("Please enter salon address")
+    }
+
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -586,41 +720,40 @@ const EditSalon = () => {
           color: '#fff',
         },
       });
-    } else {
-      const salondata = {
-        adminEmail: email,
-        salonEmail,
-        salonName,
-        salonDesc,
-        address,
-        location: {
-          type: "Point",
-          coordinates: {
-            longitude: Number(longitude),
-            latitude: Number(latitude)
-          }
-        },
-        country,
-        city,
-        timeZone: timezone,
-        postCode,
-        contactTel: Number(contactTel),
-        countryCode: Number(dialCode),
-        salonType,
-        webLink,
-        fbLink,
-        instraLink,
-        twitterLink,
-        tiktokLink,
-        services: selectedServices,
-        salonId: currentSalon?.salonId
-      }
 
-      // console.log(salondata)
-
-      dispatch(adminEditSalonAction(salondata, navigate, email))
+      return setInvalidNumberError("Invalid Number")
     }
 
+    const salondata = {
+      adminEmail: email,
+      salonEmail,
+      salonName,
+      salonDesc,
+      address,
+      location: {
+        type: "Point",
+        coordinates: {
+          longitude: Number(longitude),
+          latitude: Number(latitude)
+        }
+      },
+      country,
+      city,
+      timeZone: timezone,
+      postCode,
+      contactTel: Number(contactTel),
+      countryCode: Number(dialCode),
+      salonType,
+      webLink,
+      fbLink,
+      instraLink,
+      twitterLink,
+      tiktokLink,
+      services: selectedServices,
+      salonId: currentSalon?.salonId
+    }
+
+    dispatch(adminEditSalonAction(salondata, navigate, email))
   }
 
   const handleKeyPress = (e) => {
@@ -1004,6 +1137,7 @@ const EditSalon = () => {
   const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta) => {
+    setInvalidNumberError("")
     const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
@@ -1024,90 +1158,11 @@ const EditSalon = () => {
       <div className={`${style.edit_salon_content_wrapper} ${darkmodeOn && style.dark}`}>
         <div>
           <div>
-            <div><svg xmlns="http://www.w3.org/2000/svg" width="100%">
-              <rect fill="#ffffff" width="540" height="450"></rect>
-              <defs>
-                <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="0" y2="100%" gradientTransform="rotate(222,648,379)">
-                  <stop offset="0" stop-color="#ffffff"></stop>
-                  <stop offset="1" stop-color="var(--primary-bg-color3)"></stop>
-                </linearGradient>
-                <pattern patternUnits="userSpaceOnUse" id="b" width="300" height="250" x="0" y="0" viewBox="0 0 1080 900">
-                  <g fill-opacity="0.5">
-                    <polygon fill="#444" points="90 150 0 300 180 300"></polygon>
-                    <polygon points="90 150 180 0 0 0"></polygon>
-                    <polygon fill="#AAA" points="270 150 360 0 180 0"></polygon>
-                    <polygon fill="#DDD" points="450 150 360 300 540 300"></polygon>
-                    <polygon fill="#999" points="450 150 540 0 360 0"></polygon>
-                    <polygon points="630 150 540 300 720 300"></polygon>
-                    <polygon fill="#DDD" points="630 150 720 0 540 0"></polygon>
-                    <polygon fill="#444" points="810 150 720 300 900 300"></polygon>
-                    <polygon fill="#FFF" points="810 150 900 0 720 0"></polygon>
-                    <polygon fill="#DDD" points="990 150 900 300 1080 300"></polygon>
-                    <polygon fill="#444" points="990 150 1080 0 900 0"></polygon>
-                    <polygon fill="#DDD" points="90 450 0 600 180 600"></polygon>
-                    <polygon points="90 450 180 300 0 300"></polygon>
-                    <polygon fill="#666" points="270 450 180 600 360 600"></polygon>
-                    <polygon fill="#AAA" points="270 450 360 300 180 300"></polygon>
-                    <polygon fill="#DDD" points="450 450 360 600 540 600"></polygon>
-                    <polygon fill="#999" points="450 450 540 300 360 300"></polygon>
-                    <polygon fill="#999" points="630 450 540 600 720 600"></polygon>
-                    <polygon fill="#FFF" points="630 450 720 300 540 300"></polygon>
-                    <polygon points="810 450 720 600 900 600"></polygon>
-                    <polygon fill="#DDD" points="810 450 900 300 720 300"></polygon>
-                    <polygon fill="#AAA" points="990 450 900 600 1080 600"></polygon>
-                    <polygon fill="#444" points="990 450 1080 300 900 300"></polygon>
-                    <polygon fill="#222" points="90 750 0 900 180 900"></polygon>
-                    <polygon points="270 750 180 900 360 900"></polygon>
-                    <polygon fill="#DDD" points="270 750 360 600 180 600"></polygon>
-                    <polygon points="450 750 540 600 360 600"></polygon>
-                    <polygon points="630 750 540 900 720 900"></polygon>
-                    <polygon fill="#444" points="630 750 720 600 540 600"></polygon>
-                    <polygon fill="#AAA" points="810 750 720 900 900 900"></polygon>
-                    <polygon fill="#666" points="810 750 900 600 720 600"></polygon>
-                    <polygon fill="#999" points="990 750 900 900 1080 900"></polygon>
-                    <polygon fill="#999" points="180 0 90 150 270 150"></polygon>
-                    <polygon fill="#444" points="360 0 270 150 450 150"></polygon>
-                    <polygon fill="#FFF" points="540 0 450 150 630 150"></polygon>
-                    <polygon points="900 0 810 150 990 150"></polygon>
-                    <polygon fill="#222" points="0 300 -90 450 90 450"></polygon>
-                    <polygon fill="#FFF" points="0 300 90 150 -90 150"></polygon>
-                    <polygon fill="#FFF" points="180 300 90 450 270 450"></polygon>
-                    <polygon fill="#666" points="180 300 270 150 90 150"></polygon>
-                    <polygon fill="#222" points="360 300 270 450 450 450"></polygon>
-                    <polygon fill="#FFF" points="360 300 450 150 270 150"></polygon>
-                    <polygon fill="#444" points="540 300 450 450 630 450"></polygon>
-                    <polygon fill="#222" points="540 300 630 150 450 150"></polygon>
-                    <polygon fill="#AAA" points="720 300 630 450 810 450"></polygon>
-                    <polygon fill="#666" points="720 300 810 150 630 150"></polygon>
-                    <polygon fill="#FFF" points="900 300 810 450 990 450"></polygon>
-                    <polygon fill="#999" points="900 300 990 150 810 150"></polygon>
-                    <polygon points="0 600 -90 750 90 750"></polygon>
-                    <polygon fill="#666" points="0 600 90 450 -90 450"></polygon>
-                    <polygon fill="#AAA" points="180 600 90 750 270 750"></polygon>
-                    <polygon fill="#444" points="180 600 270 450 90 450"></polygon>
-                    <polygon fill="#444" points="360 600 270 750 450 750"></polygon>
-                    <polygon fill="#999" points="360 600 450 450 270 450"></polygon>
-                    <polygon fill="#666" points="540 600 630 450 450 450"></polygon>
-                    <polygon fill="#222" points="720 600 630 750 810 750"></polygon>
-                    <polygon fill="#FFF" points="900 600 810 750 990 750"></polygon>
-                    <polygon fill="#222" points="900 600 990 450 810 450"></polygon>
-                    <polygon fill="#DDD" points="0 900 90 750 -90 750"></polygon>
-                    <polygon fill="#444" points="180 900 270 750 90 750"></polygon>
-                    <polygon fill="#FFF" points="360 900 450 750 270 750"></polygon>
-                    <polygon fill="#AAA" points="540 900 630 750 450 750"></polygon>
-                    <polygon fill="#FFF" points="720 900 810 750 630 750"></polygon>
-                    <polygon fill="#222" points="900 900 990 750 810 750"></polygon>
-                    <polygon fill="#222" points="1080 300 990 450 1170 450"></polygon>
-                    <polygon fill="#FFF" points="1080 300 1170 150 990 150"></polygon>
-                    <polygon points="1080 600 990 750 1170 750"></polygon>
-                    <polygon fill="#666" points="1080 600 1170 450 990 450"></polygon>
-                    <polygon fill="#DDD" points="1080 900 1170 750 990 750"></polygon>
-                  </g>
-                </pattern>
-              </defs>
-              <rect x="0" y="0" fill="url(#a)" width="100%" height="100%"></rect>
-              <rect x="0" y="0" fill="url(#b)" width="100%" height="100%"></rect>
-            </svg></div>
+            <div>
+              {
+                salonImages?.[0] && <img src={salonImages?.[0]?.url} alt="cover-img" />
+              }
+            </div>
 
             <div className={style.edit_salon_logo_container}>
               {
@@ -1176,9 +1231,14 @@ const EditSalon = () => {
             <input
               type="text"
               value={salonName}
-              onChange={(e) => setSalonName(e.target.value)}
+              onChange={(e) => {
+                setSalonNameError("")
+                setSalonName(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
+              style={{ border: salonNameError && "0.1rem solid red"}}
             />
+            <p className={style.error_message}>{salonNameError}</p>
           </div>
 
           <div>
@@ -1188,7 +1248,6 @@ const EditSalon = () => {
               value={salonEmail}
               readOnly
               onKeyDown={handleKeyPress}
-            // onChange={(e) => setSalonEmail(e.target.value)}
             />
           </div>
 
@@ -1197,9 +1256,14 @@ const EditSalon = () => {
             <input
               type="text"
               value={salonDesc}
-              onChange={(e) => setSalonDesc(e.target.value)}
+              onChange={(e) => {
+                setSalonDescError("")
+                setSalonDesc(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
+              style={{ border: salonDescError && "0.1rem solid red"}}
             />
+             <p className={style.error_message}>{salonDescError}</p>
           </div>
 
           <div>
@@ -1207,9 +1271,14 @@ const EditSalon = () => {
             <input
               type="text"
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => {
+                setSalonAddressError("")
+                setAddress(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
+              style={{ border: salonAddressError && "0.1rem solid red"}}
             />
+            <p className={style.error_message}>{salonAddressError}</p>
           </div>
 
           <div>
@@ -1246,27 +1315,7 @@ const EditSalon = () => {
                 value={country}
                 readOnly
                 onKeyDown={handleKeyPress}
-              // onChange={(e) => searchCountryHandler(e)}
               />
-
-              {/* {countryDrop && <ClickAwayListener onClickAway={() => setCountryDrop(false)}><div>
-                {
-                  getAdminAllCountriesLoading && !getAdminAllCountriesResolve ?
-                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                    !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length > 0 ?
-
-                      AllCountries.map((c) => (
-                        <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
-                      ))
-
-                      :
-                      !getAdminAllCountriesLoading && getAdminAllCountriesResolve && AllCountries?.length == 0 ?
-                        <p>No Countries</p> :
-                        !getAdminAllCountriesLoading && !getAdminAllCountriesResolve &&
-                        <p>No Countries</p>
-                }
-              </div></ClickAwayListener>} */}
-
             </div>
 
             <div>
@@ -1276,26 +1325,7 @@ const EditSalon = () => {
                 value={city}
                 readOnly
                 onKeyDown={handleKeyPress}
-              // onChange={(e) => searchCityHandler(e)}
               />
-
-              {/* {cityDrop && <ClickAwayListener onClickAway={() => setCityDrop(false)}><div>
-                {
-                  getAdminAllCitiesLoading && !getAdminAllCitiesResolve ?
-                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                    !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length > 0 ?
-
-                      AllCities.map((c) => (
-                        <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
-                      ))
-
-                      :
-                      !getAdminAllCitiesLoading && getAdminAllCitiesResolve && AllCities?.length == 0 ?
-                        <p>No Cities</p> :
-                        !getAdminAllCitiesLoading && !getAdminAllCitiesResolve &&
-                        <p>No Cities</p>
-                }
-              </div></ClickAwayListener>} */}
             </div>
           </div>
 
@@ -1307,29 +1337,7 @@ const EditSalon = () => {
                 value={timezone}
                 readOnly
                 onKeyDown={handleKeyPress}
-              // onClick={() => timezoneDropHandler()}
               />
-
-              {/* {timezoneDrop &&
-                <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}>
-                  <div>
-                    {
-                      getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve ?
-                        <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                        !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
-
-                          AllTimezones.map((c) => (
-                            <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
-                          ))
-
-                          :
-                          !getAdminAllTimezoneLoading && getAdminAllTimezoneResolve && AllTimezones?.length == 0 ?
-                            <p>No Timezone</p> :
-                            !getAdminAllTimezoneLoading && !getAdminAllTimezoneResolve &&
-                            <p>No Timezone</p>
-                    }
-                  </div>
-                </ClickAwayListener>} */}
             </div>
 
             <div>
@@ -1339,7 +1347,6 @@ const EditSalon = () => {
                 value={postCode}
                 readOnly
                 onKeyDown={handleKeyPress}
-              // onChange={(e) => setPostCode(e.target.value)}
               />
             </div>
           </div>
@@ -1353,7 +1360,7 @@ const EditSalon = () => {
               value={`${salonType ? `${salonType}` : ''}`}
               onClick={() => salonTypeDropHandler()}
               className={style.salontype_input}
-              onKeyDown={handleKeyPress}
+              readOnly
             />
 
             {salonTypeDrop &&
@@ -1368,7 +1375,7 @@ const EditSalon = () => {
           <div>
             <p>Mobile Number</p>
             <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div onKeyDown={handleKeyPress}>
+              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red"}}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry={countryflag}
@@ -1376,16 +1383,12 @@ const EditSalon = () => {
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />
               </div>
-
             </div>
+            <p className={style.error_message}>{invalidNumberError}</p>
           </div>
 
           <div className={style.add_services_drop}>
-            <p>Add Your Services</p>
-            <button
-              onClick={addservicedropHandler}
-              className={openServices ? style.add_services_btn_inactive : style.add_services_btn_active}
-            >{openServices ? "-" : "+"}</button>
+            <button onClick={addservicedropHandler} className={style.addservices_btn}>Add Services</button>
           </div>
 
           {
@@ -1471,7 +1474,7 @@ const EditSalon = () => {
                             SalonIcons?.map((s) => (
                               <div key={s._id} className={style.slider_item} onClick={() => logoselectHandler(s)}
                                 style={{
-                                  border: selectedLogo?.url === s.url ? "3px solid var(--primary-bg-color3)" : "1px solid black"
+                                  border: serviceIconError ? "0.1rem solid red" : selectedLogo?.url === s.url ? "2px solid var(--primary-bg-color3)" : "1px solid rgba(0,0,0,0.4)"
                                 }}
                               >
                                 <img src={s.url} alt="" />
@@ -1493,9 +1496,14 @@ const EditSalon = () => {
                 <input
                   type="text"
                   value={serviceName}
-                  onChange={(e) => setServiceName(e.target.value)}
+                  onChange={(e) => {
+                    setServiceNameError("")
+                    setServiceName(e.target.value)
+                  }}
                   onKeyDown={handleKeyPressAddServices}
+                  style={{ border: serviceNameError && "0.1rem solid red" }}
                 />
+                <p className={style.error_message}>{serviceNameError}</p>
               </div>
 
               <div>
@@ -1503,9 +1511,14 @@ const EditSalon = () => {
                 <input
                   type="text"
                   value={serviceDesc}
-                  onChange={(e) => setServiceDesc(e.target.value)}
+                  onChange={(e) => {
+                    setServiceDescError("")
+                    setServiceDesc(e.target.value)
+                  }}
                   onKeyDown={handleKeyPressAddServices}
+                  style={{ border: serviceDescError && "0.1rem solid red" }}
                 />
+                <p className={style.error_message}>{serviceDescError}</p>
               </div>
 
               <div>
@@ -1514,7 +1527,7 @@ const EditSalon = () => {
                   type="text"
                   value={`${vipService ? 'VIP' : 'Regular'}`}
                   onClick={() => vipServiceDropHandler()}
-                  onKeyDown={handleKeyPressAddServices}
+                  readOnly
                 />
 
                 {vipServiceDrop &&
@@ -1532,15 +1545,17 @@ const EditSalon = () => {
                   <input
                     type="text"
                     value={servicePrice}
-                    // onChange={(e) => setServicePrice(e.target.value)}
                     onChange={(e) => {
+                      setServicePriceError("")
                       const value = e.target.value;
                       if (/^\d*$/.test(value)) {
                         setServicePrice(value);
                       }
                     }}
                     onKeyDown={handleKeyPressAddServices}
+                    style={{ border: servicePriceError && "0.1rem solid red" }}
                   />
+                  <p className={style.error_message}>{servicePriceError}</p>
                 </div>
 
                 <div>
@@ -1548,15 +1563,17 @@ const EditSalon = () => {
                   <input
                     type="text"
                     value={serviceEWT}
-                    // onChange={(e) => setServiceEWT(e.target.value)}
                     onChange={(e) => {
+                      setServiceEwtError("")
                       const value = e.target.value;
                       if (/^\d*$/.test(value)) {
                         setServiceEWT(value);
                       }
                     }}
                     onKeyDown={handleKeyPressAddServices}
+                    style={{ border: serviceEwtError && "0.1rem solid red" }}
                   />
+                  <p className={style.error_message}>{serviceEwtError}</p>
                 </div>
               </div>
 
@@ -1627,35 +1644,6 @@ const EditSalon = () => {
               <div>{uploadSalonLogo?.name}</div>
             </div>
           </div>
-
-
-          {/* <div
-            className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}
-          >
-            <div>
-              <p>Select Salon Images</p>
-
-              <button onClick={() => handleSalonImageButtonClick()}>
-                Upload
-                <input
-                  type="file"
-                  ref={salonImagefileInputRef}
-                  style={{ display: 'none' }}
-                  multiple
-                  onChange={handleSalonImageFileInputChange}
-                />
-              </button>
-            </div>
-
-            <div>
-              <p>Update Salon Images</p>
-
-              <button onClick={() => setOpenMobileUpdateModal(true)}>
-                Update
-              </button>
-            </div>
-
-          </div> */}
 
           <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
