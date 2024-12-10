@@ -29,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 20rem;
+    width: 16rem;
     height: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -66,7 +66,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     cursor: pointer;
     border-radius: 50%;
@@ -414,7 +414,7 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #0867ff25;
+            background-color: #efefef;
             border: 0.1rem solid #000;
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);

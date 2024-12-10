@@ -62,6 +62,7 @@ const Queue = () => {
     const confirm = window.confirm("Are you Sure ?")
 
     const queueData = {
+      servedByEmail:barberEmail,
       barberEmail,
       barberId: b.barberId,
       salonId,
@@ -122,10 +123,10 @@ const Queue = () => {
               <>
                 <div className={`${style.barber_queue_content_body} ${darkmodeOn && style.dark}`}>
                   <div>
+                    <p>#</p>
                     <p>Name</p>
-                    <p>Time Joined Q</p>
                     <p>Barber Name</p>
-                    <p>Q Postion</p>
+                    <p>Time Joined Q</p>
                     <p>Type</p>
                     <p>Serve</p>
                     <p>Cancel</p>
@@ -139,10 +140,10 @@ const Queue = () => {
                         borderBottom: BarberQueueList.length - 1 === index && "none"
                       }}
                     >
-                      <p>{b.name}</p>
-                      <p>{b.timeJoinedQ}</p>
-                      <p>{b.barberName}</p>
                       <p>{b.qPosition}</p>
+                      <p>{b.name}</p>         
+                      <p>{b.barberName}</p>
+                      <p>{b.timeJoinedQ}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"

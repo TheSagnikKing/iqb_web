@@ -68,6 +68,7 @@
 }
 
 .barber_edit_profile_container_right {
+    padding-inline: 0.5rem;
     height: calc(100% - 5rem);
     width: 100%;
     overflow: auto;
@@ -124,7 +125,7 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 0.1rem solid #000;
         color: #000;
 
@@ -136,11 +137,13 @@
 
     &>div {
         margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
 
         &>p {
             font-size: var(--list-content-body-text);
             font-weight: 600;
-            margin-bottom: 1rem;
         }
 
         &>input {
@@ -168,7 +171,7 @@
         height: 4rem;
         border: none;
         cursor: pointer;
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 0.1rem solid #000;
         transition: var(--btn-transition);
         border-radius: var(--list-btn-border-radius);
@@ -584,7 +587,7 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #0867ff25;
+            background-color: #efefef;
             border: 0.1rem solid #000;
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
@@ -733,7 +736,7 @@
             }
 
             &>button:nth-child(2) {
-                background-color: #0867ff25;
+                background-color: #efefef;
                 border: 0.1rem solid #000;
                 color: #000;
 
@@ -842,7 +845,7 @@
             align-items: center;
             justify-content: center;
             width: 3.2rem;
-            background-color: #0867ff25;
+            background-color: #efefef;
             border: 0.1rem solid #000;
             cursor: pointer;
             color: #000;
@@ -1069,7 +1072,7 @@
     &>button {
         width: 10rem;
         height: 4rem;
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 0.1rem solid #000;
         color: #000;
         padding: var(--list-header-btn-padding);
@@ -1093,6 +1096,12 @@
             color: #fff;
         }
     }
+}
+
+
+.error_message {
+    font-size: 1.2rem !important;
+    color: red;
 }
 
 

@@ -180,7 +180,7 @@
     height: 3.2rem;
     border: none;
     cursor: pointer;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     border-radius: var(--list-btn-border-radius);
     -webkit-border-radius: var(--list-btn-border-radius);
@@ -434,7 +434,7 @@
                 }
 
                 &>button:nth-child(1) {
-                    background-color: #0867ff25;
+                    background-color: #efefef;
                     border: 1px solid #000;
 
                     &>div,
@@ -603,7 +603,7 @@
     -moz-border-radius: var(--list-btn-border-radius);
     -ms-border-radius: var(--list-btn-border-radius);
     -o-border-radius: var(--list-btn-border-radius);
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
     transition: var(--btn-transition);
@@ -1390,7 +1390,7 @@
 }
 
 .add_services_btn_active {
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
 
@@ -1538,7 +1538,7 @@
     -moz-border-radius: var(--list-btn-border-radius);
     -ms-border-radius: var(--list-btn-border-radius);
     -o-border-radius: var(--list-btn-border-radius);
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
     transition: var(--btn-transition);
@@ -1578,7 +1578,7 @@
     -moz-border-radius: var(--list-btn-border-radius) !important;
     -ms-border-radius: var(--list-btn-border-radius) !important;
     -o-border-radius: var(--list-btn-border-radius) !important;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
     transition: var(--btn-transition);
@@ -1911,7 +1911,7 @@
                     }
 
                     &>button:nth-child(2) {
-                        background-color: #0867ff25;
+                        background-color: #efefef;
                         border: 1px solid #000;
 
                         &>p {

@@ -254,7 +254,24 @@ const EditProfile = () => {
 
     const [invalidnumber, setInvalidNumber] = useState(false)
 
+
+    const [nameError, setNameError] = useState("")
+    const [invalidNumberError, setInvalidNumberError] = useState("")
+
     const updateBarberProfile = () => {
+
+        if (name.length === 0 || name.length > 20) {
+            toast.error("Name must be between 1 to 20 characters", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setNameError("Name must be between 1 to 20 characters");
+        }
 
         if (invalidnumber) {
             toast.error("Invalid Number", {
@@ -266,23 +283,23 @@ const EditProfile = () => {
                     color: '#fff',
                 },
             });
-        } else {
-            const profiledata = {
-                email: barberProfile?.email,
-                dateOfBirth,
-                mobileNumber: Number(mobileNumber),
-                countryCode: Number(countryCode),
-                name,
-                gender,
-                password,
-                barberServices: currentBarberServices
-            }
 
-            // console.log(profiledata)
-
-            dispatch(barberUpdateProfileAction(profiledata, navigate))
+            return setInvalidNumberError("Invalid Number")
         }
 
+
+        const profiledata = {
+            email: barberProfile?.email,
+            dateOfBirth,
+            mobileNumber: Number(mobileNumber),
+            countryCode: Number(countryCode),
+            name,
+            gender,
+            password,
+            barberServices: currentBarberServices
+        }
+
+        dispatch(barberUpdateProfileAction(profiledata, navigate))
     }
 
     const handleKeyPress = (e) => {
@@ -372,6 +389,7 @@ const EditProfile = () => {
     const [countryflag, setCountryFlag] = useState("gb")
 
     const handlePhoneChange = (phone, meta) => {
+        setInvalidNumberError("")
         const { country, inputValue } = meta;
 
         const isValid = isPhoneValid(phone);
@@ -483,7 +501,7 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    <p>{name}</p>
+                    <p>{name?.length > 20 ? `${name.slice(0,20)}...` : name}</p>
                     <p>{barberProfile?.email}</p>
                 </div>
             </div>
@@ -582,9 +600,16 @@ const EditProfile = () => {
                         type="text"
                         placeholder='Enter Name'
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => {
+                            setNameError("")
+                            setName(e.target.value)
+                        }}
                         onKeyDown={handleKeyPress}
+                        style={{
+                            border: nameError ? "0.1rem solid red" : "none"
+                        }}
                     />
+                    <p className={style.error_message}>{nameError}</p>
                 </div>
 
                 <div>
@@ -745,7 +770,7 @@ const EditProfile = () => {
 
                 <div>
                     <p>Mob. Number</p>
-                    <div className={style.barber_edit_mobile_container}>
+                    <div className={style.barber_edit_mobile_container} style={{ outline: invalidNumberError && "0.1rem solid red" }}>
                         <div onKeyDown={handleKeyPress}>
                             <PhoneInput
                                 forceDialCode={true}
@@ -767,6 +792,7 @@ const EditProfile = () => {
 
                         </button>
                     </div>
+                    <p className={style.error_message}>{invalidNumberError}</p>
                 </div>
 
                 <Modal

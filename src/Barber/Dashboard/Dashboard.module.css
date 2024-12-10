@@ -166,7 +166,7 @@
             height: 4rem;
             border: none;
             cursor: pointer;
-            background-color: #0867ff25;
+            background-color: #efefef;
             border: 0.1rem solid #000;
             color: #000;
             transition: var(--btn-transition);
@@ -194,7 +194,7 @@
     width: 3.5rem;
     height: 3.5rem;
     border: none;
-    background-color: #0867ff25;
+    background-color: #efefef;
     color: #000;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);
@@ -290,7 +290,7 @@
     align-items: center;
     justify-content: center;
     width: 3.2rem;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     cursor: pointer;
     color: #000;
@@ -485,7 +485,7 @@
     height: 4rem;
     display: block;
     margin-inline: auto;
-    background-color: #0867ff25;
+    background-color: #efefef;
     color: #000;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);

@@ -95,7 +95,7 @@
     cursor: pointer;
     border: 0.1rem solid #000;
     color: #000;
-    background-color: #0867ff25;
+    background-color: #efefef;
     font-size: var(--list-content-body-text);
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -161,7 +161,7 @@ iframe {
     width: 100%;
     border: 0.1rem solid #000;
     color: #000;
-    background-color: #0867ff25;
+    background-color: #efefef;
     outline: none;
     cursor: pointer;
     display: flex;

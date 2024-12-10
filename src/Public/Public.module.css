@@ -59,7 +59,7 @@
     padding: var(--list-header-btn-padding);
     border: 0.1rem solid #000;
     color: #000;
-    background-color: #0867ff25;
+    background-color: #efefef;
     outline: none;
     cursor: pointer;
     display: flex;

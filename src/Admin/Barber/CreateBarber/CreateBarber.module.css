@@ -80,7 +80,7 @@
     height: 4rem;
     border: none;
     cursor: pointer;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
@@ -187,7 +187,7 @@
     align-items: center;
     justify-content: center;
     width: 3.2rem;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     cursor: pointer;
     color: #000;
@@ -444,7 +444,7 @@
         height: 4rem;
         border: none;
         cursor: pointer;
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 1px solid #000;
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);
@@ -581,7 +581,7 @@
         height: 4rem;
         border: none;
         cursor: pointer;
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 1px solid #000;
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);
@@ -718,7 +718,7 @@
         height: 4rem;
         border: none;
         cursor: pointer;
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 1px solid #000;
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);

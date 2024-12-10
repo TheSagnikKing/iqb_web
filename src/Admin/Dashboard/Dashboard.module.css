@@ -41,7 +41,7 @@
         cursor: pointer;
         width: var(--mdl-sbt-btn-width);
         height: var(--mdl-sbt-btn-height);
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 0.1rem solid #000;
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);

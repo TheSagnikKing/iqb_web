@@ -38,7 +38,24 @@ const SignupEditProfile = () => {
 
   const [invalidnumber, setInvalidNumber] = useState(false)
 
+  const [nameError, setNameError] = useState("")
+  const [invalidNumberError, setInvalidNumberError] = useState("")
+
   const updateClicked = () => {
+
+    if (name.length === 0 || name.length > 20) {
+      toast.error("Name must be between 1 to 20 characters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Name must be between 1 to 20 characters");
+    }
+
     if (invalidnumber) {
       toast.error("Invalid Number", {
         duration: 3000,
@@ -49,13 +66,12 @@ const SignupEditProfile = () => {
           color: '#fff',
         },
       });
-    } else {
-      const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
 
-      // console.log(profiledata)
-      dispatch(AdminSignupEditAction(profiledata, navigate))
+      return setInvalidNumberError("Invalid Number")
     }
 
+    const profiledata = { email: admindata?.email, mobileNumber: Number(mobileNumber), name, gender, dateOfBirth, salonId: admindata?.salonId, AuthType: admindata?.AuthType, countryCode: Number(countryCode) };
+    dispatch(AdminSignupEditAction(profiledata, navigate))
   }
 
   const skipClicked = () => {
@@ -95,6 +111,7 @@ const SignupEditProfile = () => {
   const [countryflag, setCountryFlag] = useState("gb")
 
   const handlePhoneChange = (phone, meta) => {
+    setInvalidNumberError("")
     const { country, inputValue } = meta;
 
     const isValid = isPhoneValid(phone);
@@ -139,9 +156,16 @@ const SignupEditProfile = () => {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setNameError("")
+                setName(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
+              style={{
+                border: nameError ? "0.1rem solid red" : "none"
+              }}
             />
+            <p className={style.error_message}>{nameError}</p>
           </div>
 
           <div>
@@ -172,7 +196,7 @@ const SignupEditProfile = () => {
 
           <div>
             <p>Mobile Number</p>
-            <div>
+            <div style={{ border: invalidNumberError && "0.1rem solid red"}}>
               <div>
                 <PhoneInput
                   forceDialCode={true}
@@ -184,6 +208,7 @@ const SignupEditProfile = () => {
               </div>
 
             </div>
+            <p className={style.error_message}>{invalidNumberError}</p>
           </div>
 
           <div>

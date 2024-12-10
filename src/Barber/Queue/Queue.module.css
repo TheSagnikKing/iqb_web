@@ -74,7 +74,7 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr;
+    grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr;
     place-items: center;
     font-size: var(--list-content-body-text);
     font-weight: 500;
@@ -127,7 +127,7 @@
     font-size: var(--list-content-body-text);
 }
 
-.barber_queue_content_body>div>p:nth-child(4),
+/* .barber_queue_content_body>div>p:nth-child(4), */
 .barber_queue_content_body>div>p:nth-child(5),
 .barber_queue_content_body>div>p:nth-child(6),
 .barber_queue_content_body>div>p:nth-child(7) {
@@ -170,7 +170,7 @@
 }
 
 .barber_queue_content_body_item>div:nth-child(6)>button {
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
     font-weight: 500;

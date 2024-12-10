@@ -43,7 +43,7 @@ const QueHistory = () => {
     const [copyAdminQueueHistory, setCopyAdminQueueHistory] = useState([])
 
     useEffect(() => {
-        if (AdminQueueListHistory && AdminQueueListHistory.length > 0) {
+        if (AdminQueueListHistory) {
             setCopyAdminQueueHistory(AdminQueueListHistory)
         }
     }, [AdminQueueListHistory])
@@ -57,11 +57,11 @@ const QueHistory = () => {
         if (!searchValue) {
             setCopyAdminQueueHistory(AdminQueueListHistory);
         } else {
-            const filteredArray = AdminQueueListHistory.filter((queue) => {
+            const filteredArray = AdminQueueListHistory?.filter((queue) => {
                 return (
                     queue.barberName.toLowerCase().includes(searchValue) ||
                     queue.customerName.toLowerCase().includes(searchValue)
-            )
+                )
             });
             setCopyAdminQueueHistory(filteredArray);
         }
@@ -96,10 +96,12 @@ const QueHistory = () => {
                             <>
                                 <div className={`${style.quehistory_wrapper_content_body} ${darkmodeOn && style.dark}`}>
                                     <div>
+                                        <p>#</p>
                                         <p>Name</p>
-                                        <p>Time Joined Q</p>
                                         <p>Barber Name</p>
-                                        <div><p>Q Postion</p></div>
+                                        <p>Time Joined Q</p>
+                                        <div><p>Qg Code</p></div>
+                                        <div><p>EWT</p></div>
                                         <div><p>Type</p></div>
                                         <div><p>isAdmin</p></div>
                                         <div><p>Status</p></div>
@@ -113,10 +115,12 @@ const QueHistory = () => {
                                                 borderBottom: copyAdminQueueHistory.length - 1 === index && "none"
                                             }}
                                         >
+                                            <p>{b?.qPosition}</p>
                                             <p>{b?.customerName}</p>
-                                            <p>{b?.timeJoinedQ}</p>
                                             <p>{b?.barberName}</p>
-                                            <div><p>{b?.qPosition}</p></div>
+                                            <p>{b?.timeJoinedQ}</p>
+                                            <div><p>{b?.qgCode}</p></div>
+                                            <div><p>{b?.serviceEWT}</p></div>
                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div>
                                                 {

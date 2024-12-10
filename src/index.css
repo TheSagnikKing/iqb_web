@@ -283,7 +283,7 @@ p {
   border: none;
   border: 0.1rem solid #000;
   color: #000;
-  background-color: #0867ff25;
+  background-color: #efefef;
   transition: var(--btn-transition);
   -webkit-transition: var(--btn-transition);
   -moz-transition: var(--btn-transition);

@@ -49,7 +49,7 @@ const QueHistory = () => {
             </div>
 
             <div className={`${style.quehistory_wrapper_content}`}>
-                
+
                 {
                     getBarberQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
                         <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
@@ -59,10 +59,12 @@ const QueHistory = () => {
                             <>
                                 <div className={`${style.quehistory_wrapper_content_body} ${darkmodeOn && style.dark}`}>
                                     <div>
+                                        <p>#</p>
                                         <p>Name</p>
-                                        <p>Time Joined Q</p>
                                         <p>Barber Name</p>
-                                        <div><p>Q Postion</p></div>
+                                        <p>Time Joined Q</p>
+                                        <div><p>Qg Code</p></div>
+                                        <div><p>EWT</p></div>
                                         <div><p>Type</p></div>
                                         <div><p>Status</p></div>
                                     </div>
@@ -75,11 +77,13 @@ const QueHistory = () => {
                                                 borderBottom: BarberQueueListHistory.length - 1 === index && "none"
                                             }}
                                         >
+                                            <p>{b?.qPosition}</p>
                                             <p>{b?.customerName}</p>
-                                            <p>{b?.timeJoinedQ}</p>
                                             <p>{b?.barberName}</p>
-                                            <div><p>{b?.qPosition}</p></div>
-                                            <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon/>}</p></div>
+                                            <p>{b?.timeJoinedQ}</p>
+                                            <div><p>{b?.qgCode}</p></div>
+                                            <div><p>{b?.serviceEWT}</p></div>
+                                            <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
                                         </div>
                                     ))}

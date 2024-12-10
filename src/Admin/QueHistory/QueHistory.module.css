@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 20rem;
+    width: 16rem;
     height: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -107,7 +107,7 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1fr;
+    grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr 1fr 1fr;
     place-items: center;
     font-size: var(--list-content-body-text);
     font-weight: 500;

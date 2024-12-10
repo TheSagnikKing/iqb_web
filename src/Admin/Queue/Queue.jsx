@@ -2,13 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./Queue.module.css"
 
 import { useNavigate } from 'react-router-dom'
-import { CrownIcon, DeleteIcon, SearchIcon, ServeIcon } from '../../icons'
+import { CloseIcon, CrownIcon, DeleteIcon, SearchIcon, ServeIcon } from '../../icons'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
 import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import toast from 'react-hot-toast'
+import { Modal } from '@mui/material'
+import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction'
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 
 const Queue = () => {
 
@@ -43,7 +46,7 @@ const Queue = () => {
   const [copyQueueList, setCopyQueueList] = useState([])
 
   useEffect(() => {
-    if (queuelist && queuelist.length > 0) {
+    if (queuelist) {
       setCopyQueueList(queuelist)
     }
   }, [queuelist])
@@ -58,9 +61,9 @@ const Queue = () => {
       setCopyQueueList(queuelist)
     } else {
       setCopyQueueList((prev) => {
-        const filteredArray = queuelist.filter((queue) => {
+        const filteredArray = queuelist?.filter((queue) => {
           return queue.name.toLowerCase().includes(searchValue) ||
-          queue.barberName.toLowerCase().includes(search)
+            queue.barberName.toLowerCase().includes(search)
         })
         return filteredArray
       })
@@ -71,7 +74,7 @@ const Queue = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  const serveQHandler = (b) => {
+  const selectHandler = (b) => {
     if (b.qPosition !== 1) {
       return toast.error("Queue position is not 1", {
         duration: 3000,
@@ -95,7 +98,12 @@ const Queue = () => {
     }
 
     if (confirm) {
-      dispatch(adminServeQueueAction(queueData, salonId))
+      setChoosebarber(b?.barberName)
+      setChoosebarberemail(b?.barberEmail)
+      setChoosebarbermodalopen({
+        open: true,
+        data: queueData
+      })
     }
   }
 
@@ -129,6 +137,60 @@ const Queue = () => {
     loading: adminCancelQueueLoading
   } = adminCancelQueue
 
+  const [choosebarbermodalopen, setChoosebarbermodalopen] = useState({
+    open: false,
+    data: {}
+  })
+
+  const [choosebarber, setChoosebarber] = useState("")
+  const [choosebarberemail, setChoosebarberemail] = useState("")
+
+  const BarberListcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    BarberListcontrollerRef.current = controller;
+
+    dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+    return () => {
+      if (BarberListcontrollerRef.current) {
+        BarberListcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+  const {
+    loading: getAdminBarberListLoading,
+    resolve: getAdminBarberListResolve,
+    getAllBarbers: BarberList
+  } = getAdminBarberList
+
+
+  const [copybarberlistdata, setCopybarberlistdata] = useState([])
+
+  useEffect(() => {
+    if(BarberList){
+      const clockedinbarbers = BarberList?.filter((b) => {
+        return b.isClockedIn
+      })
+      setCopybarberlistdata(clockedinbarbers)
+    }
+  },[BarberList])
+
+  const serveQHandler = () => {
+
+    const queuedata = {
+      ...choosebarbermodalopen.data,
+      servedByEmail: choosebarberemail
+    }
+
+    dispatch(adminServeQueueAction(queuedata, salonId, setChoosebarbermodalopen))
+  }
+
+
   return (
     <div className={`${style.admin_queue_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
@@ -159,10 +221,10 @@ const Queue = () => {
               <>
                 <div className={`${style.admin_queue_content_body} ${darkmodeOn && style.dark}`}>
                   <div>
+                    <p>#</p>
                     <p>Name</p>
-                    <p>Time Joined Q</p>
                     <p>Barber Name</p>
-                    <p>Q Postion</p>
+                    <p>Time Joined Q</p>
                     <p>Type</p>
                     <p>Serve</p>
                     <p>Cancel</p>
@@ -176,16 +238,16 @@ const Queue = () => {
                         borderBottom: copyQueueList.length - 1 === index && "none"
                       }}
                     >
-                      <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>
-                      <p>{b.timeJoinedQ}</p>
-                      <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.qPosition}</p>
+                      <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>
+                      <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
+                      <p>{b.timeJoinedQ}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"
                         }
                       </div>
-                      <div><button onClick={() => serveQHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
+                      <div><button onClick={() => selectHandler(b)} disabled={adminServeQueueLoading}>Serve</button></div>
                       <div><button onClick={() => cancelQHandler(b)} disabled={adminCancelQueueLoading}>Cancel</button></div>
                     </div>
                   ))}
@@ -196,6 +258,81 @@ const Queue = () => {
               </div>
         }
       </div>
+
+      <Modal
+        open={choosebarbermodalopen.open}
+        onClose={() => setChoosebarbermodalopen({
+          open: false,
+          data: {}
+        })}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={style.modal_container}>
+          <div>
+            <p>Choose Barber</p>
+            <button onClick={() => setChoosebarbermodalopen({
+              open: false,
+              data: {}
+            })}><CloseIcon /></button>
+          </div>
+
+          <div className={style.modal_content_container}>
+            <input type="text" value={choosebarber} placeholder='Choose Barber' readOnly />
+
+            {
+              getAdminBarberListLoading ? (<div className={style.barber_dropdown_loading}>
+                <Skeleton count={3} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              </div>) :
+                getAdminBarberListResolve && copybarberlistdata?.length > 0 ?
+                  (<div className={style.barber_dropdown}>
+                    {
+                      copybarberlistdata?.map((b) => {
+                        return (
+                          <div className={style.choose_barber_dropdown_item} key={b._id}
+                            onClick={() => {
+                              setChoosebarberemail(b?.email)
+                              setChoosebarber(b?.name)
+                            }}
+                            style={{
+                              borderLeft: b.isOnline ? "0.5rem solid limegreen" : "0.5rem solid red"
+                            }}
+                          >
+                            <div>
+                              <img src={b?.profile?.[0]?.url} alt="img" />
+                              <div className={style.barber_online_dot}
+                                style={{
+                                  backgroundColor: b.isOnline ? "limegreen" : "red"
+                                }}
+                              ></div>
+                            </div>
+                            <div>
+                              <p>{b.name}</p>
+                              <p>Queue Count : {b.queueCount}</p>
+                              <p>EWT : {b.barberEWT} mins</p>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>) :
+                  (<div className={style.barber_dropdown_error}>
+                    <p>No barbers available</p>
+                  </div>)
+            }
+
+          </div>
+
+            {
+              adminServeQueueLoading ? <button style={{
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
+            }
+
+        </div>
+      </Modal>
     </div>
   )
 }

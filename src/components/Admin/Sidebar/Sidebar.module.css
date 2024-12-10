@@ -5,7 +5,8 @@
   grid-template-columns: auto auto;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-  background-color: #ebf5ff;
+  /* background-color: #ebf5ff; */
+  background-color: #efefef;
 }
 
 .sidebar {
@@ -167,7 +168,8 @@
   color: var(--primary-text-light-color2);
   padding-inline: 2rem;
   font-weight: 500;
-  background-color: #ebf5ff;
+  /* background-color: #ebf5ff; */
+  background-color: #efefef;
 }
 
 .sidebar_top_salon {

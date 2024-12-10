@@ -35,7 +35,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     cursor: pointer;
     color: #000;
@@ -76,7 +76,7 @@
     padding: var(--list-header-btn-padding);
     border: none;
     cursor: pointer;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
@@ -278,7 +278,7 @@
 
 .admin_barber_content_body_item>div:nth-last-child(1) {
     &>button {
-        background-color: #0867ff25;
+        background-color: #efefef;
         border: 0.1rem solid #000;
         color: #000;
         font-weight: 500;
@@ -539,7 +539,7 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #0867ff25;
+            background-color: #efefef;
             border: 0.1rem solid #000;
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);

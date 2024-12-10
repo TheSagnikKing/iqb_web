@@ -684,7 +684,7 @@ const EditSalon = () => {
       return setSalonDescError("Please enter salon description")
     }
 
-    if (salonDesc.length === 0 || salonDesc.length > 20) {
+    if (salonDesc.length === 0 || salonDesc.length > 35) {
       toast.error("Salon Description must be between 1 to 35 characters", {
         duration: 3000,
         style: {

@@ -37,7 +37,7 @@
     height: 4rem;
     border: none;
     cursor: pointer;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
@@ -95,7 +95,7 @@
     padding: var(--list-header-btn-padding);
     border: none;
     cursor: pointer;
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
@@ -258,7 +258,7 @@
 
 
 .salonadv_task>div:nth-child(2)>button:nth-child(1) {
-    background-color: #0867ff25;
+    background-color: #efefef;
     border: 0.1rem solid #000;
 
     &>div {

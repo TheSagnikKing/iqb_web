@@ -3,7 +3,7 @@ import { ADMIN_BARBER_SERVED_QUEUE_REQ, ADMIN_BARBER_SERVED_QUEUE_SUCCESS, ADMIN
 import api from "../../api/Api"
 import { getAllQueueListAction } from "./DashboardAction"
 
-export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispatch) => {
+export const adminServeQueueAction = (barberqueuedata, salonId, setChoosebarbermodalopen) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_BARBER_SERVED_QUEUE_REQ })
 
@@ -23,6 +23,11 @@ export const adminServeQueueAction = (barberqueuedata, salonId) => async (dispat
                 color: '#fff',
             },
         });
+
+        setChoosebarbermodalopen({
+            open: false,
+            data: {}
+        })
 
         const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 

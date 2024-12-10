@@ -14,6 +14,8 @@ import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 
 const CustomerList = () => {
 
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
   const dispatch = useDispatch();
   const CustomerListControllerRef = useRef(new AbortController());
@@ -264,7 +266,15 @@ const CustomerList = () => {
             <div onClick={searchCustomerhandler}><SearchIcon /></div>
           </div>
 
-          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendEmailNavigate} title='Email'>
+          <button
+            className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`}
+            onClick={sendEmailNavigate}
+            title='Email'
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+          >
             <div><EmailIcon /></div>
           </button>
 
@@ -329,7 +339,15 @@ const CustomerList = () => {
             </div>
           </Modal>
 
-          <button className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`} onClick={sendMessageNavigate} title='Message'>
+          <button
+            className={`${style.customer_send_btn} ${darkmodeOn && style.dark}`}
+            onClick={sendMessageNavigate}
+            title='Message'
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+          >
             <div><MessageIcon /></div>
           </button>
 

@@ -79,7 +79,7 @@
     width: 12rem;
     border: 0.1rem solid #000;
     color: #000;
-    background-color: #0867ff25;
+    background-color: #efefef;
     outline: none;
     cursor: pointer;
     display: flex;
@@ -170,7 +170,7 @@
     width: 10rem;
     border: 0.1rem solid #000;
     color: #000;
-    background-color: #0867ff25;
+    background-color: #efefef;
     outline: none;
     cursor: pointer;
     display: flex;
@@ -192,6 +192,11 @@
         background-color: #000;
         color: #fff;
     }
+}
+
+.error_message {
+    font-size: 1.2rem !important;
+    color: red;
 }
 
 @media screen and (min-width:0px) and (max-width:430px){
