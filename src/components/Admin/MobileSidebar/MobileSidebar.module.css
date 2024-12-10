@@ -10,7 +10,8 @@
     color: var(--primary-text-light-color2);
     padding-inline: 1rem;
     font-weight: 500;
-    background-color: #ebf5ff;
+    /* background-color: #ebf5ff; */
+    background-color: #efefef;
   }
 
   .mobile_content>div>div:nth-child(2) {

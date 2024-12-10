@@ -269,7 +269,7 @@ const DashboardHeader = () => {
                             key={s._id}
                             onClick={() => selectedActiveSalon(s)}
                             style={{
-                              background: s.salonId === adminProfile?.salonId ? "#0866ff" : undefined,
+                              background: s.salonId === adminProfile?.salonId ? "#000" : undefined,
                               color: s.salonId === adminProfile?.salonId ? "var(--primary-text-light-color1)" : undefined,
                               boxShadow: s.salonId === adminProfile?.salonId ? "0px 1px 6px rgba(0,0,0,0.2)" : undefined,
                             }}
@@ -329,7 +329,7 @@ const DashboardHeader = () => {
                         key={s.id}
                         onClick={() => selectedActiveSalon(s)}
                         style={{
-                          background: s.salonId == adminProfile?.salonId && "#0866ff",
+                          background: s.salonId == adminProfile?.salonId && "#000",
                           color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
                         }}
                       >{s.salonName}</p>
@@ -379,7 +379,7 @@ const DashboardHeader = () => {
                         key={s._id}
                         onClick={() => selectedActiveSalon(s)}
                         style={{
-                          background: s.salonId == adminProfile?.salonId && "#0866ff",
+                          background: s.salonId == adminProfile?.salonId && "#000",
                           color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
                         }}
                       >{s.salonName}</p>

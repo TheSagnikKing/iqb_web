@@ -94,17 +94,17 @@
     color: var(--primary-text-light-colo2);
 }
 
-.barber_queue_content_body>div>p:nth-child(1) {
+.barber_queue_content_body>div>p:nth-child(2) {
     position: sticky;
     left: 0;
     z-index: 2;
 }
 
-.barber_queue_content_body>div:not(:nth-child(1))>p:nth-child(1) {
+.barber_queue_content_body>div:not(:nth-child(1))>p:nth-child(2) {
     background-color: var(--primary-bg-light-color1);
 }
 
-.barber_queue_content_body>div:nth-child(1)>p:nth-child(1) {
+.barber_queue_content_body>div:nth-child(1)>p:nth-child(2) {
     background-color: var(--primary-bg-light-color1);
 }
 

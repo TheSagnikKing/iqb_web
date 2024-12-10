@@ -509,7 +509,7 @@ const EditProfile = () => {
 
                         <div>
                             <p>Please check your email</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.email}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{adminProfile?.email}</span></p>
                             <div>
                                 {
                                     otp.map((digit, index) => (
@@ -666,7 +666,7 @@ const EditProfile = () => {
 
                         <div>
                             <p>Please check your message</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#0866ff" }}>{adminProfile?.mobileNumber}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{adminProfile?.mobileNumber}</span></p>
                             <div>
                                 {
                                     mobileotp.map((digit, index) => (
