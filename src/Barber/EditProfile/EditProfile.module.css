@@ -73,7 +73,7 @@
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
-    scrollbar-color: #0867ff48 transparent;
+    scrollbar-color: #00000089 transparent;
 
     &::-webkit-scrollbar {
         width: 0;
@@ -247,7 +247,7 @@
             border: none;
 
             &:hover {
-                background-color: #0867ffc1;
+                background-color: #00000089;
             }
         }
     }

@@ -172,13 +172,13 @@ const Queue = () => {
   const [copybarberlistdata, setCopybarberlistdata] = useState([])
 
   useEffect(() => {
-    if(BarberList){
+    if (BarberList) {
       const clockedinbarbers = BarberList?.filter((b) => {
         return b.isClockedIn
       })
       setCopybarberlistdata(clockedinbarbers)
     }
-  },[BarberList])
+  }, [BarberList])
 
   const serveQHandler = () => {
 
@@ -225,9 +225,11 @@ const Queue = () => {
                     <p>Name</p>
                     <p>Barber Name</p>
                     <p>Time Joined Q</p>
-                    <p>Type</p>
-                    <p>Serve</p>
-                    <p>Cancel</p>
+                    <div><p>Qg Code</p></div>
+                    <div><p>EWT</p></div>
+                    <div><p>Type</p></div>
+                    <div><p>Serve</p></div>
+                    <div><p>Cancel</p></div>
                   </div>
 
                   {copyQueueList?.map((b, index) => (
@@ -242,6 +244,8 @@ const Queue = () => {
                       <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>
                       <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
+                      <p>{b?.qgCode}</p>
+                      <p>{b?.serviceEWT}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"
@@ -324,12 +328,12 @@ const Queue = () => {
 
           </div>
 
-            {
-              adminServeQueueLoading ? <button style={{
-                display: "grid",
-                placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
-            }
+          {
+            adminServeQueueLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
+          }
 
         </div>
       </Modal>

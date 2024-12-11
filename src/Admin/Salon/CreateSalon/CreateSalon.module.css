@@ -132,7 +132,7 @@
     color: var(--primary-text-light-color1);
 
     &:hover {
-        background-color: #0867ffc1;
+        background-color: #00000089;
     }
 }
 

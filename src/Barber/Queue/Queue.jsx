@@ -127,9 +127,11 @@ const Queue = () => {
                     <p>Name</p>
                     <p>Barber Name</p>
                     <p>Time Joined Q</p>
-                    <p>Type</p>
-                    <p>Serve</p>
-                    <p>Cancel</p>
+                    <div><p>Qg Code</p></div>
+                    <div><p>EWT</p></div>
+                    <div><p>Type</p></div>
+                    <div><p>Serve</p></div>
+                    <div><p>Cancel</p></div>
                   </div>
 
                   {BarberQueueList?.map((b, index) => (
@@ -144,6 +146,8 @@ const Queue = () => {
                       <p>{b.name}</p>         
                       <p>{b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
+                      <p>{b?.qgCode}</p>
+                      <p>{b?.serviceEWT}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"

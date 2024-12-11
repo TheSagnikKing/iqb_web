@@ -110,7 +110,7 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr;
+    grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr;
     place-items: center;
     font-size: var(--list-content-body-text);
     font-weight: 500;
@@ -192,8 +192,8 @@
     justify-content: center;
 }
 
-.admin_queue_content_body_item>div:nth-child(6)>button,
-.admin_queue_content_body_item>div:nth-child(7)>button {
+.admin_queue_content_body_item>div:nth-last-child(1)>button,
+.admin_queue_content_body_item>div:nth-last-child(2)>button {
     padding: var(--list-wrapper-btn-padding);
     border-radius: var(--list-btn-border-radius);
     -webkit-border-radius: var(--list-btn-border-radius);
@@ -205,7 +205,7 @@
     font-size: var(--list-content-body-text);
 }
 
-.admin_queue_content_body_item>div:nth-child(6)>button {
+.admin_queue_content_body_item>div:nth-last-child(2)>button {
     background-color: #efefef;
     border: 0.1rem solid #000;
     color: #000;
@@ -223,7 +223,7 @@
     }
 }
 
-.admin_queue_content_body_item>div:nth-child(7)>button {
+.admin_queue_content_body_item>div:nth-last-child(1)>button {
     background-color: rgba(255, 0, 0, 0.144);
     border: 0.1rem solid red;
     color: red;
