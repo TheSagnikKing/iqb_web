@@ -302,7 +302,13 @@ const Dashboard = () => {
                           {
                             BarberList?.map((barber, index) => {
                               return (
-                                <div className={style.barberitem} key={barber._id}>
+                                <div 
+                                className={style.barberitem} 
+                                key={barber._id}
+                                style={{
+                                  borderBottom: BarberList.length -  1 === index && "none"
+                                }}
+                                >
                                   <div>
                                     <div>
                                       <img src={barber?.profile?.[0]?.url} alt="barber" />
