@@ -182,8 +182,6 @@ const EditSalon = () => {
   const [servicePriceError, setServicePriceError] = useState("")
   const [serviceEwtError, setServiceEwtError] = useState("")
 
-
-
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
   }

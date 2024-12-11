@@ -150,14 +150,11 @@ const SalonAdv = () => {
   const [publicId, setPublicId] = useState("")
   const [mongoid, setMongoid] = useState("")
 
-
-  const fileEditInputRef = useRef(null);
-
   const [handleEditLoader, sethandleEditLoader] = useState(null)
 
-  const editImageHandler = (publicId, mongoid) => {
+  const editImageHandler = (publicId, mongoid, fileEditInputRef) => {
     if (fileEditInputRef.current) {
-      fileEditInputRef.current.click(); // Trigger the file input click
+      fileEditInputRef.current.click(); 
     } else {
       console.error("File input ref is null");
     }
@@ -404,7 +401,7 @@ const SalonAdv = () => {
                   <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
                     {advertisements.map((adv) => (
                       <React.Fragment key={adv._id}>
-                        <Adv id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} fileEditInputRef={fileEditInputRef} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
+                        <Adv id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
                       </React.Fragment>
                     ))}
 
@@ -422,7 +419,7 @@ const SalonAdv = () => {
 
 export default SalonAdv;
 
-const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHandler, deleteLoader, fileEditInputRef, handleEditFileInputChange, darkmodeOn }) => {
+const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHandler, deleteLoader,  handleEditFileInputChange, darkmodeOn }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   // const style = {
@@ -430,6 +427,7 @@ const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHan
   //   transform: CSS.Transform.toString(transform)
   // };
 
+  const fileEditInputRef = useRef(null);
 
 
   return (
@@ -445,7 +443,7 @@ const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHan
       }
       <div>
         <button
-          onClick={() => editImageHandler(public_id, id)}
+          onClick={() => editImageHandler(public_id, id, fileEditInputRef)}
           disabled={handleEditLoader === id}
           onPointerDown={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
@@ -471,5 +469,6 @@ const Adv = ({ id, url, public_id, editImageHandler, handleEditLoader, deleteHan
       </div>
     </div>
   );
+
 };
 
