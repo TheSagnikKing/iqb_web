@@ -15,6 +15,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
 import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
+import { getCurrentDate } from '../../utils/Date';
 
 
 const EditProfile = () => {
@@ -710,6 +711,7 @@ const EditProfile = () => {
                         value={dateOfBirth}
                         onChange={(e) => setDateofBirth(e.target.value)}
                         onKeyDown={handleKeyPress}
+                        max={getCurrentDate()}
                     />
                 </div>
 

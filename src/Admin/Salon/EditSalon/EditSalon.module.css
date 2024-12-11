@@ -1568,7 +1568,7 @@
 }
 
 .addservices_btn {
-    width: 12rem !important;
+    width: 15rem !important;
     height: 4rem !important;
     font-size: var(--list-content-error-text);
     margin-inline: auto;

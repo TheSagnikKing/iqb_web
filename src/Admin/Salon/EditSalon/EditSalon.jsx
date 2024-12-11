@@ -402,6 +402,7 @@ const EditSalon = () => {
     salonImagefileInputRef.current.click();
   };
 
+  const [uploadSalonImageLoader, setUploadSalonImageLoader] = useState(false)
 
   const handleSalonImageFileInputChange = async (e) => {
     const uploadedFiles = e.target.files;
@@ -431,6 +432,7 @@ const EditSalon = () => {
     files.forEach(file => formData.append('gallery', file));
 
     try {
+      setUploadSalonImageLoader(true)
       const { data } = await api.post('/api/salon/uploadSalonImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -438,6 +440,7 @@ const EditSalon = () => {
       });
 
       setSalonImages([...data?.response, ...salonImages]);
+      setUploadSalonImageLoader(false)
 
       toast.success("Salon images uploaded successfully", {
         duration: 3000,
@@ -449,7 +452,7 @@ const EditSalon = () => {
         },
       });
     } catch (error) {
-
+      setUploadSalonImageLoader(false)
       if (error?.response?.status === 500) {
         toast.error("Something went wrong !", {
           duration: 3000,
@@ -1200,18 +1203,23 @@ const EditSalon = () => {
             <button
               className={style.salon_upload_button}
               onClick={() => handleSalonImageButtonClick()}
+              disabled={uploadSalonImageLoader}
             >
 
-              <p>Upload</p>
-              <div><Uploadicon /></div>
+              {
+                uploadSalonImageLoader ? (<ButtonLoader />) : (<><p>Upload</p>
+                  <div><Uploadicon /></div>
 
-              <input
-                type="file"
-                ref={salonImagefileInputRef}
-                style={{ display: 'none' }}
-                multiple
-                onChange={handleSalonImageFileInputChange}
-              />
+                  <input
+                    type="file"
+                    ref={salonImagefileInputRef}
+                    style={{ display: 'none' }}
+                    multiple
+                    onChange={handleSalonImageFileInputChange}
+                  /></>)
+              }
+
+
             </button>
           </div>
 
@@ -1236,7 +1244,7 @@ const EditSalon = () => {
                 setSalonName(e.target.value)
               }}
               onKeyDown={handleKeyPress}
-              style={{ border: salonNameError && "0.1rem solid red"}}
+              style={{ border: salonNameError && "0.1rem solid red" }}
             />
             <p className={style.error_message}>{salonNameError}</p>
           </div>
@@ -1261,9 +1269,9 @@ const EditSalon = () => {
                 setSalonDesc(e.target.value)
               }}
               onKeyDown={handleKeyPress}
-              style={{ border: salonDescError && "0.1rem solid red"}}
+              style={{ border: salonDescError && "0.1rem solid red" }}
             />
-             <p className={style.error_message}>{salonDescError}</p>
+            <p className={style.error_message}>{salonDescError}</p>
           </div>
 
           <div>
@@ -1276,7 +1284,7 @@ const EditSalon = () => {
                 setAddress(e.target.value)
               }}
               onKeyDown={handleKeyPress}
-              style={{ border: salonAddressError && "0.1rem solid red"}}
+              style={{ border: salonAddressError && "0.1rem solid red" }}
             />
             <p className={style.error_message}>{salonAddressError}</p>
           </div>
@@ -1375,7 +1383,7 @@ const EditSalon = () => {
           <div>
             <p>Mobile Number</p>
             <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red"}}>
+              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red" }}>
                 <PhoneInput
                   forceDialCode={true}
                   defaultCountry={countryflag}
@@ -1388,7 +1396,7 @@ const EditSalon = () => {
           </div>
 
           <div className={style.add_services_drop}>
-            <button onClick={addservicedropHandler} className={style.addservices_btn}>Add Services</button>
+            <button onClick={addservicedropHandler} className={style.addservices_btn}>Select Services</button>
           </div>
 
           {

@@ -10,6 +10,7 @@ import { adminSkipProfileAction } from '../../../Redux/Admin/Actions/AdminProfil
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast'
 import { ClickAwayListener } from '@mui/material';
+import { getCurrentDate } from '../../../utils/Date'
 
 const SignupEditProfile = () => {
 
@@ -191,6 +192,7 @@ const SignupEditProfile = () => {
               value={dateOfBirth}
               onChange={(e) => setDateofBirth(e.target.value)}
               onKeyDown={handleKeyPress}
+              max={getCurrentDate()}
             />
           </div>
 

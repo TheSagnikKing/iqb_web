@@ -17,6 +17,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
 import { getAllSalonServicesBarberAction } from '../../Redux/Barber/Actions/BarberQueueAction';
+import { getCurrentDate } from '../../utils/Date';
 
 const EditProfile = () => {
     const dispatch = useDispatch()
@@ -848,6 +849,7 @@ const EditProfile = () => {
                         value={dateOfBirth}
                         onChange={(e) => setDateofBirth(e.target.value)}
                         onKeyDown={handleKeyPress}
+                        max={getCurrentDate()}
                     />
                 </div>
 

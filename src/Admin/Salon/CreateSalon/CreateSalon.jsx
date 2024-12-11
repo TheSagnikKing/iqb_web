@@ -1506,7 +1506,7 @@ const CreateSalon = () => {
           </div>
 
           <div className={style.add_services_drop}>
-            <button onClick={addservicedropHandler} className={style.addservices_btn}>Add Services</button>
+            <button onClick={addservicedropHandler} className={style.addservices_btn}>Select Services</button>
           </div>
 
           {

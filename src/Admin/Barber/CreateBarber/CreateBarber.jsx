@@ -10,6 +10,7 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast';
 import { Skeleton, Modal } from '@mui/material';
+import { getCurrentDate } from "../../../utils/Date";
 
 const CreateBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -314,6 +315,8 @@ const CreateBarber = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+  console.log(getCurrentDate())
   return (
     <>
       <div className={`${style.admin_create_barber_wrapper} ${darkmodeOn && style.dark}`}>
@@ -473,6 +476,7 @@ const CreateBarber = () => {
                   border: dateOfBirthError && "0.1rem solid red"
                 }}
                 onKeyDown={handleKeyPress}
+                max={getCurrentDate()}
               />
               <p className={style.error_message}>{dateOfBirthError}</p>
             </div>

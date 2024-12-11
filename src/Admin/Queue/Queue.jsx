@@ -300,7 +300,8 @@ const Queue = () => {
                               setChoosebarber(b?.name)
                             }}
                             style={{
-                              borderLeft: b.isOnline ? "0.5rem solid limegreen" : "0.5rem solid red"
+                              borderLeft: b.isOnline ? "0.5rem solid limegreen" : "0.5rem solid red",
+                              outline: choosebarberemail === b?.email ? "0.1rem solid rgba(0,0,0,1)" : "none"
                             }}
                           >
                             <div>

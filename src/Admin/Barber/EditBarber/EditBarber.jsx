@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 
 import Skeleton from '@mui/material/Skeleton';
 import { Box, Modal, Typography } from '@mui/material';
+import { getCurrentDate } from '../../../utils/Date';
 
 const EditBarber = () => {
 
@@ -442,6 +443,7 @@ const EditBarber = () => {
                   border: dateOfBirthError && "0.1rem solid red"
                 }}
                 onKeyDown={handleKeyPress}
+                max={getCurrentDate()}
               />
               <p className={style.error_message}>{dateOfBirthError}</p>
             </div>

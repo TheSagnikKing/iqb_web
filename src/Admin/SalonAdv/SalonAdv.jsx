@@ -150,12 +150,19 @@ const SalonAdv = () => {
   const [publicId, setPublicId] = useState("")
   const [mongoid, setMongoid] = useState("")
 
+
   const fileEditInputRef = useRef(null);
 
   const [handleEditLoader, sethandleEditLoader] = useState(null)
 
   const editImageHandler = (publicId, mongoid) => {
-    fileEditInputRef.current.click();
+    if (fileEditInputRef.current) {
+      fileEditInputRef.current.click(); // Trigger the file input click
+    } else {
+      console.error("File input ref is null");
+    }
+
+
     setPublicId(publicId)
     setMongoid(mongoid)
   }
