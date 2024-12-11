@@ -23,9 +23,8 @@ const EditProfile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const salonId = useSelector(state => state.BarberLoggedInMiddleware.barberSalonId)
     const barberProfile = useSelector(state => state.BarberLoggedInMiddleware.entiredata.user[0])
-
-    console.log(barberProfile?.salonId)
 
     const [changeEmailVerifiedState, setChangeEmailVerifiedState] = useState(barberProfile?.emailVerified)
     const [changeMobileVerifiedState, setChangeMobileVerifiedState] = useState(barberProfile?.mobileVerified)
@@ -412,10 +411,10 @@ const EditProfile = () => {
     const [editServiceModal, setEditServiceModal] = useState(false)
 
     useEffect(() => {
-        if (barberProfile) {
+        if (barberProfile && salonId !== 0) {
             dispatch(getAllSalonServicesBarberAction(barberProfile?.salonId))
         }
-    }, [barberProfile, dispatch])
+    }, [barberProfile, salonId, dispatch])
 
     const getAllSalonServicesBarber = useSelector(state => state.getAllSalonServicesBarber)
 
@@ -476,6 +475,8 @@ const EditProfile = () => {
         }
     };
 
+    
+
     return (
         <main className={style.barber_edit_profile_container}>
             <div className={style.barber_edit_profile_container_left}>
@@ -507,7 +508,10 @@ const EditProfile = () => {
                 </div>
             </div>
             <div className={style.barber_edit_profile_container_right}>
-                <button onClick={() => setEditServiceModal(true)}>Edit services</button>
+                {
+                    salonId === 0 ? (<div></div>) : <button onClick={() => setEditServiceModal(true)}>Edit services</button>
+                }
+                
 
                 <Modal
                     open={editServiceModal}
