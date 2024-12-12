@@ -62,8 +62,8 @@ const Queue = () => {
     } else {
       setCopyQueueList((prev) => {
         const filteredArray = queuelist?.filter((queue) => {
-          return queue.name.toLowerCase().includes(searchValue) ||
-            queue.barberName.toLowerCase().includes(search)
+          return (queue.name.toLowerCase().includes(searchValue) ||
+          queue.barberName.toLowerCase().includes(searchValue))
         })
         return filteredArray
       })

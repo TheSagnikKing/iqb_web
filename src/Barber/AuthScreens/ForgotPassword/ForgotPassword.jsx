@@ -5,6 +5,7 @@ import { HomeIcon } from '../../../icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { barberForgetPasswordAction } from '../../../Redux/Barber/Actions/BarberPasswordAction'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import toast from 'react-hot-toast'
 
 const ForgotPassword = () => {
 
@@ -13,7 +14,38 @@ const ForgotPassword = () => {
 
   const [email, setEmail] = useState()
 
+  const [emailError, setEmailError] = useState("")
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const mailHandler = () => {
+
+    if (!email) {
+      toast.error("Please enter email", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setEmailError("Please enter email")
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email format", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setEmailError("Invalid email format");
+    }
+
+
     dispatch(barberForgetPasswordAction(email))
     // navigate("/barbercheckemail")
   }
@@ -38,13 +70,20 @@ const ForgotPassword = () => {
         <div>
           <p>Forgot Password</p>
 
-          <input
-            type="email"
-            placeholder='Enter Your Email ID'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleKeyPress}
-          />
+          <div>
+            <input
+              type="email"
+              placeholder='Enter Your Email ID'
+              value={email}
+              onChange={(e) => {
+                setEmailError("")
+                setEmail(e.target.value)
+              }}
+              onKeyDown={handleKeyPress}
+              style={{ border: emailError ? "0.1rem solid red" : undefined }}
+            />
+            <p className={style.error_message}>{emailError}</p>
+          </div>
 
           {
             barberForgetPasswordLoading ?

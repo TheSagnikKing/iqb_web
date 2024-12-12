@@ -17,10 +17,14 @@ const ChangePassword = () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
+  const [passwordError, setPasswordError] = useState("")
+  const [confirmPasswordError, setConfirmPasswordError] = useState("")
+  const [notMatchError, setNotMatchError] = useState("")
+
   const ChangePasswordHandler = () => {
 
-    if (!password || !confirmPassword) {
-      toast.error("Please fill out both password fields.", {
+    if (!password) {
+      toast.error("Please enter password", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -29,11 +33,11 @@ const ChangePassword = () => {
           color: '#fff',
         },
       });
-      return;
+      return setPasswordError("Please enter password")
     }
 
     if (password.length < 8) {
-      toast.error("Password must be at least 8 characters long.", {
+      toast.error("Password length must be 8 charecters", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -42,11 +46,37 @@ const ChangePassword = () => {
           color: '#fff',
         },
       });
-      return;
+      return setPasswordError("Password length must be 8 charecters")
+    }
+
+    if (!confirmPassword) {
+      toast.error("Please enter confirm password", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setConfirmPasswordError("Please enter confirm password")
+    }
+
+    if (confirmPassword.length < 8) {
+      toast.error("Confirm password length must be 8 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setConfirmPasswordError("Confirm password length must be 8 charecters")
     }
 
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match.", {
+      toast.error("Password and confirm password do not match", {
         duration: 3000,
         style: {
           fontSize: "var(--list-modal-header-normal-font)",
@@ -55,8 +85,9 @@ const ChangePassword = () => {
           color: '#fff',
         },
       });
-      return;
+      return setNotMatchError("Password and confirm password do not match");
     }
+
 
     dispatch(barberResetPasswordAction(password, params?.token, navigate))
   };
@@ -88,26 +119,36 @@ const ChangePassword = () => {
           <p>Use at least 8 characters with a mix of letters, numbers, and symbols.</p>
           <p>Keep it unique and avoid reusing passwords.</p>
 
-          <div className={style.password_container}>
+          <div className={style.password_container} style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setNotMatchError("")
+                setPasswordError("")
+                setPassword(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
+            <p className={style.error_message}>{passwordError}</p>
           </div>
 
-          <div className={style.password_container}>
+          <div className={style.password_container} style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
             <input
               type={visibleeye2 ? "text" : "password"}
               placeholder='Confirm Password'
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setNotMatchError("")
+                setConfirmPasswordError("")
+                setConfirmPassword(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
             />
             <div onClick={() => setVisibleeye2((prev) => !prev)}>{visibleeye2 ? <Eyevisible /> : <Notvisibleeye />}</div>
+            <p className={style.error_message}>{confirmPasswordError || notMatchError}</p>
           </div>
 
           {

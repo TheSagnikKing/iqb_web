@@ -6,6 +6,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch, useSelector } from 'react-redux'
 import { BarberGoogleloginAction, BarberSigninAction } from "../../../Redux/Barber/Actions/AuthAction"
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import toast from 'react-hot-toast'
 
 const Signin = () => {
 
@@ -55,7 +56,65 @@ const Signin = () => {
     navigate("/barberforgotpassword")
   }
 
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const signinClicked = () => {
+
+    if (!email) {
+      toast.error("Please enter email", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setEmailError("Please enter email")
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email format", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setEmailError("Invalid email format");
+    }
+
+    if (!password) {
+      toast.error("Please enter password", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setPasswordError("Please enter password");
+    }
+
+    if (password.length < 8) {
+      toast.error("Password length must be 8 charecters", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: "0.3rem",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return setPasswordError("Password length must be 8 charecters");
+    }
+
     const barbersignindata = { email, password }
     dispatch(BarberSigninAction(barbersignindata, navigate))
   }
@@ -75,7 +134,7 @@ const Signin = () => {
   return (
     <main className={style.barber_signin_container}>
       <div className={style.barber_signin_left}>
-          <img src="./signin_un.png" alt="barber_signin" />
+        <img src="./signin_un.png" alt="barber_signin" />
       </div>
 
       <div className={style.barber_signin_right}>
@@ -83,23 +142,39 @@ const Signin = () => {
           <p>Sign In to your Barber Account</p>
           <p>Welcome back Barber! please enter your details</p>
 
-          <input
-            type="email"
-            placeholder='Enter Your Email ID'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleKeyPress}
-          />
-
-          <div className={style.password_container}>
+          <div>
             <input
-              type={visibleeye ? "text" : "password"}
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              placeholder='Enter Your Email ID'
+              value={email}
+              onChange={(e) => {
+                setEmailError("")
+                setEmail(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
+              style={{ border: emailError ? "0.1rem solid red" : undefined }}
             />
-            <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
+            <p className={style.error_message}>{emailError}</p>
+          </div>
+
+          <div>
+            <div
+              className={style.password_container}
+              style={{ border: passwordError ? "0.1rem solid red" : undefined }}
+            >
+              <input
+                type={visibleeye ? "text" : "password"}
+                placeholder='Password'
+                value={password}
+                onChange={(e) => {
+                  setPasswordError("")
+                  setPassword(e.target.value)
+                }}
+                onKeyDown={handleKeyPress}
+              />
+              <div onClick={() => setVisibleeye((prev) => !prev)}>{visibleeye ? <Eyevisible /> : <Notvisibleeye />}</div>
+            </div>
+            <p className={style.error_message}>{passwordError}</p>
           </div>
 
           <div>

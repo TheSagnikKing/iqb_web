@@ -330,12 +330,16 @@ const EditProfile = () => {
     const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    const [openModal, setOpenModal] = useState(false)
+    
+    const [oldPasswordError, setOldPasswordError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const [confirmPasswordError, setConfirmPasswordError] = useState("")
+    const [notMatchError, setNotMatchError] = useState("")
 
     const updatePasswordHandler = () => {
-        if (password !== confirmPassword) {
-            toast.error("New and confirm password donot match", {
+
+        if (!oldPassword) {
+            toast.error("Please enter password", {
                 duration: 3000,
                 style: {
                     fontSize: "var(--list-modal-header-normal-font)",
@@ -344,16 +348,94 @@ const EditProfile = () => {
                     color: '#fff',
                 },
             });
-        } else {
-
-            const profiledata = {
-                email: barberProfile?.email,
-                password,
-                oldPassword
-            }
-
-            dispatch(barberUpdatePasswordAction(profiledata, navigate))
+            return setOldPasswordError("Please enter old password")
         }
+
+        if (oldPassword.length < 8) {
+            toast.error("Password length must be 8 charecters", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setOldPasswordError("Old password length must be 8 charecters")
+        }
+        
+        if (!password) {
+            toast.error("Please enter password", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setPasswordError("Please enter new password")
+        }
+
+        if (password.length < 8) {
+            toast.error("Password length must be 8 charecters", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setPasswordError("New password length must be 8 charecters")
+        }
+
+        if (!confirmPassword) {
+            toast.error("Please enter confirm password", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setConfirmPasswordError("Please enter confirm password")
+        }
+
+        if (confirmPassword.length < 8) {
+            toast.error("Confirm password length must be 8 charecters", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setConfirmPasswordError("Confirm password length must be 8 charecters")
+        }
+
+        if (password !== confirmPassword) {
+            toast.error("Password and confirm password do not match", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--list-modal-header-normal-font)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+            return setNotMatchError("Password and confirm password do not match");
+        }
+
+        const profiledata = {
+            email: barberProfile?.email,
+            password,
+            oldPassword
+        }
+
+        dispatch(barberUpdatePasswordAction(profiledata, navigate))
     }
 
     const handleKeyPressPasswordHandler = (e) => {
@@ -475,7 +557,7 @@ const EditProfile = () => {
         }
     };
 
-    
+
 
     return (
         <main className={style.barber_edit_profile_container}>
@@ -503,7 +585,7 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    <p>{name?.length > 20 ? `${name.slice(0,20)}...` : name}</p>
+                    <p>{name?.length > 20 ? `${name.slice(0, 20)}...` : name}</p>
                     <p>{barberProfile?.email}</p>
                 </div>
             </div>
@@ -511,7 +593,7 @@ const EditProfile = () => {
                 {
                     salonId === 0 ? (<div></div>) : <button onClick={() => setEditServiceModal(true)}>Edit services</button>
                 }
-                
+
 
                 <Modal
                     open={editServiceModal}
@@ -714,44 +796,58 @@ const EditProfile = () => {
 
                             <div>
                                 <p>Old Password</p>
-                                <div>
+                                <div style={{ border: oldPasswordError ? "0.1rem solid red" : undefined }}>
                                     <input
                                         type={`${seePassword ? "text" : "password"}`}
                                         value={oldPassword}
-                                        onChange={(e) => setOldPassword(e.target.value)}
+                                        onChange={(e) => {
+                                            setOldPasswordError("")
+                                            setOldPassword(e.target.value)
+                                        }}
                                         placeholder='Enter Old Password'
                                         onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
+                                <p className={style.error_message} style={{ marginTop: "1rem" }}>{oldPasswordError}</p>
                             </div>
 
                             <div>
                                 <p>New Password</p>
-                                <div>
+                                <div style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
                                     <input
                                         type={`${seeOldPassword ? "text" : "password"}`}
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => {
+                                            setNotMatchError("")
+                                            setPasswordError("")
+                                            setPassword(e.target.value)
+                                        }}
                                         placeholder='Enter New Password'
                                         onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
+                                <p className={style.error_message} style={{ marginTop: "1rem" }}>{passwordError}</p>
                             </div>
 
                             <div>
                                 <p>Confirm Password</p>
-                                <div>
+                                <div style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
                                     <input
                                         type={`${seeConfirmPassword ? "text" : "password"}`}
                                         value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        onChange={(e) => {
+                                            setNotMatchError("")
+                                            setConfirmPasswordError("")
+                                            setConfirmPassword(e.target.value)
+                                        }}
                                         placeholder='Enter Confirm Password'
                                         onKeyDown={handleKeyPressPasswordHandler}
                                     />
                                     <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
                                 </div>
+                                <p className={style.error_message} style={{ marginTop: "1rem" }}>{(confirmPasswordError || notMatchError)}</p>
                             </div>
 
                             <button

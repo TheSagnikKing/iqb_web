@@ -47,37 +47,23 @@
             font-weight: 500;
         }
 
-        &>input:nth-child(3) {
-            height: 4rem;
-            width: 100%;
-            background-color: var(--bg-color3);
-            font-size: var(--list-content-body-text);
-            font-weight: 500;
-            border: none;
-            outline: none;
-            padding-inline: 1rem;
-            border-radius: var(--input-border-radius);
-            -webkit-border-radius: var(--input-border-radius);
-            -moz-border-radius: var(--input-border-radius);
-            -ms-border-radius: var(--input-border-radius);
-            -o-border-radius: var(--input-border-radius);
-}
-
-        &>div:nth-child(4) {
-            height: 4rem;
-            width: 100%;
-            background-color: var(--bg-color3);
-            font-size: var(--list-content-body-text);
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: var(--input-border-radius);
-            -webkit-border-radius: var(--input-border-radius);
-            -moz-border-radius: var(--input-border-radius);
-            -ms-border-radius: var(--input-border-radius);
-            -o-border-radius: var(--input-border-radius);
-}
+        &>div {        
+            &>input {
+                height: 4rem;
+                width: 100%;
+                background-color: var(--bg-color3);
+                font-size: var(--list-content-body-text);
+                font-weight: 500;
+                border: none;
+                outline: none;
+                padding-inline: 1rem;
+                border-radius: var(--input-border-radius);
+                -webkit-border-radius: var(--input-border-radius);
+                -moz-border-radius: var(--input-border-radius);
+                -ms-border-radius: var(--input-border-radius);
+                -o-border-radius: var(--input-border-radius);
+            }
+        }
     }
 
 }
@@ -118,6 +104,18 @@ iframe {
 
 .password_container {
     height: 4rem;
+    width: 100%;
+    background-color: var(--bg-color3);
+    font-size: var(--list-content-body-text);
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+    position: relative;
 }
 
 .password_container>div {
@@ -128,6 +126,9 @@ iframe {
     align-items: center;
     cursor: pointer;
     font-size: var(--list-content-body-text);
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
 }
 
 .password_container>input {
@@ -211,6 +212,13 @@ iframe {
     font-size: var(--list-content-body-text);
     text-align: center;
     margin-top: 2rem;
+}
+
+.error_message {
+    font-size: 1.2rem !important;
+    font-weight: 500;
+    color: red;
+    margin-top: 1rem;
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
