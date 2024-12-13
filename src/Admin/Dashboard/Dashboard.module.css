@@ -2,7 +2,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -11,6 +11,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .dashboard_intial_container {
@@ -41,8 +46,6 @@
         cursor: pointer;
         width: var(--mdl-sbt-btn-width);
         height: var(--mdl-sbt-btn-height);
-        background-color: #efefef;
-        border: 0.1rem solid #000;
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);
         -moz-border-radius: var(--list-btn-border-radius);
@@ -55,17 +58,17 @@
         -o-transition: var(--btn-transition);
         font-size: var(--list-modal-header-normal-font);
         font-weight: 500;
-        color: #000;
+        background-color: var(--color-2);
+        color: var(--light-color-4);
 
         &:hover {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--color-3);
+            color: var(--light-color-4);
         }
 
     }
 
 }
-
 
 .dashboard_body {
     width: 100%;
@@ -74,7 +77,6 @@
 }
 
 .inner_container {
-    /* padding-inline: 0.3rem; */
     height: calc(100svh - 6rem);
     display: grid;
     grid-template-columns: 3fr 1.8fr;
@@ -89,15 +91,19 @@
     min-height: 12rem;
     height: 15svh;
     width: 100%;
-    /* box-shadow: var(--cmmn-box-shadow-y); */
     padding-block: 1.5rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
     margin-bottom: 2rem;
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 
     &>div:nth-child(1) {
         height: 30%;
@@ -167,14 +173,18 @@
     min-height: 25rem;
     height: 35svh;
     width: 100%;
-    /* box-shadow: var(--cmmn-box-shadow-y); */
     margin-bottom: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .dashboard_advertise_loader {
@@ -215,16 +225,20 @@
 
 .barberlist_container {
     min-height: 25rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
+    transition: var(--transition);
     height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
     margin-bottom: 2rem;
     width: 100%;
-    /* box-shadow: var(--cmmn-box-shadow-y); */
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .barberlist_container_body_loading {
@@ -365,16 +379,20 @@
 .report_container {
     min-height: 25rem;
     height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
-    /* box-shadow: var(--cmmn-box-shadow-y); */
     padding: 1rem;
     border-radius: var(--list-wrapper-border-radius);
-    background-color: #fff;
+    transition: var(--transition);
+    background-color: var(--light-color-4);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 
-    .r_chart {
+    .r_chart{
         min-height: calc(25rem - 2rem);
         height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem - 1.6vw);
         width: 100%;
@@ -433,15 +451,19 @@
 }
 
 .queuelists_container {
-    /* box-shadow: var(--cmmn-box-shadow-y); */
     border-radius: var(--list-wrapper-border-radius);
+    transition: var(--transition);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    background-color: #fff;
+    background-color: var(--light-color-4);
     min-height: 66rem;
     height: calc(100svh - 6rem - 2rem);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .queue_header {
@@ -497,6 +519,7 @@
     min-height: 6rem;
     width: 100%;
     display: flex;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
 
     &>div:nth-child(1) {
         flex: 0.7;
@@ -522,6 +545,31 @@
     & div:nth-child(2) {
         flex: 1;
     }
+}
+
+/* Dark Mode  */
+
+.dashboard_body_intial.dark,
+.saloninfo_container.dark,
+.salonadv_container.dark,
+.barberlist_container.dark,
+.report_container.dark,
+.queuelists_container.dark {
+    background-color: var(--dark-color-2);
+}
+
+.saloninfo_container.dark {
+    &>div:nth-child(1) {
+        border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+
+.barberitem_header.dark,
+.barberitem.dark,
+.queue_header.dark,
+.queue_item.dark {
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
 

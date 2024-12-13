@@ -209,8 +209,8 @@ const SalonList = () => {
               <Skeleton
                 count={6}
                 height={"6rem"}
-                baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                 style={{ marginBottom: "1rem" }} />
             </div>
           ) : getAdminSalonListResolve && SalonList?.length > 0 ? (
@@ -266,7 +266,7 @@ const SalonList = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <div className={style.modal_container}>
+          <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
             <div>
               <p> Appointment Settings</p>
               <button onClick={() => setOpenSalonSettings(false)}><CloseIcon /></button>
@@ -280,11 +280,12 @@ const SalonList = () => {
                   value={`${startTime ? `${startTime} hr` : ''}`}
                   onClick={() => startTimeDropHandler()}
                   onKeyDown={handleKeyPress}
+                  readOnly
                 />
 
                 {startTimeDrop && (
                   <ClickAwayListener onClickAway={() => setStartTimeDrop(false)}>
-                    <div className={style.time_drop_container}>
+                    <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
                       {timeOptions.map((option) => (
                         <p key={option.value} onClick={() => setStartTimeHandler(option.value)}>
                           {option.value} hr
@@ -303,11 +304,12 @@ const SalonList = () => {
                   value={`${endTime ? `${endTime} hr` : ''}`}
                   onClick={() => endTimeDropHandler()}
                   onKeyDown={handleKeyPress}
+                  readOnly
                 />
 
                 {endTimeDrop && (
                   <ClickAwayListener onClickAway={() => setEndTimeHandler(false)}>
-                    <div className={style.time_drop_container}>
+                    <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
                       {timeOptions.map((option) => (
                         <p key={option.value} onClick={() => setEndTimeHandler(option.value)}>
                           {option.value} hr
@@ -326,16 +328,18 @@ const SalonList = () => {
                   value={`${intervalTime ? `${intervalTime} mins` : ''}`}
                   onClick={() => intervalTimeDropHandler()}
                   onKeyDown={handleKeyPress}
+                  readOnly
                 />
 
                 {intervalTimeDrop &&
-                  <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}><div className={style.time_drop_container}>
-                    {intervalTimemin.map((option) => (
-                      <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
-                        {option} mins
-                      </p>
-                    ))}
-                  </div>
+                  <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}>
+                    <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+                      {intervalTimemin.map((option) => (
+                        <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
+                          {option} mins
+                        </p>
+                      ))}
+                    </div>
                   </ClickAwayListener>}
               </div>
 

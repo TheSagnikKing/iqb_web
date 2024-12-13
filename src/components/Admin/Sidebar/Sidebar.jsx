@@ -54,16 +54,14 @@ const Sidebar = () => {
       <div className={`${style.sidebar} ${showSidebar ? style.show : style.hide} ${darkmodeOn && style.dark}`}>
         <div>
           <div className={showSidebar ? style.titleActive : style.titleInActive}>
-            {showSidebar ? <div className={style.sidebar_top_salon}>
+            {showSidebar ? <div className={`${style.sidebar_top_salon} ${darkmodeOn && style.dark}`}>
               <div onClick={() => navigate("/admin-dashboard")} style={{ cursor: "pointer" }}>
                 <img
                   src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}
                   alt="salonLogo"
                 />
               </div>
-              <p style={{
-                color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
-              }}>{adminGetDefaultSalonResponse?.salonName}</p>
+              <p>{adminGetDefaultSalonResponse?.salonName}</p>
             </div> : ""}
           </div>
         </div>
@@ -82,7 +80,7 @@ const Sidebar = () => {
             </div>
           ))}
 
-          {/* <div className={style.menu_theme_container}
+          <div className={style.menu_theme_container}
             style={{
               justifyContent: showSidebar ? "space-between" : "center"
             }}
@@ -101,7 +99,7 @@ const Sidebar = () => {
                 </button>
             }
 
-          </div> */}
+          </div>
         </div>
 
         <button className={style.sidebar_toggle_btn} onClick={() => setShowSidebar((prev) => !prev)}>{showSidebar ? <LeftArrow /> : <RightArrow />}</button>

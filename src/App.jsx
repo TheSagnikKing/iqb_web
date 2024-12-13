@@ -109,6 +109,23 @@ const App = () => {
   };
 
 
+  useEffect(() => {
+    // This sets globally 
+    const styleElement = document.createElement("style");
+    styleElement.textContent = `
+      p, h1, h2, h3, h4, h5, i, input {
+        color: ${darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"};
+        transition: var(--transition);
+      }
+    `;
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, [darkmodeOn]);
+
+
   return (
     // <div style={{
     //   background: darkmodeOn ? "var(--dark-mode-bg-color-1)" : "var(--primary-bg-light-color1)"

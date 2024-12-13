@@ -4,8 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background-color: #ebf5ff; */
-    background-color: #efefef;
 }
 
 
@@ -66,11 +64,6 @@
     margin: auto;
 }
 
-.choose_salon_div>p:nth-child(1) {
-    /* font-size: 1.4rem;
-    font-weight: 500; */
-}
-
 .choose_salon_div>div:nth-child(2) {
     width: 21.6rem;
     height: 3rem;
@@ -87,7 +80,12 @@
     font-size: var(--list-modal-header-normal-font);
     position: relative;
     cursor: pointer;
-    background-color: #fff;
+    background-color: var(--light-color-4);
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .choose_salon_div>div:nth-child(2)>div:nth-child(2) {
@@ -110,7 +108,7 @@
     padding: 1rem;
     box-shadow: var(--cmmn-box-shadow-y);
     z-index: 100;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -120,32 +118,6 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-
-    &::-webkit-scrollbar {
-        width: 0.6rem;
-        height: 0.7rem;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #0867ff48;
-        border-radius: var(--input-border-radius);
-        -webkit-border-radius: var(--input-border-radius);
-        -moz-border-radius: var(--input-border-radius);
-        -ms-border-radius: var(--input-border-radius);
-        -o-border-radius: var(--input-border-radius);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255);
-    }
-
-    &::-webkit-scrollbar-corner {
-        background-color: transparent;
-    }
 }
 
 .dashboard_salon_list_dropdown>p {
@@ -164,14 +136,20 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
+    color: var(--light-color-2)
 }
 
 .dashboard_salon_list_dropdown>p:hover {
-    background-color: #000;
-    color: var(--primary-text-light-color1);
+    background-color: var(--light-color-2);
+    color: var(--light-color-4);
     cursor: pointer;
     font-weight: 500;
     box-shadow: var(--cmmn-box-shadow-y);
+}
+
+.salonName_active {
+    background-color: var(--light-color-2);
+    color: var(--light-color-4) !important;
 }
 
 .choose_salon_div>button:nth-child(3) {
@@ -179,8 +157,8 @@
     height: 3rem;
     cursor: pointer;
     border: none;
-    background-color: #000;
-    color: var(--primary-text-light-color1);
+    background-color: var(--color-2);
+    color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -219,7 +197,7 @@
     padding: 1rem;
     box-shadow: var(--cmmn-box-shadow-y);
     z-index: 100;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -231,52 +209,42 @@
     -o-border-radius: var(--list-wrapper-border-radius);
     width: 13rem;
     overflow: hidden;
+
+
+    &>div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 3rem;
+        padding-inline: 0.8rem;
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
+        border-radius: var(--list-wrapper-border-radius);
+        -webkit-border-radius: var(--list-wrapper-border-radius);
+        -moz-border-radius: var(--list-wrapper-border-radius);
+        -ms-border-radius: var(--list-wrapper-border-radius);
+        -o-border-radius: var(--list-wrapper-border-radius);
+
+        &:hover {
+            background-color: var(--light-color-2);
+            
+            cursor: pointer;
+            &>div{
+                color: var(--light-color-4);
+            }
+        }
+
+        &>div {
+            color: var(--light-color-2);
+        }
+    }
 }
 
-.profile_drop_container>p {
-    min-height: 2.5rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-inline: 1rem;
-    border-radius: var(--input-border-radius);
-    -webkit-border-radius: var(--input-border-radius);
-    -moz-border-radius: var(--input-border-radius);
-    -ms-border-radius: var(--input-border-radius);
-    -o-border-radius: var(--input-border-radius);
-    cursor: pointer;
-    font-weight: 500;
-}
 
-.profile_drop_container>div:hover {
-    background-color: #000;
-    color: var(--primary-text-light-color1);
-    cursor: pointer;
-}
-
-.profile_drop_container>div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 3rem;
-    padding-inline: 0.8rem;
-    transition: var(--btn-transition);
-    -webkit-transition: var(--btn-transition);
-    -moz-transition: var(--btn-transition);
-    -ms-transition: var(--btn-transition);
-    -o-transition: var(--btn-transition);
-    border-radius: var(--list-wrapper-border-radius);
-    -webkit-border-radius: var(--list-wrapper-border-radius);
-    -moz-border-radius: var(--list-wrapper-border-radius);
-    -ms-border-radius: var(--list-wrapper-border-radius);
-    -o-border-radius: var(--list-wrapper-border-radius);
-}
-
-.profile_drop_container>div>div:nth-child(2) {
-    font-size: var(--list-modal-header-normal-font);
-    font-weight: 500;
-}
 
 .profile_drop_container>div>div:nth-child(1) {
     display: grid;
@@ -285,8 +253,13 @@
     font-weight: 500;
 }
 
+.profile_drop_container>div>div:nth-child(2) {
+    font-size: var(--list-modal-header-normal-font);
+    font-weight: 500;
+}
+
 .salon_toggle_btn_container {
-    background-color: #fff;
+    background-color: var(--light-color-4);
     height: 2.2rem;
     width: 6rem;
     cursor: pointer;
@@ -298,10 +271,14 @@
     -o-border-radius: var(--list-btn-border-radius);
     position: relative;
     display: flex;
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
 }
 
 .salononline_toggle_btn {
-    background-color: #fff;
     height: 2rem;
     width: 2rem;
     cursor: pointer;
@@ -338,7 +315,6 @@
 }
 
 .salononline_toggle_btn_text {
-    /* background-color: red; */
     position: absolute;
     top: 0.1rem;
     height: 2rem;
@@ -347,21 +323,63 @@
     align-items: center;
     font-size: clamp(0.8rem, 0.5rem + 0.2vw, 1.8rem) !important;
     font-weight: bold;
-
+    color: var(--light-color-2);
 }
 
 .salononline_toggle_btn_text_active {
     left: 0.6rem;
     opacity: 1;
-    color: #000;
 }
 
 .salononline_toggle_btn_text_inactive {
     right: 0.6rem;
-    color: #000;
 }
 
+/* Dark mode */
+.choose_salon_div.dark>div:nth-child(2) {
+    background-color: var(--dark-color-2);
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
+}
 
+.dashboard_salon_list_dropdown.dark {
+    background-color: var(--dark-color-2);
+
+    &>p {
+        color: var(--dark-color-4);
+
+        &:hover {
+            background-color: var(--dark-color-3);
+            color: var(--dark-color-4);
+        }
+    }
+}
+
+.salonName_active.dark {
+    background-color: var(--dark-color-3);
+    color: var(--dark-color-4);
+}
+
+.profile_drop_container.dark {
+    background-color: var(--dark-color-2);
+
+    &>div {
+        &:hover {
+            background-color: var(--dark-color-3);
+        }
+
+        &>div {
+            color: var(--dark-color-4);
+        }
+    }
+}
+
+.salon_toggle_btn_container.dark {
+    background-color: var(--dark-color-2);
+}
+
+.salononline_toggle_btn_text.dark {
+    color: var(--dark-color-4);
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
 
@@ -383,8 +401,8 @@
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
-        color: #fff;
-        background-color: #000;
+        color: var(--light-color-4) ;
+        background-color: var(--color-2);
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -392,6 +410,11 @@
         -moz-border-radius: var(--input-border-radius);
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
+        transition: var(--transition);
+        -webkit-transition: var(--transition);
+        -moz-transition: var(--transition);
+        -ms-transition: var(--transition);
+        -o-transition: var(--transition);
     }
 
     .chooseSalon_modal {
@@ -408,7 +431,7 @@
     .chooseSalon_model_content {
         width: 90vw;
         height: auto;
-        background-color: var(--primary-bg-light-color1);
+        background-color: var(--light-color-4);
         padding: 2rem;
         box-shadow: var(--cmmn-box-shadow-y);
         display: flex;
@@ -419,7 +442,12 @@
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
         -o-border-radius: var(--list-wrapper-border-radius);
-    }
+        transition: var(--transition);
+        -webkit-transition: var(--transition);
+        -moz-transition: var(--transition);
+        -ms-transition: var(--transition);
+        -o-transition: var(--transition);
+}
 
     .chooseSalon_model_content>button:nth-child(1) {
         height: 3rem;
@@ -433,7 +461,7 @@
         border: none;
         font-size: var(--list-modal-header-icon);
         color: red;
-        border: 1px solid red;
+        border: 0.1rem solid red;
         background-color: #ff000025;
         margin-left: auto;
         display: flex;
@@ -442,7 +470,7 @@
 
         &:hover {
             background-color: red;
-            color: #fff;
+            color: var(--light-color-4) ;
         }
     }
 
@@ -450,6 +478,7 @@
         font-size: var(--list-modal-header-text);
         font-weight: 600;
         margin-inline: auto;
+        color: var(--light-color-2);
     }
 
     .chooseSalon_model_content>div:nth-child(3) {
@@ -471,6 +500,8 @@
 
     .chooseSalon_model_content>div:nth-child(3)>p {
         font-size: var(--list-modal-content-text);
+        color: var(--light-color-2);
+
     }
 
     .mobile_dashboard_salon_list_dropdown {
@@ -483,39 +514,13 @@
         border: 0.1rem solid rgba(0, 0, 0, 0.2);
         overflow-y: scroll;
         margin-block: 2rem;
-
-        &::-webkit-scrollbar {
-            width: 0.6rem;
-            height: 0.7rem;
-        }
-
-        &::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #0867ff48;
-            border-radius: var(--list-wrapper-border-radius);
-            -webkit-border-radius: var(--list-wrapper-border-radius);
-            -moz-border-radius: var(--list-wrapper-border-radius);
-            -ms-border-radius: var(--list-wrapper-border-radius);
-            -o-border-radius: var(--list-wrapper-border-radius);
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: rgb(0, 98, 255);
-        }
-
-        &::-webkit-scrollbar-corner {
-            background-color: transparent;
-        }
     }
 
     .mobile_dashboard_salon_list_dropdown>p {
         min-height: 4rem;
         width: 100%;
-        background-color: var(--primary-bg-light-color1);
-        color: var(--primary-text-light-color2);
+        background-color: var(--light-color-4);
+        color: var(--light-color-2);
         font-weight: 500;
         cursor: pointer;
         border-radius: var(--list-wrapper-border-radius);
@@ -531,17 +536,22 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #000;
-        color: var(--primary-text-light-color1);
+        background-color: var(--light-color-2);
+        color: var(--light-color-4) ;
+    }
+
+    .salonName_active {
+        background-color: var(--light-color-2) !important;
+        color: var(--light-color-4) !important;
     }
 
     .chooseSalon_model_content>button:nth-child(5) {
-        height: 4.5rem;
-        width: 70%;
+        height: 4rem;
+        width: 12rem;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #000;
-        color: var(--primary-text-light-color1);
+        background-color: var(--color-2);
+        color: var(--light-color-4);
         cursor: pointer;
         font-weight: 500;
         font-size: var(--list-modal-content-text);
@@ -696,6 +706,45 @@
 
     .profile_drop_container {
         display: none;
+    }
+
+    /* dark mode on  */
+
+    .chooseSalon_model_content.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .chooseSalon_model_content.dark>p:nth-child(2){
+        color: var(--dark-color-4);
+    }
+
+    .chooseSalon_model_content.dark>div:nth-child(3){
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+
+        &>p{
+            color: var(--dark-color-4);
+        }
+    }
+
+    .mobile_dashboard_salon_list_dropdown.dark{
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+
+        &>p{
+            background-color: transparent;
+            color: var(--light-color-4);
+
+            &:hover{
+                background-color: var(--dark-color-3) !important;
+                color: var(--dark-color-4) !important;
+            }
+        }
+    }
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
     }
 
 }

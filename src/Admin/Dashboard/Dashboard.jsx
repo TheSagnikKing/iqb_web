@@ -194,10 +194,10 @@ const Dashboard = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    salonId == 0 ? (<>
+    salonId === 0 ? (<>
       <main className={style.dashboard}>
-        <div className={style.dashboard_body_intial}>
-          <div className={style.dashboard_intial_container}>
+        <div className={`${style.dashboard_body_intial} ${darkmodeOn && style.dark}`}>
+          <div className={`${style.dashboard_intial_container}`}>
             <p>Hey &#128075;, {adminName || email?.split('@')[0]}</p>
             <div>
               <p>You don't have any salon right now.</p>
@@ -211,7 +211,7 @@ const Dashboard = () => {
         <main className={style.dashboard_body}>
           <div className={style.inner_container}>
             <div className={style.dashboard_container_one}>
-              <div className={style.saloninfo_container}>
+              <div className={`${style.saloninfo_container} ${darkmodeOn && style.dark}`}>
                 <div>
                   <h2>Welcome, {adminName}</h2>
                 </div>
@@ -226,8 +226,10 @@ const Dashboard = () => {
                           paddingTop: "2rem",
                           paddingInline: "1rem"
                         }}>
-                        <Skeleton count={1} height={"4rem"} style={{ borderRadius: "0.3rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                        <Skeleton count={1} height={"4rem"} style={{ borderRadius: "0.3rem" }}
+                          baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                        />
                       </div> :
                       adminGetDefaultSalonResolve && adminGetDefaultSalonResponse?.salonDesc?.length > 0 ?
                         <i>
@@ -244,11 +246,13 @@ const Dashboard = () => {
               {
                 getAllAdvertisementLoading ?
                   <div className={style.salonadv_container_loader}>
-                    <Skeleton count={1} className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                      highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                    <Skeleton count={1} className={style.dashboard_advertise_loader} style={{ borderRadius: "0.6vw" }}
+                      baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    />
                   </div> :
                   getAllAdvertisementResolve && advertisements?.length > 0 ?
-                    <div className={style.salonadv_container}>
+                    <div className={`${style.salonadv_container} ${darkmodeOn && style.dark}`}>
                       <Carousel
                         showThumbs={false}
                         infiniteLoop={true}
@@ -277,9 +281,9 @@ const Dashboard = () => {
 
 
               <div className={style.barber_report_container}>
-                <div className={style.barberlist_container}>
+                <div className={`${style.barberlist_container} ${darkmodeOn && style.dark}`}>
 
-                  <div className={style.barberitem_header}>
+                  <div className={`${style.barberitem_header} ${darkmodeOn && style.dark}`}>
                     <div>
                       <div>
 
@@ -292,8 +296,10 @@ const Dashboard = () => {
                   {
                     getAdminBarberListLoading ?
                       <div className={style.barberlist_container_body_loading}>
-                        <Skeleton count={2} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                        <Skeleton count={2} height={"6rem"} style={{ marginBottom: "1rem" }}
+                          baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                        />
                       </div> :
                       getAdminBarberListResolve && BarberList?.length > 0 ?
                         <div className={style.barberlist_container_body}>
@@ -302,12 +308,12 @@ const Dashboard = () => {
                           {
                             BarberList?.map((barber, index) => {
                               return (
-                                <div 
-                                className={style.barberitem} 
-                                key={barber._id}
-                                style={{
-                                  borderBottom: BarberList.length -  1 === index && "none"
-                                }}
+                                <div
+                                  className={`${style.barberitem} ${darkmodeOn && style.dark}`}
+                                  key={barber._id}
+                                  style={{
+                                    borderBottom: BarberList.length - 1 === index && "none"
+                                  }}
                                 >
                                   <div>
                                     <div>
@@ -333,7 +339,7 @@ const Dashboard = () => {
                   }
 
                 </div>
-                <div className={style.report_container}>
+                <div className={`${style.report_container} ${darkmodeOn && style.dark}`}>
 
                   <Carousel
                     showThumbs={false}
@@ -433,8 +439,8 @@ const Dashboard = () => {
 
 
             <div className={style.dashboard_container_two}>
-              <div className={style.queuelists_container}>
-                <div className={style.queue_header}>
+              <div className={`${style.queuelists_container} ${darkmodeOn && style.dark}`}>
+                <div className={`${style.queue_header} ${darkmodeOn && style.dark}`}>
                   <div><p>#</p></div>
                   <div><p>Name</p></div>
                   <div><p>Barber</p></div>
@@ -444,8 +450,9 @@ const Dashboard = () => {
                 {
                   getAllQueueListLoading ?
                     <div className={style.queue_body_loading}>
-                      <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                        highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                      <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }} 
+                      baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                      highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
                     </div> :
                     getAllQueueListResolve && queuelist?.length > 0 ?
                       <div className={style.queue_body}>
@@ -454,9 +461,9 @@ const Dashboard = () => {
                             return (
                               <div
                                 key={queue._id}
-                                className={style.queue_item}
+                                className={`${style.queue_item} ${darkmodeOn && style.dark}`}
                                 style={{
-                                  borderBottom: index === queuelist.length - 1 ? "none" : "1px solid rgba(0, 0, 0, 0.2)"
+                                  borderBottom: index === queuelist.length - 1 && "none"
                                 }}
                               >
                                 <div><p>{queue.qPosition}</p></div>

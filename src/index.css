@@ -44,17 +44,42 @@ html {
   --lightmode-loader-bg-color: #ebebeb;
   --lightmode-loader-highlight-color: #f5f5f5;
 
+  /* common colors */
+  --color-1: #8ab4f8;
+  --color-2: #174ea6;
+  --color-3: #174ea698;
+  --color-4: #720455;
+  --color-5: #7204557b;
+  --color-6: #ba0000;
+  --color-7: #ba000089;
+  --color-8: #00A36C;
+  --color-9: #00a36d87;
+  --color-10: #CC5500;
+  --color-11: #cc550085;
+  --transition: 0.3s all ease;
+
+  /* light mode colors */
+
+  --light-color-1: #efefef;
+  --light-color-2: #1f1f1f;
+  --light-color-3: #EEEDED;
+  --light-color-4: #fff;
+
   /* Dark mode colors */
 
-  --dark-mode-bg-color-4: #3c4043;
-  --dark-mode-bg-color-2: #202124;
-  --dark-mode-bg-color-3: #28292a;
-  --dark-mode-bg-color-1: #28292a;
+  --dark-color-1: #28292a;
+  --dark-color-2: #202124;
+  --dark-color-3: #3c4043;
+  --dark-color-4: #e8eaed;
 
-  --darkmode-loader-bg-color: #202124;
-  --darkmode-loader-highlight-color: #3c4043;
+  /* loader colors */
 
-  --darkmode-loader-bg-color2: #28292a;
+  --light-loader-bg-color: #ebebeb;
+  --light-loader-highlight-color: #f5f5f5;
+
+  --dark-loader-bg-color: #28292a;
+  --dark-loader-highlight-color: #3c4043;
+
 
   /* font sizes */
   --list-primary-text: clamp(1.6rem, 1.2rem + 0.4vw, 3.2rem);
@@ -98,15 +123,15 @@ html {
 body {
   font-size: 1.6rem;
 }
-
+/* 
 h1,
 h2,
 h3,
 h4,
 h5,
 p {
-  color: var(--primary-text-light-color2);
-}
+  color: var();
+} */
 
 /* input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
