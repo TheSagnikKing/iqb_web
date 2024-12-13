@@ -192,11 +192,15 @@
 }
 
 .customer_content_body>div:not(:nth-child(1))>p:nth-child(2) {
-    background-color: var(--primary-bg-light-color1);
+    background-color: rgba(255, 255, 255, 0.5) !important; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
 }
 
 .customer_content_body>div:nth-child(1)>p:nth-child(2) {
-    background-color: var(--primary-bg-light-color1);
+    background-color: rgba(255, 255, 255, 0.5) !important; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
 }
 
 .customer_content_body>div>p {
