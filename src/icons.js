@@ -15,7 +15,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 
 import { RiMoonClearFill } from "react-icons/ri";
-import { RiSunFill } from "react-icons/ri";
+import { BsSunFill } from "react-icons/bs";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { FaChartBar } from "react-icons/fa";
 import { FaChartPie } from "react-icons/fa";
@@ -65,7 +65,7 @@ export const Adminreporticon = TbReportSearch
 export const Notificationicon = IoMdNotifications
 export const Settingsicon = IoSettingsSharp
 
-export const Sunicon = RiSunFill
+export const Sunicon = BsSunFill
 export const MoonIcon = RiMoonClearFill
 export const DropdownIcon = IoMdArrowDropdownCircle
 export const UserIcon = FaUser

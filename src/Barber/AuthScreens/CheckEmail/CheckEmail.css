@@ -47,7 +47,7 @@
     height: 4;
     width: 100%;
     border-radius: var(--input-border-radius);
-    background-color: var(--bg-color3);
+    background-color: var(--light-color-3);
     font-size: var(--list-content-body-text);
     font-weight: 500;
     border: none;
@@ -84,7 +84,7 @@
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 

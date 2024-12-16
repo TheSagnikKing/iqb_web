@@ -41,7 +41,7 @@
     -o-border-radius: 1.7rem;
     padding-inline: 1.5rem;
     padding-block: 2rem;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     transition: 300ms ease;
     -webkit-transition: 300ms ease;
     -moz-transition: 300ms ease;
@@ -63,7 +63,7 @@
 
 .salon_appointment_content>div:nth-child(1)>div>input{
     min-height: 4rem;
-    background-color: var(--bg-color3);
+    background-color: var(--light-color-3);
     border: none;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
@@ -76,7 +76,7 @@
 }
 
 .salon_appointment_content>div:nth-child(1)>div>input:focus{
-    outline: 2px solid var(--primary-bg-color3);
+    outline: 2px solid var(--light-color-2);
 }
 
 .salon_appointment_content>div:nth-child(1)>div>div{
@@ -91,7 +91,7 @@
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
     padding: 1rem;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -108,8 +108,8 @@
 }
 
 .salon_appointment_content>div:nth-child(1)>div>div>p:hover{
-    background-color: var(--primary-bg-color3);
-    color: var(--primary-text-light-color1);
+    background-color: var(--light-color-2);
+    color: var(--light-color-4);
     cursor: pointer;
     font-weight: 500;
     min-height: 3.5rem;
@@ -140,15 +140,15 @@
     -ms-border-radius: 1.5rem;
     -o-border-radius: 1.5rem;
     border: none;
-    background-color: var(--primary-bg-color3);
-    color: var(--primary-text-light-color1);
+    background-color: var(--light-color-2);
+    color: var(--light-color-4);
     box-shadow: 0px 2px 7.7px rgba(0, 0, 0, 0.4);
 }
 
 /* Dark Mode Css */
 
 .salon_appointment_wrapper.dark>p:nth-child(1){
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 .salon_appointment_content.dark>div:nth-child(1){
@@ -156,12 +156,12 @@
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>p{
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>input{
     background-color: var(--dark-mode-bg-color-2);
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>div{
@@ -169,7 +169,7 @@
 }
 
 .salon_appointment_content.dark>div:nth-child(1)>div>div p{
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 @media screen and (min-width: 0px) and (max-width:1140px) {

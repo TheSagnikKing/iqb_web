@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./Header.module.css"
 import Skeleton from 'react-loading-skeleton'
-import { DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
+import { DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
 import { menudata } from '../menudata'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
@@ -336,7 +336,7 @@ const DashboardHeader = () => {
                         onClick={() => selectedActiveSalon(s)}
                         style={{
                           background: s.salonId == adminProfile?.salonId && "#000",
-                          color: s.salonId == adminProfile?.salonId && "var(--primary-text-light-color1)"
+                          color: s.salonId == adminProfile?.salonId && "var(--light-color-4)"
                         }}
                       >{s.salonName}</p>
                     )) :
@@ -510,10 +510,10 @@ const DashboardHeader = () => {
           {
             darkmodeOn ?
               <button onClick={toggleHandler}>
-                <IoMoon />
+                <Sunicon />
               </button> :
               <button onClick={toggleHandler}>
-                <MdSunny />
+                <MoonIcon />
               </button>
           }
 

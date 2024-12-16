@@ -2,7 +2,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -32,39 +32,6 @@
     width: 100%;
     height: calc(100% - 5rem);
     overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #0867ff48 transparent;
-
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-
-    &:hover::-webkit-scrollbar {
-        width: 0.6rem;
-        height: 0.7rem;
-    }
-
-    &:hover::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-
-    &:hover::-webkit-scrollbar-thumb {
-        background: #0867ff48;
-        border-radius: var(--list-wrapper-border-radius);
-        -webkit-border-radius: var(--list-wrapper-border-radius);
-        -moz-border-radius: var(--list-wrapper-border-radius);
-        -ms-border-radius: var(--list-wrapper-border-radius);
-        -o-border-radius: var(--list-wrapper-border-radius);
-    }
-
-    &:hover::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255);
-    }
-
-    &:hover::-webkit-scrollbar-corner {
-        background-color: transparent;
-    }
 }
 
 .admin_edit_profile_container_right {
@@ -74,39 +41,6 @@
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
-    scrollbar-color: #00000089 transparent;
-
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-
-    &:hover::-webkit-scrollbar {
-        width: 0.6rem;
-        height: 0.7rem;
-    }
-
-    &:hover::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-
-    &:hover::-webkit-scrollbar-thumb {
-        background: #0867ff48;
-        border-radius: var(--list-wrapper-border-radius);
-        -webkit-border-radius: var(--list-wrapper-border-radius);
-        -moz-border-radius: var(--list-wrapper-border-radius);
-        -ms-border-radius: var(--list-wrapper-border-radius);
-        -o-border-radius: var(--list-wrapper-border-radius);
-    }
-
-    &:hover::-webkit-scrollbar-thumb:hover {
-        background: rgb(0, 98, 255);
-    }
-
-    &:hover::-webkit-scrollbar-corner {
-        background-color: transparent;
-    }
-
 
     &>div {
         margin-bottom: 2rem;
@@ -124,7 +58,7 @@
             height: 4rem;
             padding-inline: 1rem;
             font-size: var(--list-content-body-text);
-            background-color: #EEEDED;
+            background-color: var(--light-color-3);
             border: none;
             outline: none;
             border-radius: var(--input-border-radius);
@@ -144,8 +78,8 @@
         height: 4rem;
         border: none;
         cursor: pointer;
-        background-color: #efefef;
-        border: 0.1rem solid #000;
+        background-color: var(--color-3);
+        border: 0.1rem solid var(--color-2);
         transition: var(--btn-transition);
         border-radius: var(--list-btn-border-radius);
         -webkit-border-radius: var(--list-btn-border-radius);
@@ -157,13 +91,13 @@
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
         margin-inline: auto;
-        color: #000;
+        color: var(--color-2);
         font-size: var(--list-content-body-text);
 
 
         &:hover {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--color-2);
+            color: var(--light-color-4);
         }
     }
 }
@@ -197,15 +131,11 @@
 
         .upload_image_container {
             position: absolute;
-            /* right: 1vw;
-            bottom: 1vw;
-            height: 4vw;
-            width: 4vw; */
             right: 1rem;
             bottom: 1rem;
             height: 4rem;
             width: 4rem;
-            background-color: #000;
+            background-color: var(--color-2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -215,18 +145,17 @@
             -ms-border-radius: var(--list-wrapper-border-radius);
             -o-border-radius: var(--list-wrapper-border-radius);
             font-size: var(--list-primary-text);
-            color: #fff;
+            color: var(--light-color-4);
             cursor: pointer;
             border: none;
 
             &:hover {
-                background-color: #00000089;
+                background-color: var(--color-1);
             }
         }
     }
 
     &>p:nth-child(2) {
-        /* font-size: 2vw; */
         font-size: var(--list-primary-text);
         margin-top: 3rem;
         font-weight: 600;
@@ -260,7 +189,7 @@
     display: flex;
     align-items: center;
     height: 4rem;
-    background-color: #EEEDED;
+    background-color: var(--light-color-3);
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
     -moz-border-radius: var(--input-border-radius);
@@ -307,15 +236,15 @@
         font-size: var(--list-content-body-text);
 
         &:hover {
-            color: #fff;
+            color: var(--light-color-4);
             background-color: limegreen;
         }
     }
 
     .admin_notverified_icon {
-        background-color: #ff000025;
-        color: red;
-        border: 0.1rem solid red;
+        background-color: var(--color-7);
+        color: var(--color-6);
+        border: 0.1rem solid var(--color-6);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -323,8 +252,8 @@
         -o-transition: var(--btn-transition);
 
         &:hover {
-            color: #fff;
-            background-color: red;
+            color: var(--light-color-4);
+            background-color: var(--color-6);
         }
     }
 }
@@ -333,7 +262,7 @@
     display: flex;
     align-items: center;
     height: 4rem;
-    background-color: #EEEDED;
+    background-color: var(--light-color-3);
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
     -moz-border-radius: var(--input-border-radius);
@@ -375,15 +304,15 @@
         font-size: var(--list-content-body-text);
 
         &:hover {
-            color: #fff;
+            color: var(--light-color-4);
             background-color: limegreen;
         }
     }
 
     .admin_notverified_icon {
-        background-color: #ff000025;
-        color: red;
-        border: 1px solid red;
+        background-color: var(--color-7);
+        color: var(--color-6);
+        border: 1px solid var(--color-6);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -391,8 +320,8 @@
         -o-transition: var(--btn-transition);
 
         &:hover {
-            color: #fff;
-            background-color: red;
+            color: var(--light-color-4);
+            background-color: var(--color-6);
         }
     }
 
@@ -402,7 +331,7 @@
     position: relative;
 
     &>div {
-        background-color: #fff;
+        background-color: var(--light-color-4);
         box-shadow: var(--cmmn-box-shadow-y);
         position: absolute;
         top: 7rem;
@@ -434,8 +363,8 @@
             cursor: pointer;
 
             &:hover {
-                background-color: #000;
-                color: #fff;
+                background-color: var(--light-color-2);
+                color: var(--light-color-4);
             }
         }
     }
@@ -451,7 +380,7 @@
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border: none;
     width: 40%;
     border-radius: var(--input-border-radius);
@@ -478,10 +407,10 @@
             align-items: center;
             justify-content: center;
             width: 3.2rem;
-            background-color: #ff000025;
-            border: 0.1rem solid red;
+            background-color: var(--color-7);
+            border: 0.1rem solid var(--color-6);
             cursor: pointer;
-            color: red;
+            color: var(--color-6);
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -496,11 +425,11 @@
             margin-bottom: 1rem;
 
             &:hover {
-                background-color: red;
-                color: #fff;
+                background-color: var(--color-6);
+                color: var(--light-color-4);
 
                 &>div {
-                    color: var(--primary-text-light-color1);
+                    color: var(--light-color-4);
                 }
             }
         }
@@ -521,7 +450,7 @@
             &>div {
                 height: 4rem;
                 width: 100%;
-                background-color: #EEEDED;
+                background-color: var(--light-color-3);
                 display: flex;
                 align-items: center;
                 border-radius: var(--input-border-radius);
@@ -560,8 +489,8 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #efefef;
-            border: 0.1rem solid #000;
+            background-color: var(--color-3);
+            border: 0.1rem solid var(--color-2);
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
             -moz-border-radius: var(--list-btn-border-radius);
@@ -575,11 +504,11 @@
             margin-inline: auto;
             font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
-            color: #000;
+            color: var(--color-2);
 
             &:hover {
-                background-color: #000;
-                color: #fff;
+                background-color: var(--color-2);
+                color: var(--light-color-4);
             }
         }
     }
@@ -597,7 +526,7 @@
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border: none;
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
@@ -610,7 +539,7 @@
         width: 5rem;
         font-size: clamp(5rem, 4.6rem + 0.4vw, 10rem);
         margin-inline: auto;
-        color: #000;
+        color: var(--light-color-2);
         margin-bottom: 1rem;
     }
 
@@ -634,21 +563,20 @@
             display: flex;
             justify-content: space-around;
             gap: 2rem;
-            /* background-color: red; */
 
             &>input {
                 width: 6rem;
                 height: 6rem;
                 text-align: center;
                 font-size: clamp(3rem, 2.6rem + 0.4vw, 6rem);
-                border: 0.1rem solid #000;
+                border: 0.1rem solid var(--light-color-2);
                 outline: none;
                 border-radius: var(--list-wrapper-border-radius);
                 -webkit-border-radius: var(--list-wrapper-border-radius);
                 -moz-border-radius: var(--list-wrapper-border-radius);
                 -ms-border-radius: var(--list-wrapper-border-radius);
                 -o-border-radius: var(--list-wrapper-border-radius);
-                color: #000;
+                color: var(--light-color-2);
                 font-weight: 500;
             }
         }
@@ -659,7 +587,6 @@
             text-align: center;
 
             &>span {
-                color: #000;
                 text-decoration: underline;
                 cursor: pointer;
             }
@@ -693,29 +620,29 @@
                 font-weight: 500;
 
                 &:hover {
-                    color: #fff;
+                    color: var(--light-color-4);
                 }
             }
 
             &>button:nth-child(1) {
-                background-color: #ff000025;
-                border: 0.1rem solid red;
-                color: red;
+                background-color: var(--color-7);
+                border: 0.1rem solid var(--color-6);
+                color: var(--color-6);
 
                 &:hover {
-                    background-color: red;
-                    color: #fff;
+                    background-color: var(--color-6);
+                    color: var(--light-color-4);
                 }
             }
 
             &>button:nth-child(2) {
-                background-color: #efefef;
-                border: 0.1rem solid #000;
-                color: #000;
+                background-color: var(--color-3);
+                border: 0.1rem solid var(--color-2);
+                color: var(--color-2);
 
                 &:hover {
-                    background-color: #000;
-                    color: #fff;
+                    background-color: var(--color-2);
+                    color: var(--light-color-4);
                 }
             }
         }
@@ -725,9 +652,61 @@
 .error_message {
     font-size: 1.2rem !important;
     font-weight: 500;
-    color: red;
+    color: var(--color-6);
 }
 
+/* dark mode  */
+
+.admin_edit_profile_container.dark{
+    background-color: var(--dark-color-2);
+}
+
+.admin_edit_profile_container_right.dark{
+    &>div{
+        &>input{
+            background-color: var(--dark-color-3);
+        }
+    }
+}
+
+.admin_edit_email_container.dark,
+.admin_edit_mobile_container.dark{
+    background-color: var(--dark-color-3);
+}
+
+.modal_container.dark{
+    background-color: var(--dark-color-2);
+
+    .modal_content_container{
+        &>div{
+            &>div{
+                background-color: var(--dark-color-3);
+
+                &>div{
+                    color: var(--light-color-4);
+                }
+            }
+        }
+    }
+}
+
+.modal_common_container.dark{
+    background-color: var(--dark-color-2);
+
+    &>div:nth-child(1){
+        color: var(--light-color-4);
+    }
+
+    &>div:nth-child(2){
+        &>div:nth-child(3){
+            &>input{
+                background-color: var(--dark-color-3);
+                border: 0.1rem solid rgba(255, 255, 255, 0.2);
+                color: var(--light-color-4);
+            }
+        }
+    }
+}
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_edit_profile_container {

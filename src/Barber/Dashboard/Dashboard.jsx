@@ -526,7 +526,7 @@ const Dashboard = () => {
             barberProfile?.user[0]?.approvePendingMessage ?
               <div className={style.barber_approve_container}>
                 <div>
-                  <p style={{ color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)" }}>{barberProfile?.user[0]?.approvePendingMessage}</p>
+                  <p style={{ color: darkmodeOn ? "var(--light-color-4)" : "var(--primary-text-light-color2)" }}>{barberProfile?.user[0]?.approvePendingMessage}</p>
                   <button onClick={() => window.location.reload()}>Reload</button>
                 </div>
               </div> :

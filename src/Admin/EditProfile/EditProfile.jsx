@@ -505,8 +505,19 @@ const EditProfile = () => {
     const [openMobileModal, setOpenMobileModal] = useState(false)
     const [openEmailModal, setOpenEmailModal] = useState(false)
 
+
+    useEffect(() => {
+    const phoneInput = document.querySelector(
+      '.react-international-phone-input-container .react-international-phone-input'
+    );
+
+    if (phoneInput) {
+      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    }
+  }, [darkmodeOn]);
+
     return (
-        <main className={style.admin_edit_profile_container}>
+        <main className={`${style.admin_edit_profile_container} ${darkmodeOn && style.dark}`}>
             <div className={style.admin_edit_profile_container_left}>
                 <div><p>Your Profile</p></div>
                 <div className={style.admin_edit_profile_content_left}>
@@ -538,7 +549,7 @@ const EditProfile = () => {
                     <p>{adminProfile?.email}</p>
                 </div>
             </div>
-            <div className={style.admin_edit_profile_container_right}>
+            <div className={`${style.admin_edit_profile_container_right}  ${darkmodeOn && style.dark}`}>
                 <div>
                     <p>Name</p>
                     <input
@@ -559,7 +570,7 @@ const EditProfile = () => {
 
                 <div>
                     <p>Email</p>
-                    <div className={style.admin_edit_email_container}>
+                    <div className={`${style.admin_edit_email_container} ${darkmodeOn && style.dark}`}>
                         <input
                             type="text"
                             placeholder='Enter Email'
@@ -588,12 +599,12 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_common_container}>
+                    <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
                         <div><OtpEmailIcon /></div>
 
                         <div>
                             <p>Please check your email</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{adminProfile?.email}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{adminProfile?.email}</span></p>
                             <div>
                                 {
                                     otp.map((digit, index) => (
@@ -644,7 +655,7 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_container}>
+                    <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
                         <div>
                             <p>Change your password</p>
                             <button onClick={() => setOpenPasswordModal(false)}><CloseIcon /></button>
@@ -728,7 +739,7 @@ const EditProfile = () => {
 
                 <div>
                     <p>Mob. Number</p>
-                    <div className={style.admin_edit_mobile_container} style={{ outline: invalidNumberError && "0.1rem solid red" }}>
+                    <div className={`${style.admin_edit_mobile_container} ${darkmodeOn && style.dark}`} style={{ outline: invalidNumberError && "0.1rem solid red" }}>
                         <div onKeyDown={handleKeyPress}>
                             <PhoneInput
                                 forceDialCode={true}
@@ -759,12 +770,12 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_common_container}>
+                    <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
                         <div><OtpMessageIcon /></div>
 
                         <div>
                             <p>Please check your message</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{adminProfile?.mobileNumber}</span></p>
+                            <p>We have sent a code to your <span style={{fontWeight: "600"}}>{adminProfile?.mobileNumber}</span></p>
                             <div>
                                 {
                                     mobileotp.map((digit, index) => (

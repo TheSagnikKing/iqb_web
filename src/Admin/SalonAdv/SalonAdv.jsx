@@ -340,7 +340,7 @@ const SalonAdv = () => {
 
 
   return (
-    <div className={style.salonadv_container}>
+    <div className={`${style.salonadv_container} ${darkmodeOn && style.dark}`}>
       <div className={`${style.salonadv_header} ${darkmodeOn && style.dark}`}>
         <p>Advertisements with Drag-and-Drop</p>
 

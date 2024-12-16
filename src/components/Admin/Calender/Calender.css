@@ -59,7 +59,7 @@
     -o-border-radius: 3px;
 }
 .next-month{
-    color: red;
+    color: var(--color-6);
 }
 
 .calender-header > div:nth-child(1):hover {
@@ -70,13 +70,13 @@
 
 .calender-header.dark{
     background-color: var(--dark-mode-bg-color-4);
-    color: var(--primary-bg-light-color1);
+    color: var(--light-color-4);
 }
 
 .calender-header.dark>div:nth-child(2):hover,
 .calender-header.dark>div:nth-child(3):hover{
     background-color: var(--dark-mode-bg-color-1);
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 

@@ -28,7 +28,7 @@
     align-items: center;
     font-size: var(--list-content-body-text);
     cursor: pointer;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -65,7 +65,7 @@
     padding: 1rem;
     box-shadow: var(--cmmn-box-shadow-y);
     z-index: 100;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@
 
 .profile_drop_container>div:hover {
     background-color: #000;
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
     cursor: pointer;
 }
 
@@ -150,7 +150,7 @@
         -o-transition: var(--btn-transition);
 
         &:hover {
-            color: #fff;
+            color: var(--light-color-4);
         }
     }
 
@@ -162,19 +162,19 @@
 
         &:hover {
             background-color: limegreen;
-            color: #fff;
+            color: var(--light-color-4);
         }
     }
 
     .barber_online_inactive,
     .barber_clock_inactive {
         background-color: #ff000032;
-        border: 0.1rem solid red !important;
-        color: red;
+        border: 0.1rem solid var(--color-6) !important;
+        color: var(--color-6);
 
         &:hover {
-            background-color: red;
-            color: #fff;
+            background-color: var(--color-6);
+            color: var(--light-color-4);
         }
     }
 
@@ -206,12 +206,12 @@
     .barber_online_inactive,
     .barber_clock_inactive {
         background-color: #ff000032;
-        border: 0.1rem solid red !important;
-        color: red;
+        border: 0.1rem solid var(--color-6) !important;
+        color: var(--color-6);
 
         &:hover {
             background-color: #ff000032 !important;
-            color: red !important;
+            color: var(--color-6) !important;
         }
     }
 
@@ -238,7 +238,7 @@
         height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
-        background-color: var(--primary-bg-light-color1);
+        background-color: var(--light-color-4);
         padding: 2rem;
         transition: width 300ms ease;
         -webkit-transition: width 300ms ease;
@@ -260,9 +260,9 @@
             cursor: pointer;
             border: none;
             font-size: var(--list-modal-header-icon);
-            color: red;
-            border: 1px solid red;
-            background-color: #ff000025;
+            color: var(--color-6);
+            border: 1px solid var(--color-6);
+            background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
             margin-left: auto;
@@ -309,12 +309,12 @@
             background-color: #000;
 
             &>div {
-                color: #fff;
+                color: var(--light-color-4);
             }
 
 
             &>p {
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }
@@ -386,12 +386,12 @@
     .barber_online_inactive,
     .barber_clock_inactive {
         background-color: #ff000032;
-        border: 0.1rem solid red !important;
-        color: red;
+        border: 0.1rem solid var(--color-6) !important;
+        color: var(--color-6);
 
         &:hover {
             background-color: #ff000032 !important;
-            color: red !important;
+            color: var(--color-6) !important;
         }
     }
 
@@ -418,7 +418,7 @@
         height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
-        background-color: var(--primary-bg-light-color1);
+        background-color: var(--light-color-4);
         padding: 2rem;
         transition: width 300ms ease;
         -webkit-transition: width 300ms ease;
@@ -440,9 +440,9 @@
             cursor: pointer;
             border: none;
             font-size: var(--list-modal-header-icon);
-            color: red;
-            border: 1px solid red;
-            background-color: #ff000025;
+            color: var(--color-6);
+            border: 1px solid var(--color-6);
+            background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
             margin-left: auto;
@@ -489,12 +489,12 @@
             background-color: #000;
 
             &>div {
-                color: #fff;
+                color: var(--light-color-4);
             }
 
 
             &>p {
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }
@@ -566,12 +566,12 @@
     .barber_online_inactive,
     .barber_clock_inactive {
         background-color: #ff000032;
-        border: 0.1rem solid red !important;
-        color: red;
+        border: 0.1rem solid var(--color-6) !important;
+        color: var(--color-6);
 
         &:hover {
             background-color: #ff000032 !important;
-            color: red !important;
+            color: var(--color-6) !important;
         }
     }
 
@@ -598,7 +598,7 @@
         height: 100svh;
         box-shadow: var(--cmmn-box-shadow-x);
         z-index: 1000;
-        background-color: var(--primary-bg-light-color1);
+        background-color: var(--light-color-4);
         padding: 2rem;
         transition: width 300ms ease;
         -webkit-transition: width 300ms ease;
@@ -620,9 +620,9 @@
             cursor: pointer;
             border: none;
             font-size: var(--list-modal-header-icon);
-            color: red;
-            border: 1px solid red;
-            background-color: #ff000025;
+            color: var(--color-6);
+            border: 1px solid var(--color-6);
+            background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
             margin-left: auto;
@@ -669,12 +669,12 @@
             background-color: #000;
 
             &>div {
-                color: #fff;
+                color: var(--light-color-4);
             }
 
 
             &>p {
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }

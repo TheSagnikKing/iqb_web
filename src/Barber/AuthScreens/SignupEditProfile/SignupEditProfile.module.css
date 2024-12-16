@@ -53,7 +53,7 @@
 .barber_signup_edit_container>div:nth-child(2)>div>div>input {
     height: 4rem;
     width: 100%;
-    background-color: var(--bg-color3);
+    background-color: var(--light-color-3);
     border: none;
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
@@ -99,7 +99,7 @@
 
     &:hover{
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -115,7 +115,7 @@
     box-shadow: var(--cmmn-box-shadow-y);
     border-radius: var(--list-wrapper-border-radius);
     padding: 1rem;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -137,8 +137,8 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3)>div>p:hover {
-    background-color: var(--primary-bg-color3);
-    color: var(--primary-text-light-color1);
+    background-color: var(--light-color-2);
+    color: var(--light-color-4);
     cursor: pointer;
     font-weight: 500;
     min-height: 4rem;
@@ -190,14 +190,14 @@
     
     &:hover{
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
 .error_message {
     font-size: 1.2rem !important;
     font-weight: 500;
-    color: red;
+    color: var(--color-6);
 }
 
 @media screen and (min-width:0px) and (max-width:430px){

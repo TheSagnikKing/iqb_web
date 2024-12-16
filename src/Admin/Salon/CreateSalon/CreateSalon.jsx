@@ -1155,6 +1155,30 @@ const CreateSalon = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    const phoneInput = document.querySelector(
+      '.react-international-phone-input-container .react-international-phone-input'
+    );
+
+    // const phonedropdown = document.querySelector(
+    //   '.react-international-phone-country-selector-dropdown'
+    // )
+
+    // const phonedropfocus = document.querySelector(
+    //   '.react-international-phone-country-selector-dropdown__list-item--selected, .react-international-phone-country-selector-dropdown__list-item--focused'
+    // )
+
+    if (phoneInput) {
+      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    }
+
+    // if(phonedropdown){
+    //   phonedropdown.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    //   phonedropdown.style.backgroundColor = darkmodeOn ? 'var(--dark-color-2)' : 'var(--light-color-4)';
+    // }
+
+  }, [darkmodeOn])
+
   return (
     <div className={`${style.create_salon_wrapper} ${darkmodeOn && style.dark}`}>
       <div><p>Create Salon</p></div>
@@ -1167,9 +1191,9 @@ const CreateSalon = () => {
               }
             </div>
 
-            <div className={style.create_salon_logo_container}>
+            <div className={`${style.create_salon_logo_container} ${darkmodeOn && style.dark}`}>
               <div>
-                <img src={`${salonLogo}`} alt="" />
+                <img src={`${salonLogo}`} alt="s" />
                 <div>
                   <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
                   <input
@@ -1424,9 +1448,9 @@ const CreateSalon = () => {
                 style={{ border: (!countryCodePresent || timezoneError) ? "0.1rem solid red" : undefined }}
               />
               {
-                !countryCodePresent ? <p className={style.error_message}>Please select country</p> :  <p className={style.error_message}>{timezoneError}</p>
+                !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{timezoneError}</p>
               }
-             
+
               {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
                 {
                   getAdminAllTimezoneLoading ?
@@ -1590,9 +1614,11 @@ const CreateSalon = () => {
                         >
                           {
                             SalonIcons?.map((s) => (
-                              <div key={s._id} className={style.slider_item} onClick={() => logoselectHandler(s)}
+                              <div key={s._id}
+                                className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`} 
+                                onClick={() => logoselectHandler(s)}
                                 style={{
-                                  border: serviceIconError ? "0.1rem solid red" : selectedLogo?.url === s.url ? "2px solid var(--primary-bg-color3)" : "1px solid rgba(0,0,0,0.4)"
+                                  border: serviceIconError && "0.1rem solid red"
                                 }}
                               >
                                 <img src={s.url} alt="" />
@@ -1704,7 +1730,7 @@ const CreateSalon = () => {
                 {
                   localsalondata?.selectedServices?.map((ser, index) => {
                     return (
-                      <div className={`${style.service_item}`} key={index}>
+                      <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={index}>
                         <div className={`${style.service_item_top}`}>
                           <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="service icon" /></div>
                           <div>
@@ -1759,7 +1785,7 @@ const CreateSalon = () => {
                 />
               </button>
 
-              <div>{uploadSalonLogo?.name}</div>
+              <div><p>{uploadSalonLogo?.name}</p></div>
             </div>
           </div>
 
@@ -1858,7 +1884,7 @@ const CreateSalon = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={style.modal_container}>
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
           <div>
             <p>Selected Image</p>
             <button onClick={() => setOpenModal(false)}><CloseIcon /></button>

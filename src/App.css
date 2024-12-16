@@ -22,7 +22,7 @@
             text-align: center;
 
             &>span {
-                color: red;
+                color: var(--color-6);
                 font-weight: 600;
             }
         }
@@ -33,7 +33,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     display: flex;
     align-items: center;
     justify-content: center;

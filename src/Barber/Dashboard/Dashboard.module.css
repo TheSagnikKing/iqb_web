@@ -2,7 +2,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -48,7 +48,7 @@
 
 .barber_connect_salon_list_header {
     height: 5rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
@@ -88,7 +88,7 @@
 
 .barber_connect_salon_list_body {
     height: 5rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
@@ -137,7 +137,7 @@
 .barber_connect_salon_list_error {
     font-size: var(--list-content-body-text);
     margin-top: 1rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     height: calc(100% - 5rem);
     display: flex;
     justify-content: center;
@@ -184,7 +184,7 @@
 
             &:hover {
                 background-color: #000;
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }
@@ -212,7 +212,7 @@
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -241,7 +241,7 @@
 
     &:hover {
         background-color: limegreen;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -275,7 +275,7 @@
     -o-border-radius: var(--list-wrapper-border-radius);
 
     margin-bottom: 1.5rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     padding: 1rem;
     position: relative;
     border: 0.1rem solid rgba(0, 0, 0, 0.2);
@@ -308,7 +308,7 @@
 
     &:hover {
         background-color: #000;
-        color: var(--primary-text-light-color1);
+        color: var(--light-color-4);
     }
 }
 
@@ -321,10 +321,10 @@
     align-items: center;
     justify-content: center;
     width: 3.2rem;
-    background-color: #ff000025;
-    border: 0.1rem solid red;
+    background-color: var(--color-7);
+    border: 0.1rem solid var(--color-6);
     cursor: pointer;
-    color: red;
+    color: var(--color-6);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -338,8 +338,8 @@
     font-size: var(--list-header-btn-text);
 
     &:hover {
-        background-color: red;
-        color: var(--primary-text-light-color1);
+        background-color: var(--color-6);
+        color: var(--light-color-4);
     }
 }
 
@@ -503,7 +503,7 @@
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -533,7 +533,7 @@
     width: 100%;
     /* box-shadow: var(--cmmn-box-shadow-y); */
     padding-block: 1.5rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -591,7 +591,7 @@
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
     box-shadow: var(--cmmn-box-shadow-y);
-    background-color: #fff;
+    background-color: var(--light-color-4);
 
     &>img {
         width: 100%;
@@ -611,7 +611,7 @@
     width: 100%;
     /* box-shadow: var(--cmmn-box-shadow-y); */
     margin-bottom: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -664,7 +664,7 @@
     /* box-shadow: var(--cmmn-box-shadow-y); */
     padding: 1rem;
     border-radius: var(--list-wrapper-border-radius);
-    background-color: #fff;
+    background-color: var(--light-color-4);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
@@ -735,7 +735,7 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    background-color: #fff;
+    background-color: var(--light-color-4);
     min-height: 66rem;
     height: calc(100svh - 6rem - 2rem);
 }

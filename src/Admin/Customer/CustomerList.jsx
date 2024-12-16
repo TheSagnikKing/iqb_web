@@ -284,7 +284,7 @@ const CustomerList = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <div className={style.modal_container}>
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Send Email</p>
                 <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
@@ -358,7 +358,7 @@ const CustomerList = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <div className={style.modal_container}>
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Send Message</p>
                 <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>
@@ -411,8 +411,8 @@ const CustomerList = () => {
               count={6}
               height={'6rem'}
               style={{ marginBottom: '1rem' }}
-              baseColor={darkmodeOn ? 'var(--darkmode-loader-bg-color)' : 'var(--lightmode-loader-bg-color)'}
-              highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--lightmode-loader-highlight-color)'}
+              baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+              highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
             />
           </div>
         ) : adminGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (
@@ -457,7 +457,7 @@ const CustomerList = () => {
 
       </div>
 
-      <div className={style.customer_pagination_wrapper}>
+      <div className={`${style.customer_pagination_wrapper} ${darkmodeOn && style.dark}`}>
         <div>
           <div onClick={paginationLeftHandler}><LeftArrow /></div>
           <div onClick={paginationRightHandler} disabled={page === totalPages}><RightArrow /></div>

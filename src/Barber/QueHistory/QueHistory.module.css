@@ -2,7 +2,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -84,7 +84,7 @@
     border-top-left-radius: var(--list-wrapper-border-radius);
     border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
 }
 
 .quehistory_wrapper_content_body>div:nth-child(1)>p {

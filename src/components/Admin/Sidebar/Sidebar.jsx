@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './Sidebar.module.css';
 import { menudata } from '../menudata.jsx';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Adminqueueicon, LeftArrow, RightArrow } from '../../../icons';
+import { Adminqueueicon, LeftArrow, MoonIcon, RightArrow, Sunicon } from '../../../icons';
 import Header from '../Header/Header.jsx';
 import Skeleton from 'react-loading-skeleton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -80,7 +80,7 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className={style.menu_theme_container}
+          <div className={`${style.menu_theme_container} ${darkmodeOn && style.dark}`}
             style={{
               justifyContent: showSidebar ? "space-between" : "center"
             }}
@@ -92,10 +92,10 @@ const Sidebar = () => {
             {
               darkmodeOn ?
                 <button onClick={toggleHandler}>
-                  <IoMoon />
+                  <Sunicon />
                 </button> :
                 <button onClick={toggleHandler}>
-                  <MdSunny />
+                  <MoonIcon />
                 </button>
             }
 

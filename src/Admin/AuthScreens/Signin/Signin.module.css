@@ -51,7 +51,7 @@
             &>input {
                 height: 4rem;
                 width: 100%;
-                background-color: var(--bg-color3);
+                background-color: var(--light-color-3);
                 font-size: var(--list-content-body-text);
                 font-weight: 500;
                 border: none;
@@ -94,7 +94,7 @@
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -105,7 +105,7 @@ iframe {
 .password_container {
     height: 4rem;
     width: 100%;
-    background-color: var(--bg-color3);
+    background-color: var(--light-color-3);
     font-size: var(--list-content-body-text);
     font-weight: 500;
     border: none;
@@ -182,7 +182,7 @@ iframe {
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
@@ -217,7 +217,7 @@ iframe {
 .error_message {
     font-size: 1.2rem !important;
     font-weight: 500;
-    color: red;
+    color: var(--color-6);
     margin-top: 1rem;
 }
 

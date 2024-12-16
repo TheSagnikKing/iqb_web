@@ -57,7 +57,7 @@ const Sidebar = () => {
                 />
               </div>
               <p style={{
-                color: darkmodeOn ? "var(--primary-text-light-color1)" : "var(--primary-text-light-color2)"
+                color: darkmodeOn ? "var(--light-color-4)" : "var(--primary-text-light-color2)"
               }}>{barberGetSalonLogoResponse?.salonName}</p>
             </div> : ""}
           </div>

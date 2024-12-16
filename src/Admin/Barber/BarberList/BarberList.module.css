@@ -8,11 +8,6 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
 }
 
 .admin_barber_wrapper>div:nth-child(1) {
@@ -40,10 +35,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-2);
+    background-color: var(--color-3);
     border: 0.1rem solid var(--color-2);
     cursor: pointer;
-    color: var(--light-color-4);
+    color: var(--color-2);
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
     -webkit-border-radius: var(--list-btn-border-radius);
@@ -56,15 +51,16 @@
     -o-transition: var(--btn-transition);
 
     &>div {
+        font-weight: 600;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: var(--list-header-btn-icon);
-        color: var(--light-color-4);
+        color: var(--color-2);
     }
 
     &:hover {
-        background-color: var(--color-3);
+        background-color: var(--color-2);
 
         &>div {
             color: var(--light-color-4);
@@ -81,33 +77,34 @@
     padding: var(--list-header-btn-padding);
     border: none;
     cursor: pointer;
-    background-color: var(--color-2);
+    background-color: var(--color-3);
     border: 0.1rem solid var(--color-2);
-    transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
     -webkit-border-radius: var(--list-btn-border-radius);
     -moz-border-radius: var(--list-btn-border-radius);
     -ms-border-radius: var(--list-btn-border-radius);
     -o-border-radius: var(--list-btn-border-radius);
+
+    transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
 
     &>p {
-        font-weight: 500;
+        font-weight: 600;
         font-size: var(--list-header-btn-text);
-        color: var(--light-color-4);
+        color: var(--color-2);
     }
 
     &>div {
         font-size: var(--list-header-btn-icon);
-        font-weight: 500;
-        color: var(--light-color-4);
+        font-weight: 600;
+        color: var(--color-2);
     }
 
     &:hover {
-        background-color: var(--color-3);
+        background-color: var(--color-2);
 
         &>p {
             color: var(--light-color-4);
@@ -184,11 +181,6 @@
     border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
     background-color: var(--light-color-4);
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
 }
 
 
@@ -198,38 +190,23 @@
     left: 0;
     z-index: 2;
     background-color: var(--light-color-4);
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
 }
 
 
 .admin_barber_content_body>div:nth-child(1)>p:nth-child(2) {
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
     background-color: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
 .admin_barber_content_body>div:not(:nth-child(1))>p:nth-child(2) {
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
     background-color: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
 .admin_barber_content_body>div:nth-child(1)>p:nth-child(2) {
-    /* background-color: var(--primary-bg-light-color1); */
+    /* background-color: var(--light-color-4); */
 }
 
 .admin_barber_content_body>div>p {
@@ -265,9 +242,9 @@
 
 /* .admin_barber_content_body_item>div:nth-last-child(1) {
     &>button {
-        background-color: #ff000025;
-        border: 0.1rem solid red;
-        color: red;
+        background-color: var(--color-7);
+        border: 0.1rem solid var(--color-6);
+        color: var(--color-6);
         font-weight: 500;
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
@@ -276,18 +253,18 @@
         -o-transition: var(--btn-transition);
 
         &:hover {
-            background-color: red;
-            color: #fff;
+            background-color: var(--color-6);
+            color: var(--light-color-4);
         }
     }
 } */
 
 .admin_barber_content_body_item>div:nth-last-child(1) {
     &>button {
-        background-color: var(--color-2);
+        background-color: var(--color-3);
         border: 0.1rem solid var(--color-2);
-        color: var(--light-color-4);
-        font-weight: 500;
+        color: var(--color-2);
+        font-weight: 600;
 
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
@@ -296,7 +273,7 @@
         -o-transition: var(--btn-transition);
 
         &:hover {
-            background-color: var(--color-3);
+            background-color: var(--color-2);
             color: var(--light-color-4);
         }
     }
@@ -304,7 +281,7 @@
 
 .admin_barber_content_body_item>div:nth-last-child(2) {
     &>button {
-        font-weight: 500;
+        font-weight: 600;
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -320,7 +297,7 @@
 .admin_barber_content_body_item>div:nth-last-child(3),
 .admin_barber_content_body_item>div:nth-last-child(4) {
     &>button {
-        font-weight: 500;
+        font-weight: 600;
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -335,24 +312,24 @@
 
 .barber_online_btn_active,
 .barber_clock_btn_active {
-    background-color: var(--color-8);
+    background-color: var(--color-9);
     border: 0.1rem solid var(--color-8) !important;
-    color: var(--light-color-4);
+    color: var(--color-8);
 
     &:hover {
-        background-color: var(--color-9);
+        background-color: var(--color-8);
         color: var(--light-color-4);
     }
 }
 
 .barber_online_btn_inactive,
 .barber_clock_btn_inactive {
-    background-color: var(--color-6);
+    background-color: var(--color-7);
     border: 0.1rem solid var(--color-6) !important;
-    color: var(--light-color-4);
+    color: var(--color-6);
 
     &:hover {
-        background-color: var(--color-7);
+        background-color: var(--color-6);
         color: var(--light-color-4);
     }
 }
@@ -372,23 +349,23 @@
 }
 
 .barber_approve_btn_active {
-    background-color: var(--color-10);
+    background-color: var(--color-11);
     border: 0.1rem solid var(--color-10) !important;
-    color: var(--light-color-4);
+    color: var(--color-10);
 
     &:hover {
-        background-color: var(--color-11);
+        background-color: var(--color-10);
         color: var(--light-color-4);
     }
 }
 
 .barber_approve_btn_inactive {
-    background-color: var(--color-4);
+    background-color: var(--color-5);
     border: 0.1rem solid var(--color-4) !important;
-    color: var(--light-color-4);
+    color: var(--color-4);
 
     &:hover {
-        background-color: var(--color-5);
+        background-color: var(--color-4);
         color: var(--light-color-4);
     }
 }
@@ -405,7 +382,7 @@
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border: none;
     width: 40%;
     border-radius: var(--list-wrapper-border-radius);
@@ -433,10 +410,10 @@
             align-items: center;
             justify-content: center;
             width: 3.2rem;
-            background-color: #ff000025;
-            border: 0.1rem solid red;
+            background-color: var(--color-7);
+            border: 0.1rem solid var(--color-6);
             cursor: pointer;
-            color: red;
+            color: var(--color-6);
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -451,11 +428,11 @@
             margin-bottom: 1rem;
 
             &:hover {
-                background-color: red;
-                color: #fff;
+                background-color: var(--color-6);
+                color: var(--light-color-4);
 
                 &>div {
-                    color: var(--primary-text-light-color1);
+                    color: var(--light-color-4);
                 }
             }
         }
@@ -476,7 +453,7 @@
             &>input {
                 height: 4rem;
                 width: 100%;
-                background-color: #EEEDED;
+                background-color: var(--light-color-3);
                 border-radius: var(--input-border-radius);
                 -webkit-border-radius: var(--input-border-radius);
                 -moz-border-radius: var(--input-border-radius);
@@ -491,7 +468,7 @@
             &>textarea {
                 width: 100%;
                 min-height: 20vh;
-                background-color: #EEEDED;
+                background-color: var(--light-color-3);
                 border: none;
                 border-radius: var(--input-border-radius);
                 -webkit-border-radius: var(--input-border-radius);
@@ -503,37 +480,6 @@
                 resize: none;
                 overflow: auto;
                 outline: none;
-
-                &::-webkit-scrollbar {
-                    width: 0;
-                    height: 0;
-                }
-
-                &:hover::-webkit-scrollbar {
-                    width: 0.6rem;
-                    height: 0.7rem;
-                }
-
-                &:hover::-webkit-scrollbar-track {
-                    background-color: transparent;
-                }
-
-                &:hover::-webkit-scrollbar-thumb {
-                    background: #0867ff48;
-                    border-radius: var(--list-wrapper-border-radius);
-                    -webkit-border-radius: var(--list-wrapper-border-radius);
-                    -moz-border-radius: var(--list-wrapper-border-radius);
-                    -ms-border-radius: var(--list-wrapper-border-radius);
-                    -o-border-radius: var(--list-wrapper-border-radius);
-                }
-
-                &:hover::-webkit-scrollbar-thumb:hover {
-                    background: rgb(0, 98, 255);
-                }
-
-                &:hover::-webkit-scrollbar-corner {
-                    background-color: transparent;
-                }
             }
         }
 
@@ -545,8 +491,8 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #efefef;
-            border: 0.1rem solid #000;
+            background-color: var(--color-3);
+            border: 0.1rem solid var(--color-2);
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
             -moz-border-radius: var(--list-btn-border-radius);
@@ -560,11 +506,11 @@
             margin-inline: auto;
             font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
-            color: #000;
+            color: var(--color-2);
 
             &:hover {
-                background-color: #000;
-                color: #fff;
+                background-color:var(--color-2);
+                color: var(--light-color-4);
             }
         }
     }
@@ -604,6 +550,19 @@
 
 .admin_barber_content_body.dark>div:not(:nth-child(1))>p:nth-child(2) {
     background-color: rgba(32, 33, 36, 0.5) !important;
+}
+
+.modal_container.dark {
+    background-color: var(--dark-color-2);
+
+    .modal_content_container {
+        &>div {
+            &>textarea,
+            &>input {
+                background-color: var(--dark-color-3);
+            }
+        }
+    }
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {

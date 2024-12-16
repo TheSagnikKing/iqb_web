@@ -3,8 +3,8 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
-    background-color: #fff;
+    background-color: var(--light-color-4);
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -87,7 +87,7 @@
     border-top-left-radius: var(--list-wrapper-border-radius);
     border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
 }
 
 .barber_queue_content_body>div:nth-child(1)>p {
@@ -187,14 +187,14 @@
 
     &:hover {
         background-color: #000;
-        color: #fff;
+        color: var(--light-color-4);
     }
 }
 
 .barber_queue_content_body_item>div:nth-last-child(1)>button {
     background-color: rgba(255, 0, 0, 0.144);
-    border: 0.1rem solid red;
-    color: red;
+    border: 0.1rem solid var(--color-6);
+    color: var(--color-6);
     font-weight: 500;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -203,8 +203,8 @@
     -o-transition: var(--btn-transition);
 
     &:hover {
-        background-color: red;
-        color: #fff;
+        background-color: var(--color-6);
+        color: var(--light-color-4);
     }
 }
 

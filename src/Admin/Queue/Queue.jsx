@@ -63,7 +63,7 @@ const Queue = () => {
       setCopyQueueList((prev) => {
         const filteredArray = queuelist?.filter((queue) => {
           return (queue.name.toLowerCase().includes(searchValue) ||
-          queue.barberName.toLowerCase().includes(searchValue))
+            queue.barberName.toLowerCase().includes(searchValue))
         })
         return filteredArray
       })
@@ -214,8 +214,9 @@ const Queue = () => {
         {
           getAllQueueListLoading ?
             <div className={style.admin_queue_content_body}>
-              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
             </div> :
             getAllQueueListResolve && copyQueueList?.length > 0 ?
               <>
@@ -272,7 +273,7 @@ const Queue = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={style.modal_container}>
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
           <div>
             <p>Choose Barber</p>
             <button onClick={() => setChoosebarbermodalopen({
@@ -281,27 +282,30 @@ const Queue = () => {
             })}><CloseIcon /></button>
           </div>
 
-          <div className={style.modal_content_container}>
+          <div className={`${style.modal_content_container} ${darkmodeOn && style.dark}`}>
             <input type="text" value={choosebarber} placeholder='Choose Barber' readOnly />
 
             {
               getAdminBarberListLoading ? (<div className={style.barber_dropdown_loading}>
-                <Skeleton count={3} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                  highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                <Skeleton count={3} height={"6rem"} style={{ marginBottom: "1rem" }}
+                  baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                  highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                />
               </div>) :
                 getAdminBarberListResolve && copybarberlistdata?.length > 0 ?
                   (<div className={style.barber_dropdown}>
                     {
                       copybarberlistdata?.map((b) => {
                         return (
-                          <div className={style.choose_barber_dropdown_item} key={b._id}
+                          <div
+                            className={`${style.choose_barber_dropdown_item} ${choosebarberemail === b?.email && style.barber_select} ${darkmodeOn && style.dark}`}
+                            key={b._id}
                             onClick={() => {
                               setChoosebarberemail(b?.email)
                               setChoosebarber(b?.name)
                             }}
                             style={{
                               borderLeft: b.isOnline ? "0.5rem solid limegreen" : "0.5rem solid red",
-                              outline: choosebarberemail === b?.email ? "0.1rem solid rgba(0,0,0,1)" : "none"
                             }}
                           >
                             <div>

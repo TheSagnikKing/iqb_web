@@ -9,7 +9,7 @@
 }
 
 .active-cell {
-    background-color: var(--primary-bg-color3);
+    background-color: var(--light-color-2);
     color: white;
     border-radius: 3px;
     cursor: default;
@@ -28,7 +28,7 @@
 
 .cells.dark:hover {
     background-color: var(--dark-mode-bg-color-1);
-    color: var(--primary-text-light-color1);
+    color: var(--light-color-4);
 }
 
 .initial-active-cell.dark{

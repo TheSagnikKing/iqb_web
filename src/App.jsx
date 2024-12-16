@@ -113,9 +113,8 @@ const App = () => {
     // This sets globally 
     const styleElement = document.createElement("style");
     styleElement.textContent = `
-      p, h1, h2, h3, h4, h5, i, input {
+      p, h1, h2, h3, h4, h5, i, input, textarea, input::placeholder, textarea::placeholder {
         color: ${darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"};
-        transition: var(--transition);
       }
     `;
     document.head.appendChild(styleElement);

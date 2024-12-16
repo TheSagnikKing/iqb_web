@@ -3,7 +3,7 @@
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
@@ -92,7 +92,7 @@
         background-color: #000;
 
         &>div {
-            color: var(--primary-text-light-color1);
+            color: var(--light-color-4);
         }
     }
 }
@@ -183,7 +183,7 @@
     border-top-left-radius: var(--list-wrapper-border-radius);
     border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
 }
 
 .customer_content_body>div>p:nth-child(2) {
@@ -193,11 +193,11 @@
 }
 
 .customer_content_body>div:not(:nth-child(1))>p:nth-child(2) {
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
 }
 
 .customer_content_body>div:nth-child(1)>p:nth-child(2) {
-    background-color: var(--primary-bg-light-color1);
+    background-color: var(--light-color-4);
 }
 
 .customer_content_body>div>p {
@@ -274,7 +274,7 @@
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--light-color-4);
     border: none;
     width: 40%;
     border-radius: var(--list-wrapper-border-radius);
@@ -302,10 +302,10 @@
             align-items: center;
             justify-content: center;
             width: 3.2rem;
-            background-color: #ff000025;
-            border: 0.1rem solid red;
+            background-color: var(--color-7);
+            border: 0.1rem solid var(--color-6);
             cursor: pointer;
-            color: red;
+            color: var(--color-6);
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -320,11 +320,11 @@
             margin-bottom: 1rem;
 
             &:hover {
-                background-color: red;
-                color: #fff;
+                background-color: var(--color-6);
+                color: var(--light-color-4);
 
                 &>div {
-                    color: var(--primary-text-light-color1);
+                    color: var(--light-color-4);
                 }
             }
         }
@@ -433,7 +433,7 @@
 
             &:hover {
                 background-color: #000;
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }

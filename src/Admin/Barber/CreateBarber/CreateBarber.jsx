@@ -218,7 +218,7 @@ const CreateBarber = () => {
       return setDateOfBirthError("Please select date of birth")
     }
 
-    if(chooseServices.length === 0){
+    if (chooseServices.length === 0) {
       toast.error("Please provide a service", {
         duration: 3000,
         style: {
@@ -316,12 +316,21 @@ const CreateBarber = () => {
   const handleClose = () => setOpen(false);
 
 
-  console.log(getCurrentDate())
+  useEffect(() => {
+    const phoneInput = document.querySelector(
+      '.react-international-phone-input-container .react-international-phone-input'
+    );
+
+    if (phoneInput) {
+      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    }
+  }, [darkmodeOn]);
+
   return (
     <>
       <div className={`${style.admin_create_barber_wrapper} ${darkmodeOn && style.dark}`}>
 
-        <div className={`${style.admin_create_barber_wrapper_right}`}>
+        <div className={`${style.admin_create_barber_wrapper_right} ${darkmodeOn && style.dark}`}>
           <div>
             <p>Add Your Services</p>
           </div>
@@ -334,12 +343,12 @@ const CreateBarber = () => {
               </div>) :
               adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
                 (
-                  <div className={`${style.admin_create_barber_content_wrapper_right}`}>
+                  <div className={`${style.admin_create_barber_content_wrapper_right} ${darkmodeOn && style.dark}`}>
 
                     {
                       allSalonServices?.map((s) => {
                         return (
-                          <div className={`${style.service_item}`} key={s._id}>
+                          <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={s._id}>
                             <div className={`${style.service_item_top}`}>
                               <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                               <div>
@@ -406,7 +415,7 @@ const CreateBarber = () => {
             >Add Services</button>
           </div>
 
-          <div className={`${style.admin_create_barber_content_wrapper_left}`}>
+          <div className={`${style.admin_create_barber_content_wrapper_left} ${darkmodeOn && style.dark}`}>
 
             <div>
               <p>Name</p>
@@ -449,10 +458,10 @@ const CreateBarber = () => {
 
             <div>
               <p>Mob. Number</p>
-              <div>
-                <div 
-                onKeyDown={handleKeyPress} 
-                style={{ border: invalidNumberError && "0.1rem solid red" }}>
+              <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`}>
+                <div
+                  onKeyDown={handleKeyPress}
+                  style={{ border: invalidNumberError && "0.1rem solid red" }}>
                   <PhoneInput
                     forceDialCode={true}
                     defaultCountry={countryflag}
@@ -488,7 +497,7 @@ const CreateBarber = () => {
                 value={chooseServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
                 readOnly
-                style={{ border: servicesError && "0.1rem solid red"}}
+                style={{ border: servicesError && "0.1rem solid red" }}
               />
               <p className={style.error_message}>{servicesError}</p>
             </div>

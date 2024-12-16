@@ -340,7 +340,7 @@ const BarberList = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <div className={style.modal_container}>
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Send Email</p>
                 <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
@@ -417,7 +417,7 @@ const BarberList = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <div className={style.modal_container}>
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Send Message</p>
                 <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>

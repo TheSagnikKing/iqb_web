@@ -68,7 +68,7 @@ const QueHistory = () => {
     };
 
     return (
-        <div className={`${style.quehistory_wrapper}`}>
+        <div className={`${style.quehistory_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
                 <p>Queue History</p>
 

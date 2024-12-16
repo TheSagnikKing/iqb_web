@@ -24,16 +24,16 @@ html {
   font-size: 62.5%;
 
   /* light theme */
-  --primary-bg-light-color1: #fff;
+  --light-color-4: var(--light-color-4);
   --primary-bg-light-color2: #000;
-  --primary-bg-color3: #000;
-  /* --primary-bg-color3: #3E3232; */
+  --light-color-2: #000;
+  /* --light-color-2: #3E3232; */
 
-  --bg-color3: #EEEDED;
+  --light-color-3: #EEEDED;
   --sidebar-bg-color: #ECEBEB;
   --hover-bg-color-1: #38598b;
 
-  --primary-text-light-color1: #fff;
+  --primary-text-light-color1: var(--light-color-4);
   --primary-text-light-color2: #000;
 
   --text-color-3: #D9D9D9;
@@ -46,17 +46,16 @@ html {
 
   /* common colors */
   --color-1: #8ab4f8;
-  --color-2: #174ea6;
-  --color-3: #174ea698;
-  --color-4: #720455;
-  --color-5: #7204557b;
-  --color-6: #ba0000;
-  --color-7: #ba000089;
+  --color-2: #0d58d2;
+  --color-3: #174ea61d;
+  --color-4: #ae0581;
+  --color-5: #72045523;
+  --color-6: rgb(244, 67, 54);
+  --color-7: rgba(244, 67, 54, 0.103);
   --color-8: #00A36C;
-  --color-9: #00a36d87;
+  --color-9: #00a36d15;
   --color-10: #CC5500;
-  --color-11: #cc550085;
-  --transition: 0.3s all ease;
+  --color-11: #cc550016;
 
   /* light mode colors */
 
@@ -148,11 +147,10 @@ p {
 }
 
 .carousel .control-dots .dot {
-  background: #000;
+  background: var(--color-2);
 }
 
 .react-international-phone-input-container {
-  background-color: var(--bg-color3);
   border-radius: var(--input-border-radius) !important;
   -webkit-border-radius: var(--input-border-radius) !important;
   -moz-border-radius: var(--input-border-radius) !important;
@@ -174,7 +172,7 @@ p {
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-  background-color: var(--bg-color3) !important;
+  background-color: transparent !important;
   min-height: 4rem !important;
   width: 6rem !important;
   border: none !important;
@@ -190,7 +188,7 @@ p {
 .react-multiple-carousel__arrow {
   min-width: 3rem !important;
   min-height: 3rem !important;
-  background-color: var(--primary-bg-color3) !important;
+  background-color: var(--light-color-2) !important;
 }
 
 .react-multiple-carousel__arrow--left {
@@ -317,7 +315,7 @@ p {
 
   &:hover{
     background-color: #000;
-    color: #fff;
+    color: var(--light-color-4);
   }
 }
 

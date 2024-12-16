@@ -1,5 +1,6 @@
 .salon_wrapper {
-    /*theextra2remisforpaddingbottom*/height: var(--list-wrapper-height);
+    /*theextra2remisforpaddingbottom*/
+    height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
     background-color: var(--light-color-4);
@@ -8,11 +9,6 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
 }
 
 .salon_wrapper>div:nth-child(1) {
@@ -36,7 +32,7 @@
     padding: var(--list-header-btn-padding);
     border: none;
     cursor: pointer;
-    background-color: var(--color-2);
+    background-color: var(--color-3);
     border: 0.1rem solid var(--color-2);
     transition: var(--btn-transition);
     border-radius: var(--list-btn-border-radius);
@@ -51,23 +47,20 @@
 
     &>p {
         font-weight: 500;
+        color: var(--color-2);
         font-size: var(--list-header-btn-text);
-        color: var(--light-color-4);
     }
 
     &>div {
         font-size: var(--list-header-btn-icon);
         font-weight: 500;
-        color: var(--light-color-4);
+        color: var(--color-2);
     }
 
     &:hover {
-        background-color: var(--color-3);
+        background-color: var(--color-2);
 
-        &>p {
-            color: var(--light-color-4);
-        }
-
+        &>p,
         &>div {
             color: var(--light-color-4);
         }
@@ -82,7 +75,7 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    /* background-color: #fff; */
+    /* background-color: var(--light-color-4); */
 }
 
 .salon_content_body {
@@ -112,11 +105,6 @@
     border-top-right-radius: var(--list-wrapper-border-radius);
     font-weight: 600;
     background-color: var(--light-color-4);
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
 }
 
 .salon_content_body>div>p:nth-child(1) {
@@ -126,22 +114,12 @@
 }
 
 .salon_content_body>div:not(:nth-child(1))>p:nth-child(1) {
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
     background-color: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
 .salon_content_body>div:nth-child(1)>p:nth-child(1) {
-    transition: var(--transition);
-    -webkit-transition: var(--transition);
-    -moz-transition: var(--transition);
-    -ms-transition: var(--transition);
-    -o-transition: var(--transition);
     background-color: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -197,9 +175,9 @@
 }
 
 .salon_content_body>div>div:nth-child(5)>button {
-    background-color: var(--color-2);
+    background-color: var(--color-3);
     border: 0.1rem solid var(--color-2);
-    color: var(--light-color-4);
+    color: var(--color-2);
     font-weight: 500;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -208,15 +186,15 @@
     -o-transition: var(--btn-transition);
 
     &:hover {
-        background-color: var(--color-3);
+        background-color: var(--color-2);
         color: var(--light-color-4);
     }
 }
 
 /* .salon_content_body>div>div:nth-child(6)>button {
     background-color: rgba(255, 0, 0, 0.144);
-    border: 0.1rem solid red;
-    color: red;
+    border: 0.1rem solid var(--color-6);
+    color: var(--color-6);
     font-weight: 500;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -225,15 +203,15 @@
     -o-transition: var(--btn-transition);
 
     &:hover {
-        background-color: red;
-        color: #fff;
+        background-color: var(--color-6);
+        color: var(--light-color-4);
     }
 } */
 
 .salon_content_body>div>div:nth-child(6)>button {
-    background-color: var(--color-4);
+    background-color: var(--color-5);
     border: 0.1rem solid var(--color-4);
-    color: var(--light-color-4);
+    color: var(--color-4);
     font-weight: 500;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -242,7 +220,7 @@
     -o-transition: var(--btn-transition);
 
     &:hover {
-        background-color: var(--color-5);
+        background-color: var(--color-4);
         color: var(--light-color-4);
     }
 }
@@ -297,10 +275,10 @@
             align-items: center;
             justify-content: center;
             width: 3.2rem;
-            background-color: #ff000025;
-            border: 0.1rem solid red;
+            background-color: var(--color-7);
+            border: 0.1rem solid var(--color-6);
             cursor: pointer;
-            color: red;
+            color: var(--color-6);
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -315,11 +293,11 @@
             margin-bottom: 1rem;
 
             &:hover {
-                background-color: red;
+                background-color: var(--color-6);
                 color: var(--light-color-4);
 
                 &>div {
-                    color: var(--primary-text-light-color1);
+                    color: var(--light-color-4);
                 }
             }
         }

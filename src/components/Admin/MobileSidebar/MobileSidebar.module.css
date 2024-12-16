@@ -11,11 +11,15 @@
     padding-inline: 1rem;
     font-weight: 500;
     /* background-color: #ebf5ff; */
-    background-color: #efefef;
+    background-color: var(--light-color-1);
   }
 
   .mobile_content>div>div:nth-child(2) {
     height: calc(100svh - 6rem);
     width: 100%;
+  }
+
+  .mobile_content.dark{
+    background-color: var(--dark-color-1);
   }
 }

@@ -41,7 +41,7 @@
 
             &:hover {
                 background-color: #000;
-                color: #fff;
+                color: var(--light-color-4);
             }
         }
     }
