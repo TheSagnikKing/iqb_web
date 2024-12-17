@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { barberForgetPasswordAction } from '../../../Redux/Barber/Actions/BarberPasswordAction'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import toast from 'react-hot-toast'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const ForgotPassword = () => {
 
@@ -62,11 +63,15 @@ const ForgotPassword = () => {
     loading: barberForgetPasswordLoading
   } = barberForgetPassword
 
-  return (
-    <div className={style.forgot_container}>
-      <div className={style.forgot_container_left}><img src="/signin_un.png" alt="forgot_image" /></div>
+  const darkMode = useSelector(darkmodeSelector)
 
-      <div className={style.forgot_container_right}>
+  const darkmodeOn = darkMode === "On"
+
+  return (
+    <div className={`${style.forgot_container} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.forgot_container_left} ${darkmodeOn && style.dark}`}><img src="/signin_un.png" alt="forgot_image" /></div>
+
+      <div className={`${style.forgot_container_right} ${darkmodeOn && style.dark}`}>
         <div>
           <p>Forgot Password</p>
 

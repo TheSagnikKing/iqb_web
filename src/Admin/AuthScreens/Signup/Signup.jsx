@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AdminGoogleSignupAction, AdminSignupAction } from '../../../Redux/Admin/Actions/AuthAction'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import toast from 'react-hot-toast'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const Signup = () => {
 
@@ -116,13 +117,17 @@ const Signup = () => {
     loading: AdminSignupLoading,
   } = AdminSignup
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <main className={style.admin_signup_container}>
+    <main className={`${style.admin_signup_container} ${darkmodeOn && style.dark}`}>
       <div className={style.admin_signup_left}>
         <img src="./signup_un.png" alt="admin_signup" />
       </div>
 
-      <div className={style.admin_signup_right}>
+      <div className={`${style.admin_signup_right} ${darkmodeOn && style.dark}`}>
         <div>
           <p>Sign Up to your Admin Account</p>
           <p>Welcome back Admin! please enter your details</p>
@@ -144,7 +149,7 @@ const Signup = () => {
 
           <div>
             <div
-              className={style.password_container}
+              className={`${style.password_container} ${darkmodeOn && style.dark}`}
               style={{ border: passwordError ? "0.1rem solid red" : undefined }}
             >
               <input

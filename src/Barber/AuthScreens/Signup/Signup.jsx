@@ -7,6 +7,7 @@ import { BarberGoogleSignupAction, BarberSignupAction } from '../../../Redux/Bar
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import toast from 'react-hot-toast'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const Signup = () => {
 
@@ -115,13 +116,17 @@ const Signup = () => {
     loading: BarberSignupLoading,
   } = BarberSignup
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <main className={style.barber_signup_container}>
+    <main className={`${style.barber_signup_container} ${darkmodeOn && style.dark}`}>
       <div className={style.barber_signup_left}>
         <img src="./signup_un.png" alt="barber_signup" />
       </div>
 
-      <div className={style.barber_signup_right}>
+      <div className={`${style.barber_signup_right} ${darkmodeOn && style.dark}`}>
         <div>
           <p>Sign Up to your Barber Account</p>
           <p>Welcome back Barber! please enter your details</p>
@@ -143,7 +148,7 @@ const Signup = () => {
 
           <div>
             <div
-              className={style.password_container}
+              className={`${style.password_container} ${darkmodeOn && style.dark}`}
               style={{ border: passwordError ? "0.1rem solid red" : undefined }}
             >
               <input

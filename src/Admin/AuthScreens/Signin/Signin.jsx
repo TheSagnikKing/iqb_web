@@ -7,6 +7,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { AdminGoogleloginAction, AdminSigninAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const Signin = () => {
 
@@ -120,13 +121,18 @@ const Signin = () => {
     loading: AdminSigninLoading,
   } = AdminSignin
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+
   return (
-    <main className={style.admin_signin_container}>
+    <main className={`${style.admin_signin_container} ${darkmodeOn && style.dark}`}>
       <div className={style.admin_signin_left}>
         <img src="./signin_un.png" alt="admin_Signin" />
       </div>
 
-      <div className={style.admin_signin_right}>
+      <div className={`${style.admin_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
           <p>Sign In to your Admin Account</p>
           <p>Welcome back Admin! please enter your details</p>
@@ -147,9 +153,9 @@ const Signin = () => {
           </div>
 
           <div>
-            <div 
-            className={style.password_container} 
-            style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
+            <div
+              className={`${style.password_container} ${darkmodeOn && style.dark}`}
+              style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
               <input
                 type={visibleeye ? "text" : "password"}
                 placeholder='Password'

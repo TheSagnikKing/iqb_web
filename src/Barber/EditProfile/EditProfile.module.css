@@ -410,7 +410,7 @@
     .barber_notverified_icon {
         background-color: var(--color-7);
         color: var(--color-6);
-        border: 1px solid var(--color-6);
+        border: 0.1rem solid var(--color-6);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -1013,14 +1013,14 @@
                         &>input {
                             width: 6rem;
                             border: none;
-                            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                            border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
                             outline: none;
                             font-size: var(--list-primary-text);
                             font-weight: 600;
                             text-align: center;
 
                             &:focus {
-                                border-bottom: 1px solid #000;
+                                border-bottom: 0.1rem solid #000;
                             }
                         }
 

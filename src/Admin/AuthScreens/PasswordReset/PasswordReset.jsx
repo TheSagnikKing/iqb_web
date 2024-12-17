@@ -1,6 +1,8 @@
 import React from 'react'
 import style from "./PasswordReset.module.css"
 import { useNavigate } from 'react-router-dom'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import { useSelector } from 'react-redux'
 
 const PasswordReset = () => {
  
@@ -10,8 +12,12 @@ const PasswordReset = () => {
     navigate("/adminsignin")
   }
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
   return (
-    <div className={style.password_reset_container}>
+    <div className={`${style.password_reset_container} ${darkmodeOn && style.dark}`}>
         <div>
             <img src="/passwordReset_img.png" alt="passwordReset_img" />
             <p>Password Reset</p>

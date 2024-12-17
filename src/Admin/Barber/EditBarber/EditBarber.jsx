@@ -280,6 +280,17 @@ const EditBarber = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+  useEffect(() => {
+    const phoneInput = document.querySelector(
+      '.react-international-phone-input-container .react-international-phone-input'
+    );
+
+    if (phoneInput) {
+      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    }
+  }, [darkmodeOn]);
+
   return (
     <>
       <div className={`${style.admin_edit_barber_wrapper} ${darkmodeOn && style.dark}`}>
@@ -291,18 +302,18 @@ const EditBarber = () => {
 
           {
             adminAllSalonServicesLoading ?
-              (<div className={`${style.admin_edit_barber_content_wrapper_right_loading}`}>
+              (<div className={`${style.admin_edit_barber_content_wrapper_right_loading} ${darkmodeOn && style.dark}`}>
                 <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "6px" }} />
                 <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "6px" }} />
               </div>) :
               adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
                 (
-                  <div className={`${style.admin_edit_barber_content_wrapper_right}`}>
+                  <div className={`${style.admin_edit_barber_content_wrapper_right} ${darkmodeOn && style.dark}`}>
 
                     {
                       AllSalonServices?.map((s) => {
                         return (
-                          <div className={`${style.service_item}`} key={s._id}>
+                          <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={s._id}>
                             <div className={`${style.service_item_top}`}>
                               <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                               <div>
@@ -349,10 +360,11 @@ const EditBarber = () => {
 
                   </div>
                 ) :
-                (<div className={`${style.admin_edit_barber_content_wrapper_right_error}`}>
+                (<div className={`${style.admin_edit_barber_content_wrapper_right_error} ${darkmodeOn && style.dark}`}>
                   <p>No services available</p>
                 </div>)
           }
+
 
         </div>
 
@@ -366,7 +378,7 @@ const EditBarber = () => {
             >Add Services</button>
           </div>
 
-          <div className={`${style.admin_edit_barber_content_wrapper_left}`}>
+          <div className={`${style.admin_edit_barber_content_wrapper_left} ${darkmodeOn && style.dark}`}>
 
             <div>
               <p>Name</p>
@@ -407,15 +419,15 @@ const EditBarber = () => {
                 onKeyDown={handleKeyPress}
                 style={{ border: nickNameError && "0.1rem solid red" }}
               />
-               <p className={style.error_message}>{nickNameError}</p>
+              <p className={style.error_message}>{nickNameError}</p>
             </div>
 
             <div>
               <p>Mob. Number</p>
-              <div>
-                <div 
-                onKeyDown={handleKeyPress}
-                style={{ border: invalidNumberError && "0.1rem solid red" }}
+              <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`}>
+                <div
+                  onKeyDown={handleKeyPress}
+                  style={{ border: invalidNumberError && "0.1rem solid red" }}
                 >
                   <PhoneInput
                     forceDialCode={true}
@@ -455,7 +467,7 @@ const EditBarber = () => {
                 value={currentBarberServices?.map((s) => " " + s.serviceName)}
                 placeholder='Your Services'
                 readOnly
-                style={{ border: servicesError && "0.1rem solid red"}}
+                style={{ border: servicesError && "0.1rem solid red" }}
               />
               <p className={style.error_message}>{servicesError}</p>
             </div>
@@ -479,57 +491,73 @@ const EditBarber = () => {
               aria-describedby="modal-modal-description"
               className={style.mobile_modal}
             >
-              <div className={style.mobile_service_container}>
+              <div className={`${style.mobile_service_container} ${darkmodeOn && style.dark}`}>
                 <button onClick={handleClose}><CloseIcon /></button>
-                <div>
-                  {
-                    AllSalonServices?.map((s) => {
-                      return (
-                        <div className={`${style.service_item}`} key={s._id}>
-                          <div className={`${style.service_item_top}`}>
-                            <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
-                            <div>
-                              <p>{s?.serviceName}</p>
-                              <p>{s?.vipService ? "VIP" : "Regular"}</p>
-                              <p>{s?.serviceDesc}</p>
-                            </div>
-                          </div>
-                          <div className={`${style.service_item_bottom}`}>
-                            <div>
-                              <div>
-                                <p>Service Price</p>
-                                <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
-                              </div>
-                            </div>
 
-                            <div>
-                              <div>
-                                <p>Est Wait Time</p>
-                                <div>
-                                  <div><ClockIcon /></div>
-                                  <input
-                                    type="text"
-                                    value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
-                                    onChange={(e) => handleonChange(e, s)}
-                                  />
-                                  <p>mins</p>
+                {
+                  adminAllSalonServicesLoading ? (
+                    <div>
+                      <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)", marginBottom: "1rem" }} />
+                      <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                    </div>
+                  ) :
+                    adminAllSalonServicesResolve && allSalonServices?.length > 0 ? (
+                      <div>
+                        {
+                          AllSalonServices?.map((s) => {
+                            return (
+                              <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={s._id}>
+                                <div className={`${style.service_item_top}`}>
+                                  <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
+                                  <div>
+                                    <p>{s?.serviceName}</p>
+                                    <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                    <p>{s?.serviceDesc}</p>
+                                  </div>
                                 </div>
+                                <div className={`${style.service_item_bottom}`}>
+                                  <div>
+                                    <div>
+                                      <p>Service Price</p>
+                                      <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                    </div>
+                                  </div>
+
+                                  <div>
+                                    <div>
+                                      <p>Est Wait Time</p>
+                                      <div>
+                                        <div><ClockIcon /></div>
+                                        <input
+                                          type="text"
+                                          value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
+                                          onChange={(e) => handleonChange(e, s)}
+                                        />
+                                        <p>mins</p>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                                {
+                                  currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
+                                    (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
+                                    (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                }
+
                               </div>
-                            </div>
+                            )
+                          })
+                        }
+                      </div>
+                    ) : (
+                      <div className={`${style.admin_mobile_edit_barber_content_wrapper_right_error}`}>
+                        <p>No services available</p>
+                      </div>
+                    )
+                }
 
-                          </div>
-
-                          {
-                            currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
-                              (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                              (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
-                          }
-
-                        </div>
-                      )
-                    })
-                  }
-                </div>
               </div>
             </Modal>
 

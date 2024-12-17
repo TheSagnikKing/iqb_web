@@ -385,7 +385,9 @@
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
-        background-color: var(--color-2);
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -393,6 +395,11 @@
         -moz-border-radius: var(--input-border-radius);
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .chooseSalon_modal {
@@ -519,8 +526,9 @@
         width: 12rem;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: var(--color-2);
-        color: var(--light-color-4);
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
         font-size: var(--list-modal-content-text);
@@ -530,6 +538,11 @@
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
         -o-border-radius: var(--list-wrapper-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .dashboard_mobile_menu {
@@ -570,7 +583,7 @@
             border: none;
             font-size: var(--list-modal-header-icon);
             color: var(--color-6);
-            border: 1px solid var(--color-6);
+            border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
@@ -711,6 +724,27 @@
         color: var(--light-color-4);
     }
 
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
@@ -733,8 +767,9 @@
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
-        color: var(--light-color-4);
-        background-color: #000;
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -742,6 +777,11 @@
         -moz-border-radius: var(--input-border-radius);
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .chooseSalon_modal {
@@ -780,11 +820,10 @@
         -ms-border-radius: 50%;
         -o-border-radius: 50%;
         cursor: pointer;
-        box-shadow: var(--cmmn-box-shadow-y);
         border: none;
         font-size: var(--list-modal-header-icon);
         color: var(--color-6);
-        border: 1px solid var(--color-6);
+        border: 0.1rem solid var(--color-6);
         background-color: var(--color-7);
         margin-left: auto;
         display: flex;
@@ -834,39 +873,12 @@
         border: 0.1rem solid rgba(0, 0, 0, 0.2);
         overflow-y: scroll;
         margin-block: 2rem;
-
-        &::-webkit-scrollbar {
-            width: 0.6rem;
-            height: 0.7rem;
-        }
-
-        &::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #0867ff48;
-            border-radius: var(--list-wrapper-border-radius);
-            -webkit-border-radius: var(--list-wrapper-border-radius);
-            -moz-border-radius: var(--list-wrapper-border-radius);
-            -ms-border-radius: var(--list-wrapper-border-radius);
-            -o-border-radius: var(--list-wrapper-border-radius);
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: rgb(0, 98, 255);
-        }
-
-        &::-webkit-scrollbar-corner {
-            background-color: transparent;
-        }
     }
 
     .mobile_dashboard_salon_list_dropdown>p {
         min-height: 4rem;
         width: 100%;
         background-color: var(--light-color-4);
-        color: var(--primary-text-light-color2);
         font-weight: 500;
         cursor: pointer;
         border-radius: var(--list-wrapper-border-radius);
@@ -882,17 +894,23 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #000;
+        background-color: var(--light-color-2);
         color: var(--light-color-4);
     }
 
+    .salonName_active {
+        background-color: var(--light-color-2) !important;
+        color: var(--light-color-4) !important;
+    }
+
     .chooseSalon_model_content>button:nth-child(5) {
-        height: 4.5rem;
-        width: 70%;
+        height: 4rem;
+        width: 12rem;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #000;
-        color: var(--light-color-4);
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
         font-size: var(--list-modal-content-text);
@@ -902,6 +920,11 @@
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
         -o-border-radius: var(--list-wrapper-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .dashboard_mobile_menu {
@@ -942,7 +965,7 @@
             border: none;
             font-size: var(--list-modal-header-icon);
             color: var(--color-6);
-            border: 1px solid var(--color-6);
+            border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
@@ -1049,8 +1072,62 @@
         display: none;
     }
 
-}
+    /* dark mode on  */
 
+    .chooseSalon_model_content.dark {
+        background-color: var(--dark-color-2);
+    }
+
+    .chooseSalon_model_content.dark>div:nth-child(3) {
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile_dashboard_salon_list_dropdown.dark {
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+
+        &>p {
+            background-color: transparent;
+
+            &:hover {
+                background-color: var(--dark-color-3) !important;
+                color: var(--dark-color-4) !important;
+            }
+        }
+    }
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
+    }
+
+    .dashboard_mobile_menu.dark{
+        color: var(--light-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
+    }
+}
 
 @media screen and (min-width:769px) and (max-width:1140px) {
 
@@ -1072,8 +1149,9 @@
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
         font-weight: 500;
-        color: var(--light-color-4);
-        background-color: #000;
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         font-size: var(--list-header-btn-text);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
@@ -1081,6 +1159,11 @@
         -moz-border-radius: var(--input-border-radius);
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .chooseSalon_modal {
@@ -1122,7 +1205,7 @@
         border: none;
         font-size: var(--list-modal-header-icon);
         color: var(--color-6);
-        border: 1px solid var(--color-6);
+        border: 0.1rem solid var(--color-6);
         background-color: var(--color-7);
         margin-left: auto;
         display: flex;
@@ -1172,39 +1255,12 @@
         border: 0.1rem solid rgba(0, 0, 0, 0.2);
         overflow-y: scroll;
         margin-block: 2rem;
-
-        &::-webkit-scrollbar {
-            width: 0.6rem;
-            height: 0.7rem;
-        }
-
-        &::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #0867ff48;
-            border-radius: var(--list-wrapper-border-radius);
-            -webkit-border-radius: var(--list-wrapper-border-radius);
-            -moz-border-radius: var(--list-wrapper-border-radius);
-            -ms-border-radius: var(--list-wrapper-border-radius);
-            -o-border-radius: var(--list-wrapper-border-radius);
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: rgb(0, 98, 255);
-        }
-
-        &::-webkit-scrollbar-corner {
-            background-color: transparent;
-        }
     }
 
     .mobile_dashboard_salon_list_dropdown>p {
         min-height: 4rem;
         width: 100%;
         background-color: var(--light-color-4);
-        color: var(--primary-text-light-color2);
         font-weight: 500;
         cursor: pointer;
         border-radius: var(--list-wrapper-border-radius);
@@ -1220,17 +1276,23 @@
     }
 
     .mobile_dashboard_salon_list_dropdown>p:hover {
-        background-color: #000;
+        background-color: var(--light-color-2);
         color: var(--light-color-4);
     }
 
+    .salonName_active {
+        background-color: var(--light-color-2) !important;
+        color: var(--light-color-4) !important;
+    }
+
     .chooseSalon_model_content>button:nth-child(5) {
-        height: 4.5rem;
-        width: 70%;
+        height: 4rem;
+        width: 12rem;
         border: none;
         box-shadow: var(--cmmn-box-shadow-y);
-        background-color: #000;
-        color: var(--light-color-4);
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
         font-size: var(--list-modal-content-text);
@@ -1240,6 +1302,11 @@
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
         -o-border-radius: var(--list-wrapper-border-radius);
+
+        &:hover{
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
     }
 
     .dashboard_mobile_menu {
@@ -1280,7 +1347,7 @@
             border: none;
             font-size: var(--list-modal-header-icon);
             color: var(--color-6);
-            border: 1px solid var(--color-6);
+            border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
             font-weight: bold;
             margin-bottom: 2rem;
@@ -1314,18 +1381,18 @@
                 justify-content: center;
                 align-items: center;
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
 
 
             &>p {
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #000;
+            background-color: var(--light-color-2);
 
             &>div {
                 color: var(--light-color-4);
@@ -1387,4 +1454,59 @@
         display: none;
     }
 
+    /* dark mode on  */
+
+    .chooseSalon_model_content.dark {
+        background-color: var(--dark-color-2);
+    }
+
+    .chooseSalon_model_content.dark>div:nth-child(3) {
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile_dashboard_salon_list_dropdown.dark {
+        background-color: var(--dark-color-1);
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+
+        &>p {
+            background-color: transparent;
+
+            &:hover {
+                background-color: var(--dark-color-3) !important;
+                color: var(--dark-color-4) !important;
+            }
+        }
+    }
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
+    }
+
+    .dashboard_mobile_menu.dark{
+        color: var(--light-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
+    }
 }

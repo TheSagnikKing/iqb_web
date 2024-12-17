@@ -6,6 +6,7 @@ import { barberResetPasswordAction } from '../../../Redux/Barber/Actions/BarberP
 import toast from 'react-hot-toast'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { Eyevisible, Notvisibleeye } from '../../../icons'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const ChangePassword = () => {
 
@@ -109,17 +110,21 @@ const ChangePassword = () => {
   const [visibleeye, setVisibleeye] = useState(false)
   const [visibleeye2, setVisibleeye2] = useState(false)
 
-  return (
-    <div className={style.change_password_container}>
-      <div className={style.change_password_container_left}><img src="/signin_un.png" alt="reset_image" /></div>
+  const darkMode = useSelector(darkmodeSelector)
 
-      <div className={style.change_password_container_right}>
+  const darkmodeOn = darkMode === "On"
+
+  return (
+    <div className={`${style.change_password_container} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.change_password_container_left} ${darkmodeOn && style.dark}`}><img src="/signin_un.png" alt="reset_image" /></div>
+
+      <div className={`${style.change_password_container_right} ${darkmodeOn && style.dark}`}>
         <div>
           <p>Change Password</p>
           <p>Use at least 8 characters with a mix of letters, numbers, and symbols.</p>
           <p>Keep it unique and avoid reusing passwords.</p>
 
-          <div className={style.password_container} style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
+          <div className={`${style.password_container} ${darkmodeOn && style.dark}`} style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
             <input
               type={visibleeye ? "text" : "password"}
               placeholder='Password'
@@ -135,7 +140,7 @@ const ChangePassword = () => {
             <p className={style.error_message}>{passwordError}</p>
           </div>
 
-          <div className={style.password_container} style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
+          <div className={`${style.password_container} ${darkmodeOn && style.dark}`} style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
             <input
               type={visibleeye2 ? "text" : "password"}
               placeholder='Confirm Password'

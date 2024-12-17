@@ -476,7 +476,7 @@ const DashboardHeader = () => {
             menudata.map((m) => (
               <div
                 key={m.id}
-                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
+                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active} ${darkmodeOn && style.dark}`}
                 onClick={() => {
                   navigate(m?.url)
                   setSidebarToggle(false)
@@ -496,16 +496,16 @@ const DashboardHeader = () => {
             setSidebarToggle(false)
             navigate("/admin-dashboard/editprofile")
           }}
-            className={style.dashboard_mobile_item}>
+            className={`${style.dashboard_mobile_item} ${darkmodeOn && style.dark}`}>
             <div><ProfileIcon /></div>
             <p>Profile</p>
           </div>
-          <div onClick={() => dispatch(AdminLogoutAction(navigate))} className={style.dashboard_mobile_item}>
+          <div onClick={() => dispatch(AdminLogoutAction(navigate))} className={`${style.dashboard_mobile_item} ${darkmodeOn && style.dark}`}>
             <div><LogoutIcon /></div>
             <p>Logout</p>
           </div>
 
-          <div className={style.dashboard_theme_container}>
+          <div className={`${style.dashboard_theme_container} ${darkmodeOn && style.dark}`}>
           <p>Theme</p>
           {
             darkmodeOn ?

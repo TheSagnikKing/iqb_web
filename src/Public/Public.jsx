@@ -1,11 +1,18 @@
 import React from 'react'
 import style from './Public.module.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { darkmodeSelector } from '../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const Public = () => {
+
+    const darkMode = useSelector(darkmodeSelector)
+
+    const darkmodeOn = darkMode === "On"
+
     return (
-        <main className={style.public_main_container}>
-            <div className={style.public_main_content}>
+        <main className={`${style.public_main_container} ${darkmodeOn && style.dark}`}>
+            <div className={`${style.public_main_content} ${darkmodeOn && style.dark}`}>
 
                 <div>
                     <img src="./barber_public.png" alt="public_image" />

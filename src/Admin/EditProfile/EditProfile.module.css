@@ -312,7 +312,7 @@
     .admin_notverified_icon {
         background-color: var(--color-7);
         color: var(--color-6);
-        border: 1px solid var(--color-6);
+        border: 0.1rem solid var(--color-6);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);

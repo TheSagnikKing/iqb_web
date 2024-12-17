@@ -79,9 +79,9 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     cursor: pointer;
-    border: 0.1rem solid #000;
-    color: #000;
-    background-color: #efefef;
+    border: 0.1rem solid var(--color-2);
+    color: var(--color-2);
+    background-color: var(--color-3);
     font-size: var(--list-content-body-text);
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
@@ -93,7 +93,7 @@
     align-items: center;
 
     &:hover{
-        background-color: #000;
+        background-color: var(--color-2);
         color: var(--light-color-4);
     }
 }
@@ -147,9 +147,9 @@ iframe {
 .signup_btn {
     height: 4rem;
     width: 100%;
-    border: 0.1rem solid #000;
-    color: #000;
-    background-color: #efefef;
+    border: 0.1rem solid var(--color-2);
+    color: var(--color-2);
+    background-color: var(--color-3);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -168,7 +168,7 @@ iframe {
     font-size: var(--list-content-body-text);
 
     &:hover{
-        background-color: #000;
+        background-color: var(--color-2);
         color: var(--light-color-4);
     }
 }
@@ -206,6 +206,35 @@ iframe {
     font-weight: 500;
     color: var(--color-6);
     margin-top: 1rem;
+}
+
+
+/* dark mode on */
+
+.admin_signup_container.dark{
+    background-color: var(--dark-color-2);
+}
+
+.admin_signup_right.dark{
+    &>div:nth-child(1){
+        &>div{
+            &>input{
+                background-color: var(--dark-color-3);
+            }
+        }
+    }
+}
+
+.password_container.dark{
+    background-color: var(--dark-color-3);
+
+    &>div{
+        color: var(--light-color-4);
+    }
+}
+
+.admin_signup_container.dark>div:nth-child(2)>div>div:nth-child(7)>div {
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
