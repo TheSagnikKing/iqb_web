@@ -66,8 +66,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #efefef;
-    border: 0.1rem solid #000;
+    background-color: var(--light-color-1);
+    border: 0.1rem solid var(--light-color-2);
     cursor: pointer;
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -85,11 +85,11 @@
         justify-content: center;
         align-items: center;
         font-size: var(--list-header-btn-icon);
-        color: #000;
+        color: var(--light-color-2);
     }
 
     &:hover {
-        background-color: #000;
+        background-color: var(--light-color-2);
 
         &>div {
             color: var(--light-color-4);
@@ -164,7 +164,7 @@
     &>input {
         width: var(--list-content-body-text);
         height: var(--list-content-body-text);
-        accent-color: #000;
+        accent-color: var(--light-color-2);
     }
 }
 
@@ -345,7 +345,7 @@
             &>input {
                 height: 4rem;
                 width: 100%;
-                background-color: #EEEDED;
+                background-color: var(--light-color-3);
                 border-radius: var(--input-border-radius);
                 -webkit-border-radius: var(--input-border-radius);
                 -moz-border-radius: var(--input-border-radius);
@@ -360,7 +360,7 @@
             &>textarea {
                 width: 100%;
                 min-height: 20vh;
-                background-color: #EEEDED;
+                background-color: var(--light-color-3);
                 border: none;
                 border-radius: var(--input-border-radius);
                 -webkit-border-radius: var(--input-border-radius);
@@ -414,8 +414,8 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: #efefef;
-            border: 0.1rem solid #000;
+            background-color: var(--light-color-1);
+            border: 0.1rem solid var(--light-color-2);
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
             -moz-border-radius: var(--list-btn-border-radius);
@@ -429,10 +429,10 @@
             margin-inline: auto;
             font-size: var(--list-modal-header-normal-font);
             font-weight: 500;
-            color: #000;
+            color: var(--light-color-2);
 
             &:hover {
-                background-color: #000;
+                background-color: var(--light-color-2);
                 color: var(--light-color-4);
             }
         }

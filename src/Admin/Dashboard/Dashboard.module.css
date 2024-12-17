@@ -53,11 +53,12 @@
         -o-transition: var(--btn-transition);
         font-size: var(--list-modal-header-normal-font);
         font-weight: 500;
-        background-color: var(--color-2);
-        color: var(--light-color-4);
+        border: 0.1rem solid var(--color-2);
+        background-color: var(--color-3);
+        color: var(--color-2);
 
         &:hover {
-            background-color: var(--color-3);
+            background-color: var(--color-2);
             color: var(--light-color-4);
         }
 

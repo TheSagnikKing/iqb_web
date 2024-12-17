@@ -330,7 +330,7 @@ const EditProfile = () => {
     const [oldPassword, setOldPassword] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    
+
     const [oldPasswordError, setOldPasswordError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [confirmPasswordError, setConfirmPasswordError] = useState("")
@@ -363,7 +363,7 @@ const EditProfile = () => {
             });
             return setOldPasswordError("Old password length must be 8 charecters")
         }
-        
+
         if (!password) {
             toast.error("Please enter password", {
                 duration: 3000,
@@ -558,12 +558,22 @@ const EditProfile = () => {
     };
 
 
+    useEffect(() => {
+        const phoneInput = document.querySelector(
+            '.react-international-phone-input-container .react-international-phone-input'
+        );
+
+        if (phoneInput) {
+            phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+        }
+    }, [darkmodeOn]);
+
 
     return (
-        <main className={style.barber_edit_profile_container}>
+        <main className={`${style.barber_edit_profile_container} ${darkmodeOn && style.dark}`}>
             <div className={style.barber_edit_profile_container_left}>
                 <div><p>Your Profile</p></div>
-                <div className={style.barber_edit_profile_content_left}>
+                <div className={`${style.barber_edit_profile_content_left} ${darkmodeOn && style.dark}`}>
                     <div>
 
                         {
@@ -589,7 +599,7 @@ const EditProfile = () => {
                     <p>{barberProfile?.email}</p>
                 </div>
             </div>
-            <div className={style.barber_edit_profile_container_right}>
+            <div className={`${style.barber_edit_profile_container_right} ${darkmodeOn && style.dark}`}>
                 {
                     salonId === 0 ? (<div></div>) : <button onClick={() => setEditServiceModal(true)}>Edit services</button>
                 }
@@ -601,7 +611,7 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.edit_modal_container}>
+                    <div className={`${style.edit_modal_container} ${darkmodeOn && style.dark}`}>
                         <div>
                             <p>Edit Services</p>
                             <button onClick={() => setEditServiceModal(false)}><CloseIcon /></button>
@@ -609,17 +619,20 @@ const EditProfile = () => {
 
                         {
                             getAllSalonServicesBarberLoading ? (
-                                <main className={`${style.edit_modal_content_container_loading}`}>
+                                <main className={`${style.edit_modal_content_container_loading} ${darkmodeOn && style.dark}`}>
                                     <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
                                     <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
                                 </main>
                             ) :
                                 getAllSalonServicesBarberData?.response?.services?.length > 0 ?
-                                    (<main className={style.edit_modal_content_container}>
+                                    (<main className={`${style.edit_modal_content_container} ${darkmodeOn && style.dark}`}>
                                         {
                                             AllSalonServices.map((s) => {
                                                 return (
-                                                    <div className={`${style.service_item}`} key={s?._id}>
+                                                    <div
+                                                        className={`${style.service_item} ${darkmodeOn && style.dark}`}
+                                                        key={s?.serviceId}
+                                                    >
                                                         <div className={`${style.service_item_top}`}>
                                                             <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                                                             <div>
@@ -666,7 +679,7 @@ const EditProfile = () => {
 
 
                                     </main>) :
-                                    (<main className={`${style.edit_modal_content_container_error}`}>
+                                    (<main className={`${style.edit_modal_content_container_error} ${darkmodeOn && style.dark}`}>
                                         <p>No services available</p>
                                     </main>)
                         }
@@ -701,7 +714,7 @@ const EditProfile = () => {
 
                 <div>
                     <p>Email</p>
-                    <div className={style.barber_edit_email_container}>
+                    <div className={`${style.barber_edit_email_container} ${darkmodeOn && style.dark}`}>
                         <input
                             type="text"
                             placeholder='Enter Email'
@@ -731,12 +744,12 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_common_container}>
+                    <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
                         <div><OtpEmailIcon /></div>
 
                         <div>
                             <p>Please check your email</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{barberProfile?.email}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{barberProfile?.email}</span></p>
                             <div>
                                 {
                                     otp.map((digit, index) => (
@@ -787,7 +800,7 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_container}>
+                    <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
                         <div>
                             <p>Change your password</p>
                             <button onClick={() => setOpenPasswordModal(false)}><CloseIcon /></button>
@@ -871,7 +884,7 @@ const EditProfile = () => {
 
                 <div>
                     <p>Mob. Number</p>
-                    <div className={style.barber_edit_mobile_container} style={{ outline: invalidNumberError && "0.1rem solid red" }}>
+                    <div className={`${style.barber_edit_mobile_container} ${darkmodeOn && style.dark}`} style={{ outline: invalidNumberError && "0.1rem solid red" }}>
                         <div onKeyDown={handleKeyPress}>
                             <PhoneInput
                                 forceDialCode={true}
@@ -902,12 +915,12 @@ const EditProfile = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <div className={style.modal_common_container}>
+                    <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
                         <div><OtpMessageIcon /></div>
 
                         <div>
                             <p>Please check your message</p>
-                            <p>We have sent a code to your <span style={{ fontWeight: "600", color: "#000" }}>{barberProfile?.mobileNumber}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{barberProfile?.mobileNumber}</span></p>
                             <div>
                                 {
                                     mobileotp.map((digit, index) => (
@@ -950,6 +963,9 @@ const EditProfile = () => {
                         onChange={(e) => setDateofBirth(e.target.value)}
                         onKeyDown={handleKeyPress}
                         max={getCurrentDate()}
+                        style={{
+                            colorScheme: darkmodeOn ? "dark" : "light",
+                        }}
                     />
                 </div>
 

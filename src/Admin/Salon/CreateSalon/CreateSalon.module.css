@@ -1486,12 +1486,26 @@
 } 
 
 .service_item.dark{
-    background-color: var(--dark-color-2);
+    background-color: var(--dark-color-3);
     border: 0.1rem solid rgba(255, 255, 255, 0.2);
 
     .service_item_top{
         border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
     } 
+
+    .service_item_bottom{
+        &>div:nth-child(2){
+            &>div{
+
+                &>div:nth-child(2){
+
+                    &>div:nth-child(1){
+                        color: var(--light-color-4);
+                    }  
+                }     
+            }     
+        }
+    }
 }
 .slider_item.dark{
     background-color: var(--dark-color-1);

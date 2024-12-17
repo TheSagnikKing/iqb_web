@@ -71,11 +71,11 @@ const Sidebar = () => {
             <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
             >
               <div style={{
-                color: location.pathname.includes(m.url) && "#fff"
+                color: location.pathname.includes(m.url) && "var(--light-color-4)"
               }}
               >{m.icon}</div>
               <p style={{
-                color: location.pathname.includes(m.url) && "#fff"
+                color: location.pathname.includes(m.url) && "var(--light-color-4)"
               }}>{m.title}</p>
             </div>
           ))}

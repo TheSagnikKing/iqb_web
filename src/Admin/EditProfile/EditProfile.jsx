@@ -520,7 +520,7 @@ const EditProfile = () => {
         <main className={`${style.admin_edit_profile_container} ${darkmodeOn && style.dark}`}>
             <div className={style.admin_edit_profile_container_left}>
                 <div><p>Your Profile</p></div>
-                <div className={style.admin_edit_profile_content_left}>
+                <div className={`${style.admin_edit_profile_content_left} ${darkmodeOn && style.dark}`}>
                     <div>
 
                         {
@@ -820,6 +820,9 @@ const EditProfile = () => {
                         onChange={(e) => setDateofBirth(e.target.value)}
                         onKeyDown={handleKeyPress}
                         max={getCurrentDate()}
+                        style={{
+                            colorScheme: darkmodeOn ? "dark" : "light",
+                        }}
                     />
                 </div>
 

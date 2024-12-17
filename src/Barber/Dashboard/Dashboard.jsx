@@ -549,7 +549,7 @@ const Dashboard = () => {
                         </> :
                         !connectSalonListLoading && connectSalonListResolve && connectSalonListResponse?.length > 0 ?
                           connectSalonListResponse?.map((s) => (
-                            <div key={s._id} className={style.barber_connect_salon_list_body}>
+                            <div key={s.salonId} className={style.barber_connect_salon_list_body}>
                               <div><img src={s?.salonLogo?.[0]?.url} alt="salon_logo" /></div>
                               <p>{s.salonName}</p>
                               <div>{
@@ -580,7 +580,7 @@ const Dashboard = () => {
                     {
                       selectedServiceList?.map((s) => {
                         return (
-                          <div className={`${style.service_item}`} key={s._id}>
+                          <div className={`${style.service_item}`} key={s.serviceId}>
                             <div className={`${style.service_item_top}`}>
                               <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
                               <div>

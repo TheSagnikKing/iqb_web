@@ -77,9 +77,9 @@
 .admin_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
     height:4rem;
     width: 12rem;
-    border: 0.1rem solid #000;
-    color: #000;
-    background-color: #efefef;
+    border: 0.1rem solid var(--light-color-2);
+    color: var(--light-color-2);
+    background-color: var(--light-color-1);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -98,7 +98,7 @@
     font-size: var(--list-content-body-text);
 
     &:hover{
-        background-color: #000;
+        background-color: var(--light-color-2);
         color: var(--light-color-4);
     }
 }
@@ -168,9 +168,9 @@
 .admin_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) button {
     height: 4rem;
     width: 10rem;
-    border: 0.1rem solid #000;
-    color: #000;
-    background-color: #efefef;
+    border: 0.1rem solid var(--light-color-2);
+    color: var(--light-color-2);
+    background-color: var(--light-color-1);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -189,7 +189,7 @@
     font-size: var(--list-content-body-text);
     
     &:hover{
-        background-color: #000;
+        background-color: var(--light-color-2);
         color: var(--light-color-4);
     }
 }

@@ -174,9 +174,9 @@
 }
 
 .barber_queue_content_body_item>div:nth-last-child(2)>button {
-    background-color: #efefef;
-    border: 0.1rem solid #000;
-    color: #000;
+    background-color: var(--light-color-1);
+    border: 0.1rem solid var(--light-color-2);
+    color: var(--light-color-2);
     font-weight: 500;
 
     transition: var(--btn-transition);
@@ -186,7 +186,7 @@
     -o-transition: var(--btn-transition);
 
     &:hover {
-        background-color: #000;
+        background-color: var(--light-color-2);
         color: var(--light-color-4);
     }
 }

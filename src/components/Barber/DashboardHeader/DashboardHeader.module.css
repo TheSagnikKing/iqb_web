@@ -4,8 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background-color: #ebf5ff; */
-    background-color: #efefef;
 }
 
 .barber_dashboard_btn_container {
@@ -95,7 +93,7 @@
 }
 
 .profile_drop_container>div:hover {
-    background-color: #000;
+    background-color: var(--light-color-2);
     color: var(--light-color-4);
     cursor: pointer;
 }
@@ -187,6 +185,27 @@
 
 .dashboard_mobile_sidebar_container {
     display: none;
+}
+
+
+/* Dark mode */
+
+.salonName_active.dark {
+    background-color: var(--dark-color-3);
+}
+
+.profile_drop_container.dark {
+    background-color: var(--dark-color-2);
+
+    &>div {
+        &:hover {
+            background-color: var(--dark-color-3);
+        }
+
+        &>div {
+            color: var(--dark-color-4);
+        }
+    }
 }
 
 @media screen and (min-width:0px) and (max-width:430px) {
@@ -295,18 +314,18 @@
                 justify-content: center;
                 align-items: center;
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
 
 
             &>p {
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #000;
+            background-color: var(--light-color-2);
 
             &>div {
                 color: var(--light-color-4);
@@ -366,6 +385,39 @@
 
     .profile_drop_container {
         display: none;
+    }
+
+    /* dark mode on  */
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
+    }
+
+    .dashboard_mobile_menu.dark{
+        color: var(--light-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
     }
 }
 
@@ -475,18 +527,18 @@
                 justify-content: center;
                 align-items: center;
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
 
 
             &>p {
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #000;
+            background-color: var(--light-color-2);
 
             &>div {
                 color: var(--light-color-4);
@@ -546,6 +598,39 @@
 
     .profile_drop_container {
         display: none;
+    }
+
+    /* dark mode on  */
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
+    }
+
+    .dashboard_mobile_menu.dark{
+        color: var(--light-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
     }
 }
 
@@ -655,18 +740,18 @@
                 justify-content: center;
                 align-items: center;
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
 
 
             &>p {
                 font-size: var(--list-modal-content-text);
-                color: #000;
+                color: var(--light-color-2);
             }
         }
 
         .dashboard_mobile_item.dashboard_mobile_item_active {
-            background-color: #000;
+            background-color: var(--light-color-2);
 
             &>div {
                 color: var(--light-color-4);
@@ -726,5 +811,38 @@
 
     .profile_drop_container {
         display: none;
+    }
+
+    /* dark mode on  */
+
+    .salonName_active.dark {
+        background-color: var(--dark-color-3) !important;
+        color: var(--dark-color-4) !important;
+    }
+
+    .dashboard_mobile_menu.dark{
+        color: var(--light-color-4);
+    }
+
+    .dashboard_mobile_sidebar_container.dark{
+        background-color: var(--dark-color-2);
+    }
+
+    .dashboard_mobile_item.dark{
+        &>div,
+        &>p{
+            color: var(--light-color-4);
+        }
+    }
+
+    .dashboard_mobile_item.dark.dashboard_mobile_item_active{
+        background-color: var(--dark-color-3);
+    }
+
+    .dashboard_theme_container.dark{
+        &>button{
+            background-color: var(--dark-color-3);
+            color: var(--light-color-4);
+        }
     }
 }

@@ -197,7 +197,7 @@ const DashboardHeader = () => {
                         menudata.map((m) => (
                             <div
                                 key={m.id}
-                                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active}`}
+                                className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active} ${darkmodeOn && style.dark}`}
                                 onClick={() => {
                                     navigate(m?.url)
                                     setSidebarToggle(false)
@@ -215,29 +215,30 @@ const DashboardHeader = () => {
                     <div onClick={() => {
                         navigate("/barber-dashboard/editprofile")
                         setSidebarToggle(false)
-                    }} className={style.dashboard_mobile_item}
+                    }} className={`${style.dashboard_mobile_item} ${darkmodeOn && style.dark}`}
                     >
                         <div><ProfileIcon /></div>
                         <p>Profile</p>
                     </div>
-                    <div onClick={logoutHandler} className={style.dashboard_mobile_item}>
+                    <div onClick={logoutHandler} className={`${style.dashboard_mobile_item} ${darkmodeOn && style.dark}`}>
                         <div><LogoutIcon /></div>
                         <p>Logout</p>
                     </div>
 
-                    {/* <div className={style.dashboard_theme_container}>
-          <p>Theme</p>
-          {
-            darkmodeOn ?
-              <button onClick={toggleHandler}>
-                <IoMoon />
-              </button> :
-              <button onClick={toggleHandler}>
-                <MdSunny />
-              </button>
-          }
+                    <div className={`${style.dashboard_theme_container} ${darkmodeOn && style.dark}`}>
+                        <p>Theme</p>
+                        {
+                            darkmodeOn ?
+                                <button onClick={toggleHandler}>
+                                    <Sunicon />
+                                </button> :
+                                <button onClick={toggleHandler}>
+                                    <MoonIcon />
+                                </button>
+                        }
 
-        </div> */}
+                    </div>
+
                 </main>
             </div>
 

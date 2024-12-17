@@ -708,6 +708,12 @@
     }
 }
 
+.admin_edit_profile_content_left.dark{
+    &>div:nth-child(1){
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+    }
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .admin_edit_profile_container {
         grid-template-columns: 1fr;

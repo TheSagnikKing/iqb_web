@@ -23,9 +23,9 @@
             height: 4rem;
             display: block;
             margin-inline: auto;
-            background-color: #efefef;
-            color: #000;
-            border: 0.1rem solid #000;
+            background-color: var(--light-color-1);
+            color: var(--light-color-2);
+            border: 0.1rem solid var(--light-color-2);
             transition: 0.3s all ease;
             -webkit-transition: 0.3s all ease;
             -moz-transition: 0.3s all ease;
@@ -40,7 +40,7 @@
             -o-border-radius: 20px;
 
             &:hover {
-                background-color: #000;
+                background-color: var(--light-color-2);
                 color: var(--light-color-4);
             }
         }
