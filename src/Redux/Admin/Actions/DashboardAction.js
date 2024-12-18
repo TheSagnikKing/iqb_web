@@ -25,7 +25,7 @@ export const getAllAdvertisementAction = (salonId, signal) => async (dispatch) =
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -66,7 +66,7 @@ export const getAllQueueListAction = (salonId, signal) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -111,7 +111,7 @@ export const getDashboardAppointmentListAction = (salonId, currentDate, signal) 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -130,7 +130,7 @@ export const getDashboardAppointmentListAction = (salonId, currentDate, signal) 
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -169,7 +169,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -189,7 +189,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -225,7 +225,7 @@ export const adminUpdateSalonInfoAction = (salonupdatedata, setOpenModal, setSal
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -243,7 +243,7 @@ export const adminUpdateSalonInfoAction = (salonupdatedata, setOpenModal, setSal
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -277,7 +277,7 @@ export const adminDragAdvertisementAction = (salonId, advertisements, signal) =>
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -296,7 +296,7 @@ export const adminDragAdvertisementAction = (salonId, advertisements, signal) =>
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

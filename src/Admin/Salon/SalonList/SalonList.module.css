@@ -52,7 +52,7 @@
     }
 
     &>div {
-        font-size: var(--font-size-3);
+        font-size: var(--font-size-2);
         font-weight: 500;
         color: var(--color-2);
     }
@@ -93,7 +93,7 @@
     display: grid;
     grid-template-columns: 0.8fr 0.8fr 0.8fr 0.6fr 0.5fr 0.5fr;
     place-items: center;
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
     font-weight: 500;
 }
 
@@ -171,7 +171,7 @@
     -o-border-radius: var(--list-btn-border-radius);
     border: none;
     cursor: pointer;
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
 }
 
 .salon_content_body>div>div:nth-child(5)>button {
@@ -232,7 +232,7 @@
     place-items: center;
 
     &>p {
-        font-size: var(--font-size-5);
+        font-size: var(--font-size-3);
         font-weight: 500;
     }
 }
@@ -264,7 +264,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--font-size-6);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -289,7 +289,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
             margin-bottom: 1rem;
 
             &:hover {
@@ -310,7 +310,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
                 font-weight: 500;
                 margin-bottom: 1rem;
             }
@@ -327,7 +327,7 @@
                 padding-inline: 1rem;
                 outline: none;
                 border: none;
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
             }
         }
 
@@ -352,7 +352,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--font-size-8);
+            font-size: var(--font-size-2);
             font-weight: 500;
             color: var(--light-color-4);
 
@@ -391,7 +391,7 @@
         line-height: 4rem;
         margin-bottom: 1rem;
         padding-inline: 1rem;
-        font-size: var(--font-size-9);
+        font-size: var(--font-size-3);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);

@@ -52,7 +52,7 @@
         }
 
         &>p {
-            font-size: var(--font-size-9);
+            font-size: var(--font-size-3);
             font-weight: 500;
         }
     }
@@ -76,7 +76,7 @@
         }
 
         &>p {
-            font-size: var(--font-size-9);
+            font-size: var(--font-size-3);
             font-weight: 500;
         }
     }

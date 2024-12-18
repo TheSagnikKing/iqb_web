@@ -48,7 +48,7 @@
     width: 100%;
     border-radius: var(--input-border-radius);
     background-color: var(--light-color-3);
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
     font-weight: 500;
     border: none;
     outline: none;
@@ -80,7 +80,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
 
     &:hover {
         background-color: #000;
@@ -90,7 +90,7 @@
 
 .check_email_container>div:nth-child(2)>div>a {
     text-align: center;
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
     font-weight: 500;
     color: var(--light-color-2);
     text-decoration: none;

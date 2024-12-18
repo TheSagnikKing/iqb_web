@@ -79,7 +79,7 @@ const Queue = () => {
       return toast.error("Queue position is not 1", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

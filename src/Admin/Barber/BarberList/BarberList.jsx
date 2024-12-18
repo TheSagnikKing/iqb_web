@@ -241,7 +241,7 @@ const BarberList = () => {
       toast.error("Please select a barber", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -287,7 +287,7 @@ const BarberList = () => {
       toast.error("Please select a barber", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

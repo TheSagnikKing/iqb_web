@@ -100,7 +100,7 @@ const EditBarber = () => {
       toast.error("Please enter name", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -113,7 +113,7 @@ const EditBarber = () => {
       toast.error("Name must be between 1 to 20 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -127,7 +127,7 @@ const EditBarber = () => {
       toast.error("Please enter nickname", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -140,7 +140,7 @@ const EditBarber = () => {
       toast.error("Nickname must be between 1 to 20 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -154,7 +154,7 @@ const EditBarber = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -168,7 +168,7 @@ const EditBarber = () => {
       toast.error("Please select date of birth", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -182,7 +182,7 @@ const EditBarber = () => {
       toast.error("Please provide a service", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

@@ -77,7 +77,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
     text-decoration: none;
     
     &:hover{

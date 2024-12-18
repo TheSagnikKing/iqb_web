@@ -49,7 +49,7 @@ const EditProfile = () => {
             toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -63,7 +63,7 @@ const EditProfile = () => {
             toast.error("File size must be lower than 2mb", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -100,7 +100,7 @@ const EditProfile = () => {
             toast.success("Profile upload successfully", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -115,7 +115,7 @@ const EditProfile = () => {
                 toast.error("Something went wrong !", {
                     duration: 3000,
                     style: {
-                        fontSize: "var(--font-size-8)",
+                        fontSize: "var(--font-size-2)",
                         borderRadius: '0.3rem',
                         background: '#333',
                         color: '#fff',
@@ -128,7 +128,7 @@ const EditProfile = () => {
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -264,7 +264,7 @@ const EditProfile = () => {
             toast.error("Name must be between 1 to 20 characters", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -277,7 +277,7 @@ const EditProfile = () => {
             toast.error("Invalid Number", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -342,7 +342,7 @@ const EditProfile = () => {
             toast.error("Please enter password", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -355,7 +355,7 @@ const EditProfile = () => {
             toast.error("Password length must be 8 charecters", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -368,7 +368,7 @@ const EditProfile = () => {
             toast.error("Please enter password", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -381,7 +381,7 @@ const EditProfile = () => {
             toast.error("Password length must be 8 charecters", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -394,7 +394,7 @@ const EditProfile = () => {
             toast.error("Please enter confirm password", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -407,7 +407,7 @@ const EditProfile = () => {
             toast.error("Confirm password length must be 8 charecters", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -420,7 +420,7 @@ const EditProfile = () => {
             toast.error("Password and confirm password do not match", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

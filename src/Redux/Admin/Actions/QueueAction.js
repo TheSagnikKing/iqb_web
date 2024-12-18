@@ -17,7 +17,7 @@ export const adminServeQueueAction = (barberqueuedata, salonId, setChoosebarberm
         toast.success("Customer serve successfully", {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -47,7 +47,7 @@ export const adminServeQueueAction = (barberqueuedata, salonId, setChoosebarberm
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -65,7 +65,7 @@ export const adminServeQueueAction = (barberqueuedata, salonId, setChoosebarberm
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -88,7 +88,7 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
         toast.success("Customer cancel successfully", {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -113,7 +113,7 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -131,7 +131,7 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -164,7 +164,7 @@ export const getAdminQueueListHistoryAction = (salonId, signal) => async (dispat
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

@@ -31,7 +31,7 @@ export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -49,7 +49,7 @@ export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -83,7 +83,7 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -102,7 +102,7 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -140,7 +140,7 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -160,7 +160,7 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -195,7 +195,7 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -214,7 +214,7 @@ export const BarberSignupAction = (signupData, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -251,7 +251,7 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -270,7 +270,7 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -310,7 +310,7 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -328,7 +328,7 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',

@@ -55,7 +55,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--font-size-3);
+        font-size: var(--font-size-2);
         color: var(--color-2);
     }
 
@@ -98,7 +98,7 @@
     }
 
     &>div {
-        font-size: var(--font-size-3);
+        font-size: var(--font-size-2);
         font-weight: 600;
         color: var(--color-2);
     }
@@ -139,7 +139,7 @@
     max-width: 100%;
     display: grid;
     grid-template-columns: 0.1fr 0.8fr 0.8fr 0.5fr 0.5fr 0.5fr 0.5fr;
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
     font-weight: 500;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
 }
@@ -151,8 +151,8 @@
     min-width: 3rem;
 
     &>input {
-        width: var(--font-size-4);
-        height: var(--font-size-4);
+        width: var(--font-size-3);
+        height: var(--font-size-3);
         accent-color: var(--color-2);
         cursor: pointer;
     }
@@ -236,7 +236,7 @@
     -o-border-radius: var(--list-btn-border-radius);
     border: none;
     cursor: pointer;
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-3);
 }
 
 
@@ -399,7 +399,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--font-size-6);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -424,7 +424,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
             margin-bottom: 1rem;
 
             &:hover {
@@ -445,7 +445,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
                 font-weight: 500;
                 margin-bottom: 1rem;
             }
@@ -462,7 +462,7 @@
                 padding-inline: 1rem;
                 outline: none;
                 border: none;
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
             }
 
             &>textarea {
@@ -476,7 +476,7 @@
                 -ms-border-radius: var(--input-border-radius);
                 -o-border-radius: var(--input-border-radius);
                 padding: 1rem;
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
                 resize: none;
                 overflow: auto;
                 outline: none;
@@ -504,7 +504,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--font-size-8);
+            font-size: var(--font-size-2);
             font-weight: 500;
             color: var(--color-2);
 
@@ -524,7 +524,7 @@
     place-items: center;
 
     &>p {
-        font-size: var(--font-size-5);
+        font-size: var(--font-size-3);
         font-weight: 500;
     }
 }

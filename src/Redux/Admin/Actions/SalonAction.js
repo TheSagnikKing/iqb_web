@@ -25,7 +25,7 @@ export const getAdminSalonListAction = (email, signal) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -66,7 +66,7 @@ export const getAdminAllSalonIconAction = (signal) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -85,7 +85,7 @@ export const getAdminAllSalonIconAction = (signal) => async (dispatch) => {
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -118,7 +118,7 @@ export const getAdminAllCountriesAction = (countryname) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -156,7 +156,7 @@ export const getAdminAllCitiesAction = (cityname, countrycode) => async (dispatc
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -196,7 +196,7 @@ export const getAdminAllTimezoneAction = (countrycode) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -214,7 +214,7 @@ export const getAdminAllTimezoneAction = (countrycode) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -249,7 +249,7 @@ export const adminDeleteSalonAction = (salonId, salonmongoid) => async (dispatch
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -267,7 +267,7 @@ export const adminDeleteSalonAction = (salonId, salonmongoid) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -318,7 +318,7 @@ export const adminCreateSalonAction = (salondata, navigate) => async (dispatch) 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -336,7 +336,7 @@ export const adminCreateSalonAction = (salondata, navigate) => async (dispatch) 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -379,7 +379,7 @@ export const adminEditSalonAction = (salondata, navigate, email) => async (dispa
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -397,7 +397,7 @@ export const adminEditSalonAction = (salondata, navigate, email) => async (dispa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -439,7 +439,7 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSett
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -457,7 +457,7 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSett
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -489,7 +489,7 @@ export const getAdminSalonImagesAction = (salonId) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -508,7 +508,7 @@ export const getAdminSalonImagesAction = (salonId) => async (dispatch) => {
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -542,7 +542,7 @@ export const getAdminSalonLogoAction = (salonId) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -562,7 +562,7 @@ export const getAdminSalonLogoAction = (salonId) => async (dispatch) => {
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

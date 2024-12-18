@@ -55,14 +55,7 @@
   /* font sizes */
   --font-size-1: clamp(1.6rem, 1.2rem + 0.4vw, 3.2rem);
   --font-size-2: clamp(1.4rem, 1rem + 0.2vw, 3rem);
-  --font-size-3: clamp(1.4rem, 1rem + 0.2vw, 3rem);
-  --font-size-4: clamp(1.4rem, 1.2rem + 0.2vw, 3rem);
-  --font-size-5: clamp(1.4rem, 1.2rem + 0.2vw, 3rem);
-
-  --font-size-6: clamp(1.6rem, 1.2rem + 0.4vw, 3.2rem);
-  --font-size-7: clamp(1.4rem, 1rem + 0.2vw, 3rem);
-  --font-size-8: clamp(1.4rem, 1rem + 0.2vw, 3rem);
-  --font-size-9: clamp(1.4rem, 1.2rem + 0.2vw, 3rem);
+  --font-size-3: clamp(1.4rem, 1.2rem + 0.2vw, 3rem);
 
   /* padding */
   --list-header-btn-padding: 0.6em 1em;
@@ -121,7 +114,7 @@ body {
   min-height: 4rem !important;
   background-color: transparent;
   border: none;
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-3);
   border-radius: var(--input-border-radius) !important;
   -webkit-border-radius: var(--input-border-radius) !important;
   -moz-border-radius: var(--input-border-radius) !important;
@@ -245,7 +238,7 @@ body {
 }
 
 .route_error_container_content>div:nth-child(1)>p {
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-3);
   font-weight: 500;
   margin-bottom: 1rem;
 }
@@ -254,7 +247,7 @@ body {
   margin-top: 2rem;
   width: 12rem;
   height: 4rem;
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-3);
   cursor: pointer;
   border-radius: 3rem;
   -webkit-border-radius: 3rem;

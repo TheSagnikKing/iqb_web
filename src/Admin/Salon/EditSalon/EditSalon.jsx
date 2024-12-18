@@ -324,7 +324,7 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -338,7 +338,7 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -367,7 +367,7 @@ const EditSalon = () => {
       toast.success("Salon logo uploaded successfully", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -412,7 +412,7 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -443,7 +443,7 @@ const EditSalon = () => {
       toast.success("Salon images uploaded successfully", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -455,7 +455,7 @@ const EditSalon = () => {
         toast.error("Something went wrong !", {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -468,7 +468,7 @@ const EditSalon = () => {
       toast.error(error?.response?.data?.message, {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -499,7 +499,7 @@ const EditSalon = () => {
       toast.error("Please select service icon", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -512,7 +512,7 @@ const EditSalon = () => {
       toast.error("Please enter service name", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -525,7 +525,7 @@ const EditSalon = () => {
       toast.error("Service name must be between 1 to 25 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -539,7 +539,7 @@ const EditSalon = () => {
       toast.error("Please enter service description", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -552,7 +552,7 @@ const EditSalon = () => {
       toast.error("Service description must be between 1 to 50 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -565,7 +565,7 @@ const EditSalon = () => {
       toast.error("Please enter service price", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -578,7 +578,7 @@ const EditSalon = () => {
       toast.error("Please enter service EWT", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -650,7 +650,7 @@ const EditSalon = () => {
       toast.error("Please enter salon name", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -663,7 +663,7 @@ const EditSalon = () => {
       toast.error("Salon Name must be between 1 to 20 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -676,7 +676,7 @@ const EditSalon = () => {
       toast.error("Please enter salon description", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -689,7 +689,7 @@ const EditSalon = () => {
       toast.error("Salon Description must be between 1 to 35 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -702,7 +702,7 @@ const EditSalon = () => {
       toast.error("Please enter salon address", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -715,7 +715,7 @@ const EditSalon = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -796,7 +796,7 @@ const EditSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -810,7 +810,7 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -848,7 +848,7 @@ const EditSalon = () => {
         toast.success("Image updated successfully", {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -861,7 +861,7 @@ const EditSalon = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--font-size-8)",
+              fontSize: "var(--font-size-2)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -875,7 +875,7 @@ const EditSalon = () => {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -902,7 +902,7 @@ const EditSalon = () => {
         toast.success("Image deleted successfully", {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -915,7 +915,7 @@ const EditSalon = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--font-size-8)",
+              fontSize: "var(--font-size-2)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -929,7 +929,7 @@ const EditSalon = () => {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -964,7 +964,7 @@ const EditSalon = () => {
         toast.success("Image deleted successfully", {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -977,7 +977,7 @@ const EditSalon = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--font-size-8)",
+              fontSize: "var(--font-size-2)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -991,7 +991,7 @@ const EditSalon = () => {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -1028,7 +1028,7 @@ const EditSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -1067,7 +1067,7 @@ const EditSalon = () => {
         toast.success("Image updated successfully", {
           duration: 3000,
           style: {
-            fontSize: "var(--font-size-8)",
+            fontSize: "var(--font-size-2)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -1082,7 +1082,7 @@ const EditSalon = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--font-size-8)",
+              fontSize: "var(--font-size-2)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -1113,7 +1113,7 @@ const EditSalon = () => {
       toast.error("Please select a country", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -1681,12 +1681,12 @@ const EditSalon = () => {
           <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
               <p style={{
-                fontSize: "var(--font-size-4)",
+                fontSize: "var(--font-size-3)",
                 fontWeight: "600"
               }}>Select Images</p>
 
               <button onClick={() => handleSalonImageButtonClick()}
-                style={{ fontSize: "var(--font-size-4)" }}>
+                style={{ fontSize: "var(--font-size-3)" }}>
                 Upload
                 <input
                   type="file"
@@ -1701,11 +1701,11 @@ const EditSalon = () => {
 
             <div>
               <p style={{
-                fontSize: "var(--font-size-4)",
+                fontSize: "var(--font-size-3)",
                 fontWeight: "600"
               }}>Update Images</p>
 
-              <button onClick={() => setOpenMobileUpdateModal(true)} style={{ fontSize: "var(--font-size-4)" }}>
+              <button onClick={() => setOpenMobileUpdateModal(true)} style={{ fontSize: "var(--font-size-3)" }}>
                 Update
               </button>
             </div>

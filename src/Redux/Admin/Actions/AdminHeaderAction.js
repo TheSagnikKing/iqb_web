@@ -29,7 +29,7 @@ export const adminApplySalonAction = (applySalondata) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -47,7 +47,7 @@ export const adminApplySalonAction = (applySalondata) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -90,7 +90,7 @@ export const adminGetDefaultSalonAction = (adminEmail, signal, adminSetSalon) =>
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -110,7 +110,7 @@ export const adminGetDefaultSalonAction = (adminEmail, signal, adminSetSalon) =>
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

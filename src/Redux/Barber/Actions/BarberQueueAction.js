@@ -27,7 +27,7 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -61,7 +61,7 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
         toast.success("Customer serve successfully", {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -90,7 +90,7 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -108,7 +108,7 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -131,7 +131,7 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
         toast.success("Customer cancel successfully", {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -160,7 +160,7 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -178,7 +178,7 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--font-size-8)",
+                fontSize: "var(--font-size-2)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -212,7 +212,7 @@ export const getBarberQueueListHistoryAction = (salonId, barberId, signal) => as
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -255,7 +255,7 @@ export const getAllSalonServicesBarberAction = (salonId) => async (dispatch) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--font-size-8)",
+                    fontSize: "var(--font-size-2)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',

@@ -185,7 +185,7 @@ const CustomerList = () => {
       toast.error("Atleast one customer needed", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -232,7 +232,7 @@ const CustomerList = () => {
       toast.error("Please select a customer", {
         duration: 3000,
         style: {
-          fontSize: "var(--font-size-8)",
+          fontSize: "var(--font-size-2)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

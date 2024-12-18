@@ -57,7 +57,7 @@
         -o-border-radius: var(--list-btn-border-radius);
         border: none;
         cursor: pointer;
-        font-size: var(--font-size-8);
+        font-size: var(--font-size-2);
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
         -moz-transition: var(--btn-transition);
@@ -80,7 +80,7 @@
         gap: 1rem;
 
         &>p {
-            font-size: var(--font-size-4);
+            font-size: var(--font-size-3);
             font-weight: 600;
         }
 
@@ -88,7 +88,7 @@
             width: 100%;
             height: 4rem;
             padding-inline: 1rem;
-            font-size: var(--font-size-4);
+            font-size: var(--font-size-3);
             background-color: var(--light-color-3);
             border: none;
             outline: none;
@@ -123,7 +123,7 @@
         -o-transition: var(--btn-transition);
         margin-inline: auto;
         color: var(--color-2);
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
 
 
         &:hover {
@@ -195,7 +195,7 @@
 
     &>p {
         margin-top: 1.5rem;
-        font-size: var(--font-size-9);
+        font-size: var(--font-size-3);
         text-align: center;
     }
 }
@@ -234,7 +234,7 @@
         outline: none;
         background-color: transparent;
         padding-inline: 1rem;
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
 
     }
 
@@ -244,7 +244,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
         font-weight: bold;
         cursor: pointer;
         margin-inline: auto;
@@ -264,7 +264,7 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
 
         &:hover {
             color: var(--light-color-4);
@@ -311,7 +311,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
         font-weight: bold;
         cursor: pointer;
         margin-inline: auto;
@@ -332,7 +332,7 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-3);
 
         &:hover {
             color: var(--light-color-4);
@@ -379,7 +379,7 @@
         &>p {
             line-height: 4rem;
             margin-bottom: 1rem;
-            font-size: var(--font-size-4);
+            font-size: var(--font-size-3);
             padding-inline: 1rem;
             border-radius: var(--input-border-radius);
             -webkit-border-radius: var(--input-border-radius);
@@ -427,7 +427,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--font-size-6);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -452,7 +452,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
             margin-bottom: 1rem;
 
             &:hover {
@@ -473,7 +473,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: var(--font-size-9);
+                font-size: var(--font-size-3);
                 font-weight: 600;
                 margin-bottom: 1rem;
             }
@@ -497,13 +497,13 @@
                     padding-inline: 1rem;
                     outline: none;
                     border: none;
-                    font-size: var(--font-size-9);
+                    font-size: var(--font-size-3);
                 }
 
                 &>div {
                     width: 4rem;
                     height: 4rem;
-                    font-size: var(--font-size-7);
+                    font-size: var(--font-size-2);
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -533,7 +533,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--font-size-8);
+            font-size: var(--font-size-2);
             font-weight: 500;
             color: var(--light-color-2);
 
@@ -649,7 +649,7 @@
                 -moz-transition: var(--btn-transition);
                 -ms-transition: var(--btn-transition);
                 -o-transition: var(--btn-transition);
-                font-size: var(--font-size-8);
+                font-size: var(--font-size-2);
                 font-weight: 500;
 
                 &:hover {
@@ -708,7 +708,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--font-size-6);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -733,7 +733,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
             margin-bottom: 1rem;
 
             &:hover {
@@ -792,7 +792,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
 
             &:hover {
                 background-color: var(--color-2);
@@ -823,7 +823,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--font-size-7);
+            font-size: var(--font-size-2);
 
             &:hover {
                 background-color: var(--color-6);
@@ -866,7 +866,7 @@
                 justify-content: space-between;
 
                 &>p:nth-child(1) {
-                    font-size: var(--font-size-4);
+                    font-size: var(--font-size-3);
                     font-weight: 600;
                     margin-bottom: 0.5rem;
                 }
@@ -900,7 +900,7 @@
 
                 &>div {
                     &>p:nth-child(1) {
-                        font-size: var(--font-size-4);
+                        font-size: var(--font-size-3);
                         font-weight: 600;
                         color: gray;
                         margin-bottom: 0.9rem;
@@ -924,7 +924,7 @@
 
                 &>div {
                     &>p:nth-child(1) {
-                        font-size: var(--font-size-4);
+                        font-size: var(--font-size-3);
                         font-weight: 600;
                         color: gray;
                         margin-bottom: 0.9rem;
@@ -998,7 +998,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--font-size-5);
+            font-size: var(--font-size-3);
             font-weight: 500;
         }
     }
