@@ -1411,6 +1411,7 @@
 
 .create_salon_wrapper.dark {
     background-color: var(--dark-color-2);
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
 .create_salon_content_wrapper.dark>div:nth-child(1)>div:nth-child(1) {

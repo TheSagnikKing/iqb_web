@@ -62,7 +62,7 @@ const Queue = () => {
     const confirm = window.confirm("Are you Sure ?")
 
     const queueData = {
-      servedByEmail:barberEmail,
+      servedByEmail: barberEmail,
       barberEmail,
       barberId: b.barberId,
       salonId,
@@ -116,8 +116,9 @@ const Queue = () => {
         {
           getBarberQueueListLoading ?
             <div className={style.barber_queue_content_body}>
-              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
             </div> :
             getBarberQueueListResolve && BarberQueueList?.length > 0 ?
               <>
@@ -143,7 +144,7 @@ const Queue = () => {
                       }}
                     >
                       <p>{b.qPosition}</p>
-                      <p>{b.name}</p>         
+                      <p>{b.name}</p>
                       <p>{b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b?.qgCode}</p>

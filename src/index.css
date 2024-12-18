@@ -23,23 +23,8 @@ html {
 :root {
   font-size: 62.5%;
 
-  /* light theme */
-  --light-color-4: var(--light-color-4);
-  --primary-bg-light-color2: #000;
-  --light-color-2: #000;
-  /* --light-color-2: #3E3232; */
-
-  --light-color-3: #EEEDED;
-  --sidebar-bg-color: #ECEBEB;
   --hover-bg-color-1: #38598b;
 
-  --primary-text-light-color1: var(--light-color-4);
-  --primary-text-light-color2: #000;
-
-  --text-color-3: #D9D9D9;
-  --text-color-4: #B2AFAF;
-
-  --border-color-1: #000;
 
   --lightmode-loader-bg-color: #ebebeb;
   --lightmode-loader-highlight-color: #f5f5f5;
@@ -122,20 +107,6 @@ html {
 body {
   font-size: 1.6rem;
 }
-/* 
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
-  color: var();
-} */
-
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  -webkit-filter: invert(1);
-} */
 
 
 .carousel * {
@@ -304,9 +275,9 @@ p {
   -ms-border-radius: 3rem;
   -o-border-radius: 3rem;
   border: none;
-  border: 0.1rem solid #000;
-  color: #000;
-  background-color: #efefef;
+  border: 0.1rem solid var(--color-2);
+  color: var(--color-2);
+  background-color: var(--color-3);
   transition: var(--btn-transition);
   -webkit-transition: var(--btn-transition);
   -moz-transition: var(--btn-transition);
@@ -314,7 +285,7 @@ p {
   -o-transition: var(--btn-transition);
 
   &:hover{
-    background-color: #000;
+    background-color: var(--color-2);
     color: var(--light-color-4);
   }
 }

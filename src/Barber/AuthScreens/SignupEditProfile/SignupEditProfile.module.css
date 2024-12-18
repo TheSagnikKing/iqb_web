@@ -77,9 +77,9 @@
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
     height:4rem;
     width: 12rem;
-    border: 0.1rem solid var(--light-color-2);
-    color: var(--light-color-2);
-    background-color: var(--light-color-1);
+    border: 0.1rem solid var(--color-2);
+    color: var(--color-2);
+    background-color: var(--color-3);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -98,7 +98,7 @@
     font-size: var(--list-content-body-text);
 
     &:hover{
-        background-color: var(--light-color-2);
+        background-color: var(--color-2);
         color: var(--light-color-4);
     }
 }
@@ -168,9 +168,9 @@
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(1) button {
     height: 4rem;
     width: 10rem;
-    border: 0.1rem solid var(--light-color-2);
-    color: var(--light-color-2);
-    background-color: var(--light-color-1);
+    border: 0.1rem solid var(--color-2);
+    color: var(--color-2);
+    background-color: var(--color-3);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -189,7 +189,7 @@
     font-size: var(--list-content-body-text);
     
     &:hover{
-        background-color: var(--light-color-2);
+        background-color: var(--color-2);
         color: var(--light-color-4);
     }
 }
@@ -198,6 +198,41 @@
     font-size: 1.2rem !important;
     font-weight: 500;
     color: var(--color-6);
+}
+
+.mobile_container {
+    background-color: var(--light-color-3);
+    border-radius: var(--input-border-radius);
+    -webkit-border-radius: var(--input-border-radius);
+    -moz-border-radius: var(--input-border-radius);
+    -ms-border-radius: var(--input-border-radius);
+    -o-border-radius: var(--input-border-radius);
+}
+
+/* dark mode  */
+
+.barber_signup_edit_container.dark{
+    background-color: var(--dark-color-2);
+}
+
+.barber_signup_edit_container.dark>div:nth-child(1)>div{
+    border-right: 0.1rem solid rgba(255, 255, 255, 0.2);
+} 
+
+.barber_signup_edit_container.dark>div:nth-child(2)>div>div>input{
+    background-color: var(--dark-color-3);
+} 
+
+.mobile_container.dark {
+    background-color: var(--dark-color-3);
+}
+
+.barber_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div{
+    background-color: var(--dark-color-1);
+}
+
+.barber_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div>p:hover{
+    background-color: var(--dark-color-3);
 }
 
 @media screen and (min-width:0px) and (max-width:430px){

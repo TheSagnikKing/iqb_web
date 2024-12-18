@@ -826,7 +826,7 @@ const EditProfile = () => {
                     />
                 </div>
 
-                <div className={style.admin_edit_gender_container}>
+                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`}>
                     <p>Gender</p>
                     <input
                         type="text"

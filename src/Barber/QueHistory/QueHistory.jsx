@@ -43,7 +43,7 @@ const QueHistory = () => {
     } = getBarberQueueListHistory
 
     return (
-        <div className={`${style.quehistory_wrapper}`}>
+        <div className={`${style.quehistory_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
                 <p>Queue History</p>
             </div>
@@ -52,8 +52,9 @@ const QueHistory = () => {
 
                 {
                     getBarberQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
-                        <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                            highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                        <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }}
+                            baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                            highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
                     </div>) :
                         getBarberQueueListHistoryResolve && BarberQueueListHistory?.length > 0 ? (
                             <>

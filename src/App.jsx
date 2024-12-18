@@ -97,9 +97,20 @@ const App = () => {
     };
   }, []);
 
+  const ErrorFallbackRoute = ({ error }) => {
+    return (
+      <main className={`error_boundary_route_container ${darkmodeOn && "dark"}`}>
+        <div>
+          <div><ExclamationIcon /></div>
+          <p>Oops ! Something went wrong</p>
+        </div>
+      </main>
+    );
+  };
+
   const ErrorFallback = ({ error }) => {
     return (
-      <main className="error_boundary_container">
+      <main className={`error_boundary_container ${darkmodeOn && "dark"}`}>
         <div>
           <div><ExclamationIcon /></div>
           <p>Oops ! Something went wrong</p>
@@ -126,11 +137,7 @@ const App = () => {
 
 
   return (
-    // <div style={{
-    //   background: darkmodeOn ? "var(--dark-mode-bg-color-1)" : "var(--primary-bg-light-color1)"
-    // }}>
     <>
-
       {!isOnline ? (
         <div className="offline_container">
           <div >
@@ -150,12 +157,12 @@ const App = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                background: darkmodeOn ? "var(--dark-mode-bg-color-2)" : "#fff"
+                background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
               }}><Loader /></div>}>
               <Routes>
 
                 {/* Admin Auth Screens */}
-                <Route element={<ErrorBoundary FallbackComponent={ErrorFallback}><ProtectedAdminAuthRoute /></ErrorBoundary>}>
+                <Route element={<ErrorBoundary FallbackComponent={ErrorFallbackRoute}><ProtectedAdminAuthRoute /></ErrorBoundary>}>
                   <Route path="/" element={<Public />} />
                   <Route path="/adminsignin" element={<AdminSignin />} />
                   <Route path="/adminsignup" element={<AdminSignup />} />
@@ -282,7 +289,7 @@ const App = () => {
                 </Route>
 
                 {/* Barber Auth Screens */}
-                <Route element={<ErrorBoundary FallbackComponent={ErrorFallback}><ProtectedBarberAuthRoute /></ErrorBoundary>}>
+                <Route element={<ErrorBoundary FallbackComponent={ErrorFallbackRoute}><ProtectedBarberAuthRoute /></ErrorBoundary>}>
                   <Route path="/" element={<Public />} />
                   <Route path="/barbersignin" element={<BarberSignin />} />
                   <Route path="/barbersignup" element={<BarberSignup />} />
@@ -347,9 +354,7 @@ const App = () => {
           </BrowserRouter>
         </>
       )}
-
     </>
-    // </div>
   )
 }
 

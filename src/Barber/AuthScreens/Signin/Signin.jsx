@@ -132,9 +132,9 @@ const Signin = () => {
     loading: BarberSigninLoading,
   } = BarberSignin
 
-    const darkMode = useSelector(darkmodeSelector)
-  
-    const darkmodeOn = darkMode === "On"
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
 
   return (
     <main className={`${style.barber_signin_container} ${darkmodeOn && style.dark}`}>

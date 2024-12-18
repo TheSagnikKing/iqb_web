@@ -243,7 +243,7 @@
     color: gray;
 
     &:hover {
-        color: var(--primary-text-light-color2);
+        color: var(--light-color-2);
     }
 }
 

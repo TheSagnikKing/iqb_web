@@ -89,8 +89,9 @@ const QueHistory = () => {
 
                 {
                     getAdminQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
-                        <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                            highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"} />
+                        <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} 
+                        baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                        highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
                     </div>) :
                         getAdminQueueListHistoryResolve && copyAdminQueueHistory?.length > 0 ? (
                             <>
@@ -138,7 +139,6 @@ const QueHistory = () => {
                             </div>
                         )
                 }
-
 
             </div>
         </div>

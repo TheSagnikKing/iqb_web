@@ -408,7 +408,7 @@ const DashboardHeader = () => {
             <div
               className={`${style.salon_toggle_btn_container} ${darkmodeOn && style.dark}`}
               style={{
-                outline: togglecheck ? "1px solid limegreen" : "1px solid red",
+                outline: togglecheck ? "0.1rem solid limegreen" : "0.1rem solid red",
               }}
             >
               <p className={`${style.salononline_toggle_btn_text} ${togglecheck ? style.salononline_toggle_btn_text_active : style.salononline_toggle_btn_text_inactive} ${darkmodeOn && style.dark}`}>{togglecheck ? "Online" : "Offline"}</p>

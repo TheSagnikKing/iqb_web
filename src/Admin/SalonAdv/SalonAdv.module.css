@@ -305,6 +305,7 @@
 
 .salonadv_container.dark{
     background-color: var(--dark-color-2);
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
 .salonadv_task.dark{

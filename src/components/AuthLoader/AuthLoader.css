@@ -76,3 +76,7 @@
       height: 40px;
     }
   }
+
+  .authloader.dark{
+    background-color: var(--dark-color-2);
+  }

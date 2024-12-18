@@ -423,6 +423,10 @@
     background-color: var(--dark-color-2);
 }
 
+.salon_wrapper.dark{
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
+}
+
 .time_drop_container.dark {
     border: 0.1rem solid rgba(255, 255, 255, 0.2);
 

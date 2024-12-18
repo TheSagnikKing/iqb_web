@@ -11,6 +11,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast'
 import { ClickAwayListener } from '@mui/material';
 import { getCurrentDate } from '../../../utils/Date'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 const SignupEditProfile = () => {
 
@@ -43,9 +44,24 @@ const SignupEditProfile = () => {
   const [invalidnumber, setInvalidNumber] = useState(false)
 
   const [nameError, setNameError] = useState("")
+  const [genderError, setGenderError] = useState("")
   const [invalidNumberError, setInvalidNumberError] = useState("")
+  const [dateOfBirthError, setDateOfBirthError] = useState("");
 
   const updateClicked = () => {
+
+    if (!name) {
+      toast.error("Please enter name", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setNameError("Please enter name");
+    }
 
     if (name.length === 0 || name.length > 20) {
       toast.error("Name must be between 1 to 20 characters", {
@@ -58,6 +74,33 @@ const SignupEditProfile = () => {
         },
       });
       return setNameError("Name must be between 1 to 20 characters");
+    }
+
+    if (!gender) {
+      toast.error("Please select gender", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setGenderError("Please select gender");
+    }
+
+    if (!dateOfBirth) {
+      toast.error("Please select date of birth", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--list-modal-header-normal-font)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
+      return setDateOfBirthError("Please select date of birth")
     }
 
     if (invalidnumber) {
@@ -86,8 +129,6 @@ const SignupEditProfile = () => {
 
   const skipClicked = () => {
     const profiledata = { email: barberdata?.email, mobileNumber: "", name: "", gender: "", dateOfBirth: "", salonId: barberdata?.salonId, countryCode: Number(countryCode) };
-
-    console.log(profiledata)
 
     dispatch(barberSkipProfileAction(profiledata, navigate))
   }
@@ -132,8 +173,22 @@ const SignupEditProfile = () => {
     }
   };
 
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+  useEffect(() => {
+    const phoneInput = document.querySelector(
+      '.react-international-phone-input-container .react-international-phone-input'
+    );
+
+    if (phoneInput) {
+      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+    }
+  }, [darkmodeOn]);
+
   return (
-    <main className={style.barber_signup_edit_container}>
+    <main className={`${style.barber_signup_edit_container} ${darkmodeOn && style.dark}`}>
       <div>
         <div>
           <img src="./signin_un.png" alt="barber_signup" />
@@ -178,9 +233,18 @@ const SignupEditProfile = () => {
             <input
               type="text"
               value={`${gender ? `${gender}` : ''}`}
-              onClick={() => genderDropHandler()}
+              onClick={() => {
+                setGenderError("")
+                genderDropHandler()
+              }}
               onKeyDown={handleKeyPress}
+              style={{
+                border: genderError ? "0.1rem solid red" : "none"
+              }}
+              readOnly
             />
+
+            <p className={style.error_message}>{genderError}</p>
 
             {genderDrop && <ClickAwayListener onClickAway={() => setGenderDrop(false)}><div>
               <p onClick={() => setGenderHandler("Male")}>Male</p>
@@ -194,15 +258,23 @@ const SignupEditProfile = () => {
             <input
               type="date"
               value={dateOfBirth}
-              onChange={(e) => setDateofBirth(e.target.value)}
+              onChange={(e) => {
+                setDateOfBirthError("")
+                setDateofBirth(e.target.value)
+              }}
               onKeyDown={handleKeyPress}
               max={getCurrentDate()}
+              style={{
+                colorScheme: darkmodeOn ? "dark" : "light",
+                border: dateOfBirthError && "0.1rem solid red"
+              }}
             />
+            <p className={style.error_message}>{dateOfBirthError}</p>
           </div>
 
           <div>
             <p>Mobile Number</p>
-            <div style={{ border: invalidNumberError && "0.1rem solid red"}}>
+            <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`} style={{ border: invalidNumberError && "0.1rem solid red" }}>
               <div style={{
                 background: "var(--bg-color3)",
                 borderRadius: "1rem",

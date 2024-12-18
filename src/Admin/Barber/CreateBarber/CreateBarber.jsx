@@ -337,7 +337,7 @@ const CreateBarber = () => {
 
           {
             adminAllSalonServicesLoading ?
-              (<div className={`${style.admin_create_barber_content_wrapper_right_loading}`}>
+              (<div className={`${style.admin_create_barber_content_wrapper_right_loading} ${darkmodeOn && style.dark}`}>
                 <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
                 <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
               </div>) :
@@ -398,7 +398,7 @@ const CreateBarber = () => {
 
                   </div>
                 ) :
-                (<div className={`${style.admin_create_barber_content_wrapper_right_error}`}>
+                (<div className={`${style.admin_create_barber_content_wrapper_right_error} ${darkmodeOn && style.dark}`}>
                   <p>No services available</p>
                 </div>)
           }

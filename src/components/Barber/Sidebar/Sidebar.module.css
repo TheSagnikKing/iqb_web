@@ -119,7 +119,7 @@
   -o-border-radius: var(--input-border-radius);
 
   &>div {
-    color: var(--primary-text-light-color2);
+    color: var(--light-color-2);
     font-size: var(--list-content-body-text);
     font-weight: 500;
     display: flex;
@@ -128,7 +128,7 @@
   }
 
   &>p {
-    color: var(--primary-text-light-color2);
+    color: var(--light-color-2);
     font-size: var(--list-content-body-text);
     font-weight: 500;
   }
@@ -158,7 +158,7 @@
 
 .content {
   height: 100svh;
-  color: var(--primary-text-light-color2);
+  color: var(--light-color-2);
   padding-inline: 2rem;
   font-weight: 500;
   background-color: var(--light-color-1);
