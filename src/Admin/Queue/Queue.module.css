@@ -20,7 +20,7 @@
 }
 
 .admin_queue_wrapper>div:nth-child(1)>p {
-    font-size: var(--list-primary-text);
+    font-size: var(--font-size-1);
     font-weight: 600;
 }
 
@@ -42,7 +42,7 @@
     height: 4rem;
     width: calc(100% - 3rem);
     border: none;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     background: transparent;
 }
 
@@ -56,7 +56,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     cursor: pointer;
     color: var(--light-color-2);
 }
@@ -86,7 +86,7 @@
     display: grid;
     grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr;
     place-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
@@ -150,14 +150,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 }
 
 .admin_queue_content_body_item>p:nth-child(5) {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     height: 100%;
     width: 100%;
 }
@@ -181,7 +181,7 @@
     -o-border-radius: var(--list-btn-border-radius);
     border: none;
     cursor: pointer;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 }
 
 .admin_queue_content_body_item>div:nth-last-child(2)>button {
@@ -227,7 +227,7 @@
     place-items: center;
 
     &>p {
-        font-size: var(--list-content-error-text);
+        font-size: var(--font-size-5);
         font-weight: 500;
     }
 }
@@ -259,7 +259,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -284,7 +284,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             margin-bottom: 1rem;
 
             &:hover {
@@ -304,7 +304,7 @@
             width: 100%;
             height: 4rem;
             padding-inline: 1rem;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             background-color: var(--light-color-3);
             border: none;
             outline: none;
@@ -355,7 +355,7 @@
             -o-border-radius: var(--input-border-radius);
 
             &>p {
-                font-size: var(--list-content-error-text);
+                font-size: var(--font-size-5);
                 font-weight: 500;
             }
         }
@@ -372,7 +372,7 @@
         -o-border-radius: var(--list-btn-border-radius);
         border: none;
         cursor: pointer;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         background-color: var(--color-3);
         border: 0.1rem solid var(--color-2);
         color: var(--color-2);
@@ -441,7 +441,7 @@
 
     &>div:nth-child(2) {
         &>p:nth-child(1) {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
             color: var(--light-color-2);
         }

@@ -30,7 +30,7 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -49,7 +49,7 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -83,7 +83,7 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -102,7 +102,7 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -139,7 +139,7 @@ export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -158,7 +158,7 @@ export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -194,7 +194,7 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -213,7 +213,7 @@ export const AdminSignupAction = (signupData, navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -251,7 +251,7 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -270,7 +270,7 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -311,7 +311,7 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -330,7 +330,7 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',

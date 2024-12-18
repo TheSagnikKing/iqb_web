@@ -37,7 +37,7 @@ const SalonAdv = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -108,7 +108,7 @@ const SalonAdv = () => {
         toast.success("Advertisement uploaded successfully", {
           duration: 3000,
             style: {
-              fontSize: "var(--list-modal-header-normal-font)",
+              fontSize: "var(--font-size-8)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -120,7 +120,7 @@ const SalonAdv = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--list-modal-header-normal-font)",
+              fontSize: "var(--font-size-8)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',
@@ -136,7 +136,7 @@ const SalonAdv = () => {
         toast.error(error?.response?.data?.message, {
           duration: 3000,
           style: {
-            fontSize: "var(--list-modal-header-normal-font)",
+            fontSize: "var(--font-size-8)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -182,7 +182,7 @@ const SalonAdv = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -221,7 +221,7 @@ const SalonAdv = () => {
         toast.error("Something went wrong !", {
           duration: 3000,
           style: {
-            fontSize: "var(--list-modal-header-normal-font)",
+            fontSize: "var(--font-size-8)",
             borderRadius: '0.3rem',
             background: '#333',
             color: '#fff',
@@ -237,7 +237,7 @@ const SalonAdv = () => {
       toast.error(error?.response?.data?.message, {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -272,7 +272,7 @@ const SalonAdv = () => {
           toast.error("Something went wrong !", {
             duration: 3000,
             style: {
-              fontSize: "var(--list-modal-header-normal-font)",
+              fontSize: "var(--font-size-8)",
               borderRadius: '0.3rem',
               background: '#333',
               color: '#fff',

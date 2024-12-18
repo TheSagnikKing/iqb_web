@@ -24,7 +24,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     cursor: pointer;
     background-color: var(--light-color-4);
     border-radius: 50%;
@@ -77,7 +77,7 @@
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
     border: 0.1rem solid rgba(0, 0, 0, 0.2);
-    font-size: var(--list-modal-header-normal-font);
+    font-size: var(--font-size-8);
     position: relative;
     cursor: pointer;
     background-color: var(--light-color-4);
@@ -87,7 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--list-modal-header-icon);
+    font-size: var(--font-size-7);
 }
 
 .dashboard_salon_list_dropdown {
@@ -159,7 +159,7 @@
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
     font-weight: 500;
-    font-size: var(--list-modal-header-normal-font);
+    font-size: var(--font-size-8);
     /* box-shadow: var(--cmmn-box-shadow-y); */
 }
 
@@ -244,12 +244,12 @@
 .profile_drop_container>div>div:nth-child(1) {
     display: grid;
     place-items: center;
-    font-size: var(--list-modal-header-normal-font);
+    font-size: var(--font-size-8);
     font-weight: 500;
 }
 
 .profile_drop_container>div>div:nth-child(2) {
-    font-size: var(--list-modal-header-normal-font);
+    font-size: var(--font-size-8);
     font-weight: 500;
 }
 
@@ -388,7 +388,7 @@
         background-color: var(--color-3);
         color: var(--color-2);
         border: 0.1rem solid var(--color-2);
-        font-size: var(--list-header-btn-text);
+        font-size: var(--font-size-2);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
         -webkit-border-radius: var(--input-border-radius);
@@ -439,7 +439,7 @@
         -o-border-radius: 50%;
         cursor: pointer;
         border: none;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         color: var(--color-6);
         border: 0.1rem solid var(--color-6);
         background-color: var(--color-7);
@@ -455,7 +455,7 @@
     }
 
     .chooseSalon_model_content>p:nth-child(2) {
-        font-size: var(--list-modal-header-text);
+        font-size: var(--font-size-6);
         font-weight: 600;
         margin-inline: auto;
     }
@@ -478,7 +478,7 @@
     }
 
     .chooseSalon_model_content>div:nth-child(3)>p {
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
     }
 
     .mobile_dashboard_salon_list_dropdown {
@@ -504,7 +504,7 @@
         padding-inline: 1rem;
         display: flex;
         align-items: center;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         -webkit-border-radius: var(--list-wrapper-border-radius);
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
@@ -531,7 +531,7 @@
         border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         margin-inline: auto;
         border-radius: var(--list-wrapper-border-radius);
         -webkit-border-radius: var(--list-wrapper-border-radius);
@@ -549,7 +549,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         font-weight: bold;
         cursor: pointer;
     }
@@ -581,7 +581,7 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             color: var(--color-6);
             border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
@@ -616,13 +616,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
 
 
             &>p {
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
         }
@@ -664,7 +664,7 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -677,7 +677,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -770,7 +770,7 @@
         background-color: var(--color-3);
         color: var(--color-2);
         border: 0.1rem solid var(--color-2);
-        font-size: var(--list-header-btn-text);
+        font-size: var(--font-size-2);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
         -webkit-border-radius: var(--input-border-radius);
@@ -821,7 +821,7 @@
         -o-border-radius: 50%;
         cursor: pointer;
         border: none;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         color: var(--color-6);
         border: 0.1rem solid var(--color-6);
         background-color: var(--color-7);
@@ -837,7 +837,7 @@
     }
 
     .chooseSalon_model_content>p:nth-child(2) {
-        font-size: var(--list-modal-header-text);
+        font-size: var(--font-size-6);
         font-weight: 600;
         margin-inline: auto;
     }
@@ -860,7 +860,7 @@
     }
 
     .chooseSalon_model_content>div:nth-child(3)>p {
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
     }
 
     .mobile_dashboard_salon_list_dropdown {
@@ -886,7 +886,7 @@
         padding-inline: 1rem;
         display: flex;
         align-items: center;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         -webkit-border-radius: var(--list-wrapper-border-radius);
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
@@ -913,7 +913,7 @@
         border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         margin-inline: auto;
         border-radius: var(--list-wrapper-border-radius);
         -webkit-border-radius: var(--list-wrapper-border-radius);
@@ -931,7 +931,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         font-weight: bold;
         cursor: pointer;
     }
@@ -963,7 +963,7 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             color: var(--color-6);
             border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
@@ -998,13 +998,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
 
 
             &>p {
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
         }
@@ -1046,7 +1046,7 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -1059,7 +1059,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1152,7 +1152,7 @@
         background-color: var(--color-3);
         color: var(--color-2);
         border: 0.1rem solid var(--color-2);
-        font-size: var(--list-header-btn-text);
+        font-size: var(--font-size-2);
         margin-left: 0.5rem;
         border-radius: var(--input-border-radius);
         -webkit-border-radius: var(--input-border-radius);
@@ -1203,7 +1203,7 @@
         -o-border-radius: 50%;
         cursor: pointer;
         border: none;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         color: var(--color-6);
         border: 0.1rem solid var(--color-6);
         background-color: var(--color-7);
@@ -1219,7 +1219,7 @@
     }
 
     .chooseSalon_model_content>p:nth-child(2) {
-        font-size: var(--list-modal-header-text);
+        font-size: var(--font-size-6);
         font-weight: 600;
         margin-inline: auto;
     }
@@ -1242,7 +1242,7 @@
     }
 
     .chooseSalon_model_content>div:nth-child(3)>p {
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
     }
 
     .mobile_dashboard_salon_list_dropdown {
@@ -1268,7 +1268,7 @@
         padding-inline: 1rem;
         display: flex;
         align-items: center;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         -webkit-border-radius: var(--list-wrapper-border-radius);
         -moz-border-radius: var(--list-wrapper-border-radius);
         -ms-border-radius: var(--list-wrapper-border-radius);
@@ -1295,7 +1295,7 @@
         border: 0.1rem solid var(--color-2);
         cursor: pointer;
         font-weight: 500;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         margin-inline: auto;
         border-radius: var(--list-wrapper-border-radius);
         -webkit-border-radius: var(--list-wrapper-border-radius);
@@ -1313,7 +1313,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         font-weight: bold;
         cursor: pointer;
     }
@@ -1345,7 +1345,7 @@
             align-items: center;
             cursor: pointer;
             border: none;
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             color: var(--color-6);
             border: 0.1rem solid var(--color-6);
             background-color: var(--color-7);
@@ -1380,13 +1380,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
 
 
             &>p {
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 color: var(--light-color-2);
             }
         }
@@ -1428,7 +1428,7 @@
         padding-inline: 1rem;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -1441,7 +1441,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border: none;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             display: flex;
             justify-content: center;
             align-items: center;

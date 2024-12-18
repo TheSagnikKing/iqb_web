@@ -34,7 +34,7 @@ export const adminUpdateProfileAction = (profiledata, navigate) => async (dispat
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -52,7 +52,7 @@ export const adminUpdateProfileAction = (profiledata, navigate) => async (dispat
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -90,7 +90,7 @@ export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -108,7 +108,7 @@ export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -134,7 +134,7 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
         toast.success("We have send a code to your email", {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -152,7 +152,7 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -170,7 +170,7 @@ export const adminSendVerifyEmailAction = (verifyemail, setOpenEmailModal) => as
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -196,7 +196,7 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
         toast.success("We have send a sms to your mob No.", {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -214,7 +214,7 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -232,7 +232,7 @@ export const adminSendVerifyMobileAction = (verifyemail, setOpenMobileModal) => 
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -275,7 +275,7 @@ export const adminVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMod
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -294,7 +294,7 @@ export const adminVerifiedEmailStatusAction = (verifyemail, otp, setOpenEmailMod
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -337,7 +337,7 @@ export const adminVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobileM
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -355,7 +355,7 @@ export const adminVerifiedMobileStatusAction = (verifyemail, otp, setOpenMobileM
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -387,7 +387,7 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -405,7 +405,7 @@ export const adminUploadProfilePicAction = () => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -439,7 +439,7 @@ export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispa
         toast.success("Password matched successfully", {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -457,7 +457,7 @@ export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispa
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -475,7 +475,7 @@ export const adminUpdatePasswordAction = (profiledata, navigate) => async (dispa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',

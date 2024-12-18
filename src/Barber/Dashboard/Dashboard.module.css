@@ -10,7 +10,7 @@
     -o-border-radius: var(--list-wrapper-border-radius);
 
     &>p:nth-child(1) {
-        font-size: var(--list-primary-text);
+        font-size: var(--font-size-1);
         font-weight: 600;
         line-height: 1rem;
         margin-bottom: 2rem;
@@ -34,7 +34,7 @@
     padding: 1rem;
 
     &>p {
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: 600;
         margin-bottom: 1rem;
         height: 2rem;
@@ -64,12 +64,12 @@
         min-width: 4rem;
         display: flex;
         align-items: center;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: 600;
     }
 
     &>p:nth-child(2) {
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         display: flex;
         align-items: center;
         min-width: 40%;
@@ -81,7 +81,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: 600;
     }
 }
@@ -120,7 +120,7 @@
     }
 
     &>p {
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: 500;
         ;
         overflow: auto;
@@ -135,7 +135,7 @@
 }
 
 .barber_connect_salon_list_error {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     margin-top: 1rem;
     background-color: var(--light-color-4);
     height: calc(100% - 5rem);
@@ -152,7 +152,7 @@
 
     &>div {
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
             margin-bottom: 2rem;
         }
@@ -180,7 +180,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
 
             &:hover {
                 background-color: var(--color-2);
@@ -208,7 +208,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     cursor: pointer;
-    font-size: var(--list-header-btn-icon);
+    font-size: var(--font-size-3);
 
     &:hover {
         background-color: var(--color-2);
@@ -233,7 +233,7 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    font-size: var(--list-header-btn-icon);
+    font-size: var(--font-size-3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,7 +252,7 @@
     padding: 1rem;
 
     &>p {
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: 600;
         margin-bottom: 1rem;
         height: 2rem;
@@ -304,7 +304,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
 
     &:hover {
         background-color: var(--color-2);
@@ -335,7 +335,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
 
     &:hover {
         background-color: var(--color-6);
@@ -379,19 +379,19 @@
         justify-content: space-between;
 
         &>p:nth-child(1) {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         &>p:nth-child(2) {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
             margin-bottom: 0.5rem;
         }
 
         &>p:nth-child(3) {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
             color: gray;
         }
@@ -413,7 +413,7 @@
 
         &>div {
             &>p:nth-child(1) {
-                font-size: var(--list-content-body-text);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 color: gray;
                 margin-bottom: 0.9rem;
@@ -421,7 +421,7 @@
             }
 
             &>p:nth-child(2) {
-                font-size: var(--list-primary-text);
+                font-size: var(--font-size-1);
                 font-weight: 600;
                 text-align: center;
             }
@@ -440,7 +440,7 @@
             border: none;
             border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
             outline: none;
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
             text-align: center;
 
@@ -451,7 +451,7 @@
 
         &>div {
             &>p:nth-child(1) {
-                font-size: var(--list-content-body-text);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 color: gray;
                 margin-bottom: 0.9rem;
@@ -467,12 +467,12 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: var(--list-primary-text);
+                    font-size: var(--font-size-1);
                     font-weight: 600;
                 }
 
                 &>p {
-                    font-size: var(--list-primary-text);
+                    font-size: var(--font-size-1);
                     font-weight: 600;
                 }
             }
@@ -493,7 +493,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     cursor: pointer;
     border-radius: var(--list-btn-border-radius);
     -webkit-border-radius: var(--list-btn-border-radius);
@@ -550,7 +550,7 @@
 
         &>h2 {
             margin-bottom: 1rem;
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
     }
@@ -562,7 +562,7 @@
         padding-inline: 1rem;
 
         &>i {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
         }
     }
@@ -678,7 +678,7 @@
         &>p:nth-child(1) {
             height: 10%;
             align-content: center;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -704,8 +704,8 @@
 
 
                 &>div {
-                    width: var(--list-content-body-text);
-                    height: var(--list-content-body-text);
+                    width: var(--font-size-4);
+                    height: var(--font-size-4);
                     border-radius: 0.4rem;
                     background-color: brown;
                     cursor: pointer;
@@ -716,7 +716,7 @@
                 }
 
                 &>p {
-                    font-size: var(--list-content-body-text);
+                    font-size: var(--font-size-4);
                     font-weight: 500;
                 }
             }
@@ -760,7 +760,7 @@
         place-items: center;
 
         & p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
     }
@@ -778,7 +778,7 @@
     justify-content: center;
 
     &>p {
-        font-size: var(--list-content-error-text);
+        font-size: var(--font-size-5);
         font-weight: 500;
     }
 }
@@ -809,7 +809,7 @@
         align-items: center;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
         }
 

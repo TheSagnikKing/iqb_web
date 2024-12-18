@@ -20,7 +20,7 @@
         margin-bottom: 1rem;
 
         &>p {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
     }
@@ -121,7 +121,7 @@
     position: absolute;
     bottom: 0rem;
     right: 0rem;
-    font-size: var(--list-modal-header-icon);
+    font-size: var(--font-size-7);
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -152,7 +152,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(1)>div:nth-child(1)>div:nth-child(3)>p {
-    font-size: var(--list-modal-content-text);
+    font-size: var(--font-size-9);
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
@@ -168,7 +168,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(1)>div:nth-child(2)>p {
-    font-size: var(--list-primary-text);
+    font-size: var(--font-size-1);
     font-weight: 600;
 }
 
@@ -196,12 +196,12 @@
 
     &>p {
         font-weight: 500;
-        font-size: var(--list-modal-header-normal-font);
+        font-size: var(--font-size-8);
         color: var(--color-2);
     }
 
     &>div {
-        font-size: var(--list-modal-header-icon);
+        font-size: var(--font-size-7);
         font-weight: 500;
         color: var(--color-2);
         display: flex;
@@ -288,7 +288,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
@@ -313,7 +313,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             margin-bottom: 1rem;
 
             &:hover {
@@ -371,11 +371,11 @@
                     -o-transition: var(--btn-transition);
 
                     &>p {
-                        font-size: var(--list-modal-header-normal-font);
+                        font-size: var(--font-size-8);
                     }
 
                     &>div {
-                        font-size: var(--list-modal-header-normal-font);
+                        font-size: var(--font-size-8);
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -454,7 +454,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div>p {
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     font-weight: 600;
 }
 
@@ -462,7 +462,7 @@
     min-height: 4rem;
     background-color: var(--light-color-3);
     border: none;
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
     -moz-border-radius: var(--input-border-radius);
@@ -486,7 +486,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(5)>div>p {
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     font-weight: 600;
 }
 
@@ -501,7 +501,7 @@
     -ms-border-radius: var(--input-border-radius);
     -o-border-radius: var(--input-border-radius);
     padding-inline: 1rem;
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(6) {
@@ -512,7 +512,7 @@
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(6)>button {
     padding: var(--list-header-btn-padding);
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     margin-inline: auto;
     cursor: pointer;
     border-radius: var(--list-btn-border-radius);
@@ -550,7 +550,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(7)>div>p {
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     font-weight: 600;
 }
 
@@ -560,7 +560,7 @@
     background-color: var(--light-color-3);
     border: none;
     padding-inline: 1rem;
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     border-radius: var(--input-border-radius);
     outline: none;
     -webkit-border-radius: var(--input-border-radius);
@@ -611,7 +611,7 @@
     height: 4rem;
     width: calc(100% - 3rem);
     border: none;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     background: transparent;
 }
 
@@ -625,14 +625,14 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     cursor: pointer;
     color: var(--light-color-2);
 }
 
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(7)>div:nth-child(1)>div>p {
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     padding-inline: 1rem;
     min-height: 3.5rem;
     display: grid;
@@ -688,7 +688,7 @@
 
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     padding-inline: 1rem;
     min-height: 3.5rem;
     display: grid;
@@ -728,7 +728,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(8)>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 600;
 }
 
@@ -737,7 +737,7 @@
     min-height: 4rem;
     background-color: var(--light-color-3);
     border: none;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
     -moz-border-radius: var(--input-border-radius);
@@ -775,7 +775,7 @@
 
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(8)>div:nth-child(1)>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     padding-inline: 1rem;
     min-height: 3.5rem;
     display: grid;
@@ -816,7 +816,7 @@
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(9)>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 600;
 }
 
@@ -830,7 +830,7 @@
     -moz-border-radius: var(--input-border-radius);
     -ms-border-radius: var(--input-border-radius);
     -o-border-radius: var(--input-border-radius);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 }
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(10) {
@@ -866,7 +866,7 @@
 
 
 .create_salon_content_wrapper>div:nth-child(2)>div:nth-child(10)>div:nth-child(3)>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     padding-inline: 1rem;
     min-height: 3.5rem;
     display: grid;
@@ -1021,19 +1021,19 @@
         justify-content: space-between;
 
         &>p:nth-child(1) {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         &>p:nth-child(2) {
-            font-size: var(--list-header-btn-text);
+            font-size: var(--font-size-2);
             font-weight: 500;
             margin-bottom: 0.5rem;
         }
 
         &>p:nth-child(3) {
-            font-size: var(--list-header-btn-text);
+            font-size: var(--font-size-2);
             font-weight: 500;
             color: gray;
         }
@@ -1055,7 +1055,7 @@
 
         &>div {
             &>p:nth-child(1) {
-                font-size: var(--list-content-body-text);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 color: gray;
                 margin-bottom: 0.5rem;
@@ -1063,7 +1063,7 @@
             }
 
             &>p:nth-child(2) {
-                font-size: var(--list-primary-text);
+                font-size: var(--font-size-1);
                 font-weight: 600;
                 text-align: center;
             }
@@ -1079,7 +1079,7 @@
 
         &>div {
             &>p:nth-child(1) {
-                font-size: var(--list-content-body-text);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 color: gray;
                 margin-bottom: 0.5rem;
@@ -1095,12 +1095,12 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: var(--list-primary-text);
+                    font-size: var(--font-size-1);
                     color: gray;
                 }
 
                 &>p {
-                    font-size: var(--list-primary-text);
+                    font-size: var(--font-size-1);
                     font-weight: 600;
                 }
             }
@@ -1131,7 +1131,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-modal-header-icon);
+    font-size: var(--font-size-7);
 
     &:hover {
         background-color: var(--color-6);
@@ -1161,7 +1161,7 @@
     &>p {
         line-height: 4rem;
         padding-inline: 1rem;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         cursor: pointer;
         transition: var(--btn-transition);
         -webkit-transition: var(--btn-transition);
@@ -1214,7 +1214,7 @@
     cursor: pointer;
     display: grid;
     place-items: center;
-    font-size: var(--list-modal-header-icon);
+    font-size: var(--font-size-7);
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
@@ -1245,7 +1245,7 @@
 }
 
 .add_services_drop_container>p:nth-child(1) {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 600;
     margin-bottom: 1rem;
 }
@@ -1258,7 +1258,7 @@
 }
 
 .add_services_drop_container>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 600;
 }
 
@@ -1271,7 +1271,7 @@
     -moz-border-radius: var(--input-border-radius);
     -ms-border-radius: var(--input-border-radius);
     -o-border-radius: var(--input-border-radius);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     padding-inline: 1rem;
     outline: none;
 }
@@ -1314,7 +1314,7 @@
 }
 
 .add_services_drop_container>div:nth-child(6)>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 600;
 }
 
@@ -1328,7 +1328,7 @@
     -moz-border-radius: var(--input-border-radius);
     -ms-border-radius: var(--input-border-radius);
     -o-border-radius: var(--input-border-radius);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     outline: none;
 }
 
@@ -1337,7 +1337,7 @@
 .create_salon_btn {
     padding-inline: 1.8em;
     height: 4rem;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     margin-inline: auto;
     cursor: pointer;
     border-radius: var(--list-btn-border-radius);
@@ -1377,7 +1377,7 @@
 .addservices_btn {
     width: 15rem !important;
     height: 4rem !important;
-    font-size: var(--list-content-error-text);
+    font-size: var(--font-size-5);
     margin-inline: auto;
     cursor: pointer;
     border-radius: var(--list-btn-border-radius) !important;
@@ -1552,7 +1552,7 @@
         -moz-border-radius: var(--input-border-radius);
         -ms-border-radius: var(--input-border-radius);
         -o-border-radius: var(--input-border-radius);
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         overflow: auto;
     }
 
@@ -1596,7 +1596,7 @@
         margin-top: 1rem;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -1613,7 +1613,7 @@
             cursor: pointer;
             background-color: var(--light-color-2);
             color: var(--light-color-4);
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             box-shadow: none;
         }
     }

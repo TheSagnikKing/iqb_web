@@ -185,7 +185,7 @@ const CustomerList = () => {
       toast.error("Atleast one customer needed", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -232,7 +232,7 @@ const CustomerList = () => {
       toast.error("Please select a customer", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -406,8 +406,8 @@ const CustomerList = () => {
               count={6}
               height={'6rem'}
               style={{ marginBottom: '1rem' }}
-              baseColor={darkmodeOn ? 'var(--darkmode-loader-bg-color)' : 'var(--lightmode-loader-bg-color)'}
-              highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--lightmode-loader-highlight-color)'}
+              baseColor={darkmodeOn ? 'var(--darkmode-loader-bg-color)' : 'var(--light-loader-bg-color)'}
+              highlightColor={darkmodeOn ? 'var(--darkmode-loader-highlight-color)' : 'var(--light-loader-highlight-color)'}
             />
           </div>
         ) : barberGetAllCustomerListResolve && AllCustomerList?.length > 0 ? (

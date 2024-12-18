@@ -35,7 +35,7 @@
 }
 
 .signup_head {
-    font-size: var(--list-primary-text) !important;
+    font-size: var(--font-size-1) !important;
     font-weight: 600;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
@@ -61,7 +61,7 @@
     -ms-border-radius: var(--input-border-radius);
     -o-border-radius: var(--input-border-radius);
     padding-inline: 1rem;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     outline: none;
 }
 
@@ -95,7 +95,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 
     &:hover{
         background-color: var(--color-2);
@@ -133,7 +133,7 @@
     min-height: 4rem;
     display: grid;
     align-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3)>div>p:hover {
@@ -186,7 +186,7 @@
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     
     &:hover{
         background-color: var(--color-2);

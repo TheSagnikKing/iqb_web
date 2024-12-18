@@ -24,7 +24,7 @@ const ForgotPassword = () => {
       toast.error("Please enter email", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
       toast.error("Invalid email format", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: "0.3rem",
           background: "#333",
           color: "#fff",

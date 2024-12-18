@@ -19,7 +19,7 @@
 }
 
 .quehistory_wrapper>div:nth-child(1)>p {
-    font-size: var(--list-primary-text);
+    font-size: var(--font-size-1);
     font-weight: 600;
 }
 
@@ -47,7 +47,7 @@
     display: grid;
     grid-template-columns: 0.3fr 1fr 1fr 0.7fr 0.5fr 0.5fr 0.8fr 1fr;
     place-items: center;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
@@ -98,7 +98,7 @@
     place-items: center;
 
     &>p {
-        font-size: var(--list-content-error-text);
+        font-size: var(--font-size-5);
         font-weight: 500;
     }
 }

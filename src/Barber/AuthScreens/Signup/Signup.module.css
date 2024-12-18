@@ -38,12 +38,12 @@
 
 
         &>p {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
         }
 
         &>p:nth-child(2) {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 500;
         }
 
@@ -52,7 +52,7 @@
                 height: 4rem;
                 width: 100%;
                 background-color: var(--light-color-3);
-                font-size: var(--list-content-body-text);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 border: none;
                 outline: none;
@@ -82,7 +82,7 @@
     border: 0.1rem solid var(--color-2);
     color: var(--color-2);
     background-color: var(--color-3);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
@@ -106,7 +106,7 @@ iframe {
     height: 4rem;
     width: 100%;
     background-color: var(--light-color-3);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
     border: none;
     outline: none;
@@ -125,7 +125,7 @@ iframe {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     position: absolute;
     right: 0rem;
     top: 0rem;
@@ -140,7 +140,7 @@ iframe {
     background: transparent;
     border-top-left-radius: var(--input-border-radius);
     border-bottom-left-radius: var(--input-border-radius);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
@@ -166,7 +166,7 @@ iframe {
     -moz-transition: var(--btn-transition);
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
 
     &:hover{
         background-color: var(--color-2);
@@ -191,13 +191,13 @@ iframe {
 }
 
 .barber_signup_container>div:nth-child(2)>div>div:nth-child(7)>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
 
 .barber_signup_container>div:nth-child(2)>div>p:nth-child(9) {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     text-align: center;
     margin-top: 2rem;
 }

@@ -23,7 +23,7 @@
     margin-bottom: 1rem;
 
     &>p {
-        font-size: var(--list-primary-text);
+        font-size: var(--font-size-1);
         font-weight: 600;
     }
 }
@@ -49,7 +49,7 @@
         gap: 1rem;
 
         &>p {
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             font-weight: 600;
         }
 
@@ -57,7 +57,7 @@
             width: 100%;
             height: 4rem;
             padding-inline: 1rem;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             background-color: var(--light-color-3);
             border: none;
             outline: none;
@@ -92,7 +92,7 @@
         -o-transition: var(--btn-transition);
         margin-inline: auto;
         color: var(--color-2);
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
 
 
         &:hover {
@@ -144,7 +144,7 @@
             -moz-border-radius: var(--list-wrapper-border-radius);
             -ms-border-radius: var(--list-wrapper-border-radius);
             -o-border-radius: var(--list-wrapper-border-radius);
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             color: var(--light-color-4);
             cursor: pointer;
             border: none;
@@ -156,7 +156,7 @@
     }
 
     &>p:nth-child(2) {
-        font-size: var(--list-primary-text);
+        font-size: var(--font-size-1);
         margin-top: 3rem;
         font-weight: 600;
         text-align: center;
@@ -164,7 +164,7 @@
 
     &>p {
         margin-top: 1.5rem;
-        font-size: var(--list-modal-content-text);
+        font-size: var(--font-size-9);
         text-align: center;
     }
 }
@@ -203,7 +203,7 @@
         outline: none;
         background-color: transparent;
         padding-inline: 1rem;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
 
     }
 
@@ -213,7 +213,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: bold;
         cursor: pointer;
         margin-inline: auto;
@@ -233,7 +233,7 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
 
         &:hover {
             color: var(--light-color-4);
@@ -280,7 +280,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
         font-weight: bold;
         cursor: pointer;
         margin-inline: auto;
@@ -301,7 +301,7 @@
         -moz-transition: var(--btn-transition);
         -ms-transition: var(--btn-transition);
         -o-transition: var(--btn-transition);
-        font-size: var(--list-content-body-text);
+        font-size: var(--font-size-4);
 
         &:hover {
             color: var(--light-color-4);
@@ -348,7 +348,7 @@
         &>p {
             line-height: 4rem;
             margin-bottom: 1rem;
-            font-size: var(--list-content-body-text);
+            font-size: var(--font-size-4);
             padding-inline: 1rem;
             border-radius: var(--input-border-radius);
             -webkit-border-radius: var(--input-border-radius);
@@ -396,7 +396,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--list-modal-header-text);
+            font-size: var(--font-size-6);
             font-weight: 600;
         }
 
@@ -421,7 +421,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             margin-bottom: 1rem;
 
             &:hover {
@@ -442,7 +442,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 font-weight: 600;
                 margin-bottom: 1rem;
             }
@@ -466,13 +466,13 @@
                     padding-inline: 1rem;
                     outline: none;
                     border: none;
-                    font-size: var(--list-modal-content-text);
+                    font-size: var(--font-size-9);
                 }
 
                 &>div {
                     width: 4rem;
                     height: 4rem;
-                    font-size: var(--list-modal-header-icon);
+                    font-size: var(--font-size-7);
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -502,7 +502,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--list-modal-header-normal-font);
+            font-size: var(--font-size-8);
             font-weight: 500;
             color: var(--color-2);
 
@@ -545,14 +545,14 @@
 
     &>div:nth-child(2) {
         &>p:nth-child(1) {
-            font-size: var(--list-primary-text);
+            font-size: var(--font-size-1);
             font-weight: 600;
             text-align: center;
             margin-bottom: 1rem;
         }
 
         &>p:nth-child(2) {
-            font-size: var(--list-header-btn-text);
+            font-size: var(--font-size-2);
             font-weight: 500;
             text-align: center;
             margin-bottom: 2rem;
@@ -582,7 +582,7 @@
         }
 
         &>p:nth-child(4) {
-            font-size: var(--list-header-btn-text);
+            font-size: var(--font-size-2);
             margin-bottom: 3rem;
             text-align: center;
 
@@ -616,7 +616,7 @@
                 -moz-transition: var(--btn-transition);
                 -ms-transition: var(--btn-transition);
                 -o-transition: var(--btn-transition);
-                font-size: var(--list-modal-header-normal-font);
+                font-size: var(--font-size-8);
                 font-weight: 500;
 
                 &:hover {

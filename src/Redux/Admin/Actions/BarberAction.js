@@ -23,7 +23,7 @@ export const getAdminBarberListAction = (salonId, signal) => async (dispatch) =>
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -64,7 +64,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -82,7 +82,7 @@ export const changeAdminBarberOnlineStatusAction = (barberOnlinedata, setCheckMa
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -129,7 +129,7 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -148,7 +148,7 @@ export const changeAdminBarberClockStatusAction = (barberClockdata, setCheckMapC
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -207,7 +207,7 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -225,7 +225,7 @@ export const adminApproveBarberAction = (approvedata, setApproveBarberMap, b, or
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -265,7 +265,7 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -284,7 +284,7 @@ export const adminAllSalonServicesAction = (salonId, signal) => async (dispatch)
             toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -320,7 +320,7 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -338,7 +338,7 @@ export const adminCreateBarberAction = (barberdata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -370,7 +370,7 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -389,7 +389,7 @@ export const adminUpdateBarberAction = (barberdata, navigate) => async (dispatch
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -425,7 +425,7 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -443,7 +443,7 @@ export const adminDeleteBarberAction = (salonId, email, barber) => async (dispat
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -469,7 +469,7 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -488,7 +488,7 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -506,7 +506,7 @@ export const adminSendBarberEmailAction = (maildata, setSubject, setMessage, set
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -532,7 +532,7 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -551,7 +551,7 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -569,7 +569,7 @@ export const adminSendBarberMessageAction = (smsdata, setMessage, setOpenBarberM
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',

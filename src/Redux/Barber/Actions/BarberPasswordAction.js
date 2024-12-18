@@ -16,7 +16,7 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
         toast.success(data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -34,7 +34,7 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -52,7 +52,7 @@ export const barberForgetPasswordAction = (email) => async (dispatch) => {
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
@@ -85,7 +85,7 @@ export const barberResetPasswordAction = (password,token,navigate) => async (dis
             toast.error("Something went wrong !", {
                 duration: 3000,
                 style: {
-                    fontSize: "var(--list-modal-header-normal-font)",
+                    fontSize: "var(--font-size-8)",
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
@@ -103,7 +103,7 @@ export const barberResetPasswordAction = (password,token,navigate) => async (dis
         toast.error(error?.response?.data?.message, {
             duration: 3000,
             style: {
-                fontSize: "var(--list-modal-header-normal-font)",
+                fontSize: "var(--font-size-8)",
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',

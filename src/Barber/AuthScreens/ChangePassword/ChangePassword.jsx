@@ -28,7 +28,7 @@ const ChangePassword = () => {
       toast.error("Please enter password", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -41,7 +41,7 @@ const ChangePassword = () => {
       toast.error("Password length must be 8 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -54,7 +54,7 @@ const ChangePassword = () => {
       toast.error("Please enter confirm password", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -67,7 +67,7 @@ const ChangePassword = () => {
       toast.error("Confirm password length must be 8 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -80,7 +80,7 @@ const ChangePassword = () => {
       toast.error("Password and confirm password do not match", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

@@ -332,7 +332,7 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -347,7 +347,7 @@ const CreateSalon = () => {
       toast.error("File size must be lower than 2mb", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -385,7 +385,7 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG) under 2MB.", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -426,7 +426,7 @@ const CreateSalon = () => {
       toast.error("Please select service icon", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -439,7 +439,7 @@ const CreateSalon = () => {
       toast.error("Please enter service name", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -452,7 +452,7 @@ const CreateSalon = () => {
       toast.error("Service name must be between 1 to 25 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -466,7 +466,7 @@ const CreateSalon = () => {
       toast.error("Please enter service description", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -479,7 +479,7 @@ const CreateSalon = () => {
       toast.error("Service description must be between 1 to 50 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -492,7 +492,7 @@ const CreateSalon = () => {
       toast.error("Please enter service price", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -505,7 +505,7 @@ const CreateSalon = () => {
       toast.error("Please enter service EWT", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -608,7 +608,7 @@ const CreateSalon = () => {
       toast.error("Please upload only valid image files (JPEG, WebP, PNG).", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -621,7 +621,7 @@ const CreateSalon = () => {
       toast.error("File size must be lower than 2MB.", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -660,7 +660,7 @@ const CreateSalon = () => {
       toast.error("Please enter salon name", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -673,7 +673,7 @@ const CreateSalon = () => {
       toast.error("Salon Name must be between 1 to 20 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -686,7 +686,7 @@ const CreateSalon = () => {
       toast.error("Please enter salon email", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -699,7 +699,7 @@ const CreateSalon = () => {
       toast.error("Invalid email format", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: "0.3rem",
           background: "#333",
           color: "#fff",
@@ -712,7 +712,7 @@ const CreateSalon = () => {
       toast.error("Please enter salon description", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -725,7 +725,7 @@ const CreateSalon = () => {
       toast.error("Salon Description must be between 1 to 35 characters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -738,7 +738,7 @@ const CreateSalon = () => {
       toast.error("Please enter salon address", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -751,7 +751,7 @@ const CreateSalon = () => {
       toast.error("Coordinates is not present", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -764,7 +764,7 @@ const CreateSalon = () => {
       toast.error("Please select country", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -777,7 +777,7 @@ const CreateSalon = () => {
       toast.error("Please select city", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -790,7 +790,7 @@ const CreateSalon = () => {
       toast.error("Please select timezone", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -803,7 +803,7 @@ const CreateSalon = () => {
       toast.error("Please enter postcode", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -816,7 +816,7 @@ const CreateSalon = () => {
       toast.error("Postcode must be between 0 to 10 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -829,7 +829,7 @@ const CreateSalon = () => {
       toast.error("Please select salon type", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -842,7 +842,7 @@ const CreateSalon = () => {
       toast.error("Invalid Number", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -1012,7 +1012,7 @@ const CreateSalon = () => {
               toast.success("Salon logo uploaded successfully", {
                 duration: 3000,
                 style: {
-                  fontSize: "var(--list-modal-header-normal-font)",
+                  fontSize: "var(--font-size-8)",
                   borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
@@ -1022,7 +1022,7 @@ const CreateSalon = () => {
               toast.error(error?.response?.data?.message, {
                 duration: 3000,
                 style: {
-                  fontSize: "var(--list-modal-header-normal-font)",
+                  fontSize: "var(--font-size-8)",
                   borderRadius: '0.3rem',
                   background: '#333',
                   color: '#fff',
@@ -1058,7 +1058,7 @@ const CreateSalon = () => {
       toast.error("Please select a country", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -1362,8 +1362,8 @@ const CreateSalon = () => {
                         <Skeleton count={2}
                           height={"4rem"}
                           width={"100%"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "0.3rem",
                             marginBottom: "1rem"
@@ -1376,7 +1376,7 @@ const CreateSalon = () => {
                           ))
                           :
                           <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                            <p style={{ fontSize: "var(--list-content-error-text)" }}>No countries available</p>
+                            <p style={{ fontSize: "var(--font-size-5)" }}>No countries available</p>
                           </div>
                     }
                   </div>
@@ -1415,8 +1415,8 @@ const CreateSalon = () => {
                         <Skeleton count={2}
                           height={"4rem"}
                           width={"100%"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "0.3rem",
                             marginBottom: "1rem"
@@ -1429,7 +1429,7 @@ const CreateSalon = () => {
                           ))
                           :
                           <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                            <p style={{ fontSize: "var(--list-content-error-text)" }}>No city available</p>
+                            <p style={{ fontSize: "var(--font-size-5)" }}>No city available</p>
                           </div>
                     }
                   </div>
@@ -1463,7 +1463,7 @@ const CreateSalon = () => {
 
                       :
                       <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                        <p style={{ fontSize: "var(--list-content-error-text)" }}>No timezone available</p>
+                        <p style={{ fontSize: "var(--font-size-5)" }}>No timezone available</p>
                       </div>
                 }
               </div></ClickAwayListener>}
@@ -1545,8 +1545,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1554,8 +1554,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1563,8 +1563,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1572,8 +1572,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1581,8 +1581,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1590,8 +1590,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1599,8 +1599,8 @@ const CreateSalon = () => {
                         <Skeleton count={1}
                           height={"9rem"}
                           width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--lightmode-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--lightmode-loader-highlight-color)"}
+                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                           style={{
                             borderRadius: "6px"
                           }}
@@ -1793,12 +1793,12 @@ const CreateSalon = () => {
           <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
               <p style={{
-                fontSize: "var(--list-content-body-text)",
+                fontSize: "var(--font-size-4)",
                 fontWeight: "600"
               }}>Select Images</p>
 
               <button onClick={() => handleSalonImageButtonClick()}
-                style={{ fontSize: "var(--list-content-body-text)" }}>
+                style={{ fontSize: "var(--font-size-4)" }}>
                 Upload
                 <input
                   type="file"

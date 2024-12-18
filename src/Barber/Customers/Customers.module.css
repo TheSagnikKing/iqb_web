@@ -20,7 +20,7 @@
 }
 
 .customer_wrapper>div:nth-child(1)>p {
-    font-size: var(--list-primary-text);
+    font-size: var(--font-size-1);
     font-weight: 600;
 }
 
@@ -43,7 +43,7 @@
     height: 4rem;
     width: calc(100% - 3rem);
     border: none;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     background: transparent;
 }
 
@@ -57,7 +57,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: var(--list-header-btn-text);
+    font-size: var(--font-size-2);
     cursor: pointer;
 }
 
@@ -84,7 +84,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: var(--list-header-btn-icon);
+        font-size: var(--font-size-3);
         color: var(--light-color-2);
     }
 
@@ -150,7 +150,7 @@
     display: grid;
     grid-template-columns: 0.1fr 0.8fr 0.8fr 0.4fr 0.5fr;
     gap: 1rem;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
 }
 
@@ -162,8 +162,8 @@
     min-width: 2rem;
 
     &>input {
-        width: var(--list-content-body-text);
-        height: var(--list-content-body-text);
+        width: var(--font-size-4);
+        height: var(--font-size-4);
         accent-color: var(--light-color-2);
     }
 }
@@ -238,7 +238,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: var(--list-primary-text);
+    font-size: var(--font-size-1);
     font-weight: 500;
     color: gray;
 
@@ -291,7 +291,7 @@
         margin-bottom: 2rem;
 
         &>p {
-            font-size: var(--list-modal-header-text);
+            font-size: var(--font-size-6);
             font-weight: 600;
         }
 
@@ -316,7 +316,7 @@
             -moz-transition: var(--btn-transition);
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
-            font-size: var(--list-modal-header-icon);
+            font-size: var(--font-size-7);
             margin-bottom: 1rem;
 
             &:hover {
@@ -337,7 +337,7 @@
             margin-bottom: 2rem;
 
             &>p {
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 font-weight: 500;
                 margin-bottom: 1rem;
             }
@@ -354,7 +354,7 @@
                 padding-inline: 1rem;
                 outline: none;
                 border: none;
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
             }
 
             &>textarea {
@@ -368,7 +368,7 @@
                 -ms-border-radius: var(--input-border-radius);
                 -o-border-radius: var(--input-border-radius);
                 padding: 1rem;
-                font-size: var(--list-modal-content-text);
+                font-size: var(--font-size-9);
                 resize: none;
                 overflow: auto;
                 outline: none;
@@ -427,7 +427,7 @@
             -ms-transition: var(--btn-transition);
             -o-transition: var(--btn-transition);
             margin-inline: auto;
-            font-size: var(--list-modal-header-normal-font);
+            font-size: var(--font-size-8);
             font-weight: 500;
             color: var(--light-color-2);
 
@@ -447,7 +447,7 @@
     place-items: center;
 
     &>p {
-        font-size: var(--list-content-error-text);
+        font-size: var(--font-size-5);
         font-weight: 500;
     }
 }

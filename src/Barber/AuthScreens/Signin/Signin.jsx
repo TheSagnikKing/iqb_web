@@ -68,7 +68,7 @@ const Signin = () => {
       toast.error("Please enter email", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',
@@ -81,7 +81,7 @@ const Signin = () => {
       toast.error("Invalid email format", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: "0.3rem",
           background: "#333",
           color: "#fff",
@@ -94,7 +94,7 @@ const Signin = () => {
       toast.error("Please enter password", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: "0.3rem",
           background: "#333",
           color: "#fff",
@@ -107,7 +107,7 @@ const Signin = () => {
       toast.error("Password length must be 8 charecters", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: "0.3rem",
           background: "#333",
           color: "#fff",

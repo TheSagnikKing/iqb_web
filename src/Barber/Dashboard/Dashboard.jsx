@@ -142,7 +142,7 @@ const Dashboard = () => {
       return toast.error("Please provide a service", {
         duration: 3000,
         style: {
-          fontSize: "var(--list-modal-header-normal-font)",
+          fontSize: "var(--font-size-8)",
           borderRadius: '0.3rem',
           background: '#333',
           color: '#fff',

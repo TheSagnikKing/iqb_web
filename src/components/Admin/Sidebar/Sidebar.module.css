@@ -120,7 +120,7 @@
 
   &>div {
     color: var(--light-color-2);
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
     display: flex;
     justify-content: center;
@@ -128,7 +128,7 @@
   }
 
   &>p {
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     font-weight: 500;
   }
 
@@ -194,7 +194,7 @@
 
 .sidebar_top_salon>p:nth-child(2) {
   font-weight: 500;
-  font-size: var(--list-content-body-text);
+  font-size: var(--font-size-4);
 }
 
 .mobile_content {
@@ -207,7 +207,7 @@
 
   &>p {
     font-weight: 500;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
   }
 
   &>button {
@@ -219,7 +219,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     border: none;
-    font-size: var(--list-content-body-text);
+    font-size: var(--font-size-4);
     display: flex;
     justify-content: center;
     align-items: center;
