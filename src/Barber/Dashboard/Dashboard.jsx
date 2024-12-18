@@ -501,7 +501,7 @@ const Dashboard = () => {
                                     borderBottom: index === BarberQueueList.length - 1 ? "none" : "0.1rem solid rgba(0, 0, 0, 0.2)"
                                   }}
                                 >
-                                  <div><p>{queue.qPosition}</p></div>
+                                  <div><p>{index === 0 ? "Next" : queue.qPosition}</p></div>
                                   <div><p>{queue.name.length > 6 ? `${queue.name.slice(0, 6).concat("...")}` : queue.name}</p></div>
                                   <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
                                   <div><p>{queue.customerEWT} mins</p></div>

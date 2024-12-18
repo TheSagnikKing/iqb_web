@@ -1131,7 +1131,7 @@ const CreateSalon = () => {
   const setHandler = (setState, value, localname, setError) => {
     setError("")
     setState(value);
-    console.log("Saving to localStorage:", localname, value);
+    // console.log("Saving to localStorage:", localname, value);
 
     const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
 
@@ -1275,7 +1275,7 @@ const CreateSalon = () => {
           </div>
 
           <div>
-            <p>Desc</p>
+            <p>Description</p>
             <input
               type="text"
               value={salonDesc}
@@ -1425,7 +1425,7 @@ const CreateSalon = () => {
                         getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
 
                           copyCitiesData.map((c) => (
-                            <p key={c._id} onClick={() => setCityHandler(c)}>{c.name}</p>
+                            <p key={c.longitude} onClick={() => setCityHandler(c)}>{c.name}</p>
                           ))
                           :
                           <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
@@ -1492,7 +1492,7 @@ const CreateSalon = () => {
           <div />
 
           <div>
-            <p>Type</p>
+            <p>Type of business</p>
             <input
               type="text"
               value={`${salonType ? `${salonType}` : ''}`}
@@ -1652,7 +1652,7 @@ const CreateSalon = () => {
               </div>
 
               <div>
-                <p>Service Desc</p>
+                <p>Service Description</p>
                 <input
                   type="text"
                   value={serviceDesc}

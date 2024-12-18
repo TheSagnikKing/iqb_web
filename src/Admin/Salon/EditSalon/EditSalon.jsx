@@ -1283,7 +1283,7 @@ const EditSalon = () => {
           </div>
 
           <div>
-            <p>Desc</p>
+            <p>Description</p>
             <input
               type="text"
               value={salonDesc}
@@ -1385,7 +1385,7 @@ const EditSalon = () => {
           <div />
 
           <div>
-            <p>Type</p>
+            <p>Type of business</p>
             <input
               type="text"
               value={`${salonType ? `${salonType}` : ''}`}
@@ -1540,7 +1540,7 @@ const EditSalon = () => {
               </div>
 
               <div>
-                <p>Service Desc</p>
+                <p>Service Description</p>
                 <input
                   type="text"
                   value={serviceDesc}

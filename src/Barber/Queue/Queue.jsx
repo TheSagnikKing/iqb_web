@@ -143,12 +143,12 @@ const Queue = () => {
                         borderBottom: BarberQueueList.length - 1 === index && "none"
                       }}
                     >
-                      <p>{b.qPosition}</p>
+                      <p>{index === 0 ? "Next" : b.qPosition}</p>
                       <p>{b.name}</p>
                       <p>{b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b?.qgCode}</p>
-                      <p>{b?.serviceEWT}</p>
+                      <p>{b?.customerEWT}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"

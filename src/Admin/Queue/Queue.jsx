@@ -241,12 +241,12 @@ const Queue = () => {
                         borderBottom: copyQueueList.length - 1 === index && "none"
                       }}
                     >
-                      <p>{b.qPosition}</p>
+                      <p>{b.qPosition === 1 ? "Next" : b.qPosition}</p>
                       <p>{b.name.length > 18 ? b.name.slice(0, 18) + "..." : b.name}</p>
                       <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b?.qgCode}</p>
-                      <p>{b?.serviceEWT}</p>
+                      <p>{b?.customerEWT}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"

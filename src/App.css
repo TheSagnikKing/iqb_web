@@ -6,7 +6,7 @@
 
     &>div {
         height: auto;
-        /* border: 1px solid black; */
+        /* border: 1px solid var(--light-color-2); */
 
         &>div {
             font-size: 4rem;
