@@ -1,348 +1,238 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./Appointment.module.css"
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
+import api from "../../Redux/api/Api"
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import Skeleton from 'react-loading-skeleton'
 
 const Appointment = () => {
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
   const darkMode = useSelector(darkmodeSelector)
 
   const darkmodeOn = darkMode === "On"
 
-  const appointmentlist = [
-    {
-      barberId: 1,
-      barberName: "Adilson",
-      barberImage: "https://static.thehoneycombers.com/wp-content/uploads/sites/6/2024/01/barber-shops-lead-image.jpg",
-      appointments: [
-        {
-          _id: 1,
-          customerName: "Customer One",
-          customerImage: "https://verint.imgix.net/wp-content/uploads/customer-calling-home-featured.png?fit=max&auto=format&auto=compress",
-          startTime: "02:30",
-          endTime: "05:45",
-          services: [
-            {
-              serviceId: 1,
-              serviceName: "Hair cut",
-              servicePrice: 200,
-              barberServiceEWT: 30,
-              _id: "6768f2d1f8de1daedf34a825"
-            },
-            {
-              serviceId: 2,
-              serviceName: "Hair cut",
-              servicePrice: 200,
-              barberServiceEWT: 40,
-              _id: "6768f2d1f8de1daedf34a825"
-            }
-          ]
-        },
-        {
-          _id: 2,
-          customerName: "Customer Two",
-          customerImage: "https://verint.imgix.net/wp-content/uploads/customer-calling-home-featured.png?fit=max&auto=format&auto=compress",
-          startTime: "02:30",
-          endTime: "05:45",
-          services: [
-            {
-              serviceId: 1,
-              serviceName: "Hair cut",
-              servicePrice: 200,
-              barberServiceEWT: 30,
-              _id: "6768f2d1f8de1daedf34a825"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      barberId: 2,
-      barberName: "Jackson",
-      barberImage: "https://static.thehoneycombers.com/wp-content/uploads/sites/6/2024/01/barber-shops-lead-image.jpg",
-      appointments: [
-        {
-          _id: 2,
-          customerName: "Customer Two",
-          customerImage: "https://images.unsplash.com/photo-1502767089025-6572583495f6",
-          startTime: "10:00",
-          endTime: "11:30",
-          services: [
-            {
-              serviceId: 2,
-              serviceName: "Beard Trim",
-              servicePrice: 150,
-              barberServiceEWT: 20,
-              _id: "987c5e2fa9b84b8ebf24a671"
-            },
-            {
-              serviceId: 3,
-              serviceName: "Shave",
-              servicePrice: 100,
-              barberServiceEWT: 15,
-              _id: "784c3e6fa3c64d9bbf32b712"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      barberId: 3,
-      barberName: "Miguel",
-      barberImage: "https://static.thehoneycombers.com/wp-content/uploads/sites/6/2024/01/barber-shops-lead-image.jpg",
-      appointments: [
-        {
-          _id: 3,
-          customerName: "Customer Three",
-          customerImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a5",
-          startTime: "13:00",
-          endTime: "14:00",
-          services: [
-            {
-              serviceId: 4,
-              serviceName: "Hair Wash",
-              servicePrice: 120,
-              barberServiceEWT: 15,
-              _id: "29c7f4a74d2345dfb9a23b17"
-            },
-            {
-              serviceId: 5,
-              serviceName: "Hair Color",
-              servicePrice: 400,
-              barberServiceEWT: 45,
-              _id: "d37fa2b1a7424bfcab64e912"
-            }
-          ]
-        },
-        {
-          _id: 4,
-          customerName: "Customer Three",
-          customerImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a5",
-          startTime: "13:00",
-          endTime: "14:00",
-          services: [
-            {
-              serviceId: 4,
-              serviceName: "Hair Wash",
-              servicePrice: 120,
-              barberServiceEWT: 15,
-              _id: "29c7f4a74d2345dfb9a23b17"
-            },
-            {
-              serviceId: 5,
-              serviceName: "Hair Color",
-              servicePrice: 400,
-              barberServiceEWT: 45,
-              _id: "d37fa2b1a7424bfcab64e912"
-            }
-          ]
-        },
-        {
-          _id: 5,
-          customerName: "Customer Three",
-          customerImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a5",
-          startTime: "13:00",
-          endTime: "14:00",
-          services: [
-            {
-              serviceId: 4,
-              serviceName: "Hair Wash",
-              servicePrice: 120,
-              barberServiceEWT: 15,
-              _id: "29c7f4a74d2345dfb9a23b17"
-            },
-            {
-              serviceId: 5,
-              serviceName: "Hair Color",
-              servicePrice: 400,
-              barberServiceEWT: 45,
-              _id: "d37fa2b1a7424bfcab64e912"
-            }
-          ]
-        },
-        {
-          _id: 6,
-          customerName: "Customer Three",
-          customerImage: "https://images.unsplash.com/photo-1595152772835-219674b2a8a5",
-          startTime: "13:00",
-          endTime: "14:00",
-          services: [
-            {
-              serviceId: 4,
-              serviceName: "Hair Wash",
-              servicePrice: 120,
-              barberServiceEWT: 15,
-              _id: "29c7f4a74d2345dfb9a23b17"
-            },
-            {
-              serviceId: 5,
-              serviceName: "Hair Color",
-              servicePrice: 400,
-              barberServiceEWT: 45,
-              _id: "d37fa2b1a7424bfcab64e912"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      barberId: 4,
-      barberName: "Roberto",
-      barberImage: "https://static.thehoneycombers.com/wp-content/uploads/sites/6/2024/01/barber-shops-lead-image.jpg",
-      appointments: [
-        {
-          _id: 4,
-          customerName: "Customer Four",
-          customerImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-          startTime: "15:30",
-          endTime: "16:15",
-          services: [
-            {
-              serviceId: 6,
-              serviceName: "Facial",
-              servicePrice: 300,
-              barberServiceEWT: 40,
-              _id: "5b6f83d1c6d84dbcae21c812"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      barberId: 5,
-      barberName: "Lucas",
-      barberImage: "https://static.thehoneycombers.com/wp-content/uploads/sites/6/2024/01/barber-shops-lead-image.jpg",
-      appointments: [
-        {
-          _id: 5,
-          customerName: "Customer Five",
-          customerImage: "https://images.unsplash.com/photo-1552058544-f2b08422138a",
-          startTime: "17:00",
-          endTime: "18:30",
-          services: [
-            {
-              serviceId: 7,
-              serviceName: "Head Massage",
-              servicePrice: 250,
-              barberServiceEWT: 30,
-              _id: "98a6c1d4fbdc4aebaa23e914"
-            },
-            {
-              serviceId: 8,
-              serviceName: "Hair Styling",
-              servicePrice: 500,
-              barberServiceEWT: 60,
-              _id: "fa2bde19e6c34f9da6a25d01"
-            }
-          ]
-        }
-      ]
+
+  const [selectedDate, setSelectedDate] = useState("")
+
+  console.log(selectedDate)
+
+
+  // const [selectedDate, setSelectedDate] = useState(null);
+
+  // const barbaplist = [
+  //   {
+  //     date: "2024-11-188",
+
+  //   }
+  // ]
+
+  // const highlightDate = new Date(2024, 11, 18);
+
+  //   const [openCalender, setOpenCalender] = useState(false)
+
+
+  //   useEffect(() => {
+  //     const styleElement = document.createElement("style");
+
+  //     styleElement.textContent = `
+  //       .react-calendar {
+  //         width: 32rem;
+  //         border-radius: 1rem;
+  //         border: 0.1rem solid rgba(0,0,0,0.2);
+  //         background: ${darkmodeOn ? "var(--dark-color-1)" : "white"}; 
+  //       }
+
+  //       .react-calendar__tile{
+  //         font-size: 1.2rem;
+  //         padding: 1rem;
+  //       }
+
+  //       .react-calendar button {
+  //       color: ${darkmodeOn ? "var(--light-color-4)" : "var(--light-color-2)"}
+  //       }
+
+  //       .react-calendar__tile--now,
+  //       .react-calendar__tile--now:enabled:hover,
+  // .react-calendar__tile--now:enabled:focus,
+  // .react-calendar__tile--hasActive{
+  //     color: ${darkmodeOn ? "var(--light-color-4)" : "var(--light-color-2)"}
+  // }
+
+  //     `;
+
+  //     document.head.appendChild(styleElement);
+
+  //     return () => {
+  //       document.head.removeChild(styleElement);
+  //     };
+  //   }, [darkmodeOn]);
+
+  const [loading, setLoading] = useState(false)
+  const [appointmentList, setAppointmentList] = useState([])
+
+  useEffect(() => {
+    try {
+      setLoading(true)
+      const getAppointmentList = async () => {
+        const { data } = await api.post("/api/appointments/getAllAppointmentsBySalonIdAndDate", {
+          salonId,
+          appointmentDate: selectedDate
+        })
+
+        setAppointmentList(data)
+        setLoading(false)
+      }
+
+      getAppointmentList()
+    } catch (error) {
+      setLoading(false)
     }
-  ];
+  }, [selectedDate])
 
-  // const [selectedDate, setSelectedDate] = useState("")
-
-  // console.log(selectedDate)
-
-
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const barbaplist = [
-    {
-      date: "2024-11-188",
-      
-    }
-  ]
-
-  const highlightDate = new Date(2024, 11, 18);
+  console.log(appointmentList?.response)
 
   return (
     <div className={`${style.appointment_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Appointment List</p>
 
-        {/* <input
+        <input
           type="date"
           onChange={(e) => setSelectedDate(e.target.value)}
           style={{
             colorScheme: darkmodeOn ? "dark" : "light",
-          }} /> */}
+          }} />
 
-        <Calendar
-          onChange={setSelectedDate}
-          value={selectedDate}
-          tileClassName={({ date, view }) =>
-            view === "month" && date.toDateString() === highlightDate.toDateString()
-              ? "highlight-with-dot"
-              : ""
+        {/* <div>
+          <button onClick={() => setOpenCalender(!openCalender)}>Select Date</button>
+          {
+            openCalender && <div className={style.cal}>
+              <Calendar
+                onChange={setSelectedDate}
+                value={selectedDate}
+                className="custom-calendar"
+                tileClassName={({ date, view }) =>
+                  view === "month" && date.toDateString() === highlightDate.toDateString()
+                    ? "highlight"
+                    : ""
+                }
+              />
+            </div>
           }
-        />
+        </div>
 
         <style>
           {`
           .react-calendar{
           z-index: 100
           }
-          .highlight-with-dot {
-            position: relative;
-          }
 
-          .highlight-with-dot::before {
-            content: '';
-            position: absolute;
-            top: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
-            background-color: red;
-            border-radius: 50%;
-            z-index: 1;
+          .highlight {
+            border: 2px solid var(--color-6) !important;
+            border-radius: 0.5rem;
+            // color: white;
           }
+          // .highlight-with-dot {
+          //   position: relative;
+          // }
+
+          // .highlight-with-dot::before {
+          //   content: '';
+          //   position: absolute;
+          //   top: 0px;
+          //   left: 50%;
+          //   transform: translateX(-50%);
+          //   width: 8px;
+          //   height: 8px;
+          //   background-color: red;
+          //   border-radius: 50%;
+          //   z-index: 1;
+          // }
         `}
-        </style>
+        </style> */}
       </div>
 
       <div className={`${style.appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
         {
-          appointmentlist.map((appoint) => {
-            return (
+          loading ? (
+            <div style={{ width: "100%", height: "100%", display: "flex", gap: "1.2rem" }}>
+              <Skeleton
+                count={1}
+                // height={"6rem"}
+                style={{ width: "30rem", height: "100%" }}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+
+              <Skeleton
+                count={1}
+                // height={"6rem"}
+                style={{ width: "30rem", height: "100%" }}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+
+              <Skeleton
+                count={1}
+                // height={"6rem"}
+                style={{ width: "30rem", height: "100%" }}
+                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+
+            </div>
+          ) : appointmentList?.response?.length > 0 ? (
+            appointmentList?.response?.map((appoint) => (
               <React.Fragment key={appoint.barberId}>
-                <main className={`${style.appointment_container} ${darkmodeOn && style.dark}`}>
-                  <div className={`${style.appointment_barber_container} ${darkmodeOn && style.dark}`}>
+                <main className={`${style.appointment_container} ${darkmodeOn ? style.dark : ''}`}>
+                  <div className={`${style.appointment_barber_container} ${darkmodeOn ? style.dark : ''}`}>
                     <div>
-                      <img src={appoint.barberImage} alt='profile' />
+                      <img src={appoint.barberProfile?.[0]?.url} alt="profile" />
                     </div>
-                    <p>{appoint.barberName}</p>
+                    <p>{appoint.barbername}</p>
                   </div>
 
                   <main className={style.appointment_content_list_container}>
-                    {
-                      appoint.appointments.map((cus) => {
-                        return (
-                          <div className={`${style.appointment_body_customer_item} ${darkmodeOn && style.dark}`} key={cus._id}>
-                            <div><img src={cus.customerImage} alt="" /></div>
-                            <div>
-                              <p>{cus.customerName}</p>
-                              <p>Time: {cus.startTime} - {cus.endTime}</p>
-                              <p>EWT - {cus.services.reduce((total, service) => total + service.barberServiceEWT, 0)} mins</p>
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-
+                    {appoint?.appointments.map((cus) => (
+                      <div
+                        className={`${style.appointment_body_customer_item} ${darkmodeOn ? style.dark : ''}`}
+                        key={cus._id}
+                      >
+                        <div>
+                          <img src={cus.customerProfile?.[0]?.url} alt="" />
+                        </div>
+                        <div>
+                          <p>{cus.customerName}</p>
+                          <p>
+                            Time: {cus.startTime} - {cus.endTime}
+                          </p>
+                          <p>
+                            EWT -{' '}
+                            {cus.services.reduce(
+                              (total, service) => total + service.barberServiceEWT,
+                              0
+                            )}{' '}
+                            mins
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </main>
                 </main>
               </React.Fragment>
-            )
-          })
+            ))
+          ) : (
+            <div style={{
+              display: "grid", placeItems: "center", width: "100%", fontSize: "var(--font-size-3)",
+              fontWeight: "500"
+            }}><p>No Appointment available</p></div>
+          )
         }
+
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -18,6 +18,22 @@
     height: 4rem;
     margin-bottom: 1rem;
 
+    &>p {
+        font-size: var(--font-size-1);
+        font-weight: 600;
+    }
+
+    /* &>div {
+        background-color: red;
+        position: relative;
+
+        .cal {
+            position: absolute;
+            top: 3rem;
+            right: 0rem;
+        }
+    } */
+
     &>input {
         height: 3rem;
         width: 15rem;
@@ -33,10 +49,6 @@
     }
 }
 
-.appointment_wrapper>div:nth-child(1)>p {
-    font-size: var(--font-size-1);
-    font-weight: 600;
-}
 
 .appointment_content_wrapper {
     width: 100%;
@@ -83,6 +95,7 @@
         -moz-border-radius: 1rem;
         -ms-border-radius: 1rem;
         -o-border-radius: 1rem;
+        border: 0.1rem solid rgba(0, 0, 0, 0.2);
 
         &>img {
             width: 100%;
@@ -138,6 +151,7 @@
         -moz-border-radius: 1rem;
         -ms-border-radius: 1rem;
         -o-border-radius: 1rem;
+        border: 0.1rem solid rgba(0, 0, 0, 0.2);
 
         &>img {
             width: 100%;
