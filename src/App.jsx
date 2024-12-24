@@ -52,6 +52,7 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
+import Appointment from './Admin/Appointment/Appointment';
 
 const App = () => {
 
@@ -281,6 +282,15 @@ const App = () => {
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
                           <AdminQueHistory />
+                        </ErrorBoundary>
+                      }
+                    />
+
+                    <Route
+                      path="/admin-appointments"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <Appointment />
                         </ErrorBoundary>
                       }
                     />

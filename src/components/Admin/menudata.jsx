@@ -43,12 +43,12 @@ export const menudata = [
         icon: <HistoryIcon />,
         url: "/admin-quehistory"
     },
-    // {
-    //     id: 7,
-    //     title: "Appointments",
-    //     icon: <Adminappointmenticon />,
-    //     url: "/admin-appointment"
-    // },
+    {
+        id: 8,
+        title: "Appointments",
+        icon: <Adminappointmenticon />,
+        url: "/admin-appointments"
+    },
     // {
     //     id: 8,
     //     title: "Reports",
