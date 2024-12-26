@@ -17,15 +17,15 @@ const ProtectedRoute = () => {
                 const { data } = await api.get('/api/barber/barberloggedin');
                 setloggindata(data);
                 dispatch({
-                    type:BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
-                    payload:data
+                    type: BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS,
+                    payload: data
                 })
             } catch (error) {
-                if(error?.response?.data?.message === "UnAuthorized Barber" || error?.response?.data?.message === "Forbidden Barber"){
-                    localStorage.setItem("userBarberLoggedIn","false")
+                if (error?.response?.data?.message === "UnAuthorized Barber" || error?.response?.data?.message === "Forbidden Barber") {
+                    localStorage.setItem("userBarberLoggedIn", "false")
                     setlogginerror(error?.response?.data?.message)
                 }
-                
+
             }
         };
 
@@ -37,7 +37,7 @@ const ProtectedRoute = () => {
     const navigate = useNavigate()
 
     const ErrorClickedHandler = () => {
-        localStorage.setItem("userBarberLoggedIn","false")
+        localStorage.setItem("userBarberLoggedIn", "false")
         navigate("/barbersignin")
     }
 
@@ -51,9 +51,9 @@ const ProtectedRoute = () => {
                 {
                     logginerror ? <div className='route_error_container_content'>
                         <div>
-                            <h1>You are not authorize</h1>
-                            <p>You tried to access a page you did not have prior authorization for.</p>
-                            <p>Click the Link below to signin again</p>
+                            <h1 style={{ color: "var(--light-color-2)" }}>You are not authorize</h1>
+                            <p style={{ color: "var(--light-color-2)" }}>You tried to access a page you did not have prior authorization for.</p>
+                            <p style={{ color: "var(--light-color-2)" }}>Click the Link below to signin again</p>
                             <button onClick={ErrorClickedHandler}>Signin</button>
                         </div>
                         <div>

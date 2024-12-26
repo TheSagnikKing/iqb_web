@@ -52,9 +52,9 @@ const ProtectedRoute = () => {
                 {
                     logginerror ? <div className='route_error_container_content'>
                         <div>
-                            <h1>You are not authorize</h1>
-                            <p>You tried to access a page you did not have prior authorization for.</p>
-                            <p>Click the Link below to signin again</p>
+                            <h1 style={{ color: "var(--light-color-2)" }}>You are not authorize</h1>
+                            <p style={{ color: "var(--light-color-2)" }}>You tried to access a page you did not have prior authorization for.</p>
+                            <p style={{ color: "var(--light-color-2)" }}>Click the Link below to signin again</p>
                             <button onClick={ErrorClickedHandler}>Signin</button>
                         </div>
                         <div>

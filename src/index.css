@@ -205,13 +205,13 @@ body {
   }
 }
 
-@media screen and (min-width:4001px) and (max-width:4560px){
+@media screen and (min-width:4001px) and (max-width:4560px) {
   :root {
     font-size: 132.5%;
   }
 }
 
-@media screen and (min-width:4561px){
+@media screen and (min-width:4561px) {
   :root {
     font-size: 142.5%;
   }
@@ -265,7 +265,7 @@ body {
   -ms-transition: var(--btn-transition);
   -o-transition: var(--btn-transition);
 
-  &:hover{
+  &:hover {
     background-color: var(--color-2);
     color: var(--light-color-4);
   }
@@ -334,4 +334,89 @@ body {
 
 *:hover::-webkit-scrollbar-corner {
   background-color: transparent;
+}
+
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1rem;
+}
+
+.fc .fc-toolbar-title {
+  font-size: var(--font-size-1);
+  font-weight: 600;
+}
+
+/* 
+.fc .fc-button {
+  height: 3.5rem;
+  width: 3.5rem;
+  outline: none;
+  margin-left: 1rem;
+  border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  -o-border-radius: 0.3rem;
+  background-color: var(--color-3);
+  color: var(--color-2);
+  border: 0.1rem solid var(--color-2);
+
+  &:hover {
+    background-color: var(--color-2);
+    color: var(--light-color-4);
+  }
+} */
+
+.fc .fc-button-group>.fc-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-2) !important;
+  color: var(--color-2) !important;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--color-3);
+  color: var(--color-2);
+  border: 0.1rem solid var(--color-2);
+
+  &:hover {
+    background-color: var(--color-2);
+    color: var(--light-color-4) !important;
+  }
+}
+
+.fc .fc-today-button {
+  width: 7rem !important;
+  border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  -o-border-radius: 0.3rem;
+  margin-right: -1rem;
+  font-size: var(--font-size-2);
+  border: 0.1rem solid var(--color-2) !important;
+  color: var(--color-2) !important;
+}
+
+.fc .fc-button:disabled {
+  background-color: var(--color-2) !important;
+  color: var(--light-color-4) !important;
+}
+
+.fc-direction-ltr {
+  height: calc(var(--list-wrapper-height) - 4rem);
+}
+
+.fc-h-event .fc-event-title {
+  color: var(--light-color-4) !important;
+  padding-inline: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.fc-h-event {
+  background-color: var(--color-2);
+  margin-bottom: 0.5rem;
+  height: 2rem;
+  align-content: center;
 }

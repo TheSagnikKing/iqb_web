@@ -41,7 +41,8 @@ const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
 const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
 const BarberQueHistory = React.lazy(() => import("./Barber/QueHistory/QueHistory"))
 const AdminQueHistory = React.lazy(() => import("./Admin/QueHistory/QueHistory"))
-
+const AppointmentCalender = React.lazy(() => import("./Admin/Appointment/AppointCalender/AppointmentCalender"))
+const AppointmentList = React.lazy(() => import("./Admin/Appointment/AppointmentList/AppointmentList"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -52,7 +53,7 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
-import Appointment from './Admin/Appointment/Appointment';
+// import Appointment from './Admin/Appointment/Appointment';
 
 const App = () => {
 
@@ -290,7 +291,16 @@ const App = () => {
                       path="/admin-appointments"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <Appointment />
+                          <AppointmentCalender />
+                        </ErrorBoundary>
+                      }
+                    />
+
+                    <Route
+                      path="/admin-appointments-list"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AppointmentList />
                         </ErrorBoundary>
                       }
                     />

@@ -1,0 +1,29 @@
+.appoint_cal_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    height: var(--list-wrapper-height);
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: var(--light-color-4);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+}
+
+.appoint_content_wrapper {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+/* dark mode */
+
+.appoint_cal_wrapper.dark {
+    background-color: var(--dark-color-3);
+}
