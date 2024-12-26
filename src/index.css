@@ -399,6 +399,15 @@ body {
   color: var(--color-2) !important;
 }
 
+.fc .fc-button:hover {
+
+  .fc-icon-chevron-left::before,
+  .fc-icon-chevron-right::before {
+    color: var(--light-color-4) !important;
+  }
+
+}
+
 .fc .fc-button:disabled {
   background-color: var(--color-2) !important;
   color: var(--light-color-4) !important;
@@ -420,4 +429,3 @@ body {
   height: 2rem;
   align-content: center;
 }
-
