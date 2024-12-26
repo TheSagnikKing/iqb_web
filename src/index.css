@@ -420,3 +420,7 @@ body {
   height: 2rem;
   align-content: center;
 }
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: var(--color-3);
+}
