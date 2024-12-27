@@ -186,7 +186,7 @@ const Signup = () => {
           <button onClick={() => signup()} className={`${style.google_btn} ${darkmodeOn && style.dark}`}>
             <div>
               <div><img src="/google_logo.png" alt="logo" /></div>
-              <p>Sign up with Google &nbsp; &nbsp; 🚀</p>
+              <p>Sign up with Google</p>
             </div>
           </button>
 
