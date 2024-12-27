@@ -404,6 +404,17 @@
     -o-border-radius: var(--input-border-radius);
 }
 
+.calender_container {
+    position: relative;
+}
+
+.calender_drop_container {
+    position: absolute;
+    left: 0;
+    top: 8rem;
+    background-color: var(--light-color-4);
+}
+
 /* dark mode  */
 
 .admin_create_barber_wrapper.dark {
@@ -435,14 +446,15 @@
         border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
     }
 
-    .service_item_bottom{
+    .service_item_bottom {
         &>div:nth-child(2) {
             &>div {
                 &>div:nth-child(2) {
                     &>div {
                         color: var(--light-color-4);
                     }
-                    &>input{
+
+                    &>input {
                         border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
                         background: none;
                     }
@@ -454,7 +466,7 @@
 
 
 .admin_create_barber_content_wrapper_right_error.dark,
-.admin_create_barber_content_wrapper_right_loading.dark{
+.admin_create_barber_content_wrapper_right_loading.dark {
     background-color: var(--dark-color-1);
 }
 
@@ -568,7 +580,7 @@
 
     }
 
-    .admin_mobile_create_barber_content_wrapper_right_error{
+    .admin_mobile_create_barber_content_wrapper_right_error {
         display: grid;
         place-items: center;
         justify-content: center;
@@ -576,11 +588,11 @@
 
     /* dark mode */
 
-    .mobile_service_container.dark{
+    .mobile_service_container.dark {
         background-color: var(--dark-color-2);
         border: 0.1rem solid rgba(255, 255, 255, 0.2);
 
-        &>div:nth-child(2){
+        &>div:nth-child(2) {
             background-color: var(--dark-color-1);
             border: 0.1rem solid rgba(255, 255, 255, 0.2);
         }
@@ -723,19 +735,19 @@
 
     }
 
-    .admin_mobile_create_barber_content_wrapper_right_error{
+    .admin_mobile_create_barber_content_wrapper_right_error {
         display: grid;
         place-items: center;
         justify-content: center;
     }
 
-     /* dark mode */
+    /* dark mode */
 
-     .mobile_service_container.dark{
+    .mobile_service_container.dark {
         background-color: var(--dark-color-2);
         border: 0.1rem solid rgba(255, 255, 255, 0.2);
 
-        &>div:nth-child(2){
+        &>div:nth-child(2) {
             background-color: var(--dark-color-1);
             border: 0.1rem solid rgba(255, 255, 255, 0.2);
         }
@@ -878,19 +890,19 @@
 
     }
 
-    .admin_mobile_create_barber_content_wrapper_right_error{
+    .admin_mobile_create_barber_content_wrapper_right_error {
         display: grid;
         place-items: center;
         justify-content: center;
     }
 
-     /* dark mode */
+    /* dark mode */
 
-     .mobile_service_container.dark{
+    .mobile_service_container.dark {
         background-color: var(--dark-color-2);
         border: 0.1rem solid rgba(255, 255, 255, 0.2);
 
-        &>div:nth-child(2){
+        &>div:nth-child(2) {
             background-color: var(--dark-color-1);
             border: 0.1rem solid rgba(255, 255, 255, 0.2);
         }

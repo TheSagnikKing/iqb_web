@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import style from './Signin.module.css'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 import { useDispatch, useSelector } from 'react-redux'
 import { BarberGoogleloginAction, BarberSigninAction } from "../../../Redux/Barber/Actions/AuthAction"
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import toast from 'react-hot-toast'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import axios from 'axios'
 
 const Signin = () => {
 
@@ -15,7 +16,6 @@ const Signin = () => {
   const queryParams = new URLSearchParams(location.search);
   const urlemail = queryParams.get('email');
 
-  console.log(urlemail)
 
   useEffect(() => {
     if (urlemail) {
@@ -29,27 +29,6 @@ const Signin = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const responseMessage = (response) => {
-    dispatch(BarberGoogleloginAction(response.credential, navigate))
-  }
-
-  const errorMessage = () => {
-
-  }
-
-  const [screenwidth, setScreenWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [])
 
   const [visibleeye, setVisibleeye] = useState(false)
 
@@ -136,6 +115,27 @@ const Signin = () => {
 
   const darkmodeOn = darkMode === "On"
 
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { access_token } = tokenResponse;
+
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+
+        dispatch(BarberGoogleloginAction(userInfo.data.email, navigate))
+
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    },
+  });
+
   return (
     <main className={`${style.barber_signin_container} ${darkmodeOn && style.dark}`}>
       <div className={style.barber_signin_left}>
@@ -199,15 +199,13 @@ const Signin = () => {
             <div />
           </div>
 
-          <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            size='large'
-            shape='circle'
-            // width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
-            logo_alignment='left'
-            text='continue_with'
-          />
+
+          <button onClick={() => login()} className={`${style.google_btn} ${darkmodeOn && style.dark}`}>
+            <div>
+              <div><img src="/google_logo.png" alt="logo" /></div>
+              <p>Sign in with Google &nbsp; &nbsp; 🚀</p>
+            </div>
+          </button>
 
           <p>Don't you have an account ? <Link to="/barbersignup">Sign up</Link></p>
         </div>

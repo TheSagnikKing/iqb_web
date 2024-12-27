@@ -17,6 +17,8 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
 import { getCurrentDate } from '../../utils/Date';
 
+import Calendar from 'react-calendar';
+
 
 const EditProfile = () => {
 
@@ -507,14 +509,61 @@ const EditProfile = () => {
 
 
     useEffect(() => {
-    const phoneInput = document.querySelector(
-      '.react-international-phone-input-container .react-international-phone-input'
-    );
+        const phoneInput = document.querySelector(
+            '.react-international-phone-input-container .react-international-phone-input'
+        );
 
-    if (phoneInput) {
-      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+        if (phoneInput) {
+            phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+        }
+    }, [darkmodeOn]);
+
+
+    //Calender Logic
+
+    const [openCalender, setOpenCalender] = useState(false)
+
+    const handleClickAway = () => {
+        setOpenCalender(false);
+    };
+
+    const [value, onChange] = useState(new Date());
+
+    const convertDateToYYYYMMDD = (dateInput) => {
+        const date = new Date(dateInput);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    const onChangeHandler = (dateInput) => {
+        const formattedDate = convertDateToYYYYMMDD(dateInput);
+        onChange(formattedDate)
+        setDateofBirth(formattedDate)
+        setOpenCalender(false)
     }
-  }, [darkmodeOn]);
+
+    const [mobileValue, setMobileValue] = useState(false);
+
+    useEffect(() => {
+
+        const handleResize = () => {
+            if (window.innerWidth <= 576) {
+                setMobileValue(true);
+            } else {
+                setMobileValue(false);
+            }
+        };
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     return (
         <main className={`${style.admin_edit_profile_container} ${darkmodeOn && style.dark}`}>
@@ -775,7 +824,7 @@ const EditProfile = () => {
 
                         <div>
                             <p>Please check your message</p>
-                            <p>We have sent a code to your <span style={{fontWeight: "600"}}>{adminProfile?.mobileNumber}</span></p>
+                            <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{adminProfile?.mobileNumber}</span></p>
                             <div>
                                 {
                                     mobileotp.map((digit, index) => (
@@ -812,19 +861,44 @@ const EditProfile = () => {
                     </div>
                 </Modal>
 
-                <div>
-                    <p>Date of Birth</p>
-                    <input
-                        type="date"
-                        value={dateOfBirth}
-                        onChange={(e) => setDateofBirth(e.target.value)}
-                        onKeyDown={handleKeyPress}
-                        max={getCurrentDate()}
-                        style={{
-                            colorScheme: darkmodeOn ? "dark" : "light",
-                        }}
-                    />
-                </div>
+                {
+                    mobileValue ? (
+                        <div>
+                            <p>Date of Birth</p>
+                            <input
+                                type="date"
+                                value={dateOfBirth}
+                                onChange={(e) => setDateofBirth(e.target.value)}
+                                onKeyDown={handleKeyPress}
+                                max={getCurrentDate()}
+                                style={{
+                                    colorScheme: darkmodeOn ? "dark" : "light",
+                                }}
+                            />
+                        </div>) : (<div className={style.calender_container}>
+                            <p>Date of Birth</p>
+
+                            <input
+                                type='text'
+                                placeholder='Select Date'
+                                value={dateOfBirth}
+                                onClick={() => setOpenCalender(true)}
+                                readOnly
+                            />
+
+                            {
+                                openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                                    <div className={style.calender_drop_container}>
+                                        <Calendar
+                                            onChange={onChangeHandler}
+                                            value={value}
+                                            maxDate={new Date()}
+                                        />
+                                    </div>
+                                </ClickAwayListener>
+                            }
+                        </div>)
+                }
 
                 <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`}>
                     <p>Gender</p>

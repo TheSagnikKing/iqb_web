@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import style from './Signup.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eyevisible, HomeIcon, Notvisibleeye } from '../../../icons'
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 import { BarberGoogleSignupAction, BarberSignupAction } from '../../../Redux/Barber/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import toast from 'react-hot-toast'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import axios from 'axios'
 
 const Signup = () => {
 
@@ -16,28 +17,6 @@ const Signup = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const responseMessage = (response) => {
-    dispatch(BarberGoogleSignupAction(response.credential, navigate))
-  }
-
-  const errorMessage = () => {
-
-  }
-
-  const [screenwidth, setScreenWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [])
 
   const [visibleeye, setVisibleeye] = useState(false)
 
@@ -120,6 +99,25 @@ const Signup = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  const signup = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { access_token } = tokenResponse;
+
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+        dispatch(BarberGoogleSignupAction(userInfo.data.email, navigate))
+
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    },
+  });
+
   return (
     <main className={`${style.barber_signup_container} ${darkmodeOn && style.dark}`}>
       <div className={style.barber_signup_left}>
@@ -181,15 +179,12 @@ const Signup = () => {
             <div />
           </div>
 
-          <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            size='large'
-            shape='circle'
-            // width={screenwidth > 0 && screenwidth <= 576 ? "340" : screenwidth >= 576 && screenwidth <= 992 ? "375" : "420"}
-            logo_alignment='left'
-            text='continue_with'
-          />
+          <button onClick={() => signup()} className={`${style.google_btn} ${darkmodeOn && style.dark}`}>
+            <div>
+              <div><img src="/google_logo.png" alt="logo" /></div>
+              <p>Sign up with Google &nbsp; &nbsp; 🚀</p>
+            </div>
+          </button>
 
           <p>Already a member ? <Link to="/barbersignin">Log In</Link></p>
         </div>

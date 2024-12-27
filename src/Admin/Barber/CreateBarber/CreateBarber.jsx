@@ -10,7 +10,12 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast';
 import { Skeleton, Modal } from '@mui/material';
-import { getCurrentDate } from "../../../utils/Date";
+import { ClickAwayListener } from '@mui/material';
+
+import Calendar from 'react-calendar';
+
+
+import { getCurrentDate } from '../../../utils/Date';
 
 const CreateBarber = () => {
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
@@ -326,6 +331,53 @@ const CreateBarber = () => {
     }
   }, [darkmodeOn]);
 
+  //Calender Logic
+
+  const [openCalender, setOpenCalender] = useState(false)
+
+  const handleClickAway = () => {
+    setOpenCalender(false);
+  };
+
+  const [value, onChange] = useState(new Date());
+
+  const convertDateToYYYYMMDD = (dateInput) => {
+    const date = new Date(dateInput);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const onChangeHandler = (dateInput) => {
+    const formattedDate = convertDateToYYYYMMDD(dateInput);
+    onChange(formattedDate)
+    setHandler(setDateOfBirth, formattedDate, "dateOfBirth", setDateOfBirthError)
+    setOpenCalender(false)
+  }
+
+  const [mobileValue, setMobileValue] = useState(false);
+
+  useEffect(() => {
+
+    const handleResize = () => {
+      if (window.innerWidth <= 576) {
+        setMobileValue(true);
+      } else {
+        setMobileValue(false);
+      }
+    };
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+
   return (
     <>
       <div className={`${style.admin_create_barber_wrapper} ${darkmodeOn && style.dark}`}>
@@ -473,22 +525,50 @@ const CreateBarber = () => {
               <p className={style.error_message}>{invalidNumberError}</p>
             </div>
 
-            <div>
-              <p>Date of Birth</p>
-              <input
-                type='date'
-                placeholder='DD/MM/YY'
-                value={dateOfBirth}
-                onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth", setDateOfBirthError)}
-                style={{
-                  colorScheme: darkmodeOn ? "dark" : "light",
-                  border: dateOfBirthError && "0.1rem solid red"
-                }}
-                onKeyDown={handleKeyPress}
-                max={getCurrentDate()}
-              />
-              <p className={style.error_message}>{dateOfBirthError}</p>
-            </div>
+            {
+              mobileValue ? (<div>
+                <p>Date of Birth</p>
+                <input
+                  type='date'
+                  placeholder='DD/MM/YY'
+                  value={dateOfBirth}
+                  onChange={(e) => setHandler(setDateOfBirth, e.target.value, "dateOfBirth", setDateOfBirthError)}
+                  style={{
+                    colorScheme: darkmodeOn ? "dark" : "light",
+                    border: dateOfBirthError && "0.1rem solid red"
+                  }}
+                  onKeyDown={handleKeyPress}
+                  max={getCurrentDate()}
+                />
+                <p className={style.error_message}>{dateOfBirthError}</p>
+              </div>) : (<div className={style.calender_container}>
+                <p>Date of Birth</p>
+
+                <input
+                  type='text'
+                  placeholder='Select Date'
+                  value={dateOfBirth}
+                  onClick={() => setOpenCalender(true)}
+                  style={{
+                    border: dateOfBirthError && "0.1rem solid red"
+                  }}
+                  readOnly
+                />
+                <p className={style.error_message}>{dateOfBirthError}</p>
+                {
+                  openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                    <div className={style.calender_drop_container}>
+                      <Calendar
+                        onChange={onChangeHandler}
+                        value={value}
+                        maxDate={new Date()}
+                      />
+                    </div>
+                  </ClickAwayListener>
+                }
+              </div>)
+            }
+
 
             <div>
               <p>Selected Services</p>

@@ -9,6 +9,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 
+
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios'
+import api from '../../../Redux/api/Api'
+
 const Signin = () => {
 
   const [email, setEmail] = useState("")
@@ -17,28 +22,6 @@ const Signin = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const responseMessage = (response) => {
-    // console.log(response)
-    dispatch(AdminGoogleloginAction(response.credential, navigate))
-  }
-
-  const errorMessage = () => {
-    console.log(error)
-  }
-
-  const [screenwidth, setScreenWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [])
 
   const [visibleeye, setVisibleeye] = useState(false)
 
@@ -125,6 +108,26 @@ const Signin = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { access_token } = tokenResponse;
+
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+        // console.log('User Info:', userInfo.data);
+
+        dispatch(AdminGoogleloginAction(userInfo.data.email, navigate))
+
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    },
+  });
 
   return (
     <main className={`${style.admin_signin_container} ${darkmodeOn && style.dark}`}>
@@ -190,14 +193,12 @@ const Signin = () => {
             <div />
           </div>
 
-          <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            size="large"
-            shape="circle"
-            logo_alignment='left'
-            text='continue_with'
-          />
+          <button onClick={() => login()} className={`${style.google_btn} ${darkmodeOn && style.dark}`}>
+            <div>
+              <div><img src="/google_logo.png" alt="logo" /></div>
+              <p>Sign in with Google &nbsp; &nbsp; 🚀</p>
+            </div>
+          </button>
 
           <p>Don't you have an account ? <Link to="/adminsignup">Sign up</Link></p>
 

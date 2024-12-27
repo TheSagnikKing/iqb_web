@@ -1040,6 +1040,17 @@
     color: var(--color-6);
 }
 
+.calender_container {
+    position: relative;
+}
+
+.calender_drop_container {
+    position: absolute;
+    left: 0;
+    top: 8rem;
+    background-color: var(--light-color-4);
+}
+
 
 /* dark mode  */
 
@@ -1143,11 +1154,11 @@
     }
 }
 
-.barber_edit_gender_container.dark{
-    &>div{
+.barber_edit_gender_container.dark {
+    &>div {
         background-color: var(--dark-color-1);
 
-        &>p:hover{
+        &>p:hover {
             background-color: var(--dark-color-3);
         }
     }

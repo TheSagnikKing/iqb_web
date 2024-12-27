@@ -12,6 +12,7 @@ import toast from 'react-hot-toast'
 import { ClickAwayListener } from '@mui/material';
 import { getCurrentDate } from '../../../utils/Date'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import Calendar from 'react-calendar'
 
 const SignupEditProfile = () => {
 
@@ -187,6 +188,53 @@ const SignupEditProfile = () => {
     }
   }, [darkmodeOn]);
 
+  //Calender Logic
+
+  const [openCalender, setOpenCalender] = useState(false)
+
+  const handleClickAway = () => {
+    setOpenCalender(false);
+  };
+
+  const [value, onChange] = useState(new Date());
+
+  const convertDateToYYYYMMDD = (dateInput) => {
+    const date = new Date(dateInput);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const onChangeHandler = (dateInput) => {
+    const formattedDate = convertDateToYYYYMMDD(dateInput);
+    onChange(formattedDate)
+    setDateOfBirthError("")
+    setDateofBirth(formattedDate)
+    setOpenCalender(false)
+  }
+
+  const [mobileValue, setMobileValue] = useState(false);
+
+  useEffect(() => {
+
+    const handleResize = () => {
+      if (window.innerWidth <= 576) {
+        setMobileValue(true);
+      } else {
+        setMobileValue(false);
+      }
+    };
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
     <main className={`${style.barber_signup_edit_container} ${darkmodeOn && style.dark}`}>
       <div>
@@ -253,24 +301,55 @@ const SignupEditProfile = () => {
             </div></ClickAwayListener>}
           </div>
 
-          <div>
-            <p>Date of Birth</p>
-            <input
-              type="date"
-              value={dateOfBirth}
-              onChange={(e) => {
-                setDateOfBirthError("")
-                setDateofBirth(e.target.value)
-              }}
-              onKeyDown={handleKeyPress}
-              max={getCurrentDate()}
-              style={{
-                colorScheme: darkmodeOn ? "dark" : "light",
-                border: dateOfBirthError && "0.1rem solid red"
-              }}
-            />
-            <p className={style.error_message}>{dateOfBirthError}</p>
-          </div>
+
+
+          {
+            mobileValue ? (<div>
+              <p>Date of Birth</p>
+              <input
+                type="date"
+                value={dateOfBirth}
+                onChange={(e) => {
+                  setDateOfBirthError("")
+                  setDateofBirth(e.target.value)
+                }}
+                onKeyDown={handleKeyPress}
+                max={getCurrentDate()}
+                style={{
+                  colorScheme: darkmodeOn ? "dark" : "light",
+                  border: dateOfBirthError && "0.1rem solid red"
+                }}
+              />
+              <p className={style.error_message}>{dateOfBirthError}</p>
+            </div>
+            ) : (<div className={style.calender_container}>
+              <p>Date of Birth</p>
+
+              <input
+                type='text'
+                placeholder='Select Date'
+                value={dateOfBirth}
+                onClick={() => setOpenCalender(true)}
+                style={{
+                  border: dateOfBirthError && "0.1rem solid red"
+                }}
+                readOnly
+              />
+              <p className={style.error_message}>{dateOfBirthError}</p>
+              {
+                openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                  <div className={style.calender_drop_container}>
+                    <Calendar
+                      onChange={onChangeHandler}
+                      value={value}
+                      maxDate={new Date()}
+                    />
+                  </div>
+                </ClickAwayListener>
+              }
+            </div>)
+          }
+
 
           <div>
             <p>Mobile Number</p>

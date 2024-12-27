@@ -24,6 +24,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
 }
 
 .admin_signup_edit_container>div:nth-child(2)>div {
@@ -75,7 +76,7 @@
 }
 
 .admin_signup_edit_container>div:nth-child(2)>div>div:nth-last-child(1)>button {
-    height:4rem;
+    height: 4rem;
     width: 12rem;
     border: 0.1rem solid var(--color-2);
     color: var(--color-2);
@@ -97,7 +98,7 @@
     -o-transition: var(--btn-transition);
     font-size: var(--font-size-3);
 
-    &:hover{
+    &:hover {
         background-color: var(--color-2);
         color: var(--light-color-4);
     }
@@ -187,8 +188,8 @@
     -ms-transition: var(--btn-transition);
     -o-transition: var(--btn-transition);
     font-size: var(--font-size-3);
-    
-    &:hover{
+
+    &:hover {
         background-color: var(--color-2);
         color: var(--light-color-4);
     }
@@ -209,34 +210,44 @@
     -o-border-radius: var(--input-border-radius);
 }
 
+.calender_container {
+    position: relative;
+}
+
+.calender_drop_container {
+    position: absolute;
+    left: 0;
+    top: 8rem;
+    background-color: var(--light-color-4);
+}
 
 /* dark mode  */
 
-.admin_signup_edit_container.dark{
+.admin_signup_edit_container.dark {
     background-color: var(--dark-color-2);
 }
 
-.admin_signup_edit_container.dark>div:nth-child(1)>div{
+.admin_signup_edit_container.dark>div:nth-child(1)>div {
     border-right: 0.1rem solid rgba(255, 255, 255, 0.2);
-} 
+}
 
-.admin_signup_edit_container.dark>div:nth-child(2)>div>div>input{
+.admin_signup_edit_container.dark>div:nth-child(2)>div>div>input {
     background-color: var(--dark-color-3);
-} 
+}
 
 .mobile_container.dark {
     background-color: var(--dark-color-3);
 }
 
-.admin_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div{
+.admin_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div {
     background-color: var(--dark-color-1);
 }
 
-.admin_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div>p:hover{
+.admin_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div>p:hover {
     background-color: var(--dark-color-3);
 }
 
-@media screen and (min-width:0px) and (max-width:430px){
+@media screen and (min-width:0px) and (max-width:430px) {
     .admin_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -245,12 +256,12 @@
         display: none;
     }
 
-    .admin_signup_edit_container>div:nth-child(2)>div{
+    .admin_signup_edit_container>div:nth-child(2)>div {
         width: 85vw;
     }
 }
 
-@media screen and (min-width:431px) and (max-width:768px){
+@media screen and (min-width:431px) and (max-width:768px) {
     .admin_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -259,12 +270,12 @@
         display: none;
     }
 
-    .admin_signup_edit_container>div:nth-child(2)>div{
+    .admin_signup_edit_container>div:nth-child(2)>div {
         width: 65vw;
     }
 }
 
-@media screen and (min-width:769px) and (max-width:1000px){
+@media screen and (min-width:769px) and (max-width:1000px) {
     .admin_signup_edit_container {
         grid-template-columns: 1fr;
     }
@@ -273,7 +284,7 @@
         display: none;
     }
 
-    .admin_signup_edit_container>div:nth-child(2)>div{
+    .admin_signup_edit_container>div:nth-child(2)>div {
         width: 45vw;
     }
 }
