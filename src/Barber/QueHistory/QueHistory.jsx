@@ -83,7 +83,7 @@ const QueHistory = () => {
                                             <p>{b?.barberName}</p>
                                             <p>{b?.timeJoinedQ}</p>
                                             <div><p>{b?.qgCode}</p></div>
-                                            <div><p>{b?.serviceEWT}</p></div>
+                                            <div><p>{b?.serviceEWT} mins</p></div>
                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
                                         </div>

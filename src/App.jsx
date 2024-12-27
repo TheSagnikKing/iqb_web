@@ -143,8 +143,8 @@ const App = () => {
     styleElement.textContent = `
     .react-calendar{
     position: relative;
-    z-index: 10;
-    background-color: ${darkmodeOn ? "var(--dark-color-3) !important" : "var(--light-color) !important"};
+    z-index: 10 !important;
+    background-color: ${darkmodeOn ? "var(--dark-color-3) !important" : "var(--light-color-4) !important"};
     color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"}; 
     }
 

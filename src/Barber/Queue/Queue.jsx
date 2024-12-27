@@ -148,7 +148,7 @@ const Queue = () => {
                       <p>{b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b?.qgCode}</p>
-                      <p>{b?.customerEWT}</p>
+                      <p>{b?.customerEWT} mins</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"
