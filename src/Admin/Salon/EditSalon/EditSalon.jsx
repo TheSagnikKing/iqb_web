@@ -1650,7 +1650,7 @@ const EditSalon = () => {
                         </div>
 
 
-                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
+                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}>Delete</button>
                       </div>
                     )
                   })

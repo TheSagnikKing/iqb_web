@@ -439,8 +439,8 @@ const CreateBarber = () => {
 
                             {
                               chooseServices.find((c) => c._id === s._id) ?
-                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}>Add</button>)
                             }
 
                           </div>
@@ -652,8 +652,8 @@ const CreateBarber = () => {
 
                                 {
                                   chooseServices.find((c) => c._id === s._id) ?
-                                    (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                    (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                    (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                    (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}>Add</button>)
                                 }
 
                               </div>

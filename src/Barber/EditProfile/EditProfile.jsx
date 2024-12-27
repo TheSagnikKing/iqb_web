@@ -715,8 +715,8 @@ const EditProfile = () => {
 
                                                         {
                                                             currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
-                                                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                                                (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}><AddIcon /></button>)
+                                                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                                                (<button className={`${style.service_add_icon}`} onClick={() => chooseServiceHandler(s)}>Add</button>)
                                                         }
                                                     </div>
                                                 )

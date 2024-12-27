@@ -1072,20 +1072,21 @@
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    height: 3.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3.2rem;
     background-color: var(--color-7);
     border: 0.1rem solid var(--color-6);
     cursor: pointer;
     color: var(--color-6);
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    height: 3.5rem;
+    width: 6rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    font-weight: 600;
     transition: var(--btn-transition);
     -webkit-transition: var(--btn-transition);
     -moz-transition: var(--btn-transition);
@@ -1455,17 +1456,17 @@
         border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
     }
 
-    .service_item_bottom{
-        &>div:nth-child(2){
-            &>div{
+    .service_item_bottom {
+        &>div:nth-child(2) {
+            &>div {
 
-                &>div:nth-child(2){
+                &>div:nth-child(2) {
 
-                    &>div:nth-child(1){
+                    &>div:nth-child(1) {
                         color: var(--light-color-4);
-                    }  
-                }     
-            }     
+                    }
+                }
+            }
         }
     }
 }
@@ -1799,15 +1800,15 @@
 
 
     /* dark mode */
-    .salon_logo_wrapper.dark>div{
+    .salon_logo_wrapper.dark>div {
         background-color: var(--dark-color-3);
     }
 
-    .mobile_modal_container.dark{
+    .mobile_modal_container.dark {
         background-color: var(--dark-color-2);
 
-        .mobile_modal_content_container{
-            .salon_image_update_item{
+        .mobile_modal_content_container {
+            .salon_image_update_item {
                 border: 0.1rem solid rgba(255, 255, 255, 0.2);
                 background-color: var(--dark-color-3);
             }

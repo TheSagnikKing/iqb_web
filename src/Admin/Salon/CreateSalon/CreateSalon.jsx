@@ -1615,7 +1615,7 @@ const CreateSalon = () => {
                           {
                             SalonIcons?.map((s) => (
                               <div key={s._id}
-                                className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`} 
+                                className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
                                 onClick={() => logoselectHandler(s)}
                                 style={{
                                   border: serviceIconError && "0.1rem solid red"
@@ -1761,7 +1761,7 @@ const CreateSalon = () => {
                         </div>
 
 
-                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
+                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}>Delete</button>
                       </div>
                     )
                   })
