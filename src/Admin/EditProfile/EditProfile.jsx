@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, CloseIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
+import { CameraIcon, CheckIcon, CloseIcon, DropdownIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -900,7 +900,7 @@ const EditProfile = () => {
                         </div>)
                 }
 
-                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`}>
+                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`} >
                     <p>Gender</p>
                     <input
                         type="text"
