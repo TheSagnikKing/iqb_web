@@ -885,6 +885,7 @@ const EditProfile = () => {
                                 onClick={() => setOpenCalender(true)}
                                 readOnly
                             />
+                            <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
                             {
                                 openCalender && <ClickAwayListener onClickAway={handleClickAway}>
@@ -892,7 +893,7 @@ const EditProfile = () => {
                                         <Calendar
                                             onChange={onChangeHandler}
                                             value={value}
-                                            maxDate={new Date()}
+                                            maxDate={new Date(2009, 11, 31)}
                                         />
                                     </div>
                                 </ClickAwayListener>
@@ -900,25 +901,27 @@ const EditProfile = () => {
                         </div>)
                 }
 
-                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`} >
-                    <p>Gender</p>
-                    <input
-                        type="text"
-                        value={`${gender ? `${gender}` : ''}`}
-                        onClick={() => genderDropHandler()}
-                        readOnly
-                        onKeyDown={handleKeyPress}
-                    />
+                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`} >            
+                        <p>Gender</p>
+                        <input
+                        placeholder='Select gender'
+                            type="text"
+                            value={`${gender ? `${gender}` : ''}`}
+                            onClick={() => genderDropHandler()}
+                            readOnly
+                            onKeyDown={handleKeyPress}
+                        />
+                        
+                        <span onClick={() => setGenderDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
-                    {genderDrop &&
-                        <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
-                            <div>
-                                <p onClick={() => setGenderHandler("Male")}>Male</p>
-                                <p onClick={() => setGenderHandler("Female")}>Female</p>
-                                <p onClick={() => setGenderHandler("Other")}>Other</p>
-                            </div>
-                        </ClickAwayListener>}
-
+                        {genderDrop &&
+                            <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
+                                <div>
+                                    <p onClick={() => setGenderHandler("Male")}>Male</p>
+                                    <p onClick={() => setGenderHandler("Female")}>Female</p>
+                                    <p onClick={() => setGenderHandler("Other")}>Other</p>
+                                </div>
+                            </ClickAwayListener>}
                 </div>
 
 

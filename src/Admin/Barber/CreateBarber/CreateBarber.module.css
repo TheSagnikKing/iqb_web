@@ -408,6 +408,16 @@
 
 .calender_container {
     position: relative;
+
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .calender_drop_container {
@@ -430,6 +440,10 @@
             background-color: var(--dark-color-3);
         }
     }
+}
+
+.dropicon.dark{
+    color: var(--light-color-4);
 }
 
 .mobile_container.dark {

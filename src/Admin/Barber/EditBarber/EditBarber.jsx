@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from "./EditBarber.module.css";
-import { AddIcon, ClockIcon, CloseIcon, DeleteIcon } from '../../../icons';
+import { AddIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon } from '../../../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminAllSalonServicesAction, adminUpdateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -522,7 +522,7 @@ const EditBarber = () => {
                       border: dateOfBirthError && "0.1rem solid red"
                     }}
                   />
-
+                  <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
                   <p className={style.error_message}>{dateOfBirthError}</p>
 
                   {
@@ -531,7 +531,7 @@ const EditBarber = () => {
                         <Calendar
                           onChange={onChangeHandler}
                           value={value}
-                          maxDate={new Date()}
+                          maxDate={new Date(2009, 11, 31)}
                         />
                       </div>
                     </ClickAwayListener>

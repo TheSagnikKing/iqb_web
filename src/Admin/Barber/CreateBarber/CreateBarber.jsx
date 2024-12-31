@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import style from "./CreateBarber.module.css";
-import { AddIcon, ClockIcon, CloseIcon, DeleteIcon } from '../../../icons';
+import { AddIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon } from '../../../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminAllSalonServicesAction, adminCreateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
 import { useNavigate } from 'react-router-dom';
@@ -554,6 +554,7 @@ const CreateBarber = () => {
                   }}
                   readOnly
                 />
+                <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
                 <p className={style.error_message}>{dateOfBirthError}</p>
                 {
                   openCalender && <ClickAwayListener onClickAway={handleClickAway}>
@@ -561,7 +562,7 @@ const CreateBarber = () => {
                       <Calendar
                         onChange={onChangeHandler}
                         value={value}
-                        maxDate={new Date()}
+                        maxDate={new Date(2009, 11, 31)}
                       />
                     </div>
                   </ClickAwayListener>

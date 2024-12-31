@@ -408,6 +408,16 @@
 
 .calender_container {
     position: relative;
+
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .calender_drop_container {
@@ -435,6 +445,10 @@
 
 .mobile_container.dark {
     background-color: var(--dark-color-3);
+}
+
+.dropicon.dark{
+    color: var(--light-color-4);
 }
 
 .admin_edit_barber_content_wrapper_right.dark {

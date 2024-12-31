@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, EditIcon, SearchIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, EditIcon, SearchIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -1343,6 +1343,7 @@ const CreateSalon = () => {
                   border: countryError ? "0.1rem solid red" : "none"
                 }}
               />
+              <span onClick={() => setCountryDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
               <p className={style.error_message}>{countryError}</p>
               {countryDrop &&
                 <ClickAwayListener onClickAway={() => setCountryDrop(false)}>
@@ -1393,6 +1394,7 @@ const CreateSalon = () => {
                 readOnly
                 style={{ border: (!countryCodePresent || cityError) ? "0.1rem solid red" : undefined }}
               />
+              <span onClick={() => setCityDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
               {
                 !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{cityError}</p>
               }
@@ -1447,6 +1449,7 @@ const CreateSalon = () => {
                 readOnly
                 style={{ border: (!countryCodePresent || timezoneError) ? "0.1rem solid red" : undefined }}
               />
+              <span onClick={() => setTimezoneDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
               {
                 !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{timezoneError}</p>
               }
@@ -1501,6 +1504,7 @@ const CreateSalon = () => {
               readOnly
               style={{ border: salonTypeError && "0.1rem solid red" }}
             />
+            <span onClick={() => salonTypeDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
             {salonTypeDrop &&
               <ClickAwayListener onClickAway={() => setSalonTypeDrop(false)}>
@@ -1674,7 +1678,7 @@ const CreateSalon = () => {
                   onClick={() => vipServiceDropHandler()}
                   readOnly
                 />
-
+                <span onClick={() => vipServiceDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
                 {vipServiceDrop &&
                   <ClickAwayListener onClickAway={() => setVipServiceDrop(false)}>
                     <div className={style.service_type_dropdown_container}>

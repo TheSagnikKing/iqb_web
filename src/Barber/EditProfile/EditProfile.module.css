@@ -361,6 +361,16 @@
 .barber_edit_gender_container {
     position: relative;
 
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
     &>div {
         background-color: var(--light-color-4);
         box-shadow: var(--cmmn-box-shadow-y);
@@ -1044,6 +1054,16 @@
 
 .calender_container {
     position: relative;
+
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .calender_drop_container {
@@ -1072,6 +1092,10 @@
 .barber_edit_email_container.dark,
 .barber_edit_mobile_container.dark {
     background-color: var(--dark-color-3);
+}
+
+.dropicon.dark{
+    color: var(--light-color-4);
 }
 
 .modal_container.dark {

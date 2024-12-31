@@ -13,6 +13,7 @@ import { ClickAwayListener } from '@mui/material';
 import { getCurrentDate } from '../../../utils/Date'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import Calendar from 'react-calendar'
+import { DropdownIcon } from '../../../icons'
 
 const SignupEditProfile = () => {
 
@@ -262,6 +263,7 @@ const SignupEditProfile = () => {
           <div>
             <p>Name</p>
             <input
+            placeholder='Enter name'
               type="text"
               value={name}
               onChange={(e) => {
@@ -279,6 +281,7 @@ const SignupEditProfile = () => {
           <div>
             <p>Gender</p>
             <input
+            placeholder='Select gender'
               type="text"
               value={`${gender ? `${gender}` : ''}`}
               onClick={() => {
@@ -291,6 +294,8 @@ const SignupEditProfile = () => {
               }}
               readOnly
             />
+
+<span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
             <p className={style.error_message}>{genderError}</p>
 
@@ -335,6 +340,7 @@ const SignupEditProfile = () => {
                 }}
                 readOnly
               />
+              <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
               <p className={style.error_message}>{dateOfBirthError}</p>
               {
                 openCalender && <ClickAwayListener onClickAway={handleClickAway}>

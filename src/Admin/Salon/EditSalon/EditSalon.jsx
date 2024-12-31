@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, EditIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -1394,6 +1394,8 @@ const EditSalon = () => {
               readOnly
             />
 
+            <span onClick={() => salonTypeDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+
             {salonTypeDrop &&
               <ClickAwayListener onClickAway={() => setSalonTypeDrop(false)}>
                 <div>
@@ -1562,6 +1564,8 @@ const EditSalon = () => {
                   onClick={() => vipServiceDropHandler()}
                   readOnly
                 />
+
+                <span onClick={() => vipServiceDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
                 {vipServiceDrop &&
                   <ClickAwayListener onClickAway={() => setVipServiceDrop(false)}>

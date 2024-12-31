@@ -106,6 +106,16 @@
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3) {
     position: relative;
+
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .barber_signup_edit_container>div:nth-child(2)>div>div:nth-child(3)>div {
@@ -212,6 +222,16 @@
 
 .calender_container {
     position: relative;
+
+    &>span {
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .calender_drop_container {
@@ -238,6 +258,10 @@
 
 .mobile_container.dark {
     background-color: var(--dark-color-3);
+}
+
+.dropicon.dark{
+    color: var(--light-color-4);
 }
 
 .barber_signup_edit_container.dark>div:nth-child(2)>div>div:nth-child(3)>div {

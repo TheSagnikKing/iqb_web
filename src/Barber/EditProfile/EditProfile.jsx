@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { AddIcon, CameraIcon, CheckIcon, ClockIcon, CloseIcon, DeleteIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
+import { AddIcon, CameraIcon, CheckIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -1026,14 +1026,14 @@ const EditProfile = () => {
                                 onClick={() => setOpenCalender(true)}
                                 readOnly
                             />
-
+                            <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
                             {
                                 openCalender && <ClickAwayListener onClickAway={handleClickAway}>
                                     <div className={style.calender_drop_container}>
                                         <Calendar
                                             onChange={onChangeHandler}
                                             value={value}
-                                            maxDate={new Date()}
+                                            maxDate={new Date(2009, 11, 31)}
                                         />
                                     </div>
                                 </ClickAwayListener>
@@ -1044,12 +1044,14 @@ const EditProfile = () => {
                 <div className={`${style.barber_edit_gender_container} ${darkmodeOn && style.dark}`}>
                     <p>Gender</p>
                     <input
+                    placeholder='Select gender'
                         type="text"
                         value={`${gender ? `${gender}` : ''}`}
                         onClick={() => genderDropHandler()}
                         readOnly
                         onKeyDown={handleKeyPress}
                     />
+                    <span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
                     {genderDrop &&
                         <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
