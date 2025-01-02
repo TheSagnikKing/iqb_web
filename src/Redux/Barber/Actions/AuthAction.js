@@ -126,8 +126,12 @@ export const BarberGoogleloginAction = (googleemail, navigate) => async (dispatc
             payload: data
         });
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "true")
+        // localStorage.setItem("userAdminLoggedIn", "false")
+        // localStorage.setItem("userBarberLoggedIn", "true")
+
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", data?.accessToken)
+
 
         navigate("/barber-dashboard")
 
@@ -230,15 +234,16 @@ export const BarberSigninAction = (signinData, navigate) => async (dispatch) => 
             type: BARBER_SIGNIN_REQ
         });
 
-        await api.post("/api/barber/login", signinData);
+        const {data} = await api.post("/api/barber/login", signinData);
 
         dispatch({
             type: BARBER_SIGNIN_SUCCESS,
             payload: { message: "Barber signin successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "true")
+
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", data?.accessToken)
 
         navigate("/barber-dashboard")
     } catch (error) {
@@ -349,8 +354,8 @@ export const BarberSignupEditAction = (profiledata, navigate) => async (dispatch
             payload: { message: "Admin updated successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "true")
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", data?.accessToken)
 
         navigate("/barber-dashboard", { state: data })
     } catch (error) {
@@ -396,19 +401,19 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
 
     try {
 
-        dispatch({
-            type: BARBER_LOGOUT_REQ
-        })
+        // dispatch({
+        //     type: BARBER_LOGOUT_REQ
+        // })
 
-        const { data } = await api.post("/api/barber/logout")
+        // const { data } = await api.post("/api/barber/logout")
 
-        dispatch({
-            type: BARBER_LOGOUT_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: BARBER_LOGOUT_SUCCESS,
+        //     payload: data
+        // })
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", "")
 
         // navigate("/barbersignin")
         navigate("/")

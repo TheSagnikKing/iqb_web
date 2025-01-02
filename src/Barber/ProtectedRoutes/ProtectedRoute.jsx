@@ -21,8 +21,8 @@ const ProtectedRoute = () => {
                     payload: data
                 })
             } catch (error) {
-                if (error?.response?.data?.message === "UnAuthorized Barber" || error?.response?.data?.message === "Forbidden Barber") {
-                    localStorage.setItem("userBarberLoggedIn", "false")
+                if(error.response.status === 403 || error.response.status === 401){
+                    localStorage.setItem("userBarberLoggedIn", "")
                     setlogginerror(error?.response?.data?.message)
                 }
 
@@ -37,7 +37,7 @@ const ProtectedRoute = () => {
     const navigate = useNavigate()
 
     const ErrorClickedHandler = () => {
-        localStorage.setItem("userBarberLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "")
         navigate("/barbersignin")
     }
 

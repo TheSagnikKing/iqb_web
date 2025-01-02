@@ -9,9 +9,9 @@ const ProtectedAuthRoute = () => {
     const navigate = useNavigate()
     
     useEffect(() => {
-        if(AdminLoggedin === "true" && BarberLoggedin === "false"){
+        if(AdminLoggedin && !BarberLoggedin){
             navigate("/admin-dashboard")
-        }else if(AdminLoggedin === "false" && BarberLoggedin === "true"){
+        }else if(!AdminLoggedin && BarberLoggedin){
             navigate("/barber-dashboard")
         }else{
           

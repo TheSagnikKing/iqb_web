@@ -348,7 +348,7 @@ const SignupEditProfile = () => {
                     <Calendar
                       onChange={onChangeHandler}
                       value={value}
-                      maxDate={new Date()}
+                      maxDate={new Date(2009, 11, 31)}
                     />
                   </div>
                 </ClickAwayListener>

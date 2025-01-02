@@ -20,7 +20,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   server: {
     proxy: {
-      '/api': 'http://localhost:8001',
+      // '/api': 'http://localhost:8001',
       // '/api': 'https://iqb-final.onrender.com'
     },
   },

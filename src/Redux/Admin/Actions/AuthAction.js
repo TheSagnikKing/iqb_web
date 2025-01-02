@@ -118,15 +118,18 @@ export const AdminGoogleloginAction = (googleemail, navigate) => async (dispatch
             type: ADMIN_GOOGLE_SIGNIN_REQ
         });
 
-        await api.post(`/api/admin/googleAdminLogin`, { email: googleemail });
+        const {data} = await api.post(`/api/admin/googleAdminLogin`, { email: googleemail });
 
         dispatch({
             type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
             payload: { message: "Admin signin successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "true")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        // localStorage.setItem("userAdminLoggedIn", "true")
+        // localStorage.setItem("userBarberLoggedIn", "false")
+
+        localStorage.setItem("userAdminLoggedIn", data?.accessToken)
+        localStorage.setItem("userBarberLoggedIn", "")
 
         navigate("/admin-dashboard")
     } catch (error) {
@@ -229,15 +232,18 @@ export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
             type: ADMIN_SIGNIN_REQ
         });
 
-        await api.post("/api/admin/login", signinData);
+        const {data} = await api.post("/api/admin/login", signinData);
 
         dispatch({
             type: ADMIN_SIGNIN_SUCCESS,
             payload: { message: "Admin signin successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "true")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        // localStorage.setItem("userAdminLoggedIn", "true")
+        // localStorage.setItem("userBarberLoggedIn", "false")
+        
+        localStorage.setItem("userAdminLoggedIn", data?.accessToken)
+        localStorage.setItem("userBarberLoggedIn", "")
 
         navigate("/admin-dashboard")
     } catch (error) {
@@ -348,9 +354,12 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
             payload: { message: "Admin updated successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "true")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        // localStorage.setItem("userAdminLoggedIn", "true")
+        // localStorage.setItem("userBarberLoggedIn", "false")
 
+        localStorage.setItem("userAdminLoggedIn", data?.accessToken)
+        localStorage.setItem("userBarberLoggedIn", "")
+        
         navigate("/admin-dashboard", { state: data })
     } catch (error) {
 
@@ -394,23 +403,22 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
 export const AdminLogoutAction = (navigate) => async (dispatch) => {
 
     try {
-        dispatch({
-            type: ADMIN_LOGOUT_REQ
-        })
+        // dispatch({
+        //     type: ADMIN_LOGOUT_REQ
+        // })
 
-        const { data } = await api.post("/api/admin/logout")
+        // const { data } = await api.post("/api/admin/logout")
 
-        dispatch({
-            type: ADMIN_LOGOUT_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: ADMIN_LOGOUT_SUCCESS,
+        //     payload: data
+        // })
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", "")
         localStorage.setItem("barberdata", JSON.stringify({}))
         localStorage.setItem("salondata", JSON.stringify({}))
 
-        // navigate("/adminsignin")
         navigate("/")
     } catch (error) {
 

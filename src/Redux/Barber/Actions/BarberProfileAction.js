@@ -74,8 +74,8 @@ export const barberSkipProfileAction = (profiledata, navigate) => async (dispatc
             payload: { message: "Admin updated successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "false")
-        localStorage.setItem("userBarberLoggedIn", "true")
+        localStorage.setItem("userAdminLoggedIn", "")
+        localStorage.setItem("userBarberLoggedIn", data?.accessToken)
 
         navigate("/barber-dashboard", { state: data })
     } catch (error) {

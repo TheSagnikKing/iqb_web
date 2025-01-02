@@ -74,8 +74,11 @@ export const adminSkipProfileAction = (profiledata, navigate) => async (dispatch
             payload: { message: "Admin updated successfully" }
         });
 
-        localStorage.setItem("userAdminLoggedIn", "true")
-        localStorage.setItem("userBarberLoggedIn", "false")
+        // localStorage.setItem("userAdminLoggedIn", "true")
+        // localStorage.setItem("userBarberLoggedIn", "false")
+
+        localStorage.setItem("userAdminLoggedIn", data?.accessToken)
+        localStorage.setItem("userBarberLoggedIn", "")
 
         navigate("/admin-dashboard", { state: data })
 

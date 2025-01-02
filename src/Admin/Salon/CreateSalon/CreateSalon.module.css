@@ -1505,6 +1505,7 @@
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>div,
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(8)>div:nth-child(1)>div,
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(10)>div:nth-child(3),
+.create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(10)>div, 
 .add_services_drop_container.dark>div:nth-child(5)>div {
     background-color: var(--dark-color-1);
 }
@@ -1533,6 +1534,7 @@
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>div>p:hover,
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(8)>div:nth-child(1)>div>p:hover,
 .create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(10)>div:nth-child(3)>p:hover,
+.create_salon_content_wrapper.dark>div:nth-child(2)>div:nth-child(10)>div>p:hover,
 .add_services_drop_container.dark>div:nth-child(5)>div>p:hover{
     background-color: var(--dark-color-3);
 } 
