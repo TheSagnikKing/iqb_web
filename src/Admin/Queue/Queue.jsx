@@ -246,7 +246,7 @@ const Queue = () => {
                       <p>{b.barberName.length > 18 ? b.barberName.slice(0, 18) + "..." : b.barberName}</p>
                       <p>{b.timeJoinedQ}</p>
                       <p>{b?.qgCode}</p>
-                      <p>{b?.customerEWT} mins</p>
+                      <p>{b?.customerEWT === 0 ? "-" : b?.customerEWT + "mins"}</p>
                       <div>
                         {
                           b.serviceType === "VIP" ? <CrownIcon /> : "-"

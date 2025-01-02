@@ -67,6 +67,13 @@ const QueHistory = () => {
         }
     };
 
+
+    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+    const {
+      response: adminGetDefaultSalonResponse
+    } = adminGetDefaultSalon
+
     return (
         <div className={`${style.quehistory_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
@@ -103,6 +110,7 @@ const QueHistory = () => {
                                         <p>Time Joined Q</p>
                                         <div><p>Qg Code</p></div>
                                         <div><p>EWT</p></div>
+                                        <div><p>Price</p></div>
                                         <div><p>Type</p></div>
                                         <div><p>isAdmin</p></div>
                                         <div><p>Status</p></div>
@@ -122,6 +130,7 @@ const QueHistory = () => {
                                             <p>{b?.timeJoinedQ}</p>
                                             <div><p>{b?.qgCode}</p></div>
                                             <div><p>{b?.serviceEWT} mins</p></div>
+                                            <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{b?.services.reduce((sum, service) => sum + service.servicePrice, 0)}</p></div>
                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div>
                                                 {

@@ -42,6 +42,10 @@ const QueHistory = () => {
         queueListHistory: BarberQueueListHistory
     } = getBarberQueueListHistory
 
+    const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata)
+
+    console.log(barberProfile)
+
     return (
         <div className={`${style.quehistory_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
@@ -66,6 +70,7 @@ const QueHistory = () => {
                                         <p>Time Joined Q</p>
                                         <div><p>Qg Code</p></div>
                                         <div><p>EWT</p></div>
+                                        <div><p>Price</p></div>
                                         <div><p>Type</p></div>
                                         <div><p>Status</p></div>
                                     </div>
@@ -84,6 +89,7 @@ const QueHistory = () => {
                                             <p>{b?.timeJoinedQ}</p>
                                             <div><p>{b?.qgCode}</p></div>
                                             <div><p>{b?.serviceEWT} mins</p></div>
+                                            <div><p>{barberProfile?.currency}{" "}{b?.services.reduce((sum, service) => sum + service.servicePrice, 0)}</p></div>
                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
                                         </div>

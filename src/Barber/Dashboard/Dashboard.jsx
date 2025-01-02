@@ -504,7 +504,7 @@ const Dashboard = () => {
                                   <div><p>{index === 0 ? "Next" : queue.qPosition}</p></div>
                                   <div><p>{queue.name.length > 6 ? `${queue.name.slice(0, 6).concat("...")}` : queue.name}</p></div>
                                   <div><p>{queue.barberName.length > 6 ? `${queue.barberName.slice(0, 6).concat("...")}` : queue.barberName}</p></div>
-                                  <div><p>{queue.customerEWT} mins</p></div>
+                                  <div><p>{queue.customerEWT === 0 ? "-" : queue.customerEWT + "mins"}</p></div>
                                 </div>
                               )
                             })
