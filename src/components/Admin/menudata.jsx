@@ -49,10 +49,10 @@ export const menudata = [
         icon: <Adminappointmenticon />,
         url: "/admin-appointments"
     },
-    // {
-    //     id: 8,
-    //     title: "Reports",
-    //     icon: <Adminreporticon />,
-    //     url: "/admin-report"
-    // },
+    {
+        id: 9,
+        title: "Book Appointments",
+        icon: <Adminqueueicon />,
+        url: "/admin-book-appointments"
+    },
 ]

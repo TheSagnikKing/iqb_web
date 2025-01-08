@@ -5,12 +5,12 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import api from "../../../Redux/api/Api"
 import "react-calendar/dist/Calendar.css";
 import Skeleton from 'react-loading-skeleton'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const AppointmentList = () => {
 
     const location = useLocation()
-    console.log(location.state)
+    // console.log(location.state)
 
 
     const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
@@ -43,6 +43,8 @@ const AppointmentList = () => {
             setLoading(false)
         }
     }, [selectedDate])
+
+    const navigate = useNavigate()
 
 
     return (
@@ -101,7 +103,7 @@ const AppointmentList = () => {
                                                 key={cus._id}
                                             >
                                                 <div>
-                                                    <img src={cus.customerProfile?.[0]?.url} alt="" />
+                                                    <img src={cus.customerProfile} alt="" />
                                                 </div>
                                                 <div>
                                                     <p>{cus.customerName}</p>
@@ -117,6 +119,11 @@ const AppointmentList = () => {
                                                         mins
                                                     </p>
                                                 </div>
+                                                <button className={style.edit_app_btn}
+                                                    onClick={() => navigate("/admin-book-editappointments", {
+                                                        state: { ...cus, barberName: appoint.barbername },
+                                                    })}
+                                                >Edit</button>
                                             </div>
                                         ))}
                                     </main>

@@ -43,6 +43,10 @@ const BarberQueHistory = React.lazy(() => import("./Barber/QueHistory/QueHistory
 const AdminQueHistory = React.lazy(() => import("./Admin/QueHistory/QueHistory"))
 const AppointmentCalender = React.lazy(() => import("./Admin/Appointment/AppointCalender/AppointmentCalender"))
 const AppointmentList = React.lazy(() => import("./Admin/Appointment/AppointmentList/AppointmentList"))
+const AdminBookAppointments = React.lazy(() => import("./Admin/BookAppointment/CreateAppointment/CreateAppointment"))
+const AdminBookEditAppointments = React.lazy(() => import("./Admin/BookAppointment/EditAppointment/EditAppointment"))
+
+const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -332,6 +336,24 @@ const App = () => {
                       }
                     />
 
+                    <Route
+                      path="/admin-book-appointments"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminBookAppointments />
+                        </ErrorBoundary>
+                      }
+                    />
+
+                    <Route
+                      path="/admin-book-editappointments"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminBookEditAppointments />
+                        </ErrorBoundary>
+                      }
+                    />
+
                   </Route>
                 </Route>
 
@@ -388,6 +410,15 @@ const App = () => {
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
                           <BarberQueueList />
+                        </ErrorBoundary>
+                      }
+                    />
+
+                    <Route
+                      path="/barber-appointment"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <BarberAppointment />
                         </ErrorBoundary>
                       }
                     />

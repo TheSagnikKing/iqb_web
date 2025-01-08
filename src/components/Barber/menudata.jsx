@@ -13,7 +13,7 @@ export const menudata = [
     //     icon: <Admincustomericon />,
     //     url: "/barber-customer"
     // },
-    
+
     {
         id: 2,
         title: "QueueList",
@@ -25,5 +25,11 @@ export const menudata = [
         title: "Queue History",
         icon: <HistoryIcon />,
         url: "/barber-quehistory"
+    },
+    {
+        id: 4,
+        title: "Appointment",
+        icon: <Admincustomericon />,
+        url: "/barber-appointment"
     },
 ]

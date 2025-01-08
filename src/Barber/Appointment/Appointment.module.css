@@ -1,0 +1,86 @@
+.barber_appointment_wrapper {
+    /*theextra2remisforpaddingbottom*/
+    height: var(--list-wrapper-height);
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--light-color-4);
+    background-color: var(--light-color-4);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+}
+
+
+.barber_appointment_wrapper>div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.barber_appointment_wrapper>div:nth-child(1)>p {
+    font-size: var(--font-size-1);
+    font-weight: 600;
+}
+
+
+.barber_appointment_content_wrapper {
+    width: 100%;
+    height: var(--list-wrapper-common-height);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+}
+
+.button_group {
+    height: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+
+    &>button {
+        height: 100%;
+        background: none;
+        border: none;
+        border-bottom: 1px solid black;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+            font-weight: 600;
+            border-bottom: 2px solid black;
+        }
+    }
+}
+
+.heading,
+.value {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.4rem;
+}
+
+.value_body {
+    width: 20rem;
+    margin-left: "auto"
+}
+
+.submit {
+    background-color: var(--color-3);
+    color: var(--color-2);
+    border: 0.1rem solid var(--color-2);
+    padding: 1rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
