@@ -741,14 +741,17 @@ const EditAppointment = () => {
                                                                 <button
                                                                     disabled={b?.disabled}
                                                                     style={{
-                                                                        cursor: b?.disabled ? "not-allowed" : "pointer"
+                                                                        cursor: b?.disabled ? "not-allowed" : "pointer",
+                                                                        backgroundColor: b?.disabled && "gray",
+                                                                        color: b?.disabled && "#fff",
+                                                                        border: b?.disabled && "#fff"
                                                                     }}
                                                                     onClick={() => {
                                                                         setSelectedTimeslot(b?.timeInterval)
                                                                         setSelectTimeSlotsDrop(false)
                                                                     }}
                                                                     className={`${style.timeslot_add_btn} ${darkmodeOn && style.dark}`}
-                                                                >Add</button>
+                                                                >{b?.disabled ? "Booked" : "Add"}</button>
                                                             </div>
                                                         )
                                                     })

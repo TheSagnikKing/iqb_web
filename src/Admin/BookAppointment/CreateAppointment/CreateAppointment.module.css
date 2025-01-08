@@ -601,6 +601,7 @@
         grid-template-columns: 1fr;
         height: calc(var(--list-wrapper-common-height) - 5rem);
         overflow: auto;
+        gap: 1rem;
     }
 
     .modal_container {
@@ -613,6 +614,7 @@
         grid-template-columns: 1fr;
         height: calc(var(--list-wrapper-common-height) - 5rem);
         overflow: auto;
+        gap: 1rem;
     }
 
     .modal_container {
