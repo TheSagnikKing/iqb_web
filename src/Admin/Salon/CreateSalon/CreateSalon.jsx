@@ -1426,8 +1426,8 @@ const CreateSalon = () => {
                         /> :
                         getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
 
-                          copyCitiesData.map((c) => (
-                            <p key={c.longitude} onClick={() => setCityHandler(c)}>{c.name}</p>
+                          copyCitiesData.map((c, index) => (
+                            <p key={index} onClick={() => setCityHandler(c)}>{c.name}</p>
                           ))
                           :
                           <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
