@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./Header.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
-import { menudata } from '../menudata'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +13,7 @@ import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAc
 import { ClickAwayListener, Modal } from '@mui/material'
 import { MdSunny } from 'react-icons/md'
 import { IoMoon } from 'react-icons/io5'
+import MenuData from '../Menudata'
 
 const DashboardHeader = () => {
 
@@ -247,15 +247,15 @@ const DashboardHeader = () => {
               <>
                 <ClickAwayListener onClickAway={() => setSalonlistdrop(false)}>
                   <div onClick={() => setSalonlistdrop((prev) => !prev)}>
-                    <p 
-                    style={{
-                      color: darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"
-                    }}
+                    <p
+                      style={{
+                        color: darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"
+                      }}
                     >{adminSetSalon?.currentActiveSalon}</p>
                     <div
-                    style={{
-                      color: darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"
-                    }}
+                      style={{
+                        color: darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"
+                      }}
                     >
                       <DropdownIcon />
                     </div>
@@ -400,7 +400,7 @@ const DashboardHeader = () => {
           </div>
         </section>
       </Modal>
-      
+
       <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
 
         {
@@ -473,7 +473,7 @@ const DashboardHeader = () => {
 
         <main className={style.dashboard_mobile_siderbar_content_container}>
           {
-            menudata.map((m) => (
+            MenuData().map((m) => (
               <div
                 key={m.id}
                 className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active} ${darkmodeOn && style.dark}`}
@@ -506,18 +506,18 @@ const DashboardHeader = () => {
           </div>
 
           <div className={`${style.dashboard_theme_container} ${darkmodeOn && style.dark}`}>
-          <p>Theme</p>
-          {
-            darkmodeOn ?
-              <button onClick={toggleHandler}>
-                <Sunicon />
-              </button> :
-              <button onClick={toggleHandler}>
-                <MoonIcon />
-              </button>
-          }
+            <p>Theme</p>
+            {
+              darkmodeOn ?
+                <button onClick={toggleHandler}>
+                  <Sunicon />
+                </button> :
+                <button onClick={toggleHandler}>
+                  <MoonIcon />
+                </button>
+            }
 
-        </div>
+          </div>
 
         </main>
       </div>

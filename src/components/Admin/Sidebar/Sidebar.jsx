@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from './Sidebar.module.css';
-import { menudata } from '../menudata.jsx';
+// import  MenuData  from '../MenuData.jsx';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Adminqueueicon, LeftArrow, MoonIcon, RightArrow, Sunicon } from '../../../icons';
 import Header from '../Header/Header.jsx';
@@ -10,6 +10,7 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { IoMoon } from 'react-icons/io5';
 import { MdSunny } from 'react-icons/md';
 import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants.js';
+import MenuData from '../Menudata.jsx';
 
 const Sidebar = () => {
   const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon);
@@ -67,8 +68,8 @@ const Sidebar = () => {
         </div>
 
         <div className={style.menu_items_container}>
-          {menudata.map((m) => (
-            <div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
+          {MenuData().map((m) => (
+            m.show ? (<div className={`${style.menu_item} ${location.pathname.includes(m.url) && `${style.menu_item_active} ${darkmodeOn && style.dark}`} ${darkmodeOn && style.dark}`} key={m.id} onClick={() => navigate(m?.url)}
             >
               <div style={{
                 color: location.pathname.includes(m.url) && "var(--light-color-4)"
@@ -77,7 +78,7 @@ const Sidebar = () => {
               <p style={{
                 color: location.pathname.includes(m.url) && "var(--light-color-4)"
               }}>{m.title}</p>
-            </div>
+            </div>) : null
           ))}
 
           <div className={`${style.menu_theme_container} ${darkmodeOn && style.dark}`}

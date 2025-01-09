@@ -248,6 +248,7 @@ const SalonAppointmentSettings = () => {
                         </div>}
                     </div>
 
+
                     <div>
                         {
                             adminUpdateSalonSettingsLoading ? <button style={{

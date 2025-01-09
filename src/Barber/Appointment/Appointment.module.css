@@ -48,16 +48,17 @@
         height: 100%;
         background: none;
         border: none;
-        border-bottom: 1px solid black;
+        /* border-bottom: 1px solid black; */
         font-weight: 500;
         cursor: pointer;
 
         &:hover {
             font-weight: 600;
-            border-bottom: 2px solid black;
+            /* border-bottom: 2px solid black; */
         }
     }
 }
+
 
 .heading,
 .value {
@@ -83,4 +84,10 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor: pointer;
+}
+
+/* dark mode  */
+
+.barber_appointment_wrapper.dark {
+    background-color: var(--dark-color-2);
 }

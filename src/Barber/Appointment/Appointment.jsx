@@ -116,24 +116,24 @@ const Appointment = () => {
 
             <div className={`${style.barber_appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
                 <div className={style.button_group}>
-                    <button
-                        style={{
-                            fontWeight: appointmentdates && "600",
-                            borderBottom: appointmentdates && "2px solid black"
-                        }}
+                    <p
+                        // style={{
+                        //     fontWeight: appointmentdates && "600",
+                        //     borderBottom: appointmentdates && "2px solid black"
+                        // }}
                         onClick={() => {
                             setQueuedates(false)
                             setAppointmentDates(true)
-                        }}>Appointment Date</button>
-                    <button
-                        style={{
-                            fontWeight: queuedates && "600",
-                            borderBottom: queuedates && "2px solid black"
-                        }}
+                        }}>Appointment Date</p>
+                    <p
+                        // style={{
+                        //     fontWeight: queuedates && "600",
+                        //     borderBottom: queuedates && "2px solid black"
+                        // }}
                         onClick={() => {
                             setQueuedates(true)
                             setAppointmentDates(false)
-                        }}>Queue Date</button>
+                        }}>Queue Date</p>
                 </div>
                 {
                     appointmentdates && <div className={style.value_body}>
@@ -159,7 +159,7 @@ const Appointment = () => {
                 }
 
                 {
-                    queuedates && <div>Queue Dates</div>
+                    queuedates && <p>Queue Dates</p>
                 }
                 <button className={style.submit} onClick={submitHandler}>submit</button>
             </div>

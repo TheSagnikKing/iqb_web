@@ -365,6 +365,170 @@
 
 }
 
+
+.modal_payment_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: var(--light-color-4);
+    border: none;
+    width: 30%;
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        &>p {
+            font-size: var(--font-size-1);
+            font-weight: 600;
+        }
+
+        &>button {
+            margin-left: auto;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            background-color: var(--color-7);
+            border: 0.1rem solid var(--color-6);
+            cursor: pointer;
+            color: var(--color-6);
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            font-size: var(--font-size-2);
+            margin-bottom: 0rem;
+
+            &:hover {
+                background-color: var(--color-6);
+                color: var(--light-color-4);
+
+                &>div {
+                    color: var(--light-color-4);
+                }
+            }
+        }
+    }
+
+
+    .modal_payment_content_container {
+
+        &>div:nth-child(1) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 6rem;
+            border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+
+            &>p {
+                font-size: 2rem;
+                font-weight: 600;
+            }
+        }
+
+        &>div:nth-child(2) {
+            padding-block: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+
+            &>div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                &>div {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+
+                    &>input[type="checkbox"] {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                    }
+
+                    &>p {
+                        font-size: var(--font-size-2);
+                        font-weight: 500;
+                    }
+                }
+
+                &>p {
+                    font-weight: 500;
+                }
+            }
+        }
+
+        &>div:nth-child(3) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 6rem;
+            margin-bottom: 2rem;
+
+            &>p {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+        }
+
+        .salon_payment_btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: var(--mdl-sbt-btn-height);
+            background-color: var(--color-3);
+            border: 0.1rem solid var(--color-2);
+            border-radius: var(--list-wrapper-border-radius);
+            -webkit-border-radius: var(--list-wrapper-border-radius);
+            -moz-border-radius: var(--list-wrapper-border-radius);
+            -ms-border-radius: var(--list-wrapper-border-radius);
+            -o-border-radius: var(--list-wrapper-border-radius);
+
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            margin-inline: auto;
+            font-size: var(--font-size-2);
+            font-weight: 500;
+            color: var(--color-2);
+
+            &:hover {
+                background-color: var(--color-2);
+                color: var(--light-color-4);
+            }
+        }
+    }
+
+}
+
 .time_container {
     position: relative;
 }
@@ -423,15 +587,15 @@
     background-color: var(--dark-color-2);
 }
 
-.salon_wrapper.dark{
+.salon_wrapper.dark {
     border: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
 .time_drop_container.dark {
     border: 0.1rem solid rgba(255, 255, 255, 0.2);
 
-    &>p{
-        &:hover{
+    &>p {
+        &:hover {
             background-color: var(--dark-color-3);
         }
     }
@@ -447,14 +611,26 @@
     }
 }
 
+.modal_payment_container.dark {
+    background-color: var(--dark-color-1);
+}
+
+.modal_payment_content_container.dark{
+    &>div:nth-child(1),
+    &>div:nth-child(2){
+        border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+    }
+}
+
 .salon_content_body.dark>div:not(:nth-child(1))>p:nth-child(1),
 .salon_content_body.dark>div:nth-child(1)>p:nth-child(1) {
     background-color: rgba(32, 33, 36, 0.5) !important;
 }
 
-.salon_content_body.dark>div:nth-child(1){
+.salon_content_body.dark>div:nth-child(1) {
     background-color: var(--dark-color-2);
 }
+
 .salon_content_body.dark>div {
     border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
@@ -463,16 +639,28 @@
     .modal_container {
         width: 90%;
     }
+
+    .modal_payment_container {
+        width: 90%;
+    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
     .modal_container {
         width: 70%;
     }
+
+    .modal_payment_container {
+        width: 60%;
+    }
 }
 
 @media screen and (min-width:769px) and (max-width:1140px) {
     .modal_container {
         width: 50%;
+    }
+
+    .modal_payment_container {
+        width: 40%;
     }
 }

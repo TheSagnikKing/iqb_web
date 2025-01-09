@@ -10,6 +10,11 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 import { ClickAwayListener, Modal } from '@mui/material'
 
+import { loadStripe } from '@stripe/stripe-js';
+import api from '../../../Redux/api/Api'
+import axios from 'axios'
+import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction'
+
 const SalonList = () => {
 
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
@@ -89,6 +94,7 @@ const SalonList = () => {
     setEndTime(salon?.appointmentSettings?.appointmentEndTime)
     setIntervalTime(salon?.appointmentSettings?.intervalInMinutes)
     setOpenSalonSettings(true)
+    setPaymentModalOpen(false)
   }
 
   const [timeOptions, setTimeOptions] = useState([]);
@@ -190,6 +196,114 @@ const SalonList = () => {
   const {
     loading: adminUpdateSalonSettingsLoading,
   } = adminUpdateSalonSettings
+
+  //Payment Code
+
+  const makePayment = async (product) => {
+
+    try {
+      const stripe = await loadStripe('pk_test_51QdUcgJJY2GyQI9MyKqUyWEUQa4ZQNcyekRizKrV6ZFWvWsrP4k6wliCdB8hcybaqoxG1v45y7RigLhNniKBVtFF00csiiQOpM');
+
+      const response = await axios.post("https://iqb-final.onrender.com/api/create-checkout-session", product)
+
+      if (response.data && response.data.session && response.data.session.id) {
+        await stripe.redirectToCheckout({
+          sessionId: response.data.session.id,
+        });
+
+      } else {
+        console.error("Invalid session data: ", response.data);
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false)
+
+  const buyHandler = () => {
+    setOpenSalonSettings(false)
+    setPaymentModalOpen(true)
+  }
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  useEffect(() => {
+    if (adminGetDefaultSalonResponse) {
+      setServicesData((prev) => {
+        const updatedArray = prev.map((s) => {
+          return { ...s, currency: adminGetDefaultSalonResponse?.isoCurrencyCode }
+        })
+        return updatedArray
+      })
+    }
+  }, [adminGetDefaultSalonResponse])
+
+  // const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
+  // useEffect(() => {
+  //   if (adminProfile) {
+  //     setAppointmentCheck(adminProfile?.isAppointments)
+  //     setQueueingCheck(adminProfile?.isQueueing)
+  //   }
+  // }, [adminProfile])
+
+  const [appointmentCheck, setAppointmentCheck] = useState(false)
+  const [queueingCheck, setQueueingCheck] = useState(false)
+
+  const [servicesData, setServicesData] = useState([
+    {
+      id: 1,
+      name: "Appointment",
+      value: false,
+      price: 300,
+      quantity: 1
+    },
+    {
+      id: 2,
+      name: "Queueing",
+      value: false,
+      price: 200,
+      quantity: 1
+    }
+  ])
+
+  const [planValidityDate, setPlanValidityDate] = useState(30)
+
+  const totalPrice = servicesData.reduce(
+    (total, item) => (item.value ? total + item.price : total),
+    0
+  );
+
+  const paymentHandler = () => {
+
+    const paymentData = {
+      productInfo: {
+        salonId: selectedSalonId,
+        adminEmail: email,
+        paymentType: "Paid",
+        paymentExpiryDate: planValidityDate,
+        isQueuing: queueingCheck,
+        isAppointments: appointmentCheck,
+        products: servicesData.map(service => {
+          const { value, id, ...rest } = service;
+          return rest;
+        })
+      }
+    }
+
+    console.log(paymentData)
+
+    makePayment(paymentData)
+  }
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -343,12 +457,116 @@ const SalonList = () => {
                   </ClickAwayListener>}
               </div>
 
-              {
-                adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
-              }
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between"
+              }}>
+                <button className={style.salon_settings_btn}
+                  onClick={buyHandler}
+                >Buy</button>
+
+                {
+                  adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
+                }
+
+              </div>
 
             </div>
           </div>
+        </Modal>
+
+
+        <Modal
+          open={paymentModalOpen}
+          onClose={() => {
+            setPaymentModalOpen(false)
+            setServicesData([
+              {
+                id: 1,
+                name: "Appointment",
+                value: false,
+                price: 300,
+                currency: "usd",
+                quantity: 1
+              },
+              {
+                id: 2,
+                name: "Queueing",
+                value: false,
+                price: 200,
+                currency: "usd",
+                quantity: 1
+              }
+            ])
+            setAppointmentCheck(false)
+            setQueueingCheck(false)
+          }}
+
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div className={`${style.modal_payment_container} ${darkmodeOn && style.dark}`}>
+            <div>
+              <p>Buy Services</p>
+              <button onClick={() => setPaymentModalOpen(false)}><CloseIcon /></button>
+            </div>
+
+            <div className={`${style.modal_payment_content_container} ${darkmodeOn && style.dark}`}>
+              <div>
+                <p>Total</p>
+                <p>{adminGetDefaultSalonResponse?.currency}{totalPrice}</p>
+              </div>
+
+              <div>
+                {
+                  servicesData.map((s) => {
+                    return (
+                      <div key={s.id}>
+                        <div>
+                          <input
+                            type="checkbox"
+                            checked={s.value}
+                            onChange={() => {
+                              setServicesData((prev) => {
+                                const updatedArray = prev.map((b) => {
+                                  if (b.id === s.id) {
+                                    const newValue = !b.value;
+
+                                    if (b.name === "Appointment") {
+                                      setAppointmentCheck(newValue);
+                                    } else if (b.name === "Queueing") {
+                                      setQueueingCheck(newValue);
+                                    }
+
+                                    return { ...b, value: newValue };
+                                  }
+                                  return b;
+                                });
+                                return updatedArray
+                              })
+                            }}
+                          />
+                          <p>{s.name}</p>
+                        </div>
+
+                        <p>{adminGetDefaultSalonResponse?.currency}{s.price}</p>
+                      </div>
+                    )
+                  })
+                }
+
+              </div>
+
+              <div>
+                <p>Plan Validity</p>
+                <p>{planValidityDate}days</p>
+              </div>
+
+              <button className={style.salon_payment_btn} onClick={paymentHandler}>Pay {adminGetDefaultSalonResponse?.currency}{totalPrice}</button>
+            </div>
+          </div>
+
         </Modal>
 
       </div>
