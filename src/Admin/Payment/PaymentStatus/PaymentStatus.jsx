@@ -88,6 +88,7 @@ const PaymentStatus = () => {
                     ) : paymentStatusdata?.length > 0 ? (
                         <div className={`${style.payment_content_body} ${darkmodeOn && style.dark}`}>
                             <div>
+                                <p>Customer Name</p>
                                 <p>Product Name</p>
                                 <p>Price</p>
                                 <p>Purchase</p>
@@ -109,6 +110,7 @@ const PaymentStatus = () => {
                                         borderBottom: paymentStatusdata.length - 1 === index && "none"
                                     }}
                                 >
+                                    <p>{s?.customerName}</p>
                                     <p>
                                         {
                                             (s?.isQueuing && s?.isAppointments) ? ("Queueing, Appointment") :

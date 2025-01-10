@@ -474,7 +474,7 @@ const DashboardHeader = () => {
         <main className={style.dashboard_mobile_siderbar_content_container}>
           {
             MenuData().map((m) => (
-              <div
+              m.show ? (<div
                 key={m.id}
                 className={`${style.dashboard_mobile_item} ${location.pathname.includes(m.url) && style.dashboard_mobile_item_active} ${darkmodeOn && style.dark}`}
                 onClick={() => {
@@ -487,7 +487,7 @@ const DashboardHeader = () => {
                 <p
                   style={{
                   }}>{m.title}</p>
-              </div>
+              </div>) : null
             ))
           }
 
