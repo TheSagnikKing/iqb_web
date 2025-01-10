@@ -283,27 +283,44 @@ const SalonList = () => {
     0
   );
 
+  const [cartData, setCartData] = useState([])
+
   const paymentHandler = () => {
 
-    const paymentData = {
-      productInfo: {
-        salonId: selectedSalonId,
-        adminEmail: email,
-        paymentType: "Paid",
-        paymentExpiryDate: planValidityDate,
-        isQueuing: queueingCheck,
-        isAppointments: appointmentCheck,
-        products: servicesData.map(service => {
-          const { value, id, ...rest } = service;
-          return rest;
-        })
+    if (cartData.length > 0) {
+      const paymentData = {
+        productInfo: {
+          salonId: selectedSalonId,
+          adminEmail: email,
+          paymentType: "Paid",
+          paymentExpiryDate: planValidityDate,
+          isQueuing: queueingCheck,
+          isAppointments: appointmentCheck,
+          products: cartData.map(service => {
+            const { value, id, ...rest } = service;
+            return rest;
+          })
+        }
       }
+
+      // console.log(paymentData)
+
+      makePayment(paymentData)
+    } else {
+      toast.error("Please select a product !", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
 
-    console.log(paymentData)
-
-    makePayment(paymentData)
   }
+
+  // console.log("Cart Data ", cartData)
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -545,6 +562,20 @@ const SalonList = () => {
                                 });
                                 return updatedArray
                               })
+
+                              setCartData((prev) => {
+                                const isItemInCart = cartData.some((item) => item.id === s.id);
+
+                                if (!s.value && !isItemInCart) {
+                                  // Add to cart when checked
+                                  return [...prev, s];
+                                } else if (s.value && isItemInCart) {
+                                  // Remove from cart when unchecked
+                                  return prev.filter((item) => item.id !== s.id);
+                                }
+
+                                return prev;
+                              });
                             }}
                           />
                           <p>{s.name}</p>
