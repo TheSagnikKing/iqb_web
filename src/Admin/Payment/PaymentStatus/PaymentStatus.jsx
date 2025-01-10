@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './PaymentStatus.module.css'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
@@ -20,14 +20,19 @@ const PaymentStatus = () => {
         response: adminGetDefaultSalonResponse
     } = adminGetDefaultSalon
 
+    const PaymentistControllerRef = useRef(new AbortController());
+
     useEffect(() => {
         if (salonId !== 0) {
             try {
+                const controller = new AbortController();
+                PaymentistControllerRef.current = controller;
+
                 const fetchpayments = async () => {
                     setPaymentStatusLoading(true)
                     const { data } = await api.post("/api/salon/getSalonPaymentsBySalonId", {
                         salonId
-                    })
+                    }, { signal: controller.signal })
 
                     setPaymentStatusdata(data.response)
                     setPaymentStatusLoading(false)
@@ -38,6 +43,12 @@ const PaymentStatus = () => {
                 setPaymentStatusLoading(false)
             }
         }
+
+        return () => {
+            if (PaymentistControllerRef.current) {
+                PaymentistControllerRef.current.abort();
+            }
+        };
     }, [salonId])
 
     console.log(paymentStatusdata)
