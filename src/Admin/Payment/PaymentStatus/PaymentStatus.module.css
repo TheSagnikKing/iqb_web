@@ -48,7 +48,7 @@
     max-width: 100%;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 0.6fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 0.6fr;
     place-items: center;
     font-size: var(--font-size-3);
     font-weight: 500;
@@ -68,7 +68,7 @@
     position: sticky;
     left: 0;
     z-index: 2;
-    
+
 }
 
 .payment_content_body>div:not(:nth-child(1))>p:nth-child(1) {
@@ -93,9 +93,22 @@
     text-overflow: ellipsis;
 }
 
+.payment_content_body_error {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+
+    &>p {
+        font-size: var(--font-size-3);
+        font-weight: 500;
+    }
+}
+
+
 /* dark mode */
 
-.payment_status_wrapper.dark{
+.payment_status_wrapper.dark {
     background-color: var(--dark-color-2);
 }
 

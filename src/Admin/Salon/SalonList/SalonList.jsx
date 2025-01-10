@@ -563,6 +563,13 @@ const SalonList = () => {
                 <p>{planValidityDate}days</p>
               </div>
 
+              <div>
+                <p>Use this dummy card information for payment testing.</p>
+                <p>Dummy card: 4242424242424242</p>
+                <p>MM/YY: 03/34</p>
+                <p>CVC: 456</p>
+              </div>
+
               <button className={style.salon_payment_btn} onClick={paymentHandler}>Pay {adminGetDefaultSalonResponse?.currency}{totalPrice}</button>
             </div>
           </div>
