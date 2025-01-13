@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from './EditAppointment.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { ClickAwayListener, Modal } from '@mui/material'
+import { ClickAwayListener, keyframes, Modal } from '@mui/material'
 import Calendar from 'react-calendar'
 import { CloseIcon, DropdownIcon } from '../../../icons'
 import { getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
@@ -17,7 +17,9 @@ const EditAppointment = () => {
 
     const location = useLocation()
 
-    console.log(location.state)
+    // console.log(location.state)
+
+    const [customerTimeSlot, setCustomerTimeSlot] = useState("")
 
     useEffect(() => {
         if (location.state) {
@@ -29,6 +31,8 @@ const EditAppointment = () => {
             setDateOfBirth(location.state.appointmentDate)
             setSelectedTimeslot(location.state.startTime)
             setSelectedBarber(location.state.barberName)
+            setCustomerTimeSlot(location.state.timeSlots)
+
         }
     }, [])
 
@@ -439,6 +443,91 @@ const EditAppointment = () => {
 
     const [openModal, setOpenModal] = useState(false)
 
+
+    console.log("Timeslot ", customerTimeSlot)
+
+    function getTimeIntervals(startTime, endTime, intervalMinutes) {
+        const intervals = [];
+        let current = new Date(`1970-01-01T${startTime}:00`);
+        const end = new Date(`1970-01-01T${endTime}:00`);
+
+        while (current <= end) {
+            const hours = current.getHours().toString().padStart(2, '0');
+            const minutes = current.getMinutes().toString().padStart(2, '0');
+            // intervals.push(`${hours}:${minutes}`);
+            intervals.push({
+                timeInterval: `${hours}:${minutes}`,
+                disabled: true
+            });
+            current.setMinutes(current.getMinutes() + intervalMinutes);
+        }
+
+        return intervals;
+    }
+
+    const start = customerTimeSlot.split("-")[0];
+    const end = customerTimeSlot.split("-")[1];
+    const intervals = getTimeIntervals(start, end, 30);
+
+    console.log("timeslot customer ", customerTimeSlot)
+    console.log(intervals);
+
+    // const Dummytimeslotdata = [
+    //     { timeInterval: "10:30", disabled: true },
+    //     { timeInterval: "11:00", disabled: true },
+    //     { timeInterval: "11:30", disabled: true },
+    //     { timeInterval: "12:00", disabled: false },
+    //     { timeInterval: "12:30", disabled: false },
+    //     { timeInterval: "01:00", disabled: false },
+    //     { timeInterval: "01:30", disabled: false },
+    //     { timeInterval: "02:00", disabled: false },
+    //     { timeInterval: "02:30", disabled: true },
+    //     { timeInterval: "03:00", disabled: true },
+    //     { timeInterval: "03:30", disabled: true },
+    // ];
+
+    // const Dummyintervals = [
+    //     { timeInterval: "10:30", disabled: true },
+    //     { timeInterval: "11:00", disabled: true },
+    //     { timeInterval: "11:30", disabled: true }
+    // ];
+
+
+    // console.log("Int ", intervals);
+    // console.log("Dummy ", Dummyintervals)
+
+    const updatedTimeslotdata = timeslotdata.map((timeslot) => {
+        // Check if the current timeslot exists in Dummyintervals
+        const isCurrent = intervals.some(
+            (interval) =>
+                interval.timeInterval === timeslot.timeInterval && interval.disabled === timeslot.disabled
+        );
+        return {
+            ...timeslot,
+            current: isCurrent
+        };
+    });
+
+    // console.log("Updated ", updatedTimeslotdata)
+    // console.log("Timeslot ", timeslotdata)
+
+    const [barberofappointmentdays, setBarberofappointmentdays] = useState([])
+
+    useEffect(() => {
+        if (selectedBarberId) {
+            const getbarberappdayshandler = async () => {
+                const { data } = await api.post("/api/barberAppointmentDays/getBarberAppointmentDayNumbers", {
+                    salonId,
+                    barberId: selectedBarberId
+                })
+
+                setBarberofappointmentdays(data.response?.appointmentDays)
+            }
+
+            getbarberappdayshandler()
+        }
+    }, [selectedBarberId])
+
     return (
         <div className={`${style.appointment_book_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
@@ -537,12 +626,13 @@ const EditAppointment = () => {
                                         : getAdminBarberListResolve && BarberList?.length > 0 ? (
                                             <div className={`${style.barber_content_body} ${darkmodeOn && style.dark}`}>
                                                 {
-                                                    BarberList.map((b) => {
+                                                    BarberList.map((b, index) => {
                                                         return (
                                                             <div onClick={() => {
                                                                 setSelectedBarber(b?.name)
                                                                 setSelectedBarberId(b?.barberId)
                                                                 setSelectBarberDrop(false)
+                                                                key = { index }
                                                             }}
                                                                 style={{
                                                                     border: selectedBarberId === b?.barberId && "0.1rem solid rgba(0,0,0,0.6)"
@@ -609,9 +699,9 @@ const EditAppointment = () => {
                                         : barberServicesdata?.length > 0 ? (
                                             <div className={`${style.barber_content_body} ${darkmodeOn && style.dark}`}>
                                                 {
-                                                    barberServicesdata.map((b) => {
+                                                    barberServicesdata.map((b, index) => {
                                                         return (
-                                                            <div className={`${style.service_item} ${darkmodeOn && style}`}>
+                                                            <div className={`${style.service_item} ${darkmodeOn && style}`} key={index}>
                                                                 <div><img src={b?.serviceIcon?.url} alt="" /></div>
                                                                 <div>
                                                                     <p>{b?.serviceName}</p>
@@ -677,6 +767,9 @@ const EditAppointment = () => {
                                             value={value}
                                             minDate={getMinDate()} // Set today's date as the minimum
                                             maxDate={getMaxDate()} // Set the 14th day from today as the maximum
+                                            tileDisabled={({ date, view }) => {
+                                                return view === 'month' && barberofappointmentdays.includes(date.getDay());
+                                            }}
                                         />
                                     </div>
                                 </ClickAwayListener>
@@ -728,13 +821,14 @@ const EditAppointment = () => {
                                         : timeslotdata?.length > 0 ? (
                                             <div className={`${style.barber_content_body} ${darkmodeOn && style.dark}`}>
                                                 {
-                                                    timeslotdata.map((b) => {
+                                                    timeslotdata.map((b, index) => {
                                                         return (
                                                             <div
                                                                 className={`${style.timeslot_item} ${darkmodeOn && style.dark}`}
                                                                 style={{
                                                                     border: selectedTimeslot === b?.timeInterval && "1px solid black"
                                                                 }}
+                                                                key={index}
                                                             >
                                                                 <p>Start Time - {b?.timeInterval}</p>
 
@@ -752,10 +846,34 @@ const EditAppointment = () => {
                                                                     }}
                                                                     className={`${style.timeslot_add_btn} ${darkmodeOn && style.dark}`}
                                                                 >{b?.disabled ? "Booked" : "Add"}</button>
+
                                                             </div>
                                                         )
                                                     })
                                                 }
+
+                                                {/* {
+                                                    updatedTimeslotdata.map((b, index) => {
+                                                        return (
+                                                            <div
+                                                                className={`${style.timeslot_item} ${darkmodeOn && style.dark}`}
+                                                                key={index}
+                                                            >
+                                                                <p>Start Time - {b?.timeInterval}</p>
+
+                                                                <button
+                                                                    className={`${style.timeslot_add_btn} ${darkmodeOn && style.dark}`}
+                                                                >{
+                                                                        b?.disabled && b?.current ? "Add" :
+                                                                            b?.disabled && !b?.current ? "Booked" :
+                                                                                "Add"
+                                                                    }</button>
+
+                                                            </div>
+                                                        )
+                                                    })
+                                                } */}
+
                                             </div>
                                         ) : (
                                             <div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>

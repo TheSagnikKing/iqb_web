@@ -421,7 +421,22 @@ const CreateAppointment = () => {
     // console.log(selectedServices)
 
 
+    const [barberofappointmentdays, setBarberofappointmentdays] = useState([])
 
+    useEffect(() => {
+        if (selectedBarberId) {
+            const getbarberappdayshandler = async () => {
+                const { data } = await api.post("/api/barberAppointmentDays/getBarberAppointmentDayNumbers", {
+                    salonId,
+                    barberId: selectedBarberId
+                })
+
+                setBarberofappointmentdays(data.response?.appointmentDays)
+            }
+
+            getbarberappdayshandler()
+        }
+    }, [selectedBarberId])
 
     return (
         <div className={`${style.appointment_book_wrapper} ${darkmodeOn && style.dark}`}>
@@ -527,6 +542,7 @@ const CreateAppointment = () => {
                                                                 setSelectedBarber(b?.name)
                                                                 setSelectedBarberId(b?.barberId)
                                                                 setSelectBarberDrop(false)
+                                                                setSelectedServices([])
                                                             }}
                                                                 style={{
                                                                     border: selectedBarberId === b?.barberId && "0.1rem solid rgba(0,0,0,0.6)"
@@ -654,13 +670,16 @@ const CreateAppointment = () => {
                             <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
                             <p className={style.error_message}>{dateOfBirthError}</p>
                             {
-                                openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                                openCalender > 0 && <ClickAwayListener onClickAway={handleClickAway}>
                                     <div className={style.calender_drop_container}>
                                         <Calendar
                                             onChange={onChangeHandler}
                                             value={value}
-                                            minDate={getMinDate()} // Set today's date as the minimum
-                                            maxDate={getMaxDate()} // Set the 14th day from today as the maximum
+                                            minDate={getMinDate()}
+                                            maxDate={getMaxDate()}
+                                            tileDisabled={({ date, view }) => {
+                                                return view === 'month' && barberofappointmentdays.includes(date.getDay());
+                                            }}
                                         />
                                     </div>
                                 </ClickAwayListener>

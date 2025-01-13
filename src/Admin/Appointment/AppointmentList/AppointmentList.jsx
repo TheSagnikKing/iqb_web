@@ -46,7 +46,6 @@ const AppointmentList = () => {
 
     const navigate = useNavigate()
 
-
     return (
         <div className={`${style.appointment_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
@@ -120,9 +119,15 @@ const AppointmentList = () => {
                                                     </p>
                                                 </div>
                                                 <button className={style.edit_app_btn}
-                                                    onClick={() => navigate("/admin-book-editappointments", {
-                                                        state: { ...cus, barberName: appoint.barbername },
-                                                    })}
+                                                    onClick={() => {
+                                                        navigate("/admin-book-editappointments", {
+                                                            state: {
+                                                                ...cus,
+                                                                barberName: appoint.barbername
+                                                            }
+                                                        });
+                                                    }}
+
                                                 >Edit</button>
                                             </div>
                                         ))}

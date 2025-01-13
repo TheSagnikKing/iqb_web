@@ -597,6 +597,46 @@
 
 }
 
+.dayoff_div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &>button {
+        font-size: var(--font-size-3);
+        padding-inline: 1rem;
+        height: 3rem;
+        cursor: pointer;
+        transition: 0.3s all ease;
+        -webkit-transition: 0.3s all ease;
+        -moz-transition: 0.3s all ease;
+        -ms-transition: 0.3s all ease;
+        -o-transition: 0.3s all ease;
+    }
+
+    .delete_btn {
+        background-color: var(--color-7);
+        color: var(--color-6);
+        border: 0.1rem solid var(--color-6);
+
+        &:hover {
+            background-color: var(--color-6);
+            color: var(--light-color-4);
+        }
+    }
+
+    .add_btn {
+        background-color: var(--color-3);
+        color: var(--color-2);
+        border: 0.1rem solid var(--color-2);
+
+        &:hover {
+            background-color: var(--color-2);
+            color: var(--light-color-4);
+        }
+    }
+}
+
 /* dark mode */
 
 .salon_wrapper.dark,

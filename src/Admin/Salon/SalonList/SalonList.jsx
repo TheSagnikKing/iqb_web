@@ -172,6 +172,29 @@ const SalonList = () => {
     setIntervalTimeDrop(false)
   }
 
+  const salonOffDaysData = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ];
+
+  const [salonoffdayOpen, setSalonoffdayOpen] = useState(false)
+
+  const [selectedSalonOffdays, setSelectedSalonOffdays] = useState([])
+
+
+  const selectSalonOffdayHandler = (offday) => {
+    if (selectedSalonOffdays.includes(offday)) {
+      setSelectedSalonOffdays(prevState => prevState.filter(day => day !== offday));
+    } else {
+      setSelectedSalonOffdays(prevState => [...prevState, offday]);
+    }
+  };
+
   const updateSalonAppointment = () => {
     const appointmentdata = {
       salonId: selectedSalonId,
@@ -179,8 +202,11 @@ const SalonList = () => {
         startTime,
         endTime,
         intervalInMinutes: intervalTime
-      }
+      },
+      salonOffDays: selectedSalonOffdays
     }
+
+    // console.log(appointmentdata)
 
     dispatch(adminUpdateSalonSettingsAction(appointmentdata, setOpenSalonSettings, email))
   }
@@ -320,7 +346,6 @@ const SalonList = () => {
 
   }
 
-  // console.log("Cart Data ", cartData)
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -473,6 +498,34 @@ const SalonList = () => {
                     </div>
                   </ClickAwayListener>}
               </div>
+
+              {/* <div className={style.time_container}>
+                <p>Salon Off Days</p>
+                <input
+                  type="text"
+                  value={selectedSalonOffdays.map((s) => s)}
+                  onClick={() => setSalonoffdayOpen((prev) => !prev)}
+                  onKeyDown={handleKeyPress}
+                  placeholder='Please select salon off days'
+                  readOnly
+                />
+
+                {salonoffdayOpen &&
+                  <ClickAwayListener onClickAway={() => setSalonoffdayOpen(false)}>
+                    <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+                      {salonOffDaysData.map((offday) => (
+                        <p key={offday}
+                          className={style.dayoff_div}
+                        >
+                          {offday}
+                          {
+                            selectedSalonOffdays.find((c) => c === offday) ? (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.delete_btn}>Delete</button>) : (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.add_btn}>Add</button>)
+                          }
+                        </p>
+                      ))}
+                    </div>
+                  </ClickAwayListener>}
+              </div> */}
 
               <div style={{
                 display: "flex",
