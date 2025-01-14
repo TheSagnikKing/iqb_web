@@ -15,6 +15,12 @@ import { useLocation } from 'react-router-dom'
 
 const EditAppointment = () => {
 
+    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+    const {
+        response: adminGetDefaultSalonResponse
+    } = adminGetDefaultSalon
+
     const location = useLocation()
 
     // console.log(location.state)
@@ -45,29 +51,39 @@ const EditAppointment = () => {
 
     //Calender Logic
 
-    const getMinDate = () => {
-        const today = new Date();
-        today.setDate(today.getDate() + 1);
-        return today;
-    };
+    const [getMinDate, setGetMinDate] = useState("")
+    const [getMaxDate, setGetMaxDate] = useState("")
+    const [getMinSmallDate, setGetMinSmallDate] = useState("")
+    const [getMaxSmallDate, setGetMaxSmallDate] = useState("")
 
-    const getMaxDate = () => {
-        const today = new Date();
-        today.setDate(today.getDate() + 15);
-        return today;
-    };
 
-    const getMinSmallDate = () => {
-        const today = new Date();
-        today.setDate(today.getDate() + 1);
-        return today.toISOString().split("T")[0];
-    };
+    useEffect(() => {
 
-    const getMaxSmallDate = () => {
-        const today = new Date();
-        today.setDate(today.getDate() + 15);
-        return today.toISOString().split("T")[0];
-    };
+        if (adminGetDefaultSalonResponse) {
+            const calculateDates = () => {
+
+
+                const today = new Date();
+
+                const minDate = new Date(today);
+                minDate.setDate(today.getDate() + 1);
+                setGetMinDate(minDate);
+
+                const maxDate = new Date(today);
+                maxDate.setDate(today.getDate() + adminGetDefaultSalonResponse?.appointmentAdvanceDays);
+                setGetMaxDate(maxDate);
+
+                const minSmallDate = minDate.toISOString().split("T")[0];
+                setGetMinSmallDate(minSmallDate);
+
+                const maxSmallDate = maxDate.toISOString().split("T")[0];
+                setGetMaxSmallDate(maxSmallDate);
+            };
+
+            calculateDates();
+        }
+
+    }, [adminGetDefaultSalonResponse]);
 
 
     const [dateOfBirth, setDateOfBirth] = useState("");
@@ -129,30 +145,52 @@ const EditAppointment = () => {
     const [selectTimeSlotsDrop, setSelectTimeSlotsDrop] = useState(false)
 
 
-    const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+    const [BarberList, setBarberList] = useState([])
+    const [getAdminBarberListLoading, setGetAdminBarberListLoading] = useState(false)
 
-    const {
-        loading: getAdminBarberListLoading,
-        resolve: getAdminBarberListResolve,
-        getAllBarbers: BarberList
-    } = getAdminBarberList
-
-    const dispatch = useDispatch()
-
-    const BarberListcontrollerRef = useRef(new AbortController());
+    const BookAppointmentBarberListcontrollerRef = useRef(new AbortController());
 
     useEffect(() => {
         const controller = new AbortController();
-        BarberListcontrollerRef.current = controller;
+        BookAppointmentBarberListcontrollerRef.current = controller;
 
-        dispatch(getAdminBarberListAction(salonId, controller.signal));
+        const getBookAppointmentBarberListAction = async () => {
+            try {
+                setGetAdminBarberListLoading(true)
+                const { data } = await api.post(`/api/mobileRoutes/bookAppointmentBarbers`, {
+                    salonId
+                }, { signal: controller.signal })
+
+                setBarberList(data.response)
+                setGetAdminBarberListLoading(false)
+
+            } catch (error) {
+
+                if (error?.response?.status === 500) {
+                    toast.error("Something went wrong !", {
+                        duration: 3000,
+                        style: {
+                            fontSize: "var(--font-size-2)",
+                            borderRadius: '0.3rem',
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    });
+
+                    return;
+                }
+                setGetAdminBarberListLoading(false)
+            }
+        }
+
+        getBookAppointmentBarberListAction()
 
         return () => {
-            if (BarberListcontrollerRef.current) {
-                BarberListcontrollerRef.current.abort();
+            if (BookAppointmentBarberListcontrollerRef.current) {
+                BookAppointmentBarberListcontrollerRef.current.abort();
             }
         };
-    }, [salonId, dispatch]);
+    }, [salonId]);
 
 
     const [selectedBarber, setSelectedBarber] = useState("")
@@ -183,14 +221,6 @@ const EditAppointment = () => {
             }
         }
     }, [salonId, selectedBarberId])
-
-    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
-
-    const {
-        loading: adminGetDefaultSalonLoading,
-        resolve: adminGetDefaultSalonResolve,
-        response: adminGetDefaultSalonResponse
-    } = adminGetDefaultSalon
 
     // console.log(dateOfBirth)
 
@@ -623,7 +653,7 @@ const EditAppointment = () => {
                                                 baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
                                                 highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
                                         </div>)
-                                        : getAdminBarberListResolve && BarberList?.length > 0 ? (
+                                        : BarberList?.length > 0 ? (
                                             <div className={`${style.barber_content_body} ${darkmodeOn && style.dark}`}>
                                                 {
                                                     BarberList.map((b, index) => {
@@ -739,8 +769,8 @@ const EditAppointment = () => {
                                     colorScheme: darkmodeOn ? "dark" : "light",
                                     border: dateOfBirthError && "0.1rem solid red"
                                 }}
-                                min={getMinSmallDate()} // Set today's date as the minimum
-                                max={getMaxSmallDate()} // Set the 14th day from today as the maximum
+                                min={getMinSmallDate} // Set today's date as the minimum
+                                max={getMaxSmallDate} // Set the 14th day from today as the maximum
                             // onKeyDown={handleKeyPress}
                             />
                             <p className={style.error_message}>{dateOfBirthError}</p>
@@ -765,8 +795,8 @@ const EditAppointment = () => {
                                         <Calendar
                                             onChange={onChangeHandler}
                                             value={value}
-                                            minDate={getMinDate()} // Set today's date as the minimum
-                                            maxDate={getMaxDate()} // Set the 14th day from today as the maximum
+                                            minDate={getMinDate} // Set today's date as the minimum
+                                            maxDate={getMaxDate} // Set the 14th day from today as the maximum
                                             tileDisabled={({ date, view }) => {
                                                 return view === 'month' && barberofappointmentdays.includes(date.getDay());
                                             }}

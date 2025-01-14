@@ -13,7 +13,7 @@ import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAc
 import { ClickAwayListener, Modal } from '@mui/material'
 import { MdSunny } from 'react-icons/md'
 import { IoMoon } from 'react-icons/io5'
-import MenuData from '../Menudata'
+import MenuData from '../Menudata.jsx'
 
 const DashboardHeader = () => {
 

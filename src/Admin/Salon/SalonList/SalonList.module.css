@@ -339,7 +339,7 @@
             cursor: pointer;
             width: var(--mdl-sbt-btn-width);
             height: var(--mdl-sbt-btn-height);
-            background-color: var(--color-2);
+            background-color: var(--color-3);
             border: 0.1rem solid var(--color-2);
             border-radius: var(--list-btn-border-radius);
             -webkit-border-radius: var(--list-btn-border-radius);
@@ -354,10 +354,10 @@
             margin-inline: auto;
             font-size: var(--font-size-2);
             font-weight: 500;
-            color: var(--light-color-4);
+            color: var(--color-2);
 
             &:hover {
-                background-color: var(--color-3);
+                background-color: var(--color-2);
                 color: var(--light-color-4);
             }
         }

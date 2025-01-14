@@ -95,6 +95,7 @@ const SalonList = () => {
     setIntervalTime(salon?.appointmentSettings?.intervalInMinutes)
     setOpenSalonSettings(true)
     setPaymentModalOpen(false)
+    setSelectedAdvanceDays(salon?.appointmentAdvanceDays)
   }
 
   const [timeOptions, setTimeOptions] = useState([]);
@@ -203,7 +204,8 @@ const SalonList = () => {
         endTime,
         intervalInMinutes: intervalTime
       },
-      salonOffDays: selectedSalonOffdays
+      appointmentAdvanceDays: selectedAdvanceDays
+      // salonOffDays: selectedSalonOffdays
     }
 
     // console.log(appointmentdata)
@@ -346,6 +348,13 @@ const SalonList = () => {
 
   }
 
+  const [advanceAppointmentdaysOpen, setAdvanceAppointmentdaysOpen] = useState(false)
+
+  const maximumAppointmentdaysdata = [
+    7, 14, 21, 28, 35, 42
+  ]
+
+  const [selectedAdvanceDays, setSelectedAdvanceDays] = useState(0)
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -526,6 +535,30 @@ const SalonList = () => {
                     </div>
                   </ClickAwayListener>}
               </div> */}
+
+              <div className={style.time_container}>
+                <p>Maximum Appointment Days</p>
+                <input
+                  type="text"
+                  value={`${selectedAdvanceDays ? `${selectedAdvanceDays} days` : ''}`}
+                  onClick={() => setAdvanceAppointmentdaysOpen(true)}
+                  onKeyDown={handleKeyPress}
+                  readOnly
+                />
+
+                {advanceAppointmentdaysOpen &&
+                  <ClickAwayListener onClickAway={() => setAdvanceAppointmentdaysOpen(false)}>
+                    <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+                      {maximumAppointmentdaysdata.map((option) => (
+                        <p key={option} value={option} onClick={() => {
+                          setSelectedAdvanceDays(option) 
+                          setAdvanceAppointmentdaysOpen(false)}}>
+                          {option} days
+                        </p>
+                      ))}
+                    </div>
+                  </ClickAwayListener>}
+              </div>
 
               <div style={{
                 display: "flex",

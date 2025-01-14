@@ -428,6 +428,24 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSett
             payload: salonlist_data
         })
 
+
+        const { data:defaultsalondata } = await api.post(`/api/admin/getDefaultSalonByAdmin`, {
+            adminEmail:email
+        })
+
+        dispatch({
+            type: ADMIN_GET_DEFAULT_SALON_SUCCESS,
+            payload: defaultsalondata
+        })
+
+        dispatch({
+            type: "ADMIN_SET_SALON",
+            payload: {
+                currentActiveSalon: defaultsalondata?.response?.salonName,
+                chooseSalonId: defaultsalondata?.response?.salonId
+            }
+        })
+
     } catch (error) {
 
         if (error?.response?.status === 500) {
