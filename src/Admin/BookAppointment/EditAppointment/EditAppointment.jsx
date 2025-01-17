@@ -546,17 +546,25 @@ const EditAppointment = () => {
     useEffect(() => {
         if (selectedBarberId) {
             const getbarberappdayshandler = async () => {
-                const { data } = await api.post("/api/barberAppointmentDays/getBarberAppointmentDayNumbers", {
+                const { data } = await api.post("/api/barberAppointmentDays/GetBarberDisabledAppointmentDates", {
                     salonId,
                     barberId: selectedBarberId
                 })
 
-                setBarberofappointmentdays(data.response?.appointmentDays)
+                console.log(data)
+
+                // setBarberofappointmentdays(data.response?.appointmentDays)
+                setBarberofappointmentdays(data?.response)
             }
 
             getbarberappdayshandler()
         }
     }, [selectedBarberId])
+
+    const isDisabled = (date) => {
+        const formattedDate = date.toLocaleDateString("en-CA").split('T')[0];
+        return barberofappointmentdays?.includes(formattedDate);
+    };
 
     return (
         <div className={`${style.appointment_book_wrapper} ${darkmodeOn && style.dark}`}>
@@ -757,7 +765,7 @@ const EditAppointment = () => {
                         <p className={style.error_message}>{selectServiceError}</p>
                     </div>
 
-                    {
+                    {/* {
                         mobileValue ? (<div>
                             <p>Select appointment date</p>
                             <input
@@ -797,15 +805,50 @@ const EditAppointment = () => {
                                             value={value}
                                             minDate={getMinDate} // Set today's date as the minimum
                                             maxDate={getMaxDate} // Set the 14th day from today as the maximum
-                                            tileDisabled={({ date, view }) => {
-                                                return view === 'month' && barberofappointmentdays.includes(date.getDay());
-                                            }}
+                                            // tileDisabled={({ date, view }) => {
+                                            //     return view === 'month' && barberofappointmentdays.includes(date.getDay());
+                                            // }}
+                                            tileDisabled={({ date }) => isDisabled(date)}
                                         />
                                     </div>
                                 </ClickAwayListener>
                             }
                         </div>)
-                    }
+                    } */}
+
+
+                    <div className={style.calender_container}>
+                        <p>Select appointment date</p>
+
+                        <input
+                            type='text'
+                            placeholder='Select Date'
+                            value={dateOfBirth}
+                            onClick={() => setOpenCalender(true)}
+                            style={{
+                                border: dateOfBirthError && "0.1rem solid red"
+                            }}
+                            readOnly
+                        />
+                        <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+                        <p className={style.error_message}>{dateOfBirthError}</p>
+                        {
+                            openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                                <div className={style.calender_drop_container}>
+                                    <Calendar
+                                        onChange={onChangeHandler}
+                                        value={value}
+                                        minDate={getMinDate} // Set today's date as the minimum
+                                        maxDate={getMaxDate} // Set the 14th day from today as the maximum
+                                        // tileDisabled={({ date, view }) => {
+                                        //     return view === 'month' && barberofappointmentdays.includes(date.getDay());
+                                        // }}
+                                        tileDisabled={({ date }) => isDisabled(date)}
+                                    />
+                                </div>
+                            </ClickAwayListener>
+                        }
+                    </div>
 
 
                     <div>

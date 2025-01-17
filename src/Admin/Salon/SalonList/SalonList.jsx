@@ -88,6 +88,8 @@ const SalonList = () => {
 
   const [selectedSalonId, setSelectedSalonId] = useState(null)
 
+  const [currentSalonCurrency, setCurrentSalonCurrency] = useState("")
+
   const salonappointmentClicked = (salon) => {
     setSelectedSalonId(salon?.salonId)
     setStartTime(salon?.appointmentSettings?.appointmentStartTime)
@@ -96,6 +98,7 @@ const SalonList = () => {
     setOpenSalonSettings(true)
     setPaymentModalOpen(false)
     setSelectedAdvanceDays(salon?.appointmentAdvanceDays)
+    setCurrentSalonCurrency(salon?.currency)
   }
 
   const [timeOptions, setTimeOptions] = useState([]);
@@ -551,8 +554,9 @@ const SalonList = () => {
                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
                       {maximumAppointmentdaysdata.map((option) => (
                         <p key={option} value={option} onClick={() => {
-                          setSelectedAdvanceDays(option) 
-                          setAdvanceAppointmentdaysOpen(false)}}>
+                          setSelectedAdvanceDays(option)
+                          setAdvanceAppointmentdaysOpen(false)
+                        }}>
                           {option} days
                         </p>
                       ))}
@@ -618,7 +622,7 @@ const SalonList = () => {
             <div className={`${style.modal_payment_content_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Total</p>
-                <p>{adminGetDefaultSalonResponse?.currency}{totalPrice}</p>
+                <p>{currentSalonCurrency}{totalPrice}</p>
               </div>
 
               <div>
@@ -667,7 +671,7 @@ const SalonList = () => {
                           <p>{s.name}</p>
                         </div>
 
-                        <p>{adminGetDefaultSalonResponse?.currency}{s.price}</p>
+                        <p>{currentSalonCurrency}{s.price}</p>
                       </div>
                     )
                   })

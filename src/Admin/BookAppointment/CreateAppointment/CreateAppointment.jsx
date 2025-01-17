@@ -38,32 +38,32 @@ const CreateAppointment = () => {
 
     useEffect(() => {
 
-        if(adminGetDefaultSalonResponse){
+        if (adminGetDefaultSalonResponse) {
             const calculateDates = () => {
-      
-        
+
+
                 const today = new Date();
-            
+
                 const minDate = new Date(today);
                 minDate.setDate(today.getDate() + 1);
                 setGetMinDate(minDate);
-            
+
                 const maxDate = new Date(today);
                 maxDate.setDate(today.getDate() + adminGetDefaultSalonResponse?.appointmentAdvanceDays);
                 setGetMaxDate(maxDate);
-            
+
                 const minSmallDate = minDate.toISOString().split("T")[0];
                 setGetMinSmallDate(minSmallDate);
-            
+
                 const maxSmallDate = maxDate.toISOString().split("T")[0];
                 setGetMaxSmallDate(maxSmallDate);
-              };
-            
-              calculateDates();
+            };
+
+            calculateDates();
         }
-       
-      }, [adminGetDefaultSalonResponse]);
-      
+
+    }, [adminGetDefaultSalonResponse]);
+
 
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [openCalender, setOpenCalender] = useState(false)
@@ -468,17 +468,25 @@ const CreateAppointment = () => {
     useEffect(() => {
         if (selectedBarberId) {
             const getbarberappdayshandler = async () => {
-                const { data } = await api.post("/api/barberAppointmentDays/getBarberAppointmentDayNumbers", {
+                const { data } = await api.post("/api/barberAppointmentDays/GetBarberDisabledAppointmentDates", {
                     salonId,
                     barberId: selectedBarberId
                 })
 
-                setBarberofappointmentdays(data.response?.appointmentDays)
+                console.log(data)
+
+                // setBarberofappointmentdays(data.response?.appointmentDays)
+                setBarberofappointmentdays(data?.response)
             }
 
             getbarberappdayshandler()
         }
     }, [selectedBarberId])
+
+    const isDisabled = (date) => {
+        const formattedDate = date.toLocaleDateString("en-CA").split('T')[0];
+        return barberofappointmentdays?.includes(formattedDate);
+    };
 
     return (
         <div className={`${style.appointment_book_wrapper} ${darkmodeOn && style.dark}`}>
@@ -682,7 +690,7 @@ const CreateAppointment = () => {
                         <p className={style.error_message}>{selectServiceError}</p>
                     </div>
 
-                    {
+                    {/* {
                         mobileValue ? (<div>
                             <p>Select appointment date</p>
                             <input
@@ -704,7 +712,9 @@ const CreateAppointment = () => {
                                 max={getMaxSmallDate}
                             />
                             <p className={style.error_message}>{dateOfBirthError}</p>
-                        </div>) : (<div className={style.calender_container}>
+                        </div>) : (
+                            
+                            <div className={style.calender_container}>
                             <p>Select appointment date</p>
 
                             <input
@@ -738,15 +748,60 @@ const CreateAppointment = () => {
                                             value={value}
                                             minDate={getMinDate}
                                             maxDate={getMaxDate}
-                                            tileDisabled={({ date, view }) => {
-                                                return view === 'month' && barberofappointmentdays?.includes(date.getDay());
-                                            }}
+                                            // tileDisabled={({ date, view }) => {
+                                            //     return view === 'month' && barberofappointmentdays?.includes(date.getDay());
+                                            // }}
+                                            tileDisabled={({ date }) => isDisabled(date)}
                                         />
                                     </div>
                                 </ClickAwayListener>
                             }
                         </div>)
-                    }
+                    } */}
+
+                    <div className={style.calender_container}>
+                        <p>Select appointment date</p>
+
+                        <input
+                            type='text'
+                            placeholder='Select Date'
+                            value={dateOfBirth}
+                            onClick={() => {
+                                if (selectedBarberId === 0) {
+                                    return setDateOfBirthError("Please select barber")
+                                }
+                                setOpenCalender(true)
+                            }
+                            }
+                            style={{
+                                border: dateOfBirthError && "0.1rem solid red"
+                            }}
+                            readOnly
+                        />
+                        <span onClick={() => {
+                            if (selectedBarberId === 0) {
+                                return setDateOfBirthError("Please select barber")
+                            }
+                            setOpenCalender((prev) => !prev)
+                        }} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+                        <p className={style.error_message}>{dateOfBirthError}</p>
+                        {
+                            openCalender > 0 && <ClickAwayListener onClickAway={handleClickAway}>
+                                <div className={style.calender_drop_container}>
+                                    <Calendar
+                                        onChange={onChangeHandler}
+                                        value={value}
+                                        minDate={getMinDate}
+                                        maxDate={getMaxDate}
+                                        // tileDisabled={({ date, view }) => {
+                                        //     return view === 'month' && barberofappointmentdays?.includes(date.getDay());
+                                        // }}
+                                        tileDisabled={({ date }) => isDisabled(date)}
+                                    />
+                                </div>
+                            </ClickAwayListener>
+                        }
+                    </div>
 
 
                     <div>

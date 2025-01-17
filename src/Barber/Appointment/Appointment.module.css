@@ -69,8 +69,14 @@
 }
 
 .value_body {
-    width: 20rem;
     margin-left: "auto"
+}
+
+.leave_value_body {
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .submit {
@@ -84,6 +90,35 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor: pointer;
+    margin-top: 2rem;
+}
+
+.reset_days {
+    background-color: var(--color-3);
+    color: var(--color-2);
+    border: 0.1rem solid var(--color-2);
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.highlighted_date {
+    background-color: #0867ff54;
+    color: white !important;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.leave_dates {
+    background-color: rgba(255, 0, 0, 0.321);
 }
 
 /* dark mode  */

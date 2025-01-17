@@ -459,6 +459,7 @@ body {
 
 .react-calendar__tile--now {
   background-color: var(--color-3) !important;
+  border: 0.1rem solid var(--color-2) !important;
 }
 
 .react-calendar button:hover,
