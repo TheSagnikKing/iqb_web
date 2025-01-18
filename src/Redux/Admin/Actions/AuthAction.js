@@ -118,7 +118,7 @@ export const AdminGoogleloginAction = (googleemail, navigate) => async (dispatch
             type: ADMIN_GOOGLE_SIGNIN_REQ
         });
 
-        const {data} = await api.post(`/api/admin/googleAdminLogin`, { email: googleemail });
+        const { data } = await api.post(`/api/admin/googleAdminLogin`, { email: googleemail });
 
         dispatch({
             type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
@@ -232,7 +232,7 @@ export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
             type: ADMIN_SIGNIN_REQ
         });
 
-        const {data} = await api.post("/api/admin/login", signinData);
+        const { data } = await api.post("/api/admin/login", signinData);
 
         dispatch({
             type: ADMIN_SIGNIN_SUCCESS,
@@ -241,7 +241,7 @@ export const AdminSigninAction = (signinData, navigate) => async (dispatch) => {
 
         // localStorage.setItem("userAdminLoggedIn", "true")
         // localStorage.setItem("userBarberLoggedIn", "false")
-        
+
         localStorage.setItem("userAdminLoggedIn", data?.accessToken)
         localStorage.setItem("userBarberLoggedIn", "")
 
@@ -359,7 +359,7 @@ export const AdminSignupEditAction = (profiledata, navigate) => async (dispatch)
 
         localStorage.setItem("userAdminLoggedIn", data?.accessToken)
         localStorage.setItem("userBarberLoggedIn", "")
-        
+
         navigate("/admin-dashboard", { state: data })
     } catch (error) {
 

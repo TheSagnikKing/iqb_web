@@ -47,6 +47,7 @@ import { RiWifiOffLine } from "react-icons/ri";
 import { BsExclamationCircle } from 'react-icons/bs';
 import { RiChatHistoryFill } from "react-icons/ri";
 import { MdOutlinePayment } from "react-icons/md";
+import { FaStripeS } from "react-icons/fa6";
 
 // Make sure the icon first letter is capital
 export const Eyevisible = FaRegEye
@@ -104,3 +105,4 @@ export const WifiIcon = RiWifiOffLine
 export const ExclamationIcon = BsExclamationCircle
 export const HistoryIcon = RiChatHistoryFill
 export const PaymentIcon = MdOutlinePayment
+export const StripeIcon = FaStripeS

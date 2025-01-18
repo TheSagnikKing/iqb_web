@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, CloseIcon, DropdownIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon } from '../../icons';
+import { CameraIcon, CheckIcon, CloseIcon, DropdownIcon, Eyevisible, Notvisibleeye, OtpEmailIcon, OtpMessageIcon, SaveIcon, StripeIcon } from '../../icons';
 
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -564,6 +564,45 @@ const EditProfile = () => {
         };
     }, []);
 
+    const [connectStripeLoading, setConnectStripeLoading] = useState(false)
+
+    const stripeConnectHandler = async () => {
+        try {
+            const onboardData = {
+                email: adminProfile?.email,
+                vendorAccountId: adminProfile?.vendorAccountId
+            }
+            setConnectStripeLoading(true)
+            const { data } = await api.post("/api/onboard-vendor-account", onboardData)
+            window.location.href = data?.response?.url
+
+            setConnectStripeLoading(false)
+        } catch (error) {
+            setConnectStripeLoading(false)
+            toast.error(error?.response?.data?.response, {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return
+        }
+
+    }
+
+    const loginStripeHandler = async () => {
+        try {
+            const { data } = await api.post("/api/vendor-loginlink", { email: adminProfile?.email })
+
+            window.open(data.url, '_blank');
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <main className={`${style.admin_edit_profile_container} ${darkmodeOn && style.dark}`}>
@@ -599,6 +638,15 @@ const EditProfile = () => {
                 </div>
             </div>
             <div className={`${style.admin_edit_profile_container_right}  ${darkmodeOn && style.dark}`}>
+                {
+                    adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ?
+                        (<button className={style.stripe_connect_btn}
+                            onClick={loginStripeHandler}
+                        ><span><StripeIcon /></span>Login to Stripe</button>) :
+                        (<button className={style.stripe_connect_btn}
+                            onClick={connectStripeLoading ? () => { } : stripeConnectHandler}
+                        ><span><StripeIcon /></span>{connectStripeLoading ? "Loading..." : "Connect to Stripe"}</button>)
+                }
                 <div>
                     <p>Name</p>
                     <input
@@ -614,7 +662,7 @@ const EditProfile = () => {
                             border: nameError ? "0.1rem solid red" : "none"
                         }}
                     />
-                    <p className={style.error_message}>{nameError}</p>
+                    {nameError && <p className={style.error_message}>{nameError}</p>}
                 </div>
 
                 <div>
@@ -810,7 +858,7 @@ const EditProfile = () => {
 
                         </button>
                     </div>
-                    <p className={style.error_message}>{invalidNumberError}</p>
+                    {invalidNumberError && <p className={style.error_message}>{invalidNumberError}</p>}
                 </div>
 
                 <Modal
@@ -901,27 +949,27 @@ const EditProfile = () => {
                         </div>)
                 }
 
-                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`} >            
-                        <p>Gender</p>
-                        <input
+                <div className={`${style.admin_edit_gender_container} ${darkmodeOn && style.dark}`} >
+                    <p>Gender</p>
+                    <input
                         placeholder='Select gender'
-                            type="text"
-                            value={`${gender ? `${gender}` : ''}`}
-                            onClick={() => genderDropHandler()}
-                            readOnly
-                            onKeyDown={handleKeyPress}
-                        />
-                        
-                        <span onClick={() => setGenderDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+                        type="text"
+                        value={`${gender ? `${gender}` : ''}`}
+                        onClick={() => genderDropHandler()}
+                        readOnly
+                        onKeyDown={handleKeyPress}
+                    />
 
-                        {genderDrop &&
-                            <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
-                                <div>
-                                    <p onClick={() => setGenderHandler("Male")}>Male</p>
-                                    <p onClick={() => setGenderHandler("Female")}>Female</p>
-                                    <p onClick={() => setGenderHandler("Other")}>Other</p>
-                                </div>
-                            </ClickAwayListener>}
+                    <span onClick={() => setGenderDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+
+                    {genderDrop &&
+                        <ClickAwayListener onClickAway={() => setGenderDrop(false)}>
+                            <div>
+                                <p onClick={() => setGenderHandler("Male")}>Male</p>
+                                <p onClick={() => setGenderHandler("Female")}>Female</p>
+                                <p onClick={() => setGenderHandler("Other")}>Other</p>
+                            </div>
+                        </ClickAwayListener>}
                 </div>
 
 
