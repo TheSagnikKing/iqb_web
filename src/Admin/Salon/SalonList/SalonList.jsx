@@ -17,6 +17,8 @@ import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHe
 
 const SalonList = () => {
 
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
+
   const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
@@ -233,7 +235,7 @@ const SalonList = () => {
   const makePayment = async (product) => {
 
     try {
-      const stripe = await loadStripe('pk_test_51QdUcgJJY2GyQI9MyKqUyWEUQa4ZQNcyekRizKrV6ZFWvWsrP4k6wliCdB8hcybaqoxG1v45y7RigLhNniKBVtFF00csiiQOpM');
+      const stripe = await loadStripe('pk_test_51QiEoiBFW0Etpz0PujBksQP2p8rCRaq1gXfFfbM48EohSKBOKorS1tyPrV0QU4TNEoJONsLK2rOkXITDUltlysdQ00LZX8pnZm');
 
       const response = await axios.post("https://iqb-final.onrender.com/api/create-checkout-session", product)
 
@@ -570,7 +572,17 @@ const SalonList = () => {
                 justifyContent: "space-between"
               }}>
                 <button className={style.salon_settings_btn}
-                  onClick={buyHandler}
+                  onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
+                    toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
+                      duration: 3000,
+                      style: {
+                        fontSize: "var(--font-size-2)",
+                        borderRadius: '0.3rem',
+                        background: '#333',
+                        color: '#fff',
+                      },
+                    });
+                  }}
                 >Buy</button>
 
                 {

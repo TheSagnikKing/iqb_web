@@ -337,7 +337,8 @@
             justify-content: space-evenly;
             border: none;
             cursor: pointer;
-            width: var(--mdl-sbt-btn-width);
+            /* width: var(--mdl-sbt-btn-width); */
+            padding-inline: 2rem;
             height: var(--mdl-sbt-btn-height);
             background-color: var(--color-3);
             border: 0.1rem solid var(--color-2);

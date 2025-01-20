@@ -60,6 +60,9 @@ import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
 // import Appointment from './Admin/Appointment/Appointment';
 
+const MobileCus = React.lazy(() => import("../src/mobileCus/MobileCust"))
+const MobileCusSuccess = React.lazy(() => import("../src/mobileCus/MobileCusSuccess"))
+
 const App = () => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -436,7 +439,8 @@ const App = () => {
                 </Route>
 
                 <Route path="*" element={<ErrorPage />} />
-
+                <Route path="/mobilecus" element={<MobileCus />} />
+                <Route path='/mobilesuccess' element={<MobileCusSuccess />} />
               </Routes>
             </React.Suspense>
           </BrowserRouter>
@@ -446,5 +450,8 @@ const App = () => {
   )
 }
 
+// /api/vendor-create-checkout-session
+// body = products
+// body = email
 
 export default App
