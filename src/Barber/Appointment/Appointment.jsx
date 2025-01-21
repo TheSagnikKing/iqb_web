@@ -8,6 +8,34 @@ import Calendar from 'react-calendar'
 
 const Appointment = () => {
 
+    const salonId = useSelector(state => state.BarberLoggedInMiddleware?.barberSalonId)
+    const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
+
+    const [getSalonoffDays, setGetSalonoffDays] = useState([])
+    
+    useEffect(() => {
+        if(salonId !== 0){
+            const fetchSalonOffDaysHandler = async() => {
+                try {
+                    const {data} = await api.post("/api/salonSettings/getSalonoffDays", {salonId})
+                    setGetSalonoffDays(data?.response)
+                } catch (error) {
+                    toast.error(error?.response?.data?.message, {
+                        duration: 3000,
+                        style: {
+                            fontSize: "var(--font-size-2)",
+                            borderRadius: '0.3rem',
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    });
+                }
+            }
+
+            fetchSalonOffDaysHandler()
+        }
+    },[salonId])
+
     const darkMode = useSelector(darkmodeSelector)
 
     const darkmodeOn = darkMode === "On"
@@ -58,9 +86,6 @@ const Appointment = () => {
             }
         });
     }
-
-    const salonId = useSelector(state => state.BarberLoggedInMiddleware?.barberSalonId)
-    const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
 
     const submitHandler = async () => {
         try {
@@ -203,7 +228,8 @@ const Appointment = () => {
                                         <input
                                             type="checkbox"
                                             onChange={() => checkdayHandler(d)}
-                                            checked={selectedDays.includes(d.day)}
+                                            checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
+                                            disabled={getSalonoffDays.includes(d.day)}
                                         />
                                         <p>{d.day}</p>
                                     </div>

@@ -101,6 +101,7 @@ const SalonList = () => {
     setPaymentModalOpen(false)
     setSelectedAdvanceDays(salon?.appointmentAdvanceDays)
     setCurrentSalonCurrency(salon?.currency)
+    setSelectedSalonOffdays(salon?.salonOffDays)
   }
 
   const [timeOptions, setTimeOptions] = useState([]);
@@ -209,8 +210,8 @@ const SalonList = () => {
         endTime,
         intervalInMinutes: intervalTime
       },
-      appointmentAdvanceDays: selectedAdvanceDays
-      // salonOffDays: selectedSalonOffdays
+      appointmentAdvanceDays: selectedAdvanceDays,
+      salonOffDays: selectedSalonOffdays
     }
 
     // console.log(appointmentdata)
@@ -513,14 +514,13 @@ const SalonList = () => {
                   </ClickAwayListener>}
               </div>
 
-              {/* <div className={style.time_container}>
+              <div className={style.time_container}>
                 <p>Salon Off Days</p>
                 <input
                   type="text"
                   value={selectedSalonOffdays.map((s) => s)}
                   onClick={() => setSalonoffdayOpen((prev) => !prev)}
                   onKeyDown={handleKeyPress}
-                  placeholder='Please select salon off days'
                   readOnly
                 />
 
@@ -539,7 +539,7 @@ const SalonList = () => {
                       ))}
                     </div>
                   </ClickAwayListener>}
-              </div> */}
+              </div>
 
               <div className={style.time_container}>
                 <p>Maximum Appointment Days</p>

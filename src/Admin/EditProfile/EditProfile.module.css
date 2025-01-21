@@ -906,6 +906,10 @@
         width: 95vw;
     }
 
+    .stripe_connect_btn{
+        margin: auto;
+    }
+
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
@@ -940,6 +944,10 @@
 
     .modal_container {
         width: 75vw;
+    }
+
+    .stripe_connect_btn{
+        margin: auto;
     }
 
 }

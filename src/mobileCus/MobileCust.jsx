@@ -3,6 +3,7 @@ import style from "./MobileCus.module.css"
 import { ClickAwayListener, Modal } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const MobileCust = () => {
 
@@ -62,7 +63,57 @@ const MobileCust = () => {
         }
     }, [selectedEmail])
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     const paymentHandler = async (product) => {
+
+        if(!customerName){
+            return toast.error("Please enter customer name", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+        if(!customerEmail){
+            return toast.error("Please enter customer email", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+        if (!emailRegex.test(customerEmail)) {
+            return toast.error("Invalid email format", {
+              duration: 3000,
+              style: {
+                fontSize: "var(--font-size-2)",
+                borderRadius: "0.3rem",
+                background: "#333",
+                color: "#fff",
+              },
+            }); 
+          }
+
+        if(!selectedSalonName){
+            return toast.error("Please enter salon name", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
 
         const paymentData = {
             productInfo: {
@@ -103,6 +154,15 @@ const MobileCust = () => {
 
         } catch (error) {
             console.log(error)
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
         }
     }
 
