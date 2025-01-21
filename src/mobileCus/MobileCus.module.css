@@ -157,3 +157,10 @@
         }
     }
 }
+
+
+@media screen and (min-width:0px) and (max-width:430px){
+    .mobile_cus_container input{
+        width: 90vw;
+    }
+}
