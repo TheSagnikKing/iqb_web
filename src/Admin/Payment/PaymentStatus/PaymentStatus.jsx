@@ -81,7 +81,7 @@ const PaymentStatus = () => {
     return (
         <div className={`${style.payment_status_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
-                <p>Payment Status</p>
+                <p>Payments</p>
             </div>
 
             <div className={`${style.payment_status_content_wrapper} ${darkmodeOn && style.dark}`}>

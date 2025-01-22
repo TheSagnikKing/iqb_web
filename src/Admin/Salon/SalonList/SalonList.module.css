@@ -487,7 +487,7 @@
             align-items: center;
             justify-content: space-between;
             height: 6rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
 
             &>p {
                 font-size: 1.8rem;
@@ -496,6 +496,19 @@
         }
 
         &>div:nth-child(4) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 6rem;
+            margin-bottom: 2rem;
+
+            &>p {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+        }
+
+        &>div:nth-child(5) {
             margin-bottom: 2rem;
 
             &>p:nth-child(1) {

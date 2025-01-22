@@ -8,7 +8,7 @@ const MobileCusSuccess = () => {
                 fontWeight: "600",
                 margin: "2rem",
                 fontSize: "24px"
-            }}>Product Bought Successfully!...</p>
+            }}>Appointment purchase Successfully!...</p>
         </div>
     )
 }

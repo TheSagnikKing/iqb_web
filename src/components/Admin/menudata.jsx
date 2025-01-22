@@ -227,7 +227,7 @@ const MenuData = () => {
                 },
                 {
                     id: 10,
-                    title: "Payment Status", 
+                    title: "Payments",
                     icon: <PaymentIcon />,
                     url: "/admin-paymentstatus",
                     show: true

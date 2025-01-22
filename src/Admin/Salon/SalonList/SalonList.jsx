@@ -92,6 +92,9 @@ const SalonList = () => {
 
   const [currentSalonCurrency, setCurrentSalonCurrency] = useState("")
 
+  const [renew, setRenew] = useState(false)
+  const [trialExpiry, setTrialExpiry] = useState(false)
+
   const salonappointmentClicked = (salon) => {
     setSelectedSalonId(salon?.salonId)
     setStartTime(salon?.appointmentSettings?.appointmentStartTime)
@@ -102,6 +105,8 @@ const SalonList = () => {
     setSelectedAdvanceDays(salon?.appointmentAdvanceDays)
     setCurrentSalonCurrency(salon?.currency)
     setSelectedSalonOffdays(salon?.salonOffDays)
+    setRenew(salon?.isRenew)
+    setTrialExpiry(salon?.trailExpiryDate)
   }
 
   const [timeOptions, setTimeOptions] = useState([]);
@@ -231,6 +236,8 @@ const SalonList = () => {
     loading: adminUpdateSalonSettingsLoading,
   } = adminUpdateSalonSettings
 
+  const [paymentType, setPaymentType] = useState("Free")
+
   //Payment Code
 
   const makePayment = async (product) => {
@@ -354,6 +361,18 @@ const SalonList = () => {
 
   }
 
+  const freePaymentHandler = async () => {
+    const paymentData = {
+      salonId: selectedSalonId,
+      isTrailEnabled: true,
+      trailStartDate: new Date().toISOString().split("T")[0]
+    }
+
+    const { data } = await api.post("/api/salon/salonTrailPeriod", paymentData)
+
+    window.location.reload()
+  }
+
   const [advanceAppointmentdaysOpen, setAdvanceAppointmentdaysOpen] = useState(false)
 
   const maximumAppointmentdaysdata = [
@@ -439,7 +458,7 @@ const SalonList = () => {
         >
           <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
             <div>
-              <p> Appointment Settings</p>
+              <p>Salon Settings</p>
               <button onClick={() => setOpenSalonSettings(false)}><CloseIcon /></button>
             </div>
 
@@ -583,7 +602,9 @@ const SalonList = () => {
                       },
                     });
                   }}
-                >Buy</button>
+                >
+                  {renew ? "Renewal" : "Buy"}
+                </button>
 
                 {
                   adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
@@ -634,7 +655,7 @@ const SalonList = () => {
             <div className={`${style.modal_payment_content_container} ${darkmodeOn && style.dark}`}>
               <div>
                 <p>Total</p>
-                <p>{currentSalonCurrency}{totalPrice}</p>
+                <p>{paymentType === "Free" ? `${currentSalonCurrency}0` : `${currentSalonCurrency}${totalPrice}`}</p>
               </div>
 
               <div>
@@ -683,7 +704,7 @@ const SalonList = () => {
                           <p>{s.name}</p>
                         </div>
 
-                        <p>{currentSalonCurrency}{s.price}</p>
+                        <p>{paymentType === "Free" ? `${currentSalonCurrency}0` : `${currentSalonCurrency}${s.price}`}</p>
                       </div>
                     )
                   })
@@ -693,17 +714,33 @@ const SalonList = () => {
 
               <div>
                 <p>Plan Validity</p>
-                <p>{planValidityDate}days</p>
+                <p>{paymentType === "Free" ? 14 : planValidityDate}days</p>
+              </div>
+
+              <div
+                value={paymentType}
+                onChange={(e) => setPaymentType(e.target.value)}
+              >
+                <p>Type</p>
+                <select name="" id="">
+                  <option value="Free">Free</option>
+                  <option value="Paid">Paid</option>
+                </select>
+
               </div>
 
               <div>
                 <p>Use this dummy card information for payment testing.</p>
-                <p>Dummy card: 4242424242424242</p>
+                <p>Dummy card: 4242 4242 4242 4242</p>
                 <p>MM/YY: 03/34</p>
                 <p>CVC: 456</p>
               </div>
 
-              <button className={style.salon_payment_btn} onClick={paymentHandler}>Pay {adminGetDefaultSalonResponse?.currency}{totalPrice}</button>
+              {
+                paymentType === "Free" ?
+                  (<button className={style.salon_payment_btn} onClick={freePaymentHandler}>Free</button>) :
+                  (<button className={style.salon_payment_btn} onClick={paymentHandler}>Pay {adminGetDefaultSalonResponse?.currency}{totalPrice}</button>)
+              }
             </div>
           </div>
 

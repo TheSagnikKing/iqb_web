@@ -67,7 +67,7 @@ const MobileCust = () => {
 
     const paymentHandler = async (product) => {
 
-        if(!customerName){
+        if (!customerName) {
             return toast.error("Please enter customer name", {
                 duration: 3000,
                 style: {
@@ -79,7 +79,7 @@ const MobileCust = () => {
             });
         }
 
-        if(!customerEmail){
+        if (!customerEmail) {
             return toast.error("Please enter customer email", {
                 duration: 3000,
                 style: {
@@ -93,17 +93,17 @@ const MobileCust = () => {
 
         if (!emailRegex.test(customerEmail)) {
             return toast.error("Invalid email format", {
-              duration: 3000,
-              style: {
-                fontSize: "var(--font-size-2)",
-                borderRadius: "0.3rem",
-                background: "#333",
-                color: "#fff",
-              },
-            }); 
-          }
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: "0.3rem",
+                    background: "#333",
+                    color: "#fff",
+                },
+            });
+        }
 
-        if(!selectedSalonName){
+        if (!selectedSalonName) {
             return toast.error("Please enter salon name", {
                 duration: 3000,
                 style: {
