@@ -48,6 +48,7 @@ const AdminBookEditAppointments = React.lazy(() => import("./Admin/BookAppointme
 
 const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 const PaymentStatus = React.lazy(() => import("./Admin/Payment/PaymentStatus/PaymentStatus"))
+const BarberAppointmentList = React.lazy(() => import("./Barber/AppointmentList/AppointmentList"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -434,6 +435,15 @@ const App = () => {
                           <BarberAppointment />
                         </ErrorBoundary>
                       }
+                    />
+
+                    <Route
+                      path='/barber-appointmentlist'
+                      element = {
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <BarberAppointmentList/>
+                        </ErrorBoundary>
+                      }                    
                     />
                   </Route>
                 </Route>

@@ -32,4 +32,10 @@ export const menudata = [
         icon: <Admincustomericon />,
         url: "/barber-appointment"
     },
+    {
+        id: 5,
+        title: "Appointment list",
+        icon: <Admincustomericon />,
+        url: "/barber-appointmentlist"
+    },
 ]
