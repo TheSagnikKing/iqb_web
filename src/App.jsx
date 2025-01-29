@@ -438,7 +438,7 @@ const App = () => {
                     />
 
                     <Route
-                      path='/barber-appointmentlist'
+                      path='/barber-appointlist'
                       element = {
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
                           <BarberAppointmentList/>

@@ -38,21 +38,11 @@ export const AppointmentAction = (appointdata) => async (dispatch) => {
             type: GET_BARBER_APPOINT_LIST_FAIL,
             payload: error?.response?.data
         });
-
-        toast.error(error?.response?.data?.message, {
-            duration: 3000,
-            style: {
-                fontSize: "var(--font-size-2)",
-                borderRadius: '0.3rem',
-                background: '#333',
-                color: '#fff',
-            },
-        });
     }
 }
 
 
-export const CancelAppointmentAction = (canceldata) => async (dispatch) => {
+export const CancelAppointmentAction = (canceldata,setCancelAllModalOpen,setOpenModal) => async (dispatch) => {
     try {
         dispatch({ type: CANCEL_APPOINT_REQ })
 
@@ -63,6 +53,19 @@ export const CancelAppointmentAction = (canceldata) => async (dispatch) => {
             payload: data
         })
 
+
+        const { data: getAppointmentData } = await api.post("/api/appointments/getAllAppointmentsByBarberIdAndDate", {
+            salonId: canceldata.salonId,
+            barberId: canceldata.barberId
+        })
+
+        dispatch({
+            type: GET_BARBER_APPOINT_LIST_SUCCESS,
+            payload: getAppointmentData
+        })
+
+
+
         toast.success("Appointment cancel successfully", {
             duration: 3000,
             style: {
@@ -72,6 +75,9 @@ export const CancelAppointmentAction = (canceldata) => async (dispatch) => {
                 color: '#fff',
             },
         });
+
+        setCancelAllModalOpen(false)
+        setOpenModal(false)
 
     } catch (error) {
 

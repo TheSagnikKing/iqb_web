@@ -591,17 +591,19 @@ const SalonList = () => {
                 justifyContent: "space-between"
               }}>
                 <button className={style.salon_settings_btn}
-                  onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
-                    toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
-                      duration: 3000,
-                      style: {
-                        fontSize: "var(--font-size-2)",
-                        borderRadius: '0.3rem',
-                        background: '#333',
-                        color: '#fff',
-                      },
-                    });
-                  }}
+                  // onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
+                  //   toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
+                  //     duration: 3000,
+                  //     style: {
+                  //       fontSize: "var(--font-size-2)",
+                  //       borderRadius: '0.3rem',
+                  //       background: '#333',
+                  //       color: '#fff',
+                  //     },
+                  //   });
+                  // }}
+
+                  onClick={buyHandler}
                 >
                   {renew ? "Renewal" : "Buy"}
                 </button>

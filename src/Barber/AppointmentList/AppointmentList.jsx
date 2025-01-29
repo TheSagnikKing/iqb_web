@@ -7,6 +7,7 @@ import { CloseIcon } from '../../icons'
 import { useDispatch } from 'react-redux'
 import { AppointmentAction, CancelAppointmentAction } from '../../Redux/Barber/Actions/AppointmentAction'
 import Skeleton from 'react-loading-skeleton'
+import toast from 'react-hot-toast'
 
 const AppointmentList = () => {
 
@@ -43,6 +44,31 @@ const AppointmentList = () => {
     // console.log(modalData)
 
     const CancelHandler = async () => {
+
+        if (!subject) {
+            return toast.error("Please enter subject", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+        if (!body) {
+            return toast.error("Please enter body", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
         const cancelbody = {
             salonId,
             barberId,
@@ -52,16 +78,42 @@ const AppointmentList = () => {
             body
         }
 
-        console.log(cancelbody)
+        // console.log(cancelbody)
 
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(CancelAppointmentAction(cancelbody))
+            dispatch(CancelAppointmentAction(cancelbody,setCancelAllModalOpen,setOpenModal))
         }
     }
 
     const CancelAllHandler = () => {
+
+        if (!subject) {
+            return toast.error("Please enter subject", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+        if (!body) {
+            return toast.error("Please enter body", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+
         const cancelbody = {
             salonId,
             barberId,
@@ -76,13 +128,14 @@ const AppointmentList = () => {
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(CancelAppointmentAction(cancelbody))
+            dispatch(CancelAppointmentAction(cancelbody,setCancelAllModalOpen,setOpenModal))
         }
 
     }
 
     const [cancelAllModalOpen, setCancelAllModalOpen] = useState(false)
     const [cancelAllAppoint, setCancelAllAppoint] = useState({})
+
 
     return (
         <div className={`${style.appointment_wrapper} ${darkmodeOn && style.dark}`}>
@@ -254,10 +307,10 @@ const AppointmentList = () => {
                     </div>
 
                     <div className={`${style.modal_content_container} ${darkmodeOn && style.dark}`}>
-                    <p style={{
-                        fontWeight: 600,
-                        marginBottom: "2rem"
-                    }}>All appointments scheduled for <span style={{ textDecoration: "underline"}}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
+                        <p style={{
+                            fontWeight: 600,
+                            marginBottom: "2rem"
+                        }}>All appointments scheduled for <span style={{ textDecoration: "underline" }}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
 
                         <p>Reason for cancelling appointment</p>
                         <div>
