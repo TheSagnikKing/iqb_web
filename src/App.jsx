@@ -59,6 +59,7 @@ import { useSelector } from 'react-redux';
 import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
+import Dummy from './Admin/Dummy';
 // import Appointment from './Admin/Appointment/Appointment';
 
 const MobileCus = React.lazy(() => import("../src/mobileCus/MobileCust"))
@@ -223,6 +224,8 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
+
+                    <Route path="/dummy" element={<Dummy/>}/>
                     <Route
                       path="/admin-dashboard/editprofile"
                       element={

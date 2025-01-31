@@ -464,6 +464,7 @@ const CreateAppointment = () => {
 
 
     const [barberofappointmentdays, setBarberofappointmentdays] = useState([])
+    const [barberfullybookeddays, setBarberfullybookeddays] = useState([])
 
     useEffect(() => {
         if (selectedBarberId) {
@@ -473,15 +474,27 @@ const CreateAppointment = () => {
                     barberId: selectedBarberId
                 })
 
-                console.log(data)
+                // console.log(data)
 
                 // setBarberofappointmentdays(data.response?.appointmentDays)
                 setBarberofappointmentdays(data?.response)
             }
 
+            const getfullybookedDayshandler = async () => {
+                const { data } = await api.post("/api/barberAppointmentDays/getFullyBookedDatesBySalonIdBarberId", {
+                    salonId,
+                    barberId: selectedBarberId
+                })
+
+                console.log(data)
+                setBarberfullybookeddays(data?.response)
+            }
+
             getbarberappdayshandler()
+            getfullybookedDayshandler()
         }
     }, [selectedBarberId])
+
 
     const isDisabled = (date) => {
         const formattedDate = date.toLocaleDateString("en-CA").split('T')[0];
@@ -595,6 +608,8 @@ const CreateAppointment = () => {
                                                                 setSelectedServices([])
                                                                 setDateOfBirthError("")
                                                                 setSelectServiceError("")
+                                                                setOpenCalender(false)
+                                                                setDateOfBirth("")
                                                             }}
                                                                 key={b.barberId}
                                                                 style={{
@@ -797,6 +812,11 @@ const CreateAppointment = () => {
                                         //     return view === 'month' && barberofappointmentdays?.includes(date.getDay());
                                         // }}
                                         tileDisabled={({ date }) => isDisabled(date)}
+                                        tileClassName={({ date }) =>
+                                            barberfullybookeddays.includes(date.toLocaleDateString('en-CA'))
+                                                ? style.bookedDays
+                                                : ''
+                                        }
                                     />
                                 </div>
                             </ClickAwayListener>

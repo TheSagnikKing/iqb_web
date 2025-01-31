@@ -11,11 +11,10 @@
     -o-border-radius: var(--list-wrapper-border-radius);
 }
 
-.day_off {
-    background-color: red !important;
+.bookedDays {
+    background-color: rgba(255, 0, 0, 0.297) !important;
     color: white !important;
-    pointer-events: none; /* Ensures it's disabled */
-    opacity: 0.6;
+    pointer-events: none;
 }
 
 .appointment_book_wrapper>div:nth-child(1) {
