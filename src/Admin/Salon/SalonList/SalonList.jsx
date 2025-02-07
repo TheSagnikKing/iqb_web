@@ -344,7 +344,7 @@ const SalonList = () => {
         }
       }
 
-      // console.log(paymentData)
+      // console.log("old ", paymentData)
 
       makePayment(paymentData)
     } else {
@@ -590,7 +590,7 @@ const SalonList = () => {
                 alignItems: "center",
                 justifyContent: "space-between"
               }}>
-                <button className={style.salon_settings_btn}
+                {/* <button className={style.salon_settings_btn}
                   // onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
                   //   toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
                   //     duration: 3000,
@@ -606,7 +606,7 @@ const SalonList = () => {
                   onClick={buyHandler}
                 >
                   {renew ? "Renewal" : "Buy"}
-                </button>
+                </button> */}
 
                 {
                   adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>

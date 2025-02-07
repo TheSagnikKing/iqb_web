@@ -45,6 +45,7 @@ const AppointmentCalender = React.lazy(() => import("./Admin/Appointment/Appoint
 const AppointmentList = React.lazy(() => import("./Admin/Appointment/AppointmentList/AppointmentList"))
 const AdminBookAppointments = React.lazy(() => import("./Admin/BookAppointment/CreateAppointment/CreateAppointment"))
 const AdminBookEditAppointments = React.lazy(() => import("./Admin/BookAppointment/EditAppointment/EditAppointment"))
+const AdminSubscription = React.lazy(() => import("./Admin/Subscription/Subscription"))
 
 const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 const PaymentStatus = React.lazy(() => import("./Admin/Payment/PaymentStatus/PaymentStatus"))
@@ -225,7 +226,7 @@ const App = () => {
                       }
                     />
 
-                    <Route path="/dummy" element={<Dummy/>}/>
+                    <Route path="/dummy" element={<Dummy />} />
                     <Route
                       path="/admin-dashboard/editprofile"
                       element={
@@ -363,6 +364,16 @@ const App = () => {
                     />
 
                     <Route
+                      path="/admin-subscription"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminSubscription />
+                        </ErrorBoundary>
+                      }
+                    />
+
+
+                    <Route
                       path="/admin-paymentstatus"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -442,11 +453,11 @@ const App = () => {
 
                     <Route
                       path='/barber-appointlist'
-                      element = {
+                      element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberAppointmentList/>
+                          <BarberAppointmentList />
                         </ErrorBoundary>
-                      }                    
+                      }
                     />
                   </Route>
                 </Route>

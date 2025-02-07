@@ -9,7 +9,8 @@ import {
     Adminappointmenticon,
     Adminreporticon,
     HistoryIcon,
-    PaymentIcon
+    PaymentIcon,
+    Subscription
 } from "../../icons";
 import { useEffect, useState } from "react";
 
@@ -227,6 +228,13 @@ const MenuData = () => {
                 },
                 {
                     id: 10,
+                    title: "Subscription",
+                    icon: <Subscription />,
+                    url: "/admin-subscription",
+                    show: true
+                },
+                {
+                    id: 11,
                     title: "Payments",
                     icon: <PaymentIcon />,
                     url: "/admin-paymentstatus",
