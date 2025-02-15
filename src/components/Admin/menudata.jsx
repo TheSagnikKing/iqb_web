@@ -240,13 +240,13 @@ const MenuData = () => {
                     url: "/admin-subscription",
                     show: true
                 },
-                {
-                    id: 12,
-                    title: "Payments",
-                    icon: <PaymentIcon />,
-                    url: "/admin-paymentstatus",
-                    show: true
-                }
+                // {
+                //     id: 12,
+                //     title: "Payments",
+                //     icon: <PaymentIcon />,
+                //     url: "/admin-paymentstatus",
+                //     show: true
+                // }
             ];
 
             setMenuItems(items);
