@@ -118,7 +118,7 @@ const Report = () => {
               <XAxis
                 dataKey={selectedFilter === "daily" ? "date" : selectedFilter === "weekly" ? "week" : "month"}
                 tick={{ fontSize: 12 }}
-                angle={-45}
+                angle={selectedFilter === "daily" ? -45 : 0}
                 textAnchor="end"
                 dy={10}
                 interval={0}
