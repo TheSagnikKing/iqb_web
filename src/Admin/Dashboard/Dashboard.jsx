@@ -3,11 +3,13 @@ import Skeleton from 'react-loading-skeleton'
 import style from './Dashboard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel';
-import { ResponsiveContainer, LineChart, Line, BarChart, Bar } from 'recharts'
+// import { ResponsiveContainer, LineChart, Line, BarChart, Bar } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
 import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction';
+import api from '../../Redux/api/Api';
 
 const Dashboard = () => {
 
@@ -194,6 +196,64 @@ const Dashboard = () => {
 
   const darkmodeOn = darkMode === "On"
 
+
+  const [reportData, setReportData] = useState([])
+
+  useEffect(() => {
+    const getAllReports = async () => {
+      const { data } = await api.post("/api/reports/getdashboardReports", {
+        salonId,
+        reportType: "daily"
+      })
+
+      setReportData(data.response)
+
+    }
+
+    getAllReports()
+
+  }, [])
+
+//   const dailyreport = [
+//     { date: "2025-01-16", count: 3 },
+//     { date: "2025-01-17", count: 0 },
+//     { date: "2025-01-18", count: 5 },
+//     { date: "2025-01-19", count: 2 },
+//     { date: "2025-01-20", count: 0 },
+//     { date: "2025-01-21", count: 7 },
+//     { date: "2025-01-22", count: 1 },
+//     { date: "2025-01-23", count: 0 },
+//     { date: "2025-01-24", count: 4 },
+//     { date: "2025-01-25", count: 0 },
+//     { date: "2025-01-26", count: 2 },
+//     { date: "2025-01-27", count: 8 },
+//     { date: "2025-01-28", count: 0 },
+//     // { date: "2025-01-29", count: 3 },
+//     // { date: "2025-01-30", count: 0 },
+//     // { date: "2025-01-31", count: 6 },
+//     // { date: "2025-02-01", count: 1 },
+//     // { date: "2025-02-02", count: 0 },
+//     // { date: "2025-02-03", count: 9 },
+//     // { date: "2025-02-04", count: 0 },
+//     // { date: "2025-02-05", count: 4 },
+//     // { date: "2025-02-06", count: 2 },
+//     // { date: "2025-02-07", count: 6 },
+//     // { date: "2025-02-08", count: 5 },
+//     // { date: "2025-02-09", count: 0 },
+//     // { date: "2025-02-10", count: 3 },
+//     // { date: "2025-02-11", count: 1 },
+//     // { date: "2025-02-12", count: 0 },
+//     // { date: "2025-02-13", count: 7 },
+//     // { date: "2025-02-14", count: 0 },
+//     // { date: "2025-02-15", count: 2 }
+//   ];
+
+//   const formattedReport = dailyreport.map((item) => ({
+//     ...item,
+//     date: new Date(item.date).toLocaleDateString("en-US", { month: "short", day: "2-digit" }) // e.g., "Feb, 07"
+// }));
+
+
   return (
     salonId === 0 ? (<>
       <main className={style.dashboard}>
@@ -345,7 +405,7 @@ const Dashboard = () => {
                   <Carousel
                     showThumbs={false}
                     infiniteLoop={true}
-                    autoPlay={true}
+                    autoPlay={false}
                     interval={5000}
                     showStatus={false}
                     showArrows={false}
@@ -357,14 +417,24 @@ const Dashboard = () => {
                     <div className={style.r_chart}>
                       <p>Report-Type One</p>
                       <div>
-                        <ResponsiveContainer width="100%" height="90%" style={{}}>
-                          <BarChart width={150} height={40} data={data2}>
+                        {/* <ResponsiveContainer width="100%" height="90%" style={{}}>
+                          <BarChart width={150} height={40} data={dailyreport}>
                             <Bar dataKey="uv" fill="rgba(255, 0, 0, 0.393)" stroke="#000000" strokeWidth={1} />
+                          </BarChart>
+                        </ResponsiveContainer> */}
+
+                        <ResponsiveContainer width="100%" height="100%" style={{ marginTop: 20}}>
+                          <BarChart width={150} height={50} data={reportData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="date" tick={{ fontSize: 10 }} angle={-45} textAnchor="end" />
+                            {/* <YAxis /> */}
+                            <Tooltip />
+                            <Bar dataKey="totalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="#000000" strokeWidth={1} />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
 
-                      <div>
+                      {/* <div>
                         <div>
                           <div onClick={() => alert("Monthly Report")}></div>
                           <p>Monthly Report</p>
@@ -377,10 +447,10 @@ const Dashboard = () => {
                           <div onClick={() => alert("Monthly Report")}></div>
                           <p>Daily Report</p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
 
-                    <div className={style.r_chart}>
+                    {/* <div className={style.r_chart}>
                       <p>Report-Type Two</p>
                       <div>
                         <ResponsiveContainer width="100%" height="90%" style={{}}>
@@ -430,7 +500,7 @@ const Dashboard = () => {
                           <p>Daily Report</p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
 
                   </Carousel>
@@ -451,9 +521,9 @@ const Dashboard = () => {
                 {
                   getAllQueueListLoading ?
                     <div className={style.queue_body_loading}>
-                      <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }} 
-                      baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                      highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                      <Skeleton count={7} height={"6rem"} style={{ marginBottom: "1rem" }}
+                        baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                        highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
                     </div> :
                     getAllQueueListResolve && queuelist?.length > 0 ?
                       <div className={style.queue_body}>

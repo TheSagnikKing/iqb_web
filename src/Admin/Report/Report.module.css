@@ -1,0 +1,110 @@
+.salon_wrapper {
+    /*theextra2remisforpaddingbottom*/
+    height: var(--list-wrapper-height);
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--light-color-4);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+}
+
+.salon_wrapper>div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.salon_wrapper>div:nth-child(1)>p {
+    font-size: var(--font-size-1);
+    font-weight: 600;
+}
+
+.salon_content_wrapper {
+    width: 100%;
+    height: var(--list-wrapper-common-height);
+    border-radius: var(--list-wrapper-border-radius);
+    -webkit-border-radius: var(--list-wrapper-border-radius);
+    -moz-border-radius: var(--list-wrapper-border-radius);
+    -ms-border-radius: var(--list-wrapper-border-radius);
+    -o-border-radius: var(--list-wrapper-border-radius);
+    /* background-color: var(--light-color-4); */
+}
+
+.salon_content_body {
+    height: var(--list-wrapper-common-height);
+    width: 100%;
+    overflow: auto;
+}
+
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .bottom div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .bottom p {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .bottom input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  /* Dark Mode Styles */
+  .dark {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Active Checkbox Styles */
+  .checked {
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Unchecked */
+  .unchecked {
+    opacity: 0.5;
+  }
+  
+
+/* dark mode on */
+
+.salon_wrapper.dark{
+    background-color: var(--dark-color-2);
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
+}
+
+
+.salon_content_body.dark>div:not(:nth-child(1))>p:nth-child(1),
+.salon_content_body.dark>div:nth-child(1)>p:nth-child(1) {
+    background-color: rgba(32, 33, 36, 0.5) !important;
+}
+
+.salon_content_body.dark>div:nth-child(1) {
+    background-color: var(--dark-color-2);
+}
+
+.salon_content_body.dark>div {
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+}

@@ -50,6 +50,7 @@ const AdminSubscription = React.lazy(() => import("./Admin/Subscription/Subscrip
 const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 const PaymentStatus = React.lazy(() => import("./Admin/Payment/PaymentStatus/PaymentStatus"))
 const BarberAppointmentList = React.lazy(() => import("./Barber/AppointmentList/AppointmentList"))
+const AdminReports = React.lazy(() => import("./Admin/Report/Report"))
 
 import ProtectedAdminRoute from "./Admin/ProtectedRoutes/ProtectedRoute"
 import ProtectedAdminAuthRoute from "./Admin/ProtectedRoutes/ProtectedAuthRoute"
@@ -371,7 +372,15 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-
+                    
+                    <Route
+                      path="/admin-reports"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminReports />
+                        </ErrorBoundary>
+                      }
+                    />
 
                     <Route
                       path="/admin-paymentstatus"

@@ -228,13 +228,20 @@ const MenuData = () => {
                 },
                 {
                     id: 10,
+                    title: "Reports",
+                    icon: <Adminqueueicon />,
+                    url: "/admin-reports",
+                    show: true
+                },
+                {
+                    id: 11,
                     title: "Subscription",
                     icon: <Subscription />,
                     url: "/admin-subscription",
                     show: true
                 },
                 {
-                    id: 11,
+                    id: 12,
                     title: "Payments",
                     icon: <PaymentIcon />,
                     url: "/admin-paymentstatus",
