@@ -190,6 +190,13 @@ const Subscription = () => {
         }
     }, [paymentType])
 
+    const [modalValue, setModalValue] = useState({
+        queue: false,
+        appointment: false
+    })
+
+    console.log(paymentType)
+
     return (
         <div className={`${style.subscription_status_wrapper} ${darkmodeOn && style.dark}`}>
             <div>
@@ -199,7 +206,7 @@ const Subscription = () => {
 
             <div className={`${style.subscription_status_content_wrapper} ${darkmodeOn && style.dark}`}>
 
-                {
+                {/* {
                     getSubscriptionLoading ? (
                         <>
                             <Skeleton
@@ -268,12 +275,130 @@ const Subscription = () => {
                                 </div>
                             )
                         })
+                } */}
+
+
+                {
+                    getSubscriptionLoading ? (
+                        <>
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+
+                            <Skeleton
+                                count={1}
+                                height={"25rem"}
+                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+                        </>
+                    ) :
+                        getSubscriptiondata.map((s, index) => {
+                            return (
+                                <div className={`${style.subscription_content_item} ${darkmodeOn && style.dark}`}
+                                    key={s.salonId}
+                                >
+                                    <div>
+                                        <img src={s?.salonLogo?.[0]?.url} alt="" />
+                                        <p>{s?.salonName}</p>
+                                    </div>
+                                    <div>
+
+                                        <div>
+                                            <div>
+                                                <div
+                                                style={{
+                                                    display:"flex",
+                                                    alignItems:"center",
+                                                    gap: 10,
+                                                    marginInline: "auto"
+                                                }}
+                                                >
+                                                <p>Queue</p>
+                                                <div style={{
+                                                    height: "3rem",
+                                                    background: "var(--color-3)",
+                                                    paddingInline: "1rem",
+                                                    color: "var(--color-2)",
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    borderRadius: "2rem"
+                                                }}><p>Free</p></div>
+                                                </div>
+                                                <p>expires in 7 Jun, 2025 1:46 PM</p>
+                                                <button
+                                                    onClick={() => {
+                                                        setPaymentModalOpen(true)
+                                                        setModalValue({
+                                                            queue: true,
+                                                            appointment: false
+                                                        })
+                                                        setCurrentSalonCurrency(s?.currency)
+                                                        setCurrentSalonisoCurrency(s?.isoCurrencyCode)
+                                                        setSelectedSalonId(s?.salonId)
+                                                    }}
+                                                >Buy</button>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <p>Appointment</p>
+                                                <p>expires in 7 Jun, 2025 1:46 PM</p>
+                                                <button
+                                                    onClick={() => {
+                                                        setPaymentModalOpen(true)
+                                                        setModalValue({
+                                                            queue: false,
+                                                            appointment: true
+                                                        })
+                                                    }}
+                                                >Buy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
                 }
+
 
             </div>
 
 
-            <Modal
+            {/* <Modal
                 open={paymentModalOpen}
                 onClose={() => {
                     setPaymentModalOpen(false)
@@ -392,17 +517,101 @@ const Subscription = () => {
 
                         </div>
 
-                        {/* <div>
-                            <p>Use this dummy card information for payment testing.</p>
-                            <p>Dummy card: 4242 4242 4242 4242</p>
-                            <p>MM/YY: 03/34</p>
-                            <p>CVC: 456</p>
-                        </div> */}
-
                         {
                             paymentType === "Free" ?
                                 (<button className={style.salon_payment_btn} onClick={freePaymentHandler}>Free</button>) :
                                 (<button className={style.salon_payment_btn} onClick={paymentHandler}>Pay {currentSalonCurrency}{totalPrice}</button>)
+                        }
+                    </div>
+                </div>
+
+            </Modal> */}
+
+
+            <Modal
+                open={paymentModalOpen}
+                // onClose={() => {
+                //     setPaymentModalOpen(false)
+                //     setServicesData([
+                //         {
+                //             id: 1,
+                //             name: "Appointment",
+                //             value: false,
+                //             price: 300,
+                //             currency: "usd",
+                //             quantity: 1
+                //         },
+                //         {
+                //             id: 2,
+                //             name: "Queueing",
+                //             value: false,
+                //             price: 200,
+                //             currency: "usd",
+                //             quantity: 1
+                //         }
+                //     ])
+                //     setAppointmentCheck(false)
+                //     setQueueingCheck(false)
+                //     setPaymentType("Free")
+                // }}
+
+                onClose={() => {
+                    setModalValue({
+                        queue: false,
+                        appointment: false
+                    })
+                    setPaymentModalOpen(false)
+                }}
+
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className={`${style.modal_payment_container} ${darkmodeOn && style.dark}`}>
+                    <div>
+                        <p>Buy Services</p>
+                        <button onClick={() => {
+                            // setPaymentModalOpen(false)
+                            // setPaymentType("Free")
+                            setModalValue({
+                                queue: false,
+                                appointment: false
+                            })
+                            setPaymentModalOpen(false)
+                            setPaymentType("Free")
+                        }}><CloseIcon /></button>
+                    </div>
+
+                    <div className={`${style.modal_payment_content_container} ${darkmodeOn && style.dark}`}>
+
+                        <div>
+                            <p>{modalValue.queue ? "Queue" : "Appointment"}</p>
+                            <p>{paymentType === "Free" ? `${currentSalonCurrency}0` : `${currentSalonCurrency}${modalValue.queue ? 300 : 400}`}</p>
+                        </div>
+                        <div>
+                            <p>Plan Validity</p>
+                            <p>{paymentType === "Free" ? 14 : planValidityDate}days</p>
+                        </div>
+
+                        <div
+                            value={paymentType}
+                            onChange={(e) => setPaymentType(e.target.value)}
+                        >
+                            <p>Type</p>
+                            <select name="" id="">
+                                <option value="Free">Free</option>
+                                <option value="Paid">Paid</option>
+                            </select>
+
+                        </div>
+
+                        {
+                            paymentType === "Free" ?
+                                (<button className={style.salon_payment_btn}
+                                // onClick={freePaymentHandler}
+                                >Free</button>) :
+                                (<button className={style.salon_payment_btn}
+                                // onClick={paymentHandler}
+                                >Pay {currentSalonCurrency}{totalPrice}</button>)
                         }
                     </div>
                 </div>

@@ -495,9 +495,9 @@ body {
 }
 
 
-.light-theme .rmdp-day {
+/* .light-theme .rmdp-day {
   color: #000 !important;
-}
+} */
 
 .light-theme .rmdp-header-values {
   color: #000 !important;
@@ -510,6 +510,10 @@ body {
   border: 1px solid #444 !important;
 }
 
+.dark-theme .rmdp-month-picker, .rmdp-year-picker {
+  background-color: #222 !important;
+}
+
 .dark-theme .rmdp-day {
   color: #fff !important;
 }
@@ -518,6 +522,12 @@ body {
   color: #fff !important;
 }
 
+
 .rmdp-shadow {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) !important;
 }
+
+
+.dark-input .rmdp-input{
+  background-color: red !important;
+} 

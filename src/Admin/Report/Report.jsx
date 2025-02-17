@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './Report.module.css'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import { ClickAwayListener } from '@mui/material'
 import Calendar from 'react-calendar'
 import api from '../../Redux/api/Api'
 import DatePicker from "react-multi-date-picker";
+import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction'
+import Skeleton from 'react-loading-skeleton'
 
 const Report = () => {
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const dispatch = useDispatch()
 
   const darkMode = useSelector(darkmodeSelector)
 
@@ -42,7 +45,7 @@ const Report = () => {
   // State for checkboxes
   const [selectedFilter, setSelectedFilter] = useState("daily");
 
-  console.log(selectedFilter)
+  // console.log(selectedFilter)
 
 
   const [reportData, setReportData] = useState([])
@@ -77,7 +80,7 @@ const Report = () => {
     setSelectedDates(dates);
   };
 
-  console.log(selectedDates)
+  // console.log(selectedDates)
 
 
   const [isMobile, setIsMobile] = useState(false);
@@ -101,12 +104,40 @@ const Report = () => {
 
   const [selectedbarber, setSelectedbarber] = useState("")
 
+  const BarberListcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    BarberListcontrollerRef.current = controller;
+
+    dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+    return () => {
+      if (BarberListcontrollerRef.current) {
+        BarberListcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+  const {
+    loading: getAdminBarberListLoading,
+    getAllBarbers: BarberList
+  } = getAdminBarberList
+
+  // console.log(BarberList)
+
+  const [weekOption, setWeekOption] = useState("");
+  const [monthOption, setMonthOption] = useState("");
+  const [dayOption, setDayOption] = useState("");
+
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Reports</p>
         <div className={`${style.select_container}`}>
-          <div className={`${style.barber_container}`}>
+          <div className={`${style.barber_container} ${darkmodeOn && style.dark}`}>
             <input
               placeholder='Select Barber'
               value={selectedbarber}
@@ -116,25 +147,42 @@ const Report = () => {
             {
               openbarberContainer && (
                 <ClickAwayListener onClickAway={() => setOpenBarberContainer(false)}>
-                  <div className={style.barber_container_dropdown}>
+                  <div className={`${style.barber_container_dropdown} ${darkmodeOn && style.dark}`}>
+
                     {
-                      [0, 1, 2, 3, 4, 5, 6, 7, 8].map((b) => {
-                        return (
-                          <div
-                            className={style.barber_item}
-                            key={b}
-                            style={{
-                              border: selectedbarber === b ? "0.1rem solid rgba(0,0,0,0.6)" : "0.1rem solid rgba(0,0,0,0.2)"
-                            }}
-                            onClick={() => setSelectedbarber(b)}
-                          >
-                            <div>
-                              <img src="https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg" alt="" />
+                      getAdminBarberListLoading ? (
+                        <Skeleton count={6} height={"4.5rem"} style={{ marginBottom: "1rem" }}
+                          baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                        />
+                      ) : BarberList?.length > 0 ? (
+                        BarberList.map((b) => {
+                          return (
+                            <div
+                              className={`${style.barber_item} ${darkmodeOn && style.dark}`}
+                              key={b.barberId}
+                              style={{
+                                border: selectedbarber === b.name ? "0.1rem solid rgba(0,0,0,0.6)" : "0.1rem solid rgba(0,0,0,0.2)"
+                              }}
+                              onClick={() => setSelectedbarber(b.name)}
+                            >
+                              <div>
+                                <img src={b?.profile?.[0]?.url} alt="" />
+                              </div>
+                              <p>{b?.name}</p>
                             </div>
-                            <p>Adilson</p>
-                          </div>
-                        )
-                      })
+                          )
+                        })
+                      ) : (
+                        <div style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "100%"
+                        }}>
+                          <p style={{ fontSize: "1.4rem" }}>No barber</p>
+                        </div>
+                      )
                     }
 
                   </div>
@@ -149,20 +197,28 @@ const Report = () => {
                   numberOfMonths={2}
                   value={selectedDates}
                   range
-                  placeholder='yyyy/mm/dd - yyyy/mm/dd'
+                  placeholder='yyyy-mm-dd - yyyy-mm-dd'
                   onChange={handleDateChange}
                   dateSeparator={" - "}
-                  portal={true}
                   calendarPosition={"bottom-right"}
                   className={darkmodeOn ? "dark-theme" : "light-theme"}
-                  isOpen={true}
+                  style={{
+                    background: darkmodeOn ? "#222" : "#fff"
+                  }}
                 />
               </div>
             )
           }
 
+          <select name="" id="">
+            <option value="daily">daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+
 
         </div>
+        
 
       </div>
 
@@ -183,9 +239,92 @@ const Report = () => {
       }
 
 
-      <div className={`${style.salon_content_wrapper} ${darkmodeOn && style.dark}`}>
-        <div className={`${style.salon_content_body} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.salon_content_wrapper}`}>
 
+        {/* <div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
+          <div
+            className={selectedFilter === "daily" ? style.checked : style.unchecked}
+            onClick={() => setSelectedFilter("daily")}
+          >
+            <p>Daily</p>
+            <input type="checkbox" checked={selectedFilter === "daily"} readOnly />
+          </div>
+
+          <div
+            className={selectedFilter === "weekly" ? style.checked : style.unchecked}
+            onClick={() => setSelectedFilter("weekly")}
+          >
+            <p>Weekly</p>
+            <input type="checkbox" checked={selectedFilter === "weekly"} readOnly />
+          </div>
+
+          <div
+            className={selectedFilter === "monthly" ? style.checked : style.unchecked}
+            onClick={() => setSelectedFilter("monthly")}
+          >
+            <p>Monthly</p>
+            <input type="checkbox" checked={selectedFilter === "monthly"} readOnly />
+          </div>
+
+          <div>
+            <p>Type</p>
+            <p>Queue Served</p>
+          </div>
+        </div> */}
+
+
+<div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
+      <div
+        className={selectedFilter === "daily" ? style.checked : style.unchecked}
+        onClick={() => setSelectedFilter("daily")}
+      >
+        <p>Daily</p>
+        {selectedFilter === "daily" && (
+          <select onChange={(e) => setDayOption(e.target.value)} value={dayOption}>
+            <option value="today">Yesterday</option>
+            <option value="last7days">Last 7 Days</option>
+            <option value="last10days">Last 10 Days</option>
+          </select>
+        )}
+      </div>
+
+      <div
+        className={selectedFilter === "weekly" ? style.checked : style.unchecked}
+        onClick={() => setSelectedFilter("weekly")}
+      >
+        <p>Weekly</p>
+        {selectedFilter === "weekly" && (
+          <select onChange={(e) => setWeekOption(e.target.value)} value={weekOption}>
+            <option value="currentWeek">Current Week</option>
+            <option value="last1Week">Last 1 Week</option>
+            <option value="last4Weeks">Last 4 Weeks</option>
+          </select>
+        )}
+      </div>
+
+      <div
+        className={selectedFilter === "monthly" ? style.checked : style.unchecked}
+        onClick={() => setSelectedFilter("monthly")}
+      >
+        <p>Monthly</p>
+        {selectedFilter === "monthly" && (
+          <select onChange={(e) => setMonthOption(e.target.value)} value={monthOption}>
+            <option value="currentMonth">Current Month</option>
+            <option value="last3Months">Last 3 Months</option>
+            <option value="last6Months">Last 6 Months</option>
+            <option value="last6Months">Last 12 Months</option>
+          </select>
+        )}
+      </div>
+
+      {/* <div>
+        <p>Type</p>
+        <p>Queue Served</p>
+      </div> */}
+    </div>
+
+
+        <div className={`${style.salon_content_body}`}>
           <p style={{
             marginBottom: 20
           }}>Queue Report</p>
@@ -210,36 +349,7 @@ const Report = () => {
             </BarChart>
           </ResponsiveContainer>
 
-          <div className={`${style.bottom} ${darkmodeOn && style.dark}`}>
-            <div
-              className={selectedFilter === "daily" ? style.checked : style.unchecked}
-              onClick={() => setSelectedFilter("daily")}
-            >
-              <p>Daily</p>
-              <input type="checkbox" checked={selectedFilter === "daily"} readOnly />
-            </div>
 
-            <div
-              className={selectedFilter === "weekly" ? style.checked : style.unchecked}
-              onClick={() => setSelectedFilter("weekly")}
-            >
-              <p>Weekly</p>
-              <input type="checkbox" checked={selectedFilter === "weekly"} readOnly />
-            </div>
-
-            <div
-              className={selectedFilter === "monthly" ? style.checked : style.unchecked}
-              onClick={() => setSelectedFilter("monthly")}
-            >
-              <p>Monthly</p>
-              <input type="checkbox" checked={selectedFilter === "monthly"} readOnly />
-            </div>
-
-            <div>
-              <p>Type</p>
-              <p>Queue Served</p>
-            </div>
-          </div>
 
           {/* <p style={{
               marginBottom: 20

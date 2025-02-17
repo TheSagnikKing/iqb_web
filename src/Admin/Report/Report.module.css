@@ -42,7 +42,7 @@
 }
 
 
-.bottom {
+/* .filter_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,22 +52,22 @@
   margin-top: 20px;
 }
 
-.bottom div {
+.filter_container div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.bottom p {
+.filter_container p {
   font-size: 14px;
   font-weight: 500;
 }
 
-.bottom input {
+.filter_container input {
   width: 16px;
   height: 16px;
   cursor: pointer;
-}
+} */
 
 /* Dark Mode Styles */
 .dark {
@@ -75,16 +75,86 @@
   color: white;
 }
 
+.filter_container_content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 /* Active Checkbox Styles */
 .checked {
   background-color: rgba(255, 0, 0, 0.2);
   padding: 5px;
   border-radius: 5px;
+  margin: 10px;
 }
 
 /* Unchecked */
 .unchecked {
   opacity: 0.5;
+}
+
+/* Container styling for the entire filter section */
+.filter_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* gap: 10px; */
+  /* padding: 20px; */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  /* padding-inline: 1rem; */
+}
+
+.filter_container.dark {
+  background-color: #333;
+  color: white;
+}
+
+/* Style for each filter option (Daily, Weekly, Monthly) */
+.filter_container>div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.filter_container>div:hover {
+  background-color: #f0f0f0;
+}
+
+.filter_container>div.checked {
+  background-color: rgba(255, 0, 0, 0.2);
+  /* Checked state color */
+  color: white;
+}
+
+.filter_container>div.unchecked {
+  background-color: #f9f9f9;
+  /* Unchecked state color */
+  color: #333;
+}
+
+/* Styling the select dropdown */
+select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+select:focus {
+  outline: none;
+  background-color: #e8f0fe;
+  border-color: #4CAF50;
 }
 
 
@@ -188,4 +258,19 @@
 
 .salon_content_body.dark>div {
   border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+}
+
+.barber_container.dark {
+  &>input {
+    background-color: #222;
+    border: 0.1rem solid #c0c4d6;
+  }
+}
+
+.barber_container_dropdown.dark {
+  background-color: #222;
+}
+
+.barber_item.dark {
+  background-color: #333;
 }
