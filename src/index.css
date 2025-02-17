@@ -472,3 +472,52 @@ body {
   background-color: var(--color-2) !important;
   color: var(--light-color-4) !important;
 }
+
+.rmdp-input {
+  height: 3rem !important;
+  padding-inline: 1rem !important;
+  text-align: "center" !important;
+  font-size: 1.4rem !important;
+  width: 20rem;
+}
+
+.rmdp-input::placeholder {
+  font-size: 1.2rem !important;
+  text-transform: uppercase !important;
+}
+
+
+/* Light Mode */
+.light-theme .rmdp-calendar {
+  background-color: white !important;
+  /* color: black !important; */
+  border: 1px solid #ddd !important;
+}
+
+
+.light-theme .rmdp-day {
+  color: #000 !important;
+}
+
+.light-theme .rmdp-header-values {
+  color: #000 !important;
+}
+
+/* Dark Mode */
+.dark-theme .rmdp-calendar {
+  background-color: #222 !important;
+  /* color: white !important; */
+  border: 1px solid #444 !important;
+}
+
+.dark-theme .rmdp-day {
+  color: #fff !important;
+}
+
+.dark-theme .rmdp-header-values {
+  color: #fff !important;
+}
+
+.rmdp-shadow {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) !important;
+}

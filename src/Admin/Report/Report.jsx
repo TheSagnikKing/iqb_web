@@ -6,6 +6,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } fro
 import { ClickAwayListener } from '@mui/material'
 import Calendar from 'react-calendar'
 import api from '../../Redux/api/Api'
+import DatePicker from "react-multi-date-picker";
 
 const Report = () => {
 
@@ -37,20 +38,6 @@ const Report = () => {
     date: new Date(item.date).toLocaleDateString("en-US", { month: "short", day: "2-digit" }) // e.g., "Feb, 07"
   }));
 
-  const [date, setDate] = useState("")
-  const [openCalender, setOpenCalender] = useState(false)
-
-  const handleClickAway = () => {
-    setOpenCalender(false);
-  };
-
-
-  const onChangeHandler = (dateInput) => {
-    const formattedDate = convertDateToYYYYMMDD(dateInput);
-    onChange(formattedDate)
-    setHandler(setDateOfBirth, formattedDate, "dateOfBirth", setDateOfBirthError)
-    setOpenCalender(false)
-  }
 
   // State for checkboxes
   const [selectedFilter, setSelectedFilter] = useState("daily");
@@ -76,30 +63,125 @@ const Report = () => {
 
   }, [selectedFilter])
 
+  const [openCalender, setOpenCalender] = useState(false)
+
+  const [selectedDates, setSelectedDates] = useState([])
+
+  // const handleDateChange = (dates) => {
+  //   const formatedDates = dates.map((date) => date.format("YYYY-MM-DD"))
+  //   setSelectedDates(formatedDates)
+  // }
+
+  const handleDateChange = (dates) => {
+    console.log(dates)
+    setSelectedDates(dates);
+  };
+
+  console.log(selectedDates)
+
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  const [openbarberContainer, setOpenBarberContainer] = useState(false)
+
+  const [selectedbarber, setSelectedbarber] = useState("")
+
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
       <div>
         <p>Reports</p>
-        {/* <div>
-          <input
-            placeholder="Select Date"
-            onClick={() => setOpenCalender((prev) => !prev)}
-            value={date}
-            readOnly
-          />
+        <div className={`${style.select_container}`}>
+          <div className={`${style.barber_container}`}>
+            <input
+              placeholder='Select Barber'
+              value={selectedbarber}
+              onClick={() => setOpenBarberContainer((prev) => !prev)}
+            />
 
-          {openCalender && (
-            <ClickAwayListener onClickAway={handleClickAway}>
-              <div className={style.calender_drop_container}>
-                <Calendar
-                  onChange={onChangeHandler}
-                  value={value}
+            {
+              openbarberContainer && (
+                <ClickAwayListener onClickAway={() => setOpenBarberContainer(false)}>
+                  <div className={style.barber_container_dropdown}>
+                    {
+                      [0, 1, 2, 3, 4, 5, 6, 7, 8].map((b) => {
+                        return (
+                          <div
+                            className={style.barber_item}
+                            key={b}
+                            style={{
+                              border: selectedbarber === b ? "0.1rem solid rgba(0,0,0,0.6)" : "0.1rem solid rgba(0,0,0,0.2)"
+                            }}
+                            onClick={() => setSelectedbarber(b)}
+                          >
+                            <div>
+                              <img src="https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg" alt="" />
+                            </div>
+                            <p>Adilson</p>
+                          </div>
+                        )
+                      })
+                    }
+
+                  </div>
+                </ClickAwayListener>
+              )
+            }
+          </div>
+          {
+            !isMobile && (
+              <div>
+                <DatePicker
+                  numberOfMonths={2}
+                  value={selectedDates}
+                  range
+                  placeholder='yyyy/mm/dd - yyyy/mm/dd'
+                  onChange={handleDateChange}
+                  dateSeparator={" - "}
+                  portal={true}
+                  calendarPosition={"bottom-right"}
+                  className={darkmodeOn ? "dark-theme" : "light-theme"}
+                  isOpen={true}
                 />
               </div>
-            </ClickAwayListener>
-          )}
-        </div> */}
+            )
+          }
+
+
+        </div>
+
       </div>
+
+      {
+        isMobile && (
+          <DatePicker
+            numberOfMonths={1}
+            value={selectedDates}
+            range
+            placeholder='yyyy/mm/dd - yyyy/mm/dd'
+            onChange={handleDateChange}
+            dateSeparator={" - "}
+            portal={true}
+            calendarPosition={"bottom-left"}
+            className={darkmodeOn ? "dark-theme" : "light-theme"}
+          />
+        )
+      }
+
 
       <div className={`${style.salon_content_wrapper} ${darkmodeOn && style.dark}`}>
         <div className={`${style.salon_content_body} ${darkmodeOn && style.dark}`}>
