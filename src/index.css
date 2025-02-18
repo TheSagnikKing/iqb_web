@@ -282,6 +282,11 @@ body {
     grid-template-columns: 1fr;
     height: 60svh;
   }
+
+
+  .rmdp-input {
+    margin-top: 3rem !important;
+  }
 }
 
 @media((min-width:577px) and (max-width:768px)) {
@@ -289,6 +294,7 @@ body {
     grid-template-columns: 1fr;
     height: 90svh;
   }
+
 }
 
 @media((min-width:769px) and (max-width:992px)) {
@@ -510,7 +516,8 @@ body {
   border: 1px solid #444 !important;
 }
 
-.dark-theme .rmdp-month-picker, .rmdp-year-picker {
+.dark-theme .rmdp-month-picker,
+.rmdp-year-picker {
   background-color: #222 !important;
 }
 
@@ -528,6 +535,6 @@ body {
 }
 
 
-.dark-input .rmdp-input{
+.dark-input .rmdp-input {
   background-color: red !important;
-} 
+}

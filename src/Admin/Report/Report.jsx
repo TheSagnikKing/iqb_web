@@ -47,26 +47,33 @@ const Report = () => {
 
   // console.log(selectedFilter)
 
+  const [weekOption, setWeekOption] = useState("0");
+  const [monthOption, setMonthOption] = useState("0");
+  const [dayOption, setDayOption] = useState("7");
+  const [queueType, setQueueType] = useState("queueserved")
+
+  console.log(queueType)
 
   const [reportData, setReportData] = useState([])
 
   useEffect(() => {
     const getAllReports = async () => {
-      const { data } = await api.post("/api/reports/getSalonReports", {
+      const reportOptions = {
         salonId,
-        reportValue: "queueserved",
-        reportType: selectedFilter
-      })
+        reportValue: queueType,
+        reportType: selectedFilter,
+        ...(selectedFilter === "daily" && { days: Number(dayOption) }),
+        ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
+        ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
+      };
 
-      setReportData(data.response)
+      const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
+      setReportData(data.response);
+    };
 
-    }
+    getAllReports();
+  }, [selectedFilter, dayOption, weekOption, monthOption, queueType]);
 
-    getAllReports()
-
-  }, [selectedFilter])
-
-  const [openCalender, setOpenCalender] = useState(false)
 
   const [selectedDates, setSelectedDates] = useState([])
 
@@ -128,9 +135,6 @@ const Report = () => {
 
   // console.log(BarberList)
 
-  const [weekOption, setWeekOption] = useState("");
-  const [monthOption, setMonthOption] = useState("");
-  const [dayOption, setDayOption] = useState("");
 
   return (
     <div className={`${style.salon_wrapper} ${darkmodeOn && style.dark}`}>
@@ -210,7 +214,7 @@ const Report = () => {
             )
           }
 
-          <select name="" id="">
+          <select name="" id="" className={`${darkmodeOn && style.dark}`}>
             <option value="daily">daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
@@ -218,7 +222,7 @@ const Report = () => {
 
 
         </div>
-        
+
 
       </div>
 
@@ -234,6 +238,9 @@ const Report = () => {
             portal={true}
             calendarPosition={"bottom-left"}
             className={darkmodeOn ? "dark-theme" : "light-theme"}
+            style={{
+              background: darkmodeOn ? "#222" : "#fff"
+            }}
           />
         )
       }
@@ -241,13 +248,19 @@ const Report = () => {
 
       <div className={`${style.salon_content_wrapper}`}>
 
-        {/* <div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
           <div
             className={selectedFilter === "daily" ? style.checked : style.unchecked}
             onClick={() => setSelectedFilter("daily")}
           >
             <p>Daily</p>
-            <input type="checkbox" checked={selectedFilter === "daily"} readOnly />
+            {selectedFilter === "daily" && (
+              <select onChange={(e) => setDayOption(e.target.value)} value={dayOption} className={`${darkmodeOn && style.dark}`}>
+                <option value="7">Last 7 Days</option>
+                <option value="12">Last 12 Days</option>
+                <option value="14">Last 14 Days</option>
+              </select>
+            )}
           </div>
 
           <div
@@ -255,7 +268,13 @@ const Report = () => {
             onClick={() => setSelectedFilter("weekly")}
           >
             <p>Weekly</p>
-            <input type="checkbox" checked={selectedFilter === "weekly"} readOnly />
+            {selectedFilter === "weekly" && (
+              <select onChange={(e) => setWeekOption(e.target.value)} value={weekOption} className={`${darkmodeOn && style.dark}`}>
+                <option value="0">This Week</option>
+                <option value="1">Last 1 Week</option>
+                <option value="4">Last 4 Weeks</option>
+              </select>
+            )}
           </div>
 
           <div
@@ -263,65 +282,40 @@ const Report = () => {
             onClick={() => setSelectedFilter("monthly")}
           >
             <p>Monthly</p>
-            <input type="checkbox" checked={selectedFilter === "monthly"} readOnly />
+            {selectedFilter === "monthly" && (
+              <select onChange={(e) => setMonthOption(e.target.value)} value={monthOption} className={`${darkmodeOn && style.dark}`}>
+                <option value="0">This year</option>
+                <option value="3">Last 3 Months</option>
+                <option value="6">Last 6 Months</option>
+                <option value="12">Last 12 Months</option>
+              </select>
+            )}
           </div>
+
+
+          {/* <div
+            className={selectedFilter === "monthly" ? style.checked : style.unchecked}
+            onClick={() => setSelectedFilter("monthly")}
+          >
+            <p>Type</p>
+
+            <select onChange={(e) => setQueueType(e.target.value)} value={queueType}>
+              <option value="queueserved">Queue Served</option>
+              <option value="queuecanceled">Queue Cancel</option>
+            </select>
+
+          </div> */}
+
 
           <div>
             <p>Type</p>
-            <p>Queue Served</p>
+
+            <select onChange={(e) => setQueueType(e.target.value)} value={queueType} className={`${darkmodeOn && style.dark}`}>
+              <option value="queueserved">Queue Served</option>
+              <option value="queuecancelled">Queue Cancel</option>
+            </select>
           </div>
-        </div> */}
-
-
-<div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
-      <div
-        className={selectedFilter === "daily" ? style.checked : style.unchecked}
-        onClick={() => setSelectedFilter("daily")}
-      >
-        <p>Daily</p>
-        {selectedFilter === "daily" && (
-          <select onChange={(e) => setDayOption(e.target.value)} value={dayOption}>
-            <option value="today">Yesterday</option>
-            <option value="last7days">Last 7 Days</option>
-            <option value="last10days">Last 10 Days</option>
-          </select>
-        )}
-      </div>
-
-      <div
-        className={selectedFilter === "weekly" ? style.checked : style.unchecked}
-        onClick={() => setSelectedFilter("weekly")}
-      >
-        <p>Weekly</p>
-        {selectedFilter === "weekly" && (
-          <select onChange={(e) => setWeekOption(e.target.value)} value={weekOption}>
-            <option value="currentWeek">Current Week</option>
-            <option value="last1Week">Last 1 Week</option>
-            <option value="last4Weeks">Last 4 Weeks</option>
-          </select>
-        )}
-      </div>
-
-      <div
-        className={selectedFilter === "monthly" ? style.checked : style.unchecked}
-        onClick={() => setSelectedFilter("monthly")}
-      >
-        <p>Monthly</p>
-        {selectedFilter === "monthly" && (
-          <select onChange={(e) => setMonthOption(e.target.value)} value={monthOption}>
-            <option value="currentMonth">Current Month</option>
-            <option value="last3Months">Last 3 Months</option>
-            <option value="last6Months">Last 6 Months</option>
-            <option value="last6Months">Last 12 Months</option>
-          </select>
-        )}
-      </div>
-
-      {/* <div>
-        <p>Type</p>
-        <p>Queue Served</p>
-      </div> */}
-    </div>
+        </div>
 
 
         <div className={`${style.salon_content_body}`}>
@@ -337,7 +331,7 @@ const Report = () => {
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
-                dataKey={selectedFilter === "daily" ? "date" : selectedFilter === "weekly" ? "week" : "month"}
+                dataKey={selectedFilter === "daily" ? "date" : selectedFilter === "weekly" ? "week" : selectedFilter === "monthly" && "month"}
                 tick={{ fontSize: 12 }}
                 angle={selectedFilter === "daily" ? -45 : 0}
                 textAnchor="end"
@@ -345,7 +339,7 @@ const Report = () => {
                 interval={0}
               />
               <Tooltip />
-              <Bar dataKey="totalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="#000000" strokeWidth={1} />
+              <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
             </BarChart>
           </ResponsiveContainer>
 

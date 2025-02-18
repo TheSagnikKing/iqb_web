@@ -36,7 +36,7 @@
 }
 
 .salon_content_body {
-  height: var(--list-wrapper-common-height);
+  height: calc(var(--list-wrapper-common-height) - 9rem);
   width: 100%;
   overflow: auto;
 }
@@ -105,6 +105,7 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   margin-bottom: 2rem;
+  overflow: auto;
   /* padding-inline: 1rem; */
 }
 
@@ -125,7 +126,7 @@
 }
 
 .filter_container>div:hover {
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
 }
 
 .filter_container>div.checked {
@@ -135,14 +136,13 @@
 }
 
 .filter_container>div.unchecked {
-  background-color: #f9f9f9;
   /* Unchecked state color */
-  color: #333;
+  /* color: #000; */
 }
 
 /* Styling the select dropdown */
 select {
-  padding: 5px 10px;
+  height: 3rem;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 14px;
@@ -273,4 +273,31 @@ select:focus {
 
 .barber_item.dark {
   background-color: #333;
+}
+
+select.dark {
+  background-color: #222;
+}
+
+@media screen and (min-width:0px) and (max-width:768px) {
+  .salon_wrapper>div:nth-child(1) {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .filter_container {
+    margin-top: 2rem;
+  }
+
+  .salon_content_body {
+    /* display: none; */
+    /* background-color: red; */
+    height: calc(var(--list-wrapper-common-height) - 18rem);
+  }
+
+  .salon_content_wrapper {
+    /* background-color: blue; */
+    height: calc(var(--list-wrapper-common-height) - 8rem);
+  }
 }
