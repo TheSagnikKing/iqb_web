@@ -20,29 +20,6 @@ const Report = () => {
 
   const darkmodeOn = darkMode === "On"
 
-
-  // const dailyreport = [
-  //   { date: "2025-01-16", count: 3 },
-  //   { date: "2025-01-17", count: 0 },
-  //   { date: "2025-01-18", count: 5 },
-  //   { date: "2025-01-19", count: 2 },
-  //   { date: "2025-01-20", count: 0 },
-  //   { date: "2025-01-21", count: 7 },
-  //   { date: "2025-01-22", count: 1 },
-  //   { date: "2025-01-23", count: 0 },
-  //   { date: "2025-01-24", count: 4 },
-  //   { date: "2025-01-25", count: 0 },
-  //   { date: "2025-01-26", count: 2 },
-  //   { date: "2025-01-27", count: 8 },
-  //   { date: "2025-01-28", count: 0 },
-  // ];
-
-  // const formattedReport = dailyreport.map((item) => ({
-  //   ...item,
-  //   date: new Date(item.date).toLocaleDateString("en-US", { month: "short", day: "2-digit" }) // e.g., "Feb, 07"
-  // }));
-
-
   // State for checkboxes
 
 
@@ -576,101 +553,10 @@ const Report = () => {
           </ResponsiveContainer>
       </div>
 
-
-      {/* <div className={`${style.salon_content_wrapper}`}>
-
-
-
-        <div className={`${style.salon_content_body}`}>
-          <p style={{
-            marginBottom: 20
-          }}>Queue Report</p>
-
-          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
-            {QueueReportData.length > 0 ? (
-              <BarChart
-                width={150}
-                height={50}
-                data={QueueReportData}
-                margin={{ bottom: 30 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey={
-                    (selectedRangeFilter || selectedFilter) === "daily"
-                      ? "date"
-                      : (selectedRangeFilter || selectedFilter) === "weekly"
-                        ? "week"
-                        : (selectedRangeFilter || selectedFilter) === "monthly"
-                          ? "month"
-                          : ""
-                  }
-                  tick={{ fontSize: 12 }}
-                  angle={(selectedRangeFilter || selectedFilter) === "daily" ? -45 : 0}
-                  textAnchor="end"
-                  dy={10}
-                  interval={0}
-                />
-                <Tooltip />
-                <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
-              </BarChart>
-            ) : (
-              <div style={{ height: "20rem", marginInline: "0.5rem", border: darkmodeOn ? "0.1rem solid rgba(255,255,255,0.2)" : "0.1rem solid rgba(0,0,0,0.2)", textAlign: "center", alignContent: "center", boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px", borderRadius: "4px" }}>
-                No Queue Report Available
-              </div>
-            )}
-          </ResponsiveContainer>
-
-          <div style={{ marginBlock: "1rem" }}></div>
-
-          <p style={{
-            marginBottom: 20
-          }}>Appointment Report</p>
-
-          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
-            {AppointmentReportData.length > 0 ? (
-              <BarChart
-                width={150}
-                height={50}
-                data={AppointmentReportData}
-                margin={{ bottom: 30 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey={
-                    (selectedRangeFilter || selectedFilter) === "daily"
-                      ? "date"
-                      : (selectedRangeFilter || selectedFilter) === "weekly"
-                        ? "week"
-                        : (selectedRangeFilter || selectedFilter) === "monthly"
-                          ? "month"
-                          : ""
-                  }
-                  tick={{ fontSize: 12 }}
-                  angle={(selectedRangeFilter || selectedFilter) === "daily" ? -45 : 0}
-                  textAnchor="end"
-                  dy={10}
-                  interval={0}
-                />
-                <Tooltip />
-                <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
-              </BarChart>
-            ) : (
-              <div style={{ height: "20rem", marginInline: "0.5rem", border: darkmodeOn ? "0.1rem solid rgba(255,255,255,0.2)" : "0.1rem solid rgba(0,0,0,0.2)", textAlign: "center", alignContent: "center", boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px", borderRadius: "4px" }}>
-                No Appointment Report Available
-              </div>
-            )}
-          </ResponsiveContainer>
-
-        </div>
-
-
-      </div> */}
-
-
-
     </div>
   )
 }
 
 export default Report
+
+
