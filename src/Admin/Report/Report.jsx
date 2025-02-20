@@ -54,19 +54,54 @@ const Report = () => {
   const [weekOption, setWeekOption] = useState("");
   const [monthOption, setMonthOption] = useState("");
   const [dayOption, setDayOption] = useState("");
-  const [queueType, setQueueType] = useState("queueserved")
+  const [queueType, setQueueType] = useState("")
+  const [appointmentType, setAppointmentType] = useState("")
 
   // console.log(queueType)
 
-  const [reportData, setReportData] = useState([])
+  const [dummyReport] = useState([
+    {
+      "0": "0",
+      "TotalQueue": 0
+    },
+    {
+      "1": "1",
+      "TotalQueue": 0
+    },
+    {
+      "2": "2",
+      "TotalQueue": 0
+    },
+    {
+      "3": "3",
+      "TotalQueue": 0
+    },
+    {
+      "4": "4",
+      "TotalQueue": 0
+    },
+    {
+      "5": "5",
+      "TotalQueue": 0
+    },
+    {
+      "6": "6",
+      "TotalQueue": 0
+    }
+  ])
+
+  const [QueueReportData, setQueueReportData] = useState(dummyReport)
+  const [AppointmentReportData, setAppointmentReportData] = useState(dummyReport)
+
+  console.log(QueueReportData)
 
   useEffect(() => {
-    if (selectedFilter && dayOption || weekOption || monthOption) {
+    if (selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
       try {
         const getAllReports = async () => {
           const reportOptions = {
             salonId,
-            reportValue: queueType,
+            reportValue: queueType || appointmentType,
             reportType: selectedFilter,
             ...(selectedFilter === "daily" && { days: Number(dayOption) }),
             ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
@@ -74,7 +109,13 @@ const Report = () => {
           };
 
           const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-          setReportData(data.response);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
         };
 
         getAllReports();
@@ -83,7 +124,7 @@ const Report = () => {
       }
     }
 
-  }, [selectedFilter, dayOption, weekOption, monthOption, queueType]);
+  }, [selectedFilter, dayOption, weekOption, monthOption, queueType, appointmentType]);
 
 
   const [selectedDates, setSelectedDates] = useState([])
@@ -154,12 +195,12 @@ const Report = () => {
 
   useEffect(() => {
 
-    if (selectedDates.length === 2 && selectedRangeFilter && selectedbarberEmail) {
+    if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType) && selectedbarberEmail) {
       const getAllReports = async () => {
         try {
           const reportOptions = {
             salonId,
-            reportValue: queueType,
+            reportValue: (queueType || appointmentType),
             reportType: selectedRangeFilter,
             from: selectedDates[0],
             to: selectedDates[1],
@@ -168,7 +209,13 @@ const Report = () => {
           };
 
           const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-          setReportData(data.response);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
         } catch (error) {
           toast.error(error?.response?.data?.message || "Something went wrong", {
             duration: 3000,
@@ -183,19 +230,25 @@ const Report = () => {
       };
 
       getAllReports();
-    } else if (selectedDates.length === 2 && selectedRangeFilter) {
+    } else if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType)) {
       const getAllReports = async () => {
         try {
           const reportOptions = {
             salonId,
-            reportValue: queueType,
+            reportValue: (queueType || appointmentType),
             reportType: selectedRangeFilter,
             from: selectedDates[0],
             to: selectedDates[1]
           };
 
           const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-          setReportData(data.response);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
         } catch (error) {
           toast.error(error?.response?.data?.message || "Something went wrong", {
             duration: 3000,
@@ -211,7 +264,7 @@ const Report = () => {
 
       getAllReports();
     }
-  }, [selectedDates, selectedRangeFilter, queueType, selectedbarberEmail, selectedbarberId]);
+  }, [selectedDates, selectedRangeFilter, queueType, appointmentType, selectedbarberEmail, selectedbarberId]);
 
   const resetHandler = () => {
     setSelectedDates([])
@@ -219,12 +272,15 @@ const Report = () => {
     setSelectedbarberEmail("")
     setSelectedbarberId("")
     setSelectedbarber("")
-    setReportData([])
+    setQueueReportData(dummyReport)
+    setAppointmentReportData(dummyReport)
 
     setSelectedFilter("")
     setWeekOption("")
     setMonthOption("")
     setDayOption("")
+    setQueueType("")
+    setAppointmentType("")
   }
 
 
@@ -264,7 +320,7 @@ const Report = () => {
                                 setSelectedbarber(b.name)
                                 setSelectedbarberId(b.barberId)
                                 setSelectedbarberEmail(b.email)
-                                setReportData([])
+                                setQueueReportData(dummyReport)
                                 setWeekOption("")
                                 setMonthOption("")
                                 setDayOption("")
@@ -296,25 +352,22 @@ const Report = () => {
               )
             }
           </div>
-          {
-            !isMobile && (
-              <div>
-                <DatePicker
-                  numberOfMonths={2}
-                  value={selectedDates}
-                  range
-                  placeholder='yyyy-mm-dd - yyyy-mm-dd'
-                  onChange={handleDateChange}
-                  dateSeparator={" - "}
-                  calendarPosition={"bottom-right"}
-                  className={darkmodeOn ? "dark-theme" : "light-theme"}
-                  style={{
-                    background: darkmodeOn ? "#222" : "#fff"
-                  }}
-                />
-              </div>
-            )
-          }
+
+          <div>
+            <DatePicker
+              numberOfMonths={isMobile ? 1 : 2}
+              value={selectedDates}
+              range
+              placeholder='yyyy-mm-dd - yyyy-mm-dd'
+              onChange={handleDateChange}
+              dateSeparator={" - "}
+              calendarPosition={"bottom-right"}
+              className={darkmodeOn ? "dark-theme" : "light-theme"}
+              style={{
+                background: darkmodeOn ? "#222" : "#fff"
+              }}
+            />
+          </div>
 
           <select name="" id=""
             className={`${darkmodeOn && style.dark}`}
@@ -334,136 +387,124 @@ const Report = () => {
 
       </div>
 
-      {
-        isMobile && (
-          <DatePicker
-            numberOfMonths={1}
-            value={selectedDates}
-            range
-            placeholder='yyyy/mm/dd - yyyy/mm/dd'
-            onChange={handleDateChange}
-            dateSeparator={" - "}
-            portal={true}
-            calendarPosition={"bottom-left"}
-            className={darkmodeOn ? "dark-theme" : "light-theme"}
-            style={{
-              background: darkmodeOn ? "#222" : "#fff"
-            }}
-          />
-        )
-      }
-
-
-      <div className={`${style.salon_content_wrapper}`}>
-
-        <div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
-          <div
-            className={selectedFilter === "daily" ? style.checked : style.unchecked}
-            onClick={() => {
-              setSelectedFilter("daily")
-              setSelectedRangeFilter("")
-              setSelectedDates([])
-              setWeekOption("")
-              setMonthOption("")
-              setReportData([])
-              setSelectedbarberEmail("")
-              setSelectedbarber("")
-              setSelectedbarberId("")
-            }}
-          >
-            <p>Daily</p>
-            {selectedFilter === "daily" && (
-              <select onChange={(e) => setDayOption(e.target.value)} value={dayOption} className={`${darkmodeOn && style.dark}`}>
-                <option value="" disabled>Select a range</option>
-                <option value="7">Last 7 Days</option>
-                <option value="12">Last 12 Days</option>
-                <option value="14">Last 14 Days</option>
-              </select>
-            )}
-          </div>
-
-          <div
-            className={selectedFilter === "weekly" ? style.checked : style.unchecked}
-            onClick={() => {
-              setSelectedFilter("weekly")
-              setSelectedRangeFilter("")
-              setSelectedDates([])
-              setMonthOption("")
-              setDayOption("")
-              setReportData([])
-              setSelectedbarberEmail("")
-              setSelectedbarber("")
-              setSelectedbarberId("")
-            }}
-          >
-            <p>Weekly</p>
-            {selectedFilter === "weekly" && (
-              <select onChange={(e) => setWeekOption(e.target.value)} value={weekOption} className={`${darkmodeOn && style.dark}`}>
-                <option value="" disabled>Select a range</option>
-                <option value="0">This Week</option>
-                <option value="2">Last 2 Week</option>
-                <option value="4">Last 4 Weeks</option>
-              </select>
-            )}
-          </div>
-
-          <div
-            className={selectedFilter === "monthly" ? style.checked : style.unchecked}
-            onClick={() => {
-              setSelectedFilter("monthly")
-              setSelectedRangeFilter("")
-              setSelectedDates([])
-              setWeekOption("")
-              setDayOption("")
-              setReportData([])
-              setSelectedbarberEmail("")
-              setSelectedbarber("")
-              setSelectedbarberId("")
-            }}
-          >
-            <p>Monthly</p>
-            {selectedFilter === "monthly" && (
-              <select onChange={(e) => setMonthOption(e.target.value)} value={monthOption} className={`${darkmodeOn && style.dark}`}>
-                <option value="" disabled>Select a range</option>
-                <option value="0">This year</option>
-                <option value="3">Last 3 Months</option>
-                <option value="6">Last 6 Months</option>
-                <option value="12">Last 12 Months</option>
-              </select>
-            )}
-          </div>
-
-          <div>
-            <p>Type</p>
-
-            <select onChange={(e) => setQueueType(e.target.value)} value={queueType} className={`${darkmodeOn && style.dark}`}>
-              <option value="queueserved">Queue Served</option>
-              <option value="queuecancelled">Queue Cancel</option>
+      <div className={`${style.filter_container} ${darkmodeOn && style.dark}`}>
+        <div
+          className={selectedFilter === "daily" ? style.checked : style.unchecked}
+          onClick={() => {
+            setSelectedFilter("daily")
+            setSelectedRangeFilter("")
+            setSelectedDates([])
+            setWeekOption("")
+            setMonthOption("")
+            setQueueReportData(dummyReport)
+            setAppointmentReportData(dummyReport)
+            setSelectedbarberEmail("")
+            setSelectedbarber("")
+            setSelectedbarberId("")
+          }}
+        >
+          <p>Daily</p>
+          {selectedFilter === "daily" && (
+            <select onChange={(e) => setDayOption(e.target.value)} value={dayOption} className={`${darkmodeOn && style.dark}`}>
+              <option value="" disabled>Select a range</option>
+              <option value="7">Last 7 Days</option>
+              <option value="12">Last 12 Days</option>
+              <option value="14">Last 14 Days</option>
             </select>
-          </div>
-
-          {/* <div>
-            <p>Type</p>
-
-            <select onChange={(e) => setQueueType(e.target.value)} value={queueType} className={`${darkmodeOn && style.dark}`}>
-              <option value="queueserved">Queue Served</option>
-              <option value="queuecancelled">Queue Cancel</option>
-            </select>
-          </div> */}
+          )}
         </div>
 
+        <div
+          className={selectedFilter === "weekly" ? style.checked : style.unchecked}
+          onClick={() => {
+            setSelectedFilter("weekly")
+            setSelectedRangeFilter("")
+            setSelectedDates([])
+            setMonthOption("")
+            setDayOption("")
+            setQueueReportData(dummyReport)
+            setAppointmentReportData(dummyReport)
+            setSelectedbarberEmail("")
+            setSelectedbarber("")
+            setSelectedbarberId("")
+          }}
+        >
+          <p>Weekly</p>
+          {selectedFilter === "weekly" && (
+            <select onChange={(e) => setWeekOption(e.target.value)} value={weekOption} className={`${darkmodeOn && style.dark}`}>
+              <option value="" disabled>Select a range</option>
+              <option value="0">This Week</option>
+              <option value="2">Last 2 Week</option>
+              <option value="4">Last 4 Weeks</option>
+            </select>
+          )}
+        </div>
 
-        <div className={`${style.salon_content_body}`}>
-          <p style={{
+        <div
+          className={selectedFilter === "monthly" ? style.checked : style.unchecked}
+          onClick={() => {
+            setSelectedFilter("monthly")
+            setSelectedRangeFilter("")
+            setSelectedDates([])
+            setWeekOption("")
+            setDayOption("")
+            setQueueReportData(dummyReport)
+            setAppointmentReportData(dummyReport)
+            setSelectedbarberEmail("")
+            setSelectedbarber("")
+            setSelectedbarberId("")
+          }}
+        >
+          <p>Monthly</p>
+          {selectedFilter === "monthly" && (
+            <select onChange={(e) => setMonthOption(e.target.value)} value={monthOption} className={`${darkmodeOn && style.dark}`}>
+              <option value="" disabled>Select a range</option>
+              <option value="0">This year</option>
+              <option value="3">Last 3 Months</option>
+              <option value="6">Last 6 Months</option>
+              <option value="12">Last 12 Months</option>
+            </select>
+          )}
+        </div>
+
+        <div>
+
+          <select onChange={(e) => {
+            setAppointmentType("")
+            setAppointmentReportData(dummyReport)
+            setQueueType(e.target.value)
+          }} value={queueType} className={`${darkmodeOn && style.dark}`}>
+            <option value="" disabled>Select queue type</option>
+            <option value="queueserved">Queue Serve</option>
+            <option value="queuecancelled">Queue Cancel</option>
+          </select>
+        </div>
+
+        <div>
+          <select onChange={(e) => {
+            setQueueType("")
+            setQueueReportData(dummyReport)
+            setAppointmentType(e.target.value)
+          }} value={appointmentType} className={`${darkmodeOn && style.dark}`}>
+            <option value="" disabled>Select appointment type</option>
+            <option value="appointmentserved">Appointment Serve</option>
+            <option value="appointmentcancelled">Appointment Cancel</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div className={`${style.report_container}`}>
+      <p style={{
             marginBottom: 20
           }}>Queue Report</p>
 
-          <ResponsiveContainer width="100%" height="50%">
-            {reportData.length > 0 ? (
+          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
+            {QueueReportData.length > 0 ? (
               <BarChart
                 width={150}
                 height={50}
-                data={reportData}
+                data={QueueReportData}
                 margin={{ bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -493,34 +534,142 @@ const Report = () => {
             )}
           </ResponsiveContainer>
 
+          <div style={{ marginBlock: "1rem" }}></div>
 
-          {/* <p style={{
-              marginBottom: 20
-            }}>Queue Report</p>
-            <ResponsiveContainer width="100%" height="50%">
+          <p style={{
+            marginBottom: 20
+          }}>Appointment Report</p>
+
+          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
+            {AppointmentReportData.length > 0 ? (
               <BarChart
                 width={150}
                 height={50}
-                data={formattedReport}
+                data={AppointmentReportData}
                 margin={{ bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
-                  dataKey="date"
+                  dataKey={
+                    (selectedRangeFilter || selectedFilter) === "daily"
+                      ? "date"
+                      : (selectedRangeFilter || selectedFilter) === "weekly"
+                        ? "week"
+                        : (selectedRangeFilter || selectedFilter) === "monthly"
+                          ? "month"
+                          : ""
+                  }
                   tick={{ fontSize: 12 }}
-                  angle={-30}
+                  angle={(selectedRangeFilter || selectedFilter) === "daily" ? -45 : 0}
                   textAnchor="end"
                   dy={10}
                   interval={0}
                 />
                 <Tooltip />
-                <Bar dataKey="count" fill="rgba(255, 0, 0, 0.393)" stroke="#000000" strokeWidth={1} />
+                <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
               </BarChart>
-            </ResponsiveContainer> */}
+            ) : (
+              <div style={{ height: "20rem", marginInline: "0.5rem", border: darkmodeOn ? "0.1rem solid rgba(255,255,255,0.2)" : "0.1rem solid rgba(0,0,0,0.2)", textAlign: "center", alignContent: "center", boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px", borderRadius: "4px" }}>
+                No Appointment Report Available
+              </div>
+            )}
+          </ResponsiveContainer>
+      </div>
+
+
+      {/* <div className={`${style.salon_content_wrapper}`}>
+
+
+
+        <div className={`${style.salon_content_body}`}>
+          <p style={{
+            marginBottom: 20
+          }}>Queue Report</p>
+
+          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
+            {QueueReportData.length > 0 ? (
+              <BarChart
+                width={150}
+                height={50}
+                data={QueueReportData}
+                margin={{ bottom: 30 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey={
+                    (selectedRangeFilter || selectedFilter) === "daily"
+                      ? "date"
+                      : (selectedRangeFilter || selectedFilter) === "weekly"
+                        ? "week"
+                        : (selectedRangeFilter || selectedFilter) === "monthly"
+                          ? "month"
+                          : ""
+                  }
+                  tick={{ fontSize: 12 }}
+                  angle={(selectedRangeFilter || selectedFilter) === "daily" ? -45 : 0}
+                  textAnchor="end"
+                  dy={10}
+                  interval={0}
+                />
+                <Tooltip />
+                <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
+              </BarChart>
+            ) : (
+              <div style={{ height: "20rem", marginInline: "0.5rem", border: darkmodeOn ? "0.1rem solid rgba(255,255,255,0.2)" : "0.1rem solid rgba(0,0,0,0.2)", textAlign: "center", alignContent: "center", boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px", borderRadius: "4px" }}>
+                No Queue Report Available
+              </div>
+            )}
+          </ResponsiveContainer>
+
+          <div style={{ marginBlock: "1rem" }}></div>
+
+          <p style={{
+            marginBottom: 20
+          }}>Appointment Report</p>
+
+          <ResponsiveContainer width={isMobile ? "200%" : "100%"} height="50%">
+            {AppointmentReportData.length > 0 ? (
+              <BarChart
+                width={150}
+                height={50}
+                data={AppointmentReportData}
+                margin={{ bottom: 30 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey={
+                    (selectedRangeFilter || selectedFilter) === "daily"
+                      ? "date"
+                      : (selectedRangeFilter || selectedFilter) === "weekly"
+                        ? "week"
+                        : (selectedRangeFilter || selectedFilter) === "monthly"
+                          ? "month"
+                          : ""
+                  }
+                  tick={{ fontSize: 12 }}
+                  angle={(selectedRangeFilter || selectedFilter) === "daily" ? -45 : 0}
+                  textAnchor="end"
+                  dy={10}
+                  interval={0}
+                />
+                <Tooltip />
+                <Bar dataKey="TotalQueue" fill="rgba(255, 0, 0, 0.393)" stroke="rgba(255, 0, 0, 0.393)" strokeWidth={1} />
+              </BarChart>
+            ) : (
+              <div style={{ height: "20rem", marginInline: "0.5rem", border: darkmodeOn ? "0.1rem solid rgba(255,255,255,0.2)" : "0.1rem solid rgba(0,0,0,0.2)", textAlign: "center", alignContent: "center", boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px", borderRadius: "4px" }}>
+                No Appointment Report Available
+              </div>
+            )}
+          </ResponsiveContainer>
 
         </div>
-      </div >
-    </div >
+
+
+      </div> */}
+
+
+
+    </div>
   )
 }
 

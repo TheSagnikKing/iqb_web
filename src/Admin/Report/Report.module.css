@@ -9,13 +9,16 @@
   -moz-border-radius: var(--list-wrapper-border-radius);
   -ms-border-radius: var(--list-wrapper-border-radius);
   -o-border-radius: var(--list-wrapper-border-radius);
+
+  display: flex;
+  flex-direction: column;
 }
 
 .salon_wrapper>div:nth-child(1) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  /* height: 4rem; */
   margin-bottom: 1rem;
 }
 
@@ -27,16 +30,16 @@
 .salon_content_wrapper {
   width: 100%;
   height: var(--list-wrapper-common-height);
-  border-radius: var(--list-wrapper-border-radius);
+  /* border-radius: var(--list-wrapper-border-radius);
   -webkit-border-radius: var(--list-wrapper-border-radius);
   -moz-border-radius: var(--list-wrapper-border-radius);
   -ms-border-radius: var(--list-wrapper-border-radius);
-  -o-border-radius: var(--list-wrapper-border-radius);
+  -o-border-radius: var(--list-wrapper-border-radius); */
   /* background-color: var(--light-color-4); */
 }
 
 .salon_content_body {
-  height: calc(var(--list-wrapper-common-height) - 9rem);
+  height: calc(var(--list-wrapper-common-height) - 7rem);
   width: 100%;
   overflow: auto;
 }
@@ -107,6 +110,7 @@
   margin-bottom: 2rem;
   overflow: auto;
   /* padding-inline: 1rem; */
+  min-height: 4rem;
 }
 
 .filter_container.dark {
@@ -118,11 +122,12 @@
 .filter_container>div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   cursor: pointer;
-  padding: 8px;
+  padding: 0.8rem;
   border-radius: 5px;
   transition: all 0.2s ease;
+  /* min-width: 20rem; */
 }
 
 .filter_container>div:hover {
@@ -254,6 +259,13 @@ select:focus {
 
 }
 
+.report_container{
+  /* background-color: red; */
+  /* outline: 1px solid black; */
+  flex-grow: 1;
+  overflow: auto;
+}
+
 /* dark mode on */
 
 .salon_wrapper.dark {
@@ -298,7 +310,19 @@ select.dark {
   border: 0.1rem solid #c0c4d6;
 }
 
-@media screen and (min-width:0px) and (max-width:768px) {
+@media screen and (min-width:0px) and (max-width:768px){
+  .salon_wrapper>div:nth-child(1) {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .select_container{
+    flex-wrap: wrap;
+  }
+}
+
+/* @media screen and (min-width:0px) and (max-width:430px) {
   .salon_wrapper>div:nth-child(1) {
     flex-direction: column;
     align-items: start;
@@ -306,17 +330,84 @@ select.dark {
   }
 
   .filter_container {
-    margin-top: 2rem;
+    margin-block: 1rem;
   }
 
-  .salon_content_body {
-    /* display: none; */
-    /* background-color: red; */
-    height: calc(var(--list-wrapper-common-height) - 18rem);
+  .select_container{
+    flex-wrap: wrap;
   }
 
-  .salon_content_wrapper {
-    /* background-color: blue; */
-    height: calc(var(--list-wrapper-common-height) - 8rem);
+  .salon_content_wrapper{
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    height: calc(100% - 15rem);
+    margin-top: 11rem;
+    overflow: auto;
+  }
+
+  .salon_content_body{
+    height: auto;
+  }
+
+}
+
+@media screen and (min-width:431px) and (max-width:650px) {
+  .salon_wrapper>div:nth-child(1) {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .filter_container {
+    margin-block: 1rem;
+  }
+
+  .select_container{
+    flex-wrap: wrap;
+  }
+
+  .salon_content_wrapper{
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    height: calc(100% - 15rem);
+    margin-top: 8rem;
+    overflow: auto;
+  }
+
+  .salon_content_body{
+    height: auto;
   }
 }
+
+@media screen and (min-width:651px) and (max-width:768px) {
+  .salon_wrapper>div:nth-child(1) {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .filter_container {
+    margin-block: 1rem;
+  }
+
+  .select_container{
+    flex-wrap: wrap;
+  }
+
+  .salon_content_wrapper{
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    height: calc(100% - 15rem);
+    margin-top: 3rem;
+    overflow: auto;
+  }
+
+  .salon_content_body{
+    height: auto;
+  }
+
+}
+
+@media screen and (min-width:769px) and (max-width:1140px){
+  .salon_content_body{
+    height: calc(var(--list-wrapper-common-height) - 0rem);
+  }
+
+} */

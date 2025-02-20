@@ -283,10 +283,6 @@ body {
     height: 60svh;
   }
 
-
-  .rmdp-input {
-    margin-top: 3rem !important;
-  }
 }
 
 @media((min-width:577px) and (max-width:768px)) {
@@ -507,6 +503,11 @@ body {
 
 .light-theme .rmdp-header-values {
   color: #000 !important;
+}
+
+.light-theme .rmdp-month-picker,
+.rmdp-year-picker{
+  background-color: #fff !important;
 }
 
 /* Dark Mode */
