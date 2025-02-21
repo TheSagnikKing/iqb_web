@@ -505,11 +505,11 @@ body {
   color: #000 !important;
 }
 
-.light-theme .rmdp-month-picker{
+.light-theme .rmdp-month-picker {
   background-color: #fff !important;
 }
 
-.light-theme .rmdp-year-picker{
+.light-theme .rmdp-year-picker {
   background-color: #fff !important;
 }
 
@@ -520,15 +520,15 @@ body {
   border: 1px solid #444 !important;
 }
 
-.dark-theme .rmdp-month-picker{
+.dark-theme .rmdp-month-picker {
   background-color: #222 !important;
 }
 
-.dark-theme .rmdp-year-picker{
+.dark-theme .rmdp-year-picker {
   background-color: #222 !important;
 }
 
- 
+
 
 .dark-theme .rmdp-day {
   color: #fff !important;
