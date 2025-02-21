@@ -867,6 +867,9 @@ const Subscription = () => {
     const [isQueueClicked, setIsQueueClicked] = useState(false)
     const [isAppointClicked, setisAppointClicked] = useState(false)
 
+
+    const [currentProductPrice, setCurrentProductPrice] = useState(0)
+
     const [selectedProduct, setSelectedProduct] = useState({
         productName: "",
         productPrice: 0,
@@ -1077,6 +1080,7 @@ const Subscription = () => {
                                                         setSelectedSalonId(s?.salonId)
                                                         setIsQueueClicked(true)
                                                         setisAppointClicked(false)
+
                                                     }}
                                                 >{s?.queueSubscriptions?.bought === "" ? "Buy" : "Renew"}</button>
                                             </div>
@@ -1224,7 +1228,7 @@ const Subscription = () => {
                                 (<button className={style.salon_payment_btn}
                                     onClick={paidPaymentHandler}
                                 // onClick={paymentHandler}
-                                >Pay {currentSalonCurrency}{totalPrice}</button>)
+                                >Pay</button>)
                         }
                     </div>
                 </div>
