@@ -968,7 +968,7 @@ const Subscription = () => {
 
         // console.log(productInfo)
 
-        const confirm = window.confirm("Do you want to start free trial ?")
+        const confirm = window.confirm("Would you prefer to purchase now?")
 
         // if (confirm) {
         //     try {
