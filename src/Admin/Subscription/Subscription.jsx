@@ -1035,7 +1035,67 @@ const Subscription = () => {
                                     </div>
                                     <div>
 
-                                        <div>
+                                        {
+                                            s?.subscriptions.map((sub) => {
+                                                return (
+                                                    <div>
+                                                        <div>
+                                                            <div>
+                                                                <p>{sub?.name}</p>
+
+                                                                {
+                                                                    sub?.trial === "Free" ? (
+                                                                        <div style={{
+                                                                            height: "3rem",
+                                                                            background: "var(--color-3)",
+                                                                            paddingInline: "1rem",
+                                                                            color: "var(--color-2)",
+                                                                            display: "flex",
+                                                                            justifyContent: "center",
+                                                                            alignItems: "center",
+                                                                            borderRadius: "2rem"
+                                                                        }}><p>Free</p></div>
+                                                                    ) : sub?.trial === "Paid" ? (
+                                                                        <div style={{
+                                                                            height: "3rem",
+                                                                            background: "rgba(0, 255, 0, 0.498)",
+                                                                            paddingInline: "1rem",
+                                                                            color: "var(--color-2)",
+                                                                            display: "flex",
+                                                                            justifyContent: "center",
+                                                                            alignItems: "center",
+                                                                            borderRadius: "2rem"
+                                                                        }}><p>Paid</p></div>
+                                                                    ) : null
+                                                                }
+
+
+                                                            </div>
+                                                            <p>{sub?.expirydate === "" ? "select a plan" : sub?.expirydate}</p>
+                                                            <button
+                                                                onClick={() => {
+                                                                    setPaymentModalOpen(true)
+                                                                    setModalValue({
+                                                                        queue: sub?.name === "Queue" ? true : false,
+                                                                        appointment: sub?.name === "Appointment" ? true : false
+                                                                    })
+                                                                    setCurrentSalonCurrency(s?.currency)
+                                                                    setCurrentSalonisoCurrency(s?.isoCurrencyCode)
+                                                                    setSelectedSalonId(s?.salonId)
+                                                                    setIsQueueClicked(sub?.name === "Queue" ? true : false)
+                                                                    setisAppointClicked(sub?.name === "Appointment" ? true : false)
+
+                                                                }}
+                                                            >{sub?.bought === "" ? "Buy" : "Renew"}</button>
+
+                                                        </div>
+                                                    </div>
+
+                                                )
+                                            })
+                                        }
+
+                                        {/* <div>
                                             <div>
                                                 <div>
                                                     <p>Queue</p>
@@ -1133,7 +1193,9 @@ const Subscription = () => {
                                                     }}
                                                 >{s?.appointmentSubscriptions?.bought === "" ? "Buy" : "Renew"}</button>
                                             </div>
-                                        </div>
+                                        </div> */}
+
+
                                     </div>
                                 </div>
                             )
@@ -1143,7 +1205,7 @@ const Subscription = () => {
 
             </div>
 
-
+            <p></p>
             <Modal
                 open={paymentModalOpen}
                 // onClose={() => {
@@ -1219,7 +1281,9 @@ const Subscription = () => {
                                 <option value="Paid">Paid</option>
                             </select>
                         </div>
+                        <p>
 
+                        </p>
                         {
                             paymentType === "Free" ?
                                 (<button className={style.salon_payment_btn}
