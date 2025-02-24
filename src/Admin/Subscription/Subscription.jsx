@@ -924,6 +924,30 @@ const Subscription = () => {
         console.log(productInfo)
     }
 
+    const STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY
+
+    const makePayment = async (product) => {
+
+        try {
+            const stripe = await loadStripe(STRIPE_KEY);
+
+            const response = await axios.post("https://iqb-final.onrender.com/api/create-checkout-session", product)
+
+            if (response.data && response.data.session && response.data.session.id) {
+                await stripe.redirectToCheckout({
+                    sessionId: response.data.session.id,
+                });
+
+            } else {
+                console.error("Invalid session data: ", response.data);
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     const paidPaymentHandler = async () => {
         const productInfo = {
             salonId: selectedSalonId,
@@ -946,11 +970,28 @@ const Subscription = () => {
 
         const confirm = window.confirm("Do you want to start free trial ?")
 
+        // if (confirm) {
+        //     try {
+        //         const { data } = await api.post("/api/salon/salonTrailPaidPeriod", productInfo)
+
+        //         window.location.reload()
+
+        //     } catch (error) {
+        //         toast.error(error.response.data.message, {
+        //             duration: 3000,
+        //             style: {
+        //                 fontSize: "var(--font-size-2)",
+        //                 borderRadius: '0.3rem',
+        //                 background: '#333',
+        //                 color: '#fff',
+        //             },
+        //         });
+        //     }
+        // }
+
         if (confirm) {
             try {
-                const { data } = await api.post("/api/salon/salonTrailPaidPeriod", productInfo)
-
-                window.location.reload()
+                makePayment(productInfo)
 
             } catch (error) {
                 toast.error(error.response.data.message, {
@@ -965,7 +1006,9 @@ const Subscription = () => {
             }
         }
 
-        console.log(productInfo)
+
+
+        // console.log(productInfo)
     }
 
 
