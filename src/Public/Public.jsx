@@ -26,7 +26,7 @@ const Public = () => {
                             <Link to="/adminsignin">Admin Signin</Link>
                             <Link to="/barbersignin">Barber Signin</Link>
                         </div>
-                        <div><Link to="/mobilecus">Customer</Link></div>
+                        {/* <div><Link to="/mobilecus">Customer</Link></div> */}
                     </div>
                 </div>
             </div>
