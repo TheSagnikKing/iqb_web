@@ -274,7 +274,7 @@ const Dashboard = () => {
             <div className={style.dashboard_container_one}>
               <div className={`${style.saloninfo_container} ${darkmodeOn && style.dark}`}>
                 <div>
-                  <h2>Welcome, {adminName}</h2>
+                  <h2>Welcome, {adminName} fdff</h2>
                 </div>
 
                 <div>
