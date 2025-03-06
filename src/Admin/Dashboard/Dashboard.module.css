@@ -1,4 +1,4 @@
-.dashboard_body_intial {
+/* .dashboard_body_intial {
     height: var(--list-wrapper-height);
     width: 100%;
     padding: 2rem;
@@ -518,7 +518,7 @@
     }
 }
 
-/* Dark Mode  */
+
 
 .dashboard_body_intial.dark,
 .saloninfo_container.dark,
@@ -594,4 +594,74 @@
             gap: 2rem;
         }
     }
+} */
+
+
+
+.dashboard_container {
+    height: calc(100vh - 6rem);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: auto;
+
+    /* alt + up */
+
+    &>div:nth-child(1) {
+        height: 6rem;
+        display: flex;
+        align-items: center;
+
+        &>h1 {
+            color: var(--text-primary);
+            line-height: 6rem;
+            font-family: "AirbnbCereal_Medium";
+        }
+    }
+
+    &>div:nth-child(2) {
+        flex: 1;
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        &>div:nth-child(1) {
+            height: 24rem;
+            min-height: 24rem;
+
+            display: flex;
+            gap: 1.5rem;
+
+            &>div {
+                flex: 1;
+                border: 0.1rem solid var(--border-secondary);
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+            }
+        }
+
+        &>div:nth-child(2) {
+            flex: 2;
+
+            display: flex;
+            gap: 1.5rem;
+
+            &>div {
+                flex: 1;
+                border: 0.1rem solid var(--border-secondary);
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+            }
+        }
+    }
+
 }

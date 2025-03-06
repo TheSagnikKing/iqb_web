@@ -122,6 +122,7 @@ const App = () => {
     );
   };
 
+
   const ErrorFallback = ({ error }) => {
     return (
       <main className={`error_boundary_container ${darkmodeOn && "dark"}`}>

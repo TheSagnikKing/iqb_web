@@ -273,17 +273,17 @@
 aside {
   background-color: var(--bg-primary);
   height: inherit;
-  transition: width 0.2s ease-in-out;
-  -webkit-transition: width 0.2s ease-in-out;
-  -moz-transition: width 0.2s ease-in-out;
-  -ms-transition: width 0.2s ease-in-out;
-  -o-transition: width 0.2s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz-transition: width 0.3s ease-in-out;
+  -ms-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-
-  &>header {
+  border-right: 0.1rem solid var(--border-secondary);
+  
+  &>header{
     height: 6rem;
     /* background-color: var(--bg-primary); */
     padding: 0.5rem;
@@ -292,8 +292,8 @@ aside {
     gap: 1rem;
 
     &>div {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4rem;
+      height: 4rem;
       border: 0.1rem solid var(--border-primary);
       border-radius: 0.4rem;
       -webkit-border-radius: 0.4rem;
@@ -316,7 +316,12 @@ aside {
       color: var(--text-primary);
       font-family: "AirbnbCereal_Bold";
       font-size: 1.4rem;
-    }
+      transition: opacity 0.5s ease-in-out;
+      -webkit-transition: opacity 0.5s ease-in-out;
+      -moz-transition: opacity 0.5s ease-in-out;
+      -ms-transition: opacity 0.5s ease-in-out;
+      -o-transition: opacity 0.5s ease-in-out;
+}
 
   }
 
@@ -348,13 +353,21 @@ aside {
           &>li {
             height: 3rem;
             /*background-color: yellow;
-            */
-            padding-inline: 0.5rem;
+            */padding-inline: 0.5rem;
             border-radius: 0.5rem;
             -webkit-border-radius: 0.5rem;
             -moz-border-radius: 0.5rem;
             -ms-border-radius: 0.5rem;
             -o-border-radius: 0.5rem;
+            transition: 0.3s ease-in;
+            -webkit-transition: 0.3s ease-in;
+            -moz-transition: 0.3s ease-in;
+            -ms-transition: 0.3s ease-in;
+            -o-transition: 0.3s ease-in;
+            
+            &:hover{
+              background-color: var(--bg-secondary);
+            }
 
             &>a {
               height: inherit;
@@ -383,9 +396,8 @@ aside {
 }
 
 section {
-  background-color: #fff;
+  background-color: var(--bg-primary);
   flex: 1;
   height: inherit;
-  padding: 1rem;
   overflow: auto;
 }
