@@ -452,8 +452,56 @@
 
 import React from 'react'
 import style from "./Dashboard.module.css"
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Tooltip } from '@mui/material';
 
 const Dashboard = () => {
+
+  const queueData = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
 
   const barberlist = [
     {
@@ -485,6 +533,21 @@ const Dashboard = () => {
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNvQn2bWXuOh7sTO1doC46MSLtg6yKv9aBEg&s"
     }
   ]
+
+  const queueList = [
+    { customerName: "John Doe", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
+    { customerName: "Emma Smith", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
+    { customerName: "Liam Johnson", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
+    { customerName: "Sophia Brown", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
+    { customerName: "Noah Wilson", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
+    { customerName: "Olivia Martinez", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
+    { customerName: "William Davis", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
+    { customerName: "Ava Garcia", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img08" },
+    { customerName: "James Rodriguez", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
+    { customerName: "Mia Anderson", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" }
+  ];
+  
+  
   return (
     <section className={`${style.dashboard_container}`}>
       <div>
@@ -515,12 +578,86 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div>2</div>
-          <div>3</div>
+          <div>
+            <div>
+              <p>Queue Reports</p>
+              <p>Today status of Queue</p>
+              <h2>70</h2>
+            </div>
+
+            <div className={`${style.queue_report_container}`}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={queueData}
+                >
+                  <Line type="monotone" dataKey="pv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                  <Line type="monotone" dataKey="uv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <p>Queue History</p>
+              <p><span>+20.1%</span> from last 30 days</p>
+              <h2>400</h2>
+            </div>
+
+            <div className={`${style.queue_history_container}`}>
+              <div>
+                <div>
+                  <span style={{ background: "#00A36C" }}>+62.5%</span>
+                  <p>Served</p>
+                </div>
+
+                <div>
+                  <span style={{ background: "rgb(244, 67, 54)" }}>-32.5%</span>
+                  <p>Canceled</p>
+                </div>
+              </div>
+
+              <div>
+                <div></div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
         <div>
           <div>1</div>
-          <div>2</div>
+          <div>
+            <div>
+              <p>Queue List</p>
+              <p>The current total queue count is 100.</p>
+            </div>
+
+            <div>
+              {
+                queueList.map((item) => {
+                  return(
+                    <div className={`${style.queue_list_item}`}>
+                  <div>
+                    <div><img src={item.customerImage} alt="" /></div>
+                    <div>
+                      <p>{item.customerName}</p>
+                      <p>{item.barberName}</p>
+                    </div>
+                  </div>
+  
+                  <div>
+                    <h2>{item.qPos}</h2>
+                    <p>Est. Time - {item.mins} mins</p>
+                  </div>
+                </div>
+                  )
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     </section>
