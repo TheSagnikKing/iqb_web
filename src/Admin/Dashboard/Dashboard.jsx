@@ -452,8 +452,9 @@
 
 import React from 'react'
 import style from "./Dashboard.module.css"
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Tooltip } from '@mui/material';
+import { AppointmentIcon } from '../../newicons';
 
 const Dashboard = () => {
 
@@ -546,8 +547,68 @@ const Dashboard = () => {
     { customerName: "James Rodriguez", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
     { customerName: "Mia Anderson", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" }
   ];
-  
-  
+
+  const appointmentReportList = [
+    {
+      heading: "Total Appointments",
+      value: 60,
+    },
+    {
+      heading: "Served Appointments",
+      value: 40,
+    },
+    {
+      heading: "Canceled Appointments",
+      value: 20,
+    },
+  ]
+
+  const appointReportData = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
+
   return (
     <section className={`${style.dashboard_container}`}>
       <div>
@@ -628,7 +689,53 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <div>1</div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <p>Queue List</p>
+                  <p>The current total queue count is 100.</p>
+                </div>
+
+                <div>
+                  <h1>19th Feb - 25th Feb</h1>
+                  <p><span>+20.1%</span> from last 7 days</p>
+                </div>
+              </div>
+
+              <div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={150} height={40} data={appointReportData}>
+                    <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[6, 6, 6, 6]}/>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div>
+              {
+                appointmentReportList.map((item) => {
+                  return (
+                    <div
+                      key={item.heading}
+                      className={`${style.appoint_report_item}`}>
+                      <div>
+                        <div><AppointmentIcon /></div>
+                        <p>{item.heading}</p>
+                      </div>
+
+                      <h2>{item.value}</h2>
+
+                      <div><div></div></div>
+                    </div>
+                  )
+                })
+              }
+
+
+            </div>
+          </div>
+
           <div>
             <div>
               <p>Queue List</p>
@@ -637,22 +744,22 @@ const Dashboard = () => {
 
             <div>
               {
-                queueList.map((item) => {
-                  return(
-                    <div className={`${style.queue_list_item}`}>
-                  <div>
-                    <div><img src={item.customerImage} alt="" /></div>
-                    <div>
-                      <p>{item.customerName}</p>
-                      <p>{item.barberName}</p>
+                queueList.map((item,index) => {
+                  return (
+                    <div className={`${style.queue_list_item}`} key={index}>
+                      <div>
+                        <div><img src={item.customerImage} alt="" /></div>
+                        <div>
+                          <p>{item.customerName}</p>
+                          <p>{item.barberName}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2>{item.qPos}</h2>
+                        <p>Est. Time - {item.mins} mins</p>
+                      </div>
                     </div>
-                  </div>
-  
-                  <div>
-                    <h2>{item.qPos}</h2>
-                    <p>Est. Time - {item.mins} mins</p>
-                  </div>
-                </div>
                   )
                 })
               }
