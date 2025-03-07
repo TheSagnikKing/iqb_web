@@ -400,3 +400,10 @@ section {
   height: inherit;
   overflow: auto;
 }
+
+
+@media screen and (min-width:1141px) and (max-width: 1439px) {
+  section{
+    width: 100vw;
+  }
+}

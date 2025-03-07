@@ -1,25 +1,22 @@
-.mobile_content {
-  display: none;
-}
-
 @media screen and (min-width: 0px) and (max-width: 1140px) {
+  .mobile_container {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    position: relative;
 
-  .mobile_content {
-    display: block;
-    height: 100svh;
-    color: var(--light-color-2);
-    padding-inline: 1rem;
-    font-weight: 500;
-    /* background-color: #ebf5ff; */
-    background-color: var(--light-color-1);
-  }
+    &>aside {
+      position: absolute;
+      background-color: gray;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-  .mobile_content>div>div:nth-child(2) {
-    height: calc(100svh - 6rem);
-    width: 100%;
-  }
-
-  .mobile_content.dark{
-    background-color: var(--dark-color-1);
+      &>div {
+        height: 100vh;
+        background-color: rgba(255, 0, 0, 0.567);
+      }
+    }
   }
 }

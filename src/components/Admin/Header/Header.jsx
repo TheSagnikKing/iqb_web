@@ -535,7 +535,7 @@ import { MoonIcon, SearchIcon } from '../../../icons'
 import { LogoutIcon, ProfileIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
 import { ClickAwayListener, Modal } from '@mui/material'
 
-const Header = ({ sidebar, setSidebar }) => {
+const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
   const salonlist = [
     { name: "LuxeLocks Salon" },
@@ -571,9 +571,10 @@ const Header = ({ sidebar, setSidebar }) => {
   const [onlineState, setOnlineState] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
 
+
   return (
     <header className={`${style.header}`}>
-      <div>
+      <div className={`${style.large_container_left}`}>
         <button onClick={() => setSidebar((prev) => !prev)}>{sidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
         <ClickAwayListener onClickAway={() => setSalonlistdrop(false)}>
           <div>
@@ -632,40 +633,49 @@ const Header = ({ sidebar, setSidebar }) => {
           <div onClick={() => setProfileOpen((prev) => !prev)}>
             <img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" />
 
-              <div 
+            <div
               style={{
                 opacity: profileOpen ? 1 : 0
               }}
               className={`${style.profile_container}`} onClick={(e) => e.stopPropagation()}>
-                <div className={`${style.profile_container_header}`}>
-                  <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
-                  <div>
-                    <p>Toby Belhome</p>
-                    <p>contact@hotmail.com</p>
-                  </div>
+              <div className={`${style.profile_container_header}`}>
+                <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
+                <div>
+                  <p>Toby Belhome</p>
+                  <p>contact@hotmail.com</p>
                 </div>
+              </div>
 
-                <div 
+              <div
                 className={`${style.profile_container_item}`}
                 style={{
                   borderBottom: "0.1rem solid var(--border-secondary)"
                 }}
-                >
-                  <div><ProfileIcon/></div>
-                  <p>Profile</p>
-                </div>
-
-                <div className={`${style.profile_container_item}`}>
-                  <div><LogoutIcon/></div>
-                  <p>Logout</p>
-                </div>
-                
+              >
+                <div><ProfileIcon /></div>
+                <p>Profile</p>
               </div>
+
+              <div className={`${style.profile_container_item}`}>
+                <div><LogoutIcon /></div>
+                <p>Logout</p>
+              </div>
+
+            </div>
 
           </div>
         </ClickAwayListener>
 
 
+      </div>
+
+      {/* for mobile header */}
+
+      <div className={`${style.mobile_container_left}`}>
+        <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
+        <button>
+          Select Salon
+        </button>
       </div>
     </header>
   )
