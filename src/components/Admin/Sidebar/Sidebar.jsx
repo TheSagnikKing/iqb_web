@@ -124,7 +124,7 @@
 
 import React, { useState } from 'react'
 import style from './Sidebar.module.css'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from '../Header/Header.jsx';
 import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, SalonIcon } from '../../../newicons.js';
 
@@ -140,27 +140,32 @@ const Sidebar = () => {
         {
           id: 1,
           name: "Dashboard",
-          icon: <DashboardIcon />
+          icon: <DashboardIcon />,
+          url: "/admin-dashboard",
         },
         {
           id: 2,
           name: "Salons",
-          icon: <SalonIcon />
-        }, ,
+          icon: <SalonIcon />,
+          url: "/admin-salon",
+        }, 
         {
           id: 3,
           name: "Barbers",
-          icon: <BarberIcon />
+          icon: <BarberIcon />,
+          url: "/admin-barber",
         },
         {
           id: 4,
           name: "Customers",
-          icon: <CustomerIcon />
+          icon: <CustomerIcon />,
+          url: "/admin-customer",
         }, ,
         {
           id: 5,
           name: "Advertisements",
-          icon: <AdvertisementIcon />
+          icon: <AdvertisementIcon />,
+          url: "/admin-advertise",
         },
       ]
     },
@@ -170,17 +175,20 @@ const Sidebar = () => {
         {
           id: 1,
           name: "Queue List",
-          icon: <QueueIcon />
+          icon: <QueueIcon />,
+          url: "/admin-queue",
         },
         {
           id: 2,
           name: "Queue History",
-          icon: <QueueHistoryIcon />
+          icon: <QueueHistoryIcon />,
+          url: "/admin-quehistory",
         },
         {
           id: 3,
           name: "Appointments",
-          icon: <AppointmentIcon />
+          icon: <AppointmentIcon />,
+          url: "/admin-appointments",
         },
       ]
     },
@@ -190,7 +198,8 @@ const Sidebar = () => {
         {
           id: 1,
           name: "Subscription",
-          icon: <QueueIcon />
+          icon: <QueueIcon />,
+          url: "/admin-subscription",
         },
         {
           id: 2,
@@ -201,9 +210,8 @@ const Sidebar = () => {
     },
   ]
 
-  const [activeMenu, setActiveMenu] = useState(true)
+  const location = useLocation()
 
-  
 
   return (
     <main className={`${style.main_container}`}>
@@ -230,8 +238,9 @@ const Sidebar = () => {
                   {section.menuItems.map((item, cIndex) => (
                     <li
                       key={item.id}
-                      className={`${pIndex === 0 && cIndex == 0 ? style.activeMenu : null}`}>
-                      <Link to={"#"}>
+                      className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
+                      >
+                      <Link to={item?.url}>
                         <span
                         style={{
                           marginInline: sidebar ? "0rem" : "auto"

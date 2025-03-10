@@ -589,7 +589,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
             <div
               style={{
                 opacity: salonlistdrop ? 1 : 0,
-                transition: "opacity 0.3s ease-in-out"
+                transition: "opacity 0.2s ease-in-out"
               }}
               className={`${style.salonlist_container}`}
             >
@@ -635,9 +635,13 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
             <div
               style={{
-                opacity: profileOpen ? 1 : 0
+                opacity: profileOpen ? 1 : 0,
+                zIndex: profileOpen ? 100 : 0,
+                visibility: profileOpen ? "visible" : "hidden"
               }}
-              className={`${style.profile_container}`} onClick={(e) => e.stopPropagation()}>
+              className={`${style.profile_container}`} 
+              onClick={(e) => e.stopPropagation()}
+              >
               <div className={`${style.profile_container_header}`}>
                 <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
                 <div>
@@ -649,7 +653,8 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
               <div
                 className={`${style.profile_container_item}`}
                 style={{
-                  borderBottom: "0.1rem solid var(--border-secondary)"
+                  borderBottom: "0.1rem solid var(--border-secondary)",
+                  // cursor: profileOpen ? "cursor" : ""
                 }}
               >
                 <div><ProfileIcon /></div>

@@ -636,7 +636,7 @@ const Dashboard = () => {
   return (
     <section className={`${style.dashboard_container}`}>
       <div>
-        <h1>Welcome, Toby Belhome</h1>
+        <h2>Welcome, Toby Belhome</h2>
       </div>
 
       <div>
@@ -717,8 +717,8 @@ const Dashboard = () => {
             <div>
               <div>
                 <div>
-                  <p>Queue List</p>
-                  <p>The current total queue count is 100.</p>
+                  <p>Appointments Weekly Reports</p>
+                  <p>Weekly earnings overview</p>
                 </div>
 
                 <div>
@@ -780,7 +780,7 @@ const Dashboard = () => {
                       </div>
 
                       <div>
-                        <h2>{item.qPos}</h2>
+                        <h2>{item.qPos === 1 ? "Next" : item.qPos}</h2>
                         <p>Est. Time - {item.mins} mins</p>
                       </div>
                     </div>
