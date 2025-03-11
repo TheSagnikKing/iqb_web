@@ -122,6 +122,8 @@ body {
   --bg-secondary-hover: #e11d48e6;
   --btn-primary-hover: #27272A;
 
+  --input-bg-color: #27272A80;
+
   --common-btn-transition: 0.3s all ease;
 
   --text-primary: #F4F4F5;
@@ -594,3 +596,4 @@ body {
 .dark-input .rmdp-input {
   /* background-color: red !important; */
 }
+

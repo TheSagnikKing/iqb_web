@@ -761,6 +761,7 @@ import React, { useEffect, useState } from 'react'
 import style from "./SalonList.module.css"
 import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SalonList = () => {
 
@@ -1156,11 +1157,13 @@ const SalonList = () => {
 
   const [selectOpen, setSelectOpen] = useState(false)
 
+  const navigate = useNavigate()
+
   return (
     <section className={`${style.section}`}>
       <div>
         <h2>Salon List</h2>
-        <button>Create</button>
+        <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button>
       </div>
 
       <div className={`${style.list_container}`}>
