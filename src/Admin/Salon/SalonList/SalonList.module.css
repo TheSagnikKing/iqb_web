@@ -113,7 +113,7 @@
 
             &>div {
                 min-width: max-content;
-                min-height: 6rem;
+                min-height: 6.5rem;
                 display: flex;
 
                 &:hover {
@@ -280,13 +280,122 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            /* background-color: #fff; */
 
-            &>div:nth-child(2){
+            &>div:nth-child(2) {
                 height: inherit;
-                /* background-color: red; */
                 display: flex;
                 align-items: center;
                 gap: 1rem;
+            }
+
+            &>div:nth-child(3) {
+                /* background-color: red; */
+                display: flex;
+                align-items: center;
+                gap: 4rem;
+                height: inherit;
+                padding-right: 2rem;
+
+                &>div:nth-child(1) {
+                    /* background-color: blue; */
+                    display: flex;
+                    align-items: center;
+                    gap: 2rem;
+
+                    &>p {
+                        color: var(--text-primary);
+                        font-size: 1.4rem;
+                    }
+
+
+                    .select_container {
+                        width: 5.5rem;
+                        height: 3.5rem;
+                        position: relative;
+
+                        &>div {
+                            width: inherit;
+                            height: inherit;
+                            
+
+                            &>input {
+                                width: inherit;
+                                height: inherit;
+                                padding-inline: 1rem;
+                                background-color: var(--bg-primary);
+                                color: var(--text-primary);
+                                border: 0.1rem solid var(--border-secondary);
+                                outline: none;
+                                cursor: pointer;
+                                font-size: 1.4rem;
+                            }
+
+                            &>div {
+                                position: absolute;
+                                right: 0.5rem;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                color: var(--text-primary);
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 1.4rem;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+
+                    .select_container>ul {
+                        position: absolute;
+                        bottom: 110%;
+                        left: 0;
+                        right: 0;
+                        background-color: var(--bg-primary);
+                        border: 0.1rem solid var(--border-secondary);
+                        max-height: 15rem;
+                        overflow-y: auto;
+                        z-index: 300;
+                        border-radius: var(--border-radius-primary);
+                        padding: 0;
+                        margin: 0;
+                        list-style: none;
+                        -webkit-border-radius: var(--border-radius-primary);
+                        -moz-border-radius: var(--border-radius-primary);
+                        -ms-border-radius: var(--border-radius-primary);
+                        -o-border-radius: var(--border-radius-primary);
+
+                        &>li {
+                            color: var(--text-primary);
+                            font-size: 1.4rem;
+                            width: inherit;
+                            height: 3.5rem;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                            transition: background-color 0.3s ease-in-out;
+                            -webkit-transition: background-color 0.3s ease-in-out;
+                            -moz-transition: background-color 0.3s ease-in-out;
+                            -ms-transition: background-color 0.3s ease-in-out;
+                            -o-transition: background-color 0.3s ease-in-out;
+
+                            &:hover{
+                                background-color: var(--bg-secondary);
+                            }
+                        }
+                    }
+
+                }
+
+                &>div:nth-child(2) {
+                    &>p {
+                        color: var(--text-primary);
+                        font-size: 1.4rem;
+                        word-spacing: 0.4rem;
+                    }
+                }
             }
         }
     }

@@ -757,26 +757,26 @@
 // export default SalonList
 
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./SalonList.module.css"
-import { SalonThreeDotsIcon, SortUpDownArrowIcon } from '../../../newicons';
-import { ClickAwayListener, Pagination } from '@mui/material';
+import { DropdownIcon, SalonThreeDotsIcon, SortUpDownArrowIcon } from '../../../newicons';
+import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 
 const SalonList = () => {
 
   const headRows = [
-    { id: 1, heading: "#" },
-    { id: 2, heading: "Name" },
-    { id: 3, heading: "Address" },
-    { id: 4, heading: "City" },
-    { id: 5, heading: "Type" },
-    { id: 6, heading: "Subscription" },
-    { id: 7, heading: "Status" },
-    { id: 8, heading: "" },
+    { id: 1, heading: "#", key: "id" },
+    { id: 2, heading: "Name", key: "name" },
+    { id: 3, heading: "Address", key: "address" },
+    { id: 4, heading: "City", key: "city" },
+    { id: 5, heading: "Type", key: "type" },
+    { id: 6, heading: "Subscription", key: "subscription" },
+    { id: 7, heading: "Status", key: "status" },
+    { id: 8, heading: "", key: "" },
   ];
+  
 
-
-  const salonlistData = [
+  const [salonlistData, setSalonlistData] = useState([
     {
       id: 1,
       name: "Glamour Lounge",
@@ -1097,26 +1097,66 @@ const SalonList = () => {
       subscription: "Inactive",
       status: "Offline",
     }
-  ]
+  ])
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
   const [rowsPerPage, SetRowsPerPage] = useState(10)
 
-  const [totalPages, setTotalPages] = useState(Math.ceil(salonlistData.length / rowsPerPage))
-
-  console.log(totalPages)
-
   const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [startIndex, setStartIndex] = useState(0)
+  const [endIndex, setEndIndex] = useState(rowsPerPage)
+  const [sortOrder, setSortOrder] = useState("asc")
+  const [sortColumn, setSortColumn] = useState("")
 
-  const handleChange = (event,value) => {
+  const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
+
+  useEffect(() => {
+    const totalPages = Math.ceil(salonlistData.length / rowsPerPage)
+    setTotalPages(totalPages)
+    setStartIndex((page - 1) * rowsPerPage)
+    setEndIndex(page * rowsPerPage)
+  }, [rowsPerPage, page])
+
+  useEffect(() => {
+    setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
+  }, [startIndex, endIndex, salonlistData])
+
+  console.log(salonlistData)
+
+
+
+  const handleChange = (event, value) => {
     setPage(value);
   }
 
-  const startDataIndex = (page - 1) * rowsPerPage
-  const endDataIndex = page * rowsPerPage
+  console.log(startIndex, endIndex, totalPages)
+
+  useEffect(() => {
+    if (!sortColumn) return;
   
-  console.log(endDataIndex)
+    const sortedList = [...salonlistData].sort((a, b) => {
+      if (a[sortColumn] < b[sortColumn]) return sortOrder === "asc" ? -1 : 1;
+      if (a[sortColumn] > b[sortColumn]) return sortOrder === "asc" ? 1 : -1;
+      return 0;
+    });
+  
+    setSalonlistData(sortedList);
+    setPage(1); // Reset to first page after sorting
+  }, [sortColumn, sortOrder]);
+  
+
+  console.log(salonlistData)
+
+  const [selectOpen, setSelectOpen] = useState(false)
+
+  const sortFunction = (columnKey) => {
+    setSortOrder((prev) => (sortColumn === columnKey && prev === "asc" ? "desc" : "asc"));
+    setSortColumn(columnKey);
+  };
+  
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -1133,9 +1173,9 @@ const SalonList = () => {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>[]
-                    <button onClick={() => alert(index)}>
+                    <button onClick={() => sortfunction(item.heading)}>
                       {item.heading}
-                      {index === 0 || index === headRows.length - 1 ? null : <span><SortUpDownArrowIcon /></span>}
+                      {item.key && (sortColumn === item.key ? (sortOrder === "asc" ? " 🔼" : " 🔽") : " ⇅")}
                     </button>
                   </div>
                 )
@@ -1143,12 +1183,11 @@ const SalonList = () => {
             }
           </div>
 
-          {/* <div style={{ color: "red" }}><SortUpDownArrowIcon /></div> */}
           {
-            salonlistData.map((item, index) => {
+            salonPaginationData.map((item, index) => {
               return (
-                <div key={item.id} style={{ borderBottom: (index === endDataIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div><p>{index + 1}</p></div>
+                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                  <div><p>{item.id}</p></div>
                   <div>
                     <div>
                       <div><img src={item.logo} alt="" /></div>
@@ -1196,7 +1235,7 @@ const SalonList = () => {
 
                 </div>
               )
-            }).slice(startDataIndex, endDataIndex)
+            })
           }
         </div>
 
@@ -1209,14 +1248,53 @@ const SalonList = () => {
               onChange={handleChange}
               sx={{
                 "& .MuiPaginationItem-root": {
-                  color: "white",
+                  color: "var(--text-primary)",
                   fontSize: "1.4rem",
                 },
                 "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important" },
               }}
             />
           </div>
-          <div>Rows</div>
+          <div>
+            <div>
+              <p>Rows Per Page</p>
+
+              <ClickAwayListener onClickAway={() => setSelectOpen(false)}>
+                <div className={`${style.select_container}`}>
+                  <div onClick={() => setSelectOpen((prev) => !prev)}>
+                    <input type="text" value={rowsPerPage} readOnly />
+                    <div><DropdownIcon /></div>
+                  </div>
+
+                  {
+                    selectOpen ? (<ul>
+                      {
+                        [10, 20, 30, 50].map((item, index) => {
+                          return (
+                            <li key={item} onClick={() => {
+                              setPage(1)
+                              SetRowsPerPage(item)
+                              setSelectOpen(false)
+                            }}
+                              style={{
+                                background: item === rowsPerPage ? "var(--bg-secondary)" : null,
+                                borderBottom: index === [10, 20, 30, 50].length - 1 ? "none" : "0.1rem solid var(--border-secondary)"
+                              }}
+                            >{item}</li>
+                          )
+                        })
+                      }
+
+                    </ul>) : (null)
+                  }
+                </div>
+              </ClickAwayListener>
+
+            </div>
+            <div>
+              <p>{startIndex} - {endIndex}{" "} of {totalPages}</p>
+            </div>
+          </div>
         </div>
       </div>
 
