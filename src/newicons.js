@@ -4,7 +4,7 @@ import { BsSunFill } from "react-icons/bs";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { FiPieChart } from "react-icons/fi";
-import { IoChevronDownOutline, IoPerson, IoPersonCircleOutline } from "react-icons/io5";
+import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline } from "react-icons/io5";
 import { LuHistory, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { MdLogout, MdOutlineQueue, MdOutlineSubscriptions, MdPayment } from "react-icons/md";
 import { RiAdvertisementLine, RiMoonClearFill } from "react-icons/ri";
@@ -31,3 +31,5 @@ export const LogoutIcon = MdLogout
 export const SalonThreeDotsIcon = PiDotsThreeOutlineFill
 export const SortUpDownArrowIcon = BiSortAlt2
 export const DropdownIcon = IoChevronDownOutline 
+export const SortDownIcon = IoArrowDownSharp 
+export const SortUpIcon = IoArrowUpSharp 

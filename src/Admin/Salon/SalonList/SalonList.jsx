@@ -759,13 +759,13 @@
 
 import React, { useEffect, useState } from 'react'
 import style from "./SalonList.module.css"
-import { DropdownIcon, SalonThreeDotsIcon, SortUpDownArrowIcon } from '../../../newicons';
+import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 
 const SalonList = () => {
 
   const headRows = [
-    { id: 1, heading: "#", key: "id" },
+    { id: 1, heading: "#", key: "" },
     { id: 2, heading: "Name", key: "name" },
     { id: 3, heading: "Address", key: "address" },
     { id: 4, heading: "City", key: "city" },
@@ -774,7 +774,7 @@ const SalonList = () => {
     { id: 7, heading: "Status", key: "status" },
     { id: 8, heading: "", key: "" },
   ];
-  
+
 
   const [salonlistData, setSalonlistData] = useState([
     {
@@ -785,7 +785,7 @@ const SalonList = () => {
       city: "Noida",
       type: "Hair Dresser",
       subscription: "Active",
-      status: "Online",
+      status: "Offline",
     },
     {
       id: 2,
@@ -1123,39 +1123,38 @@ const SalonList = () => {
     setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
   }, [startIndex, endIndex, salonlistData])
 
-  console.log(salonlistData)
-
 
 
   const handleChange = (event, value) => {
     setPage(value);
   }
 
-  console.log(startIndex, endIndex, totalPages)
+  const sortFunction = (columnKey) => {
+    setSortOrder((prev) => (sortColumn === columnKey && prev === 'asc' ? 'desc' : 'asc'));
+    setSortColumn(columnKey);
+  };
 
   useEffect(() => {
     if (!sortColumn) return;
-  
-    const sortedList = [...salonlistData].sort((a, b) => {
-      if (a[sortColumn] < b[sortColumn]) return sortOrder === "asc" ? -1 : 1;
-      if (a[sortColumn] > b[sortColumn]) return sortOrder === "asc" ? 1 : -1;
-      return 0;
-    });
-  
-    setSalonlistData(sortedList);
-    setPage(1); // Reset to first page after sorting
-  }, [sortColumn, sortOrder]);
-  
 
-  console.log(salonlistData)
+    const sortedList = [...salonlistData].sort((a, b) => {
+      const valueA = a[sortColumn];
+      const valueB = b[sortColumn];
+
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        return sortOrder === "asc"
+          ? valueA.localeCompare(valueB)
+          : valueB.localeCompare(valueA);
+      } else {
+        return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+      }
+    });
+
+    setSalonlistData(sortedList);
+    // setPage(1); 
+  }, [sortColumn, sortOrder]);
 
   const [selectOpen, setSelectOpen] = useState(false)
-
-  const sortFunction = (columnKey) => {
-    setSortOrder((prev) => (sortColumn === columnKey && prev === "asc" ? "desc" : "asc"));
-    setSortColumn(columnKey);
-  };
-  
 
   return (
     <section className={`${style.section}`}>
@@ -1172,10 +1171,10 @@ const SalonList = () => {
             {
               headRows.map((item, index) => {
                 return (
-                  <div key={item.id}>[]
-                    <button onClick={() => sortfunction(item.heading)}>
+                  <div key={item.id}>
+                    <button onClick={() => sortFunction(item.key)}>
                       {item.heading}
-                      {item.key && (sortColumn === item.key ? (sortOrder === "asc" ? " 🔼" : " 🔽") : " ⇅")}
+                      <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
                     </button>
                   </div>
                 )
