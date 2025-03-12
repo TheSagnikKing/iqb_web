@@ -1175,14 +1175,25 @@ const SalonList = () => {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <button onClick={() => sortFunction(item.key)}>
-                      {item.heading}
+                    <button
+                      className={`${item.key === "name" ? style.name_head_btn : ""}`}
+                      onClick={() => sortFunction(item.key)}>
+                      {item.key === "name" ? (
+                        <>
+                          <span></span>
+                          {item.heading}
+                        </>
+                      ) : (
+                        item.heading
+                      )}
+
                       <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
                     </button>
                   </div>
                 )
               })
             }
+
           </div>
 
           {

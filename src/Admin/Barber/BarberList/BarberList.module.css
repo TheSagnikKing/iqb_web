@@ -18,30 +18,67 @@
             font-family: "AirbnbCereal_Medium";
         }
 
-        &>button {
-            height: 3.75rem;
-            padding-inline: 2rem;
-            border-radius: var(--border-radius-primary);
-            -webkit-border-radius: var(--border-radius-primary);
-            -moz-border-radius: var(--border-radius-primary);
-            -ms-border-radius: var(--border-radius-primary);
-            -o-border-radius: var(--border-radius-primary);
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: none;
-            outline: none;
-            cursor: pointer;
-            transition: var(--common-btn-transition);
-            -webkit-transition: var(--common-btn-transition);
-            -moz-transition: var(--common-btn-transition);
-            -ms-transition: var(--common-btn-transition);
-            -o-transition: var(--common-btn-transition);
-            z-index: 4;
+        &>div {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
 
-            &:hover {
-                background-color: var(--bg-secondary-hover);
+            &>button:nth-child(1),
+            &>button:nth-child(2) {
+                height: 3.5rem;
+                width: 3.5rem;
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+                background: var(--bg-hover-primary);
+                border: 0.1rem solid var(--border-secondary);
+                color: var(--text-primary);
+                font-size: 1.4rem;
+                transition: background-color 0.2s ease-in;
+                -webkit-transition: background-color 0.2s ease-in;
+                -moz-transition: background-color 0.2s ease-in;
+                -ms-transition: background-color 0.2s ease-in;
+                -o-transition: background-color 0.2s ease-in;
+                cursor: pointer;
+                outline: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover{
+                    background-color: var(--btn-primary-hover);
+                    border: none;
+                }
+            }
+
+            &>button:nth-last-child(1) {
+                height: 3.5rem;
+                padding-inline: 1.5rem;
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+                background-color: var(--bg-secondary);
+                color: var(--text-primary);
+                border: none;
+                outline: none;
+                cursor: pointer;
+                transition: var(--common-btn-transition);
+                -webkit-transition: var(--common-btn-transition);
+                -moz-transition: var(--common-btn-transition);
+                -ms-transition: var(--common-btn-transition);
+                -o-transition: var(--common-btn-transition);
+                z-index: 4;
+
+                &:hover {
+                    background-color: var(--bg-secondary-hover);
+                }
             }
         }
+
     }
 
     .list_container {
@@ -78,6 +115,23 @@
                 border-bottom: 0.1rem solid var(--border-secondary);
 
                 &>div {
+
+                    .name_head_btn{
+                        width: 80%;
+                        display: flex;
+                        align-items: center;
+                        gap: 0rem;
+
+                        &>span:nth-child(1){
+                            height: 3.5rem;
+                            width: 3.5rem;
+                            margin-right: 2rem;
+                        }
+
+                        &>span:nth-child(2){
+                            margin-left: 0.5rem;
+                        }
+                    }
 
                     &>button {
                         cursor: pointer;
@@ -316,7 +370,7 @@
                         &>div {
                             width: inherit;
                             height: inherit;
-                            
+
 
                             &>input {
                                 width: inherit;
@@ -380,7 +434,7 @@
                             -ms-transition: background-color 0.3s ease-in-out;
                             -o-transition: background-color 0.3s ease-in-out;
 
-                            &:hover{
+                            &:hover {
                                 background-color: var(--bg-secondary);
                             }
                         }
@@ -400,21 +454,21 @@
     }
 }
 
-@media screen and (min-width:0px) and (max-width:430px){
-    .list_container{
-        
-        .pagination_container{
+@media screen and (min-width:0px) and (max-width:430px) {
+    .list_container {
+
+        .pagination_container {
             flex-direction: column;
             gap: 2rem;
             align-items: flex-start !important;
             padding: 1rem;
             height: auto !important;
 
-            &>div:nth-child(2){
+            &>div:nth-child(2) {
                 margin-inline: auto;
             }
 
-            &>div:nth-child(3){
+            &>div:nth-child(3) {
                 width: 100%;
                 justify-content: space-between;
             }
@@ -422,21 +476,21 @@
     }
 }
 
-@media screen and (min-width:431px) and (max-width:576px){
-    .list_container{
-        
-        .pagination_container{
+@media screen and (min-width:431px) and (max-width:576px) {
+    .list_container {
+
+        .pagination_container {
             flex-direction: column;
             gap: 2rem;
             align-items: flex-start !important;
             padding: 1rem;
             height: auto !important;
 
-            &>div:nth-child(2){
+            &>div:nth-child(2) {
                 margin-inline: auto;
             }
 
-            &>div:nth-child(3){
+            &>div:nth-child(3) {
                 width: 100%;
                 justify-content: space-between;
             }

@@ -590,7 +590,8 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
               style={{
                 opacity: salonlistdrop ? 1 : 0,
                 visibility: salonlistdrop ? "visible" : "hidden",
-                transition: "opacity 0.2s ease-in-out"
+                transition: "opacity 0.2s ease-in-out",
+                zIndex: salonlistdrop ? 9999 : -100
               }}
               className={`${style.salonlist_container}`}
             >

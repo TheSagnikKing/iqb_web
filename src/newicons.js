@@ -6,7 +6,7 @@ import { FaUser } from "react-icons/fa6";
 import { FiPieChart } from "react-icons/fi";
 import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline } from "react-icons/io5";
 import { LuHistory, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
-import { MdLogout, MdOutlineQueue, MdOutlineSubscriptions, MdPayment } from "react-icons/md";
+import { MdAdd, MdLogout, MdOutlineMailOutline, MdOutlineMessage, MdOutlineQueue, MdOutlineSubscriptions, MdPayment } from "react-icons/md";
 import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine  } from "react-icons/ri";
 import { TbScissors, TbWorldWww } from "react-icons/tb";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
@@ -39,3 +39,6 @@ export const WebsiteIcon = TbWorldWww
 export const InstagramIcon = BsInstagram 
 export const XIcon = RiTwitterXLine 
 export const TiktokIcon = BiLogoTiktok 
+export const EmailIcon = MdOutlineMailOutline
+export const MessageIcon = MdOutlineMessage
+export const AddIcon = MdAdd

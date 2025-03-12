@@ -571,8 +571,9 @@
 
 import React, { useEffect, useState } from 'react'
 import style from "./BarberList.module.css"
-import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
+import { DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const BarberList = () => {
 
@@ -968,11 +969,17 @@ const BarberList = () => {
 
   const [selectOpen, setSelectOpen] = useState(false)
 
+  const navigate = useNavigate()
+
   return (
     <section className={`${style.section}`}>
       <div>
         <h2>Barber List</h2>
-        <button>Create</button>
+        <div>
+          <button><MessageIcon /></button>
+          <button><EmailIcon /></button>
+          <button onClick={() => navigate("/admin-barber/createbarber")}>Create</button>
+        </div>
       </div>
 
       <div className={`${style.list_container}`}>
@@ -980,12 +987,23 @@ const BarberList = () => {
         <div className={`${style.list_body_container}`}>
 
           <div className={`${style.headRow}`}>
+
             {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <button onClick={() => sortFunction(item.key)}>
-                      {item.heading}
+                    <button
+                      className={`${item.key === "name" ? style.name_head_btn : ""}`}
+                      onClick={() => sortFunction(item.key)}>
+                      {item.key === "name" ? (
+                        <>
+                          <span></span>
+                          {item.heading}
+                        </>
+                      ) : (
+                        item.heading
+                      )}
+
                       <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
                     </button>
                   </div>

@@ -88,7 +88,6 @@
                 right: 0rem;
                 height: 18rem;
                 overflow: auto;
-                z-index: 100;
 
                 .salonlist_container_item {
                     height: 4rem;
