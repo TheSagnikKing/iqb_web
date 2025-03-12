@@ -1929,7 +1929,7 @@
 import React, { useState } from 'react'
 import style from './CreateSalon.module.css'
 import { ClickAwayListener, Step, StepContent, StepLabel, Stepper } from '@mui/material';
-import { DropdownIcon } from '../../../newicons';
+import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
 
 const CreateSalon = () => {
 
@@ -1948,6 +1948,9 @@ const CreateSalon = () => {
       fields: [
         { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type' },
         { name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address' },
+        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode' },
+        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude' },
+        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude' },
         { name: 'country', label: 'Country', type: 'text', dropdown: true, placeholder: 'Select country' },
         { name: 'city', label: 'City', type: 'text', dropdown: true, placeholder: 'Select city' },
         { name: 'timezone', label: 'Timezone', type: 'text', dropdown: true, placeholder: 'Select timezone' },
@@ -1961,6 +1964,21 @@ const CreateSalon = () => {
         { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true },
         { name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false },
         { name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false },
+      ],
+    },
+    {
+      label: 'Gallery',
+      fields: [
+      ],
+    },
+    {
+      label: 'Social Links',
+      fields: [
+        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon /> },
+        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon /> },
+        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon /> },
+        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon /> },
+        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon /> },
       ],
     },
   ];
@@ -2014,6 +2032,41 @@ const CreateSalon = () => {
   };
 
   const [open, setOpen] = useState(false)
+
+  const salonImageslist = [
+    {
+      id: 1,
+      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
+    },
+    {
+      id: 2,
+      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
+    },
+    {
+      id: 3,
+      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
+    },
+    {
+      id: 4,
+      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
+    },
+    {
+      id: 5,
+      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
+    },
+    {
+      id: 6,
+      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
+    },
+    {
+      id: 7,
+      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
+    },
+    {
+      id: 8,
+      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
+    },
+  ]
 
   return (
     <section className={`${style.section}`}>
@@ -2116,6 +2169,12 @@ const CreateSalon = () => {
                           />)
                         }
 
+                        {field.name === "longitude" && (
+                          <button className={`${style.geolocation_btn}`}>
+                            Get geolocation
+                          </button>
+                        )}
+
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
@@ -2129,6 +2188,7 @@ const CreateSalon = () => {
                   </main>
                 </StepContent>)
               }
+
 
               {
                 step.label === "Select Services" && (<StepContent>
@@ -2162,18 +2222,180 @@ const CreateSalon = () => {
                       </div>
 
                       <div>
-                          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+                        {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                             return (
                               <div className={`${style.service_item}`} key={index}>
-                                <p>Service Item</p>
+                                <div>
+                                  <div>
+                                    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
+                                    <div>
+                                      <p>Braids & Layers</p>
+                                      <p>Regular</p>
+                                      <p>Today’s salon owners know that everyone wants to look their best.</p>
+                                    </div>
+                                  </div>
+                                  <button><DeleteIcon/></button>
+                                </div>
+                                <div></div>
                               </div>
                             )
-                          })}
+                          })} */}
+
+                        <div className={`${style.service_item}`}>
+                          <div>
+                            <div>
+                              <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
+                              <div>
+                                <p>Braids & Layers</p>
+                                <p>Regular</p>
+                                <p>Today’s salon owners know that everyone wants to look their best.</p>
+                              </div>
+                            </div>
+                            <button><DeleteIcon /></button>
+                          </div>
+                          <div>
+                            <div>
+                              <p>Price</p>
+                              <p>€ 300</p>
+                            </div>
+
+                            <div>
+                              <p>Estimated Time</p>
+                              <p>30 mins</p>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div className={`${style.service_item}`}>
+                          <div>
+                            <div>
+                              <div><img src="https://dynamic.brandcrowd.com/asset/logo/4641cc89-eed8-46eb-b525-15da3ea2d021/logo-search-grid-1x?logoTemplateVersion=1&v=638302799045600000" alt="" /></div>
+                              <div>
+                                <p>Style Lounge</p>
+                                <p>VIP</p>
+                                <p>Today’s salon owners know that everyone wants to look their best and many people don’t consider salon services gender-specific. If you want a unisex salon name that reflects an inclusive brand, use these ideas for inspiration.</p>
+                              </div>
+                            </div>
+                            <button><DeleteIcon /></button>
+                          </div>
+                          <div>
+                            <div>
+                              <p>Price</p>
+                              <p>€ 300</p>
+                            </div>
+
+                            <div>
+                              <p>Estimated Time</p>
+                              <p>30 mins</p>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className={`${style.service_item}`}>
+                          <div>
+                            <div>
+                              <div><img src="https://marketplace.canva.com/EAFHiAQTPQQ/1/0/1600w/canva-pink-black-hand-drawn-hair-salon-logo-tVTdlo6D5XQ.jpg" alt="" /></div>
+                              <div>
+                                <p>Dueling Scissors</p>
+                                <p>Regular</p>
+                                <p>Today’s salon owners know.</p>
+                              </div>
+                            </div>
+                            <button><DeleteIcon /></button>
+                          </div>
+                          <div>
+                            <div>
+                              <p>Price</p>
+                              <p>€ 300</p>
+                            </div>
+
+                            <div>
+                              <p>Estimated Time</p>
+                              <p>30 mins</p>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
 
                     </div>
 
 
+                  </main>
+                </StepContent>)
+              }
+
+              {
+                step.label === "Gallery" && (
+                  <StepContent>
+                    <main className={`${style.gallery_container}`}>
+                      <div>
+                        <div>
+                          <p>Upload your salon's logo</p>
+                          <button>upload</button>
+                        </div>
+
+                        <div>
+                          <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-763b440be07bf6efa6f10d4c9e7f77a2_screen.jpg?ts=1686899215" alt="" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <p>Please select high-quality images to showcase your salon.</p>
+
+                        <div>
+                          {
+                            salonImageslist.map((item, index) => {
+                              return (
+                                <div key={index} ><img src={item.url} /></div>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+
+
+                      <div className={`${style.button_container}`}>
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
+                        <button onClick={handleNext}>
+                          {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                        </button>
+                      </div>
+                    </main>
+                  </StepContent>
+                )
+              }
+
+              {
+                step.label === "Social Links" && (<StepContent>
+                  <main className={`${style.social_link_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        <div>
+                          <div>{field.icon}</div>
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={formData[field.name]}
+                            placeholder={field.placeholder}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
                   </main>
                 </StepContent>)
               }
@@ -2184,7 +2406,7 @@ const CreateSalon = () => {
 
         {activeStep === steps.length && (
           <div className={`${style.complete}`}>
-            <p>All steps have been successfully completed! Click the 'Create' button to set up your new salon.</p>
+            <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Create</span> button to set up your new salon.</p>
             <div>
               <button onClick={handleReset}>Reset</button>
               <button>Create</button>
