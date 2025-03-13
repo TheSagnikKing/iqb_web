@@ -620,7 +620,7 @@ const CustomerList = () => {
           <button><EmailIcon /></button>
           <input
             type='text'
-            placeholder='Search Customer...'
+            placeholder='Search Customer'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />

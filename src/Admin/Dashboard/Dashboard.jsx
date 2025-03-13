@@ -363,15 +363,15 @@
 //                 <div className={`${style.report_container} ${darkmodeOn && style.dark}`}>
 
 //                   <Carousel
-//                     showThumbs={false}
-//                     infiniteLoop={true}
-//                     autoPlay={false}
-//                     interval={5000}
-//                     showStatus={false}
-//                     showArrows={false}
-//                     stopOnHover={true}
-//                     swipeable={true}
-//                     renderIndicator={false}
+                    // showThumbs={false}
+                    // infiniteLoop={true}
+                    // autoPlay={false}
+                    // interval={5000}
+                    // showStatus={false}
+                    // showArrows={false}
+                    // stopOnHover={true}
+                    // swipeable={true}
+                    // renderIndicator={false}
 //                   >
 
 //                     <div className={style.r_chart}>

@@ -275,14 +275,19 @@
                             border: 0.1rem solid var(--border-secondary);
                             width: 16rem;
 
+                            &>p:nth-child(1) {
+                                border-bottom: 0.1rem solid var(--border-secondary);
+                            }
+
                             &>p {
                                 color: var(--text-primary);
                                 font-size: 1.4rem;
                                 padding: 1rem;
-                            }
 
-                            &>p:nth-child(1) {
-                                border-bottom: 0.1rem solid var(--border-secondary);
+                                &>a{
+                                    text-decoration: none;
+                                    color: var(--text-primary);
+                                }
                             }
 
                         }

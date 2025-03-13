@@ -487,6 +487,7 @@ import api from '../../Redux/api/Api';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 import Skeleton from 'react-loading-skeleton';
 import toast from 'react-hot-toast';
+import { Carousel } from 'react-responsive-carousel';
 
 
 const SalonAdv = () => {
@@ -821,40 +822,64 @@ const SalonAdv = () => {
       </div>
 
       <div className={`${style.list_container}`}>
-        <div>Carousel</div>
         <div>
+          <Carousel
+            showThumbs={false}
+            infiniteLoop={true}
+            autoPlay={true}
+            interval={5000}
+            showStatus={false}
+            showArrows={false}
+            stopOnHover={true}
+            renderIndicator={false}
+          >
+            {
+              getAllAdvertisementLoading ? (
+                <Skeleton
+                  count={1}
+                  width={"100%"}
+                  height={"30vh"}
+                  style={{ borderRadius: "0.6rem" }}
+                  baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                  highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                />
+              ) : advertisements?.map((adv) => {
+                return (<div className={`${style.carousel_item}`} key={adv._id}>
+                  <img src={adv.url} />
+                </div>)
+              })
+            }
 
-          {/* // DND  */}
-
+          </Carousel>
+        </div>
+        <div>
           {
             getAllAdvertisementLoading ?
-              <div className={style.salonadv_column}>
+              <>
                 {[...Array(6)].map((_, index) => (
                   <Skeleton
                     key={index}
                     count={1}
-                    width={"95%"}
+                    width={"100%"}
                     height={"30rem"}
                     style={{ borderRadius: "0.6rem" }}
-                    baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                    highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
                   />
                 ))}
-              </div> :
+              </> :
               getAllAdvertisementResolve && advertisements?.length > 0 ?
 
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
-                  {/* <div className={`${style.salonadv_column} ${darkmodeOn && style.dark}`}> */}
-                    <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
-                      {advertisements.map((adv) => (
-                        <React.Fragment key={adv._id}>
-                          <Adv id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
-                        </React.Fragment>
-                      ))}
+                  <SortableContext items={advertisements.map(adv => adv._id)} strategy={horizontalListSortingStrategy}>
+                    {advertisements.map((adv) => (
+                      <React.Fragment key={adv._id}>
+                        <Adv id={adv._id} url={adv.url} public_id={adv.public_id} editImageHandler={editImageHandler} handleEditLoader={handleEditLoader} deleteHandler={deleteHandler} deleteLoader={deleteLoader} handleEditFileInputChange={handleEditFileInputChange} darkmodeOn={darkmodeOn} />
+                      </React.Fragment>
+                    ))}
 
-                    </SortableContext>
+                  </SortableContext>
 
-                  {/* </div> */}
                 </DndContext> :
                 <div className={`${style.salonadv_column_error} ${darkmodeOn && style.dark}`}><p>No Advertisment Avaialble</p></div>
           }

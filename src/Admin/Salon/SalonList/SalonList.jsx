@@ -761,7 +761,7 @@ import React, { useEffect, useState } from 'react'
 import style from "./SalonList.module.css"
 import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SalonList = () => {
 
@@ -1114,15 +1114,14 @@ const SalonList = () => {
   const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
 
   useEffect(() => {
-      const totalPages = Math.ceil(salonlistData.length / rowsPerPage)
-      setTotalPages(totalPages)
-      setStartIndex((page - 1) * rowsPerPage)
-      setEndIndex(page * rowsPerPage)
-    }, [rowsPerPage, page])
-  
-    useEffect(() => {
-      setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
-    }, [startIndex, endIndex, salonlistData])
+      const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
+      setTotalPages(totalPages);
+      const startIndex = (page - 1) * rowsPerPage;
+      const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+      setStartIndex(startIndex);
+      setEndIndex(endIndex);
+      setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
+    }, [salonlistData, page, rowsPerPage]);
 
 
   const handleChange = (event, value) => {
@@ -1235,8 +1234,9 @@ const SalonList = () => {
                                 zIndex: settingsIndex === index ? 9999 : -100,
                               }}
                               className={`${style.settings_container}`}>
-                              <p>Salon settings</p>
-                              <p>Appointment settings</p>
+                              <p><Link to="#">Salon settings</Link></p>
+                              <p><Link to="#">Appointment settings</Link></p>
+                              <p><Link to="/admin-salon/editsalon/:salonid">Edit Salon</Link></p>
                             </div>
                           </ClickAwayListener>)
                       }

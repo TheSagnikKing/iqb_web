@@ -143,7 +143,7 @@ body {
   font-size: 1.6rem;
 }
 
-.carousel * {
+/* .carousel * {
   border-radius: 0.6rem;
   -webkit-border-radius: 0.6rem;
   -moz-border-radius: 0.6rem;
@@ -153,7 +153,7 @@ body {
 
 .carousel .control-dots .dot {
   background: var(--color-2);
-}
+} */
 
 .react-international-phone-input-container {
   border-radius: var(--input-border-radius) !important;
