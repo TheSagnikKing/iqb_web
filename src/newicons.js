@@ -11,6 +11,7 @@ import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine 
 import { TbScissors, TbWorldWww } from "react-icons/tb";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
+import { IoMdCheckmark } from "react-icons/io";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors 
@@ -42,3 +43,4 @@ export const TiktokIcon = BiLogoTiktok
 export const EmailIcon = MdOutlineMailOutline
 export const MessageIcon = MdOutlineMessage
 export const AddIcon = MdAdd
+export const CheckIcon = IoMdCheckmark 

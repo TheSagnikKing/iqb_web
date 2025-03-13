@@ -937,7 +937,6 @@ const BarberList = () => {
   }, [startIndex, endIndex, salonlistData])
 
 
-
   const handleChange = (event, value) => {
     setPage(value);
   }

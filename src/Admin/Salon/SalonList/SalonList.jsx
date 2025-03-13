@@ -1114,16 +1114,15 @@ const SalonList = () => {
   const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
 
   useEffect(() => {
-    const totalPages = Math.ceil(salonlistData.length / rowsPerPage)
-    setTotalPages(totalPages)
-    setStartIndex((page - 1) * rowsPerPage)
-    setEndIndex(page * rowsPerPage)
-  }, [rowsPerPage, page])
-
-  useEffect(() => {
-    setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
-  }, [startIndex, endIndex, salonlistData])
-
+      const totalPages = Math.ceil(salonlistData.length / rowsPerPage)
+      setTotalPages(totalPages)
+      setStartIndex((page - 1) * rowsPerPage)
+      setEndIndex(page * rowsPerPage)
+    }, [rowsPerPage, page])
+  
+    useEffect(() => {
+      setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
+    }, [startIndex, endIndex, salonlistData])
 
 
   const handleChange = (event, value) => {

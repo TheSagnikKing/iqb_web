@@ -849,7 +849,7 @@ const CreateBarber = () => {
     const prevService = copySalonServices.find((item) => item.id !== service.id)
 
     setSalonServices((prev) => {
-      
+
       const updatedSalonServices = prev.map((item) => {
         return item.id === service.id ? ({ ...item, add: false, estimatedTime: prevService.estimatedTime }) : (item)
       })
@@ -945,11 +945,8 @@ const CreateBarber = () => {
                 step.label === "Barber Services" && (<StepContent>
                   <main className={`${style.service_container}`}>
 
-                    <div>
+                    {/* <div>
                       <div>
-
-                        {/* Left Service start ====  */}
-
                         <div>
                           {salonServices.map((service) => (
                             <div key={service.id} className={style.service_item}>
@@ -1005,8 +1002,6 @@ const CreateBarber = () => {
 
                         </div>
 
-                        {/* Left Service End ====  */}
-
                         <div className={`${style.button_container}`}>
                           <button onClick={handleBack} disabled={index === 0}>
                             Back
@@ -1031,7 +1026,7 @@ const CreateBarber = () => {
                                     <p>{service.description}</p>
                                   </div>
                                 </div>
-                                {/* <button><DeleteIcon /></button> */}
+
                               </div>
                               <div>
                                 <div>
@@ -1053,8 +1048,107 @@ const CreateBarber = () => {
 
 
 
+                    </div> */}
+
+
+                    <div>
+                      <div>
+                        {salonServices.map((service) => (
+                          <div key={service.id} className={style.service_item}>
+                            <div>
+                              <div>
+                                <div><img src={service.image} alt={service.name} /></div>
+                                <div>
+                                  <p>{service.name}</p>
+                                  <p>{service.type}</p>
+                                  <p>{service.description}</p>
+                                </div>
+                              </div>
+                              {service.add ? (
+                                <button
+                                  style={{
+                                    background: "#450a0a",
+                                  }}
+                                  onClick={() => deleteBarberServicesHandler(service)}
+                                ><DeleteIcon /></button>
+                              ) : (
+                                <button
+                                  style={{
+                                    background: "#052e16",
+                                  }}
+                                  onClick={() => addBarberServicesHandler(service)}
+                                ><AddIcon /></button>
+                              )}
+
+                            </div>
+                            <div>
+                              <div>
+                                <p>Price</p>
+                                <p>{service.price}</p>
+                              </div>
+                              <div>
+                                <p>Estimated Time</p>
+                                <div>
+                                  <input
+                                    type="text"
+                                    value={service.estimatedTime}
+                                    onChange={(e) => {
+                                      const value = e.target.value.replace(/[^0-9]/g, '');
+                                      handleEWTChange(service.id, value);
+                                    }}
+                                    maxLength={3}
+                                  />
+                                  <p>mins</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {
+                        barberServices.length > 0 ? (<div>
+                          {barberServices.map((service) => (
+                            <div key={service.id} className={style.service_item}>
+                              <div>
+                                <div>
+                                  <div><img src={service.image} alt={service.name} /></div>
+                                  <div>
+                                    <p>{service.name}</p>
+                                    <p>{service.type}</p>
+                                    <p>{service.description}</p>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div>
+                                <div>
+                                  <p>Price</p>
+                                  <p>{service.price}</p>
+                                </div>
+                                <div>
+                                  <p>Estimated Time</p>
+                                  <p>{`${service.estimatedTime} mins`}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+
+                        </div>) : (<div className={`${style.empty_barber_services}`}>
+                          <p>Select Barber Services</p>
+                        </div>)
+                      }
+
                     </div>
 
+                    <div className={`${style.button_container}`}>
+                      <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
 
                   </main>
                 </StepContent>)

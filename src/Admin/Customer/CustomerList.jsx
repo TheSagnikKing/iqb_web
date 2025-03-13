@@ -472,7 +472,7 @@
 
 import React, { useEffect, useState } from 'react'
 import style from "./CustomerList.module.css"
-import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
+import { CheckIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -486,6 +486,29 @@ const CustomerList = () => {
     { id: 5, heading: "Mobile Number", key: "mobile" },
     { id: 6, heading: "Date Of Birth", key: "dob" },
   ];
+
+  const salonlistDataCopy = [
+    { customerName: "John Doe", gender: "Male", email: "john.doe@example.com", dob: "1990-05-15", mobile: "123-456-7890", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
+    { customerName: "Emma Smith", gender: "Female", email: "emma.smith@example.com", dob: "1995-08-22", mobile: "987-654-3210", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
+    { customerName: "Liam Johnson", gender: "Male", email: "liam.johnson@example.com", dob: "1988-11-30", mobile: "456-789-0123", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
+    { customerName: "Sophia Brown", gender: "Female", email: "sophia.brown@example.com", dob: "1992-03-25", mobile: "321-654-0987", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
+    { customerName: "Noah Wilson", gender: "Male", email: "noah.wilson@example.com", dob: "2000-07-10", mobile: "789-123-4560", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
+    { customerName: "Olivia Martinez", gender: "Female", email: "olivia.martinez@example.com", dob: "1985-12-19", mobile: "654-321-7890", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
+    { customerName: "William Davis", gender: "Male", email: "william.davis@example.com", dob: "1998-09-05", mobile: "147-258-3690", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
+    { customerName: "Ava Garcia", gender: "Female", email: "ava.garcia@example.com", dob: "1993-04-14", mobile: "369-147-2580", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img=8" },
+    { customerName: "James Rodriguez", gender: "Male", email: "james.rodriguez@example.com", dob: "1996-06-21", mobile: "852-963-7410", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
+    { customerName: "Mia Anderson", gender: "Female", email: "mia.anderson@example.com", dob: "2002-02-28", mobile: "741-852-9630", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" },
+    { customerName: "Ethan Walker", gender: "Male", email: "ethan.walker@example.com", dob: "1987-01-08", mobile: "963-741-8520", barberName: "Kevin Young", qPos: 11, mins: 35, customerImage: "https://i.pravatar.cc/150?img=11" },
+    { customerName: "Isabella Allen", gender: "Female", email: "isabella.allen@example.com", dob: "1999-10-12", mobile: "852-147-3690", barberName: "Brandon Hill", qPos: 12, mins: 45, customerImage: "https://i.pravatar.cc/150?img=12" },
+    { customerName: "Alexander King", gender: "Male", email: "alexander.king@example.com", dob: "1991-07-03", mobile: "147-852-9630", barberName: "Tyler Green", qPos: 13, mins: 25, customerImage: "https://i.pravatar.cc/150?img=13" },
+    { customerName: "Charlotte Wright", gender: "Female", email: "charlotte.wright@example.com", dob: "1984-03-18", mobile: "369-963-1470", barberName: "Aaron Baker", qPos: 14, mins: 50, customerImage: "https://i.pravatar.cc/150?img=14" },
+    { customerName: "Daniel Moore", gender: "Male", email: "daniel.moore@example.com", dob: "1997-11-27", mobile: "741-258-3690", barberName: "Adam Carter", qPos: 15, mins: 30, customerImage: "https://i.pravatar.cc/150?img=15" },
+    { customerName: "Amelia Taylor", gender: "Female", email: "amelia.taylor@example.com", dob: "1994-08-01", mobile: "258-741-9630", barberName: "Justin Mitchell", qPos: 16, mins: 40, customerImage: "https://i.pravatar.cc/150?img=16" },
+    { customerName: "Michael Thomas", gender: "Male", email: "michael.thomas@example.com", dob: "1989-05-20", mobile: "963-369-1470", barberName: "Jose Perez", qPos: 17, mins: 20, customerImage: "https://i.pravatar.cc/150?img=17" },
+    { customerName: "Evelyn Jackson", gender: "Female", email: "evelyn.jackson@example.com", dob: "2001-01-15", mobile: "147-963-8520", barberName: "Luis Roberts", qPos: 18, mins: 55, customerImage: "https://i.pravatar.cc/150?img=18" },
+    { customerName: "Henry White", gender: "Male", email: "henry.white@example.com", dob: "1986-09-29", mobile: "852-741-3690", barberName: "Samuel Turner", qPos: 19, mins: 35, customerImage: "https://i.pravatar.cc/150?img=19" },
+    { customerName: "Abigail Harris", gender: "Female", email: "abigail.harris@example.com", dob: "1992-06-07", mobile: "369-258-1470", barberName: "Patrick Phillips", qPos: 20, mins: 45, customerImage: "https://i.pravatar.cc/150?img=20" },
+  ]
 
 
   const [salonlistData, setSalonlistData] = useState([
@@ -511,7 +534,6 @@ const CustomerList = () => {
     { customerName: "Abigail Harris", gender: "Female", email: "abigail.harris@example.com", dob: "1992-06-07", mobile: "369-258-1470", barberName: "Patrick Phillips", qPos: 20, mins: 45, customerImage: "https://i.pravatar.cc/150?img=20" },
   ])
 
-  const [settingsIndex, setSettingsIndex] = useState("")
 
   const [rowsPerPage, SetRowsPerPage] = useState(10)
 
@@ -521,21 +543,19 @@ const CustomerList = () => {
   const [endIndex, setEndIndex] = useState(rowsPerPage)
   const [sortOrder, setSortOrder] = useState("asc")
   const [sortColumn, setSortColumn] = useState("")
+  const [query, setQuery] = useState("")
 
   const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
 
   useEffect(() => {
-    const totalPages = Math.ceil(salonlistData.length / rowsPerPage)
-    setTotalPages(totalPages)
-    setStartIndex((page - 1) * rowsPerPage)
-    setEndIndex(page * rowsPerPage)
-  }, [rowsPerPage, page])
-
-  useEffect(() => {
-    setSalonPaginationData(salonlistData.slice(startIndex, endIndex))
-  }, [startIndex, endIndex, salonlistData])
-
-
+    const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
+    setTotalPages(totalPages);
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+    setStartIndex(startIndex);
+    setEndIndex(endIndex);
+    setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
+  }, [salonlistData, page, rowsPerPage]);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -566,6 +586,27 @@ const CustomerList = () => {
     // setPage(1); 
   }, [sortColumn, sortOrder]);
 
+
+  useEffect(() => {
+    let filteredData = salonlistDataCopy;
+
+    if (query.trim() !== '') {
+      filteredData = salonlistDataCopy.filter((item) => {
+        return (
+          item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
+          item.gender.toLowerCase().trim().includes(query.toLowerCase()) ||
+          item.email.toLowerCase().trim().includes(query.toLowerCase()) ||
+          item.dob.toLowerCase().trim().includes(query.toLowerCase()) ||
+          item.mobile.toLowerCase().trim().includes(query.toLowerCase())
+        );
+      });
+    }
+
+    setSalonlistData(filteredData);
+    setPage(1);
+  }, [query]);
+
+
   const [selectOpen, setSelectOpen] = useState(false)
 
   const navigate = useNavigate()
@@ -574,6 +615,16 @@ const CustomerList = () => {
     <section className={`${style.section}`}>
       <div>
         <h2>Customer List</h2>
+        <div>
+          <button><MessageIcon /></button>
+          <button><EmailIcon /></button>
+          <input
+            type='text'
+            placeholder='Search Customer...'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
         {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button> */}
       </div>
 
@@ -587,20 +638,27 @@ const CustomerList = () => {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <button
-                      className={`${item.key === "customerName" ? style.name_head_btn : ""}`}
-                      onClick={() => sortFunction(item.key)}>
-                      {item.key === "customerName" ? (
-                        <>
-                          <span></span>
-                          {item.heading}
-                        </>
+                    {
+                      item.key === "" ? (
+                        <button className={`${style.head_select_icon}`}><CheckIcon /></button>
                       ) : (
-                        item.heading
-                      )}
+                        <button
+                          className={`${item.key === "customerName" ? style.name_head_btn : ""}`}
+                          onClick={() => sortFunction(item.key)}>
+                          {item.key === "customerName" ? (
+                            <>
+                              <span></span>
+                              {item.heading}
+                            </>
+                          ) : (
+                            item.heading
+                          )}
 
-                      <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
-                    </button>
+                          <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
+                        </button>
+                      )
+                    }
+
                   </div>
                 )
               })
@@ -611,8 +669,10 @@ const CustomerList = () => {
           {
             salonPaginationData.map((item, index) => {
               return (
-                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div><p>{item.id}</p></div>
+                <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                  <div>
+                    <button><CheckIcon /></button>
+                  </div>
                   <div>
                     <div>
                       <div><img src={item.customerImage} alt="" /></div>
