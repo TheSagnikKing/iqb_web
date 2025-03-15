@@ -376,6 +376,7 @@ aside {
               font-size: 1.4rem;
               color: var(--text-primary);
               text-decoration: none;
+              user-select: none;
 
               &>span {
                 display: flex;

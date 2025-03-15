@@ -130,20 +130,18 @@ const Signin = () => {
   });
 
   return (
-    <main className={`${style.admin_signin_container} ${darkmodeOn && style.dark}`}>
-      <div className={style.admin_signin_left}>
-        <img src="./signin_un.png" alt="admin_Signin" />
-      </div>
+    <main className={`${style.section} ${darkmodeOn && style.dark}`}>
+      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
 
       <div className={`${style.admin_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Sign In to your Admin Account</p>
-          <p>Welcome back Admin! please enter your details</p>
+          <h2>Welcome back, Admin</h2>
+          <p>Please signin to your account</p>
 
           <div>
             <input
               type="email"
-              placeholder='Enter Your Email ID'
+              placeholder='Enter your email'
               value={email}
               onChange={(e) => {
                 setEmailError("")
@@ -161,7 +159,7 @@ const Signin = () => {
               style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
               <input
                 type={visibleeye ? "text" : "password"}
-                placeholder='Password'
+                placeholder='Enter your password'
                 value={password}
                 onChange={(e) => {
                   setPasswordError("")

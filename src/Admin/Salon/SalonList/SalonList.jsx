@@ -760,8 +760,10 @@
 import React, { useEffect, useState } from 'react'
 import style from "./SalonList.module.css"
 import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
-import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
+import { ClickAwayListener, FormControl, MenuItem, Pagination, Select, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import styled from "@emotion/styled";
 
 const SalonList = () => {
 
@@ -1114,14 +1116,14 @@ const SalonList = () => {
   const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
 
   useEffect(() => {
-      const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
-      setTotalPages(totalPages);
-      const startIndex = (page - 1) * rowsPerPage;
-      const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
-      setStartIndex(startIndex);
-      setEndIndex(endIndex);
-      setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
-    }, [salonlistData, page, rowsPerPage]);
+    const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
+    setTotalPages(totalPages);
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+    setStartIndex(startIndex);
+    setEndIndex(endIndex);
+    setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
+  }, [salonlistData, page, rowsPerPage]);
 
 
   const handleChange = (event, value) => {
@@ -1156,6 +1158,7 @@ const SalonList = () => {
   const [selectOpen, setSelectOpen] = useState(false)
 
   const navigate = useNavigate()
+
 
   return (
     <section className={`${style.section}`}>

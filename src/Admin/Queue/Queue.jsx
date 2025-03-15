@@ -363,7 +363,7 @@ const Queue = () => {
     { id: 4, heading: "Time Joined", key: "timejoined" },
     { id: 5, heading: "Qg Code", key: "qgcode" },
     { id: 6, heading: "Type", key: "type" },
-    { id: 7, heading: "Estimated Time", key: "estimatedtime" },
+    { id: 7, heading: "Est. Time", key: "estimatedtime" },
     { id: 8, heading: "", key: "serve" },
     { id: 9, heading: "", key: "cancel" },
   ];
@@ -471,7 +471,7 @@ const Queue = () => {
                       className={`${item.key === "customerName" || item.key === "barberName" ? style.name_head_btn : ""}`}
                     // onClick={() => sortFunction(item.key)}
                     >
-                      {item.key === "customerName" ? (
+                      {item.key === "customerName" || item.key === "barberName" ? (
                         <>
                           <span></span>
                           {item.heading}

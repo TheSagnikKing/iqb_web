@@ -91,9 +91,9 @@
 //     };
 //   }, []);
 
-//   const logoutHandler = async () => {
-//     dispatch(AdminLogoutAction(navigate))
-//   }
+  // const logoutHandler = async () => {
+  //   dispatch(AdminLogoutAction(navigate))
+  // }
 
 
 //   const SalonListControllerRef = useRef(new AbortController());
@@ -534,6 +534,9 @@ import style from './Header.module.css'
 import { MoonIcon, SearchIcon } from '../../../icons'
 import { LogoutIcon, ProfileIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
 import { ClickAwayListener, Modal } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
@@ -565,12 +568,17 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
     { name: "Golden Strands Studio" }
   ];
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [salonlistdrop, setSalonlistdrop] = useState(false)
 
   const [onlineState, setOnlineState] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
 
+  const logoutHandler = async () => {
+    dispatch(AdminLogoutAction(navigate))
+  }
 
   return (
     <header className={`${style.header}`}>
@@ -638,7 +646,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
             <div
               style={{
                 opacity: profileOpen ? 1 : 0,
-                zIndex: profileOpen ? 100 : 0,
+                zIndex: profileOpen ? 9999 : 0,
                 visibility: profileOpen ? "visible" : "hidden"
               }}
               className={`${style.profile_container}`} 
@@ -663,7 +671,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
                 <p>Profile</p>
               </div>
 
-              <div className={`${style.profile_container_item}`}>
+              <div onClick={logoutHandler} className={`${style.profile_container_item}`}>
                 <div><LogoutIcon /></div>
                 <p>Logout</p>
               </div>

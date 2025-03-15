@@ -12,6 +12,7 @@ import { TbScissors, TbWorldWww } from "react-icons/tb";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
 import { IoMdCheckmark } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors 
@@ -44,3 +45,4 @@ export const EmailIcon = MdOutlineMailOutline
 export const MessageIcon = MdOutlineMessage
 export const AddIcon = MdAdd
 export const CheckIcon = IoMdCheckmark 
+export const CloseIcon = RxCross2
