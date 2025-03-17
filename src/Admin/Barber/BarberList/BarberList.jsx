@@ -573,7 +573,7 @@ import React, { useEffect, useState } from 'react'
 import style from "./BarberList.module.css"
 import { DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BarberList = () => {
 
@@ -1053,6 +1053,7 @@ const BarberList = () => {
                               className={`${style.settings_container}`}>
                               <p>Salon settings</p>
                               <p>Appointment settings</p>
+                              <p><Link to="/admin-barber/editbarber/:salonid">Edit barber</Link></p>
                             </div>
                           </ClickAwayListener>)
                       }

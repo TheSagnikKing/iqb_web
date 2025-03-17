@@ -543,13 +543,43 @@
                 flex-direction: column;
                 gap: 2rem;
 
-                &>p {
-                    font-size: 1.6rem;
-                    color: var(--text-primary);
-                    font-family: 'AirbnbCereal_Medium';
-                }
+                &>div:nth-child(1){
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
 
-                &>div {
+                    &>p {
+                        font-size: 1.6rem;
+                        color: var(--text-primary);
+                        font-family: 'AirbnbCereal_Medium';
+                    }
+
+                    &>button {
+                        height: 3.5rem;
+                        padding-inline: 1.5rem;
+                        border-radius: var(--border-radius-primary);
+                        -webkit-border-radius: var(--border-radius-primary);
+                        -moz-border-radius: var(--border-radius-primary);
+                        -ms-border-radius: var(--border-radius-primary);
+                        -o-border-radius: var(--border-radius-primary);
+                        background-color: var(--bg-secondary);
+                        color: var(--text-primary);
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+                        transition: var(--common-btn-transition);
+                        -webkit-transition: var(--common-btn-transition);
+                        -moz-transition: var(--common-btn-transition);
+                        -ms-transition: var(--common-btn-transition);
+                        -o-transition: var(--common-btn-transition);
+    
+                        &:hover {
+                            background-color: var(--bg-secondary-hover);
+                        }
+                    }
+                }
+                
+                &>div:nth-child(2) {
                     height: 30rem;
                     min-height: 30rem;
                     overflow: auto;

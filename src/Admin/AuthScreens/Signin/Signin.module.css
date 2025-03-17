@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 100%;
+    flex: 1;
     background-color: var(--bg-primary);
 
     &>div:nth-child(1) {
@@ -262,103 +262,32 @@ iframe {
     }
 }
 
-/* dark mode on */
-
-.section.dark {
-    background-color: var(--dark-color-2);
-}
-
-.section.dark {
-    &>div:nth-child(1) {
-        &>div {
-            &>input {
-                background-color: var(--dark-color-3);
-            }
+@media screen and (min-width:0px) and (max-width:430px) {
+    .section{
+        &>img{
+            display: none;
         }
     }
-}
 
-.password_container.dark {
-    background-color: var(--dark-color-3);
-
-    &>div {
-        color: var(--light-color-4);
-    }
-}
-
-.section.dark>div:nth-child(2)>div>div:nth-child(7)>div {
-    background-color: rgba(255, 255, 255, 0.6);
-}
-
-.google_btn.dark {
-    background-color: var(--dark-color-1);
-    border: 0.1rem solid rgba(255, 255, 255, 0.2);
-
-    &:hover {
-        background-color: var(--dark-color-3);
-    }
-}
-
-/* @media screen and (min-width:0px) and (max-width:430px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
-    }
-
-    .admin_signin_right {
-        &>div:nth-child(1) {
+    .admin_signin_right{
+        &>div:nth-child(1){
             width: 85vw;
         }
-    }
-
-    .homeicon {
-        top: 3svh;
-        left: 5vw;
     }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
-    }
-
-    .admin_signin_right {
-        &>div:nth-child(1) {
-            width: 65vw;
-        }
-    }
-
-
-}
-
-@media screen and (min-width:769px) and (max-width:1000px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
-    }
-
-    .admin_signin_right {
-        &>div:nth-child(1) {
-            width: 45vw;
+    .section{
+        &>img{
+            display: none;
         }
     }
 }
 
-@media screen and (min-width:1001px) and (max-width:1250px) {
-
-    .admin_signin_right {
-        &>div:nth-child(1) {
-            width: 30%;
+@media screen and (min-width:769px) and (max-width:1140px) {
+    .admin_signin_right{
+        &>div:nth-child(1){
+            width: 75%;
         }
     }
-} */
+}

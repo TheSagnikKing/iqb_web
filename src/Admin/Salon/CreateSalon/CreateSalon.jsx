@@ -2344,7 +2344,10 @@ const CreateSalon = () => {
                       </div>
 
                       <div>
-                        <p>Please select high-quality images to showcase your salon.</p>
+                        <div>
+                          <p>Please select high-quality images to showcase your salon.</p>
+                          <button>upload</button>
+                        </div>
 
                         <div>
                           {

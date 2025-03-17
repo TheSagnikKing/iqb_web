@@ -176,6 +176,9 @@ const AppointmentCalender = () => {
     color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"};
   }
  
+  .fc-theme-standard .fc-popover{
+        background: var(--bg-primary) !important;
+  }
 
 `;
         document.head.appendChild(styleElement);

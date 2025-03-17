@@ -91,9 +91,9 @@
 //     };
 //   }, []);
 
-  // const logoutHandler = async () => {
-  //   dispatch(AdminLogoutAction(navigate))
-  // }
+// const logoutHandler = async () => {
+//   dispatch(AdminLogoutAction(navigate))
+// }
 
 
 //   const SalonListControllerRef = useRef(new AbortController());
@@ -536,7 +536,7 @@ import { LogoutIcon, ProfileIcon, SidebarCloseIcon, SidebarOpenIcon } from '../.
 import { ClickAwayListener, Modal } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { AdminLogoutAction } from '../../../Redux/Admin/Actions/AuthAction'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
@@ -649,9 +649,9 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
                 zIndex: profileOpen ? 9999 : 0,
                 visibility: profileOpen ? "visible" : "hidden"
               }}
-              className={`${style.profile_container}`} 
+              className={`${style.profile_container}`}
               onClick={(e) => e.stopPropagation()}
-              >
+            >
               <div className={`${style.profile_container_header}`}>
                 <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
                 <div>
@@ -660,16 +660,17 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
                 </div>
               </div>
 
-              <div
-                className={`${style.profile_container_item}`}
-                style={{
-                  borderBottom: "0.1rem solid var(--border-secondary)",
-                  // cursor: profileOpen ? "cursor" : ""
-                }}
-              >
-                <div><ProfileIcon /></div>
-                <p>Profile</p>
-              </div>
+              <Link to="/admin-dashboard/editprofile" style={{ textDecoration: "none", color: "inherit" }}>
+                <div
+                  className={`${style.profile_container_item}`}
+                  style={{
+                    borderBottom: "0.1rem solid var(--border-secondary)",
+                  }}
+                >
+                  <div><ProfileIcon /></div>
+                  <p>Profile</p>
+                </div>
+              </Link>
 
               <div onClick={logoutHandler} className={`${style.profile_container_item}`}>
                 <div><LogoutIcon /></div>
