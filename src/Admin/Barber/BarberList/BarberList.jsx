@@ -571,344 +571,380 @@
 
 import React, { useEffect, useState } from 'react'
 import style from "./BarberList.module.css"
-import { DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
+import { CheckIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const BarberList = () => {
 
   const headRows = [
-    { id: 1, heading: "#", key: "" },
+    { id: 1, heading: "", key: "" },
     { id: 2, heading: "Name", key: "name" },
-    { id: 3, heading: "Address", key: "address" },
-    { id: 4, heading: "City", key: "city" },
-    { id: 5, heading: "Type", key: "type" },
-    { id: 6, heading: "Subscription", key: "subscription" },
-    { id: 7, heading: "Status", key: "status" },
-    { id: 8, heading: "", key: "" },
+    { id: 3, heading: "Email", key: "email" },
+    { id: 4, heading: "isOnline", key: "isOnline" },
+    { id: 5, heading: "isClockin", key: "isClockedIn" },
+    { id: 6, heading: "isApprove", key: "isApproved" },
+    { id: 7, heading: "", key: "" },
   ];
 
 
   const [salonlistData, setSalonlistData] = useState([
     {
-      id: 1,
-      name: "Glamour Lounge",
-      logo: "https://images.pexels.com/photos/1068852/pexels-photo-1068852.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 18, Noida",
-      city: "Noida",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Offline",
+      "_id": "67a46ad5c85dd16cdfa7f1c9",
+      "name": "John Doe",
+      "email": "john@yopmail.com",
+      "emailVerified": false,
+      "password": "$2b$10$tH/C1Xo25p6i0S9TRyjiPOwV5UbxAImvX1LVFZ1spUjhmmXDQlPaW",
+      "role": "Barber",
+      "AuthType": "local",
+      "nickName": "john",
+      "mobileNumber": 8240205351,
+      "mobileCountryCode": 91,
+      "mobileVerified": false,
+      "dateOfBirth": "2002-04-11T00:00:00.000Z",
+      "salonId": 1,
+      "barberId": 1,
+      "barberCode": "JO1",
+      "isActive": true,
+      "isApproved": true,
+      "barberRatings": [],
+      "barberServices": [
+        {
+          "serviceIcon": {
+            "public_id": "icons/Femalehaircut_1706703379391",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
+          },
+          "serviceId": 12,
+          "serviceCode": "FE12",
+          "serviceName": "Female Haircut",
+          "servicePrice": 40,
+          "vipService": false,
+          "barberServiceEWT": 120,
+          "_id": "67a46936c85dd16cdfa7ef9c"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/spa_1706703379407",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
+          },
+          "serviceId": 13,
+          "serviceCode": "HA13",
+          "serviceName": "Hair Spa",
+          "servicePrice": 100,
+          "vipService": true,
+          "barberServiceEWT": 50,
+          "_id": "67a46936c85dd16cdfa7ef9d"
+        }
+      ],
+      "barberEWT": 530,
+      "queueCount": 4,
+      "isOnline": true,
+      "isClockedIn": true,
+      "isDeleted": false,
+      "approvePendingMessage": "",
+      "profile": [
+        {
+          "public_id": "barbers/download - 2024-12-27T164801_7c8887e1-1d2b-4946-8dfa-42fb9f696021",
+          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739771508/barbers/download%20-%202024-12-27T164801_7c8887e1-1d2b-4946-8dfa-42fb9f696021.png",
+          "_id": "67b2ce7459f98fd329c6cd46"
+        }
+      ],
+      "createdAt": "2025-02-06T07:55:01.949Z",
+      "updatedAt": "2025-03-13T13:17:36.291Z",
+      "__v": 0
     },
     {
-      id: 2,
-      name: "Elegant Cuts",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Park Street, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "_id": "67a46b28c85dd16cdfa7f26e",
+      "name": "Bob",
+      "email": "bob@yopmail.com",
+      "emailVerified": false,
+      "password": "$2b$10$GGig2mi/OCrewGSpYcIJJ.Bl94xzSTv6tu.oh//Yw.wgQCzZm7clC",
+      "role": "Barber",
+      "AuthType": "local",
+      "nickName": "bob",
+      "mobileNumber": 8240205351,
+      "mobileCountryCode": 91,
+      "mobileVerified": false,
+      "dateOfBirth": "2009-12-04T00:00:00.000Z",
+      "salonId": 1,
+      "barberId": 2,
+      "barberCode": "BO2",
+      "isActive": true,
+      "isApproved": true,
+      "barberRatings": [],
+      "barberServices": [
+        {
+          "serviceIcon": {
+            "public_id": "icons/Malehaircut_1706703379405",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
+          },
+          "serviceId": 11,
+          "serviceCode": "HA11",
+          "serviceName": "Haircut",
+          "servicePrice": 38,
+          "vipService": false,
+          "barberServiceEWT": 20,
+          "_id": "67a46936c85dd16cdfa7ef9b"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/massage_1706703379406",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
+          },
+          "serviceId": 14,
+          "serviceCode": "MA14",
+          "serviceName": "Massage",
+          "servicePrice": 70,
+          "vipService": true,
+          "barberServiceEWT": 50,
+          "_id": "67a46936c85dd16cdfa7ef9e"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/Femalehaircut_1706703379391",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
+          },
+          "serviceId": 12,
+          "serviceCode": "FE12",
+          "serviceName": "Female Haircut",
+          "servicePrice": 40,
+          "vipService": false,
+          "barberServiceEWT": 30,
+          "_id": "67a46936c85dd16cdfa7ef9c"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/spa_1706703379407",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
+          },
+          "serviceId": 13,
+          "serviceCode": "HA13",
+          "serviceName": "Hair Spa",
+          "servicePrice": 100,
+          "vipService": true,
+          "barberServiceEWT": 50,
+          "_id": "67a46936c85dd16cdfa7ef9d"
+        }
+      ],
+      "barberEWT": 50,
+      "queueCount": 1,
+      "isOnline": true,
+      "isClockedIn": true,
+      "isDeleted": false,
+      "approvePendingMessage": "",
+      "profile": [
+        {
+          "public_id": "barbers/photo-1562004760-aceed7bb0fe3_a799f144-0078-4b1f-a6cf-2204599c9ffd",
+          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739169664/barbers/photo-1562004760-aceed7bb0fe3_a799f144-0078-4b1f-a6cf-2204599c9ffd.jpg",
+          "_id": "67a99f80faacd06cfb189d64"
+        }
+      ],
+      "createdAt": "2025-02-06T07:56:24.715Z",
+      "updatedAt": "2025-03-13T13:14:48.872Z",
+      "__v": 0
     },
     {
-      id: 3,
-      name: "Urban Styles",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Brigade Road, Bangalore",
-      city: "Bangalore",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "_id": "67a46b6bc85dd16cdfa7f2ef",
+      "name": "Jazz",
+      "email": "jazz@yopmail.com",
+      "emailVerified": false,
+      "password": "$2b$10$YWO4UJGfeOTx0lciID9ls.t9QmU9Qr3kkymsnHd1I/HnlRXFkYGSC",
+      "role": "Barber",
+      "AuthType": "local",
+      "nickName": "jazz",
+      "mobileNumber": 1234567890,
+      "mobileCountryCode": 44,
+      "mobileVerified": false,
+      "dateOfBirth": "2008-04-09T00:00:00.000Z",
+      "salonId": 1,
+      "barberId": 3,
+      "barberCode": "JA3",
+      "isActive": true,
+      "isApproved": true,
+      "barberRatings": [],
+      "barberServices": [
+        {
+          "serviceIcon": {
+            "public_id": "icons/Femalehaircut_1706703379391",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
+          },
+          "serviceId": 12,
+          "serviceCode": "FE12",
+          "serviceName": "Female Haircut",
+          "servicePrice": 40,
+          "vipService": false,
+          "barberServiceEWT": 30,
+          "_id": "67a46936c85dd16cdfa7ef9c"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/spa_1706703379407",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
+          },
+          "serviceId": 13,
+          "serviceCode": "HA13",
+          "serviceName": "Hair Spa",
+          "servicePrice": 100,
+          "vipService": true,
+          "barberServiceEWT": 50,
+          "_id": "67a46936c85dd16cdfa7ef9d"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/massage_1706703379406",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
+          },
+          "serviceId": 14,
+          "serviceCode": "MA14",
+          "serviceName": "Massage",
+          "servicePrice": 70,
+          "vipService": true,
+          "barberServiceEWT": 30,
+          "_id": "67a46936c85dd16cdfa7ef9e"
+        }
+      ],
+      "barberEWT": 0,
+      "queueCount": 0,
+      "isOnline": false,
+      "isClockedIn": true,
+      "isDeleted": false,
+      "approvePendingMessage": "",
+      "profile": [
+        {
+          "public_id": "barbers/istockphoto-853924196-612x612_d9c08f1f-43e7-4dc0-ba7f-812489274166",
+          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739169753/barbers/istockphoto-853924196-612x612_d9c08f1f-43e7-4dc0-ba7f-812489274166.jpg",
+          "_id": "67a99fd9faacd06cfb189f1c"
+        }
+      ],
+      "createdAt": "2025-02-06T07:57:31.219Z",
+      "updatedAt": "2025-02-28T08:01:54.925Z",
+      "__v": 0
     },
     {
-      id: 4,
-      name: "Chic Hair Studio",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Connaught Place, Delhi",
-      city: "Delhi",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "_id": "67a9a1e1faacd06cfb18a6d4",
+      "name": "Hercules",
+      "email": "hbk@yopmail.com",
+      "emailVerified": false,
+      "password": "$2b$10$7v5h.Ei0T3YdnIigoHga9eBmkw117PsZaWhrwJ3AiX9gWwsN2yzRO",
+      "role": "Barber",
+      "AuthType": "local",
+      "nickName": "",
+      "mobileVerified": false,
+      "dateOfBirth": "2009-12-10T00:00:00.000Z",
+      "salonId": 1,
+      "barberId": 4,
+      "isActive": true,
+      "isApproved": true,
+      "barberRatings": [],
+      "barberEWT": 0,
+      "queueCount": 0,
+      "isOnline": true,
+      "isClockedIn": true,
+      "isDeleted": false,
+      "approvePendingMessage": "",
+      "profile": [
+        {
+          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1720520065/default-avatar-icon-of-social-media-user-vector_wl5pm0.jpg",
+          "_id": "67a9a1e1faacd06cfb18a6d5"
+        }
+      ],
+      "barberServices": [
+        {
+          "serviceIcon": {
+            "public_id": "icons/Malehaircut_1706703379405",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
+          },
+          "serviceId": 11,
+          "serviceCode": "HA11",
+          "serviceName": "Haircut",
+          "servicePrice": 38,
+          "vipService": false,
+          "barberServiceEWT": 25,
+          "_id": "67a46936c85dd16cdfa7ef9b"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/Femalehaircut_1706703379391",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
+          },
+          "serviceId": 12,
+          "serviceCode": "FE12",
+          "serviceName": "Female Haircut",
+          "servicePrice": 40,
+          "vipService": false,
+          "barberServiceEWT": 30,
+          "_id": "67a46936c85dd16cdfa7ef9c"
+        }
+      ],
+      "createdAt": "2025-02-10T06:51:13.428Z",
+      "updatedAt": "2025-03-10T08:33:02.447Z",
+      "__v": 0,
+      "gender": "Male",
+      "mobileCountryCode": 44,
+      "mobileNumber": 1234567890
     },
     {
-      id: 5,
-      name: "Royal Touch",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Baner, Pune",
-      city: "Pune",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 6,
-      name: "Classic Makeovers",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Juhu, Mumbai",
-      city: "Mumbai",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 7,
-      name: "Trendy Tresses",
-      logo: "https://images.pexels.com/photos/1128318/pexels-photo-1128318.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Anna Nagar, Chennai",
-      city: "Chennai",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 8,
-      name: "Velvet Touch",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 18, Noida",
-      city: "Noida",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 9,
-      name: "Golden Scissors",
-      logo: "https://images.pexels.com/photos/1070857/pexels-photo-1070857.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "South Extension, Delhi",
-      city: "Delhi",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 10,
-      name: "Beauty Bliss",
-      logo: "https://images.pexels.com/photos/906051/pexels-photo-906051.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Banjara Hills, Hyderabad",
-      city: "Hyderabad",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 11,
-      name: "Dazzle Salon",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Thane, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 12,
-      name: "Glossy Hair Hub",
-      logo: "https://images.pexels.com/photos/1128319/pexels-photo-1128319.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Gomti Nagar, Lucknow",
-      city: "Lucknow",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 13,
-      name: "Fashion Fiesta",
-      logo: "https://images.pexels.com/photos/1579250/pexels-photo-1579250.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Karol Bagh, Delhi",
-      city: "Delhi",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 14,
-      name: "Glow & Shine",
-      logo: "https://images.pexels.com/photos/1126992/pexels-photo-1126992.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Indiranagar, Bangalore",
-      city: "Bangalore",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 15,
-      name: "Elite Makeovers",
-      logo: "https://images.pexels.com/photos/1579252/pexels-photo-1579252.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Powai, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 16,
-      name: "Stylish Cuts",
-      logo: "https://images.pexels.com/photos/1128320/pexels-photo-1128320.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Salt Lake, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 17,
-      name: "Scissor Magic",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Gariahat, Kolkata",
-      city: "Kolkata",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 18,
-      name: "Snip & Style",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Koramangala, Bangalore",
-      city: "Bangalore",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 19,
-      name: "Sharp Edge Salon",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "MG Road, Pune",
-      city: "Pune",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 20,
-      name: "The Barber’s Den",
-      logo: "https://images.pexels.com/photos/1070857/pexels-photo-1070857.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Bandra, Mumbai",
-      city: "Mumbai",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 21,
-      name: "Crown & Comb",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "T Nagar, Chennai",
-      city: "Chennai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 22,
-      name: "Style Station",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 50, Gurgaon",
-      city: "Gurgaon",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 23,
-      name: "The Grooming Hub",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Dadar, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 24,
-      name: "The Hair Affair",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "DLF Phase 2, Gurgaon",
-      city: "Gurgaon",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 25,
-      name: "Men’s Hair Lounge",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Whitefield, Bangalore",
-      city: "Bangalore",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 26,
-      name: "Shear Elegance",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Garia, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 27,
-      name: "Majestic Cuts",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Hitech City, Hyderabad",
-      city: "Hyderabad",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 28,
-      name: "Gents Corner",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Lajpat Nagar, Delhi",
-      city: "Delhi",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 29,
-      name: "Royal Shaves",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Jubilee Hills, Hyderabad",
-      city: "Hyderabad",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 30,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 31,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 32,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "_id": "67a9a32efaacd06cfb18abaa",
+      "name": "hg",
+      "email": "hg@yopmail.com",
+      "emailVerified": false,
+      "password": "$2b$10$1S0IkVFTWN1GQBtQ0GMWu.y9OG3TfNfgncaTOeqgD.JLafR4EoiGi",
+      "role": "Barber",
+      "AuthType": "local",
+      "nickName": "",
+      "mobileVerified": false,
+      "dateOfBirth": "2009-12-10T00:00:00.000Z",
+      "salonId": 1,
+      "barberId": 5,
+      "isActive": true,
+      "isApproved": false,
+      "barberRatings": [],
+      "barberEWT": 0,
+      "queueCount": 0,
+      "isOnline": false,
+      "isClockedIn": false,
+      "isDeleted": false,
+      "approvePendingMessage": "",
+      "profile": [
+        {
+          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1720520065/default-avatar-icon-of-social-media-user-vector_wl5pm0.jpg",
+          "_id": "67a9a32efaacd06cfb18abab"
+        }
+      ],
+      "barberServices": [
+        {
+          "serviceIcon": {
+            "public_id": "icons/Malehaircut_1706703379405",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
+          },
+          "serviceId": 11,
+          "serviceCode": "HA11",
+          "serviceName": "Haircut",
+          "servicePrice": 38,
+          "vipService": false,
+          "barberServiceEWT": 25,
+          "_id": "67a46936c85dd16cdfa7ef9b"
+        },
+        {
+          "serviceIcon": {
+            "public_id": "icons/massage_1706703379406",
+            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
+          },
+          "serviceId": 14,
+          "serviceCode": "MA14",
+          "serviceName": "Massage",
+          "servicePrice": 70,
+          "vipService": true,
+          "barberServiceEWT": 30,
+          "_id": "67a46936c85dd16cdfa7ef9e"
+        }
+      ],
+      "createdAt": "2025-02-10T06:56:46.889Z",
+      "updatedAt": "2025-03-07T11:40:19.338Z",
+      "__v": 0,
+      "gender": "Male",
+      "mobileCountryCode": 44,
+      "mobileNumber": 1234567890
     }
   ])
 
@@ -991,20 +1027,27 @@ const BarberList = () => {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <button
-                      className={`${item.key === "name" ? style.name_head_btn : ""}`}
-                      onClick={() => sortFunction(item.key)}>
-                      {item.key === "name" ? (
-                        <>
-                          <span></span>
-                          {item.heading}
-                        </>
+                    {
+                      item.key === "" ? (
+                        <button className={`${style.head_select_icon}`}><CheckIcon /></button>
                       ) : (
-                        item.heading
-                      )}
+                        <button
+                          className={`${item.key === "name" ? style.name_head_btn : ""}`}
+                          onClick={() => sortFunction(item.key)}>
+                          {item.key === "name" ? (
+                            <>
+                              <span></span>
+                              {item.heading}
+                            </>
+                          ) : (
+                            item.heading
+                          )}
 
-                      <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
-                    </button>
+                          <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
+                        </button>
+                      )
+                    }
+
                   </div>
                 )
               })
@@ -1014,21 +1057,26 @@ const BarberList = () => {
           {
             salonPaginationData.map((item, index) => {
               return (
-                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div><p>{item.id}</p></div>
+                <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                  <div>
+                    <button><CheckIcon /></button>
+                  </div>
                   <div>
                     <div>
-                      <div><img src={item.logo} alt="" /></div>
+                      <div><img src={item.profile?.[0]?.url} alt="" /></div>
                       <p>{item.name}</p>
                     </div>
                   </div>
-                  <div><p>{item.address}</p></div>
-                  <div><p>{item.city}</p></div>
-                  <div><p>{item.type}</p></div>
-                  <div><p>{item.subscription}</p></div>
+                  <div><p>{item.email}</p></div>
                   <div><button style={{
-                    backgroundColor: item.status === "Online" ? "#052E16" : "#450a0a"
-                  }}>{item.status === "Online" ? "Online" : "Offline"}</button></div>
+                    backgroundColor: item.isOnline ? "#052E16" : "#450a0a"
+                  }}>{item.isOnline ? "Online" : "Offline"}</button></div>
+                  <div><button style={{
+                    backgroundColor: item.isClockedIn ? "#052E16" : "#450a0a"
+                  }}>{item.isClockedIn ? "Clock In" : "Clock Out"}</button></div>
+                  <div><button style={{
+                    backgroundColor: item.isApproved ? "var(--bg-secondary-hover)" : "var(--input-bg-color)"
+                  }}>{item.isApproved ? "Approved" : "Approve"}</button></div>
                   <div>
                     <div
                       style={{
@@ -1051,8 +1099,6 @@ const BarberList = () => {
                                 zIndex: settingsIndex === index ? 9999 : -100,
                               }}
                               className={`${style.settings_container}`}>
-                              <p>Salon settings</p>
-                              <p>Appointment settings</p>
                               <p><Link to="/admin-barber/editbarber/:salonid">Edit barber</Link></p>
                             </div>
                           </ClickAwayListener>)

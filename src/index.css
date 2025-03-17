@@ -165,10 +165,10 @@ body {
 
 .react-international-phone-input-container .react-international-phone-input {
   width: 100%;
-  min-height: 4rem !important;
+  min-height: 3.5rem !important;
   background-color: transparent;
   border: none;
-  font-size: var(--font-size-3);
+  font-size: 1.4rem;
   border-radius: var(--input-border-radius) !important;
   -webkit-border-radius: var(--input-border-radius) !important;
   -moz-border-radius: var(--input-border-radius) !important;
@@ -178,7 +178,7 @@ body {
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
   background-color: transparent !important;
-  min-height: 4rem !important;
+  min-height: 3.5rem !important;
   width: 6rem !important;
   border: none !important;
   border-top-left-radius: var(--input-border-radius) !important;

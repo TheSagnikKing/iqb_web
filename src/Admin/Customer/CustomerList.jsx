@@ -625,7 +625,7 @@ const CustomerList = () => {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
-        {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button> */}
+
       </div>
 
       <div className={`${style.list_container}`}>

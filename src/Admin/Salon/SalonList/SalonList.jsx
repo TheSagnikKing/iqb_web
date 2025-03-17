@@ -445,178 +445,178 @@
 //         }
 
 
-//         <Modal
-//           open={openSalonSettings}
-//           onClose={() => {
-//             setEndTimeHandler(false)
-//             setStartTimeHandler(false)
-//             setIntervalTimeHandler(false)
-//             setOpenSalonSettings(false)
-//           }}
-//           aria-labelledby="modal-modal-title"
-//           aria-describedby="modal-modal-description"
-//         >
-//           <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
-//             <div>
-//               <p>Salon Settings</p>
-//               <button onClick={() => setOpenSalonSettings(false)}><CloseIcon /></button>
-//             </div>
+        // <Modal
+        //   open={openSalonSettings}
+        //   onClose={() => {
+        //     setEndTimeHandler(false)
+        //     setStartTimeHandler(false)
+        //     setIntervalTimeHandler(false)
+        //     setOpenSalonSettings(false)
+        //   }}
+        //   aria-labelledby="modal-modal-title"
+        //   aria-describedby="modal-modal-description"
+        // >
+        //   <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+        //     <div>
+        //       <p>Salon Settings</p>
+        //       <button onClick={() => setOpenSalonSettings(false)}><CloseIcon /></button>
+        //     </div>
 
-//             <div className={style.modal_content_container}>
-//               <div className={style.time_container}>
-//                 <p>Start Time</p>
-//                 <input
-//                   type="text"
-//                   value={`${startTime ? `${startTime} hr` : ''}`}
-//                   onClick={() => startTimeDropHandler()}
-//                   onKeyDown={handleKeyPress}
-//                   readOnly
-//                 />
+        //     <div className={style.modal_content_container}>
+        //       <div className={style.time_container}>
+        //         <p>Start Time</p>
+        //         <input
+        //           type="text"
+        //           value={`${startTime ? `${startTime} hr` : ''}`}
+        //           onClick={() => startTimeDropHandler()}
+        //           onKeyDown={handleKeyPress}
+        //           readOnly
+        //         />
 
-//                 {startTimeDrop && (
-//                   <ClickAwayListener onClickAway={() => setStartTimeDrop(false)}>
-//                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
-//                       {timeOptions.map((option) => (
-//                         <p key={option.value} onClick={() => setStartTimeHandler(option.value)}>
-//                           {option.value} hr
-//                         </p>
-//                       ))}
-//                     </div>
-//                   </ClickAwayListener>
-//                 )}
-//               </div>
-
-
-//               <div className={style.time_container}>
-//                 <p>End Time</p>
-//                 <input
-//                   type="text"
-//                   value={`${endTime ? `${endTime} hr` : ''}`}
-//                   onClick={() => endTimeDropHandler()}
-//                   onKeyDown={handleKeyPress}
-//                   readOnly
-//                 />
-
-//                 {endTimeDrop && (
-//                   <ClickAwayListener onClickAway={() => setEndTimeHandler(false)}>
-//                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
-//                       {timeOptions.map((option) => (
-//                         <p key={option.value} onClick={() => setEndTimeHandler(option.value)}>
-//                           {option.value} hr
-//                         </p>
-//                       ))}
-//                     </div>
-//                   </ClickAwayListener>
-//                 )}
-//               </div>
+        //         {startTimeDrop && (
+        //           <ClickAwayListener onClickAway={() => setStartTimeDrop(false)}>
+        //             <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+        //               {timeOptions.map((option) => (
+        //                 <p key={option.value} onClick={() => setStartTimeHandler(option.value)}>
+        //                   {option.value} hr
+        //                 </p>
+        //               ))}
+        //             </div>
+        //           </ClickAwayListener>
+        //         )}
+        //       </div>
 
 
-//               <div className={style.time_container}>
-//                 <p>Interval Time</p>
-//                 <input
-//                   type="text"
-//                   value={`${intervalTime ? `${intervalTime} mins` : ''}`}
-//                   onClick={() => intervalTimeDropHandler()}
-//                   onKeyDown={handleKeyPress}
-//                   readOnly
-//                 />
+        //       <div className={style.time_container}>
+        //         <p>End Time</p>
+        //         <input
+        //           type="text"
+        //           value={`${endTime ? `${endTime} hr` : ''}`}
+        //           onClick={() => endTimeDropHandler()}
+        //           onKeyDown={handleKeyPress}
+        //           readOnly
+        //         />
 
-//                 {intervalTimeDrop &&
-//                   <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}>
-//                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
-//                       {intervalTimemin.map((option) => (
-//                         <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
-//                           {option} mins
-//                         </p>
-//                       ))}
-//                     </div>
-//                   </ClickAwayListener>}
-//               </div>
+        //         {endTimeDrop && (
+        //           <ClickAwayListener onClickAway={() => setEndTimeHandler(false)}>
+        //             <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+        //               {timeOptions.map((option) => (
+        //                 <p key={option.value} onClick={() => setEndTimeHandler(option.value)}>
+        //                   {option.value} hr
+        //                 </p>
+        //               ))}
+        //             </div>
+        //           </ClickAwayListener>
+        //         )}
+        //       </div>
 
-//               <div className={style.time_container}>
-//                 <p>Salon Off Days</p>
-//                 <input
-//                   type="text"
-//                   value={selectedSalonOffdays.map((s) => s)}
-//                   onClick={() => setSalonoffdayOpen((prev) => !prev)}
-//                   onKeyDown={handleKeyPress}
-//                   readOnly
-//                 />
 
-//                 {salonoffdayOpen &&
-//                   <ClickAwayListener onClickAway={() => setSalonoffdayOpen(false)}>
-//                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
-//                       {salonOffDaysData.map((offday) => (
-//                         <p key={offday}
-//                           className={style.dayoff_div}
-//                         >
-//                           {offday}
-//                           {
-//                             selectedSalonOffdays.find((c) => c === offday) ? (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.delete_btn}>Delete</button>) : (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.add_btn}>Add</button>)
-//                           }
-//                         </p>
-//                       ))}
-//                     </div>
-//                   </ClickAwayListener>}
-//               </div>
+        //       <div className={style.time_container}>
+        //         <p>Interval Time</p>
+        //         <input
+        //           type="text"
+        //           value={`${intervalTime ? `${intervalTime} mins` : ''}`}
+        //           onClick={() => intervalTimeDropHandler()}
+        //           onKeyDown={handleKeyPress}
+        //           readOnly
+        //         />
 
-//               <div className={style.time_container}>
-//                 <p>Maximum Appointment Days</p>
-//                 <input
-//                   type="text"
-//                   value={`${selectedAdvanceDays ? `${selectedAdvanceDays} days` : ''}`}
-//                   onClick={() => setAdvanceAppointmentdaysOpen(true)}
-//                   onKeyDown={handleKeyPress}
-//                   readOnly
-//                 />
+        //         {intervalTimeDrop &&
+        //           <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}>
+        //             <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+        //               {intervalTimemin.map((option) => (
+        //                 <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>
+        //                   {option} mins
+        //                 </p>
+        //               ))}
+        //             </div>
+        //           </ClickAwayListener>}
+        //       </div>
 
-//                 {advanceAppointmentdaysOpen &&
-//                   <ClickAwayListener onClickAway={() => setAdvanceAppointmentdaysOpen(false)}>
-//                     <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
-//                       {maximumAppointmentdaysdata.map((option) => (
-//                         <p key={option} value={option} onClick={() => {
-//                           setSelectedAdvanceDays(option)
-//                           setAdvanceAppointmentdaysOpen(false)
-//                         }}>
-//                           {option} days
-//                         </p>
-//                       ))}
-//                     </div>
-//                   </ClickAwayListener>}
-//               </div>
+        //       <div className={style.time_container}>
+        //         <p>Salon Off Days</p>
+        //         <input
+        //           type="text"
+        //           value={selectedSalonOffdays.map((s) => s)}
+        //           onClick={() => setSalonoffdayOpen((prev) => !prev)}
+        //           onKeyDown={handleKeyPress}
+        //           readOnly
+        //         />
 
-//               <div style={{
-//                 display: "flex",
-//                 alignItems: "center",
-//                 justifyContent: "space-between"
-//               }}>
-//                 {/* <button className={style.salon_settings_btn}
-//                   // onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
-//                   //   toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
-//                   //     duration: 3000,
-//                   //     style: {
-//                   //       fontSize: "var(--font-size-2)",
-//                   //       borderRadius: '0.3rem',
-//                   //       background: '#333',
-//                   //       color: '#fff',
-//                   //     },
-//                   //   });
-//                   // }}
+        //         {salonoffdayOpen &&
+        //           <ClickAwayListener onClickAway={() => setSalonoffdayOpen(false)}>
+        //             <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+        //               {salonOffDaysData.map((offday) => (
+        //                 <p key={offday}
+        //                   className={style.dayoff_div}
+        //                 >
+        //                   {offday}
+        //                   {
+        //                     selectedSalonOffdays.find((c) => c === offday) ? (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.delete_btn}>Delete</button>) : (<button onClick={() => selectSalonOffdayHandler(offday)} className={style.add_btn}>Add</button>)
+        //                   }
+        //                 </p>
+        //               ))}
+        //             </div>
+        //           </ClickAwayListener>}
+        //       </div>
 
-//                   onClick={buyHandler}
-//                 >
-//                   {renew ? "Renewal" : "Buy"}
-//                 </button> */}
+        //       <div className={style.time_container}>
+        //         <p>Maximum Appointment Days</p>
+        //         <input
+        //           type="text"
+        //           value={`${selectedAdvanceDays ? `${selectedAdvanceDays} days` : ''}`}
+        //           onClick={() => setAdvanceAppointmentdaysOpen(true)}
+        //           onKeyDown={handleKeyPress}
+        //           readOnly
+        //         />
 
-//                 {
-//                   adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
-//                 }
+        //         {advanceAppointmentdaysOpen &&
+        //           <ClickAwayListener onClickAway={() => setAdvanceAppointmentdaysOpen(false)}>
+        //             <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
+        //               {maximumAppointmentdaysdata.map((option) => (
+        //                 <p key={option} value={option} onClick={() => {
+        //                   setSelectedAdvanceDays(option)
+        //                   setAdvanceAppointmentdaysOpen(false)
+        //                 }}>
+        //                   {option} days
+        //                 </p>
+        //               ))}
+        //             </div>
+        //           </ClickAwayListener>}
+        //       </div>
 
-//               </div>
+        //       <div style={{
+        //         display: "flex",
+        //         alignItems: "center",
+        //         justifyContent: "space-between"
+        //       }}>
+        //         {/* <button className={style.salon_settings_btn}
+        //           // onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
+        //           //   toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
+        //           //     duration: 3000,
+        //           //     style: {
+        //           //       fontSize: "var(--font-size-2)",
+        //           //       borderRadius: '0.3rem',
+        //           //       background: '#333',
+        //           //       color: '#fff',
+        //           //     },
+        //           //   });
+        //           // }}
 
-//             </div>
-//           </div>
-//         </Modal>
+        //           onClick={buyHandler}
+        //         >
+        //           {renew ? "Renewal" : "Buy"}
+        //         </button> */}
+
+        //         {
+        //           adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
+        //         }
+
+        //       </div>
+
+        //     </div>
+        //   </div>
+        // </Modal>
 
 
 //         <Modal
@@ -1237,8 +1237,9 @@ const SalonList = () => {
                                 zIndex: settingsIndex === index ? 9999 : -100,
                               }}
                               className={`${style.settings_container}`}>
-                              <p><Link to="#">Salon settings</Link></p>
-                              <p><Link to="#">Appointment settings</Link></p>
+                              <p><Link to="#"
+                              onClick={() => alert("")}
+                              >Appointment settings</Link></p>
                               <p><Link to="/admin-salon/editsalon/:salonid">Edit Salon</Link></p>
                             </div>
                           </ClickAwayListener>)

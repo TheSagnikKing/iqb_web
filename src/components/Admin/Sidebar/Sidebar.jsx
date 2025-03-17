@@ -204,7 +204,8 @@ const Sidebar = () => {
         {
           id: 2,
           name: "Payment history",
-          icon: <MdPaymentIcon />
+          icon: <MdPaymentIcon />,
+          url: "/admin-paymentstatus"
         },
       ]
     },

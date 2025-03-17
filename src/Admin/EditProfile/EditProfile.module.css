@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    overflow: auto;
 
     &>div:nth-child(1) {
         height: 4rem;
@@ -48,7 +49,7 @@
     .profile_container {
         flex: 1;
         display: flex;
-        gap: 2rem;
+        gap: 3rem;
         /* border: 0.1rem solid var(--border-secondary); */
         border-radius: var(--border-radius-primary);
         -webkit-border-radius: var(--border-radius-primary);
@@ -58,7 +59,7 @@
 
         &>div:nth-child(1) {
             border: 0.1rem solid var(--border-secondary);
-            width: 43.5rem;
+            width: 45rem;
             border-radius: var(--border-radius-primary);
             -webkit-border-radius: var(--border-radius-primary);
             -moz-border-radius: var(--border-radius-primary);
@@ -67,19 +68,59 @@
             padding: 4rem;
 
             &>div:nth-child(1) {
-
-                &>img {
+                &>div {
                     width: 10rem;
                     height: 10rem;
                     margin: auto;
-                    display: block;
-                    border-radius: 50%;
-                    -webkit-border-radius: 50%;
-                    -moz-border-radius: 50%;
-                    -ms-border-radius: 50%;
-                    -o-border-radius: 50%;
                     margin-bottom: 2rem;
-                    object-fit: cover;
+                    position: relative;
+
+                    &>img {
+                        width: 10rem;
+                        height: 10rem;
+                        margin: auto;
+                        display: block;
+                        border-radius: 50%;
+                        -webkit-border-radius: 50%;
+                        -moz-border-radius: 50%;
+                        -ms-border-radius: 50%;
+                        -o-border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+
+
+                    &>button {
+                        position: absolute;
+                        right: 0rem;
+                        bottom: 0rem;
+                        height: 3rem;
+                        width: 3rem;
+                        border-radius: 50%;
+                        -webkit-border-radius: 50%;
+                        -moz-border-radius: 50%;
+                        -ms-border-radius: 50%;
+                        -o-border-radius: 50%;
+                        background: var(--bg-secondary);
+                        color: var(--text-primary);
+                        font-size: 1.4rem;
+                        transition: background-color 0.2s ease-in;
+                        -webkit-transition: background-color 0.2s ease-in;
+                        -moz-transition: background-color 0.2s ease-in;
+                        -ms-transition: background-color 0.2s ease-in;
+                        -o-transition: background-color 0.2s ease-in;
+                        border: 0.3rem solid var(--bg-primary);
+                        cursor: pointer;
+                        outline: none;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            background-color: var(--bg-secondary-hover);
+                            border: none;
+                        }
+                    }
                 }
 
                 &>h4 {
@@ -181,7 +222,7 @@
                     -o-border-radius: 2rem;
                     background-color: var(--border-secondary);
 
-                    &>span{
+                    &>span {
                         display: block;
                         width: 70%;
                         height: inherit;
@@ -196,11 +237,14 @@
         &>div:nth-child(2) {
             flex: 1;
 
-            &>div:nth-child(1){
+            &>div:nth-child(1) {
                 max-width: 67rem;
                 width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
 
-                &>div{
+                &>div {
                     display: flex;
                     flex-direction: column;
                     gap: 1.5rem;
@@ -210,7 +254,7 @@
                         color: var(--text-primary);
                         font-family: 'AirbnbCereal_Medium';
                     }
-    
+
                     &>input {
                         height: 3.5rem;
                         padding-inline: 1rem;
@@ -224,11 +268,284 @@
                         background-color: var(--input-bg-color);
                         color: var(--text-primary);
                         outline: none;
-    
+
                         &::placeholder {
                             color: var(--text-secondary);
                             letter-spacing: 0.01rem;
                         }
+                    }
+                }
+
+                .input_type_2 {
+                    border: 0.1rem solid var(--border-secondary);
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    background-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+
+                    &>input {
+                        width: calc(100% - 3rem);
+                        height: 3.5rem;
+                        padding-inline: 1rem;
+                        font-size: 1.4rem;
+                        background-color: var(--input-bg-color);
+                        color: var(--text-primary);
+                        border: none;
+                        outline: none;
+
+                        &::placeholder {
+                            color: var(--text-secondary);
+                            letter-spacing: 0.01rem;
+                        }
+                    }
+
+                    &>button {
+                        height: 3.5rem;
+                        width: 3.5rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2rem;
+                        font-family: 'AirbnbCereal_Medium';
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                    }
+                }
+
+
+                .input_type_3 {
+                    border: 0.1rem solid var(--border-secondary);
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    background-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+
+                    &>div:nth-child(1) {
+                        width: calc(100% - 3rem);
+                        height: 3.5rem;
+                        /* padding-inline: 1rem; */
+                        font-size: 1.4rem;
+                        background-color: var(--input-bg-color);
+                        color: var(--text-primary);
+                        border: none;
+                        outline: none;
+
+                        &::placeholder {
+                            color: var(--text-secondary);
+                            letter-spacing: 0.01rem;
+                        }
+                    }
+
+                    &>button {
+                        height: 3.5rem;
+                        width: 3.5rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2rem;
+                        font-family: 'AirbnbCereal_Medium';
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                    }
+                }
+
+                .calender_container {
+                    position: relative;
+
+                    &>span {
+                        position: absolute;
+                        right: 0rem;
+                        top: 3.4rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        height: 3.5rem;
+                        width: 3.5rem;
+                        color: var(--text-primary);
+                        user-select: none;
+                    }
+                }
+
+                .calender_drop_container {
+                    position: absolute;
+                    left: 0;
+                    top: 8rem;
+                }
+
+
+                .gender_container {
+                    border: 0.1rem solid var(--border-secondary);
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    background-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+
+
+                    &>input {
+                        width: calc(100% - 3rem);
+                        height: 3.5rem;
+                        padding-inline: 1rem;
+                        font-size: 1.4rem;
+                        background-color: var(--input-bg-color);
+                        color: var(--text-primary);
+                        border: none;
+                        outline: none;
+
+                        &::placeholder {
+                            color: var(--text-secondary);
+                            letter-spacing: 0.01rem;
+                        }
+                    }
+
+                    &>button {
+                        height: 3.5rem;
+                        width: 3.5rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-family: 'AirbnbCereal_Medium';
+                        background-color: var(--input-bg-color);
+                        border: none;
+                        outline: none;
+                        color: var(--text-primary);
+                        cursor: pointer;
+                        user-select: none;
+                    }
+
+                    &>div {
+                        background-color: var(--bg-primary);
+                        position: absolute;
+                        top: 5rem;
+                        left: 0rem;
+                        right: 0rem;
+                        padding: 1rem;
+                        margin-inline: auto;
+                        border-radius: var(--border-radius-primary);
+                        -webkit-border-radius: var(--border-radius-primary);
+                        -moz-border-radius: var(--border-radius-primary);
+                        -ms-border-radius: var(--border-radius-primary);
+                        -o-border-radius: var(--border-radius-primary);
+                        border: 0.1rem solid var(--border-secondary);
+
+                        &>p {
+                            line-height: 3.5rem;
+                            margin-bottom: 1rem;
+                            font-size: 1.4rem;
+                            padding-inline: 1rem;
+                            border-radius: var(--border-radius-primary);
+                            -webkit-border-radius: var(--border-radius-primary);
+                            -moz-border-radius: var(--border-radius-primary);
+                            -ms-border-radius: var(--border-radius-primary);
+                            -o-border-radius: var(--border-radius-primary);
+                            transition: var(--btn-transition);
+                            -webkit-transition: var(--btn-transition);
+                            -moz-transition: var(--btn-transition);
+                            -ms-transition: var(--btn-transition);
+                            -o-transition: var(--btn-transition);
+                            cursor: pointer;
+                            color: var(--text-secondary);
+
+                            &:hover {
+                                background-color: var(--input-bg-color);
+                                color: var(--text-primary);
+                            }
+                        }
+                    }
+                }
+
+                .profile_btn {
+                    margin-top: 2rem;
+                    width: max-content;
+                    height: 3.5rem;
+                    padding-inline: 1.5rem;
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    background-color: var(--bg-secondary);
+                    color: var(--text-primary);
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    transition: var(--common-btn-transition);
+                    -webkit-transition: var(--common-btn-transition);
+                    -moz-transition: var(--common-btn-transition);
+                    -ms-transition: var(--common-btn-transition);
+                    -o-transition: var(--common-btn-transition);
+
+                    &:hover {
+                        background-color: var(--bg-secondary-hover);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:0px) and (max-width:600px) {
+    .section {
+        .profile_container {
+            flex-direction: column;
+
+            &>div:nth-child(1) {
+                min-width: 100%;
+                max-width: 100%;
+                padding: 2rem;
+            }
+
+            &>div:nth-child(2) {
+                &>div:nth-child(1) {
+                    .profile_btn {
+                        margin-top: 0rem;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width:601px) and (max-width:900px) {
+    .section {
+        .profile_container {
+            flex-direction: column;
+
+            &>div:nth-child(1) {
+                max-width: 100%;
+                padding: 2rem;
+                margin: auto;
+            }
+
+            &>div:nth-child(2) {
+                
+                &>div:nth-child(1) {
+                    margin: auto;
+                    .profile_btn {
+                        margin-top: 0rem;
+                        width: 100%;
                     }
                 }
             }

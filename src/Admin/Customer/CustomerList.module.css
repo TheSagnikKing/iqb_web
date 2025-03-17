@@ -146,7 +146,6 @@
                     .select_all_head_btn {
                         width: 1.5rem;
                         height: 1.5rem;
-                        /* background-color: var(--bg-hover-primary); */
                         border: none;
                         outline: none;
                         border-radius: 0.2rem;
@@ -240,7 +239,6 @@
                     &>button {
                         width: 1.5rem;
                         height: 1.5rem;
-                        /* background-color: var(--bg-hover-primary); */
                         border: none;
                         outline: none;
                         border-radius: 0.2rem;
