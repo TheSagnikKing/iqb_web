@@ -39,7 +39,8 @@ import Header from '../Header/Header.jsx'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
 import { Modal } from '@mui/material'
-import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, SalonIcon } from '../../../newicons.js';
+import { AdvertisementIcon, AppointmentIcon, BarberIcon, ChangeSalonIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, SalonIcon } from '../../../newicons.js';
+import Switch from "react-switch";
 
 const MobileSidebar = () => {
 
@@ -126,9 +127,21 @@ const MobileSidebar = () => {
         },
       ]
     },
+    {
+      heading: "Settings",
+      menuItems: [
+        {
+          id: 1,
+          name: "Change Salon", // Click korle select modal open hbe
+          icon: <ChangeSalonIcon />,
+        },
+      ]
+    },
   ]
 
   const navigate = useNavigate()
+
+  const [online, setOnline] = useState(false)
 
   return (
     <section className={`${style.mobile_container}`}>
@@ -195,6 +208,48 @@ const MobileSidebar = () => {
                 </li>
               ))}
             </ul>
+
+            <div className={`${style.online_container}`}>
+              <p>{online ? "Online" : "Offline"}</p>
+              <Switch
+                width={45} 
+                height={18}
+                handleDiameter={14} 
+                offColor="#F44336"
+                onColor="#00A36C"
+                uncheckedIcon={
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      fontSize: "1rem",
+                      color: "#F4F4F5",
+                      paddingRight: "1px"
+                    }}
+                  >
+                    OFF
+                  </div>
+                }
+                checkedIcon={
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      fontSize: "1rem",
+                      color: "#F4F4F5",
+                    }}
+                  >
+                    ON
+                  </div>
+                }
+                onChange={() => setOnline((prev) => !prev)}
+                checked={online}
+              />
+            </div>
           </nav>
 
         </aside>

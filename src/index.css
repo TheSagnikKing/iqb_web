@@ -369,6 +369,10 @@ button {
   height: 0.3rem;
 }
 
+*::-webkit-scrollbar-corner{
+  background: transparent;
+}
+
 *:hover::-webkit-scrollbar-track {
   background-color: transparent;
 }
@@ -398,7 +402,7 @@ button {
 }
 
 .fc .fc-toolbar-title {
-  font-size: 24px;
+  font-size: clamp(18px, 2vw, 24px);
   font-family: 'AirbnbCereal_Medium';
 }
 

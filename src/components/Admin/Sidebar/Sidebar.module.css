@@ -266,13 +266,13 @@
 
 .main_container {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   display: flex;
 }
 
 aside {
   background-color: var(--bg-primary);
-  height: inherit;
+  height: 100svh;
   transition: width 0.3s ease-in-out;
   -webkit-transition: width 0.3s ease-in-out;
   -moz-transition: width 0.3s ease-in-out;

@@ -4,7 +4,7 @@
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
     &>div:nth-child(1) {
         height: 4rem;
@@ -16,6 +16,7 @@
             color: var(--text-primary);
             line-height: inherit;
             font-family: "AirbnbCereal_Medium";
+            font-size: clamp(18px, 2vw, 24px);
         }
 
         &>div {
@@ -428,6 +429,7 @@
             &>div:nth-child(3) {
                 width: 100%;
                 justify-content: space-between;
+                padding-right: 0rem !important;
             }
         }
     }
@@ -450,6 +452,7 @@
             &>div:nth-child(3) {
                 width: 100%;
                 justify-content: space-between;
+                padding-right: 0rem !important;
             }
         }
     }

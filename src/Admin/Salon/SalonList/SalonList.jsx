@@ -1310,6 +1310,7 @@ const SalonList = () => {
             <div>
               <p>{startIndex} - {endIndex}{" "} of {totalPages}</p>
             </div>
+
           </div>
         </div>
       </div>

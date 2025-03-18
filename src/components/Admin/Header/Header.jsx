@@ -629,6 +629,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
           </div>
         </ClickAwayListener>
       </div>
+      
       <div>
         <button
           style={{
@@ -689,9 +690,9 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
       <div className={`${style.mobile_container_left}`}>
         <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
-        <button>
+        {/* <button>
           Select Salon
-        </button>
+        </button> */}
       </div>
     </header>
   )

@@ -58,7 +58,7 @@
         -o-border-radius: var(--border-radius-primary);
 
         &>div:nth-child(1) {
-            border: 0.1rem solid var(--border-secondary);
+            /* border: 0.1rem solid var(--border-secondary); */
             width: 45rem;
             border-radius: var(--border-radius-primary);
             -webkit-border-radius: var(--border-radius-primary);
@@ -512,10 +512,11 @@
             &>div:nth-child(1) {
                 min-width: 100%;
                 max-width: 100%;
-                padding: 2rem;
+                padding: 1rem;
             }
 
             &>div:nth-child(2) {
+                padding: 1rem;
                 &>div:nth-child(1) {
                     .profile_btn {
                         margin-top: 0rem;

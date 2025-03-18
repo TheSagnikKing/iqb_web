@@ -472,7 +472,7 @@
 
 import React, { useEffect, useState } from 'react'
 import style from "./CustomerList.module.css"
-import { CheckIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
+import { CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SearchIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -611,6 +611,8 @@ const CustomerList = () => {
 
   const navigate = useNavigate()
 
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -624,6 +626,45 @@ const CustomerList = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+        </div>
+
+      </div>
+
+      <div className={`${style.mobile_header}`}>
+        <h2>Customer List</h2>
+        <div>
+          {
+            mobileSearchOpen ? (
+              <ClickAwayListener onClickAway={() => setMobileSearchOpen(false)}>
+                <div className={`${style.input_type_2}`}>
+                  <input
+                    type='text'
+                    placeholder='Search Customer'
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+
+                  <button onClick={() => setMobileSearchOpen(false)}>
+                    <CloseIcon />
+                  </button>
+
+                </div>
+              </ClickAwayListener>
+            ) : (
+              <>
+                <button><MessageIcon /></button>
+                <button><EmailIcon /></button>
+                <button onClick={() => setMobileSearchOpen(true)}><SearchIcon /></button>
+              </>
+            )
+          }
+
+          {/* <input
+            type='text'
+            placeholder='Search Customer'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          /> */}
         </div>
 
       </div>

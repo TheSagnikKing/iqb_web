@@ -343,7 +343,7 @@
                 border: none;
             }
 
-            &>button:nth-child(2) {
+            /* &>button:nth-child(2) {
                 color: var(--text-primary);
                 border: none;
                 border-radius: var(--border-radius-primary);
@@ -357,11 +357,15 @@
                 padding: 0.5rem 0.8rem;
                 letter-spacing: 0.5px;
                 background-color: var(--bg-secondary);
-            }
+            } */
         }
 
         &>div:nth-child(2) {
-            gap: 2rem;
+            gap: 3rem;
+
+            &>button{
+                display: none;
+            }
         }
     }
 

@@ -4,7 +4,7 @@ import { BsInstagram, BsSunFill } from "react-icons/bs";
 import { FaFacebookF, FaRegCalendarAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { FiPieChart } from "react-icons/fi";
-import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline } from "react-icons/io5";
+import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline, IoSearch } from "react-icons/io5";
 import { LuHistory, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { MdAdd, MdLogout, MdOutlineCameraAlt, MdOutlineMailOutline, MdOutlineMessage, MdOutlinePhoneInTalk, MdOutlinePhotoCamera, MdOutlineQueue, MdOutlineSubscriptions, MdPayment } from "react-icons/md";
 import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine  } from "react-icons/ri";
@@ -13,6 +13,7 @@ import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlineShop } from "react-icons/ai";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors 
@@ -48,3 +49,5 @@ export const CheckIcon = IoMdCheckmark
 export const CloseIcon = RxCross2
 export const ContactTel = MdOutlinePhoneInTalk 
 export const CameraIcon = MdOutlinePhotoCamera 
+export const ChangeSalonIcon = AiOutlineShop 
+export const SearchIcon = IoSearch
