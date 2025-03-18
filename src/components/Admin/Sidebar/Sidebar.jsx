@@ -126,7 +126,7 @@ import React, { useState } from 'react'
 import style from './Sidebar.module.css'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from '../Header/Header.jsx';
-import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, SalonIcon } from '../../../newicons.js';
+import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, ReportIcon, SalonIcon } from '../../../newicons.js';
 
 
 const Sidebar = () => {
@@ -189,6 +189,12 @@ const Sidebar = () => {
           name: "Appointments",
           icon: <AppointmentIcon />,
           url: "/admin-appointments",
+        },
+        {
+          id: 4,
+          name: "Reports",
+          icon: <ReportIcon />,
+          url: "/admin-reports",
         },
       ]
     },

@@ -325,7 +325,8 @@ body {
 }
 
 button {
-  user-select: none; /* Prevents text selection */
+  user-select: none;
+  /* Prevents text selection */
 }
 
 .route_error_container_content>div:nth-child(2)>img {
@@ -365,11 +366,11 @@ button {
 
 
 *::-webkit-scrollbar {
-  width: 0.3rem;  
+  width: 0.3rem;
   height: 0.3rem;
 }
 
-*::-webkit-scrollbar-corner{
+*::-webkit-scrollbar-corner {
   background: transparent;
 }
 
@@ -439,7 +440,7 @@ button {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   /* border: 0.1rem solid var(--color-2); */
-  border: none ;
+  border: none;
 
   &:hover {
     background-color: var(--bg-secondary-hover);
@@ -471,11 +472,11 @@ button {
 
 }
 
-.fc-button-group{
+.fc-button-group {
   gap: 1rem;
 }
 
-.fc-today-button{
+.fc-today-button {
   margin-right: 0rem !important;
 }
 
@@ -552,18 +553,78 @@ button {
 }
 
 .rmdp-input {
-  height: 3rem !important;
+  height: 3.5rem !important;
   padding-inline: 1rem !important;
   text-align: "center" !important;
   font-size: 1.4rem !important;
   width: 20rem;
+  background-color: transparent !important;
+  outline: none !important;
+  border: 0.1rem solid var(--border-secondary) !important;
+  border-radius: var(--border-radius-primary);
+  -webkit-border-radius: var(--border-radius-primary);
+  -moz-border-radius: var(--border-radius-primary);
+  -ms-border-radius: var(--border-radius-primary);
+  -o-border-radius: var(--border-radius-primary);
+  margin: 0px !important;
+  padding: 0px;
+  color: var(--text-secondary) !important;
 }
 
 .rmdp-input::placeholder {
-  font-size: 1.2rem !important;
+  font-size: 1.4rem !important;
   text-transform: uppercase !important;
+  color: var(--text-secondary) !important;
 }
 
+.rmdp-week-day {
+  color: var(--text-primary) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+}
+
+.rmdp-range {
+  background-color: var(--bg-secondary) !important;
+  box-shadow: 0 0 2px var(--text-primary) !important;
+}
+
+.rmdp-day.rmdp-today span {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-secondary) !important;
+}
+
+.rmdp-day span {
+  &:hover {
+    background-color: var(--bg-secondary) !important;
+  }
+}
+
+.rmdp-arrow {
+  border: solid var(--bg-secondary) !important;
+  border-width: 0 2px 2px 0 !important;
+}
+
+.rmdp-arrow-container:hover {
+  background-color: var(--bg-secondary-hover) !important;
+
+  .rmdp-arrow {
+    border: solid var(--text-primary) !important;
+    border-width: 0 2px 2px 0 !important;
+  }
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight):hover{
+  color: var(--text-primary) !important;
+}
+
+.rmdp-ep-shadow:after{
+  display: none;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight){
+  background-color: var(--bg-secondary) !important;
+  box-shadow: none !important;
+}
 
 /* Light Mode */
 .light-theme .rmdp-calendar {
@@ -591,36 +652,35 @@ button {
 
 /* Dark Mode */
 .dark-theme .rmdp-calendar {
-  background-color: #222 !important;
+  background-color: var(--bg-primary) !important;
   /* color: white !important; */
-  border: 1px solid #444 !important;
+  border: 0.1rem solid var(--border-secondary) !important;
 }
 
 .dark-theme .rmdp-month-picker {
-  background-color: #222 !important;
+  background-color: var(--bg-primary) !important;
 }
 
 .dark-theme .rmdp-year-picker {
-  background-color: #222 !important;
+  background-color: var(--bg-primary) !important;
 }
 
 
 
 .dark-theme .rmdp-day {
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
 .dark-theme .rmdp-header-values {
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
 
 .rmdp-shadow {
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: none !important;
 }
 
 
 .dark-input .rmdp-input {
   /* background-color: red !important; */
 }
-

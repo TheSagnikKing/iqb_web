@@ -188,324 +188,184 @@ const PaymentStatus = () => {
 
   const [salonlistData, setSalonlistData] = useState([
     {
-      id: 1,
-      name: "Glamour Lounge",
-      logo: "https://images.pexels.com/photos/1068852/pexels-photo-1068852.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 18, Noida",
-      city: "Noida",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Offline",
+      "id": 1,
+      "product": "Appointment",
+      "purchased": "2023-10-26",
+      "expired": "2023-10-26 11:00",
+      "price": 50.00,
+      "transactionid": "APT12345",
+      "timeperiod": "1 hour"
     },
     {
-      id: 2,
-      name: "Elegant Cuts",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Park Street, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 2,
+      "product": "Queue",
+      "purchased": "2023-11-01",
+      "expired": "2023-11-01 14:30",
+      "price": 10.00,
+      "transactionid": "QUE67890",
+      "timeperiod": "30 minutes"
     },
     {
-      id: 3,
-      name: "Urban Styles",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Brigade Road, Bangalore",
-      city: "Bangalore",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "id": 3,
+      "product": "Appointment",
+      "purchased": "2023-11-05",
+      "expired": "2023-11-05 16:00",
+      "price": 75.00,
+      "transactionid": "APT13579",
+      "timeperiod": "1 hour"
     },
     {
-      id: 4,
-      name: "Chic Hair Studio",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Connaught Place, Delhi",
-      city: "Delhi",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "id": 4,
+      "product": "Queue",
+      "purchased": "2023-11-08",
+      "expired": "2023-11-08 09:15",
+      "price": 15.00,
+      "transactionid": "QUE24680",
+      "timeperiod": "45 minutes"
     },
     {
-      id: 5,
-      name: "Royal Touch",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Baner, Pune",
-      city: "Pune",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 5,
+      "product": "Appointment",
+      "purchased": "2023-11-10",
+      "expired": "2023-11-10 13:30",
+      "price": 60.00,
+      "transactionid": "APT98765",
+      "timeperiod": "1 hour"
     },
     {
-      id: 6,
-      name: "Classic Makeovers",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Juhu, Mumbai",
-      city: "Mumbai",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "id": 6,
+      "product": "Queue",
+      "purchased": "2023-11-12",
+      "expired": "2023-11-12 11:45",
+      "price": 20.00,
+      "transactionid": "QUE45678",
+      "timeperiod": "1 hour"
     },
     {
-      id: 7,
-      name: "Trendy Tresses",
-      logo: "https://images.pexels.com/photos/1128318/pexels-photo-1128318.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Anna Nagar, Chennai",
-      city: "Chennai",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 7,
+      "product": "Appointment",
+      "purchased": "2023-11-15",
+      "expired": "2023-11-15 15:00",
+      "price": 80.00,
+      "transactionid": "APT11223",
+      "timeperiod": "1 hour"
     },
     {
-      id: 8,
-      name: "Velvet Touch",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 18, Noida",
-      city: "Noida",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "id": 8,
+      "product": "Queue",
+      "purchased": "2023-11-18",
+      "expired": "2023-11-18 10:30",
+      "price": 12.00,
+      "transactionid": "QUE33445",
+      "timeperiod": "30 minutes"
     },
     {
-      id: 9,
-      name: "Golden Scissors",
-      logo: "https://images.pexels.com/photos/1070857/pexels-photo-1070857.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "South Extension, Delhi",
-      city: "Delhi",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 9,
+      "product": "Appointment",
+      "purchased": "2023-11-20",
+      "expired": "2023-11-20 14:00",
+      "price": 70.00,
+      "transactionid": "APT55667",
+      "timeperiod": "1 hour"
     },
     {
-      id: 10,
-      name: "Beauty Bliss",
-      logo: "https://images.pexels.com/photos/906051/pexels-photo-906051.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Banjara Hills, Hyderabad",
-      city: "Hyderabad",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "id": 10,
+      "product": "Queue",
+      "purchased": "2023-11-22",
+      "expired": "2023-11-22 12:15",
+      "price": 18.00,
+      "transactionid": "QUE77889",
+      "timeperiod": "45 minutes"
     },
     {
-      id: 11,
-      name: "Dazzle Salon",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Thane, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "id": 11,
+      "product": "Appointment",
+      "purchased": "2023-11-25",
+      "expired": "2023-11-25 16:30",
+      "price": 65.00,
+      "transactionid": "APT99001",
+      "timeperiod": "1 hour"
     },
     {
-      id: 12,
-      name: "Glossy Hair Hub",
-      logo: "https://images.pexels.com/photos/1128319/pexels-photo-1128319.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Gomti Nagar, Lucknow",
-      city: "Lucknow",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 12,
+      "product": "Queue",
+      "purchased": "2023-11-28",
+      "expired": "2023-11-28 09:45",
+      "price": 22.00,
+      "transactionid": "QUE22334",
+      "timeperiod": "1 hour"
     },
     {
-      id: 13,
-      name: "Fashion Fiesta",
-      logo: "https://images.pexels.com/photos/1579250/pexels-photo-1579250.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Karol Bagh, Delhi",
-      city: "Delhi",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "id": 13,
+      "product": "Appointment",
+      "purchased": "2023-11-30",
+      "expired": "2023-11-30 13:00",
+      "price": 85.00,
+      "transactionid": "APT44556",
+      "timeperiod": "1 hour"
     },
     {
-      id: 14,
-      name: "Glow & Shine",
-      logo: "https://images.pexels.com/photos/1126992/pexels-photo-1126992.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Indiranagar, Bangalore",
-      city: "Bangalore",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 14,
+      "product": "Queue",
+      "purchased": "2023-12-02",
+      "expired": "2023-12-02 11:15",
+      "price": 14.00,
+      "transactionid": "QUE66778",
+      "timeperiod": "30 minutes"
     },
     {
-      id: 15,
-      name: "Elite Makeovers",
-      logo: "https://images.pexels.com/photos/1579252/pexels-photo-1579252.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Powai, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 15,
+      "product": "Appointment",
+      "purchased": "2023-12-05",
+      "expired": "2023-12-05 15:30",
+      "price": 72.00,
+      "transactionid": "APT88990",
+      "timeperiod": "1 hour"
     },
     {
-      id: 16,
-      name: "Stylish Cuts",
-      logo: "https://images.pexels.com/photos/1128320/pexels-photo-1128320.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Salt Lake, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Active",
-      status: "Online",
+      "id": 16,
+      "product": "Queue",
+      "purchased": "2023-12-08",
+      "expired": "2023-12-08 10:00",
+      "price": 16.00,
+      "transactionid": "QUE10112",
+      "timeperiod": "45 minutes"
     },
     {
-      id: 17,
-      name: "Scissor Magic",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Gariahat, Kolkata",
-      city: "Kolkata",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "id": 17,
+      "product": "Appointment",
+      "purchased": "2023-12-11",
+      "expired": "2023-12-11 14:30",
+      "price": 78.00,
+      "transactionid": "APT13141",
+      "timeperiod": "1 hour"
     },
     {
-      id: 18,
-      name: "Snip & Style",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Koramangala, Bangalore",
-      city: "Bangalore",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 18,
+      "product": "Queue",
+      "purchased": "2023-12-14",
+      "expired": "2023-12-14 12:45",
+      "price": 24.00,
+      "transactionid": "QUE15161",
+      "timeperiod": "1 hour"
     },
     {
-      id: 19,
-      name: "Sharp Edge Salon",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "MG Road, Pune",
-      city: "Pune",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
+      "id": 19,
+      "product": "Appointment",
+      "purchased": "2023-12-17",
+      "expired": "2023-12-17 16:00",
+      "price": 68.00,
+      "transactionid": "APT17181",
+      "timeperiod": "1 hour"
     },
     {
-      id: 20,
-      name: "The Barber’s Den",
-      logo: "https://images.pexels.com/photos/1070857/pexels-photo-1070857.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Bandra, Mumbai",
-      city: "Mumbai",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 21,
-      name: "Crown & Comb",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "T Nagar, Chennai",
-      city: "Chennai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 22,
-      name: "Style Station",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Sector 50, Gurgaon",
-      city: "Gurgaon",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 23,
-      name: "The Grooming Hub",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Dadar, Mumbai",
-      city: "Mumbai",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 24,
-      name: "The Hair Affair",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "DLF Phase 2, Gurgaon",
-      city: "Gurgaon",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 25,
-      name: "Men’s Hair Lounge",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Whitefield, Bangalore",
-      city: "Bangalore",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 26,
-      name: "Shear Elegance",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Garia, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 27,
-      name: "Majestic Cuts",
-      logo: "https://images.pexels.com/photos/906048/pexels-photo-906048.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Hitech City, Hyderabad",
-      city: "Hyderabad",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 28,
-      name: "Gents Corner",
-      logo: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Lajpat Nagar, Delhi",
-      city: "Delhi",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 29,
-      name: "Royal Shaves",
-      logo: "https://images.pexels.com/photos/1579251/pexels-photo-1579251.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Jubilee Hills, Hyderabad",
-      city: "Hyderabad",
-      type: "Hair Dresser",
-      subscription: "Active",
-      status: "Online",
-    },
-    {
-      id: 30,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 31,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
-    },
-    {
-      id: 32,
-      name: "Gentleman’s Choice",
-      logo: "https://images.pexels.com/photos/1070861/pexels-photo-1070861.jpeg?auto=compress&cs=tinysrgb&w=600",
-      address: "Ballygunge, Kolkata",
-      city: "Kolkata",
-      type: "Barber Shop",
-      subscription: "Inactive",
-      status: "Offline",
+      "id": 20,
+      "product": "Queue",
+      "purchased": "2023-12-20",
+      "expired": "2023-12-20 09:30",
+      "price": 26.00,
+      "transactionid": "QUE19201",
+      "timeperiod": "30 minutes"
     }
   ])
 
@@ -537,30 +397,6 @@ const PaymentStatus = () => {
     setPage(value);
   }
 
-  const sortFunction = (columnKey) => {
-    setSortOrder((prev) => (sortColumn === columnKey && prev === 'asc' ? 'desc' : 'asc'));
-    setSortColumn(columnKey);
-  };
-
-  useEffect(() => {
-    if (!sortColumn) return;
-
-    const sortedList = [...salonlistData].sort((a, b) => {
-      const valueA = a[sortColumn];
-      const valueB = b[sortColumn];
-
-      if (typeof valueA === "string" && typeof valueB === "string") {
-        return sortOrder === "asc"
-          ? valueA.localeCompare(valueB)
-          : valueB.localeCompare(valueA);
-      } else {
-        return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
-      }
-    });
-
-    setSalonlistData(sortedList);
-    // setPage(1); 
-  }, [sortColumn, sortOrder]);
 
   const [selectOpen, setSelectOpen] = useState(false)
 
@@ -583,19 +419,8 @@ const PaymentStatus = () => {
               headRows.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <button
-                      className={`${item.key === "name" ? style.name_head_btn : ""}`}
-                      onClick={() => sortFunction(item.key)}>
-                      {item.key === "name" ? (
-                        <>
-                          <span></span>
-                          {item.heading}
-                        </>
-                      ) : (
-                        item.heading
-                      )}
-
-                      <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
+                    <button>
+                      {item.heading}
                     </button>
                   </div>
                 )
@@ -607,54 +432,14 @@ const PaymentStatus = () => {
           {
             salonPaginationData.map((item, index) => {
               return (
-                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                   <div><p>{item.id}</p></div>
-                  <div>
-                    <div>
-                      <div><img src={item.logo} alt="" /></div>
-                      <p>{item.name}</p>
-                    </div>
-                  </div>
-                  <div><p>{item.address}</p></div>
-                  <div><p>{item.city}</p></div>
-                  <div><p>{item.type}</p></div>
-                  <div><p>{item.subscription}</p></div>
-                  <div><button style={{
-                    backgroundColor: item.status === "Online" ? "#052E16" : "#450a0a"
-                  }}>{item.status === "Online" ? "Online" : "Offline"}</button></div>
-                  <div>
-                    <div
-                      style={{
-                        position: settingsIndex === index ? "relative" : "initial",
-                        backgroundColor: settingsIndex === index ? "var(--btn-primary-hover)" : null,
-                        borderRadius: settingsIndex === index ? "var(--border-radius-primary)" : null,
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSettingsIndex(index);
-                      }}>
-                      <SalonThreeDotsIcon />
-
-                      {
-                        settingsIndex === index && (
-                          <ClickAwayListener onClickAway={() => setSettingsIndex(null)}>
-                            <div
-                              style={{
-                                position: "absolute",
-                                zIndex: settingsIndex === index ? 9999 : -100,
-                              }}
-                              className={`${style.settings_container}`}>
-                              <p><Link to="#"
-                              onClick={() => alert("")}
-                              >Appointment settings</Link></p>
-                              <p><Link to="/admin-salon/editsalon/:salonid">Edit Salon</Link></p>
-                            </div>
-                          </ClickAwayListener>)
-                      }
-
-                    </div>
-
-                  </div>
+                  <div><p>{item.product}</p></div>
+                  <div><p>{item.purchased}</p></div>
+                  <div><p>{item.expired}</p></div>
+                  <div><p>$ {item.price}</p></div>
+                  <div><p>{item.transactionid}</p></div>
+                  <div><p>{item.timeperiod}</p></div>
 
                 </div>
               )

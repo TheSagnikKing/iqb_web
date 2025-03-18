@@ -1,6 +1,6 @@
 // This icons are used in latest design
 
-import { BsInstagram, BsSunFill } from "react-icons/bs";
+import { BsGraphUp, BsInstagram, BsSunFill } from "react-icons/bs";
 import { FaFacebookF, FaRegCalendarAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { FiPieChart } from "react-icons/fi";
@@ -14,6 +14,7 @@ import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlineShop } from "react-icons/ai";
+import { GrPowerReset } from "react-icons/gr";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors 
@@ -51,3 +52,5 @@ export const ContactTel = MdOutlinePhoneInTalk
 export const CameraIcon = MdOutlinePhotoCamera 
 export const ChangeSalonIcon = AiOutlineShop 
 export const SearchIcon = IoSearch
+export const ReportIcon = BsGraphUp 
+export const ResetIcon = GrPowerReset  

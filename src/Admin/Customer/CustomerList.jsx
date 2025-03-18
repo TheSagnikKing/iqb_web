@@ -710,7 +710,7 @@ const CustomerList = () => {
           {
             salonPaginationData.map((item, index) => {
               return (
-                <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                   <div>
                     <button><CheckIcon /></button>
                   </div>

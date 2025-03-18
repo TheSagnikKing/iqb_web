@@ -1200,7 +1200,7 @@ const SalonList = () => {
           {
             salonPaginationData.map((item, index) => {
               return (
-                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonlistData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                   <div><p>{item.id}</p></div>
                   <div>
                     <div>
