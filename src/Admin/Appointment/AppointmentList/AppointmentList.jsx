@@ -47,18 +47,12 @@ const AppointmentList = () => {
     const navigate = useNavigate()
 
     return (
-        <div className={`${style.appointment_wrapper} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.section} ${darkmodeOn && style.dark}`}>
             <div>
-                <p>Appointment List</p>
+                <h2>Appointment List</h2>
 
                 <p>{location.state}</p>
 
-                {/* <input
-                    type="date"
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    style={{
-                        colorScheme: darkmodeOn ? "dark" : "light",
-                    }} /> */}
             </div>
 
             <div className={`${style.appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
@@ -68,20 +62,20 @@ const AppointmentList = () => {
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                         </div>
                     ) : appointmentList?.response?.length > 0 ? (
@@ -102,7 +96,7 @@ const AppointmentList = () => {
                                                 key={cus._id}
                                             >
                                                 <div>
-                                                    <img src={cus.customerProfile} alt="" />
+                                                    <img src={cus.customerProfile?.[0]?.url} alt="" />
                                                 </div>
                                                 <div>
                                                     <p>{cus.customerName}</p>
@@ -110,7 +104,7 @@ const AppointmentList = () => {
                                                         Time: {cus.startTime} - {cus.endTime}
                                                     </p>
                                                     <p>
-                                                        EWT -{' '}
+                                                        Ewt -{' '}
                                                         {cus.services.reduce(
                                                             (total, service) => total + service.barberServiceEWT,
                                                             0
@@ -118,7 +112,7 @@ const AppointmentList = () => {
                                                         mins
                                                     </p>
                                                 </div>
-                                                <button className={style.edit_app_btn}
+                                                {/* <button className={style.edit_app_btn}
                                                     onClick={() => {
                                                         navigate("/admin-book-editappointments", {
                                                             state: {
@@ -128,7 +122,7 @@ const AppointmentList = () => {
                                                         });
                                                     }}
 
-                                                >Edit</button>
+                                                >Edit</button> */}
                                             </div>
                                         ))}
                                     </main>

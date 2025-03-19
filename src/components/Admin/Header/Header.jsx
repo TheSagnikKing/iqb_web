@@ -647,6 +647,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
             <div
               style={{
                 opacity: profileOpen ? 1 : 0,
+                transition: "opacity 0.3s ease-in",
                 zIndex: profileOpen ? 9999 : 0,
                 visibility: profileOpen ? "visible" : "hidden"
               }}
@@ -661,7 +662,13 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
                 </div>
               </div>
 
-              <Link to="/admin-dashboard/editprofile" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link 
+              onClick={(e) => {
+                e.preventDefault()
+                navigate("/admin-dashboard/editprofile")
+                setProfileOpen(false)
+              }} 
+              style={{ textDecoration: "none", color: "inherit" }}>
                 <div
                   className={`${style.profile_container_item}`}
                   style={{

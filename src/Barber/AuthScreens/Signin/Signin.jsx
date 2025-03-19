@@ -137,15 +137,13 @@ const Signin = () => {
   });
 
   return (
-    <main className={`${style.barber_signin_container} ${darkmodeOn && style.dark}`}>
-      <div className={style.barber_signin_left}>
-        <img src="./signin_un.png" alt="barber_signin" />
-      </div>
+    <main className={`${style.section} ${darkmodeOn && style.dark}`}>
+      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
 
       <div className={`${style.barber_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Sign In to your Barber Account</p>
-          <p>Welcome back Barber! please enter your details</p>
+        <h2>Welcome back, Barber</h2>
+        <p>Please signin to your account</p>
 
           <div>
             <input

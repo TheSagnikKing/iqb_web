@@ -1717,7 +1717,7 @@ const EditProfile = () => {
 
                         {
                             mobileValue ? (
-                                <div>
+                                <div className={style.calender_container}>
                                     <p>Date of Birth</p>
                                     <input
                                         type="date"
