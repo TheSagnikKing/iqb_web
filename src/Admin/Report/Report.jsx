@@ -565,13 +565,13 @@ import style from './Report.module.css'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ClickAwayListener } from '@mui/material'
+import { Box, ClickAwayListener, Modal, Typography } from '@mui/material'
 import api from '../../Redux/api/Api'
 import Calendar from "react-multi-date-picker";
 import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction'
 import Skeleton from 'react-loading-skeleton'
 import toast from 'react-hot-toast'
-import { CheckIcon, ResetIcon, SearchIcon } from '../../newicons';
+import { CheckIcon, CloseIcon, FilterIcon, ResetIcon, SearchIcon } from '../../newicons';
 
 const Report = () => {
 
@@ -1036,54 +1036,17 @@ const Report = () => {
     }
   ])
 
- 
+
   const [selectedDates, setSelectedDates] = useState([])
+
+
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
 
   return (
     <div className={style.section}>
       <div>
         <h2>Reports</h2>
         <div>
-          {/* <input
-            type='text'
-            placeholder='Select Calender'
-            value={""}
-            onChange={(e) => { }}
-          /> */}
-
-          {/* <div onClick={() => setOpenRangeCalender(prev => !prev)}>
-            <p>
-              {
-                selectedDates.map((date, index) => (
-                  <React.Fragment key={index}>
-                    {index !== 0 && " - "}
-                    {date.format("YYYY-MM-DD")}
-                  </React.Fragment>
-                ))
-              }
-            </p>
-
-
-            <main className={`${openRangeCalender ? style.calenderActive : style.calenderInActive}`} onClick={(e) => e.stopPropagation()} ref={calenderRef}>
-              <div>
-                <Calendar
-                  range
-                  numberOfMonths={2}
-                  value={selectedDates.map(d => d.format('YYYY-MM-DD'))}
-                // onChange={handleDateChange}
-                />
-              </div>
-
-            </main>
-          </div> */}
-
-          {/* <Calendar
-  value={values}
-  onChange={setValues}
-  range
-  numberOfMonths={3}
-  showOtherDays
-/>  */}
 
           <Calendar
             // numberOfMonths={isMobile ? 1 : 2}
@@ -1096,12 +1059,12 @@ const Report = () => {
             calendarPosition={"bottom-right"}
             className={true ? "dark-theme" : "light-theme"}
             style={{
-              background: true ? "#222" : "#fff"
+              // background: true ? "#222" : "#fff"
             }}
           />
 
           <button><ResetIcon /></button>
-          <button><SearchIcon /></button>
+          <button>View Report</button>
         </div>
       </div>
 
@@ -1218,8 +1181,173 @@ const Report = () => {
           </div>
         </div>
       </div>
+
+      <div className={`${style.mobile_report_header}`}>
+        <div>
+          <h2>Reports</h2>
+          <button onClick={() => setMobileFilterOpen(true)}><FilterIcon /></button>
+        </div>
+      </div>
+
+
+      <div className={`${style.mobile_report_body}`}>
+        <div className={`${style.report_body_content}`}>
+          <ResponsiveContainer width="200%" height="85%">
+            <BarChart
+              data={appointReportData}
+              margin={{
+                left: -10,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip cursor={{ fill: "var(--input-bg-color)" }} />
+              <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
+            </BarChart>
+          </ResponsiveContainer>
+
+          <div className={`${style.report_footer}`}>
+            <p>Report Type - Queue Served (Daily)</p>
+            <p>Select - Barber</p>
+          </div>
+        </div>
+      </div>
+
+
+      <Modal
+        open={mobileFilterOpen}
+        onClose={() => setMobileFilterOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          className={style.modalbox}>
+          <div>
+            <p>Apply Filter</p>
+            <button onClick={() => setMobileFilterOpen(false)}><CloseIcon /></button>
+          </div>
+
+          <div>
+            <p>Report Type</p>
+            <div>
+              {
+                reportType.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button
+                        style={{
+                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                        }}
+                      >{item.value ? <CheckIcon /> : ""}</button>
+                      <p>{item.type}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
+
+            <p>Queue Type</p>
+            <div>
+              {
+                QueueType.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button
+                        style={{
+                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                        }}
+                      >{item.value ? <CheckIcon /> : ""}</button>
+                      <p>{item.type}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
+
+            <p>Appointment Type</p>
+            <div>
+              {
+                AppointmentType.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button
+                        style={{
+                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                        }}
+                      >{item.value ? <CheckIcon /> : ""}</button>
+                      <p>{item.type}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
+
+            <p>Select </p>
+            <div>
+              {
+                SelectType.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button
+                        style={{
+                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                        }}
+                      >{item.value ? <CheckIcon /> : ""}</button>
+                      <p>{item.type}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
+
+            {
+              SelectType[1].value ? (<div className={`${style.barberlist_container}`}>
+                {
+                  barberlistData.map((item) => {
+                    return (<div
+                      className={`${style.barber_item}`}
+                      key={item.barberId}
+                    >
+                      <img src={item.profile?.[0].url} alt="" />
+
+                      <p>{item.name}</p>
+                    </div>)
+                  })
+                }
+              </div>) : (null)
+            }
+
+            <div>
+              <Calendar
+                // numberOfMonths={isMobile ? 1 : 2}
+                numberOfMonths={1}
+                value={selectedDates}
+                range
+                placeholder='yyyy-mm-dd - yyyy-mm-dd'
+                // onChange={handleDateChange}
+                dateSeparator={" - "}
+                calendarPosition={"bottom-right"}
+                className={true ? "dark-theme" : "light-theme"}
+                style={{
+                  // background: true ? "#222" : "#fff"
+                }}
+              />
+
+              <button><ResetIcon /></button>
+
+            </div>
+
+            <button>View Report</button>
+          </div>
+
+        </Box>
+
+      </Modal>
+
     </div>
   )
 }
 
 export default Report
+
