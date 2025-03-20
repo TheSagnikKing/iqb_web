@@ -232,11 +232,11 @@
                         border: none;
                         cursor: pointer;
                         transition: var(--btn-transition);
-                        border-radius: var(--border-radius-primary);
-                        -webkit-border-radius: var(--border-radius-primary);
-                        -moz-border-radius: var(--border-radius-primary);
-                        -ms-border-radius: var(--border-radius-primary);
-                        -o-border-radius: var(--border-radius-primary);
+                        border-radius: 2rem;
+                        -webkit-border-radius: 2rem;
+                        -moz-border-radius: 2rem;
+                        -ms-border-radius: 2rem;
+                        -o-border-radius: 2rem;
                         -webkit-transition: var(--btn-transition);
                         -moz-transition: var(--btn-transition);
                         -ms-transition: var(--btn-transition);
@@ -263,11 +263,6 @@
                         border: none;
                         cursor: pointer;
                         transition: var(--btn-transition);
-                        border-radius: var(--border-radius-primary);
-                        -webkit-border-radius: var(--border-radius-primary);
-                        -moz-border-radius: var(--border-radius-primary);
-                        -ms-border-radius: var(--border-radius-primary);
-                        -o-border-radius: var(--border-radius-primary);
                         -webkit-transition: var(--btn-transition);
                         -moz-transition: var(--btn-transition);
                         -ms-transition: var(--btn-transition);
@@ -276,8 +271,13 @@
                         font-size: 1.4rem;
                         color: var(--text-primary);
                         background-color: #0285c755;
+                        border-radius: 2rem;
+                        -webkit-border-radius: 2rem;
+                        -moz-border-radius: 2rem;
+                        -ms-border-radius: 2rem;
+                        -o-border-radius: 2rem;
 
-                        &:hover {
+                        &:hover{
                             background-color: #0285c766;
                         }
                     }

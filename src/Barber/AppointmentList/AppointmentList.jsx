@@ -138,10 +138,11 @@ const AppointmentList = () => {
 
 
     return (
-        <div className={`${style.appointment_wrapper} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.section} ${darkmodeOn && style.dark}`}>
             <div>
-                <p>Appointment List</p>
+                <h2>Appointment List</h2>
             </div>
+
             <div className={`${style.appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
                 {
                     appointmentLoading ? (
@@ -149,20 +150,20 @@ const AppointmentList = () => {
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                             <Skeleton
                                 count={1}
                                 style={{ width: "30rem", height: "100%" }}
-                                baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
 
                         </div>
                     ) : appointmentResponse?.length > 0 ? (
@@ -188,7 +189,7 @@ const AppointmentList = () => {
                                                         key={index}
                                                     >
                                                         <div>
-                                                            <img src={s?.customerProfile} alt="" />
+                                                            <img src={s?.customerProfile?.[0]?.url} alt="" />
                                                         </div>
                                                         <div>
                                                             <p>{s.customerName.length > 10 ? `${s.customerName.slice(0, 10)}...` : s.customerName}</p>
@@ -204,7 +205,7 @@ const AppointmentList = () => {
                                                                 mins
                                                             </p>
                                                         </div>
-                                                        <button className={style.edit_app_btn}
+                                                        <button
                                                             onClick={() => {
                                                                 setModalData(s)
                                                                 setOpenModal(true)
@@ -266,6 +267,7 @@ const AppointmentList = () => {
                             <input
                                 type="text"
                                 value={subject}
+                                placeholder='Enter your subject'
                                 onChange={(e) => setSubject(e.target.value)}
                             />
                         </div>
@@ -274,6 +276,7 @@ const AppointmentList = () => {
                             <p>Body</p>
                             <textarea name="" id=""
                                 value={body}
+                                placeholder='Reason for cancelling appointment'
                                 onChange={(e) => setBody(e.target.value)}
                             ></textarea>
                         </div>
@@ -310,7 +313,7 @@ const AppointmentList = () => {
                         <p style={{
                             fontWeight: 600,
                             marginBottom: "2rem"
-                        }}>All appointments scheduled for <span style={{ textDecoration: "underline" }}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
+                        }}>All appointments scheduled for <span style={{ textDecoration: "underline", color:"var(--bg-secondary)" }}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
 
                         <p>Reason for cancelling appointment</p>
                         <div>
@@ -318,6 +321,7 @@ const AppointmentList = () => {
                             <input
                                 type="text"
                                 value={subject}
+                                placeholder='Enter your subject'
                                 onChange={(e) => setSubject(e.target.value)}
                             />
                         </div>
@@ -326,6 +330,7 @@ const AppointmentList = () => {
                             <p>Body</p>
                             <textarea name="" id=""
                                 value={body}
+                                placeholder='Reason for cancelling appointment'
                                 onChange={(e) => setBody(e.target.value)}
                             ></textarea>
                         </div>

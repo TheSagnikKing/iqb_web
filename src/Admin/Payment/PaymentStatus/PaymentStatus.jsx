@@ -407,7 +407,7 @@ const PaymentStatus = () => {
     <section className={`${style.section}`}>
       <div>
         <h2>Payment History</h2>
-        <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button>
+        {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button> */}
       </div>
 
       <div className={`${style.list_container}`}>

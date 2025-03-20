@@ -34,6 +34,11 @@
     align-items: center;
     gap: 1.2rem;
     overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 0.6rem; 
+        height: 0.6rem; 
+    }
 }
 
 .appointment_container {

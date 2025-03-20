@@ -127,13 +127,6 @@
                     }
                 }
 
-                &>div:nth-last-child(1),
-                &>div:nth-last-child(2){
-                    &>button{
-                        display: none;
-                    }
-                }
-
             }
 
             &>div {

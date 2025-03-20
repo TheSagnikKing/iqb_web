@@ -38,8 +38,8 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import Header from '../Header/Header.jsx'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer.js'
-import { Modal } from '@mui/material'
-import { AdvertisementIcon, AppointmentIcon, BarberIcon, ChangeSalonIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, SalonIcon } from '../../../newicons.js';
+import { ClickAwayListener, Modal } from '@mui/material'
+import { AdvertisementIcon, AppointmentIcon, BarberIcon, ChangeSalonIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, ReportIcon, SalonIcon } from '../../../newicons.js';
 import Switch from "react-switch";
 
 const MobileSidebar = () => {
@@ -109,6 +109,12 @@ const MobileSidebar = () => {
           icon: <AppointmentIcon />,
           url: "/admin-appointments",
         },
+        {
+          id: 4,
+          name: "Reports",
+          icon: <ReportIcon />,
+          url: "/admin-reports",
+        },
       ]
     },
     {
@@ -123,7 +129,8 @@ const MobileSidebar = () => {
         {
           id: 2,
           name: "Payment history",
-          icon: <MdPaymentIcon />
+          icon: <MdPaymentIcon />,
+          url: "/admin-paymentstatus"
         },
       ]
     },
@@ -148,112 +155,111 @@ const MobileSidebar = () => {
       <Header mobileSidebar={mobileSidebar} setMobileSidebar={setMobileSidebar} />
       <Outlet />
 
-      {/* {
-        mobileSidebar ? (<aside>
-          <div style={{
-            width: mobileSidebar ? "24rem" : "0rem",
-            transition: "width 0.3s ease-in-out"
-          }}>
-            <button onClick={() => setMobileSidebar((prev) => !prev)}>close</button>
-            <h1>Sidebar</h1>
-          </div>
-        </aside>) : null
-      } */}
-
-      <Modal
-        open={mobileSidebar}
-        onClose={() => setMobileSidebar(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <aside
+        style={{
+          transform: mobileSidebar ? "translateX(0)" : "translateX(-100vw)",
+          transition: mobileSidebar ? "transform 0.3s ease" : "transform 0s",
+        }}
       >
-        <aside>
-          <header>
-            <div>
-              <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/beauty-salon-logo-icon%2Cspa-logo%2Cgold-beauty-design-template-05b9bdfd3e13d2230a2846189d9660d4_screen.jpg?ts=1698222841" alt="" />
-            </div>
-            {
-              mobileSidebar ? (<p>Modern Unisex Salon</p>) : null
-            }
-          </header>
+        {mobileSidebar ? (
+          <ClickAwayListener onClickAway={() => setMobileSidebar(false)}>
+            <div className={`${style.aside_container}`}>
+              <header>
+                <div>
+                  <img
+                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/beauty-salon-logo-icon%2Cspa-logo%2Cgold-beauty-design-template-05b9bdfd3e13d2230a2846189d9660d4_screen.jpg?ts=1698222841"
+                    alt=""
+                  />
+                </div>
+                {mobileSidebar ? <p>Modern Unisex Salon</p> : null}
+              </header>
 
-          <nav>
-            <ul>
-              {sideMenuData.map((section, pIndex) => (
-                <li key={section.heading}>
-                  {mobileSidebar ? <p>{section.heading}</p> : null}
-                  <ul>
-                    {section.menuItems.map((item, cIndex) => (
-                      <li
-                        key={item.id}
-                        className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
+              <nav>
+                <ul>
+                  {sideMenuData.map((section) => (
+                    <li key={section.heading}>
+                      {mobileSidebar ? <p>{section.heading}</p> : null}
+                      <ul>
+                        {section.menuItems.map((item) => (
+                          <li
+                            key={item.id}
+                            className={`${location.pathname.includes(item?.url)
+                                ? style.activeMenu
+                                : ""
+                              }`}
+                          >
+                            <Link
+                              to={item?.url}
+                              onClick={() => {
+                                setMobileSidebar(false);
+                              }}
+                            >
+                              <span
+                                style={{
+                                  marginInline: mobileSidebar ? "0rem" : "auto",
+                                }}
+                              >
+                                {item.icon}
+                              </span>
+                              {mobileSidebar ? item.name : null}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className={`${style.online_container}`}>
+                  <p>{online ? "Online" : "Offline"}</p>
+                  <Switch
+                    width={45}
+                    height={18}
+                    handleDiameter={14}
+                    offColor="#F44336"
+                    onColor="#00A36C"
+                    uncheckedIcon={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "100%",
+                          fontSize: "1rem",
+                          color: "#F4F4F5",
+                          paddingRight: "1px",
+                        }}
                       >
-                        <Link
-                          to={item?.url}
-                          onClick={() => {
-                            setMobileSidebar(false)
-                          }}
-                        >
-                          <span
-                            style={{
-                              marginInline: mobileSidebar ? "0rem" : "auto"
-                            }}
-                          >{item.icon}</span>
-                          {
-                            mobileSidebar ? item.name : null
-                          }
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+                        OFF
+                      </div>
+                    }
+                    checkedIcon={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "100%",
+                          fontSize: "1rem",
+                          color: "#F4F4F5",
+                        }}
+                      >
+                        ON
+                      </div>
+                    }
+                    onChange={() => setOnline((prev) => !prev)}
+                    checked={online}
+                  />
+                </div>
 
-            <div className={`${style.online_container}`}>
-              <p>{online ? "Online" : "Offline"}</p>
-              <Switch
-                width={45} 
-                height={18}
-                handleDiameter={14} 
-                offColor="#F44336"
-                onColor="#00A36C"
-                uncheckedIcon={
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "100%",
-                      fontSize: "1rem",
-                      color: "#F4F4F5",
-                      paddingRight: "1px"
-                    }}
-                  >
-                    OFF
-                  </div>
-                }
-                checkedIcon={
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "100%",
-                      fontSize: "1rem",
-                      color: "#F4F4F5",
-                    }}
-                  >
-                    ON
-                  </div>
-                }
-                onChange={() => setOnline((prev) => !prev)}
-                checked={online}
-              />
+              </nav>
             </div>
-          </nav>
+          </ClickAwayListener>
+        ) : null}
+      </aside>
 
-        </aside>
-      </Modal>
+
+
 
     </section>
   )

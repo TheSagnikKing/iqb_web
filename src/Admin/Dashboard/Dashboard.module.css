@@ -1032,6 +1032,7 @@
                         align-items: center;
                         justify-content: space-between;
                         width: 98%;
+                        min-width: 30rem;
 
                         &>div:nth-child(1) {
                             display: flex;

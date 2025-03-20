@@ -351,21 +351,6 @@
                 border: none;
             }
 
-            /* &>button:nth-child(2) {
-                color: var(--text-primary);
-                border: none;
-                border-radius: var(--border-radius-primary);
-                -webkit-border-radius: var(--border-radius-primary);
-                -moz-border-radius: var(--border-radius-primary);
-                -ms-border-radius: var(--border-radius-primary);
-                -o-border-radius: var(--border-radius-primary);
-                font-size: var(--font-primary);
-                cursor: pointer;
-                outline: none;
-                padding: 0.5rem 0.8rem;
-                letter-spacing: 0.5px;
-                background-color: var(--bg-secondary);
-            } */
         }
 
         &>div:nth-child(2) {

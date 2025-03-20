@@ -185,7 +185,7 @@ const SignupEditProfile = () => {
     );
 
     if (phoneInput) {
-      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+     phoneInput.style.color = !darkmodeOn ? 'var(--light-color-4)' : 'var(--text-primary)';
     }
   }, [darkmodeOn]);
 
@@ -237,17 +237,13 @@ const SignupEditProfile = () => {
 
 
   return (
-    <main className={`${style.barber_signup_edit_container} ${darkmodeOn && style.dark}`}>
-      <div>
-        <div>
-          <img src="./signin_un.png" alt="barber_signup" />
-        </div>
-      </div>
+    <main className={`${style.section} ${darkmodeOn && style.dark}`}>
+       <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
 
       <div>
         <div>
           <div>
-            <p className={style.signup_head}>Add Your Account Details</p>
+          <h2>Account Details</h2>
             {
               barberSkipProfileLoading ?
                 <button style={{
@@ -261,7 +257,7 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            <p>Name</p>
+            {/* <p>Name</p> */}
             <input
             placeholder='Enter name'
               type="text"
@@ -279,7 +275,7 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            <p>Gender</p>
+            {/* <p>Gender</p> */}
             <input
             placeholder='Select gender'
               type="text"
@@ -310,7 +306,7 @@ const SignupEditProfile = () => {
 
           {
             mobileValue ? (<div>
-              <p>Date of Birth</p>
+              {/* <p>Date of Birth</p> */}
               <input
                 type="date"
                 value={dateOfBirth}
@@ -328,7 +324,7 @@ const SignupEditProfile = () => {
               <p className={style.error_message}>{dateOfBirthError}</p>
             </div>
             ) : (<div className={style.calender_container}>
-              <p>Date of Birth</p>
+              {/* <p>Date of Birth</p> */}
 
               <input
                 type='text'
@@ -358,7 +354,7 @@ const SignupEditProfile = () => {
 
 
           <div>
-            <p>Mobile Number</p>
+            {/* <p>Mobile Number</p> */}
             <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`} style={{ border: invalidNumberError && "0.1rem solid red" }}>
               <div style={{
                 background: "var(--bg-color3)",

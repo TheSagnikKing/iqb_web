@@ -1212,7 +1212,16 @@ const Report = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip cursor={{ fill: "var(--input-bg-color)" }} />
+              <Tooltip
+                cursor={{ fill: "var(--input-bg-color)" }}
+                contentStyle={{
+                  backgroundColor: "var(--bg-primary)",
+                  border: "0.1rem solid var(--border-secondary)",
+                }}
+                wrapperStyle={{
+                  outline: "none"
+                }}
+              />
               <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
             </BarChart>
           </ResponsiveContainer>

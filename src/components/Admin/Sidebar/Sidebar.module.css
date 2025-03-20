@@ -266,13 +266,13 @@
 
 .main_container {
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
   display: flex;
 }
 
 aside {
   background-color: var(--bg-primary);
-  height: 100svh;
+  height: 100vh;
   transition: width 0.3s ease-in-out;
   -webkit-transition: width 0.3s ease-in-out;
   -moz-transition: width 0.3s ease-in-out;
@@ -376,7 +376,6 @@ aside {
               font-size: 1.4rem;
               color: var(--text-primary);
               text-decoration: none;
-              user-select: none;
 
               &>span {
                 display: flex;
@@ -402,9 +401,3 @@ section {
   overflow: auto;
 }
 
-
-@media screen and (min-width:1141px) and (max-width: 1439px) {
-  section{
-    width: 100vw;
-  }
-}

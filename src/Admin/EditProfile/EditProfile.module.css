@@ -377,7 +377,6 @@
                         height: 3.5rem;
                         width: 3.5rem;
                         color: var(--text-primary);
-                        user-select: none;
                     }
                 }
 
@@ -430,7 +429,6 @@
                         outline: none;
                         color: var(--text-primary);
                         cursor: pointer;
-                        user-select: none;
                     }
 
                     &>div {

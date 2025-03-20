@@ -1,14 +1,24 @@
 @media screen and (min-width: 0px) and (max-width: 1140px) {
   .mobile_container {
     width: 100vw;
-    height: 100svh;
+    height: 100vh;
     background-color: var(--bg-primary);
     position: relative;
   }
 
   aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #27272A80 !important;
+    z-index: 9999;
+  }
+
+  .aside_container {
     width: min(24rem, 60vw);
-    height: 100svh;
+    height: inherit;
     background-color: var(--bg-primary);
     display: flex;
     flex-direction: column;
@@ -121,14 +131,14 @@
       }
 
 
-      .online_container{
+      .online_container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: 3rem;
         padding-inline: 1.5rem;
 
-        &>p:nth-child(1){
+        &>p:nth-child(1) {
           font-weight: 1.4rem;
           font-family: "AirbnbCereal_Medium";
           color: var(--text-primary);

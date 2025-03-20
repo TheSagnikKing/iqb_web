@@ -199,7 +199,8 @@ const App = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
+                // background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
+                background: "var(--bg-primary)"
               }}><Loader /></div>}>
               <Routes>
 

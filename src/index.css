@@ -325,10 +325,6 @@ body {
   }
 }
 
-button {
-  user-select: none;
-  /* Prevents text selection */
-}
 
 .route_error_container_content>div:nth-child(2)>img {
   width: 100%;
@@ -389,7 +385,7 @@ button {
 }
 
 *:hover::-webkit-scrollbar-thumb:hover {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
 }
 
 *:hover::-webkit-scrollbar-corner {

@@ -405,7 +405,6 @@
                                     }
 
                                     &>p {
-                                        /* background-color: red; */
                                         font-size: 1.4rem;
                                         color: var(--text-secondary);
                                         line-height: initial;

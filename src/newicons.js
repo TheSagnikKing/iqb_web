@@ -15,6 +15,7 @@ import { IoMdCheckmark } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlineShop } from "react-icons/ai";
 import { GrPowerReset } from "react-icons/gr";
+import { CiShop } from "react-icons/ci";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors 
@@ -55,3 +56,4 @@ export const SearchIcon = IoSearch
 export const ReportIcon = BsGraphUp 
 export const ResetIcon = GrPowerReset  
 export const FilterIcon = LuFilter 
+export const ConnectSalonIcon = CiShop 

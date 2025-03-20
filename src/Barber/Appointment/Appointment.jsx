@@ -197,23 +197,23 @@ const Appointment = () => {
     };
 
     return (
-        <div className={`${style.barber_appointment_wrapper} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.section}`}>
             <div>
-                <p>Appointment</p>
+                <h2>Appointment</h2>
             </div>
 
             <div className={`${style.barber_appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
                 <div className={style.button_group}>
-                    <p
+                    <button
                         onClick={() => {
                             setBarberOffdates(false)
                             setAppointmentDates(true)
-                        }}>Appointment Date</p>
-                    <p
+                        }}>Appointment Date</button>
+                    <button
                         onClick={() => {
                             setBarberOffdates(true)
                             setAppointmentDates(false)
-                        }}>Barber Off Days</p>
+                        }}>Barber Off Days</button>
                 </div>
                 {
                     appointmentdates && <div className={style.value_body}>
