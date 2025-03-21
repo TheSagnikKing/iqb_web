@@ -819,6 +819,38 @@ const SalonAdv = () => {
       <div>
         <h2>Advertisements <span>(Drag & Drop)</span></h2>
         {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button> */}
+
+        {
+          adminProfile?.salonId !== 0 && (<div>
+            <div>
+              <button
+                onClick={() => handleAdvImageButtonClick()}
+              >
+                <FaFileIcon />
+                Choose Files
+
+                <input
+                  type="file"
+                  ref={advImagefileInputRef}
+                  style={{ display: 'none' }}
+                  multiple
+                  onChange={handleAdvImageFileInputChange}
+                  disabled={uploadLoader ? true : false}
+                />
+              </button>
+              <p>
+                {uploadAdvImages?.length}{" "}
+                Files</p>
+            </div>
+            {
+              uploadLoader ? <button><ButtonLoader color="#fff" /></button> :
+                <button onClick={uploadAdvHandler} disabled={uploadLoader ? true : false}>
+                  Upload
+                  <Uploadicon />
+                </button>
+            }
+          </div>)
+        }
       </div>
 
       <div className={`${style.list_container}`}>

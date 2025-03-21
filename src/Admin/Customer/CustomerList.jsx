@@ -14,240 +14,240 @@
 
 // const CustomerList = () => {
 
-//   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  // const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
-//   const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
-//   const dispatch = useDispatch();
-//   const CustomerListControllerRef = useRef(new AbortController());
+  // const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
+  // const dispatch = useDispatch();
+  // const CustomerListControllerRef = useRef(new AbortController());
 
-//   useEffect(() => {
-//     const controller = new AbortController();
-//     CustomerListControllerRef.current = controller;
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   CustomerListControllerRef.current = controller;
 
-//     dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
+  //   dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
 
-//     return () => {
-//       if (CustomerListControllerRef.current) {
-//         CustomerListControllerRef.current.abort();
-//       }
-//     };
-//   }, [dispatch]);
+  //   return () => {
+  //     if (CustomerListControllerRef.current) {
+  //       CustomerListControllerRef.current.abort();
+  //     }
+  //   };
+  // }, [dispatch]);
 
-//   const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList);
+  // const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList);
 
-//   const {
-//     loading: adminGetAllCustomerListLoading,
-//     resolve: adminGetAllCustomerListResolve,
-//     getAllCustomers: AllCustomerList,
-//     currentPage,
-//     totalPages,
-//   } = adminGetAllCustomerList;
+  // const {
+  //   loading: adminGetAllCustomerListLoading,
+  //   resolve: adminGetAllCustomerListResolve,
+  //   getAllCustomers: AllCustomerList,
+  //   currentPage,
+  //   totalPages,
+  // } = adminGetAllCustomerList;
 
-//   const darkMode = useSelector(darkmodeSelector);
-//   const darkmodeOn = darkMode === 'On';
+  // const darkMode = useSelector(darkmodeSelector);
+  // const darkmodeOn = darkMode === 'On';
 
-//   const [search, setSearch] = useState('');
-//   const [searchLoading, setSearchLoading] = useState(false);
+  // const [search, setSearch] = useState('');
+  // const [searchLoading, setSearchLoading] = useState(false);
 
-//   const searchCustomerhandler = async () => {
-
-
-//     setSearchLoading(true);
-//     try {
-//       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
-//       dispatch({
-//         type: GET_ALL_CUSTOMERLIST_SUCCESS,
-//         payload: data,
-//       });
-//     } catch (error) {
-//       console.error('Error searching customers:', error);
-//     } finally {
-//       setSearchLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     const delayDebounce = setTimeout(() => {
-//       searchCustomerhandler();
-//     }, 300);
-
-//     return () => clearTimeout(delayDebounce);
-//   }, [search]);
+  // const searchCustomerhandler = async () => {
 
 
-//   const [checkAllCustomers, setCheckAllCustomers] = useState(false);
-//   const [checkedCustomers, setCheckedCustomers] = useState({});
-//   const [checkedEmails, setCheckedEmails] = useState([]);
-//   const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
-//   const [checkCustomerNames, setCheckCustomerNames] = useState([]);
+  //   setSearchLoading(true);
+  //   try {
+  //     const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
+  //     dispatch({
+  //       type: GET_ALL_CUSTOMERLIST_SUCCESS,
+  //       payload: data,
+  //     });
+  //   } catch (error) {
+  //     console.error('Error searching customers:', error);
+  //   } finally {
+  //     setSearchLoading(false);
+  //   }
+  // };
 
-//   const [page, setPage] = useState(1);
+  // useEffect(() => {
+  //   const delayDebounce = setTimeout(() => {
+  //     searchCustomerhandler();
+  //   }, 300);
 
-//   useEffect(() => {
-//     if (currentPage) {
-//       setPage(currentPage)
-//     }
-//   }, [currentPage])
-
-//   const paginationLeftHandler = async () => {
-//     if (page > 1) {
-//       try {
-//         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-//         const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
-//         dispatch({
-//           type: GET_ALL_CUSTOMERLIST_SUCCESS,
-//           payload: data,
-//         });
-//         setCheckAllCustomers(false)
-//         setPage(prevPage => prevPage - 1);
-//       } catch (error) {
-//         console.error('Error fetching customers:', error);
-//         setCheckAllCustomers(false)
-//       }
-//     }
-//   };
-
-//   const paginationRightHandler = async () => {
-//     if (page < totalPages) {
-//       try {
-//         dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-//         const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
-//         dispatch({
-//           type: GET_ALL_CUSTOMERLIST_SUCCESS,
-//           payload: data,
-//         });
-//         setPage(prevPage => prevPage + 1);
-//         setCheckAllCustomers(false)
-//       } catch (error) {
-//         console.error('Error fetching customers:', error);
-//         setCheckAllCustomers(false)
-//       }
-//     }
-//   };
-
-//   const customerEmailCheckedHandler = (customer) => {
-//     const isChecked = !checkedCustomers[customer._id];
-//     setCheckedCustomers(prevState => ({
-//       ...prevState,
-//       [customer._id]: isChecked,
-//     }));
-
-//     if (isChecked) {
-//       setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
-//       setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
-//       setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
-//       setCheckAllCustomers(false)
-//     } else {
-//       setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
-//       setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
-//       setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
-//       setCheckAllCustomers(false)
-//     }
-//   };
-
-//   const checkAllCustomersHandler = (e) => {
-//     setCheckAllCustomers((prev) => {
-//       if (!prev) {
-//         const customerEmails = AllCustomerList.map((c) => c.email);
-//         const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
-//         const customerNames = AllCustomerList.map((c) => c.name);
-//         const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
-//           acc[customer._id] = true;
-//           return acc;
-//         }, {});
-//         setCheckedEmails(customerEmails);
-//         setCheckMobileNumber(customerMobileNumbers);
-//         setCheckCustomerNames(customerNames);
-//         setCheckedCustomers(allCheckedCustomers);
-//       } else {
-//         setCheckedEmails([]);
-//         setCheckMobileNumber([]);
-//         setCheckCustomerNames([]);
-//         setCheckedCustomers({});
-//       }
-
-//       return !prev;
-//     });
-//   };
+  //   return () => clearTimeout(delayDebounce);
+  // }, [search]);
 
 
-//   // const navigate = useNavigate();
+  // const [checkAllCustomers, setCheckAllCustomers] = useState(false);
+  // const [checkedCustomers, setCheckedCustomers] = useState({});
+  // const [checkedEmails, setCheckedEmails] = useState([]);
+  // const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
+  // const [checkCustomerNames, setCheckCustomerNames] = useState([]);
 
-//   const [openBarberEmail, setOpenBarberEmail] = useState(false)
+  // const [page, setPage] = useState(1);
 
-//   const sendEmailNavigate = () => {
-//     if (checkedEmails.length > 0) {
-//       setOpenBarberEmail(true)
-//     } else {
-//       toast.error("Please select a customer", {
-//         duration: 3000,
-//         style: {
-//           fontSize: "var(--font-size-2)",
-//           borderRadius: '0.3rem',
-//           background: '#333',
-//           color: '#fff',
-//         },
-//       });
-//     }
+  // useEffect(() => {
+  //   if (currentPage) {
+  //     setPage(currentPage)
+  //   }
+  // }, [currentPage])
 
-//   };
+  // const paginationLeftHandler = async () => {
+  //   if (page > 1) {
+  //     try {
+  //       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
+  //       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
+  //       dispatch({
+  //         type: GET_ALL_CUSTOMERLIST_SUCCESS,
+  //         payload: data,
+  //       });
+  //       setCheckAllCustomers(false)
+  //       setPage(prevPage => prevPage - 1);
+  //     } catch (error) {
+  //       console.error('Error fetching customers:', error);
+  //       setCheckAllCustomers(false)
+  //     }
+  //   }
+  // };
 
-//   const [subject, setSubject] = useState("")
-//   const [message, setMessage] = useState("")
+  // const paginationRightHandler = async () => {
+  //   if (page < totalPages) {
+  //     try {
+  //       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
+  //       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
+  //       dispatch({
+  //         type: GET_ALL_CUSTOMERLIST_SUCCESS,
+  //         payload: data,
+  //       });
+  //       setPage(prevPage => prevPage + 1);
+  //       setCheckAllCustomers(false)
+  //     } catch (error) {
+  //       console.error('Error fetching customers:', error);
+  //       setCheckAllCustomers(false)
+  //     }
+  //   }
+  // };
 
-//   const sendMailHandler = () => {
-//     const maildata = {
-//       subject,
-//       message,
-//       role: "Barber",
-//       recipientEmails: checkedEmails
-//     }
-//     // console.log(maildata)
-//     dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
-//   }
+  // const customerEmailCheckedHandler = (customer) => {
+  //   const isChecked = !checkedCustomers[customer._id];
+  //   setCheckedCustomers(prevState => ({
+  //     ...prevState,
+  //     [customer._id]: isChecked,
+  //   }));
 
-//   const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+  //   if (isChecked) {
+  //     setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
+  //     setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
+  //     setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
+  //     setCheckAllCustomers(false)
+  //   } else {
+  //     setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
+  //     setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
+  //     setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
+  //     setCheckAllCustomers(false)
+  //   }
+  // };
 
-//   const {
-//     loading: adminSendBarberEmailLoading
-//   } = adminSendBarberEmail
+  // const checkAllCustomersHandler = (e) => {
+  //   setCheckAllCustomers((prev) => {
+  //     if (!prev) {
+  //       const customerEmails = AllCustomerList.map((c) => c.email);
+  //       const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
+  //       const customerNames = AllCustomerList.map((c) => c.name);
+  //       const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
+  //         acc[customer._id] = true;
+  //         return acc;
+  //       }, {});
+  //       setCheckedEmails(customerEmails);
+  //       setCheckMobileNumber(customerMobileNumbers);
+  //       setCheckCustomerNames(customerNames);
+  //       setCheckedCustomers(allCheckedCustomers);
+  //     } else {
+  //       setCheckedEmails([]);
+  //       setCheckMobileNumber([]);
+  //       setCheckCustomerNames([]);
+  //       setCheckedCustomers({});
+  //     }
+
+  //     return !prev;
+  //   });
+  // };
 
 
-//   const [openBarberMessage, setOpenBarberMessage] = useState(false)
-//   const [barberMessage, setBarberMessage] = useState("")
+  // // const navigate = useNavigate();
 
-//   const sendMessageNavigate = () => {
-//     if (checkMobileNumbers.length > 0) {
-//       setOpenBarberMessage(true)
-//     } else {
-//       toast.error("Please select a customer", {
-//         duration: 3000,
-//         style: {
-//           fontSize: "var(--font-size-2)",
-//           borderRadius: '0.3rem',
-//           background: '#333',
-//           color: '#fff',
-//         },
-//       });
-//     }
+  // const [openBarberEmail, setOpenBarberEmail] = useState(false)
 
-//   };
+  // const sendEmailNavigate = () => {
+  //   if (checkedEmails.length > 0) {
+  //     setOpenBarberEmail(true)
+  //   } else {
+  //     toast.error("Please select a customer", {
+  //       duration: 3000,
+  //       style: {
+  //         fontSize: "var(--font-size-2)",
+  //         borderRadius: '0.3rem',
+  //         background: '#333',
+  //         color: '#fff',
+  //       },
+  //     });
+  //   }
 
-//   const sendMessageHandler = () => {
-//     const smsdata = {
-//       smsBody: barberMessage,
-//       numbers: checkMobileNumbers
-//     }
-//     // console.log(smsdata)
-//     dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+  // };
 
-//   }
+  // const [subject, setSubject] = useState("")
+  // const [message, setMessage] = useState("")
 
-//   const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+  // const sendMailHandler = () => {
+  //   const maildata = {
+  //     subject,
+  //     message,
+  //     role: "Barber",
+  //     recipientEmails: checkedEmails
+  //   }
+  //   // console.log(maildata)
+  //   dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+  // }
 
-//   const {
-//     loading: adminSendBarberMessageLoading
-//   } = adminSendBarberMessage
+  // const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+
+  // const {
+  //   loading: adminSendBarberEmailLoading
+  // } = adminSendBarberEmail
+
+
+  // const [openBarberMessage, setOpenBarberMessage] = useState(false)
+  // const [barberMessage, setBarberMessage] = useState("")
+
+  // const sendMessageNavigate = () => {
+  //   if (checkMobileNumbers.length > 0) {
+  //     setOpenBarberMessage(true)
+  //   } else {
+  //     toast.error("Please select a customer", {
+  //       duration: 3000,
+  //       style: {
+  //         fontSize: "var(--font-size-2)",
+  //         borderRadius: '0.3rem',
+  //         background: '#333',
+  //         color: '#fff',
+  //       },
+  //     });
+  //   }
+
+  // };
+
+  // const sendMessageHandler = () => {
+  //   const smsdata = {
+  //     smsBody: barberMessage,
+  //     numbers: checkMobileNumbers
+  //   }
+  //   // console.log(smsdata)
+  //   dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+
+  // }
+
+  // const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+
+  // const {
+  //   loading: adminSendBarberMessageLoading
+  // } = adminSendBarberMessage
 
 //   return (
 //     <div className={`${style.customer_wrapper} ${darkmodeOn && style.dark}`}>
@@ -477,6 +477,9 @@ import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@m
 import { useNavigate } from 'react-router-dom';
 
 const CustomerList = () => {
+
+
+  // ========================================
 
   const headRows = [
     { id: 1, heading: "#", key: "" },
