@@ -14,240 +14,240 @@
 
 // const CustomerList = () => {
 
-  // const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+// const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
-  // const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
-  // const dispatch = useDispatch();
-  // const CustomerListControllerRef = useRef(new AbortController());
+// const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
+// const dispatch = useDispatch();
+// const CustomerListControllerRef = useRef(new AbortController());
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   CustomerListControllerRef.current = controller;
+// useEffect(() => {
+//   const controller = new AbortController();
+//   CustomerListControllerRef.current = controller;
 
-  //   dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
+//   dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
 
-  //   return () => {
-  //     if (CustomerListControllerRef.current) {
-  //       CustomerListControllerRef.current.abort();
-  //     }
-  //   };
-  // }, [dispatch]);
+//   return () => {
+//     if (CustomerListControllerRef.current) {
+//       CustomerListControllerRef.current.abort();
+//     }
+//   };
+// }, [dispatch]);
 
-  // const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList);
+// const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList);
 
-  // const {
-  //   loading: adminGetAllCustomerListLoading,
-  //   resolve: adminGetAllCustomerListResolve,
-  //   getAllCustomers: AllCustomerList,
-  //   currentPage,
-  //   totalPages,
-  // } = adminGetAllCustomerList;
+// const {
+//   loading: adminGetAllCustomerListLoading,
+//   resolve: adminGetAllCustomerListResolve,
+//   getAllCustomers: AllCustomerList,
+//   currentPage,
+//   totalPages,
+// } = adminGetAllCustomerList;
 
-  // const darkMode = useSelector(darkmodeSelector);
-  // const darkmodeOn = darkMode === 'On';
+// const darkMode = useSelector(darkmodeSelector);
+// const darkmodeOn = darkMode === 'On';
 
-  // const [search, setSearch] = useState('');
-  // const [searchLoading, setSearchLoading] = useState(false);
+// const [search, setSearch] = useState('');
+// const [searchLoading, setSearchLoading] = useState(false);
 
-  // const searchCustomerhandler = async () => {
-
-
-  //   setSearchLoading(true);
-  //   try {
-  //     const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
-  //     dispatch({
-  //       type: GET_ALL_CUSTOMERLIST_SUCCESS,
-  //       payload: data,
-  //     });
-  //   } catch (error) {
-  //     console.error('Error searching customers:', error);
-  //   } finally {
-  //     setSearchLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const delayDebounce = setTimeout(() => {
-  //     searchCustomerhandler();
-  //   }, 300);
-
-  //   return () => clearTimeout(delayDebounce);
-  // }, [search]);
+// const searchCustomerhandler = async () => {
 
 
-  // const [checkAllCustomers, setCheckAllCustomers] = useState(false);
-  // const [checkedCustomers, setCheckedCustomers] = useState({});
-  // const [checkedEmails, setCheckedEmails] = useState([]);
-  // const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
-  // const [checkCustomerNames, setCheckCustomerNames] = useState([]);
+//   setSearchLoading(true);
+//   try {
+//     const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&name=${search}`);
+//     dispatch({
+//       type: GET_ALL_CUSTOMERLIST_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     console.error('Error searching customers:', error);
+//   } finally {
+//     setSearchLoading(false);
+//   }
+// };
 
-  // const [page, setPage] = useState(1);
+// useEffect(() => {
+//   const delayDebounce = setTimeout(() => {
+//     searchCustomerhandler();
+//   }, 300);
 
-  // useEffect(() => {
-  //   if (currentPage) {
-  //     setPage(currentPage)
-  //   }
-  // }, [currentPage])
-
-  // const paginationLeftHandler = async () => {
-  //   if (page > 1) {
-  //     try {
-  //       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-  //       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
-  //       dispatch({
-  //         type: GET_ALL_CUSTOMERLIST_SUCCESS,
-  //         payload: data,
-  //       });
-  //       setCheckAllCustomers(false)
-  //       setPage(prevPage => prevPage - 1);
-  //     } catch (error) {
-  //       console.error('Error fetching customers:', error);
-  //       setCheckAllCustomers(false)
-  //     }
-  //   }
-  // };
-
-  // const paginationRightHandler = async () => {
-  //   if (page < totalPages) {
-  //     try {
-  //       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
-  //       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
-  //       dispatch({
-  //         type: GET_ALL_CUSTOMERLIST_SUCCESS,
-  //         payload: data,
-  //       });
-  //       setPage(prevPage => prevPage + 1);
-  //       setCheckAllCustomers(false)
-  //     } catch (error) {
-  //       console.error('Error fetching customers:', error);
-  //       setCheckAllCustomers(false)
-  //     }
-  //   }
-  // };
-
-  // const customerEmailCheckedHandler = (customer) => {
-  //   const isChecked = !checkedCustomers[customer._id];
-  //   setCheckedCustomers(prevState => ({
-  //     ...prevState,
-  //     [customer._id]: isChecked,
-  //   }));
-
-  //   if (isChecked) {
-  //     setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
-  //     setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
-  //     setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
-  //     setCheckAllCustomers(false)
-  //   } else {
-  //     setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
-  //     setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
-  //     setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
-  //     setCheckAllCustomers(false)
-  //   }
-  // };
-
-  // const checkAllCustomersHandler = (e) => {
-  //   setCheckAllCustomers((prev) => {
-  //     if (!prev) {
-  //       const customerEmails = AllCustomerList.map((c) => c.email);
-  //       const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
-  //       const customerNames = AllCustomerList.map((c) => c.name);
-  //       const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
-  //         acc[customer._id] = true;
-  //         return acc;
-  //       }, {});
-  //       setCheckedEmails(customerEmails);
-  //       setCheckMobileNumber(customerMobileNumbers);
-  //       setCheckCustomerNames(customerNames);
-  //       setCheckedCustomers(allCheckedCustomers);
-  //     } else {
-  //       setCheckedEmails([]);
-  //       setCheckMobileNumber([]);
-  //       setCheckCustomerNames([]);
-  //       setCheckedCustomers({});
-  //     }
-
-  //     return !prev;
-  //   });
-  // };
+//   return () => clearTimeout(delayDebounce);
+// }, [search]);
 
 
-  // // const navigate = useNavigate();
+// const [checkAllCustomers, setCheckAllCustomers] = useState(false);
+// const [checkedCustomers, setCheckedCustomers] = useState({});
+// const [checkedEmails, setCheckedEmails] = useState([]);
+// const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
+// const [checkCustomerNames, setCheckCustomerNames] = useState([]);
 
-  // const [openBarberEmail, setOpenBarberEmail] = useState(false)
+// const [page, setPage] = useState(1);
 
-  // const sendEmailNavigate = () => {
-  //   if (checkedEmails.length > 0) {
-  //     setOpenBarberEmail(true)
-  //   } else {
-  //     toast.error("Please select a customer", {
-  //       duration: 3000,
-  //       style: {
-  //         fontSize: "var(--font-size-2)",
-  //         borderRadius: '0.3rem',
-  //         background: '#333',
-  //         color: '#fff',
-  //       },
-  //     });
-  //   }
+// useEffect(() => {
+//   if (currentPage) {
+//     setPage(currentPage)
+//   }
+// }, [currentPage])
 
-  // };
+// const paginationLeftHandler = async () => {
+//   if (page > 1) {
+//     try {
+//       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
+//       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page - 1}`);
+//       dispatch({
+//         type: GET_ALL_CUSTOMERLIST_SUCCESS,
+//         payload: data,
+//       });
+//       setCheckAllCustomers(false)
+//       setPage(prevPage => prevPage - 1);
+//     } catch (error) {
+//       console.error('Error fetching customers:', error);
+//       setCheckAllCustomers(false)
+//     }
+//   }
+// };
 
-  // const [subject, setSubject] = useState("")
-  // const [message, setMessage] = useState("")
+// const paginationRightHandler = async () => {
+//   if (page < totalPages) {
+//     try {
+//       dispatch({ type: GET_ALL_CUSTOMERLIST_REQ })
+//       const { data } = await api.get(`/api/customers/getAllCustomers?salonId=${currentsalonId}&page=${page + 1}`);
+//       dispatch({
+//         type: GET_ALL_CUSTOMERLIST_SUCCESS,
+//         payload: data,
+//       });
+//       setPage(prevPage => prevPage + 1);
+//       setCheckAllCustomers(false)
+//     } catch (error) {
+//       console.error('Error fetching customers:', error);
+//       setCheckAllCustomers(false)
+//     }
+//   }
+// };
 
-  // const sendMailHandler = () => {
-  //   const maildata = {
-  //     subject,
-  //     message,
-  //     role: "Barber",
-  //     recipientEmails: checkedEmails
-  //   }
-  //   // console.log(maildata)
-  //   dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
-  // }
+// const customerEmailCheckedHandler = (customer) => {
+//   const isChecked = !checkedCustomers[customer._id];
+//   setCheckedCustomers(prevState => ({
+//     ...prevState,
+//     [customer._id]: isChecked,
+//   }));
 
-  // const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+//   if (isChecked) {
+//     setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
+//     setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
+//     setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
+//     setCheckAllCustomers(false)
+//   } else {
+//     setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
+//     setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
+//     setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
+//     setCheckAllCustomers(false)
+//   }
+// };
 
-  // const {
-  //   loading: adminSendBarberEmailLoading
-  // } = adminSendBarberEmail
+// const checkAllCustomersHandler = (e) => {
+//   setCheckAllCustomers((prev) => {
+//     if (!prev) {
+//       const customerEmails = AllCustomerList.map((c) => c.email);
+//       const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
+//       const customerNames = AllCustomerList.map((c) => c.name);
+//       const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
+//         acc[customer._id] = true;
+//         return acc;
+//       }, {});
+//       setCheckedEmails(customerEmails);
+//       setCheckMobileNumber(customerMobileNumbers);
+//       setCheckCustomerNames(customerNames);
+//       setCheckedCustomers(allCheckedCustomers);
+//     } else {
+//       setCheckedEmails([]);
+//       setCheckMobileNumber([]);
+//       setCheckCustomerNames([]);
+//       setCheckedCustomers({});
+//     }
+
+//     return !prev;
+//   });
+// };
 
 
-  // const [openBarberMessage, setOpenBarberMessage] = useState(false)
-  // const [barberMessage, setBarberMessage] = useState("")
+// // const navigate = useNavigate();
 
-  // const sendMessageNavigate = () => {
-  //   if (checkMobileNumbers.length > 0) {
-  //     setOpenBarberMessage(true)
-  //   } else {
-  //     toast.error("Please select a customer", {
-  //       duration: 3000,
-  //       style: {
-  //         fontSize: "var(--font-size-2)",
-  //         borderRadius: '0.3rem',
-  //         background: '#333',
-  //         color: '#fff',
-  //       },
-  //     });
-  //   }
+// const [openBarberEmail, setOpenBarberEmail] = useState(false)
 
-  // };
+// const sendEmailNavigate = () => {
+//   if (checkedEmails.length > 0) {
+//     setOpenBarberEmail(true)
+//   } else {
+//     toast.error("Please select a customer", {
+//       duration: 3000,
+//       style: {
+//         fontSize: "var(--font-size-2)",
+//         borderRadius: '0.3rem',
+//         background: '#333',
+//         color: '#fff',
+//       },
+//     });
+//   }
 
-  // const sendMessageHandler = () => {
-  //   const smsdata = {
-  //     smsBody: barberMessage,
-  //     numbers: checkMobileNumbers
-  //   }
-  //   // console.log(smsdata)
-  //   dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+// };
 
-  // }
+// const [subject, setSubject] = useState("")
+// const [message, setMessage] = useState("")
 
-  // const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+// const sendMailHandler = () => {
+//   const maildata = {
+//     subject,
+//     message,
+//     role: "Barber",
+//     recipientEmails: checkedEmails
+//   }
+//   // console.log(maildata)
+//   dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+// }
 
-  // const {
-  //   loading: adminSendBarberMessageLoading
-  // } = adminSendBarberMessage
+// const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+
+// const {
+//   loading: adminSendBarberEmailLoading
+// } = adminSendBarberEmail
+
+
+// const [openBarberMessage, setOpenBarberMessage] = useState(false)
+// const [barberMessage, setBarberMessage] = useState("")
+
+// const sendMessageNavigate = () => {
+//   if (checkMobileNumbers.length > 0) {
+//     setOpenBarberMessage(true)
+//   } else {
+//     toast.error("Please select a customer", {
+//       duration: 3000,
+//       style: {
+//         fontSize: "var(--font-size-2)",
+//         borderRadius: '0.3rem',
+//         background: '#333',
+//         color: '#fff',
+//       },
+//     });
+//   }
+
+// };
+
+// const sendMessageHandler = () => {
+//   const smsdata = {
+//     smsBody: barberMessage,
+//     numbers: checkMobileNumbers
+//   }
+//   // console.log(smsdata)
+//   dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+
+// }
+
+// const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+
+// const {
+//   loading: adminSendBarberMessageLoading
+// } = adminSendBarberMessage
 
 //   return (
 //     <div className={`${style.customer_wrapper} ${darkmodeOn && style.dark}`}>
@@ -470,72 +470,207 @@
 // export default CustomerList;
 
 
-import React, { useEffect, useState } from 'react'
-import style from "./CustomerList.module.css"
+import React, { useEffect, useRef, useState } from 'react';
+import style from './CustomerList.module.css';
+import Skeleton from 'react-loading-skeleton';
+import { adminGetAllCustomerListAction } from '../../Redux/Admin/Actions/CustomerAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
+import api from '../../Redux/api/Api';
+import { GET_ALL_CUSTOMERLIST_REQ, GET_ALL_CUSTOMERLIST_SUCCESS } from '../../Redux/Admin/Constants/constants';
+import toast from 'react-hot-toast';
+import Modal from '@mui/material/Modal';
+import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../Redux/Admin/Actions/BarberAction';
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import { CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SearchIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
-import { ClickAwayListener, FormControl, MenuItem, Pagination, Select } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { ClickAwayListener, Pagination } from '@mui/material';
 
 const CustomerList = () => {
 
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+
+  const currentsalonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId);
+  const dispatch = useDispatch();
+  const CustomerListControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    CustomerListControllerRef.current = controller;
+
+    dispatch(adminGetAllCustomerListAction(currentsalonId, controller.signal));
+
+    return () => {
+      if (CustomerListControllerRef.current) {
+        CustomerListControllerRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const adminGetAllCustomerList = useSelector(state => state.adminGetAllCustomerList);
+
+  const {
+    loading: adminGetAllCustomerListLoading,
+    resolve: adminGetAllCustomerListResolve,
+    getAllCustomers: AllCustomerList,
+  } = adminGetAllCustomerList;
+
+  const darkMode = useSelector(darkmodeSelector);
+  const darkmodeOn = darkMode === 'On';
+
+
+  const [checkAllCustomers, setCheckAllCustomers] = useState(false);
+  const [checkedCustomers, setCheckedCustomers] = useState({});
+  const [checkedEmails, setCheckedEmails] = useState([]);
+  const [checkMobileNumbers, setCheckMobileNumber] = useState([]);
+  const [checkCustomerNames, setCheckCustomerNames] = useState([]);
+
+
+  const customerEmailCheckedHandler = (customer) => {
+    const isChecked = !checkedCustomers[customer._id];
+    setCheckedCustomers(prevState => ({
+      ...prevState,
+      [customer._id]: isChecked,
+    }));
+
+    if (isChecked) {
+      setCheckedEmails(prevEmails => [...prevEmails, customer.email]);
+      setCheckMobileNumber(prevMobileNumbers => [...prevMobileNumbers, Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)]);
+      setCheckCustomerNames(prevNames => [...prevNames, customer.name]);
+      setCheckAllCustomers(false)
+    } else {
+      setCheckedEmails(prevEmails => prevEmails.filter(email => email !== customer.email));
+      setCheckMobileNumber(prevMobileNumbers => prevMobileNumbers.filter(mobileNumber => mobileNumber !== Number(`${customer.mobileCountryCode}${customer.mobileNumber}`)));
+      setCheckCustomerNames(prevNames => prevNames.filter(name => name !== customer.name));
+      setCheckAllCustomers(false)
+    }
+  };
+
+  const checkAllCustomersHandler = (e) => {
+    setCheckAllCustomers((prev) => {
+      if (!prev) {
+        const customerEmails = AllCustomerList.map((c) => c.email);
+        const customerMobileNumbers = AllCustomerList.map((c) => Number(`${c.mobileCountryCode}${c.mobileNumber}`));
+        const customerNames = AllCustomerList.map((c) => c.name);
+        const allCheckedCustomers = AllCustomerList.reduce((acc, customer) => {
+          acc[customer._id] = true;
+          return acc;
+        }, {});
+        setCheckedEmails(customerEmails);
+        setCheckMobileNumber(customerMobileNumbers);
+        setCheckCustomerNames(customerNames);
+        setCheckedCustomers(allCheckedCustomers);
+      } else {
+        setCheckedEmails([]);
+        setCheckMobileNumber([]);
+        setCheckCustomerNames([]);
+        setCheckedCustomers({});
+      }
+
+      return !prev;
+    });
+  };
+
+
+  // const navigate = useNavigate();
+
+  const [openBarberEmail, setOpenBarberEmail] = useState(false)
+
+  const sendEmailNavigate = () => {
+    if (checkedEmails.length > 0) {
+      setOpenBarberEmail(true)
+    } else {
+      toast.error("Please select a customer", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
+  };
+
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+
+  const sendMailHandler = () => {
+    const maildata = {
+      subject,
+      message,
+      role: "Barber",
+      recipientEmails: checkedEmails
+    }
+    // console.log(maildata)
+    dispatch(adminSendBarberEmailAction(maildata, setSubject, setMessage, setOpenBarberEmail))
+  }
+
+  const adminSendBarberEmail = useSelector(state => state.adminSendBarberEmail)
+
+  const {
+    loading: adminSendBarberEmailLoading
+  } = adminSendBarberEmail
+
+
+  const [openBarberMessage, setOpenBarberMessage] = useState(false)
+  const [barberMessage, setBarberMessage] = useState("")
+
+  const sendMessageNavigate = () => {
+    if (checkMobileNumbers.length > 0) {
+      setOpenBarberMessage(true)
+    } else {
+      toast.error("Please select a customer", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
+  };
+
+  const sendMessageHandler = () => {
+    const smsdata = {
+      smsBody: barberMessage,
+      numbers: checkMobileNumbers
+    }
+    // console.log(smsdata)
+    dispatch(adminSendBarberMessageAction(smsdata, setMessage, setOpenBarberMessage))
+
+  }
+
+  const adminSendBarberMessage = useSelector(state => state.adminSendBarberMessage)
+
+  const {
+    loading: adminSendBarberMessageLoading
+  } = adminSendBarberMessage
 
   // ========================================
 
   const headRows = [
     { id: 1, heading: "#", key: "" },
-    { id: 2, heading: "Name", key: "customerName" },
+    { id: 2, heading: "Name", key: "name" },
     { id: 3, heading: "Email", key: "email" },
     { id: 4, heading: "Gender", key: "gender" },
-    { id: 5, heading: "Mobile Number", key: "mobile" },
-    { id: 6, heading: "Date Of Birth", key: "dob" },
+    { id: 5, heading: "Mobile Number", key: "mobileNumber" },
+    { id: 6, heading: "Date Of Birth", key: "dateOfBirth" },
   ];
 
-  const salonlistDataCopy = [
-    { customerName: "John Doe", gender: "Male", email: "john.doe@example.com", dob: "1990-05-15", mobile: "123-456-7890", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
-    { customerName: "Emma Smith", gender: "Female", email: "emma.smith@example.com", dob: "1995-08-22", mobile: "987-654-3210", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
-    { customerName: "Liam Johnson", gender: "Male", email: "liam.johnson@example.com", dob: "1988-11-30", mobile: "456-789-0123", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
-    { customerName: "Sophia Brown", gender: "Female", email: "sophia.brown@example.com", dob: "1992-03-25", mobile: "321-654-0987", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
-    { customerName: "Noah Wilson", gender: "Male", email: "noah.wilson@example.com", dob: "2000-07-10", mobile: "789-123-4560", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
-    { customerName: "Olivia Martinez", gender: "Female", email: "olivia.martinez@example.com", dob: "1985-12-19", mobile: "654-321-7890", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
-    { customerName: "William Davis", gender: "Male", email: "william.davis@example.com", dob: "1998-09-05", mobile: "147-258-3690", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
-    { customerName: "Ava Garcia", gender: "Female", email: "ava.garcia@example.com", dob: "1993-04-14", mobile: "369-147-2580", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img=8" },
-    { customerName: "James Rodriguez", gender: "Male", email: "james.rodriguez@example.com", dob: "1996-06-21", mobile: "852-963-7410", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
-    { customerName: "Mia Anderson", gender: "Female", email: "mia.anderson@example.com", dob: "2002-02-28", mobile: "741-852-9630", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" },
-    { customerName: "Ethan Walker", gender: "Male", email: "ethan.walker@example.com", dob: "1987-01-08", mobile: "963-741-8520", barberName: "Kevin Young", qPos: 11, mins: 35, customerImage: "https://i.pravatar.cc/150?img=11" },
-    { customerName: "Isabella Allen", gender: "Female", email: "isabella.allen@example.com", dob: "1999-10-12", mobile: "852-147-3690", barberName: "Brandon Hill", qPos: 12, mins: 45, customerImage: "https://i.pravatar.cc/150?img=12" },
-    { customerName: "Alexander King", gender: "Male", email: "alexander.king@example.com", dob: "1991-07-03", mobile: "147-852-9630", barberName: "Tyler Green", qPos: 13, mins: 25, customerImage: "https://i.pravatar.cc/150?img=13" },
-    { customerName: "Charlotte Wright", gender: "Female", email: "charlotte.wright@example.com", dob: "1984-03-18", mobile: "369-963-1470", barberName: "Aaron Baker", qPos: 14, mins: 50, customerImage: "https://i.pravatar.cc/150?img=14" },
-    { customerName: "Daniel Moore", gender: "Male", email: "daniel.moore@example.com", dob: "1997-11-27", mobile: "741-258-3690", barberName: "Adam Carter", qPos: 15, mins: 30, customerImage: "https://i.pravatar.cc/150?img=15" },
-    { customerName: "Amelia Taylor", gender: "Female", email: "amelia.taylor@example.com", dob: "1994-08-01", mobile: "258-741-9630", barberName: "Justin Mitchell", qPos: 16, mins: 40, customerImage: "https://i.pravatar.cc/150?img=16" },
-    { customerName: "Michael Thomas", gender: "Male", email: "michael.thomas@example.com", dob: "1989-05-20", mobile: "963-369-1470", barberName: "Jose Perez", qPos: 17, mins: 20, customerImage: "https://i.pravatar.cc/150?img=17" },
-    { customerName: "Evelyn Jackson", gender: "Female", email: "evelyn.jackson@example.com", dob: "2001-01-15", mobile: "147-963-8520", barberName: "Luis Roberts", qPos: 18, mins: 55, customerImage: "https://i.pravatar.cc/150?img=18" },
-    { customerName: "Henry White", gender: "Male", email: "henry.white@example.com", dob: "1986-09-29", mobile: "852-741-3690", barberName: "Samuel Turner", qPos: 19, mins: 35, customerImage: "https://i.pravatar.cc/150?img=19" },
-    { customerName: "Abigail Harris", gender: "Female", email: "abigail.harris@example.com", dob: "1992-06-07", mobile: "369-258-1470", barberName: "Patrick Phillips", qPos: 20, mins: 45, customerImage: "https://i.pravatar.cc/150?img=20" },
-  ]
+  const [customerlistDataCopy, setCustomerlistDataCopy] = useState([])
 
+  const [customerlistData, setCustomerlistData] = useState([])
 
-  const [salonlistData, setSalonlistData] = useState([
-    { customerName: "John Doe", gender: "Male", email: "john.doe@example.com", dob: "1990-05-15", mobile: "123-456-7890", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
-    { customerName: "Emma Smith", gender: "Female", email: "emma.smith@example.com", dob: "1995-08-22", mobile: "987-654-3210", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
-    { customerName: "Liam Johnson", gender: "Male", email: "liam.johnson@example.com", dob: "1988-11-30", mobile: "456-789-0123", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
-    { customerName: "Sophia Brown", gender: "Female", email: "sophia.brown@example.com", dob: "1992-03-25", mobile: "321-654-0987", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
-    { customerName: "Noah Wilson", gender: "Male", email: "noah.wilson@example.com", dob: "2000-07-10", mobile: "789-123-4560", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
-    { customerName: "Olivia Martinez", gender: "Female", email: "olivia.martinez@example.com", dob: "1985-12-19", mobile: "654-321-7890", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
-    { customerName: "William Davis", gender: "Male", email: "william.davis@example.com", dob: "1998-09-05", mobile: "147-258-3690", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
-    { customerName: "Ava Garcia", gender: "Female", email: "ava.garcia@example.com", dob: "1993-04-14", mobile: "369-147-2580", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img=8" },
-    { customerName: "James Rodriguez", gender: "Male", email: "james.rodriguez@example.com", dob: "1996-06-21", mobile: "852-963-7410", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
-    { customerName: "Mia Anderson", gender: "Female", email: "mia.anderson@example.com", dob: "2002-02-28", mobile: "741-852-9630", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" },
-    { customerName: "Ethan Walker", gender: "Male", email: "ethan.walker@example.com", dob: "1987-01-08", mobile: "963-741-8520", barberName: "Kevin Young", qPos: 11, mins: 35, customerImage: "https://i.pravatar.cc/150?img=11" },
-    { customerName: "Isabella Allen", gender: "Female", email: "isabella.allen@example.com", dob: "1999-10-12", mobile: "852-147-3690", barberName: "Brandon Hill", qPos: 12, mins: 45, customerImage: "https://i.pravatar.cc/150?img=12" },
-    { customerName: "Alexander King", gender: "Male", email: "alexander.king@example.com", dob: "1991-07-03", mobile: "147-852-9630", barberName: "Tyler Green", qPos: 13, mins: 25, customerImage: "https://i.pravatar.cc/150?img=13" },
-    { customerName: "Charlotte Wright", gender: "Female", email: "charlotte.wright@example.com", dob: "1984-03-18", mobile: "369-963-1470", barberName: "Aaron Baker", qPos: 14, mins: 50, customerImage: "https://i.pravatar.cc/150?img=14" },
-    { customerName: "Daniel Moore", gender: "Male", email: "daniel.moore@example.com", dob: "1997-11-27", mobile: "741-258-3690", barberName: "Adam Carter", qPos: 15, mins: 30, customerImage: "https://i.pravatar.cc/150?img=15" },
-    { customerName: "Amelia Taylor", gender: "Female", email: "amelia.taylor@example.com", dob: "1994-08-01", mobile: "258-741-9630", barberName: "Justin Mitchell", qPos: 16, mins: 40, customerImage: "https://i.pravatar.cc/150?img=16" },
-    { customerName: "Michael Thomas", gender: "Male", email: "michael.thomas@example.com", dob: "1989-05-20", mobile: "963-369-1470", barberName: "Jose Perez", qPos: 17, mins: 20, customerImage: "https://i.pravatar.cc/150?img=17" },
-    { customerName: "Evelyn Jackson", gender: "Female", email: "evelyn.jackson@example.com", dob: "2001-01-15", mobile: "147-963-8520", barberName: "Luis Roberts", qPos: 18, mins: 55, customerImage: "https://i.pravatar.cc/150?img=18" },
-    { customerName: "Henry White", gender: "Male", email: "henry.white@example.com", dob: "1986-09-29", mobile: "852-741-3690", barberName: "Samuel Turner", qPos: 19, mins: 35, customerImage: "https://i.pravatar.cc/150?img=19" },
-    { customerName: "Abigail Harris", gender: "Female", email: "abigail.harris@example.com", dob: "1992-06-07", mobile: "369-258-1470", barberName: "Patrick Phillips", qPos: 20, mins: 45, customerImage: "https://i.pravatar.cc/150?img=20" },
-  ])
+  useEffect(() => {
+    if (adminGetAllCustomerListResolve && AllCustomerList.length > 0) {
+      setCustomerlistData(AllCustomerList)
+      setCustomerlistDataCopy(AllCustomerList)
+    }
+
+  }, [AllCustomerList])
 
 
   const [rowsPerPage, SetRowsPerPage] = useState(10)
@@ -548,17 +683,23 @@ const CustomerList = () => {
   const [sortColumn, setSortColumn] = useState("")
   const [query, setQuery] = useState("")
 
-  const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
+  const [customerPaginationData, setCustomerPaginationData] = useState([])
 
   useEffect(() => {
-    const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
+    if (customerlistData.length > 0) {
+      setCustomerPaginationData(customerlistData.slice(startIndex, endIndex))
+    }
+  }, [customerlistData])
+
+  useEffect(() => {
+    const totalPages = Math.ceil(customerlistData.length / rowsPerPage);
     setTotalPages(totalPages);
     const startIndex = (page - 1) * rowsPerPage;
-    const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+    const endIndex = Math.min(startIndex + rowsPerPage, customerlistData.length);
     setStartIndex(startIndex);
     setEndIndex(endIndex);
-    setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
-  }, [salonlistData, page, rowsPerPage]);
+    setCustomerPaginationData(customerlistData.slice(startIndex, endIndex));
+  }, [customerlistData, page, rowsPerPage]);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -572,7 +713,7 @@ const CustomerList = () => {
   useEffect(() => {
     if (!sortColumn) return;
 
-    const sortedList = [...salonlistData].sort((a, b) => {
+    const sortedList = [...customerlistData].sort((a, b) => {
       const valueA = a[sortColumn];
       const valueB = b[sortColumn];
 
@@ -585,34 +726,29 @@ const CustomerList = () => {
       }
     });
 
-    setSalonlistData(sortedList);
+    setCustomerlistData(sortedList);
     // setPage(1); 
   }, [sortColumn, sortOrder]);
 
 
   useEffect(() => {
-    let filteredData = salonlistDataCopy;
+    let filteredData = customerlistDataCopy;
 
     if (query.trim() !== '') {
-      filteredData = salonlistDataCopy.filter((item) => {
+      filteredData = customerlistDataCopy.filter((item) => {
         return (
-          item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
-          item.gender.toLowerCase().trim().includes(query.toLowerCase()) ||
-          item.email.toLowerCase().trim().includes(query.toLowerCase()) ||
-          item.dob.toLowerCase().trim().includes(query.toLowerCase()) ||
-          item.mobile.toLowerCase().trim().includes(query.toLowerCase())
+          item.name.toLowerCase().trim().includes(query.toLowerCase()) ||
+          item.email.toLowerCase().trim().includes(query.toLowerCase())
         );
       });
     }
 
-    setSalonlistData(filteredData);
+    setCustomerlistData(filteredData);
     setPage(1);
   }, [query]);
 
 
   const [selectOpen, setSelectOpen] = useState(false)
-
-  const navigate = useNavigate()
 
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
 
@@ -621,8 +757,134 @@ const CustomerList = () => {
       <div>
         <h2>Customer List</h2>
         <div>
-          <button><MessageIcon /></button>
-          <button><EmailIcon /></button>
+          <button
+            onClick={sendEmailNavigate}
+            title='Email'
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+          ><EmailIcon /></button>
+
+          <Modal
+            open={openBarberEmail}
+            onClose={() => setOpenBarberEmail(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+              <div>
+                <p>Send Email</p>
+                <button onClick={() => setOpenBarberEmail(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"support@iqueuebarbers.com"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text"
+                    value={
+                      checkedEmails?.map((e) => " " + e)
+                    }
+                  />
+                </div>
+
+                <div>
+                  <p>Subject</p>
+                  <input
+                    type="text"
+                    placeholder='Enter Subject'
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberEmailLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMailHandler} disabled={adminSendBarberEmailLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
+          <button
+            onClick={sendMessageNavigate}
+            title='Message'
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+          ><MessageIcon /></button>
+
+          <Modal
+            open={openBarberMessage}
+            onClose={() => setOpenBarberMessage(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+              <div>
+                <p>Send Message</p>
+                <button onClick={() => setOpenBarberMessage(false)}><CloseIcon /></button>
+              </div>
+
+              <div className={style.modal_content_container}>
+                <div>
+                  <p>From</p>
+                  <input
+                    type="text"
+                    value={"iqueuebarbers"}
+                    readOnly
+                  />
+                </div>
+
+                <div>
+                  <p>To</p>
+                  <input type="text" value={
+                    checkCustomerNames?.map((e) => " " + e)
+                  } />
+                </div>
+
+                <div>
+                  <p>Message</p>
+                  <textarea
+                    type="text"
+                    placeholder='Enter Message'
+                    value={barberMessage}
+                    onChange={(e) => setBarberMessage(e.target.value)}
+                  ></textarea>
+                </div>
+
+                {
+                  adminSendBarberMessageLoading ?
+                    <button className={style.barber_send_btn}><ButtonLoader /></button> :
+                    <button onClick={sendMessageHandler} disabled={adminSendBarberMessageLoading} className={style.barber_send_btn}>Send</button>
+                }
+              </div>
+            </div>
+          </Modal>
+
+
           <input
             type='text'
             placeholder='Search Customer'
@@ -661,77 +923,96 @@ const CustomerList = () => {
               </>
             )
           }
-
-          {/* <input
-            type='text'
-            placeholder='Search Customer'
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          /> */}
         </div>
 
       </div>
 
       <div className={`${style.list_container}`}>
 
-        <div className={`${style.list_body_container}`}>
+        {
+          adminGetAllCustomerListLoading ? (
+            <div className={`${style.list_body_container_loader}`}>
+              <Skeleton
+                count={6}
+                height={"6.5rem"}
+                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : adminGetAllCustomerListResolve && AllCustomerList.length > 0 ? (
+            <div className={`${style.list_body_container}`}>
 
-          <div className={`${style.headRow}`}>
+              <div className={`${style.headRow}`}>
 
-            {
-              headRows.map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    {
-                      item.key === "" ? (
-                        <button className={`${style.head_select_icon}`}><CheckIcon /></button>
-                      ) : (
-                        <button
-                          className={`${item.key === "customerName" ? style.name_head_btn : ""}`}
-                          onClick={() => sortFunction(item.key)}>
-                          {item.key === "customerName" ? (
-                            <>
-                              <span></span>
-                              {item.heading}
-                            </>
+                {
+                  headRows.map((item, index) => {
+                    return (
+                      <div key={item.id}>
+                        {
+                          item.key === "" && index === 0 ? (
+                            <input
+                              type="checkbox"
+                              onChange={checkAllCustomersHandler}
+                              checked={checkAllCustomers}
+                            />
                           ) : (
-                            item.heading
-                          )}
+                            <button
+                              className={`${item.key === "name" ? style.name_head_btn : ""}`}
+                              onClick={() => sortFunction(item.key)}>
+                              {item.key === "name" ? (
+                                <>
+                                  <span></span>
+                                  {item.heading}
+                                </>
+                              ) : (
+                                item.heading
+                              )}
 
-                          <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
-                        </button>
-                      )
-                    }
+                              <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
+                            </button>
+                          )
+                        }
 
-                  </div>
-                )
-              })
-            }
+                      </div>
+                    )
+                  })
+                }
 
-          </div>
+              </div>
 
-          {
-            salonPaginationData.map((item, index) => {
-              return (
-                <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div>
-                    <button><CheckIcon /></button>
-                  </div>
-                  <div>
-                    <div>
-                      <div><img src={item.customerImage} alt="" /></div>
-                      <p>{item.customerName}</p>
+              {
+                customerPaginationData.map((item, index) => {
+                  return (
+                    <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === customerPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                      <div>
+                        <input
+                          type="checkbox"
+                          checked={checkedCustomers[item._id] || false}
+                          onChange={() => customerEmailCheckedHandler(item)}
+                        />
+                      </div>
+                      <div>
+                        <div>
+                          <div><img src={item?.profile?.[0]?.url} alt="" /></div>
+                          <p>{item.name}</p>
+                        </div>
+                      </div>
+                      <div><p>{item.email}</p></div>
+                      <div><p>{item.gender}</p></div>
+                      <div><p>{item?.mobileCountryCode}{" "}{item?.mobileNumber}</p></div>
+                      <div><p>{item.dateOfBirth.split("T")[0]}</p></div>
                     </div>
-                  </div>
-                  <div><p>{item.email}</p></div>
-                  <div><p>{item.gender}</p></div>
-                  <div><p>{item.mobile}</p></div>
-                  <div><p>{item.dob}</p></div>
-                </div>
-              )
-            })
-          }
-        </div>
+                  )
+                })
+              }
+            </div>
+          ) : (
+            <div className={`${style.list_body_container_error}`}>
+              <p>No customer available</p>
+            </div>
+          )
+        }
+
 
         <div className={`${style.pagination_container}`}>
           <div></div>
@@ -792,7 +1073,7 @@ const CustomerList = () => {
         </div>
       </div>
 
-    </section>
+    </section >
   )
 }
 

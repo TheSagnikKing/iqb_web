@@ -128,8 +128,8 @@
                 }
 
                 &>div:nth-last-child(1),
-                &>div:nth-last-child(2){
-                    &>button{
+                &>div:nth-last-child(2) {
+                    &>button {
                         display: none;
                     }
                 }
@@ -277,13 +277,38 @@
                         -ms-border-radius: 2rem;
                         -o-border-radius: 2rem;
 
-                        &:hover{
+                        &:hover {
                             background-color: #0285c766;
                         }
                     }
                 }
 
             }
+        }
+
+
+        .list_body_container_loader {
+            flex-grow: 1;
+            flex-basis: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .list_body_container_error {
+            flex-grow: 1;
+            flex-basis: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+
+            &>p {
+                color: var(--text-primary);
+                font-size: 1.6rem;
+                font-family: 'AirbnbCereal_Medium';
+            }
+
         }
 
 
@@ -411,6 +436,237 @@
         }
     }
 }
+
+
+.modal_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: var(--bg-primary);
+    border: 0.1rem solid var(--border-secondary);
+    width: min(95vw, 40rem);
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
+
+    &>div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        &>p {
+            font-size: var(--font-size-1);
+            font-weight: 600;
+        }
+
+        &>button {
+            margin-left: auto;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            background-color: transparent;
+            border: 0.1rem solid var(--border-secondary);
+            cursor: pointer;
+            color: var(--color-6);
+            border-radius: var(--border-radius-primary);
+            -webkit-border-radius: var(--border-radius-primary);
+            -moz-border-radius: var(--border-radius-primary);
+            -ms-border-radius: var(--border-radius-primary);
+            -o-border-radius: var(--border-radius-primary);
+            transition: var(--btn-transition);
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            font-size: var(--font-size-2);
+            margin-bottom: 1rem;
+        }
+    }
+
+
+    .modal_content_container {
+        &>input {
+            width: 100%;
+            height: 3.5rem;
+            padding-inline: 1rem;
+            font-size: 1.4rem;
+            border: 0.1rem solid var(--border-secondary);
+            border-radius: var(--border-radius-primary);
+            -webkit-border-radius: var(--border-radius-primary);
+            -moz-border-radius: var(--border-radius-primary);
+            -ms-border-radius: var(--border-radius-primary);
+            -o-border-radius: var(--border-radius-primary);
+            background-color: var(--input-bg-color);
+            color: var(--text-primary);
+            outline: none;
+
+            &::placeholder {
+                color: var(--text-secondary);
+                letter-spacing: 0.01rem;
+            }
+        }
+
+        .barber_dropdown_loading {
+            margin-top: 2rem;
+            min-height: 28rem;
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+            overflow: auto;
+            /* background-color: var(--light-color-4); */
+        }
+
+        .barber_dropdown {
+            min-height: 28rem;
+            max-height: 28rem;
+            margin-top: 2rem;
+            background-color: var(--input-bg-color);
+            border: 0.1rem solid var(--border-secondary);
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+            padding: 1rem;
+            overflow: auto;
+        }
+
+        .barber_dropdown_error {
+            min-height: 28rem;
+            margin-top: 2rem;
+            display: grid;
+            place-items: center;
+            /* background-color: var(--light-color-3); */
+            border-radius: var(--input-border-radius);
+            -webkit-border-radius: var(--input-border-radius);
+            -moz-border-radius: var(--input-border-radius);
+            -ms-border-radius: var(--input-border-radius);
+            -o-border-radius: var(--input-border-radius);
+
+            &>p {
+                font-size: var(--font-size-3);
+                font-weight: 500;
+            }
+        }
+    }
+
+    &>button {
+        width: 100%;
+        height: 3.5rem;
+        padding-inline: 1.5rem;
+        border-radius: var(--border-radius-primary);
+        -webkit-border-radius: var(--border-radius-primary);
+        -moz-border-radius: var(--border-radius-primary);
+        -ms-border-radius: var(--border-radius-primary);
+        -o-border-radius: var(--border-radius-primary);
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: var(--common-btn-transition);
+        -webkit-transition: var(--common-btn-transition);
+        -moz-transition: var(--common-btn-transition);
+        -ms-transition: var(--common-btn-transition);
+        -o-transition: var(--common-btn-transition);
+
+        &:hover {
+            background-color: var(--bg-secondary-hover);
+        }
+    }
+
+}
+
+
+.choose_barber_dropdown_item {
+    background-color: var(--bg-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    /* align-items: center; */
+    gap: 1.5rem;
+    padding: 1rem;
+    cursor: pointer;
+
+    &>div:nth-child(1) {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        position: relative;
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+
+        .barber_online_dot {
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            top: 0rem;
+            right: 0rem;
+            border: 0.2rem solid var(--bg-primary);
+        }
+    }
+
+    &>div:nth-child(2) {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex: 1;
+
+        &>div {
+            &>p:nth-child(1) {
+                font-size: 1.4rem;
+                color: var(--text-primary);
+                margin-bottom: 0.5rem;
+            }
+
+            &>p {
+                font-size: 1.4rem;
+                color: var(--text-secondary);
+            }
+        }
+
+        &>div:nth-child(2) {
+            &>p:nth-child(1) {
+                text-align: end;
+            }
+        }
+
+    }
+}
+
+.barber_select {
+    outline: 0.1rem solid var(--text-primary);
+}
+
 
 @media screen and (min-width:0px) and (max-width:430px) {
     .list_container {

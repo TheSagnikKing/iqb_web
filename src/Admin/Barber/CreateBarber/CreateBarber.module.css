@@ -518,7 +518,7 @@
     padding: 2rem;
     background-color: transparent;
     display: grid;
-    grid-template-columns: minmax(0, 50rem) minmax(0, 67rem);
+    grid-template-columns: minmax(0, 50rem) minmax(0, 50rem);
     gap: 2rem;
     height: calc(100vh - 6rem);
 }

@@ -15,180 +15,180 @@
 
 // const Queue = () => {
 
-//   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
-//   const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+// const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+// const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
 
-//   const dispatch = useDispatch()
+// const dispatch = useDispatch()
 
-//   const queuelistcontrollerRef = useRef(new AbortController());
+// const queuelistcontrollerRef = useRef(new AbortController());
 
-//   useEffect(() => {
-//     const controller = new AbortController();
-//     queuelistcontrollerRef.current = controller;
+// useEffect(() => {
+//   const controller = new AbortController();
+//   queuelistcontrollerRef.current = controller;
 
-//     dispatch(getAllQueueListAction(salonId, controller.signal));
+//   dispatch(getAllQueueListAction(salonId, controller.signal));
 
-//     return () => {
-//       if (queuelistcontrollerRef.current) {
-//         queuelistcontrollerRef.current.abort();
-//       }
-//     };
-//   }, [salonId, dispatch]);
-
-//   const getAllQueueList = useSelector(state => state.getAllQueueList)
-
-//   const {
-//     loading: getAllQueueListLoading,
-//     resolve: getAllQueueListResolve,
-//     queueList: queuelist
-//   } = getAllQueueList
-
-//   const [copyQueueList, setCopyQueueList] = useState([])
-
-//   useEffect(() => {
-//     if (queuelist) {
-//       setCopyQueueList(queuelist)
+//   return () => {
+//     if (queuelistcontrollerRef.current) {
+//       queuelistcontrollerRef.current.abort();
 //     }
-//   }, [queuelist])
+//   };
+// }, [salonId, dispatch]);
 
-//   const [search, setSearch] = useState("")
+// const getAllQueueList = useSelector(state => state.getAllQueueList)
 
-//   const searchHandler = (value) => {
-//     setSearch(value)
-//     const searchValue = value.toLowerCase().trim();
+// const {
+//   loading: getAllQueueListLoading,
+//   resolve: getAllQueueListResolve,
+//   queueList: queuelist
+// } = getAllQueueList
 
-//     if (!search) {
-//       setCopyQueueList(queuelist)
-//     } else {
-//       setCopyQueueList((prev) => {
-//         const filteredArray = queuelist?.filter((queue) => {
-//           return (queue.name.toLowerCase().includes(searchValue) ||
-//             queue.barberName.toLowerCase().includes(searchValue))
-//         })
-//         return filteredArray
+// const [copyQueueList, setCopyQueueList] = useState([])
+
+// useEffect(() => {
+//   if (queuelist) {
+//     setCopyQueueList(queuelist)
+//   }
+// }, [queuelist])
+
+// const [search, setSearch] = useState("")
+
+// const searchHandler = (value) => {
+//   setSearch(value)
+//   const searchValue = value.toLowerCase().trim();
+
+//   if (!search) {
+//     setCopyQueueList(queuelist)
+//   } else {
+//     setCopyQueueList((prev) => {
+//       const filteredArray = queuelist?.filter((queue) => {
+//         return (queue.name.toLowerCase().includes(searchValue) ||
+//           queue.barberName.toLowerCase().includes(searchValue))
 //       })
-//     }
+//       return filteredArray
+//     })
+//   }
+// }
+
+// const darkMode = useSelector(darkmodeSelector)
+
+// const darkmodeOn = darkMode === "On"
+
+// const selectHandler = (b) => {
+//   if (b.qPosition !== 1) {
+//     return toast.error("Queue position is not 1", {
+//       duration: 3000,
+//       style: {
+//         fontSize: "var(--font-size-2)",
+//         borderRadius: '0.3rem',
+//         background: '#333',
+//         color: '#fff',
+//       },
+//     });
 //   }
 
-//   const darkMode = useSelector(darkmodeSelector)
+//   const confirm = window.confirm("Are you Sure ?")
 
-//   const darkmodeOn = darkMode === "On"
-
-//   const selectHandler = (b) => {
-//     if (b.qPosition !== 1) {
-//       return toast.error("Queue position is not 1", {
-//         duration: 3000,
-//         style: {
-//           fontSize: "var(--font-size-2)",
-//           borderRadius: '0.3rem',
-//           background: '#333',
-//           color: '#fff',
-//         },
-//       });
-//     }
-
-//     const confirm = window.confirm("Are you Sure ?")
-
-//     const queueData = {
-//       adminEmail,
-//       barberId: b.barberId,
-//       salonId,
-//       services: b.services,
-//       _id: b._id
-//     }
-
-//     if (confirm) {
-//       setChoosebarber(b?.barberName)
-//       setChoosebarberemail(b?.barberEmail)
-//       setChoosebarbermodalopen({
-//         open: true,
-//         data: queueData
-//       })
-//     }
+//   const queueData = {
+//     adminEmail,
+//     barberId: b.barberId,
+//     salonId,
+//     services: b.services,
+//     _id: b._id
 //   }
 
+//   if (confirm) {
+//     setChoosebarber(b?.barberName)
+//     setChoosebarberemail(b?.barberEmail)
+//     setChoosebarbermodalopen({
+//       open: true,
+//       data: queueData
+//     })
+//   }
+// }
 
-//   const cancelQHandler = (b) => {
-//     const confirm = window.confirm("Are you Sure ?")
 
-//     const queueData = {
-//       adminEmail,
-//       barberId: b.barberId,
-//       salonId,
-//       _id: b._id
-//     }
+// const cancelQHandler = (b) => {
+//   const confirm = window.confirm("Are you Sure ?")
 
-//     if (confirm) {
-//       // console.log(queueData)
-//       dispatch(adminCancelQueueAction(queueData, salonId))
-//     }
-
+//   const queueData = {
+//     adminEmail,
+//     barberId: b.barberId,
+//     salonId,
+//     _id: b._id
 //   }
 
-//   const adminServeQueue = useSelector(state => state.adminServeQueue)
-
-//   const {
-//     loading: adminServeQueueLoading
-//   } = adminServeQueue
-
-//   const adminCancelQueue = useSelector(state => state.adminCancelQueue)
-
-//   const {
-//     loading: adminCancelQueueLoading
-//   } = adminCancelQueue
-
-//   const [choosebarbermodalopen, setChoosebarbermodalopen] = useState({
-//     open: false,
-//     data: {}
-//   })
-
-//   const [choosebarber, setChoosebarber] = useState("")
-//   const [choosebarberemail, setChoosebarberemail] = useState("")
-
-//   const BarberListcontrollerRef = useRef(new AbortController());
-
-//   useEffect(() => {
-//     const controller = new AbortController();
-//     BarberListcontrollerRef.current = controller;
-
-//     dispatch(getAdminBarberListAction(salonId, controller.signal));
-
-//     return () => {
-//       if (BarberListcontrollerRef.current) {
-//         BarberListcontrollerRef.current.abort();
-//       }
-//     };
-//   }, [salonId, dispatch]);
-
-//   const getAdminBarberList = useSelector(state => state.getAdminBarberList)
-
-//   const {
-//     loading: getAdminBarberListLoading,
-//     resolve: getAdminBarberListResolve,
-//     getAllBarbers: BarberList
-//   } = getAdminBarberList
-
-
-//   const [copybarberlistdata, setCopybarberlistdata] = useState([])
-
-//   useEffect(() => {
-//     if (BarberList) {
-//       const clockedinbarbers = BarberList?.filter((b) => {
-//         return b.isClockedIn
-//       })
-//       setCopybarberlistdata(clockedinbarbers)
-//     }
-//   }, [BarberList])
-
-//   const serveQHandler = () => {
-
-//     const queuedata = {
-//       ...choosebarbermodalopen.data,
-//       servedByEmail: choosebarberemail
-//     }
-
-//     dispatch(adminServeQueueAction(queuedata, salonId, setChoosebarbermodalopen))
+//   if (confirm) {
+//     // console.log(queueData)
+//     dispatch(adminCancelQueueAction(queueData, salonId))
 //   }
+
+// }
+
+// const adminServeQueue = useSelector(state => state.adminServeQueue)
+
+// const {
+//   loading: adminServeQueueLoading
+// } = adminServeQueue
+
+// const adminCancelQueue = useSelector(state => state.adminCancelQueue)
+
+// const {
+//   loading: adminCancelQueueLoading
+// } = adminCancelQueue
+
+// const [choosebarbermodalopen, setChoosebarbermodalopen] = useState({
+//   open: false,
+//   data: {}
+// })
+
+// const [choosebarber, setChoosebarber] = useState("")
+// const [choosebarberemail, setChoosebarberemail] = useState("")
+
+// const BarberListcontrollerRef = useRef(new AbortController());
+
+// useEffect(() => {
+//   const controller = new AbortController();
+//   BarberListcontrollerRef.current = controller;
+
+//   dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+//   return () => {
+//     if (BarberListcontrollerRef.current) {
+//       BarberListcontrollerRef.current.abort();
+//     }
+//   };
+// }, [salonId, dispatch]);
+
+// const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+// const {
+//   loading: getAdminBarberListLoading,
+//   resolve: getAdminBarberListResolve,
+//   getAllBarbers: BarberList
+// } = getAdminBarberList
+
+
+// const [copybarberlistdata, setCopybarberlistdata] = useState([])
+
+// useEffect(() => {
+//   if (BarberList) {
+//     const clockedinbarbers = BarberList?.filter((b) => {
+//       return b.isClockedIn
+//     })
+//     setCopybarberlistdata(clockedinbarbers)
+//   }
+// }, [BarberList])
+
+// const serveQHandler = () => {
+
+//   const queuedata = {
+//     ...choosebarbermodalopen.data,
+//     servedByEmail: choosebarberemail
+//   }
+
+//   dispatch(adminServeQueueAction(queuedata, salonId, setChoosebarbermodalopen))
+// }
 
 
 //   return (
@@ -348,13 +348,176 @@
 
 // export default Queue
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from "./Queue.module.css"
-import { DropdownIcon } from '../../newicons';
-import { ClickAwayListener, Pagination } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom'
+import { CloseIcon, CrownIcon, DeleteIcon, SearchIcon, ServeIcon } from '../../icons'
+import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllQueueListAction } from '../../Redux/Admin/Actions/DashboardAction'
+import { adminCancelQueueAction, adminServeQueueAction } from '../../Redux/Admin/Actions/QueueAction'
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
+import toast from 'react-hot-toast'
+import { ClickAwayListener, Modal, Pagination } from '@mui/material'
+import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction'
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
+import { DropdownIcon } from '../../newicons'
 
 const Queue = () => {
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+
+  const dispatch = useDispatch()
+
+  const queuelistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    queuelistcontrollerRef.current = controller;
+
+    dispatch(getAllQueueListAction(salonId, controller.signal));
+
+    return () => {
+      if (queuelistcontrollerRef.current) {
+        queuelistcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAllQueueList = useSelector(state => state.getAllQueueList)
+
+  const {
+    loading: getAllQueueListLoading,
+    resolve: getAllQueueListResolve,
+    queueList: queuelist
+  } = getAllQueueList
+
+
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+  const selectHandler = (b) => {
+    if (b.qPosition !== 1) {
+      return toast.error("Queue position is not 1", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
+
+    const confirm = window.confirm("Are you Sure ?")
+
+    const queueData = {
+      adminEmail,
+      barberId: b.barberId,
+      salonId,
+      services: b.services,
+      _id: b._id
+    }
+
+    if (confirm) {
+      setChoosebarber(b?.barberName)
+      setChoosebarberemail(b?.barberEmail)
+      setChoosebarbermodalopen({
+        open: true,
+        data: queueData
+      })
+    }
+  }
+
+
+  const cancelQHandler = (b) => {
+    const confirm = window.confirm("Are you Sure ?")
+
+    const queueData = {
+      adminEmail,
+      barberId: b.barberId,
+      salonId,
+      _id: b._id
+    }
+
+    if (confirm) {
+      // console.log(queueData)
+      dispatch(adminCancelQueueAction(queueData, salonId))
+    }
+
+  }
+
+  const adminServeQueue = useSelector(state => state.adminServeQueue)
+
+  const {
+    loading: adminServeQueueLoading
+  } = adminServeQueue
+
+  const adminCancelQueue = useSelector(state => state.adminCancelQueue)
+
+  const {
+    loading: adminCancelQueueLoading
+  } = adminCancelQueue
+
+  const [choosebarbermodalopen, setChoosebarbermodalopen] = useState({
+    open: false,
+    data: {}
+  })
+
+  const [choosebarber, setChoosebarber] = useState("")
+  const [choosebarberemail, setChoosebarberemail] = useState("")
+
+  const BarberListcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    BarberListcontrollerRef.current = controller;
+
+    dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+    return () => {
+      if (BarberListcontrollerRef.current) {
+        BarberListcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+  const {
+    loading: getAdminBarberListLoading,
+    resolve: getAdminBarberListResolve,
+    getAllBarbers: BarberList
+  } = getAdminBarberList
+
+
+  const [copybarberlistdata, setCopybarberlistdata] = useState([])
+
+  useEffect(() => {
+    if (BarberList) {
+      const clockedinbarbers = BarberList?.filter((b) => {
+        return b.isClockedIn
+      })
+      setCopybarberlistdata(clockedinbarbers)
+    }
+  }, [BarberList])
+
+  const serveQHandler = () => {
+
+    const queuedata = {
+      ...choosebarbermodalopen.data,
+      servedByEmail: choosebarberemail
+    }
+
+    dispatch(adminServeQueueAction(queuedata, salonId, setChoosebarbermodalopen))
+  }
+
+
+  // ========================================================
 
   const headRows = [
     { id: 1, heading: "#", key: "qpos" },
@@ -368,31 +531,17 @@ const Queue = () => {
     { id: 9, heading: "", key: "cancel" },
   ];
 
-  const salonlistDataCopy = [
-    { customerName: "John Doe", gender: "Male", email: "john.doe@example.com", dob: "1990-05-15", mobile: "123-456-7890", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1", timeJoined: "10:00 AM", qgCode: "QG001", type: "Regular", estimatedTime: "10:30 AM" },
-    { customerName: "Emma Smith", gender: "Female", email: "emma.smith@example.com", dob: "1995-08-22", mobile: "987-654-3210", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2", timeJoined: "10:05 AM", qgCode: "QG002", type: "Premium", estimatedTime: "10:45 AM" },
-    { customerName: "Liam Johnson", gender: "Male", email: "liam.johnson@example.com", dob: "1988-11-30", mobile: "456-789-0123", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3", timeJoined: "10:10 AM", qgCode: "QG003", type: "Regular", estimatedTime: "10:45 AM" },
-    { customerName: "Sophia Brown", gender: "Female", email: "sophia.brown@example.com", dob: "1992-03-25", mobile: "321-654-0987", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4", timeJoined: "10:15 AM", qgCode: "QG004", type: "VIP", estimatedTime: "11:00 AM" },
-    { customerName: "Noah Wilson", gender: "Male", email: "noah.wilson@example.com", dob: "2000-07-10", mobile: "789-123-4560", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5", timeJoined: "10:20 AM", qgCode: "QG005", type: "Regular", estimatedTime: "10:45 AM" },
-    { customerName: "Olivia Martinez", gender: "Female", email: "olivia.martinez@example.com", dob: "1985-12-19", mobile: "654-321-7890", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6", timeJoined: "10:25 AM", qgCode: "QG006", type: "Premium", estimatedTime: "11:15 AM" },
-    { customerName: "William Davis", gender: "Male", email: "william.davis@example.com", dob: "1998-09-05", mobile: "147-258-3690", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7", timeJoined: "10:30 AM", qgCode: "QG007", type: "Regular", estimatedTime: "11:00 AM" },
-    { customerName: "Ava Garcia", gender: "Female", email: "ava.garcia@example.com", dob: "1993-04-14", mobile: "369-147-2580", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img=8", timeJoined: "10:35 AM", qgCode: "QG008", type: "VIP", estimatedTime: "11:20 AM" },
-    { customerName: "James Rodriguez", gender: "Male", email: "james.rodriguez@example.com", dob: "1996-06-21", mobile: "852-963-7410", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9", timeJoined: "10:40 AM", qgCode: "QG009", type: "Regular", estimatedTime: "11:00 AM" },
-    
-  ]
+  const [queuelistDataCopy, setQueuelistDataCopy] = useState([])
 
+  const [queuelistData, setQueuelistData] = useState([])
 
-  const [salonlistData, setSalonlistData] = useState([
-    { customerName: "John Doe", gender: "Male", email: "john.doe@example.com", dob: "1990-05-15", mobile: "123-456-7890", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1", timeJoined: "10:00 AM", qgCode: "QG001", type: "Regular", estimatedTime: "10:30 AM" },
-    { customerName: "Emma Smith", gender: "Female", email: "emma.smith@example.com", dob: "1995-08-22", mobile: "987-654-3210", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2", timeJoined: "10:05 AM", qgCode: "QG002", type: "Premium", estimatedTime: "10:45 AM" },
-    { customerName: "Liam Johnson", gender: "Male", email: "liam.johnson@example.com", dob: "1988-11-30", mobile: "456-789-0123", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3", timeJoined: "10:10 AM", qgCode: "QG003", type: "Regular", estimatedTime: "10:45 AM" },
-    { customerName: "Sophia Brown", gender: "Female", email: "sophia.brown@example.com", dob: "1992-03-25", mobile: "321-654-0987", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4", timeJoined: "10:15 AM", qgCode: "QG004", type: "VIP", estimatedTime: "11:00 AM" },
-    { customerName: "Noah Wilson", gender: "Male", email: "noah.wilson@example.com", dob: "2000-07-10", mobile: "789-123-4560", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5", timeJoined: "10:20 AM", qgCode: "QG005", type: "Regular", estimatedTime: "10:45 AM" },
-    { customerName: "Olivia Martinez", gender: "Female", email: "olivia.martinez@example.com", dob: "1985-12-19", mobile: "654-321-7890", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6", timeJoined: "10:25 AM", qgCode: "QG006", type: "Premium", estimatedTime: "11:15 AM" },
-    { customerName: "William Davis", gender: "Male", email: "william.davis@example.com", dob: "1998-09-05", mobile: "147-258-3690", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7", timeJoined: "10:30 AM", qgCode: "QG007", type: "Regular", estimatedTime: "11:00 AM" },
-    { customerName: "Ava Garcia", gender: "Female", email: "ava.garcia@example.com", dob: "1993-04-14", mobile: "369-147-2580", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img=8", timeJoined: "10:35 AM", qgCode: "QG008", type: "VIP", estimatedTime: "11:20 AM" },
-    { customerName: "James Rodriguez", gender: "Male", email: "james.rodriguez@example.com", dob: "1996-06-21", mobile: "852-963-7410", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9", timeJoined: "10:40 AM", qgCode: "QG009", type: "Regular", estimatedTime: "11:00 AM" },
-  ])
+  useEffect(() => {
+    if (getAllQueueListResolve && queuelist.length > 0) {
+      setQueuelistData(queuelist)
+      setQueuelistDataCopy(queuelist)
+    }
+
+  }, [queuelist])
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
@@ -406,19 +555,25 @@ const Queue = () => {
   const [sortColumn, setSortColumn] = useState("")
   const [query, setQuery] = useState("")
 
-  const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
+  const [queuePaginationData, setQueuePaginationData] = useState([])
 
   useEffect(() => {
-    const totalPages = Math.ceil(salonlistData.length / rowsPerPage); // Calculate based on filtered data
+    if (queuelistData.length > 0) {
+      setQueuePaginationData(queuelistData.slice(startIndex, endIndex))
+    }
+  }, [queuelistData])
+
+  useEffect(() => {
+    const totalPages = Math.ceil(queuelistData.length / rowsPerPage); // Calculate based on filtered data
     setTotalPages(totalPages);
 
     const startIndex = (page - 1) * rowsPerPage;
-    const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+    const endIndex = Math.min(startIndex + rowsPerPage, queuelistData.length);
 
     setStartIndex(startIndex);
     setEndIndex(endIndex);
-    setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
-}, [salonlistData, page, rowsPerPage]);
+    setQueuePaginationData(queuelistData.slice(startIndex, endIndex));
+  }, [queuelistData, page, rowsPerPage]);
 
 
   const handleChange = (event, value) => {
@@ -427,17 +582,17 @@ const Queue = () => {
 
 
   useEffect(() => {
-    let filteredData = salonlistDataCopy;
+    let filteredData = queuelistDataCopy;
 
     if (query.trim() !== '') {
-        filteredData = salonlistDataCopy.filter((item) =>
-            item.customerName.toLowerCase().trim().includes(query.toLowerCase())
-        );
+      filteredData = queuelistDataCopy.filter((item) =>
+        item.customerName.toLowerCase().trim().includes(query.toLowerCase())
+      );
     }
 
-    setSalonlistData(filteredData);
+    setQueuelistData(filteredData);
     setPage(1); // Reset page on filter
-}, [query]);
+  }, [query]);
 
   const [selectOpen, setSelectOpen] = useState(false)
 
@@ -460,65 +615,83 @@ const Queue = () => {
 
       <div className={`${style.list_container}`}>
 
-        <div className={`${style.list_body_container}`}>
+        {
+          getAllQueueListLoading ? (
+            <div className={`${style.list_body_container_loader}`}>
+              <Skeleton
+                count={6}
+                height={"6.5rem"}
+                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : getAllQueueListResolve && queuelist.length > 0 ? (
+            <div className={`${style.list_body_container}`}>
 
-          <div className={`${style.headRow}`}>
-            {
-              headRows.map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    <button
-                      className={`${item.key === "customerName" || item.key === "barberName" ? style.name_head_btn : ""}`}
-                    // onClick={() => sortFunction(item.key)}
-                    >
-                      {item.key === "customerName" || item.key === "barberName" ? (
-                        <>
-                          <span></span>
-                          {item.heading}
-                        </>
-                      ) : (
-                        item.heading
-                      )}
+              <div className={`${style.headRow}`}>
+                {
+                  headRows.map((item, index) => {
+                    return (
+                      <div key={item.id}>
+                        <button
+                          className={`${item.key === "customerName" || item.key === "barberName" ? style.name_head_btn : ""}`}
+                        // onClick={() => sortFunction(item.key)}
+                        >
+                          {item.key === "customerName" || item.key === "barberName" ? (
+                            <>
+                              <span></span>
+                              {item.heading}
+                            </>
+                          ) : (
+                            item.heading
+                          )}
 
-                      {/* <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span> */}
-                    </button>
-                  </div>
-                )
-              })
-            }
+                          {/* <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span> */}
+                        </button>
+                      </div>
+                    )
+                  })
+                }
 
-          </div>
+              </div>
 
 
-          {
-            salonPaginationData.map((item, index) => {
-              return (
-                <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div><p>{item.qPos === 1 ? "Next" : item.qPos}</p></div>
-                  <div>
-                    <div>
-                      <div><img src={item.customerImage} alt="" /></div>
-                      <p>{item.customerName}</p>
+              {
+                queuePaginationData.map((item, index) => {
+                  return (
+                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === queuePaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                      <div><p>{item.qPosition === 1 ? "Next" : item.qPosition}</p></div>
+                      <div>
+                        <div>
+                          <div><img src={item?.customerProfile?.[0]?.url} alt="" /></div>
+                          <p>{item.customerName}</p>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <div><img src={item?.barberProfile?.[0]?.url} alt="" /></div>
+                          <p>{item.barberName}</p>
+                        </div>
+                      </div>
+                      <div><p>{item.timeJoinedQ}</p></div>
+                      <div><p>{item.qgCode}</p></div>
+                      <div><p>{item.serviceType}</p></div>
+                      <div><p>{item?.customerEWT === 0 ? "-" : item?.customerEWT + "mins"}</p></div>
+                      <div><button onClick={() => selectHandler(item)} disabled={adminServeQueueLoading}>Serve</button></div>
+                      <div><button onClick={() => cancelQHandler(item)} disabled={adminCancelQueueLoading}>Cancel</button></div>
                     </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div><img src={item.customerImage} alt="" /></div>
-                      <p>{item.barberName}</p>
-                    </div>
-                  </div>
-                  <div><p>{item.timeJoined}</p></div>
-                  <div><p>{item.qgCode}</p></div>
-                  <div><p>{item.type}</p></div>
-                  <div><p>{item.mins} mins</p></div>
-                  <div><button onClick={() => alert(item.customerName)}>Serve</button></div>
-                  <div><button>Cancel</button></div>
+                  )
+                })
+              }
+            </div>
+          ) : (
+            <div className={`${style.list_body_container_error}`}>
+              <p>No queuelist available</p>
+            </div>
+          )
+        }
 
-                </div>
-              )
-            })
-          }
-        </div>
+
 
         <div className={`${style.pagination_container}`}>
           <div></div>
@@ -578,6 +751,90 @@ const Queue = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        open={choosebarbermodalopen.open}
+        onClose={() => setChoosebarbermodalopen({
+          open: false,
+          data: {}
+        })}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+          <div>
+            <p>Choose Barber</p>
+            <button onClick={() => setChoosebarbermodalopen({
+              open: false,
+              data: {}
+            })}><CloseIcon /></button>
+          </div>
+
+          <div className={`${style.modal_content_container} ${darkmodeOn && style.dark}`}>
+            <input type="text" value={choosebarber} placeholder='Choose Barber' readOnly />
+
+            {
+              getAdminBarberListLoading ? (<div className={style.barber_dropdown_loading}>
+                <Skeleton count={3} height={"6rem"} style={{ marginBottom: "1rem" }}
+                  baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                  highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                />
+              </div>) :
+                getAdminBarberListResolve && copybarberlistdata?.length > 0 ?
+                  (<div className={style.barber_dropdown}>
+                    {
+                      copybarberlistdata?.map((b) => {
+                        return (
+                          <div
+                            className={`${style.choose_barber_dropdown_item} ${choosebarberemail === b?.email && style.barber_select} ${darkmodeOn && style.dark}`}
+                            key={b._id}
+                            onClick={() => {
+                              setChoosebarberemail(b?.email)
+                              setChoosebarber(b?.name)
+                            }}
+                            style={{
+                              borderLeft: b.isOnline ? "0.5rem solid #00A36C" : "0.5rem solid rgb(244, 67, 54)",
+                            }}
+                          >
+                            <div>
+                              <img src={b?.profile?.[0]?.url} alt="img" />
+                              <div className={style.barber_online_dot}
+                                style={{
+                                  backgroundColor: b.isOnline ? "#00A36C" : "rgb(244, 67, 54)"
+                                }}
+                              ></div>
+                            </div>
+                            <div>
+                              <div>
+                                <p>{b.name}</p>
+                                <p>Queue Count : {b.queueCount}</p>
+                              </div>
+                              <div>
+                                <p>EWT</p>
+                                <p>{b.barberEWT} mins</p>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>) :
+                  (<div className={style.barber_dropdown_error}>
+                    <p>No barbers available</p>
+                  </div>)
+            }
+
+          </div>
+
+          {
+            adminServeQueueLoading ? <button style={{
+              display: "grid",
+              placeItems: "center"
+            }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
+          }
+
+        </div>
+      </Modal>
 
     </section>
   )
