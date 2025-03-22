@@ -70,7 +70,7 @@
                 margin-top: 0.1rem;
                 background-color: var(--bg-secondary);
                 color: var(--text-primary);
-                font-size: var(--font-primary);
+                font-size: 1.2rem;
                 cursor: pointer;
             }
 
@@ -96,6 +96,10 @@
                     align-items: center;
                     padding: 0.5rem;
                     gap: 1rem;
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
 
                     &>div {
                         height: 3rem;
@@ -126,7 +130,7 @@
 
             }
 
-            .salonlist_container_empty {
+            .salonlist_container_error {
                 position: absolute;
                 border: 0.1rem solid var(--border-secondary);
                 border-radius: var(--border-radius-primary);
@@ -148,6 +152,23 @@
                     color: var(--text-primary);
                     font-size: var(--font-primary);
                 }
+            }
+
+            .salonlist_container_loading{
+                position: absolute;
+                border: 0.1rem solid var(--border-secondary);
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+                background-color: var(--bg-primary);
+                top: 4rem;
+                left: 0rem;
+                right: 0rem;
+                height: 18rem;
+                z-index: 100;
+                padding: 1rem;
             }
         }
     }

@@ -127,10 +127,12 @@ import style from './Sidebar.module.css'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from '../Header/Header.jsx';
 import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, ReportIcon, SalonIcon } from '../../../newicons.js';
+import { useSelector } from 'react-redux';
 
 
 const Sidebar = () => {
 
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
   const [sidebar, setSidebar] = useState(true)
 
   const sideMenuData = [
@@ -142,30 +144,35 @@ const Sidebar = () => {
           name: "Dashboard",
           icon: <DashboardIcon />,
           url: "/admin-dashboard",
+          show: true
         },
         {
           id: 2,
           name: "Salons",
           icon: <SalonIcon />,
           url: "/admin-salon",
-        }, 
+          show: true
+        },
         {
           id: 3,
           name: "Barbers",
           icon: <BarberIcon />,
           url: "/admin-barber",
+          show: true
         },
         {
           id: 4,
           name: "Customers",
           icon: <CustomerIcon />,
           url: "/admin-customer",
-        }, ,
+          show: true
+        },
         {
           id: 5,
           name: "Advertisements",
           icon: <AdvertisementIcon />,
           url: "/admin-advertise",
+          show: true
         },
       ]
     },
@@ -177,24 +184,28 @@ const Sidebar = () => {
           name: "Queue List",
           icon: <QueueIcon />,
           url: "/admin-queue",
+          show: adminProfile?.isQueueing
         },
         {
           id: 2,
           name: "Queue History",
           icon: <QueueHistoryIcon />,
           url: "/admin-quehistory",
+          show: adminProfile?.isQueueing
         },
         {
           id: 3,
           name: "Appointments",
           icon: <AppointmentIcon />,
           url: "/admin-appointments",
+          show: adminProfile?.isAppointments
         },
         {
           id: 4,
           name: "Reports",
           icon: <ReportIcon />,
           url: "/admin-reports",
+          show: true
         },
       ]
     },
@@ -206,18 +217,28 @@ const Sidebar = () => {
           name: "Subscription",
           icon: <QueueIcon />,
           url: "/admin-subscription",
+          show: true
         },
         {
           id: 2,
           name: "Payment history",
           icon: <MdPaymentIcon />,
-          url: "/admin-paymentstatus"
+          url: "/admin-paymentstatus",
+          show: true
         },
       ]
     },
   ]
 
   const location = useLocation()
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
 
 
   return (
@@ -229,10 +250,10 @@ const Sidebar = () => {
       >
         <header>
           <div>
-            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/beauty-salon-logo-icon%2Cspa-logo%2Cgold-beauty-design-template-05b9bdfd3e13d2230a2846189d9660d4_screen.jpg?ts=1698222841" alt="" />
+            <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
           </div>
           {
-            sidebar ? (<p>Modern Unisex Salon</p>) : null
+            sidebar ? (<p>{adminGetDefaultSalonResponse?.salonName}</p>) : null
           }
         </header>
 
@@ -240,24 +261,27 @@ const Sidebar = () => {
           <ul>
             {sideMenuData.map((section, pIndex) => (
               <li key={section.heading}>
-               { sidebar ? <p>{section.heading}</p> : null} 
+                {sidebar ? <p>{section.heading}</p> : null}
                 <ul>
                   {section.menuItems.map((item, cIndex) => (
-                    <li
-                      key={item.id}
-                      className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
-                      >
-                      <Link to={item?.url}>
-                        <span
-                        style={{
-                          marginInline: sidebar ? "0rem" : "auto"
-                        }}
-                        >{item.icon}</span> 
-                        {
-                          sidebar ? item.name : null
-                        }
-                      </Link>
-                    </li>
+                      item.show ? (
+                        <li
+                          key={item.id}
+                          className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
+                        >
+                          <Link to={item?.url}>
+                            <span
+                              style={{
+                                marginInline: sidebar ? "0rem" : "auto"
+                              }}
+                            >{item.icon}</span>
+                            {
+                              sidebar ? item.name : null
+                            }
+                          </Link>
+                        </li>
+                      ) : null
+                      
                   ))}
                 </ul>
               </li>
@@ -268,7 +292,7 @@ const Sidebar = () => {
       </aside>
 
       <section>
-        <Header sidebar={sidebar} setSidebar={setSidebar}/>
+        <Header sidebar={sidebar} setSidebar={setSidebar} />
         <Outlet />
       </section>
     </main>

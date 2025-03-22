@@ -713,6 +713,23 @@
                         }
                     }
                 }
+
+                .barber_loading {
+                    display: block !important;
+                }
+
+                .barber_error {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex: 1;
+
+                    &>p {
+                        color: var(--text-primary);
+                        font-size: 1.6rem;
+                        font-family: 'AirbnbCereal_Medium';
+                    }
+                }
             }
 
             &>div:nth-child(2) {
@@ -847,6 +864,8 @@
                 }
             }
         }
+
+
 
         &>div:nth-child(2) {
             flex: 1;
@@ -1093,6 +1112,22 @@
                     }
                 }
             }
+
+            .queuelist_loading{
+                display: block;
+            }
+            
+            .queuelist_error {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &>p {
+                    color: var(--text-primary);
+                    font-size: 1.6rem;
+                    font-family: 'AirbnbCereal_Medium';
+                }
+            }
         }
     }
 
@@ -1107,17 +1142,17 @@
                 height: auto;
                 min-height: min-content;
 
-                &>div:nth-child(1){
+                &>div:nth-child(1) {
                     height: 28rem;
                     max-height: 28rem;
                     gap: 0rem;
                     padding: 0rem;
 
-                    &>div:nth-child(1){
+                    &>div:nth-child(1) {
                         padding: 2rem;
                     }
 
-                    &>div:nth-child(2){
+                    &>div:nth-child(2) {
                         padding: 1rem;
                     }
                 }
@@ -1127,7 +1162,7 @@
                     padding: 0rem;
                     gap: 0rem;
 
-                    &>div:nth-child(1){
+                    &>div:nth-child(1) {
                         padding: 2rem;
                     }
 
@@ -1136,7 +1171,7 @@
                         flex: none;
                         padding: 1rem;
                     }
-                    
+
                 }
 
                 &>div:nth-child(3) {
@@ -1144,9 +1179,10 @@
                     gap: 0rem;
                     flex: none;
 
-                    &>div:nth-child(1){
+                    &>div:nth-child(1) {
                         padding: 2rem;
                     }
+
                     .queue_history_container {
                         justify-content: space-between;
                         gap: 3rem;
@@ -1171,13 +1207,13 @@
                         gap: 0rem;
                         /* padding: 1rem; */
 
-                        &>div:nth-child(1){
+                        &>div:nth-child(1) {
                             /* background-color: red; */
                             gap: 1rem;
                             padding: 2rem;
                         }
 
-                        &>div:nth-child(2){
+                        &>div:nth-child(2) {
                             width: 100%;
                             min-height: 30vh;
                             max-height: 30vh;
@@ -1191,19 +1227,19 @@
                     }
                 }
 
-                &>div:nth-child(2){
-                   height: 60rem;
-                   flex: none;
-                   gap:0rem;
-                   padding: 0rem;
+                &>div:nth-child(2) {
+                    height: 60rem;
+                    flex: none;
+                    gap: 0rem;
+                    padding: 0rem;
 
-                   &>div:nth-child(1){
-                    padding: 2rem;
-                   }
+                    &>div:nth-child(1) {
+                        padding: 2rem;
+                    }
 
-                   &>div:nth-child(2){
-                    padding: 1rem;
-                   }
+                    &>div:nth-child(2) {
+                        padding: 1rem;
+                    }
                 }
 
             }

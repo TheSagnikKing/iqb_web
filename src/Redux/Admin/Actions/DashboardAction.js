@@ -173,6 +173,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
+                    zIndex: 9999
                 },
             });
 
@@ -193,6 +194,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
+                zIndex: 9999
             },
         });
     }

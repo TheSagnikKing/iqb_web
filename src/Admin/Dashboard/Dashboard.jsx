@@ -363,15 +363,15 @@
 //                 <div className={`${style.report_container} ${darkmodeOn && style.dark}`}>
 
 //                   <Carousel
-                    // showThumbs={false}
-                    // infiniteLoop={true}
-                    // autoPlay={false}
-                    // interval={5000}
-                    // showStatus={false}
-                    // showArrows={false}
-                    // stopOnHover={true}
-                    // swipeable={true}
-                    // renderIndicator={false}
+// showThumbs={false}
+// infiniteLoop={true}
+// autoPlay={false}
+// interval={5000}
+// showStatus={false}
+// showArrows={false}
+// stopOnHover={true}
+// swipeable={true}
+// renderIndicator={false}
 //                   >
 
 //                     <div className={style.r_chart}>
@@ -450,13 +450,223 @@
 
 // export default Dashboard
 
-import React from 'react'
-import style from "./Dashboard.module.css"
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { Tooltip } from '@mui/material';
+
+import React, { useEffect, useRef, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import style from './Dashboard.module.css'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllAdvertisementAction, getAllQueueListAction, getDashboardAppointmentListAction } from '../../Redux/Admin/Actions/DashboardAction';
+import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer';
+import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction';
 import { AppointmentIcon } from '../../newicons';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import api from '../../Redux/api/Api';
 
 const Dashboard = () => {
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const email = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
+  const adminName = useSelector(state => state.AdminLoggedInMiddleware.adminName)
+
+  const advertisementcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    advertisementcontrollerRef.current = controller;
+
+    dispatch(getAllAdvertisementAction(salonId, controller.signal));
+
+    return () => {
+      if (advertisementcontrollerRef.current) {
+        advertisementcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+
+  const getAllAdvertisement = useSelector(state => state.getAllAdvertisement)
+
+  const {
+    loading: getAllAdvertisementLoading,
+    resolve: getAllAdvertisementResolve,
+    advertisements
+  } = getAllAdvertisement
+
+
+  const queuelistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    queuelistcontrollerRef.current = controller;
+
+    dispatch(getAllQueueListAction(salonId, controller.signal));
+
+    return () => {
+      if (queuelistcontrollerRef.current) {
+        queuelistcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAllQueueList = useSelector(state => state.getAllQueueList)
+
+  const {
+    loading: getAllQueueListLoading,
+    resolve: getAllQueueListResolve,
+    queueList: queuelist
+  } = getAllQueueList
+
+  const [currentDate, setCurrentDate] = useState(new Date())
+
+  const appointmentlistcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    if (currentDate) {
+      const formattedDate = currentDate?.toISOString().split("T")[0]
+
+      const controller = new AbortController();
+      appointmentlistcontrollerRef.current = controller;
+
+      dispatch(getDashboardAppointmentListAction(salonId, formattedDate, controller.signal));
+
+      return () => {
+        if (appointmentlistcontrollerRef.current) {
+          appointmentlistcontrollerRef.current.abort();
+        }
+      };
+    }
+  }, [salonId, dispatch, currentDate])
+
+
+  const getDashboardAppointmentList = useSelector(state => state.getDashboardAppointmentList)
+
+  const {
+    loading: getDashboardAppointmentListLoading,
+    resolve: getDashboardAppointmentListResolve,
+    response: appointmentList
+  } = getDashboardAppointmentList
+
+
+  const truncateText = (text, characterLimit) => {
+    if (!text) return '';
+
+    // console.log(text.length)
+
+    if (text.length <= characterLimit) {
+      return text;
+    }
+
+    let truncatedText = text.slice(0, characterLimit);
+
+    return truncatedText + '...';
+  };
+
+
+  const BarberListcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    BarberListcontrollerRef.current = controller;
+
+    dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+    return () => {
+      if (BarberListcontrollerRef.current) {
+        BarberListcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+
+  const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+  const {
+    loading: getAdminBarberListLoading,
+    resolve: getAdminBarberListResolve,
+    getAllBarbers: BarberList
+  } = getAdminBarberList
+
+  const data2 = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+
+  const [reportData, setReportData] = useState([])
+
+  useEffect(() => {
+    const getAllReports = async () => {
+      const { data } = await api.post("/api/reports/getdashboardReports", {
+        salonId,
+        reportType: "daily"
+      })
+
+      setReportData(data.response)
+
+    }
+
+    getAllReports()
+
+  }, [])
+
+  // ===================================
 
   const queueData = [
     {
@@ -559,18 +769,18 @@ const Dashboard = () => {
     }
   ]
 
-  const queueList = [
-    { customerName: "John Doe", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
-    { customerName: "Emma Smith", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
-    { customerName: "Liam Johnson", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
-    { customerName: "Sophia Brown", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
-    { customerName: "Noah Wilson", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
-    { customerName: "Olivia Martinez", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
-    { customerName: "William Davis", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
-    { customerName: "Ava Garcia", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img08" },
-    { customerName: "James Rodriguez", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
-    { customerName: "Mia Anderson", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" }
-  ];
+  // const queueList = [
+  //   { customerName: "John Doe", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
+  //   { customerName: "Emma Smith", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
+  //   { customerName: "Liam Johnson", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
+  //   { customerName: "Sophia Brown", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
+  //   { customerName: "Noah Wilson", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
+  //   { customerName: "Olivia Martinez", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
+  //   { customerName: "William Davis", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
+  //   { customerName: "Ava Garcia", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img08" },
+  //   { customerName: "James Rodriguez", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
+  //   { customerName: "Mia Anderson", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" }
+  // ];
 
   const appointmentReportList = [
     {
@@ -636,7 +846,7 @@ const Dashboard = () => {
   return (
     <section className={`${style.dashboard_container}`}>
       <div>
-        <h2>Welcome, Toby Belhome</h2>
+        <h2>Welcome, {adminName}</h2>
       </div>
 
       <div>
@@ -645,22 +855,45 @@ const Dashboard = () => {
           <div>
             <div>
               <p>Barbers On Duty</p>
-              <p>Total 6 barbers are <span>Online</span></p>
+              <p>Total {BarberList?.length} barbers are available
+                {/* <span>Online</span> */}
+              </p>
             </div>
 
-            <div>
-              {
-                barberlist.map((b, index) => {
-                  return (
-                    <div className={`${style.barber_list_item}`} key={index}>
-                      <div><img src={b.img} alt="" /></div>
-                      <p>{b.name}</p>
-                    </div>
-                  )
-                })
-              }
+            {
+              getAdminBarberListLoading ? (
+                <div className={`${style.barber_loading}`}>
+                  <Skeleton
+                    count={3}
+                    width={"100%"}
+                    height={"4rem"}
+                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    style={{ marginBottom: "1rem" }} />
 
-            </div>
+                </div>
+              ) : getAdminBarberListResolve && BarberList?.length > 0 ? (
+                <div>
+                  {
+                    BarberList.map((barber, index) => {
+                      return (
+                        <div className={`${style.barber_list_item}`} key={barber._id}>
+                          <div><img src={barber?.profile?.[0]?.url} alt="barber" /></div>
+                          <p>{barber.name}</p>
+                        </div>
+                      )
+                    })
+                  }
+
+                </div>
+              ) : (
+                <div className={`${style.barber_error}`}>
+                  <p>No barbers available</p>
+                </div>
+              )
+            }
+
+
           </div>
 
           <div>
@@ -730,7 +963,7 @@ const Dashboard = () => {
               <div>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={150} height={40} data={appointReportData}>
-                    <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]}/>
+                    <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -763,31 +996,51 @@ const Dashboard = () => {
           <div>
             <div>
               <p>Queue List</p>
-              <p>The current total queue count is 100.</p>
+              <p>The current total queue count is {queuelist.length}</p>
             </div>
 
-            <div>
-              {
-                queueList.map((item,index) => {
-                  return (
-                    <div className={`${style.queue_list_item}`} key={index}>
-                      <div>
-                        <div><img src={item.customerImage} alt="" /></div>
-                        <div>
-                          <p>{item.customerName}</p>
-                          <p>{item.barberName}</p>
+            {
+              getAllQueueListLoading ? (
+                <div className={`${style.queuelist_loading}`}>
+                  <Skeleton
+                    count={6}
+                    width={"100%"}
+                    height={"6rem"}
+                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    style={{ marginBottom: "1rem" }} />
+                </div>
+              ) : getAllQueueListResolve && queuelist?.length > 0 ? (
+                <div>
+                  {
+                    queuelist.map((item, index) => {
+                      return (
+                        <div className={`${style.queue_list_item}`} key={item._id}>
+                          <div>
+                            <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
+                            <div>
+                              <p>{item.customerName}</p>
+                              <p>{item.barberName}</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <h2>{item?.qPosition === 1 ? "Next" : item?.qPosition}</h2>
+                            <p>Est. Time - {item.customerEWT === 0 ? "" : item.customerEWT} mins</p>
+                          </div>
                         </div>
-                      </div>
+                      )
+                    })
+                  }
+                </div>
+              ) : (
+                <div className={`${style.queuelist_error}`}>
+                  <p>No queue available</p>
+                </div>
+              )
+            }
 
-                      <div>
-                        <h2>{item.qPos === 1 ? "Next" : item.qPos}</h2>
-                        <p>Est. Time - {item.mins} mins</p>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </div>
+
           </div>
         </div>
       </div>

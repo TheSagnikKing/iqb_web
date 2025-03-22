@@ -575,6 +575,257 @@ import { CheckIcon, CloseIcon, FilterIcon, ResetIcon, SearchIcon } from '../../n
 
 const Report = () => {
 
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+  const dispatch = useDispatch()
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+  // State for checkboxes
+
+
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedRangeFilter, setSelectedRangeFilter] = useState("")
+
+  // console.log(selectedFilter)
+
+  const [weekOption, setWeekOption] = useState("4");
+  const [monthOption, setMonthOption] = useState("6");
+  const [dayOption, setDayOption] = useState("10");
+  const [queueType, setQueueType] = useState("")
+  const [appointmentType, setAppointmentType] = useState("")
+
+  // console.log(queueType)
+
+  const [dummyReport] = useState([
+    {
+      "0": "0",
+      "TotalQueue": 0
+    },
+    {
+      "1": "1",
+      "TotalQueue": 0
+    },
+    {
+      "2": "2",
+      "TotalQueue": 0
+    },
+    {
+      "3": "3",
+      "TotalQueue": 0
+    },
+    {
+      "4": "4",
+      "TotalQueue": 0
+    },
+    {
+      "5": "5",
+      "TotalQueue": 0
+    },
+    {
+      "6": "6",
+      "TotalQueue": 0
+    }
+  ])
+
+  const [QueueReportData, setQueueReportData] = useState(dummyReport)
+  const [AppointmentReportData, setAppointmentReportData] = useState(dummyReport)
+
+  console.log(QueueReportData)
+
+  useEffect(() => {
+    if (selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
+      try {
+        const getAllReports = async () => {
+          const reportOptions = {
+            salonId,
+            reportValue: queueType || appointmentType,
+            reportType: selectedFilter,
+            ...(selectedFilter === "daily" && { days: Number(dayOption) }),
+            ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
+            ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
+          };
+
+          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
+        };
+
+        getAllReports();
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  }, [selectedFilter, dayOption, weekOption, monthOption, queueType, appointmentType]);
+
+
+  const [selectedDates, setSelectedDates] = useState([])
+
+  const handleDateChange = (dates) => {
+    const formatedDates = dates.map((date) => date.format("YYYY-MM-DD"))
+    setSelectedDates(formatedDates)
+    setSelectedFilter("")
+    setWeekOption("")
+    setMonthOption("")
+    setDayOption("")
+  }
+
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  const [openbarberContainer, setOpenBarberContainer] = useState(false)
+
+  const [selectedbarber, setSelectedbarber] = useState("")
+  const [selectedbarberId, setSelectedbarberId] = useState("")
+  const [selectedbarberEmail, setSelectedbarberEmail] = useState("")
+
+  const BarberListcontrollerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    BarberListcontrollerRef.current = controller;
+
+    dispatch(getAdminBarberListAction(salonId, controller.signal));
+
+    return () => {
+      if (BarberListcontrollerRef.current) {
+        BarberListcontrollerRef.current.abort();
+      }
+    };
+  }, [salonId, dispatch]);
+
+  const getAdminBarberList = useSelector(state => state.getAdminBarberList)
+
+  const {
+    loading: getAdminBarberListLoading,
+    getAllBarbers: BarberList
+  } = getAdminBarberList
+
+  // console.log(BarberList)
+
+  console.log(selectedbarber)
+  console.log(selectedbarberId)
+  console.log(selectedbarberEmail)
+
+  console.log(selectedDates)
+  console.log(selectedRangeFilter)
+
+  useEffect(() => {
+
+    if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType) && selectedbarberEmail) {
+      const getAllReports = async () => {
+        try {
+          const reportOptions = {
+            salonId,
+            reportValue: (queueType || appointmentType),
+            reportType: selectedRangeFilter,
+            from: selectedDates[0],
+            to: selectedDates[1],
+            barberEmail: selectedbarberEmail,
+            barberId: selectedbarberId
+          };
+
+          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
+        } catch (error) {
+          toast.error(error?.response?.data?.message || "Something went wrong", {
+            duration: 3000,
+            style: {
+              fontSize: "var(--font-size-2)",
+              borderRadius: '0.3rem',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+        }
+      };
+
+      getAllReports();
+    } else if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType)) {
+      const getAllReports = async () => {
+        try {
+          const reportOptions = {
+            salonId,
+            reportValue: (queueType || appointmentType),
+            reportType: selectedRangeFilter,
+            from: selectedDates[0],
+            to: selectedDates[1]
+          };
+
+          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
+
+          if (queueType) {
+            setQueueReportData(data.response);
+          } else if (appointmentType) {
+            setAppointmentReportData(data.response)
+          }
+
+        } catch (error) {
+          toast.error(error?.response?.data?.message || "Something went wrong", {
+            duration: 3000,
+            style: {
+              fontSize: "var(--font-size-2)",
+              borderRadius: '0.3rem',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+        }
+      };
+
+      getAllReports();
+    }
+  }, [selectedDates, selectedRangeFilter, queueType, appointmentType, selectedbarberEmail, selectedbarberId]);
+
+  const resetHandler = () => {
+    setSelectedDates([])
+    setSelectedRangeFilter("")
+    setSelectedbarberEmail("")
+    setSelectedbarberId("")
+    setSelectedbarber("")
+    setQueueReportData(dummyReport)
+    setAppointmentReportData(dummyReport)
+
+    setSelectedFilter("")
+    setWeekOption("")
+    setMonthOption("")
+    setDayOption("")
+    setQueueType("")
+    setAppointmentType("")
+  }
+
+
+  // ============================================
+
   const appointReportData = [
     {
       name: 'Page A',
@@ -630,37 +881,37 @@ const Report = () => {
   const reportType = [
     {
       type: "Daily",
-      value: true,
+      value: "daily",
     },
     {
       type: "Weekly",
-      value: false
+      value: "weekly"
     },
     {
       type: "Monthly",
-      value: false
+      value: "monthly"
     }
   ]
 
   const QueueType = [
     {
       type: "Queue Served",
-      value: true
+      value: "queueserved"
     },
     {
       type: "Queue Cancelled",
-      value: false
+      value: "queuecancelled"
     },
   ]
 
   const AppointmentType = [
     {
       type: "Appointment Served",
-      value: false,
+      value: "appointmentserved",
     },
     {
       type: "Appointment Cancelled",
-      value: false
+      value: "appointmentcancelled"
     },
   ]
 
@@ -1037,8 +1288,6 @@ const Report = () => {
   ])
 
 
-  const [selectedDates, setSelectedDates] = useState([])
-
 
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
 
@@ -1072,14 +1321,23 @@ const Report = () => {
         <div>
           <ResponsiveContainer width="100%" height="90%">
             <BarChart
-              data={appointReportData}
+              data={QueueReportData}
               margin={{
-                left: -10,
+                left: -20,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <XAxis
+                dataKey={
+                  (selectedRangeFilter || selectedFilter) === "daily"
+                    ? "date"
+                    : (selectedRangeFilter || selectedFilter) === "weekly"
+                      ? "week"
+                      : (selectedRangeFilter || selectedFilter) === "monthly"
+                        ? "month"
+                        : ""
+                } />
+              <YAxis dataKey={"TotalQueue"}/>
               <Tooltip
                 cursor={{ fill: "var(--input-bg-color)" }}
                 contentStyle={{
@@ -1091,7 +1349,7 @@ const Report = () => {
                 }}
               />
 
-              <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
+              <Bar dataKey="TotalQueue" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
             </BarChart>
           </ResponsiveContainer>
           <div className={`${style.report_footer}`}>
@@ -1110,9 +1368,10 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: selectedFilter === item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => setSelectedFilter(item.value)}
+                      >{selectedFilter === item.value ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1128,9 +1387,13 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === queueType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setAppointmentType("")
+                          setQueueType(item.value)
+                        }}
+                      >{item.value === queueType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1146,9 +1409,13 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === appointmentType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setQueueType("")
+                          setAppointmentType(item.value)
+                        }}
+                      >{item.value === appointmentType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
