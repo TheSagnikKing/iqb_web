@@ -119,6 +119,7 @@
                             -moz-border-radius: 50%;
                             -ms-border-radius: 50%;
                             -o-border-radius: 50%;
+                            border: 0.1rem solid var(--border-secondary);
                         }
                     }
 
@@ -224,6 +225,7 @@
                 -ms-border-radius: inherit;
                 -o-border-radius: inherit;
                 object-fit: cover;
+                border: 0.1rem solid var(--border-secondary);
             }
 
             .profile_container {
@@ -265,6 +267,7 @@
                             -ms-border-radius: 50%;
                             -o-border-radius: 50%;
                             object-fit: cover;
+                            border: 0.1rem solid var(--border-secondary);
                         }
                     }
 

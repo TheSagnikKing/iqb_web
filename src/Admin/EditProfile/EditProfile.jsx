@@ -1001,12 +1001,13 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
+import { ClickAwayListener, Modal } from '@mui/material';
 import { getCurrentDate } from '../../utils/Date';
 
 import Calendar from 'react-calendar';
 import { CameraIcon, CheckIcon, CloseIcon, ContactTel, DropdownIcon, EmailIcon, OtpEmailIcon } from '../../newicons'
-import { Eyevisible, Notvisibleeye, OtpMessageIcon } from '../../icons';
+import { Eyevisible, Notvisibleeye, OtpMessageIcon, StripeIcon } from '../../icons';
+import Skeleton from 'react-loading-skeleton';
 
 const EditProfile = () => {
 
@@ -1592,41 +1593,57 @@ const EditProfile = () => {
         }
     }
 
-    // let progress = 0;
-    // if (name) progress = 25;
-    // if (name && mobileNumber) progress = 50;
-    // if (name && mobileNumber && dateOfBirth) progress = 75;
-    // if (name && mobileNumber && dateOfBirth && gender) progress = 100;
-
-    const [progress, setProgress] = useState(0)
-
-    useEffect(() => {
-        if(adminProfile){
-            if (adminProfile?.name) setProgress(25)
-                if (adminProfile?.name && adminProfile?.mobileNumber)  setProgress(50)
-                if (adminProfile?.name && adminProfile?.mobileNumber && dateOfBirth)  setProgress(75)
-                if (adminProfile?.name && adminProfile?.mobileNumber && dateOfBirth && gender)  setProgress(100)
-        }
-        
-    }, [adminProfile])
-
+    let progress = 0;
+    if (adminProfile?.name) progress = 25;
+    if (adminProfile?.name && adminProfile?.mobileNumber) progress = 50;
+    if (adminProfile?.name && adminProfile?.mobileNumber && adminProfile?.dateOfBirth) progress = 75;
+    if (adminProfile?.name && adminProfile?.mobileNumber && adminProfile?.dateOfBirth && adminProfile?.gender) progress = 100;
 
     return (
         <section className={`${style.section}`}>
             <div>
                 <h2>Profile</h2>
                 {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button> */}
+
+                {
+                    adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ?
+                        (<button className={style.stripe_connect_btn}
+                            onClick={loginStripeHandler}
+                        ><StripeIcon />Login to Stripe</button>) :
+                        (<button className={style.stripe_connect_btn}
+                            onClick={connectStripeLoading ? () => { } : stripeConnectHandler}
+                        ><StripeIcon />{connectStripeLoading ? "Loading..." : "Connect to Stripe"}</button>)
+                }
             </div>
 
             <div className={`${style.profile_container}`}>
                 <div>
                     <div>
                         <div>
-                            <img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" />
-                            <button><CameraIcon /></button>
+                            {
+                                uploadpicLoader ? <Skeleton
+                                    count={1}
+                                    width={"10rem"}
+                                    height={"10rem"}
+                                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                    style={{ borderRadius: "50%" }} /> : <img src={adminProfile?.profile[0]?.url} alt="profile" />
+                            }
+
+                            <button
+                                className={style.upload_image_container}
+                                onClick={() => handleSalonLogoButtonClick()}
+                            ><CameraIcon /></button>
+
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                style={{ display: 'none' }}
+                                onChange={handleProfileFileInputChange}
+                            />
                         </div>
 
-                        <h4>Toby Belhome</h4>
+                        <h4>{adminProfile?.name}</h4>
                         <p>Admin</p>
                     </div>
                     <div>
@@ -1661,7 +1678,7 @@ const EditProfile = () => {
                         <div>
                             <span style={{
                                 width: `${progress}%`,
-                                borderRadius: `${progress === 100} && 2rem`
+                                borderRadius: progress === 100 ? "2rem" : ""
                             }}></span>
                         </div>
                     </div>
@@ -1945,6 +1962,7 @@ const EditProfile = () => {
                                         max={getCurrentDate()}
                                         style={{
                                             colorScheme: darkmodeOn ? "dark" : "light",
+                                            width: "100% !important"
                                         }}
                                     />
                                 </div>) : (<div className={style.calender_container}>

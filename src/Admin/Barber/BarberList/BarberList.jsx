@@ -1059,7 +1059,7 @@ const BarberList = () => {
             title='Message'
           ><MessageIcon /></button>
 
-<Modal
+          <Modal
             open={openBarberMessage}
             onClose={() => setOpenBarberMessage(false)}
             aria-labelledby="modal-modal-title"
@@ -1110,8 +1110,14 @@ const BarberList = () => {
               </div>
             </div>
           </Modal>
-          
-          <button onClick={() => navigate("/admin-barber/createbarber")}>Create</button>
+
+          <button
+            disabled={salonId === 0}
+            style={{
+              cursor: salonId === 0 ? "not-allowed" : "cursor"
+            }}
+
+            onClick={() => navigate("/admin-barber/createbarber")}>Create</button>
         </div>
       </div>
 

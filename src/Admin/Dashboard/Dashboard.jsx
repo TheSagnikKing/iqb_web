@@ -843,211 +843,223 @@ const Dashboard = () => {
 
 
   return (
-    <section className={`${style.dashboard_container}`}>
-      <div>
-        <h2>Welcome, {adminName}</h2>
-      </div>
-
-      <div>
-        <div>
-
-          <div>
-            <div>
-              <p>Barbers On Duty</p>
-              <p>Total {BarberList?.length} barbers are available
-                {/* <span>Online</span> */}
-              </p>
-            </div>
-
-            {
-              getAdminBarberListLoading ? (
-                <div className={`${style.barber_loading}`}>
-                  <Skeleton
-                    count={3}
-                    width={"100%"}
-                    height={"4rem"}
-                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                    style={{ marginBottom: "1rem" }} />
-
-                </div>
-              ) : getAdminBarberListResolve && BarberList?.length > 0 ? (
-                <div>
-                  {
-                    BarberList.map((barber, index) => {
-                      return (
-                        <div className={`${style.barber_list_item}`} key={barber._id}>
-                          <div><img src={barber?.profile?.[0]?.url} alt="barber" /></div>
-                          <p>{barber.name}</p>
-                        </div>
-                      )
-                    })
-                  }
-
-                </div>
-              ) : (
-                <div className={`${style.barber_error}`}>
-                  <p>No barbers available</p>
-                </div>
-              )
-            }
-
-
-          </div>
-
-          <div>
-            <div>
-              <p>Queue Reports</p>
-              <p>Today status of Queue</p>
-              <h2>{reportData?.queue?.totalQueueCount}</h2>
-            </div>
-
-            <div className={`${style.queue_report_container}`}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  width={500}
-                  height={300}
-                  data={queueData}
-                >
-                  <Line type="monotone" dataKey="pv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
-                  <Line type="monotone" dataKey="uv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          <div>
-            <div>
-              <p>Queue History</p>
-              <p><span>+20.1%</span> from last 30 days</p>
-              <h2>400</h2>
-            </div>
-
-            <div className={`${style.queue_history_container}`}>
-              <div>
-                <div>
-                  <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedPercentage
-                    ? Number(reportData.queue.servedPercentage).toFixed(1)
-                    : "0.0"}</span>
-                  <p>Served</p>
-                </div>
-
-                <div>
-                  <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledPercentage
-                    ? Number(reportData.queue.cancelledPercentage).toFixed(1)
-                    : "0.0"}</span>
-                  <p>Canceled</p>
-                </div>
-              </div>
-
-              <div>
-                <div></div>
-              </div>
-
-            </div>
-
-          </div>
+    salonId === 0 ? (<>
+      <section className={`${style.dashboard_initial_ontainer}`}>
+        <div className={`${style.dashboard_intial_content}`}>
+          <p>Hey &#128075;, {adminName || email?.split('@')[0]}</p>
+          <p>You don't have any salon right now.</p>
+          <button onClick={() => navigate("/admin-salon/createsalon")}>Create</button>
         </div>
+      </section>
+    </>) : <>
+
+      <section className={`${style.dashboard_container}`}>
+        <div>
+          <h2>Welcome, {adminName}</h2>
+        </div>
+
         <div>
           <div>
+
             <div>
               <div>
-                <div>
-                  <p>Appointments Weekly Reports</p>
-                  <p>Weekly earnings overview</p>
-                </div>
-
-                <div>
-                  <h1>19th Feb - 25th Feb</h1>
-                  <p><span>+20.1%</span> from last 7 days</p>
-                </div>
+                <p>Barbers On Duty</p>
+                <p>Total {BarberList?.length} barbers are available
+                  {/* <span>Online</span> */}
+                </p>
               </div>
 
+              {
+                getAdminBarberListLoading ? (
+                  <div className={`${style.barber_loading}`}>
+                    <Skeleton
+                      count={3}
+                      width={"100%"}
+                      height={"4rem"}
+                      baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                      highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                      style={{ marginBottom: "1rem" }} />
+
+                  </div>
+                ) : getAdminBarberListResolve && BarberList?.length > 0 ? (
+                  <div>
+                    {
+                      BarberList.map((barber, index) => {
+                        return (
+                          <div className={`${style.barber_list_item}`} key={barber._id}>
+                            <div><img src={barber?.profile?.[0]?.url} alt="barber" /></div>
+                            <p>{barber.name}</p>
+                          </div>
+                        )
+                      })
+                    }
+
+                  </div>
+                ) : (
+                  <div className={`${style.barber_error}`}>
+                    <p>No barbers available</p>
+                  </div>
+                )
+              }
+
+
+            </div>
+
+            <div>
               <div>
+                <p>Queue Reports</p>
+                <p>Today status of Queue</p>
+                <h2>{reportData?.queue?.totalQueueCount}</h2>
+              </div>
+
+              <div className={`${style.queue_report_container}`}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart width={150} height={40} data={appointReportData}>
-                    <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
-                  </BarChart>
+                  <LineChart
+                    width={500}
+                    height={300}
+                    data={queueData}
+                  >
+                    <Line type="monotone" dataKey="pv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                    <Line type="monotone" dataKey="uv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                  </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             <div>
-              {
-                appointmentReportList.map((item) => {
-                  return (
-                    <div
-                      key={item.heading}
-                      className={`${style.appoint_report_item}`}>
-                      <div>
-                        <div><AppointmentIcon /></div>
-                        <p>{item.heading}</p>
+              <div>
+                <p>Queue History</p>
+                <p><span>+20.1%</span> from last 30 days</p>
+                <h2>400</h2>
+              </div>
+
+              <div className={`${style.queue_history_container}`}>
+                <div>
+                  <div>
+                    <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedPercentage
+                      ? Number(reportData.queue.servedPercentage).toFixed(1)
+                      : "0.0"}</span>
+                    <p>Served</p>
+                  </div>
+
+                  <div>
+                    <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledPercentage
+                      ? Number(reportData.queue.cancelledPercentage).toFixed(1)
+                      : "0.0"}</span>
+                    <p>Canceled</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <p>Appointments Weekly Reports</p>
+                    <p>Weekly earnings overview</p>
+                  </div>
+
+                  <div>
+                    <h1>19th Feb - 25th Feb</h1>
+                    <p><span>+20.1%</span> from last 7 days</p>
+                  </div>
+                </div>
+
+                <div>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart width={150} height={40} data={appointReportData}>
+                      <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div>
+                {
+                  appointmentReportList.map((item) => {
+                    return (
+                      <div
+                        key={item.heading}
+                        className={`${style.appoint_report_item}`}>
+                        <div>
+                          <div><AppointmentIcon /></div>
+                          <p>{item.heading}</p>
+                        </div>
+
+                        <h2>{item.value}</h2>
+
+                        <div><div></div></div>
                       </div>
+                    )
+                  })
+                }
 
-                      <h2>{item.value}</h2>
 
-                      <div><div></div></div>
-                    </div>
-                  )
-                })
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <p>Queue List</p>
+                <p>The current total queue count is {queuelist?.length}</p>
+              </div>
+
+              {
+                getAllQueueListLoading ? (
+                  <div className={`${style.queuelist_loading}`}>
+                    <Skeleton
+                      count={6}
+                      width={"100%"}
+                      height={"6rem"}
+                      baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                      highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                      style={{ marginBottom: "1rem" }} />
+                  </div>
+                ) : getAllQueueListResolve && queuelist?.length > 0 ? (
+                  <div>
+                    {
+                      queuelist.map((item, index) => {
+                        return (
+                          <div className={`${style.queue_list_item}`} key={item._id}>
+                            <div>
+                              <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
+                              <div>
+                                <p>{item.customerName}</p>
+                                <p>{item.barberName}</p>
+                              </div>
+                            </div>
+
+                            <div>
+                              <h2>{item?.qPosition === 1 ? "Next" : item?.qPosition}</h2>
+                              <p>Est. Time - {item.customerEWT === 0 ? "" : item.customerEWT} mins</p>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                ) : (
+                  <div className={`${style.queuelist_error}`}>
+                    <p>No queue available</p>
+                  </div>
+                )
               }
 
 
             </div>
           </div>
-
-          <div>
-            <div>
-              <p>Queue List</p>
-              <p>The current total queue count is {queuelist?.length}</p>
-            </div>
-
-            {
-              getAllQueueListLoading ? (
-                <div className={`${style.queuelist_loading}`}>
-                  <Skeleton
-                    count={6}
-                    width={"100%"}
-                    height={"6rem"}
-                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                    style={{ marginBottom: "1rem" }} />
-                </div>
-              ) : getAllQueueListResolve && queuelist?.length > 0 ? (
-                <div>
-                  {
-                    queuelist.map((item, index) => {
-                      return (
-                        <div className={`${style.queue_list_item}`} key={item._id}>
-                          <div>
-                            <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
-                            <div>
-                              <p>{item.customerName}</p>
-                              <p>{item.barberName}</p>
-                            </div>
-                          </div>
-
-                          <div>
-                            <h2>{item?.qPosition === 1 ? "Next" : item?.qPosition}</h2>
-                            <p>Est. Time - {item.customerEWT === 0 ? "" : item.customerEWT} mins</p>
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-              ) : (
-                <div className={`${style.queuelist_error}`}>
-                  <p>No queue available</p>
-                </div>
-              )
-            }
-
-
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
+
   )
 }
 

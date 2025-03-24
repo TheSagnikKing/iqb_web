@@ -439,48 +439,51 @@ const MobileSidebar = () => {
                     </li>
                   ))}
                 </ul>
-
-                <div className={`${style.online_container}`}>
-                  <p>{togglecheck ? "Online" : "Offline"}</p>
-                  <Switch
-                    width={45}
-                    height={18}
-                    handleDiameter={14}
-                    offColor="#F44336"
-                    onColor="#00A36C"
-                    uncheckedIcon={
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: "100%",
-                          fontSize: "1rem",
-                          color: "#F4F4F5",
-                          paddingRight: "1px",
-                        }}
-                      >
-                        OFF
-                      </div>
-                    }
-                    checkedIcon={
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: "100%",
-                          fontSize: "1rem",
-                          color: "#F4F4F5",
-                        }}
-                      >
-                        ON
-                      </div>
-                    }
-                    onChange={salonStatusHandler}
-                    checked={togglecheck}
-                  />
-                </div>
+                
+                {
+                  adminProfile?.salonId == 0 ? (null) : ( <div className={`${style.online_container}`}>
+                    <p>{togglecheck ? "Online" : "Offline"}</p>
+                    <Switch
+                      width={45}
+                      height={18}
+                      handleDiameter={14}
+                      offColor="#F44336"
+                      onColor="#00A36C"
+                      uncheckedIcon={
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "100%",
+                            fontSize: "1rem",
+                            color: "#F4F4F5",
+                            paddingRight: "1px",
+                          }}
+                        >
+                          OFF
+                        </div>
+                      }
+                      checkedIcon={
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "100%",
+                            fontSize: "1rem",
+                            color: "#F4F4F5",
+                          }}
+                        >
+                          ON
+                        </div>
+                      }
+                      onChange={salonStatusHandler}
+                      checked={togglecheck}
+                    />
+                  </div>)
+                }
+               
 
               </nav>
             </div>

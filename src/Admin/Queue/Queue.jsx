@@ -657,7 +657,7 @@ const Queue = () => {
 
 
               {
-                queuePaginationData.map((item, index) => {
+                queuePaginationData?.map((item, index) => {
                   return (
                     <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === queuePaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                       <div><p>{item.qPosition === 1 ? "Next" : item.qPosition}</p></div>

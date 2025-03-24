@@ -577,6 +577,7 @@ const Report = () => {
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
   const dispatch = useDispatch()
+  const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
   const darkMode = useSelector(darkmodeSelector)
 
@@ -691,7 +692,7 @@ const Report = () => {
         salonId,
         reportValue: queueType || appointmentType,
       };
-  
+
       if (selectType === "Salon" && selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
         reportOptions = {
           ...reportOptions,
@@ -700,8 +701,8 @@ const Report = () => {
           ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
           ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
         };
-      } 
-      
+      }
+
       else if (selectType === "Barber" && selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
         if (!selectedbarberEmail || !selectedbarberId) {
           toast.error("Please select barber", {
@@ -715,7 +716,7 @@ const Report = () => {
           });
           return;
         }
-  
+
         reportOptions = {
           ...reportOptions,
           reportType: selectedFilter,
@@ -725,8 +726,8 @@ const Report = () => {
           barberEmail: selectedbarberEmail,
           barberId: selectedbarberId,
         };
-      } 
-      
+      }
+
       else if (selectType === "Salon" && selectedDates.length > 0 && (queueType || appointmentType)) {
         reportOptions = {
           ...reportOptions,
@@ -734,8 +735,8 @@ const Report = () => {
           from: selectedDates[0],
           to: selectedDates[1],
         };
-      } 
-      
+      }
+
       else if (selectType === "Barber" && selectedDates.length > 0 && (queueType || appointmentType)) {
         if (!selectedbarberEmail || !selectedbarberId) {
           toast.error("Please select barber", {
@@ -749,7 +750,7 @@ const Report = () => {
           });
           return;
         }
-  
+
         reportOptions = {
           ...reportOptions,
           reportType: "range",
@@ -759,14 +760,14 @@ const Report = () => {
           barberId: selectedbarberId,
         };
       }
-  
+
       const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
       setReportData(data.response);
-  
+
     } catch (error) {
 
       console.error("API Error:", error);
-      
+
       toast.error(error?.response?.data?.message || "Something went wrong", {
         duration: 3000,
         style: {
@@ -779,7 +780,7 @@ const Report = () => {
     }
   };
 
-  
+
   const resetHandler = () => {
     setSelectedDates([])
     setSelectedRangeFilter("")
@@ -877,7 +878,12 @@ const Report = () => {
           />
 
           <button onClick={resetHandler}><ResetIcon /></button>
-          <button onClick={viewReport}>View Report</button>
+          <button onClick={viewReport}
+            disabled={adminProfile?.salonId == 0}
+            style={{
+              cursor: adminProfile?.salonId == 0 ? "not-allowed" : "pointer"
+            }}
+          >View Report</button>
         </div>
       </div>
 
@@ -1270,7 +1276,12 @@ const Report = () => {
             <button onClick={() => {
               setMobileFilterOpen(false)
               viewReport()
-            }}>View Report</button>
+            }}
+              disabled={adminProfile?.salonId == 0}
+              style={{
+                cursor: adminProfile?.salonId == 0 ? "not-allowed" : "pointer"
+              }}
+            >View Report</button>
           </div>
 
         </Box>

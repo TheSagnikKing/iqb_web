@@ -596,7 +596,54 @@
     }
 } */
 
+.dashboard_initial_ontainer {
+    height: calc(100vh - 6rem);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    .dashboard_intial_content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        &>p:nth-child(1) {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            font-family: 'AirbnbCereal_Medium';
+        }
+
+        &>p:nth-child(2) {
+            font-size: 1.6rem;
+            color: var(--text-secondary);
+        }
+
+        &>button {
+            height: 3.5rem;
+            padding-inline: 1.5rem;
+            border-radius: var(--border-radius-primary);
+            -webkit-border-radius: var(--border-radius-primary);
+            -moz-border-radius: var(--border-radius-primary);
+            -ms-border-radius: var(--border-radius-primary);
+            -o-border-radius: var(--border-radius-primary);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: var(--common-btn-transition);
+            -webkit-transition: var(--common-btn-transition);
+            -moz-transition: var(--common-btn-transition);
+            -ms-transition: var(--common-btn-transition);
+            -o-transition: var(--common-btn-transition);
+
+            &:hover {
+                background-color: var(--bg-secondary-hover);
+            }
+        }
+    }
+}
 
 .dashboard_container {
     height: calc(100vh - 6rem);
@@ -1113,10 +1160,10 @@
                 }
             }
 
-            .queuelist_loading{
+            .queuelist_loading {
                 display: block;
             }
-            
+
             .queuelist_error {
                 display: flex;
                 justify-content: center;

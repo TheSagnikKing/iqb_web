@@ -47,6 +47,8 @@ import Switch from "react-switch";
 
 const MobileSidebar = () => {
 
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata?.user[0])
+
   const location = useLocation()
 
   const darkMode = useSelector(darkmodeSelector)
@@ -163,7 +165,7 @@ const MobileSidebar = () => {
                 </ul>
 
                 <div className={`${style.online_container}`}>
-                  <p>{!online ? "Online" : "Offline"}</p>
+                  <p>{barberProfile?.isOnline ? "Online" : "Offline"}</p>
                   <Switch
                     width={40}
                     height={18}
@@ -171,12 +173,12 @@ const MobileSidebar = () => {
                     offColor="#F44336"
                     onColor="#00A36C"
                     readOnly
-                    checked={!online}
+                    checked={barberProfile?.isOnline}
                   />
                 </div>
 
                 <div className={`${style.online_container}`}>
-                  <p>{online ? "Clock In" : "Clock Out"}</p>
+                  <p>{barberProfile?.isClockedIn ? "Clock In" : "Clock Out"}</p>
                   <Switch
                     width={40}
                     height={18}
@@ -184,7 +186,7 @@ const MobileSidebar = () => {
                     offColor="#F44336"
                     onColor="#00A36C"
                     readOnly
-                    checked={online}
+                    checked={barberProfile?.isClockedIn}
                   />
                 </div>
               </nav>

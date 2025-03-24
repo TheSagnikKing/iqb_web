@@ -893,18 +893,21 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
       </div>
 
       <div>
-        <button
-          style={{
-            background: togglecheck  ? "#00A36C" : "rgb(244, 67, 54)",
-          }}
-          onClick={salonStatusHandler}
-        >{togglecheck  ? "Online" : "Offline"}</button>
+        {
+           adminProfile?.salonId == 0 ? <div></div> : (<button
+            style={{
+              background: togglecheck  ? "#00A36C" : "rgb(244, 67, 54)",
+            }}
+            onClick={salonStatusHandler}
+          >{togglecheck  ? "Online" : "Offline"}</button>)
+        }
+        
 
         <div><MoonIcon /></div>
 
         <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
           <div onClick={() => setProfileOpen((prev) => !prev)}>
-            <img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" />
+          <img src={adminProfile?.profile?.[0]?.url} alt="" />
 
             <div
               style={{
@@ -917,10 +920,10 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className={`${style.profile_container_header}`}>
-                <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
+                <div><img src={adminProfile?.profile?.[0]?.url} alt="" /></div>
                 <div>
-                  <p>Toby Belhome</p>
-                  <p>contact@hotmail.com</p>
+                  <p>{adminProfile?.name}</p>
+                  <p>{adminProfile?.email}</p>
                 </div>
               </div>
 

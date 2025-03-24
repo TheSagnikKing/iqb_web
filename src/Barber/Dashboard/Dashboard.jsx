@@ -1708,211 +1708,112 @@ const Dashboard = () => {
 
       </> :
       <>
+
         <div className={`${style.section}`}>
 
           <div>
             <h2>Connect to your salon</h2>
           </div>
 
-          {/* IMP = Thsi is the connect list  */}
-          {/* <div className={`${style.connect_container}`}>
-            <div>
-              <div>
-                {salonlistData.map((item) => (
-                  <div className={`${style.salon_item}`} key={item.id}>
-                    <img src={item.logo} alt={item.name} />
-                    <div>
-                      <p>{item.name}</p>
-                      <p>{item.city}</p>
-                    </div>
-
-                    <button><AddIcon /></button>
-                  </div>
-                ))}
-
-              </div>
-
-              <div>
-                {salonServices.map((service) => (
-                  <div key={service.id} className={style.service_item}>
-                    <div>
-                      <div>
-                        <div><img src={service.image} alt={service.name} /></div>
-                        <div>
-                          <p>{service.name}</p>
-                          <p>{service.type}</p>
-                          <p>{service.description}</p>
-                        </div>
-                      </div>
-                      {service.add ? (
-                        <button
-                          style={{
-                            background: "#450a0a",
-                          }}
-                          onClick={() => deleteBarberServicesHandler(service)}
-                        ><DeleteIcon /></button>
-                      ) : (
-                        <button
-                          style={{
-                            background: "#052e16",
-                          }}
-                          onClick={() => addBarberServicesHandler(service)}
-                        ><AddIcon /></button>
-                      )}
-
-                    </div>
-                    <div>
-                      <div>
-                        <p>Price</p>
-                        <p>{service.price}</p>
-                      </div>
-                      <div>
-                        <p>Estimated Time</p>
-                        <div>
-                          <input
-                            type="text"
-                            value={service.estimatedTime}
-                            onChange={(e) => {
-                              const value = e.target.value.replace(/[^0-9]/g, '');
-                              handleEWTChange(service.id, value);
-                            }}
-                            maxLength={3}
-                          />
-                          <p>mins</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <button>Connect</button>
-          </div> */}
-
-          {/* IMP = Thsi is the approve list  */}
-          {/* <div className={`${style.approve_container}`}>
-            <div>
-              <p>{barberProfile?.user[0]?.approvePendingMessage}</p>
-              <button onClick={() => window.location.reload()}>Reload</button>
-            </div>
-          </div> */}
-
-
-          {/* {
+          {
             barberProfile?.user[0]?.approvePendingMessage ?
-              <div className={style.barber_approve_container}>
+              <div className={`${style.approve_container}`}>
                 <div>
                   <p>{barberProfile?.user[0]?.approvePendingMessage}</p>
                   <button onClick={() => window.location.reload()}>Reload</button>
                 </div>
               </div> :
-              <div className={`${style.barber_connect_salon_list_container} ${darkmodeOn && style.dark}`}>
-                <div className={`${style.barber_connect_salon_list} ${darkmodeOn && style.dark}`}>
-                  <p>Choose Your Salon</p>
-                  <div>
-
-                    <div className={`${style.barber_connect_salon_list_header} ${darkmodeOn && style.dark}`}>
-                      <p>Salon Logo</p>
-                      <p>Salon Name</p>
-                      <p>Select</p>
-                    </div>
-
-                    {
-                      connectSalonListLoading ?
-                        <>
-                          <Skeleton count={4} height={"5rem"} style={{ marginBottom: "1rem" }}
-                            baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                            highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
-                        </> :
-                        connectSalonListResolve && connectSalonListResponse?.length > 0 ?
-                          connectSalonListResponse?.map((s) => (
-                            <div key={s.salonId} className={`${style.barber_connect_salon_list_body} ${darkmodeOn && style.dark}`}>
-                              <div><img src={s?.salonLogo?.[0]?.url} alt="salon_logo" /></div>
-                              <p>{s.salonName}</p>
-                              <div>{
-                                selectedSalonId == s.salonId ? <button className={style.check_connect_btn}><CheckIcon /></button> : <button className={style.add_connect_btn} onClick={() => setSelectedSalonId(s.salonId)} >+</button>
-                              }</div>
-
-                            </div>
-                          ))
-                          :
-                          <div className={style.barber_connect_salon_list_error}>
-                            <p>No Salons Available</p>
-                          </div>
-                    }
-
-
-                  </div>
-                </div>
-
-                <div className={`${style.barber_list_services_list} ${darkmodeOn && style.dark}`}>
-                  <p>List of Services</p>
-                  <div>
-
-                    {
-                      selectedServiceList?.map((s) => {
-                        return (
-                          <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={s.serviceId}>
-                            <div className={`${style.service_item_top}`}>
-                              <div><img src={s?.serviceIcon?.url} alt="service icon" /></div>
-                              <div>
-                                <p>{s?.serviceName}</p>
-                                <p>{s?.vipService ? "VIP" : "Regular"}</p>
-                                <p>{s?.serviceDesc}</p>
-                              </div>
-                            </div>
-                            <div className={`${style.service_item_bottom}`}>
-                              <div>
-                                <div>
-                                  <p>Service Price</p>
-                                  <p>{currentSelectedSalon?.currency}{s?.servicePrice}</p>
-                                </div>
-                              </div>
-
-                              <div>
-                                <div>
-                                  <p>Est Wait Time</p>
-                                  <div>
-                                    <div><ClockIcon /></div>
-                                    <input
-                                      type="text"
-                                      value={s?.serviceEWT}
-                                      onChange={(e) => handleBarberEwt(s?.serviceId, e.target.value)}
-                                    />
-                                    <p>mins</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                            </div>
-
-                            {
-                              barberSelectedServices.some((b) => b._id === s?._id) ?
-                                (<button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(s)}><DeleteIcon /></button>) :
-                                (<button className={`${style.service_add_icon}`} onClick={() => selectServiceHandler(s)}><AddIcon /></button>)
-                            }
-
-
-                          </div>
-                        )
-                      })
-                    }
-
-                  </div>
-                </div>
-
+              <div className={`${style.connect_container}`}>
                 <div>
+
                   {
-                    barberConnectSalonLoading ? <button style={{
-                      display: "grid",
-                      placeItems: "center",
-                    }} className={style.connect_btn}><ButtonLoader /></button> : <button onClick={connectSalonClicked} className={style.connect_btn}>Connect Salon</button>
+                    connectSalonListLoading ? (
+                      <div>
+                        <Skeleton count={4} height={"7rem"} style={{ marginBottom: "2rem" }}
+                          baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                          highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+                      </div>)
+                      : connectSalonListResolve && connectSalonListResponse?.length > 0 ? (
+                        <div>
+                          {connectSalonListResponse.map((item) => (
+                            <div className={`${style.salon_item}`} key={item.salonId}>
+                              <img src={item?.salonLogo?.[0]?.url} alt={""} />
+                              <div>
+                                <p>{item.salonName}</p>
+                                <p>{item.city}</p>
+                              </div>
+
+                              {selectedSalonId == item.salonId ? <button style={{ background: "green" }}><CheckIcon /></button> : <button onClick={() => setSelectedSalonId(item.salonId)} >+</button>}
+                            </div>
+                          ))}
+
+                        </div>
+                      ) : (<div className={`${style.salon_content_body_error} ${darkmodeOn && style.dark}`}>
+                        <p>No salons available</p>
+                      </div>
+                      )
                   }
 
+                  <div>
+                    {selectedServiceList.map((service) => (
+                      <div key={service.serviceId} className={style.service_item}>
+                        <div>
+                          <div>
+                            <div><img src={service?.serviceIcon?.url} alt={""} /></div>
+                            <div>
+                              <p>{service.serviceName}</p>
+                              <p>{service.vipService ? "VIP" : "Regular"}</p>
+                              <p>{service.serviceDesc}</p>
+                            </div>
+                          </div>
+                          {barberSelectedServices.some((b) => b._id === service?._id) ? (
+                            <button
+                              style={{
+                                background: "#450a0a",
+                              }}
+                              onClick={() => deleteServiceHandler(service)}
+                            ><DeleteIcon /></button>
+                          ) : (
+                            <button
+                              style={{
+                                background: "#052e16",
+                              }}
+                              onClick={() => selectServiceHandler(service)}
+                            ><AddIcon /></button>
+                          )}
+
+                        </div>
+                        <div>
+                          <div>
+                            <p>Price</p>
+                            <p>{currentSelectedSalon?.currency}{service?.servicePrice}</p>
+                          </div>
+                          <div>
+                            <p>Estimated Time</p>
+                            <div>
+                              <input
+                                type="text"
+                                value={service?.serviceEWT}
+                                onChange={(e) => handleBarberEwt(service?.serviceId, e.target.value)}
+                                maxLength={3}
+                              />
+                              <p>mins</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
+                {
+                  barberConnectSalonLoading ? <button style={{
+                    display: "grid",
+                    placeItems: "center",
+                  }}><ButtonLoader /></button> : <button onClick={connectSalonClicked}>Connect Salon</button>
+                }
               </div>
-          } */}
+          }
 
         </div>
       </>

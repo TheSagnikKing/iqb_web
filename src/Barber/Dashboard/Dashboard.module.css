@@ -291,6 +291,18 @@
             }
         }
 
+        .salon_content_body_error{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>p {
+                font-size: var(--font-size-3);
+                font-weight: 500;
+                font-family: "AirbnbCereal_Medium";
+            }
+        }
+
         &>button {
             width: max-content;
             height: 3.5rem;
@@ -1239,6 +1251,7 @@
             }
         }
 
+    
         &>div:nth-child(2) {
             flex: 1;
             min-height: 45rem;

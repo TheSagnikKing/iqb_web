@@ -342,6 +342,21 @@
 
 }
 
+.list_body_container_error {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+
+    &>p {
+        color: var(--text-primary);
+        font-size: 1.6rem;
+        font-family: 'AirbnbCereal_Medium';
+    }
+
+}
+
 /* dark mode */
 
 .subscription_status_wrapper.dark {

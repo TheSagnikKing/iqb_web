@@ -269,7 +269,7 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
 
     const darkMode = useSelector(darkmodeSelector)
 
-    console.log("Dark Mode ", darkMode)
+    // console.log("Dark Mode ", darkMode)
 
     const darkHandler = () => {
         localStorage.setItem("dark", "On");
@@ -395,15 +395,15 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
                 <div>
                     <button
                         style={{
-                            background: onlineState ? "#00A36C" : "rgb(244, 67, 54)",
+                            background: barberProfile?.isOnline ? "#00A36C" : "rgb(244, 67, 54)",
                         }}
-                    >{onlineState ? "Online" : "Offline"}</button>
+                    >{barberProfile?.isOnline ? "Online" : "Offline"}</button>
 
                     <button
                         style={{
-                            background: !onlineState ? "#00A36C" : "rgb(244, 67, 54)",
+                            background: barberProfile?.isClockedIn ? "#00A36C" : "rgb(244, 67, 54)",
                         }}
-                    >{!onlineState ? "Clock-In" : "Clock-Out"}</button>
+                    >{barberProfile?.isClockedIn ? "Clock-In" : "Clock-Out"}</button>
                 </div>
 
                 <div><MoonIcon /></div>
