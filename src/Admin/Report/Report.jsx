@@ -575,7 +575,6 @@ import { CheckIcon, CloseIcon, FilterIcon, ResetIcon, SearchIcon } from '../../n
 
 const Report = () => {
 
-
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
   const dispatch = useDispatch()
 
@@ -583,21 +582,16 @@ const Report = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  // State for checkboxes
-
 
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedRangeFilter, setSelectedRangeFilter] = useState("")
 
-  // console.log(selectedFilter)
-
-  const [weekOption, setWeekOption] = useState("4");
-  const [monthOption, setMonthOption] = useState("6");
-  const [dayOption, setDayOption] = useState("10");
+  const [weekOption, setWeekOption] = useState("");
+  const [monthOption, setMonthOption] = useState("");
+  const [dayOption, setDayOption] = useState("");
   const [queueType, setQueueType] = useState("")
   const [appointmentType, setAppointmentType] = useState("")
-
-  // console.log(queueType)
+  const [selectType, setSelectType] = useState("Salon")
 
   const [dummyReport] = useState([
     {
@@ -630,41 +624,8 @@ const Report = () => {
     }
   ])
 
-  const [QueueReportData, setQueueReportData] = useState(dummyReport)
-  const [AppointmentReportData, setAppointmentReportData] = useState(dummyReport)
 
-  console.log(QueueReportData)
-
-  useEffect(() => {
-    if (selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
-      try {
-        const getAllReports = async () => {
-          const reportOptions = {
-            salonId,
-            reportValue: queueType || appointmentType,
-            reportType: selectedFilter,
-            ...(selectedFilter === "daily" && { days: Number(dayOption) }),
-            ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
-            ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
-          };
-
-          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-
-          if (queueType) {
-            setQueueReportData(data.response);
-          } else if (appointmentType) {
-            setAppointmentReportData(data.response)
-          }
-
-        };
-
-        getAllReports();
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-  }, [selectedFilter, dayOption, weekOption, monthOption, queueType, appointmentType]);
+  const [reportData, setReportData] = useState(dummyReport)
 
 
   const [selectedDates, setSelectedDates] = useState([])
@@ -678,8 +639,6 @@ const Report = () => {
     setDayOption("")
   }
 
-
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -696,7 +655,6 @@ const Report = () => {
   }, []);
 
 
-  const [openbarberContainer, setOpenBarberContainer] = useState(false)
 
   const [selectedbarber, setSelectedbarber] = useState("")
   const [selectedbarberId, setSelectedbarberId] = useState("")
@@ -724,40 +682,29 @@ const Report = () => {
     getAllBarbers: BarberList
   } = getAdminBarberList
 
-  // console.log(BarberList)
+  const [isMobile, setIsMobile] = useState(false);
 
-  console.log(selectedbarber)
-  console.log(selectedbarberId)
-  console.log(selectedbarberEmail)
 
-  console.log(selectedDates)
-  console.log(selectedRangeFilter)
-
-  useEffect(() => {
-
-    if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType) && selectedbarberEmail) {
-      const getAllReports = async () => {
-        try {
-          const reportOptions = {
-            salonId,
-            reportValue: (queueType || appointmentType),
-            reportType: selectedRangeFilter,
-            from: selectedDates[0],
-            to: selectedDates[1],
-            barberEmail: selectedbarberEmail,
-            barberId: selectedbarberId
-          };
-
-          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-
-          if (queueType) {
-            setQueueReportData(data.response);
-          } else if (appointmentType) {
-            setAppointmentReportData(data.response)
-          }
-
-        } catch (error) {
-          toast.error(error?.response?.data?.message || "Something went wrong", {
+  const viewReport = async () => {
+    try {
+      let reportOptions = {
+        salonId,
+        reportValue: queueType || appointmentType,
+      };
+  
+      if (selectType === "Salon" && selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
+        reportOptions = {
+          ...reportOptions,
+          reportType: selectedFilter,
+          ...(selectedFilter === "daily" && { days: Number(dayOption) }),
+          ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
+          ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
+        };
+      } 
+      
+      else if (selectType === "Barber" && selectedFilter && (dayOption || weekOption || monthOption) && (queueType || appointmentType)) {
+        if (!selectedbarberEmail || !selectedbarberId) {
+          toast.error("Please select barber", {
             duration: 3000,
             style: {
               fontSize: "var(--font-size-2)",
@@ -766,31 +713,32 @@ const Report = () => {
               color: '#fff',
             },
           });
+          return;
         }
-      };
-
-      getAllReports();
-    } else if (selectedDates.length === 2 && selectedRangeFilter && (queueType || appointmentType)) {
-      const getAllReports = async () => {
-        try {
-          const reportOptions = {
-            salonId,
-            reportValue: (queueType || appointmentType),
-            reportType: selectedRangeFilter,
-            from: selectedDates[0],
-            to: selectedDates[1]
-          };
-
-          const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
-
-          if (queueType) {
-            setQueueReportData(data.response);
-          } else if (appointmentType) {
-            setAppointmentReportData(data.response)
-          }
-
-        } catch (error) {
-          toast.error(error?.response?.data?.message || "Something went wrong", {
+  
+        reportOptions = {
+          ...reportOptions,
+          reportType: selectedFilter,
+          ...(selectedFilter === "daily" && { days: Number(dayOption) }),
+          ...(selectedFilter === "weekly" && { week: Number(weekOption) }),
+          ...(selectedFilter === "monthly" && { month: Number(monthOption) }),
+          barberEmail: selectedbarberEmail,
+          barberId: selectedbarberId,
+        };
+      } 
+      
+      else if (selectType === "Salon" && selectedDates.length > 0 && (queueType || appointmentType)) {
+        reportOptions = {
+          ...reportOptions,
+          reportType: "range",
+          from: selectedDates[0],
+          to: selectedDates[1],
+        };
+      } 
+      
+      else if (selectType === "Barber" && selectedDates.length > 0 && (queueType || appointmentType)) {
+        if (!selectedbarberEmail || !selectedbarberId) {
+          toast.error("Please select barber", {
             duration: 3000,
             style: {
               fontSize: "var(--font-size-2)",
@@ -799,21 +747,49 @@ const Report = () => {
               color: '#fff',
             },
           });
+          return;
         }
-      };
+  
+        reportOptions = {
+          ...reportOptions,
+          reportType: "range",
+          from: selectedDates[0],
+          to: selectedDates[1],
+          barberEmail: selectedbarberEmail,
+          barberId: selectedbarberId,
+        };
+      }
+  
+      const { data } = await api.post("/api/reports/getSalonReports", reportOptions);
+      setReportData(data.response);
+  
+    } catch (error) {
 
-      getAllReports();
+      console.error("API Error:", error);
+      
+      toast.error(error?.response?.data?.message || "Something went wrong", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
-  }, [selectedDates, selectedRangeFilter, queueType, appointmentType, selectedbarberEmail, selectedbarberId]);
+  };
 
+  
   const resetHandler = () => {
     setSelectedDates([])
     setSelectedRangeFilter("")
     setSelectedbarberEmail("")
     setSelectedbarberId("")
     setSelectedbarber("")
-    setQueueReportData(dummyReport)
-    setAppointmentReportData(dummyReport)
+    // setQueueReportData(dummyReport)
+    // setAppointmentReportData(dummyReport)
+    setReportData(dummyReport)
+    setSelectType("Salon")
 
     setSelectedFilter("")
     setWeekOption("")
@@ -825,58 +801,6 @@ const Report = () => {
 
 
   // ============================================
-
-  const appointReportData = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
-  // If Report Type daily then maximum i will give them to see is 21
-  // If Weekly then 8 weeks
-  // If Monthly then 2 years
-
-  // I also have to give a search icon on press i will call api. So that user can understand,
-  // what field is missing
 
   const reportType = [
     {
@@ -919,374 +843,13 @@ const Report = () => {
   const SelectType = [
     {
       type: "Salon Report",
-      value: false
+      value: "Salon"
     },
     {
       type: "Barber Report",
-      value: true
+      value: "Barber"
     },
   ]
-
-  const [barberlistData, setBarberlistData] = useState([
-    {
-      "_id": "67a46ad5c85dd16cdfa7f1c9",
-      "name": "John Doe",
-      "email": "john@yopmail.com",
-      "emailVerified": false,
-      "password": "$2b$10$tH/C1Xo25p6i0S9TRyjiPOwV5UbxAImvX1LVFZ1spUjhmmXDQlPaW",
-      "role": "Barber",
-      "AuthType": "local",
-      "nickName": "john",
-      "mobileNumber": 8240205351,
-      "mobileCountryCode": 91,
-      "mobileVerified": false,
-      "dateOfBirth": "2002-04-11T00:00:00.000Z",
-      "salonId": 1,
-      "barberId": 1,
-      "barberCode": "JO1",
-      "isActive": true,
-      "isApproved": true,
-      "barberRatings": [],
-      "barberServices": [
-        {
-          "serviceIcon": {
-            "public_id": "icons/Femalehaircut_1706703379391",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
-          },
-          "serviceId": 12,
-          "serviceCode": "FE12",
-          "serviceName": "Female Haircut",
-          "servicePrice": 40,
-          "vipService": false,
-          "barberServiceEWT": 120,
-          "_id": "67a46936c85dd16cdfa7ef9c"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/spa_1706703379407",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
-          },
-          "serviceId": 13,
-          "serviceCode": "HA13",
-          "serviceName": "Hair Spa",
-          "servicePrice": 100,
-          "vipService": true,
-          "barberServiceEWT": 50,
-          "_id": "67a46936c85dd16cdfa7ef9d"
-        }
-      ],
-      "barberEWT": 530,
-      "queueCount": 4,
-      "isOnline": true,
-      "isClockedIn": true,
-      "isDeleted": false,
-      "approvePendingMessage": "",
-      "profile": [
-        {
-          "public_id": "barbers/download - 2024-12-27T164801_7c8887e1-1d2b-4946-8dfa-42fb9f696021",
-          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739771508/barbers/download%20-%202024-12-27T164801_7c8887e1-1d2b-4946-8dfa-42fb9f696021.png",
-          "_id": "67b2ce7459f98fd329c6cd46"
-        }
-      ],
-      "createdAt": "2025-02-06T07:55:01.949Z",
-      "updatedAt": "2025-03-13T13:17:36.291Z",
-      "__v": 0
-    },
-    {
-      "_id": "67a46b28c85dd16cdfa7f26e",
-      "name": "Bob",
-      "email": "bob@yopmail.com",
-      "emailVerified": false,
-      "password": "$2b$10$GGig2mi/OCrewGSpYcIJJ.Bl94xzSTv6tu.oh//Yw.wgQCzZm7clC",
-      "role": "Barber",
-      "AuthType": "local",
-      "nickName": "bob",
-      "mobileNumber": 8240205351,
-      "mobileCountryCode": 91,
-      "mobileVerified": false,
-      "dateOfBirth": "2009-12-04T00:00:00.000Z",
-      "salonId": 1,
-      "barberId": 2,
-      "barberCode": "BO2",
-      "isActive": true,
-      "isApproved": true,
-      "barberRatings": [],
-      "barberServices": [
-        {
-          "serviceIcon": {
-            "public_id": "icons/Malehaircut_1706703379405",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
-          },
-          "serviceId": 11,
-          "serviceCode": "HA11",
-          "serviceName": "Haircut",
-          "servicePrice": 38,
-          "vipService": false,
-          "barberServiceEWT": 20,
-          "_id": "67a46936c85dd16cdfa7ef9b"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/massage_1706703379406",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
-          },
-          "serviceId": 14,
-          "serviceCode": "MA14",
-          "serviceName": "Massage",
-          "servicePrice": 70,
-          "vipService": true,
-          "barberServiceEWT": 50,
-          "_id": "67a46936c85dd16cdfa7ef9e"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/Femalehaircut_1706703379391",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
-          },
-          "serviceId": 12,
-          "serviceCode": "FE12",
-          "serviceName": "Female Haircut",
-          "servicePrice": 40,
-          "vipService": false,
-          "barberServiceEWT": 30,
-          "_id": "67a46936c85dd16cdfa7ef9c"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/spa_1706703379407",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
-          },
-          "serviceId": 13,
-          "serviceCode": "HA13",
-          "serviceName": "Hair Spa",
-          "servicePrice": 100,
-          "vipService": true,
-          "barberServiceEWT": 50,
-          "_id": "67a46936c85dd16cdfa7ef9d"
-        }
-      ],
-      "barberEWT": 50,
-      "queueCount": 1,
-      "isOnline": true,
-      "isClockedIn": true,
-      "isDeleted": false,
-      "approvePendingMessage": "",
-      "profile": [
-        {
-          "public_id": "barbers/photo-1562004760-aceed7bb0fe3_a799f144-0078-4b1f-a6cf-2204599c9ffd",
-          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739169664/barbers/photo-1562004760-aceed7bb0fe3_a799f144-0078-4b1f-a6cf-2204599c9ffd.jpg",
-          "_id": "67a99f80faacd06cfb189d64"
-        }
-      ],
-      "createdAt": "2025-02-06T07:56:24.715Z",
-      "updatedAt": "2025-03-13T13:14:48.872Z",
-      "__v": 0
-    },
-    {
-      "_id": "67a46b6bc85dd16cdfa7f2ef",
-      "name": "Jazz",
-      "email": "jazz@yopmail.com",
-      "emailVerified": false,
-      "password": "$2b$10$YWO4UJGfeOTx0lciID9ls.t9QmU9Qr3kkymsnHd1I/HnlRXFkYGSC",
-      "role": "Barber",
-      "AuthType": "local",
-      "nickName": "jazz",
-      "mobileNumber": 1234567890,
-      "mobileCountryCode": 44,
-      "mobileVerified": false,
-      "dateOfBirth": "2008-04-09T00:00:00.000Z",
-      "salonId": 1,
-      "barberId": 3,
-      "barberCode": "JA3",
-      "isActive": true,
-      "isApproved": true,
-      "barberRatings": [],
-      "barberServices": [
-        {
-          "serviceIcon": {
-            "public_id": "icons/Femalehaircut_1706703379391",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
-          },
-          "serviceId": 12,
-          "serviceCode": "FE12",
-          "serviceName": "Female Haircut",
-          "servicePrice": 40,
-          "vipService": false,
-          "barberServiceEWT": 30,
-          "_id": "67a46936c85dd16cdfa7ef9c"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/spa_1706703379407",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/spa_1706703379407.jpg"
-          },
-          "serviceId": 13,
-          "serviceCode": "HA13",
-          "serviceName": "Hair Spa",
-          "servicePrice": 100,
-          "vipService": true,
-          "barberServiceEWT": 50,
-          "_id": "67a46936c85dd16cdfa7ef9d"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/massage_1706703379406",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
-          },
-          "serviceId": 14,
-          "serviceCode": "MA14",
-          "serviceName": "Massage",
-          "servicePrice": 70,
-          "vipService": true,
-          "barberServiceEWT": 30,
-          "_id": "67a46936c85dd16cdfa7ef9e"
-        }
-      ],
-      "barberEWT": 0,
-      "queueCount": 0,
-      "isOnline": false,
-      "isClockedIn": true,
-      "isDeleted": false,
-      "approvePendingMessage": "",
-      "profile": [
-        {
-          "public_id": "barbers/istockphoto-853924196-612x612_d9c08f1f-43e7-4dc0-ba7f-812489274166",
-          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1739169753/barbers/istockphoto-853924196-612x612_d9c08f1f-43e7-4dc0-ba7f-812489274166.jpg",
-          "_id": "67a99fd9faacd06cfb189f1c"
-        }
-      ],
-      "createdAt": "2025-02-06T07:57:31.219Z",
-      "updatedAt": "2025-02-28T08:01:54.925Z",
-      "__v": 0
-    },
-    {
-      "_id": "67a9a1e1faacd06cfb18a6d4",
-      "name": "Hercules",
-      "email": "hbk@yopmail.com",
-      "emailVerified": false,
-      "password": "$2b$10$7v5h.Ei0T3YdnIigoHga9eBmkw117PsZaWhrwJ3AiX9gWwsN2yzRO",
-      "role": "Barber",
-      "AuthType": "local",
-      "nickName": "",
-      "mobileVerified": false,
-      "dateOfBirth": "2009-12-10T00:00:00.000Z",
-      "salonId": 1,
-      "barberId": 4,
-      "isActive": true,
-      "isApproved": true,
-      "barberRatings": [],
-      "barberEWT": 0,
-      "queueCount": 0,
-      "isOnline": true,
-      "isClockedIn": true,
-      "isDeleted": false,
-      "approvePendingMessage": "",
-      "profile": [
-        {
-          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1720520065/default-avatar-icon-of-social-media-user-vector_wl5pm0.jpg",
-          "_id": "67a9a1e1faacd06cfb18a6d5"
-        }
-      ],
-      "barberServices": [
-        {
-          "serviceIcon": {
-            "public_id": "icons/Malehaircut_1706703379405",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
-          },
-          "serviceId": 11,
-          "serviceCode": "HA11",
-          "serviceName": "Haircut",
-          "servicePrice": 38,
-          "vipService": false,
-          "barberServiceEWT": 25,
-          "_id": "67a46936c85dd16cdfa7ef9b"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/Femalehaircut_1706703379391",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Femalehaircut_1706703379391.png"
-          },
-          "serviceId": 12,
-          "serviceCode": "FE12",
-          "serviceName": "Female Haircut",
-          "servicePrice": 40,
-          "vipService": false,
-          "barberServiceEWT": 30,
-          "_id": "67a46936c85dd16cdfa7ef9c"
-        }
-      ],
-      "createdAt": "2025-02-10T06:51:13.428Z",
-      "updatedAt": "2025-03-10T08:33:02.447Z",
-      "__v": 0,
-      "gender": "Male",
-      "mobileCountryCode": 44,
-      "mobileNumber": 1234567890
-    },
-    {
-      "_id": "67a9a32efaacd06cfb18abaa",
-      "name": "hg",
-      "email": "hg@yopmail.com",
-      "emailVerified": false,
-      "password": "$2b$10$1S0IkVFTWN1GQBtQ0GMWu.y9OG3TfNfgncaTOeqgD.JLafR4EoiGi",
-      "role": "Barber",
-      "AuthType": "local",
-      "nickName": "",
-      "mobileVerified": false,
-      "dateOfBirth": "2009-12-10T00:00:00.000Z",
-      "salonId": 1,
-      "barberId": 5,
-      "isActive": true,
-      "isApproved": false,
-      "barberRatings": [],
-      "barberEWT": 0,
-      "queueCount": 0,
-      "isOnline": false,
-      "isClockedIn": false,
-      "isDeleted": false,
-      "approvePendingMessage": "",
-      "profile": [
-        {
-          "url": "https://res.cloudinary.com/dpynxkjfq/image/upload/v1720520065/default-avatar-icon-of-social-media-user-vector_wl5pm0.jpg",
-          "_id": "67a9a32efaacd06cfb18abab"
-        }
-      ],
-      "barberServices": [
-        {
-          "serviceIcon": {
-            "public_id": "icons/Malehaircut_1706703379405",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703381/icons/Malehaircut_1706703379405.png"
-          },
-          "serviceId": 11,
-          "serviceCode": "HA11",
-          "serviceName": "Haircut",
-          "servicePrice": 38,
-          "vipService": false,
-          "barberServiceEWT": 25,
-          "_id": "67a46936c85dd16cdfa7ef9b"
-        },
-        {
-          "serviceIcon": {
-            "public_id": "icons/massage_1706703379406",
-            "url": "https://res.cloudinary.com/dfrw3aqyp/image/upload/v1706703380/icons/massage_1706703379406.jpg"
-          },
-          "serviceId": 14,
-          "serviceCode": "MA14",
-          "serviceName": "Massage",
-          "servicePrice": 70,
-          "vipService": true,
-          "barberServiceEWT": 30,
-          "_id": "67a46936c85dd16cdfa7ef9e"
-        }
-      ],
-      "createdAt": "2025-02-10T06:56:46.889Z",
-      "updatedAt": "2025-03-07T11:40:19.338Z",
-      "__v": 0,
-      "gender": "Male",
-      "mobileCountryCode": 44,
-      "mobileNumber": 1234567890
-    }
-  ])
-
 
 
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
@@ -1301,6 +864,7 @@ const Report = () => {
             // numberOfMonths={isMobile ? 1 : 2}
             numberOfMonths={false ? 1 : 2}
             value={selectedDates}
+            onChange={handleDateChange}
             range
             placeholder='yyyy-mm-dd - yyyy-mm-dd'
             // onChange={handleDateChange}
@@ -1312,8 +876,8 @@ const Report = () => {
             }}
           />
 
-          <button><ResetIcon /></button>
-          <button>View Report</button>
+          <button onClick={resetHandler}><ResetIcon /></button>
+          <button onClick={viewReport}>View Report</button>
         </div>
       </div>
 
@@ -1321,7 +885,7 @@ const Report = () => {
         <div>
           <ResponsiveContainer width="100%" height="90%">
             <BarChart
-              data={QueueReportData}
+              data={reportData}
               margin={{
                 left: -20,
               }}
@@ -1335,9 +899,9 @@ const Report = () => {
                       ? "week"
                       : (selectedRangeFilter || selectedFilter) === "monthly"
                         ? "month"
-                        : ""
+                        : "range"
                 } />
-              <YAxis dataKey={"TotalQueue"}/>
+              <YAxis dataKey={"TotalQueue"} />
               <Tooltip
                 cursor={{ fill: "var(--input-bg-color)" }}
                 contentStyle={{
@@ -1353,8 +917,16 @@ const Report = () => {
             </BarChart>
           </ResponsiveContainer>
           <div className={`${style.report_footer}`}>
-            <p>Report Type - Queue Served (Daily)</p>
-            <p>Select - Barber</p>
+            <p>Report Type -
+              {queueType === "queueserved"
+                ? `Queue Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                queueType === "queuecancelled" ?
+                  `Queue Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                  appointmentType === "appointmentserved" ?
+                    `Appointment Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                    `Appointment Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})`}
+            </p>
+            <p>Select - {selectType}</p>
           </div>
         </div>
         <div>
@@ -1370,7 +942,17 @@ const Report = () => {
                         style={{
                           background: selectedFilter === item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                        onClick={() => setSelectedFilter(item.value)}
+                        onClick={() => {
+                          setSelectedDates([])
+                          setSelectedFilter(item.value)
+                          if (item.value === "daily") {
+                            setDayOption(10)
+                          } else if (item.value === "weekly") {
+                            setWeekOption(4)
+                          } else {
+                            setMonthOption(6)
+                          }
+                        }}
                       >{selectedFilter === item.value ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
@@ -1431,9 +1013,12 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === selectType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setSelectType(item.value)
+                        }}
+                      >{item.value === selectType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1443,16 +1028,24 @@ const Report = () => {
 
 
             {
-              barberlistData.map((item) => {
+              selectType === "Barber" && BarberList?.length > 0 ? BarberList?.map((item) => {
                 return (<div
                   className={`${style.barber_item}`}
                   key={item.barberId}
+                  onClick={() => {
+                    setSelectedbarber(item.name)
+                    setSelectedbarberId(item.barberId)
+                    setSelectedbarberEmail(item.email)
+                  }}
+                  style={{
+                    border: selectedbarber === item.name ? "0.1rem solid var(--text-primary)" : ""
+                  }}
                 >
                   <img src={item.profile?.[0].url} alt="" />
 
                   <p>{item.name}</p>
                 </div>)
-              })
+              }) : null
             }
 
           </div>
@@ -1471,14 +1064,23 @@ const Report = () => {
         <div className={`${style.report_body_content}`}>
           <ResponsiveContainer width="200%" height="85%">
             <BarChart
-              data={appointReportData}
+              data={reportData}
               margin={{
                 left: -10,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <XAxis
+                dataKey={
+                  (selectedRangeFilter || selectedFilter) === "daily"
+                    ? "date"
+                    : (selectedRangeFilter || selectedFilter) === "weekly"
+                      ? "week"
+                      : (selectedRangeFilter || selectedFilter) === "monthly"
+                        ? "month"
+                        : "range"
+                } />
+              <YAxis dataKey={"TotalQueue"} />
               <Tooltip
                 cursor={{ fill: "var(--input-bg-color)" }}
                 contentStyle={{
@@ -1489,14 +1091,24 @@ const Report = () => {
                   outline: "none"
                 }}
               />
-              <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
+
+              <Bar dataKey="TotalQueue" fill="var(--bg-secondary)" radius={[2, 2, 2, 2]} />
             </BarChart>
           </ResponsiveContainer>
 
           <div className={`${style.report_footer}`}>
-            <p>Report Type - Queue Served (Daily)</p>
-            <p>Select - Barber</p>
+            <p>Report Type -
+              {queueType === "queueserved"
+                ? `Queue Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                queueType === "queuecancelled" ?
+                  `Queue Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                  appointmentType === "appointmentserved" ?
+                    `Appointment Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                    `Appointment Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})`}
+            </p>
+            <p>Select - {selectType}</p>
           </div>
+
         </div>
       </div>
 
@@ -1523,9 +1135,20 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: selectedFilter === item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setSelectedDates([])
+                          setSelectedFilter(item.value)
+                          if (item.value === "daily") {
+                            setDayOption(10)
+                          } else if (item.value === "weekly") {
+                            setWeekOption(4)
+                          } else {
+                            setMonthOption(6)
+                          }
+                        }}
+                      >{selectedFilter === item.value ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1541,9 +1164,13 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === queueType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setAppointmentType("")
+                          setQueueType(item.value)
+                        }}
+                      >{item.value === queueType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1559,9 +1186,13 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === appointmentType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setQueueType("")
+                          setAppointmentType(item.value)
+                        }}
+                      >{item.value === appointmentType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1577,9 +1208,12 @@ const Report = () => {
                     <div key={index}>
                       <button
                         style={{
-                          background: item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          background: item.value === selectType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
                         }}
-                      >{item.value ? <CheckIcon /> : ""}</button>
+                        onClick={() => {
+                          setSelectType(item.value)
+                        }}
+                      >{item.value === selectType ? <CheckIcon /> : ""}</button>
                       <p>{item.type}</p>
                     </div>
                   )
@@ -1588,12 +1222,20 @@ const Report = () => {
             </div>
 
             {
-              SelectType[1].value ? (<div className={`${style.barberlist_container}`}>
+              selectType === "Barber" && BarberList?.length > 0 ? (<div className={`${style.barberlist_container}`}>
                 {
-                  barberlistData.map((item) => {
+                  BarberList?.map((item) => {
                     return (<div
                       className={`${style.barber_item}`}
                       key={item.barberId}
+                      onClick={() => {
+                        setSelectedbarber(item.name)
+                        setSelectedbarberId(item.barberId)
+                        setSelectedbarberEmail(item.email)
+                      }}
+                      style={{
+                        border: selectedbarber === item.name ? "0.1rem solid var(--text-primary)" : ""
+                      }}
                     >
                       <img src={item.profile?.[0].url} alt="" />
 
@@ -1609,6 +1251,7 @@ const Report = () => {
                 // numberOfMonths={isMobile ? 1 : 2}
                 numberOfMonths={1}
                 value={selectedDates}
+                onChange={handleDateChange}
                 range
                 placeholder='yyyy-mm-dd - yyyy-mm-dd'
                 // onChange={handleDateChange}
@@ -1620,11 +1263,14 @@ const Report = () => {
                 }}
               />
 
-              <button><ResetIcon /></button>
+              <button onClick={resetHandler}><ResetIcon /></button>
 
             </div>
 
-            <button>View Report</button>
+            <button onClick={() => {
+              setMobileFilterOpen(false)
+              viewReport()
+            }}>View Report</button>
           </div>
 
         </Box>

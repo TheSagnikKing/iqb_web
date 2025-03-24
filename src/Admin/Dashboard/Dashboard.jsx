@@ -653,9 +653,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getAllReports = async () => {
-      const { data } = await api.post("/api/reports/getdashboardReports", {
-        salonId,
-        reportType: "daily"
+      const { data } = await api.post("/api/reports/getnewdashboardReports", {
+        salonId
       })
 
       setReportData(data.response)
@@ -664,7 +663,7 @@ const Dashboard = () => {
 
     getAllReports()
 
-  }, [])
+  }, [salonId])
 
   // ===================================
 
@@ -900,7 +899,7 @@ const Dashboard = () => {
             <div>
               <p>Queue Reports</p>
               <p>Today status of Queue</p>
-              <h2>70</h2>
+              <h2>{reportData?.queue?.totalQueueCount}</h2>
             </div>
 
             <div className={`${style.queue_report_container}`}>
@@ -927,12 +926,16 @@ const Dashboard = () => {
             <div className={`${style.queue_history_container}`}>
               <div>
                 <div>
-                  <span style={{ background: "#00A36C" }}>+62.5%</span>
+                  <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedPercentage
+                    ? Number(reportData.queue.servedPercentage).toFixed(1)
+                    : "0.0"}</span>
                   <p>Served</p>
                 </div>
 
                 <div>
-                  <span style={{ background: "rgb(244, 67, 54)" }}>-32.5%</span>
+                  <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledPercentage
+                    ? Number(reportData.queue.cancelledPercentage).toFixed(1)
+                    : "0.0"}</span>
                   <p>Canceled</p>
                 </div>
               </div>
@@ -996,7 +999,7 @@ const Dashboard = () => {
           <div>
             <div>
               <p>Queue List</p>
-              <p>The current total queue count is {queuelist.length}</p>
+              <p>The current total queue count is {queuelist?.length}</p>
             </div>
 
             {

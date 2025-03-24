@@ -1005,7 +1005,8 @@ import { ClickAwayListener, Modal, Skeleton } from '@mui/material';
 import { getCurrentDate } from '../../utils/Date';
 
 import Calendar from 'react-calendar';
-import { CameraIcon, CheckIcon, CloseIcon, ContactTel, DropdownIcon, EmailIcon } from '../../newicons'
+import { CameraIcon, CheckIcon, CloseIcon, ContactTel, DropdownIcon, EmailIcon, OtpEmailIcon } from '../../newicons'
+import { Eyevisible, Notvisibleeye, OtpMessageIcon } from '../../icons';
 
 const EditProfile = () => {
 
@@ -1023,7 +1024,6 @@ const EditProfile = () => {
     const [gender, setGender] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [countryCode, setCountryCode] = useState("")
-
 
 
     useEffect(() => {
@@ -1592,6 +1592,25 @@ const EditProfile = () => {
         }
     }
 
+    // let progress = 0;
+    // if (name) progress = 25;
+    // if (name && mobileNumber) progress = 50;
+    // if (name && mobileNumber && dateOfBirth) progress = 75;
+    // if (name && mobileNumber && dateOfBirth && gender) progress = 100;
+
+    const [progress, setProgress] = useState(0)
+
+    useEffect(() => {
+        if(adminProfile){
+            if (adminProfile?.name) setProgress(25)
+                if (adminProfile?.name && adminProfile?.mobileNumber)  setProgress(50)
+                if (adminProfile?.name && adminProfile?.mobileNumber && dateOfBirth)  setProgress(75)
+                if (adminProfile?.name && adminProfile?.mobileNumber && dateOfBirth && gender)  setProgress(100)
+        }
+        
+    }, [adminProfile])
+
+
     return (
         <section className={`${style.section}`}>
             <div>
@@ -1613,34 +1632,37 @@ const EditProfile = () => {
                     <div>
                         <div>
                             <h4>Salons</h4>
-                            <p>5</p>
+                            <p>{adminProfile?.salonCount}</p>
                         </div>
                         <div>
                             <h4>Barbers</h4>
-                            <p>30</p>
+                            <p>{adminProfile?.barbersCount}</p>
                         </div>
                         <div>
                             <h4>Customers</h4>
-                            <p>30K</p>
+                            <p>{adminProfile?.customersCount}</p>
                         </div>
                     </div>
 
                     <div>
                         <div>
                             <span><EmailIcon /></span>
-                            <p>contact@hotmail.com</p>
+                            <p>{adminProfile?.email}</p>
                         </div>
 
                         <div>
                             <span><ContactTel /></span>
-                            <p>+44 20 7123 4567</p>
+                            <p>{adminProfile?.mobileCountryCode}{" "}{adminProfile?.mobileNumber}</p>
                         </div>
                     </div>
 
                     <div>
                         <h4>Complete Your Profile</h4>
                         <div>
-                            <span></span>
+                            <span style={{
+                                width: `${progress}%`,
+                                borderRadius: `${progress === 100} && 2rem`
+                            }}></span>
                         </div>
                     </div>
                 </div>
@@ -1649,7 +1671,20 @@ const EditProfile = () => {
                     <div>
                         <div>
                             <p>Name</p>
-                            <input type="text" placeholder='Enter your name' />
+                            <input
+                                type="text"
+                                placeholder='Enter your name'
+                                value={name}
+                                onChange={(e) => {
+                                    setNameError("")
+                                    setName(e.target.value)
+                                }}
+                                onKeyDown={handleKeyPress}
+                                style={{
+                                    border: nameError ? "0.1rem solid red" : "none"
+                                }}
+                            />
+                            {nameError && <p className={style.error_message}>{nameError}</p>}
                         </div>
 
                         <div>
@@ -1658,33 +1693,169 @@ const EditProfile = () => {
                                 <input
                                     type="text"
                                     placeholder='Enter your email'
-                                    // value={adminProfile?.email}
+                                    value={adminProfile?.email}
                                     readOnly
                                 />
 
                                 <button
-                                    // onClick={() => sendVerificationEmail()}
-                                    // className={changeEmailVerifiedState ? style.admin_verified_icon : style.admin_notverified_icon}
-                                    // title={changeEmailVerifiedState ? "Verified" : "NotVerified"}
+                                    onClick={() => sendVerificationEmail()}
+                                    title={changeEmailVerifiedState ? "Verified" : "NotVerified"}
                                     style={{
                                         color: changeEmailVerifiedState ? "green" : "red",
                                         cursor: changeEmailVerifiedState ? "not-allowed" : "pointer"
                                     }}
                                 >
-                                    {/* {changeEmailVerifiedState ? <CheckIcon /> : <CloseIcon />} */}
-                                    {true ? <CheckIcon /> : <CloseIcon />}
+                                    {changeEmailVerifiedState ? <CheckIcon /> : <CloseIcon />}
                                 </button>
 
                             </div>
                         </div>
+
+
+                        <Modal
+                            open={openEmailModal}
+                            onClose={() => setOpenEmailModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
+                                <div><OtpEmailIcon /></div>
+
+                                <div>
+                                    <p>Please check your email</p>
+                                    <p>We have sent a code to your <span style={{ fontWeight: "600", color: "var(--bg-secondary)" }}>{adminProfile?.email}</span></p>
+                                    <div>
+                                        {
+                                            otp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (otpinputRef.current[index] = ref)}
+                                                    onChange={(e) => {
+                                                        if (/^\d*$/.test(e.target.value)) {
+                                                            handleOtpInputChange(index, e.target.value)
+                                                        }
+                                                    }
+                                                    }
+                                                    onKeyDown={(e) => handleKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <p>Didn't get the code ? <span onClick={() => sendVerificationEmail()}>Click to resend</span></p>
+
+                                    <div>
+                                        <button onClick={verifyEmailStatusClicked}>Verify</button>
+                                    </div>
+
+                                </div>
+
+                                <button onClick={() => setOpenEmailModal(false)}><CloseIcon /></button>
+
+                            </div>
+                        </Modal>
 
                         <div>
                             <p>Password</p>
                             <input
                                 type="password"
                                 value={"********"}
-                                placeholder='' />
+                                onClick={() => setOpenPasswordModal(true)}
+                                readOnly
+                            />
                         </div>
+
+                        <Modal
+                            open={openPasswordModal}
+                            onClose={() => setOpenPasswordModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+                                <div>
+                                    <p>Change your password</p>
+                                    <button onClick={() => setOpenPasswordModal(false)}><CloseIcon /></button>
+                                </div>
+                                <div className={style.modal_content_container}>
+
+                                    <div>
+                                        <p>Old Password</p>
+                                        <div style={{ border: oldPasswordError ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seePassword ? "text" : "password"}`}
+                                                value={oldPassword}
+                                                onChange={(e) => {
+                                                    setOldPasswordError("")
+                                                    setOldPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter Old Password'
+                                                onKeyDown={handleKeyPressPassword}
+                                            />
+                                            <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        {oldPasswordError && <p className={style.error_message} style={{ marginTop: "1rem" }}>{oldPasswordError}</p>}
+                                    </div>
+
+                                    <div>
+                                        <p>New Password</p>
+                                        <div style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seeOldPassword ? "text" : "password"}`}
+                                                value={password}
+                                                onChange={(e) => {
+                                                    setNotMatchError("")
+                                                    setPasswordError("")
+                                                    setPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter New Password'
+                                                onKeyDown={handleKeyPressPassword}
+                                            />
+                                            <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        {passwordError && <p className={style.error_message} style={{ marginTop: "1rem" }}>{passwordError}</p>}
+                                    </div>
+
+                                    <div>
+                                        <p>Confirm Password</p>
+                                        <div style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seeConfirmPassword ? "text" : "password"}`}
+                                                value={confirmPassword}
+                                                onChange={(e) => {
+                                                    setNotMatchError("")
+                                                    setConfirmPasswordError("")
+                                                    setConfirmPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter Confirm Password'
+                                                onKeyDown={handleKeyPressPassword}
+                                            />
+                                            <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        {(confirmPasswordError || notMatchError) && <p className={style.error_message} style={{ marginTop: "1rem" }}>{(confirmPasswordError || notMatchError)}</p>}
+                                    </div>
+
+                                    <button
+                                        className={style.edit_modal_btn}
+                                        onClick={updatePasswordHandler}
+                                    >
+                                        {
+                                            adminUpdatePasswordLoading ?
+                                                (
+                                                    <ButtonLoader />
+                                                ) :
+                                                (
+                                                    "Save"
+                                                )
+                                        }
+
+                                    </button>
+                                </div>
+                            </div>
+                        </Modal >
 
 
                         <div>
@@ -1694,7 +1865,7 @@ const EditProfile = () => {
                                     <PhoneInput
                                         forceDialCode={true}
                                         defaultCountry={countryflag}
-                                        // value={mobileNumber}
+                                        value={mobileNumber}
                                         onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                                     />
                                 </div>
@@ -1714,6 +1885,53 @@ const EditProfile = () => {
                             {invalidNumberError && <p className={style.error_message}>{invalidNumberError}</p>}
                         </div>
 
+                        <Modal
+                            open={openMobileModal}
+                            onClose={() => setOpenMobileModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
+                                <div><OtpMessageIcon /></div>
+
+                                <div>
+                                    <p>Please check your message</p>
+                                    <p>We have sent a code to your <span style={{ fontWeight: "600", color: "var(--bg-secondary)" }}>{adminProfile?.mobileNumber}</span></p>
+                                    <div>
+                                        {
+                                            mobileotp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+                                                    onChange={(e) => {
+                                                        if (/^\d*$/.test(e.target.value)) {
+                                                            handleMobileOtpInputChange(index, e.target.value)
+                                                        }
+                                                    }
+                                                    }
+                                                    onKeyDown={(e) => handleMobileKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <p>Didn't get the code ?
+                                        <span onClick={() => sendVerificationMobile()}>Click to resend</span>
+                                    </p>
+
+                                    <div>
+                                        <button onClick={verifyMobileStatusClicked}>Verify</button>
+                                    </div>
+
+                                </div>
+
+                                <button onClick={() => setOpenMobileModal(false)}><CloseIcon /></button>
+                            </div>
+                        </Modal>
 
                         {
                             mobileValue ? (
