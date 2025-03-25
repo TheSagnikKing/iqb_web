@@ -886,6 +886,7 @@ const BarberList = () => {
     loading: adminSendBarberMessageLoading
   } = adminSendBarberMessage
 
+  // console.log(BarberList)
 
   // ================================
 
@@ -908,6 +909,7 @@ const BarberList = () => {
     }
 
   }, [BarberList])
+
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
@@ -933,7 +935,7 @@ const BarberList = () => {
     setTotalPages(totalPages)
     setStartIndex((page - 1) * rowsPerPage)
     setEndIndex(page * rowsPerPage)
-  }, [rowsPerPage, page])
+  }, [rowsPerPage, page, barberlistData])
 
   useEffect(() => {
     setBarberPaginationData(barberlistData.slice(startIndex, endIndex))

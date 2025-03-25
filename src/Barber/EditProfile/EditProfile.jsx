@@ -1860,10 +1860,15 @@ const EditProfile = () => {
                     </div> */}
 
                     <div>
-                        <div>
-                            <span><ConnectSalonIcon /></span>
-                            <p>{barberProfile?.salonName}</p>
-                        </div>
+
+                        {
+                            barberProfile?.salonName ? (
+                                <div>
+                                    <span><ConnectSalonIcon /></span>
+                                    <p>{barberProfile?.salonName}</p>
+                                </div>
+                            ) : (null)
+                        }
 
 
                         <div>
@@ -1871,10 +1876,15 @@ const EditProfile = () => {
                             <p>{barberProfile?.email}</p>
                         </div>
 
-                        <div>
-                            <span><ContactTel /></span>
-                            <p>{barberProfile?.mobileCountryCode}{" "}{barberProfile?.mobileNumber}</p>
-                        </div>
+                        {
+                            barberProfile?.mobileNumber ? (
+                                <div>
+                                    <span><ContactTel /></span>
+                                    <p>{barberProfile?.mobileCountryCode}{" "}{barberProfile?.mobileNumber}</p>
+                                </div>
+                            ) : (null)
+                        }
+
                     </div>
 
                     <div>
@@ -1986,7 +1996,9 @@ const EditProfile = () => {
                                 type="password"
                                 onClick={() => setOpenPasswordModal(true)}
                                 value={"********"}
-                                placeholder='' />
+                                placeholder='' 
+                                readOnly
+                                />
                         </div>
 
                         <Modal

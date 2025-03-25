@@ -5,7 +5,7 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { useSelector } from 'react-redux'
 
 const PasswordReset = () => {
- 
+
   const navigate = useNavigate()
 
   const passwordresetHandler = () => {
@@ -17,14 +17,13 @@ const PasswordReset = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <div className={`${style.password_reset_container} ${darkmodeOn && style.dark}`}>
-        <div>
-            <img src="/passwordReset_img.png" alt="passwordReset_img" />
-            <p>Password Reset</p>
-            <p>Your Password has been successfully reset.</p>
-            {/* <p>Click below to Login</p> */}
-            <button onClick={passwordresetHandler}>Signin</button>
-        </div>
+    <div className={`${style.section} ${darkmodeOn && style.dark}`}>
+      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" />
+      <div>
+        <h2>Password Reset</h2>
+        <p>Your Password has been successfully reset.</p>
+        <button onClick={passwordresetHandler}>Signin</button>
+      </div>
     </div>
   )
 }

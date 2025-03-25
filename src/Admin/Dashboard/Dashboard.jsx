@@ -823,7 +823,6 @@ const Dashboard = () => {
               <div>
                 <p>Barbers On Duty</p>
                 <p>Total {BarberList?.length} barbers are available
-                  {/* <span>Online</span> */}
                 </p>
               </div>
 
@@ -888,9 +887,10 @@ const Dashboard = () => {
                 <p>Queue History</p>
                 <p><span
                   style={{
-                    color: reportData?.queue?.queueTrend === "Rise" ? "#00A36C" : "#00A36C"
+                    color: reportData?.queue?.queueTrend === "Rise" ? "#00A36C" : 
+                    reportData?.queue?.queueTrend === "Fall" ? "rgb(244, 67, 54)" : ""
                   }}
-                >{reportData?.queue?.queueTrend === "Rise" ? "+" : "-"}{reportData?.queue?.percentageChangelast30Days}</span> from last 30 days</p>
+                >{reportData?.queue?.queueTrend === "Rise" ? "+" : reportData?.queue?.queueTrend === "Fall" ? "-" : ""}{reportData?.queue?.percentageChangelast30Days}%</span> from last 30 days</p>
                 <h2>{reportData?.queue?.totalQueueHistoryCount}</h2>
               </div>
 
@@ -907,9 +907,6 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* <div>
-                  <div></div>
-                </div> */}
 
                 <div>
                   <div
@@ -943,14 +940,15 @@ const Dashboard = () => {
                     <h1>{reportData?.appointment?.dateFormat}</h1>
                     <p><span
                       style={{
-                        color: reportData?.appointment?.appointmentTrend === "Fall" ? "#f44336" : "#00A36C"
+                        color: reportData?.appointment?.appointmentTrend === "Fall" ? "#f44336" : 
+                        reportData?.appointment?.appointmentTrend === "Rise" ? "#00A36C" : ""
                       }}
-                    >{reportData?.appointment?.appointmentTrend === "Fall" ? "-" : "+"}{reportData?.appointment?.percentageChangeLastWeek}</span> from last 7 days</p>
+                    >{reportData?.appointment?.appointmentTrend === "Fall" ? "-" : reportData?.appointment?.appointmentTrend === "Rise" ? "+" : ""}{reportData?.appointment?.percentageChangeLastWeek}%</span> from last 7 days</p>
                   </div>
                 </div>
 
                 <div>
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="90%">
                     <BarChart width={150} height={40} data={reportData?.appointment?.last7daysCount}>
                       <Bar dataKey="TotalAppoinment" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
                     </BarChart>

@@ -227,6 +227,9 @@ const Appointment = () => {
                                     <div key={d.id} className={style.value}>
                                         <input
                                             type="checkbox"
+                                            style={{
+                                                accentColor:"var(--bg-secondary)"
+                                            }}
                                             onChange={() => checkdayHandler(d)}
                                             checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
                                             disabled={getSalonoffDays.includes(d.day)}
@@ -250,12 +253,13 @@ const Appointment = () => {
                             <button className={style.reset_days} onClick={() => offDayHandler([])}>Reset Off Days</button>
                         </div>
                         {
-                            <div>
+                            <div style={{ marginBottom: "2rem"}}>
                                 <Calendar
                                     onClickDay={onClickDay}
                                     // tileClassName={({ date }) =>
                                     //     isSelected(date) ? style.highlighted_date : ""
                                     // }
+
                                     minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
                                     tileClassName={({ date }) => {
                                         if (isSelected(date)) {

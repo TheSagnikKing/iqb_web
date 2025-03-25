@@ -1274,7 +1274,8 @@ const SalonList = () => {
                       <div><p>{item.salonType}</p></div>
                       {/* <div><p>{item.subscription}</p></div> */}
                       <div><button style={{
-                        backgroundColor: item.isOnline ? "#052E16" : "#450a0a"
+                        backgroundColor: item.isOnline ? "#052E16" : "#450a0a",
+                        cursor: "initial"
                       }}>{item.isOnline ? "Online" : "Offline"}</button></div>
                       <div>
                         <div

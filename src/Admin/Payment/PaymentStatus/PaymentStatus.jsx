@@ -165,18 +165,75 @@
 
 // export default PaymentStatus
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from "./PaymentStatus.module.css"
 import { DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Pagination, Select, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from "@emotion/styled";
+import api from '../../../Redux/api/Api';
+import { useSelector } from 'react-redux';
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
+import Skeleton from 'react-loading-skeleton';
 
 const PaymentStatus = () => {
 
+
+  const [paymentStatusdata, setPaymentStatusdata] = useState([])
+  const [paymentStatusLoading, setPaymentStatusLoading] = useState(false)
+
+  const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+
+  const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+  const {
+    loading: adminGetDefaultSalonLoading,
+    resolve: adminGetDefaultSalonResolve,
+    response: adminGetDefaultSalonResponse
+  } = adminGetDefaultSalon
+
+  const PaymentistControllerRef = useRef(new AbortController());
+
+  useEffect(() => {
+    if (salonId !== 0) {
+      try {
+        const controller = new AbortController();
+        PaymentistControllerRef.current = controller;
+
+        const fetchpayments = async () => {
+          setPaymentStatusLoading(true)
+          const { data } = await api.post("/api/salonPayments/getSalonPaymentHistoryBySalonId", {
+            salonId
+          }, { signal: controller.signal })
+
+          setPaymentStatusdata(data.response)
+          setPaymentStatusLoading(false)
+        }
+
+        fetchpayments()
+      } catch (error) {
+        setPaymentStatusLoading(false)
+      }
+    }
+
+    return () => {
+      if (PaymentistControllerRef.current) {
+        PaymentistControllerRef.current.abort();
+      }
+    };
+  }, [salonId])
+
+  // console.log(paymentStatusdata)
+
+  const darkMode = useSelector(darkmodeSelector)
+
+  const darkmodeOn = darkMode === "On"
+
+  // =======================================
+
   const headRows = [
-    { id: 1, heading: "#", key: "" },
+    { id: 1, heading: "Invoice No.", key: "" },
     { id: 2, heading: "Product", key: "product" },
     { id: 3, heading: "Purchased", key: "purchased" },
     { id: 4, heading: "Expired", key: "expired" },
@@ -186,7 +243,7 @@ const PaymentStatus = () => {
   ];
 
 
-  const [salonlistData, setSalonlistData] = useState([
+  const [paymenthistoryData, setpaymenthistoryData] = useState([
     {
       "id": 1,
       "product": "Appointment",
@@ -380,17 +437,17 @@ const PaymentStatus = () => {
   const [sortOrder, setSortOrder] = useState("asc")
   const [sortColumn, setSortColumn] = useState("")
 
-  const [salonPaginationData, setSalonPaginationData] = useState(salonlistData.slice(startIndex, endIndex))
+  const [salonPaymenthistoryData, setSalonPaymenthistoryData] = useState(paymenthistoryData.slice(startIndex, endIndex))
 
   useEffect(() => {
-    const totalPages = Math.ceil(salonlistData.length / rowsPerPage);
+    const totalPages = Math.ceil(paymenthistoryData.length / rowsPerPage);
     setTotalPages(totalPages);
     const startIndex = (page - 1) * rowsPerPage;
-    const endIndex = Math.min(startIndex + rowsPerPage, salonlistData.length);
+    const endIndex = Math.min(startIndex + rowsPerPage, paymenthistoryData.length);
     setStartIndex(startIndex);
     setEndIndex(endIndex);
-    setSalonPaginationData(salonlistData.slice(startIndex, endIndex));
-  }, [salonlistData, page, rowsPerPage]);
+    setSalonPaymenthistoryData(paymenthistoryData.slice(startIndex, endIndex));
+  }, [paymenthistoryData, page, rowsPerPage]);
 
 
   const handleChange = (event, value) => {
@@ -403,6 +460,7 @@ const PaymentStatus = () => {
   const navigate = useNavigate()
 
 
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -412,40 +470,56 @@ const PaymentStatus = () => {
 
       <div className={`${style.list_container}`}>
 
-        <div className={`${style.list_body_container}`}>
+        {
+          paymentStatusLoading ? (
+            <div className={`${style.list_body_container_loader}`}>
+              <Skeleton
+                count={6}
+                height={"6.5rem"}
+                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                style={{ marginBottom: "1rem" }} />
+            </div>
+          ) : paymentStatusdata?.length > 0 ? (
+            <div className={`${style.list_body_container}`}>
 
-          <div className={`${style.headRow}`}>
-            {
-              headRows.map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    <button>
-                      {item.heading}
-                    </button>
-                  </div>
-                )
-              })
-            }
+              <div className={`${style.headRow}`}>
+                {
+                  headRows.map((item, index) => {
+                    return (
+                      <div key={item.id}>
+                        <button>
+                          {item.heading}
+                        </button>
+                      </div>
+                    )
+                  })
+                }
 
-          </div>
+              </div>
+              {
+                paymentStatusdata?.map((item, index) => {
+                  return (
+                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaymenthistoryData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                      <div><p>{item.invoiceNumber}</p></div>
+                      <div><p>{item.products?.[0]?.productName}</p></div>
+                      <div><p>{item.purchaseDate}</p></div>
+                      <div><p>{item.paymentExpiryDate}</p></div>
+                      <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{item.products?.[0]?.productPrice}</p></div>
+                      <div><p>{item.paymentIntentId}</p></div>
+                      <div><p>{item?.timePeriod}days</p></div>
 
-          {
-            salonPaginationData.map((item, index) => {
-              return (
-                <div key={item.id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                  <div><p>{item.id}</p></div>
-                  <div><p>{item.product}</p></div>
-                  <div><p>{item.purchased}</p></div>
-                  <div><p>{item.expired}</p></div>
-                  <div><p>$ {item.price}</p></div>
-                  <div><p>{item.transactionid}</p></div>
-                  <div><p>{item.timeperiod}</p></div>
-
-                </div>
-              )
-            })
-          }
-        </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          ) : (
+            <div className={`${style.list_body_container_error}`}>
+              <p>No queue history available</p>
+            </div>
+          )
+        }
 
         <div className={`${style.pagination_container}`}>
           <div></div>

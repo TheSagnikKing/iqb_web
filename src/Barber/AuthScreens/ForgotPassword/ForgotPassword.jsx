@@ -68,12 +68,12 @@ const ForgotPassword = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <div className={`${style.forgot_container} ${darkmodeOn && style.dark}`}>
-      <div className={`${style.forgot_container_left} ${darkmodeOn && style.dark}`}><img src="/signin_un.png" alt="forgot_image" /></div>
+    <div className={`${style.section} ${darkmodeOn && style.dark}`}>
+      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" />
 
       <div className={`${style.forgot_container_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Forgot Password</p>
+          <h2>Forgot Password</h2>
 
           <div>
             <input

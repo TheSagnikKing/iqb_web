@@ -665,6 +665,7 @@ import { getBarberQueueListAction } from '../../Redux/Barber/Actions/BarberQueue
 import { getAdminSalonImagesAction } from '../../Redux/Admin/Actions/SalonAction';
 import toast from 'react-hot-toast';
 import { AppointmentIcon } from '../../newicons';
+import api from '../../Redux/api/Api';
 
 const Dashboard = () => {
 
@@ -897,52 +898,45 @@ const Dashboard = () => {
 
   // console.log(barberConnectSalonMessage)
 
+  const [reportData, setReportData] = useState([])
+  const [todaysAppLoading, setTodaysAppLoading] = useState(false)
+  const [todaysApp, setTodaysApp] = useState([])
+
+  useEffect(() => {
+    if (!salonId || !barberId) return; // Ensure salonId and barberId exist before fetching data
+
+    const getAllReports = async () => {
+      try {
+        const { data } = await api.post("/api/reports/getnewbarberdashboardReports", {
+          salonId,
+          barberId
+        });
+        setReportData(data.response);
+      } catch (error) {
+        console.error("Error fetching reports:", error);
+      }
+    };
+
+    const getTodaysAppointment = async () => {
+      try {
+        setTodaysAppLoading(true)
+        const { data } = await api.post("/api/appointments/getAllAppointmentsByBarberForToday", {
+          salonId,
+          barberId
+        });
+        setTodaysAppLoading(false)
+        setTodaysApp(data.response);
+      } catch (error) {
+        setTodaysAppLoading(false)
+        console.error("Error fetching today's appointments:", error);
+      }
+    };
+
+    getAllReports();
+    getTodaysAppointment();
+  }, [salonId, barberId]);
 
 
-  const data2 = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
   const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
 
@@ -1108,84 +1102,6 @@ const Dashboard = () => {
   ]
 
 
-  const [salonServices, setSalonServices] = useState([
-    {
-      id: 1,
-      name: "Braids & Layers",
-      type: "Regular",
-      description: "Today’s salon owners know that everyone wants to look their best.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s",
-      add: false,
-    },
-    {
-      id: 2,
-      name: "Style Lounge",
-      type: "VIP",
-      description: "Today’s salon owners know that everyone wants to look their best and many people don’t consider salon services gender-specific. If you want a unisex salon name that reflects an inclusive brand, use these ideas for inspiration.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://dynamic.brandcrowd.com/asset/logo/4641cc89-eed8-46eb-b525-15da3ea2d021/logo-search-grid-1x?logoTemplateVersion=1&v=638302799045600000",
-      add: false,
-    },
-    {
-      id: 3,
-      name: "Dueling Scissors",
-      type: "Regular",
-      description: "Today’s salon owners know.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://marketplace.canva.com/EAFHiAQTPQQ/1/0/1600w/canva-pink-black-hand-drawn-hair-salon-logo-tVTdlo6D5XQ.jpg",
-      add: false,
-    }])
-
-
-
-  const queueData = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
 
   const barberlist = [
@@ -1243,78 +1159,25 @@ const Dashboard = () => {
     }
   ]
 
-  const queueList = [
-    { customerName: "John Doe", barberName: "Mike Johnson", qPos: 1, mins: 30, customerImage: "https://i.pravatar.cc/150?img=1" },
-    { customerName: "Emma Smith", barberName: "David Thompson", qPos: 2, mins: 40, customerImage: "https://i.pravatar.cc/150?img=2" },
-    { customerName: "Liam Johnson", barberName: "Chris Williams", qPos: 3, mins: 35, customerImage: "https://i.pravatar.cc/150?img=3" },
-    { customerName: "Sophia Brown", barberName: "Alex Martinez", qPos: 4, mins: 45, customerImage: "https://i.pravatar.cc/150?img=4" },
-    { customerName: "Noah Wilson", barberName: "James Anderson", qPos: 5, mins: 25, customerImage: "https://i.pravatar.cc/150?img=5" },
-    { customerName: "Olivia Martinez", barberName: "Brian Davis", qPos: 6, mins: 50, customerImage: "https://i.pravatar.cc/150?img=6" },
-    { customerName: "William Davis", barberName: "John Rodriguez", qPos: 7, mins: 30, customerImage: "https://i.pravatar.cc/150?img=7" },
-    { customerName: "Ava Garcia", barberName: "Ryan Clark", qPos: 8, mins: 40, customerImage: "https://i.pravatar.cc/150?img08" },
-    { customerName: "James Rodriguez", barberName: "Ethan Scott", qPos: 9, mins: 20, customerImage: "https://i.pravatar.cc/150?img=9" },
-    { customerName: "Mia Anderson", barberName: "Matt Lewis", qPos: 10, mins: 55, customerImage: "https://i.pravatar.cc/150?img=10" }
-  ];
+
 
   const appointmentReportList = [
     {
       heading: "Total Appointments",
-      value: 60,
+      value: reportData?.appointment?.totalAppointmentHistoryCount,
+      percent: 100
     },
     {
       heading: "Served Appointments",
-      value: 40,
+      value: reportData?.appointment?.servedAppointmenthistoryCount,
+      percent: reportData?.appointment?.servedAppointmentHistoryPercentage
     },
     {
       heading: "Canceled Appointments",
-      value: 20,
+      value: reportData?.appointment?.cancelledAppointmentHistoryCount,
+      percent: reportData?.appointment?.cancelledAppointmentHistoryPercentage
     },
   ]
-
-  const appointReportData = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
   return (
     barberProfile?.user[0]?.isApproved ?
@@ -1540,7 +1403,7 @@ const Dashboard = () => {
 
         <section className={`${style.dashboard_container}`}>
           <div>
-            <h2>Welcome, John Smith</h2>
+            <h2>Welcome, {barberName}</h2>
           </div>
 
           <div>
@@ -1549,49 +1412,69 @@ const Dashboard = () => {
               <div>
                 <div>
                   <p>Today's Appointments</p>
-                  <p>Total 10 appointments are available</p>
+                  <p>Total {todaysApp?.totalCount} appointments are available</p>
                 </div>
 
-                <div>
-                  {
-                    barberlist.map((b, index) => {
-                      return (
-                        <div className={`${style.barber_list_item}`} key={index}>
-                          <div>
-                            <img src={b.img} alt="" />
-                            <div>
-                              <p>Mike Johnson</p>
-                              <p>{b.name}</p>
+                {
+                  todaysAppLoading ? (
+                    <div className={`${style.barber_loading}`}>
+                      <Skeleton
+                        count={3}
+                        width={"100%"}
+                        height={"4rem"}
+                        baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                        highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                        style={{ marginBottom: "1rem" }} />
+
+                    </div>
+                  ) : todaysApp?.appointments?.length > 0 ? (
+                    <div>
+                      {
+                        todaysApp?.appointments?.map((item, index) => {
+                          return (
+                            <div className={`${style.barber_list_item}`} key={item._id}>
+                              <div>
+                                <img src={item?.customerProfile?.[0]?.url} alt="" />
+                                <div>
+                                  <p>{item?.customerName ?? ""}</p>
+                                  <p>{item?.barberName ?? ""}</p>
+                                </div>
+                              </div>
+                              <div>
+                                <h4>{item.appointmentDate}</h4>
+                                <p>{item.timeSlots}</p>
+                              </div>
                             </div>
-                          </div>
-                          <div>
-                            <h4>25 Mar, 2025</h4>
-                            <p>11:30 - 12:30</p>
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
+                          )
+                        })
+                      }
 
-                </div>
+                    </div>
+                  ) : (
+                    <div className={`${style.barber_error}`}>
+                      <p>No appointments available</p>
+                    </div>
+                  )
+                }
+
+
               </div>
 
               <div>
                 <div>
                   <p>Queue Reports</p>
-                  <p>Today status of Queue</p>
-                  <h2>70</h2>
+                  <p>Queue count of last 7 days</p>
+                  <h2>{reportData?.queue?.last7daysTotalQueueCount}</h2>
                 </div>
 
                 <div className={`${style.queue_report_container}`}>
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="90%">
                     <LineChart
                       width={500}
                       height={300}
-                      data={queueData}
+                      data={reportData?.queue?.last7daysCount}
                     >
-                      <Line type="monotone" dataKey="pv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
-                      <Line type="monotone" dataKey="uv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                      <Line type="monotone" dataKey="TotalQueue" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -1600,25 +1483,41 @@ const Dashboard = () => {
               <div>
                 <div>
                   <p>Queue History</p>
-                  <p><span>+20.1%</span> from last 30 days</p>
-                  <h2>400</h2>
+                  <p><span
+                    style={{
+                      color: reportData?.queue?.queueTrend === "Rise" ? "#00A36C" :
+                        reportData?.queue?.queueTrend === "Fall" ? "rgb(244, 67, 54)" : ""
+                    }}
+                  >{reportData?.queue?.queueTrend === "Rise" ? "+" : reportData?.queue?.queueTrend === "Fall" ? "-" : ""}{reportData?.queue?.percentageChangelast30Days}%</span> from last 30 days</p>
+                  <h2>{reportData?.queue?.totalQueueHistoryCount}</h2>
                 </div>
 
                 <div className={`${style.queue_history_container}`}>
                   <div>
                     <div>
-                      <span style={{ background: "#00A36C" }}>+62.5%</span>
+                      <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedHistoryPercentage}</span>
                       <p>Served</p>
                     </div>
 
                     <div>
-                      <span style={{ background: "rgb(244, 67, 54)" }}>-32.5%</span>
+                      <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledHistoryPercentage}</span>
                       <p>Canceled</p>
                     </div>
                   </div>
 
                   <div>
-                    <div></div>
+                    <div
+                      style={{
+                        width: `${reportData?.queue?.servedHistoryPercentage}%`,
+                        borderRadius: reportData?.queue?.servedHistoryPercentage === 100 && "2rem"
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        width: `${reportData?.queue?.cancelledHistoryPercentage}%`,
+                        borderRadius: reportData?.queue?.cancelledHistoryPercentage === 100 && "2rem"
+                      }}
+                    ></div>
                   </div>
 
                 </div>
@@ -1631,19 +1530,24 @@ const Dashboard = () => {
                   <div>
                     <div>
                       <p>Appointments Weekly Reports</p>
-                      <p>Weekly earnings overview</p>
+                      <p>Last 7 days overview</p>
                     </div>
 
                     <div>
-                      <h1>19th Feb - 25th Feb</h1>
-                      <p><span>+20.1%</span> from last 7 days</p>
+                      <h1>{reportData?.appointment?.dateFormat}</h1>
+                      <p><span
+                        style={{
+                          color: reportData?.appointment?.appointmentTrend === "Fall" ? "#f44336" :
+                            reportData?.appointment?.appointmentTrend === "Rise" ? "#00A36C" : ""
+                        }}
+                      >{reportData?.appointment?.appointmentTrend === "Fall" ? "-" : reportData?.appointment?.appointmentTrend === "Rise" ? "+" : ""}{reportData?.appointment?.percentageChangeLastWeek}%</span> from last 7 days</p>
                     </div>
                   </div>
 
                   <div>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart width={150} height={40} data={appointReportData}>
-                        <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
+                    <ResponsiveContainer width="100%" height="90%">
+                      <BarChart width={150} height={40} data={reportData?.appointment?.last7daysCount}>
+                        <Bar dataKey="TotalAppoinment" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -1663,7 +1567,7 @@ const Dashboard = () => {
 
                           <h2>{item.value}</h2>
 
-                          <div><div></div></div>
+                          <div><div style={{ width: `${item.percent}%` }}></div></div>
                         </div>
                       )
                     })
@@ -1676,31 +1580,50 @@ const Dashboard = () => {
               <div>
                 <div>
                   <p>Queue List</p>
-                  <p>The current total queue count is 100.</p>
+                  <p>The current total queue count is {BarberQueueList?.length}</p>
                 </div>
 
-                <div>
-                  {
-                    queueList.map((item, index) => {
-                      return (
-                        <div className={`${style.queue_list_item}`} key={index}>
-                          <div>
-                            <div><img src={item.customerImage} alt="" /></div>
-                            <div>
-                              <p>{item.customerName}</p>
-                              <p>{item.barberName}</p>
+                {
+                  getBarberQueueListLoading ? (
+                    <div className={`${style.queuelist_loading}`}>
+                      <Skeleton
+                        count={6}
+                        width={"100%"}
+                        height={"6rem"}
+                        baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                        highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                        style={{ marginBottom: "1rem" }} />
+                    </div>
+                  ) : getBarberQueueListResolve && BarberQueueList?.length > 0 ? (
+                    <div>
+                      {
+                        BarberQueueList?.map((item, index) => {
+                          return (
+                            <div className={`${style.queue_list_item}`} key={item._id}>
+                              <div>
+                                <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
+                                <div>
+                                  <p>{item.customerName}</p>
+                                  <p>{item.barberName}</p>
+                                </div>
+                              </div>
+
+                              <div>
+                                <h2>{item?.qPosition === 1 ? "Next" : item?.qPosition}</h2>
+                                <p>Est. Time - {item.customerEWT === 0 ? "" : item.customerEWT} mins</p>
+                              </div>
                             </div>
-                          </div>
+                          )
+                        })
+                      }
+                    </div>
+                  ) : (
+                    <div className={`${style.queuelist_error}`}>
+                      <p>No queue available</p>
+                    </div>
+                  )
+                }
 
-                          <div>
-                            <h2>{item.qPos === 1 ? "Next" : item.qPos}</h2>
-                            <p>Est. Time - {item.mins} mins</p>
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
               </div>
             </div>
           </div>
@@ -1708,9 +1631,7 @@ const Dashboard = () => {
 
       </> :
       <>
-
         <div className={`${style.section}`}>
-
           <div>
             <h2>Connect to your salon</h2>
           </div>

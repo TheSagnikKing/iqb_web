@@ -115,12 +115,12 @@ const ChangePassword = () => {
   const darkmodeOn = darkMode === "On"
 
   return (
-    <div className={`${style.change_password_container} ${darkmodeOn && style.dark}`}>
-      <div className={`${style.change_password_container_left} ${darkmodeOn && style.dark}`}><img src="/signin_un.png" alt="reset_image" /></div>
+    <div className={`${style.section} ${darkmodeOn && style.dark}`}>
+      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
 
       <div className={`${style.change_password_container_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Change Password</p>
+          <h2>Change Password</h2>
           <p>Use at least 8 characters with a mix of letters, numbers, and symbols.</p>
           <p>Keep it unique and avoid reusing passwords.</p>
 

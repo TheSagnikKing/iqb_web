@@ -26,6 +26,7 @@
         flex-direction: column;
         gap: 2rem;
         padding-bottom: 3rem;
+        overflow: auto;
 
         &>div {
             display: flex;
@@ -305,7 +306,7 @@
 
         &>button {
             width: max-content;
-            height: 3.5rem;
+            min-height: 3.5rem;
             padding-inline: 1.5rem;
             border-radius: var(--border-radius-primary);
             -webkit-border-radius: var(--border-radius-primary);
@@ -1116,6 +1117,23 @@
                         }
                     }
                 }
+
+                .barber_loading {
+                    display: block !important;
+                }
+
+                .barber_error {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex: 1;
+
+                    &>p {
+                        color: var(--text-primary);
+                        font-size: 1.6rem;
+                        font-family: 'AirbnbCereal_Medium';
+                    }
+                }
             }
 
             &>div:nth-child(2) {
@@ -1180,7 +1198,7 @@
                         color: var(--text-secondary);
 
                         &>span {
-                            color: #00A36C;
+                            /* color: #00A36C; */
                             font-family: "AirbnbCereal_Medium";
                         }
                     }
@@ -1209,6 +1227,8 @@
                             gap: 1rem;
 
                             &>span {
+                                min-width: 5.3rem;
+                                min-height: 2.8rem;
                                 padding: 0.5rem 0.6rem;
                                 border-radius: 2rem;
                                 -webkit-border-radius: 2rem;
@@ -1229,22 +1249,23 @@
                         }
                     }
 
-                    &>div:nth-child(2) {
+                    &>div:nth-child(2){
+                        display: flex;
                         height: 1.5rem;
                         width: 100%;
-                        background-color: #6366f1;
-                        border-radius: 2rem;
-                        -webkit-border-radius: 2rem;
-                        -moz-border-radius: 2rem;
-                        -ms-border-radius: 2rem;
-                        -o-border-radius: 2rem;
 
-                        &>div {
-                            height: 1.5rem;
-                            width: 70%;
-                            background-color: var(--bg-secondary);
+                        &>div:nth-child(1){
+                            background-color: #00A36C;
+                            height: inherit;
                             border-top-left-radius: 2rem;
                             border-bottom-left-radius: 2rem;
+                        }
+
+                        &>div:nth-child(2){
+                            background-color: rgb(244, 67, 54);
+                            height: inherit;
+                            border-top-right-radius: 2rem;
+                            border-bottom-right-radius: 2rem;
                         }
                     }
                 }
@@ -1319,7 +1340,7 @@
                                 margin-top: -1rem;
 
                                 &>span {
-                                    color: #00A36C;
+                                    /* color: #00A36C; */
                                     font-family: "AirbnbCereal_Medium";
                                 }
                             }
@@ -1496,6 +1517,22 @@
                         }
                     }
                 }
+            }
+        }
+
+        .queuelist_loading {
+            display: block;
+        }
+
+        .queuelist_error {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &>p {
+                color: var(--text-primary);
+                font-size: 1.6rem;
+                font-family: 'AirbnbCereal_Medium';
             }
         }
     }

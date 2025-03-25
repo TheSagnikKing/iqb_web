@@ -259,66 +259,85 @@ const QueHistory = () => {
 
             <div className={`${style.list_container}`}>
 
-                <div className={`${style.list_body_container}`}>
+                {
+                    getBarberQueueListHistoryLoading ? (
+                        <div className={`${style.list_body_container_loader}`}>
+                            <Skeleton
+                                count={6}
+                                height={"6.5rem"}
+                                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                style={{ marginBottom: "1rem" }} />
+                        </div>
+                    ) : getBarberQueueListHistoryResolve && QueuehistoryPaginationData?.length > 0 ? (
+                        <div className={`${style.list_body_container}`}>
 
-                    <div className={`${style.headRow}`}>
-                        {
-                            headRows.map((item, index) => {
-                                return (
-                                    <div key={item.id}>
-                                        <button
-                                            className={`${item.key === "customerName" || item.key === "barberName" ? style.name_head_btn : ""}`}
-                                        // onClick={() => sortFunction(item.key)}
-                                        >
-                                            {item.key === "customerName" || item.key === "barberName" ? (
-                                                <>
-                                                    <span></span>
-                                                    {item.heading}
-                                                </>
-                                            ) : (
-                                                item.heading
-                                            )}
+                            <div className={`${style.headRow}`}>
+                                {
+                                    headRows.map((item, index) => {
+                                        return (
+                                            <div key={item.id}>
+                                                <button
+                                                    className={`${item.key === "customerName" || item.key === "barberName" ? style.name_head_btn : ""}`}
+                                                // onClick={() => sortFunction(item.key)}
+                                                >
+                                                    {item.key === "customerName" || item.key === "barberName" ? (
+                                                        <>
+                                                            <span></span>
+                                                            {item.heading}
+                                                        </>
+                                                    ) : (
+                                                        item.heading
+                                                    )}
 
-                                            {/* <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span> */}
-                                        </button>
-                                    </div>
-                                )
-                            })
-                        }
+                                                    {/* <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span> */}
+                                                </button>
+                                            </div>
+                                        )
+                                    })
+                                }
 
-                    </div>
+                            </div>
 
-                    {
-                        QueuehistoryPaginationData?.map((item, index) => {
-                            return (
-                                <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === QueuehistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                                    <div><p>{item.qPosition}</p></div>
-                                    <div>
-                                        <div>
-                                            <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
-                                            <p>{item.customerName}</p>
+                            {
+                                QueuehistoryPaginationData?.map((item, index) => {
+                                    return (
+                                        <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === QueuehistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                                            <div><p>{item.qPosition}</p></div>
+                                            <div>
+                                                <div>
+                                                    <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
+                                                    <p>{item.customerName}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <div><img src={item.barberProfile?.[0]?.url} alt="" /></div>
+                                                    <p>{item.barberName}</p>
+                                                </div>
+                                            </div>
+                                            <div><p>{item.timeJoinedQ}</p></div>
+                                            <div><p>{item.qgCode}</p></div>
+                                            <div><p>{barberProfile?.currency}{" "}{item?.services.reduce((sum, service) => sum + service.servicePrice, 0)}</p></div>
+                                            <div><p>{item.serviceType}</p></div>
+                                            <div><p>{item.serviceEWT} mins</p></div>
+                                            <div><p style={{
+                                                color: item.status === "served" ? "green" : "var(--bg-secondary)"
+                                            }}>{item.status}</p></div>
+
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <div><img src={item.barberProfile?.[0]?.url} alt="" /></div>
-                                            <p>{item.barberName}</p>
-                                        </div>
-                                    </div>
-                                    <div><p>{item.timeJoinedQ}</p></div>
-                                    <div><p>{item.qgCode}</p></div>
-                                    <div><p>{barberProfile?.currency}{" "}{item?.services.reduce((sum, service) => sum + service.servicePrice, 0)}</p></div>
-                                    <div><p>{item.serviceType }</p></div>
-                                    <div><p>{item.serviceEWT} mins</p></div>
-                                    <div><p style={{
-                                        color: item.status === "served" ? "green" : "var(--bg-secondary)"
-                                    }}>{item.status}</p></div>
+                                    )
+                                })
+                            }
+                        </div>
+                    ) : (
+                        <div className={`${style.list_body_container_error}`}>
+                            <p>No queue history available</p>
+                        </div>
+                    )
+                }
 
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+
 
                 <div className={`${style.pagination_container}`}>
                     <div></div>

@@ -1667,10 +1667,15 @@ const EditProfile = () => {
                             <p>{adminProfile?.email}</p>
                         </div>
 
-                        <div>
-                            <span><ContactTel /></span>
-                            <p>{adminProfile?.mobileCountryCode}{" "}{adminProfile?.mobileNumber}</p>
-                        </div>
+                        {
+                            adminProfile?.mobileNumber ? (
+                                <div>
+                                    <span><ContactTel /></span>
+                                    <p>{adminProfile?.mobileCountryCode}{" "}{adminProfile?.mobileNumber}</p>
+                                </div>
+                            ) : (null)
+                        }
+
                     </div>
 
                     <div>
