@@ -341,55 +341,10 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
 
     return (
         <header className={`${style.header}`}>
-            {/* <div className={style.barber_dashboard_btn_container}>
 
-                {barberProfile?.isOnline ? <button className={style.barber_online_active}>Online</button> : <button className={style.barber_online_inactive}>Offline</button>}
-
-                {barberProfile?.isClockedIn ? <button className={style.barber_clock_active}>Clock-In</button> : <button className={style.barber_clock_inactive}>Clock-Out</button>}
-
-            </div> */}
 
             <button onClick={() => setSidebar((prev) => !prev)}>{sidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
 
-
-            {/* <div className={`${style.profile_wrapper} ${darkmodeOn && style.dark}`}>
-
-                <div>
-                    <img
-                        src={barberProfile?.profile[0]?.url}
-                        onError={() => setSrc('https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg')}
-                        alt='barber-profile'
-                        onClick={() => setBarberEditDrop((prev) => !prev)}
-                    />
-
-                    {
-                        barberEditDrop &&
-                        <ClickAwayListener onClickAway={() => setBarberEditDrop(false)}>
-                            <div
-                                className={`${style.profile_drop_container} ${darkmodeOn && style.dark}`}
-                            >
-                                <div onClick={() => {
-                                    navigate("/barber-dashboard/editprofile")
-                                    setBarberEditDrop(false)
-                                }}>
-                                    <div><ProfileIcon /></div>
-                                    <div>My Profile</div>
-                                </div>
-                                <div onClick={logoutHandler}>
-                                    <div><LogoutIcon /></div>
-                                    <div>Logout</div>
-                                </div>
-
-                            </div>
-                        </ClickAwayListener>
-                    }
-
-                </div>
-
-                <div onClick={() => setSidebarToggle(true)}
-                    className={`${style.dashboard_mobile_menu} ${darkmodeOn && style.dark}`}
-                ><MobileMenuIcon /></div>
-            </div> */}
 
             <div>
                 <div>
@@ -410,7 +365,7 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
 
                 <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
                     <div onClick={() => setProfileOpen((prev) => !prev)}>
-                        <img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" />
+                        <img src={barberProfile?.profile?.[0]?.url} alt="" />
 
                         <div
                             style={{
@@ -423,10 +378,10 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className={`${style.profile_container_header}`}>
-                                <div><img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" /></div>
+                                <div><img src={barberProfile?.profile?.[0]?.url} alt="" /></div>
                                 <div>
-                                    <p>Toby Belhome</p>
-                                    <p>contact@hotmail.com</p>
+                                    <p>{barberProfile?.name}</p>
+                                    <p>{barberProfile?.email}</p>
                                 </div>
                             </div>
 

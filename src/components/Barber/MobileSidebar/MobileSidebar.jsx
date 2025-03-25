@@ -121,11 +121,11 @@ const MobileSidebar = () => {
               <header>
                 <div>
                   <img
-                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/beauty-salon-logo-icon%2Cspa-logo%2Cgold-beauty-design-template-05b9bdfd3e13d2230a2846189d9660d4_screen.jpg?ts=1698222841"
+                    src={barberProfile?.salonlogo?.[0]?.url}
                     alt=""
                   />
                 </div>
-                {mobileSidebar ? <p>Modern Unisex Salon</p> : null}
+                {mobileSidebar ? <p>{barberProfile?.salonName}</p> : null}
               </header>
 
               <nav>
@@ -174,6 +174,7 @@ const MobileSidebar = () => {
                     onColor="#00A36C"
                     readOnly
                     checked={barberProfile?.isOnline}
+                    onChange={() => {}}
                   />
                 </div>
 
@@ -187,6 +188,7 @@ const MobileSidebar = () => {
                     onColor="#00A36C"
                     readOnly
                     checked={barberProfile?.isClockedIn}
+                    onChange={() => {}}
                   />
                 </div>
               </nav>

@@ -1093,7 +1093,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditProfile.module.css"
-import { CameraIcon, CheckIcon, CloseIcon, ConnectSalonIcon, ContactTel, DropdownIcon, EmailIcon, SalonIcon } from '../../newicons'
+import { AddIcon, CameraIcon, CheckIcon, CloseIcon, ConnectSalonIcon, ContactTel, DeleteIcon, DropdownIcon, EmailIcon, OtpEmailIcon, SalonIcon } from '../../newicons'
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -1104,6 +1104,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 
 import { barberSendVerifyEmailAction, barberSendVerifyMobileAction, barberUpdatePasswordAction, barberUpdateProfileAction, barberVerifiedEmailStatusAction, barberVerifiedMobileStatusAction } from "../../Redux/Barber/Actions/BarberProfileAction"
 import { BARBER_LOGGED_IN_MIDDLEWARE_SUCCESS } from '../../Redux/Barber/Constants/constants';
+import { ClockIcon, Eyevisible, Notvisibleeye, OtpMessageIcon } from '../../icons'
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
@@ -1658,7 +1659,8 @@ const EditProfile = () => {
         );
 
         if (phoneInput) {
-            phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+            // phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+            phoneInput.style.color = "var(--text-primary)"
         }
     }, [darkmodeOn]);
 
@@ -1708,24 +1710,138 @@ const EditProfile = () => {
         };
     }, []);
 
+    let progress = 0;
+    if (barberProfile?.name) progress = 25;
+    if (barberProfile?.name && barberProfile?.mobileNumber) progress = 50;
+    if (barberProfile?.name && barberProfile?.mobileNumber && barberProfile?.dateOfBirth) progress = 75;
+    if (barberProfile?.name && barberProfile?.mobileNumber && barberProfile?.dateOfBirth && barberProfile?.gender) progress = 100;
 
     return (
         <section className={`${style.section}`}>
             <div>
                 <h2>Profile</h2>
-                {/* <button onClick={() => navigate("/admin-salon/createsalon")}>Services</button> */}
-                {/* <button>Services</button> */}
+                {
+                    salonId === 0 ? (<div></div>) : <button onClick={() => setEditServiceModal(true)}>Edit services</button>
+                }
             </div>
+
+            <Modal
+                open={editServiceModal}
+                onClose={() => setEditServiceModal(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className={`${style.edit_modal_container} ${darkmodeOn && style.dark}`}>
+                    <div>
+                        <p>Edit Services</p>
+                        <button onClick={() => setEditServiceModal(false)}><CloseIcon /></button>
+                    </div>
+
+                    {
+                        getAllSalonServicesBarberLoading ? (
+                            <main className={`${style.edit_modal_content_container_loading} ${darkmodeOn && style.dark}`}>
+                                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                                <Skeleton variant="rectangular" width={"100%"} height={"16rem"} style={{ borderRadius: "var(--list-wrapper-border-radius)" }} />
+                            </main>
+                        ) :
+                            getAllSalonServicesBarberData?.response?.services?.length > 0 ?
+                                (<main className={`${style.edit_modal_content_container} ${darkmodeOn && style.dark}`}>
+
+                                    {AllSalonServices?.map((s) => (
+                                        <div key={s.serviceId} className={style.service_item}>
+                                            <div>
+                                                <div>
+                                                    <div><img src={s?.serviceIcon?.url} alt={s.serviceName} /></div>
+                                                    <div>
+                                                        <p>{s?.serviceName}</p>
+                                                        <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                                        <p>{s?.serviceDesc}</p>
+                                                    </div>
+                                                </div>
+                                                {currentBarberServices.find((c) => c.serviceId === s.serviceId) ? (
+                                                    <button
+                                                        style={{
+                                                            background: "#450a0a",
+                                                        }}
+                                                        onClick={() => deleteServiceHandler(s)}
+                                                    ><DeleteIcon /></button>
+                                                ) : (
+                                                    <button
+                                                        style={{
+                                                            background: "#052e16",
+                                                        }}
+                                                        onClick={() => chooseServiceHandler(s)}
+                                                    ><AddIcon /></button>
+                                                )}
+
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <p>Price</p>
+                                                    <p>{getAllSalonServicesBarberData?.response?.currency}{s?.servicePrice}</p>
+                                                </div>
+                                                <div>
+                                                    <p>Estimated Time</p>
+                                                    <div>
+                                                        <input
+                                                            type="text"
+                                                            value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
+                                                            onChange={(e) => handleonChange(e, s)}
+                                                            maxLength={3}
+                                                        />
+                                                        <p>mins</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                </main>) :
+                                (<main className={`${style.edit_modal_content_container_error} ${darkmodeOn && style.dark}`}>
+                                    <p>No services available</p>
+                                </main>)
+                    }
+
+                    <button onClick={updateBarberProfile} className={style.edit_service_btn}>
+                        {
+                            barberUpdateProfileLoading ? (<ButtonLoader />) :
+                                "Save"
+                        }
+                    </button>
+
+                </div>
+            </Modal>
+
 
             <div className={`${style.profile_container}`}>
                 <div>
                     <div>
                         <div>
-                            <img src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" alt="" />
-                            <button><CameraIcon /></button>
+
+                            {
+                                uploadpicLoader ? <Skeleton
+                                    count={1}
+                                    width={"10rem"}
+                                    height={"10rem"}
+                                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
+                                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                    style={{ borderRadius: "50%" }} /> : <img src={barberProfile?.profile[0]?.url} alt="profile" />
+                            }
+
+                            <button
+                                className={style.upload_image_container}
+                                onClick={() => handleSalonLogoButtonClick()}
+                            ><CameraIcon /></button>
+
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                style={{ display: 'none' }}
+                                onChange={handleProfileFileInputChange}
+                            />
                         </div>
 
-                        <h4>John Smith</h4>
+                        <h4>{barberProfile?.name}</h4>
                         <p>Barber</p>
                     </div>
                     {/* <div>
@@ -1746,25 +1862,28 @@ const EditProfile = () => {
                     <div>
                         <div>
                             <span><ConnectSalonIcon /></span>
-                            <p>Modern Unisex Salon</p>
+                            <p>{barberProfile?.salonName}</p>
                         </div>
 
 
                         <div>
                             <span><EmailIcon /></span>
-                            <p>contact@hotmail.com</p>
+                            <p>{barberProfile?.email}</p>
                         </div>
 
                         <div>
                             <span><ContactTel /></span>
-                            <p>+44 20 7123 4567</p>
+                            <p>{barberProfile?.mobileCountryCode}{" "}{barberProfile?.mobileNumber}</p>
                         </div>
                     </div>
 
                     <div>
                         <h4>Complete Your Profile</h4>
                         <div>
-                            <span></span>
+                            <span style={{
+                                width: `${progress}%`,
+                                borderRadius: progress === 100 ? "2rem" : ""
+                            }}></span>
                         </div>
                     </div>
                 </div>
@@ -1773,7 +1892,20 @@ const EditProfile = () => {
                     <div>
                         <div>
                             <p>Name</p>
-                            <input type="text" placeholder='Enter your name' />
+                            <input
+                                type="text"
+                                placeholder='Enter your name'
+                                value={name}
+                                onChange={(e) => {
+                                    setNameError("")
+                                    setName(e.target.value)
+                                }}
+                                onKeyDown={handleKeyPress}
+                                style={{
+                                    border: nameError ? "0.1rem solid red" : "none"
+                                }}
+                            />
+                            {nameError && <p className={style.error_message}>{nameError}</p>}
                         </div>
 
                         <div>
@@ -1782,33 +1914,168 @@ const EditProfile = () => {
                                 <input
                                     type="text"
                                     placeholder='Enter your email'
-                                    // value={adminProfile?.email}
+                                    value={barberProfile?.email}
                                     readOnly
+                                    onKeyDown={handleKeyPress}
                                 />
 
                                 <button
-                                    // onClick={() => sendVerificationEmail()}
-                                    // className={changeEmailVerifiedState ? style.admin_verified_icon : style.admin_notverified_icon}
-                                    // title={changeEmailVerifiedState ? "Verified" : "NotVerified"}
+                                    onClick={() => sendVerificationEmail()}
+                                    title={changeEmailVerifiedState ? "Verified" : "NotVerified"}
                                     style={{
                                         color: changeEmailVerifiedState ? "green" : "red",
                                         cursor: changeEmailVerifiedState ? "not-allowed" : "pointer"
                                     }}
                                 >
-                                    {/* {changeEmailVerifiedState ? <CheckIcon /> : <CloseIcon />} */}
-                                    {true ? <CheckIcon /> : <CloseIcon />}
+                                    {changeEmailVerifiedState ? <CheckIcon /> : <CloseIcon />}
                                 </button>
 
                             </div>
                         </div>
 
+                        <Modal
+                            open={openEmailModal}
+                            onClose={() => setOpenEmailModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
+                                <div><OtpEmailIcon /></div>
+
+                                <div>
+                                    <p>Please check your email</p>
+                                    <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{barberProfile?.email}</span></p>
+                                    <div>
+                                        {
+                                            otp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (otpinputRef.current[index] = ref)}
+                                                    onChange={(e) => {
+                                                        if (/^\d*$/.test(e.target.value)) {
+                                                            handleOtpInputChange(index, e.target.value)
+                                                        }
+                                                    }
+                                                    }
+                                                    onKeyDown={(e) => handleKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <p>Didn't get the code ? <span onClick={() => sendVerificationEmail()}>Click to resend</span></p>
+
+                                    <div>
+                                        <button onClick={verifyEmailStatusClicked}>Verify</button>
+                                    </div>
+
+                                </div>
+
+                                <button onClick={() => setOpenEmailModal(false)}><CloseIcon /></button>
+                            </div>
+                        </Modal>
+
+
                         <div>
                             <p>Password</p>
                             <input
                                 type="password"
+                                onClick={() => setOpenPasswordModal(true)}
                                 value={"********"}
                                 placeholder='' />
                         </div>
+
+                        <Modal
+                            open={openPasswordModal}
+                            onClose={() => setOpenPasswordModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+                                <div>
+                                    <p>Change your password</p>
+                                    <button onClick={() => setOpenPasswordModal(false)}><CloseIcon /></button>
+                                </div>
+                                <div className={style.modal_content_container}>
+
+                                    <div>
+                                        <p>Old Password</p>
+                                        <div style={{ border: oldPasswordError ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seePassword ? "text" : "password"}`}
+                                                value={oldPassword}
+                                                onChange={(e) => {
+                                                    setOldPasswordError("")
+                                                    setOldPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter Old Password'
+                                                onKeyDown={handleKeyPressPasswordHandler}
+                                            />
+                                            <div onClick={() => setSeePassword((prev) => !prev)}>{seePassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        <p className={style.error_message} style={{ marginTop: "1rem" }}>{oldPasswordError}</p>
+                                    </div>
+
+                                    <div>
+                                        <p>New Password</p>
+                                        <div style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seeOldPassword ? "text" : "password"}`}
+                                                value={password}
+                                                onChange={(e) => {
+                                                    setNotMatchError("")
+                                                    setPasswordError("")
+                                                    setPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter New Password'
+                                                onKeyDown={handleKeyPressPasswordHandler}
+                                            />
+                                            <div onClick={() => setSeeOldPassword((prev) => !prev)}>{seeOldPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        <p className={style.error_message} style={{ marginTop: "1rem" }}>{passwordError}</p>
+                                    </div>
+
+                                    <div>
+                                        <p>Confirm Password</p>
+                                        <div style={{ border: (confirmPasswordError || notMatchError) ? "0.1rem solid red" : undefined }}>
+                                            <input
+                                                type={`${seeConfirmPassword ? "text" : "password"}`}
+                                                value={confirmPassword}
+                                                onChange={(e) => {
+                                                    setNotMatchError("")
+                                                    setConfirmPasswordError("")
+                                                    setConfirmPassword(e.target.value)
+                                                }}
+                                                placeholder='Enter Confirm Password'
+                                                onKeyDown={handleKeyPressPasswordHandler}
+                                            />
+                                            <div onClick={() => setSeeConfirmPassword((prev) => !prev)}>{seeConfirmPassword ? <Eyevisible /> : <Notvisibleeye />}</div>
+                                        </div>
+                                        <p className={style.error_message} style={{ marginTop: "1rem" }}>{(confirmPasswordError || notMatchError)}</p>
+                                    </div>
+
+                                    <button
+                                        className={style.edit_modal_btn}
+                                        onClick={updatePasswordHandler}
+                                    >
+                                        {
+                                            barberUpdatePasswordLoading ?
+                                                (
+                                                    <ButtonLoader />
+                                                ) :
+                                                (
+                                                    "Save"
+                                                )
+                                        }
+
+                                    </button>
+                                </div>
+                            </div>
+                        </Modal >
 
 
                         <div>
@@ -1818,7 +2085,7 @@ const EditProfile = () => {
                                     <PhoneInput
                                         forceDialCode={true}
                                         defaultCountry={countryflag}
-                                        // value={mobileNumber}
+                                        value={mobileNumber}
                                         onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                                     />
                                 </div>
@@ -1838,6 +2105,51 @@ const EditProfile = () => {
                             {invalidNumberError && <p className={style.error_message}>{invalidNumberError}</p>}
                         </div>
 
+                        <Modal
+                            open={openMobileModal}
+                            onClose={() => setOpenMobileModal(false)}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className={`${style.modal_common_container} ${darkmodeOn && style.dark}`}>
+                                <div><OtpMessageIcon /></div>
+
+                                <div>
+                                    <p>Please check your message</p>
+                                    <p>We have sent a code to your <span style={{ fontWeight: "600" }}>{barberProfile?.mobileNumber}</span></p>
+                                    <div>
+                                        {
+                                            mobileotp.map((digit, index) => (
+                                                <input
+                                                    type="text"
+                                                    key={index}
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    autoFocus={index === 0}
+                                                    ref={(ref) => (mobileotpinputRef.current[index] = ref)}
+                                                    onChange={(e) => {
+                                                        if (/^\d*$/.test(e.target.value)) {
+                                                            handleMobileOtpInputChange(index, e.target.value)
+                                                        }
+                                                    }
+                                                    }
+                                                    onKeyDown={(e) => handleMobileKeyDown(index, e)}
+                                                ></input>
+                                            ))
+                                        }
+                                    </div>
+
+                                    <p>Didn't get the code ? <span onClick={() => sendVerificationMobile()}>Click to resend</span></p>
+
+                                    <div>
+                                        <button onClick={verifyMobileStatusClicked}>Verify</button>
+                                    </div>
+
+                                </div>
+
+                                <button onClick={() => setOpenMobileModal(false)}><CloseIcon /></button>
+                            </div>
+                        </Modal>
 
                         {
                             mobileValue ? (

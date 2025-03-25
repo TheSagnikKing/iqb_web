@@ -784,62 +784,20 @@ const Dashboard = () => {
   const appointmentReportList = [
     {
       heading: "Total Appointments",
-      value: 60,
+      value: reportData?.appointment?.totalAppointmentHistoryCount,
+      percent: 100
     },
     {
       heading: "Served Appointments",
-      value: 40,
+      value: reportData?.appointment?.servedAppointmenthistoryCount,
+      percent: reportData?.appointment?.servedAppointmentHistoryPercentage
     },
     {
       heading: "Canceled Appointments",
-      value: 20,
+      value: reportData?.appointment?.cancelledAppointmentHistoryCount,
+      percent: reportData?.appointment?.cancelledAppointmentHistoryPercentage
     },
   ]
-
-  const appointReportData = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
 
   return (
@@ -908,19 +866,18 @@ const Dashboard = () => {
             <div>
               <div>
                 <p>Queue Reports</p>
-                <p>Today status of Queue</p>
-                <h2>{reportData?.queue?.totalQueueCount}</h2>
+                <p>Queue count of last 7 days</p>
+                <h2>{reportData?.queue?.last7daysTotalQueueCount}</h2>
               </div>
 
               <div className={`${style.queue_report_container}`}>
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="90%">
                   <LineChart
                     width={500}
                     height={300}
-                    data={queueData}
+                    data={reportData?.queue?.last7daysCount}
                   >
-                    <Line type="monotone" dataKey="pv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
-                    <Line type="monotone" dataKey="uv" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
+                    <Line type="monotone" dataKey="TotalQueue" stroke="var(--bg-secondary)" strokeWidth={2} dot={{ fill: "#fff", stroke: "var(--bg-secondary)", strokeWidth: 2, r: 4 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -929,29 +886,44 @@ const Dashboard = () => {
             <div>
               <div>
                 <p>Queue History</p>
-                <p><span>+20.1%</span> from last 30 days</p>
-                <h2>400</h2>
+                <p><span
+                  style={{
+                    color: reportData?.queue?.queueTrend === "Rise" ? "#00A36C" : "#00A36C"
+                  }}
+                >{reportData?.queue?.queueTrend === "Rise" ? "+" : "-"}{reportData?.queue?.percentageChangelast30Days}</span> from last 30 days</p>
+                <h2>{reportData?.queue?.totalQueueHistoryCount}</h2>
               </div>
 
               <div className={`${style.queue_history_container}`}>
                 <div>
                   <div>
-                    <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedPercentage
-                      ? Number(reportData.queue.servedPercentage).toFixed(1)
-                      : "0.0"}</span>
+                    <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedHistoryPercentage}</span>
                     <p>Served</p>
                   </div>
 
                   <div>
-                    <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledPercentage
-                      ? Number(reportData.queue.cancelledPercentage).toFixed(1)
-                      : "0.0"}</span>
+                    <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledHistoryPercentage}</span>
                     <p>Canceled</p>
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <div></div>
+                </div> */}
+
+                <div>
+                  <div
+                    style={{
+                      width: `${reportData?.queue?.servedHistoryPercentage}%`,
+                      borderRadius: reportData?.queue?.servedHistoryPercentage === 100 && "2rem"
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      width: `${reportData?.queue?.cancelledHistoryPercentage}%`,
+                      borderRadius: reportData?.queue?.cancelledHistoryPercentage === 100 && "2rem"
+                    }}
+                  ></div>
                 </div>
 
               </div>
@@ -963,20 +935,24 @@ const Dashboard = () => {
               <div>
                 <div>
                   <div>
-                    <p>Appointments Weekly Reports</p>
-                    <p>Weekly earnings overview</p>
+                    <p>Appointments Reports</p>
+                    <p>Last 7 days overview</p>
                   </div>
 
                   <div>
-                    <h1>19th Feb - 25th Feb</h1>
-                    <p><span>+20.1%</span> from last 7 days</p>
+                    <h1>{reportData?.appointment?.dateFormat}</h1>
+                    <p><span
+                      style={{
+                        color: reportData?.appointment?.appointmentTrend === "Fall" ? "#f44336" : "#00A36C"
+                      }}
+                    >{reportData?.appointment?.appointmentTrend === "Fall" ? "-" : "+"}{reportData?.appointment?.percentageChangeLastWeek}</span> from last 7 days</p>
                   </div>
                 </div>
 
                 <div>
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart width={150} height={40} data={appointReportData}>
-                      <Bar dataKey="uv" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
+                    <BarChart width={150} height={40} data={reportData?.appointment?.last7daysCount}>
+                      <Bar dataKey="TotalAppoinment" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -996,7 +972,7 @@ const Dashboard = () => {
 
                         <h2>{item.value}</h2>
 
-                        <div><div></div></div>
+                        <div><div style={{ width:`${item.percent}%`}}></div></div>
                       </div>
                     )
                   })

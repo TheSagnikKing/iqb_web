@@ -144,6 +144,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from '../DashboardHeader/DashboardHeader.jsx';
 import { Admincustomericon } from '../../../icons.js';
 import { AppointmentIcon, DashboardIcon, QueueHistoryIcon, QueueIcon } from '../../../newicons.js'
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
 
@@ -195,6 +196,8 @@ const Sidebar = () => {
 
   const location = useLocation()
 
+  const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata?.user[0])
+
 
   return (
     <main className={`${style.main_container}`}>
@@ -205,10 +208,10 @@ const Sidebar = () => {
       >
         <header>
           <div>
-            <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/beauty-salon-logo-icon%2Cspa-logo%2Cgold-beauty-design-template-05b9bdfd3e13d2230a2846189d9660d4_screen.jpg?ts=1698222841" alt="" />
+            <img src={barberProfile?.salonlogo?.[0]?.url} alt="" />
           </div>
           {
-            sidebar ? (<p>Modern Unisex Salon</p>) : null
+            sidebar ? (<p>{barberProfile?.salonName}</p>) : null
           }
         </header>
 

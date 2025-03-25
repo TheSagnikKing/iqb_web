@@ -427,13 +427,13 @@ const Queue = () => {
                       <div><p>{item.qPosition === 1 ? "Next" : item.qPosition}</p></div>
                       <div>
                         <div>
-                          <div><img src={item.customerImage} alt="" /></div>
+                          <div><img src={item.customerProfile?.[0]?.url} alt="" /></div>
                           <p>{item.name}</p>
                         </div>
                       </div>
                       <div>
                         <div>
-                          <div><img src={item.customerImage} alt="" /></div>
+                          <div><img src={item.barberProfile?.[0]?.url} alt="" /></div>
                           <p>{item.barberName}</p>
                         </div>
                       </div>
