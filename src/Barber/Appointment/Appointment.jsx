@@ -12,12 +12,12 @@ const Appointment = () => {
     const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
 
     const [getSalonoffDays, setGetSalonoffDays] = useState([])
-    
+
     useEffect(() => {
-        if(salonId !== 0){
-            const fetchSalonOffDaysHandler = async() => {
+        if (salonId !== 0) {
+            const fetchSalonOffDaysHandler = async () => {
                 try {
-                    const {data} = await api.post("/api/salonSettings/getSalonoffDays", {salonId})
+                    const { data } = await api.post("/api/salonSettings/getSalonoffDays", { salonId })
                     setGetSalonoffDays(data?.response)
                 } catch (error) {
                     toast.error(error?.response?.data?.message, {
@@ -34,7 +34,7 @@ const Appointment = () => {
 
             fetchSalonOffDaysHandler()
         }
-    },[salonId])
+    }, [salonId])
 
     const darkMode = useSelector(darkmodeSelector)
 
@@ -228,7 +228,7 @@ const Appointment = () => {
                                         <input
                                             type="checkbox"
                                             style={{
-                                                accentColor:"var(--bg-secondary)"
+                                                accentColor: "var(--bg-secondary)"
                                             }}
                                             onChange={() => checkdayHandler(d)}
                                             checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
@@ -250,10 +250,17 @@ const Appointment = () => {
                             alignItems: "center"
                         }}>
                             <p>Select Off Days</p>
-                            <button className={style.reset_days} onClick={() => offDayHandler([])}>Reset Off Days</button>
+                            <button
+                                className={style.reset_days}
+                                onClick={() => offDayHandler([])}
+                                disabled={salonId === 0}
+                                style={{
+                                    cursor: salonId === 0 ? "not-allowed" : "pointer"
+                                }}
+                            >Reset Off Days</button>
                         </div>
                         {
-                            <div style={{ marginBottom: "2rem"}}>
+                            <div style={{ marginBottom: "2rem" }}>
                                 <Calendar
                                     onClickDay={onClickDay}
                                     // tileClassName={({ date }) =>
@@ -276,7 +283,14 @@ const Appointment = () => {
                         }
                     </div>
                 }
-                <button className={style.submit} onClick={appointmentdates ? submitHandler : () => offDayHandler(selectedDates)}>submit</button>
+                <button
+                    className={style.submit}
+                    onClick={appointmentdates ? submitHandler : () => offDayHandler(selectedDates)}
+                    disabled={salonId === 0}
+                    style={{
+                        cursor: salonId === 0 ? "not-allowed" : "pointer"
+                    }}
+                >submit</button>
             </div>
         </div>
     )
