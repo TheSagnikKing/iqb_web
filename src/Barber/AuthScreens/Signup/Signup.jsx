@@ -120,7 +120,8 @@ const Signup = () => {
 
   return (
     <main className={`${style.section} ${darkmodeOn && style.dark}`}>
-      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
       <div className={`${style.barber_signin_right} ${darkmodeOn && style.dark}`}>
         <div>

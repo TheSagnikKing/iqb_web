@@ -922,7 +922,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
               <div className={`${style.profile_container_header}`}>
                 <div><img src={adminProfile?.profile?.[0]?.url} alt="" /></div>
                 <div>
-                  <p>{adminProfile?.name}</p>
+                  <p>{adminProfile?.name ? adminProfile?.name : "User"}</p>
                   <p>{adminProfile?.email}</p>
                 </div>
               </div>

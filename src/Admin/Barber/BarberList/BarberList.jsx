@@ -928,7 +928,7 @@ const BarberList = () => {
     if (barberlistData.length > 0) {
       setBarberPaginationData(barberlistData.slice(startIndex, endIndex))
     }
-  }, [barberlistData])
+  }, [barberlistData,startIndex,endIndex])
 
   useEffect(() => {
     const totalPages = Math.ceil(barberlistData.length / rowsPerPage)
@@ -939,7 +939,7 @@ const BarberList = () => {
 
   useEffect(() => {
     setBarberPaginationData(barberlistData.slice(startIndex, endIndex))
-  }, [startIndex, endIndex, barberlistData])
+  }, [barberlistData])
 
 
   const handleChange = (event, value) => {

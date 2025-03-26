@@ -785,7 +785,7 @@ const Dashboard = () => {
     {
       heading: "Total Appointments",
       value: reportData?.appointment?.totalAppointmentHistoryCount,
-      percent: 100
+      percent: reportData?.appointment?.totalAppointmentHistoryPercentage
     },
     {
       heading: "Served Appointments",
@@ -813,7 +813,7 @@ const Dashboard = () => {
 
       <section className={`${style.dashboard_container}`}>
         <div>
-          <h2>Welcome, {adminName}</h2>
+          <h2>Welcome, {adminName ? adminName : "User"}</h2>
         </div>
 
         <div>

@@ -69,7 +69,8 @@ const ForgotPassword = () => {
 
   return (
     <div className={`${style.section} ${darkmodeOn && style.dark}`}>
-      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" /> */}
+      <div></div>
 
       <div className={`${style.forgot_container_right} ${darkmodeOn && style.dark}`}>
         <div>

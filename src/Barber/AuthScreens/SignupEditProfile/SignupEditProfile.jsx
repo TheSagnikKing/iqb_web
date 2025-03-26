@@ -185,7 +185,7 @@ const SignupEditProfile = () => {
     );
 
     if (phoneInput) {
-     phoneInput.style.color = !darkmodeOn ? 'var(--light-color-4)' : 'var(--text-primary)';
+      phoneInput.style.color = !darkmodeOn ? 'var(--light-color-4)' : 'var(--text-primary)';
     }
   }, [darkmodeOn]);
 
@@ -238,12 +238,13 @@ const SignupEditProfile = () => {
 
   return (
     <main className={`${style.section} ${darkmodeOn && style.dark}`}>
-       <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
       <div>
         <div>
           <div>
-          <h2>Account Details</h2>
+            <h2>Account Details</h2>
             {
               barberSkipProfileLoading ?
                 <button style={{
@@ -259,7 +260,7 @@ const SignupEditProfile = () => {
           <div>
             {/* <p>Name</p> */}
             <input
-            placeholder='Enter name'
+              placeholder='Enter name'
               type="text"
               value={name}
               onChange={(e) => {
@@ -277,7 +278,7 @@ const SignupEditProfile = () => {
           <div>
             {/* <p>Gender</p> */}
             <input
-            placeholder='Select gender'
+              placeholder='Select gender'
               type="text"
               value={`${gender ? `${gender}` : ''}`}
               onClick={() => {
@@ -291,7 +292,7 @@ const SignupEditProfile = () => {
               readOnly
             />
 
-<span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+            <span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
 
             <p className={style.error_message}>{genderError}</p>
 

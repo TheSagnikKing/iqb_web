@@ -234,7 +234,8 @@ const SignupEditProfile = () => {
 
   return (
     <main className={`${style.section} ${darkmodeOn && style.dark}`}>
-      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
       <div>
         <div>

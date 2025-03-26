@@ -18,7 +18,8 @@ const PasswordReset = () => {
 
   return (
     <div className={`${style.section} ${darkmodeOn && style.dark}`}>
-      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="forgot_image" /> */}
+      <div></div>
         <div>
             <h2>Password Reset</h2>
             <p>Your Password has been successfully reset.</p>

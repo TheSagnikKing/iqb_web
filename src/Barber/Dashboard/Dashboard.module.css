@@ -1410,7 +1410,7 @@
                             -o-border-radius: 1rem;
 
                             &>div {
-                                width: 70%;
+                                width: 0%;
                                 height: 0.35rem;
                                 background-color: var(--bg-secondary);
                                 border-top-left-radius: 0.35rem;
@@ -1549,7 +1549,7 @@
                 min-height: min-content;
 
                 &>div:nth-child(1) {
-                    height: 28rem;
+                    min-height: 28rem;
                     max-height: 28rem;
                     gap: 0rem;
                     padding: 0rem;

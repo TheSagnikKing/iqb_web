@@ -243,188 +243,13 @@ const PaymentStatus = () => {
   ];
 
 
-  const [paymenthistoryData, setpaymenthistoryData] = useState([
-    {
-      "id": 1,
-      "product": "Appointment",
-      "purchased": "2023-10-26",
-      "expired": "2023-10-26 11:00",
-      "price": 50.00,
-      "transactionid": "APT12345",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 2,
-      "product": "Queue",
-      "purchased": "2023-11-01",
-      "expired": "2023-11-01 14:30",
-      "price": 10.00,
-      "transactionid": "QUE67890",
-      "timeperiod": "30 minutes"
-    },
-    {
-      "id": 3,
-      "product": "Appointment",
-      "purchased": "2023-11-05",
-      "expired": "2023-11-05 16:00",
-      "price": 75.00,
-      "transactionid": "APT13579",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 4,
-      "product": "Queue",
-      "purchased": "2023-11-08",
-      "expired": "2023-11-08 09:15",
-      "price": 15.00,
-      "transactionid": "QUE24680",
-      "timeperiod": "45 minutes"
-    },
-    {
-      "id": 5,
-      "product": "Appointment",
-      "purchased": "2023-11-10",
-      "expired": "2023-11-10 13:30",
-      "price": 60.00,
-      "transactionid": "APT98765",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 6,
-      "product": "Queue",
-      "purchased": "2023-11-12",
-      "expired": "2023-11-12 11:45",
-      "price": 20.00,
-      "transactionid": "QUE45678",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 7,
-      "product": "Appointment",
-      "purchased": "2023-11-15",
-      "expired": "2023-11-15 15:00",
-      "price": 80.00,
-      "transactionid": "APT11223",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 8,
-      "product": "Queue",
-      "purchased": "2023-11-18",
-      "expired": "2023-11-18 10:30",
-      "price": 12.00,
-      "transactionid": "QUE33445",
-      "timeperiod": "30 minutes"
-    },
-    {
-      "id": 9,
-      "product": "Appointment",
-      "purchased": "2023-11-20",
-      "expired": "2023-11-20 14:00",
-      "price": 70.00,
-      "transactionid": "APT55667",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 10,
-      "product": "Queue",
-      "purchased": "2023-11-22",
-      "expired": "2023-11-22 12:15",
-      "price": 18.00,
-      "transactionid": "QUE77889",
-      "timeperiod": "45 minutes"
-    },
-    {
-      "id": 11,
-      "product": "Appointment",
-      "purchased": "2023-11-25",
-      "expired": "2023-11-25 16:30",
-      "price": 65.00,
-      "transactionid": "APT99001",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 12,
-      "product": "Queue",
-      "purchased": "2023-11-28",
-      "expired": "2023-11-28 09:45",
-      "price": 22.00,
-      "transactionid": "QUE22334",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 13,
-      "product": "Appointment",
-      "purchased": "2023-11-30",
-      "expired": "2023-11-30 13:00",
-      "price": 85.00,
-      "transactionid": "APT44556",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 14,
-      "product": "Queue",
-      "purchased": "2023-12-02",
-      "expired": "2023-12-02 11:15",
-      "price": 14.00,
-      "transactionid": "QUE66778",
-      "timeperiod": "30 minutes"
-    },
-    {
-      "id": 15,
-      "product": "Appointment",
-      "purchased": "2023-12-05",
-      "expired": "2023-12-05 15:30",
-      "price": 72.00,
-      "transactionid": "APT88990",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 16,
-      "product": "Queue",
-      "purchased": "2023-12-08",
-      "expired": "2023-12-08 10:00",
-      "price": 16.00,
-      "transactionid": "QUE10112",
-      "timeperiod": "45 minutes"
-    },
-    {
-      "id": 17,
-      "product": "Appointment",
-      "purchased": "2023-12-11",
-      "expired": "2023-12-11 14:30",
-      "price": 78.00,
-      "transactionid": "APT13141",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 18,
-      "product": "Queue",
-      "purchased": "2023-12-14",
-      "expired": "2023-12-14 12:45",
-      "price": 24.00,
-      "transactionid": "QUE15161",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 19,
-      "product": "Appointment",
-      "purchased": "2023-12-17",
-      "expired": "2023-12-17 16:00",
-      "price": 68.00,
-      "transactionid": "APT17181",
-      "timeperiod": "1 hour"
-    },
-    {
-      "id": 20,
-      "product": "Queue",
-      "purchased": "2023-12-20",
-      "expired": "2023-12-20 09:30",
-      "price": 26.00,
-      "transactionid": "QUE19201",
-      "timeperiod": "30 minutes"
+  const [paymenthistoryData, setpaymenthistoryData] = useState([])
+
+  useEffect(() => {
+    if(paymentStatusdata?.length > 0){
+      setpaymenthistoryData(paymentStatusdata)
     }
-  ])
+  },[paymentStatusdata])
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
@@ -437,7 +262,13 @@ const PaymentStatus = () => {
   const [sortOrder, setSortOrder] = useState("asc")
   const [sortColumn, setSortColumn] = useState("")
 
-  const [salonPaymenthistoryData, setSalonPaymenthistoryData] = useState(paymenthistoryData.slice(startIndex, endIndex))
+  const [salonPaymenthistoryPaginationData, setSalonPaymenthistoryPaginationData] = useState([])
+
+  useEffect(() => {
+    if(paymenthistoryData.length > 0){
+      setSalonPaymenthistoryPaginationData(paymenthistoryData.slice(startIndex, endIndex))
+    }
+  },[paymenthistoryData])
 
   useEffect(() => {
     const totalPages = Math.ceil(paymenthistoryData.length / rowsPerPage);
@@ -446,7 +277,7 @@ const PaymentStatus = () => {
     const endIndex = Math.min(startIndex + rowsPerPage, paymenthistoryData.length);
     setStartIndex(startIndex);
     setEndIndex(endIndex);
-    setSalonPaymenthistoryData(paymenthistoryData.slice(startIndex, endIndex));
+    setSalonPaymenthistoryPaginationData(paymenthistoryData.slice(startIndex, endIndex));
   }, [paymenthistoryData, page, rowsPerPage]);
 
 
@@ -498,9 +329,9 @@ const PaymentStatus = () => {
 
               </div>
               {
-                paymentStatusdata?.map((item, index) => {
+                salonPaymenthistoryPaginationData?.map((item, index) => {
                   return (
-                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaymenthistoryData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === salonPaymenthistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                       <div><p>{item.invoiceNumber}</p></div>
                       <div><p>{item.products?.[0]?.productName}</p></div>
                       <div><p>{item.purchaseDate}</p></div>
@@ -585,4 +416,3 @@ const PaymentStatus = () => {
 }
 
 export default PaymentStatus
-

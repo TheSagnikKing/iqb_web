@@ -1460,8 +1460,8 @@ const CreateSalon = () => {
                     <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                     getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
-                      AllTimezones.map((c) => (
-                        <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
+                      AllTimezones.map((c,index) => (
+                        <p key={index} onClick={() => setTimezoneHandler(c)}>{c}</p>
                       ))
 
                       :

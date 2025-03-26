@@ -380,7 +380,7 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
                             <div className={`${style.profile_container_header}`}>
                                 <div><img src={barberProfile?.profile?.[0]?.url} alt="" /></div>
                                 <div>
-                                    <p>{barberProfile?.name}</p>
+                                    <p>{barberProfile?.name ? barberProfile?.name : "User"}</p>
                                     <p>{barberProfile?.email}</p>
                                 </div>
                             </div>

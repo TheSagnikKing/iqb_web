@@ -1643,7 +1643,7 @@ const EditProfile = () => {
                             />
                         </div>
 
-                        <h4>{adminProfile?.name}</h4>
+                        <h4>{adminProfile?.name ? adminProfile?.name : "User"}</h4>
                         <p>Admin</p>
                     </div>
                     <div>

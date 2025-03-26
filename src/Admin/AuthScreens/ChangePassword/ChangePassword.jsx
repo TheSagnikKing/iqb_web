@@ -129,7 +129,8 @@ const ChangePassword = () => {
 
   return (
     <div className={`${style.section} ${darkmodeOn && style.dark}`}>
-      <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" />
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
       <div className={`${style.change_password_container_right} ${darkmodeOn && style.dark}`}>
         <div>

@@ -1841,7 +1841,7 @@ const EditProfile = () => {
                             />
                         </div>
 
-                        <h4>{barberProfile?.name}</h4>
+                        <h4>{barberProfile?.name ? barberProfile?.name : "User"}</h4>
                         <p>Barber</p>
                     </div>
                     {/* <div>

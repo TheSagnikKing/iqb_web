@@ -4,9 +4,10 @@
     display: flex;
     align-items: center;
 
-    &>img {
+    &>div:nth-child(1) {
         width: 50%;
         height: inherit;
+        background-color: #09090bf7;
     }
 }
 
@@ -273,7 +274,7 @@
         grid-template-columns: 1fr;
     }
 
-    .section>img {
+    .section>div:nth-child(1){
         display: none;
     }
 
@@ -287,7 +288,7 @@
         grid-template-columns: 1fr;
     }
 
-    .section>img {
+    .section>div:nth-child(1) {
         display: none;
     }
 
