@@ -419,6 +419,14 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
             payload: { advertisements: [] }
         })
 
+        dispatch({
+            type: "ADMIN_SET_SALON",
+            payload: {
+                currentActiveSalon: "",
+                chooseSalonId: 0
+            }
+        })
+
         localStorage.setItem("userAdminLoggedIn", "")
         localStorage.setItem("userBarberLoggedIn", "")
         localStorage.setItem("barberdata", JSON.stringify({}))

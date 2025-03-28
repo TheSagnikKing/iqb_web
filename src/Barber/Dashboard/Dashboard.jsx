@@ -1495,12 +1495,12 @@ const Dashboard = () => {
                 <div className={`${style.queue_history_container}`}>
                   <div>
                     <div>
-                      <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedHistoryPercentage}</span>
+                      <span style={{ background: "#00A36C" }}>{reportData?.queue?.servedHistoryPercentage && `${reportData?.queue?.servedHistoryPercentage}%`}</span>
                       <p>Served</p>
                     </div>
 
                     <div>
-                      <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledHistoryPercentage}</span>
+                      <span style={{ background: "rgb(244, 67, 54)" }}>{reportData?.queue?.cancelledHistoryPercentage && `${reportData?.queue?.cancelledHistoryPercentage}%`}</span>
                       <p>Canceled</p>
                     </div>
                   </div>

@@ -917,8 +917,22 @@ const CustomerList = () => {
               </ClickAwayListener>
             ) : (
               <>
-                <button><MessageIcon /></button>
-                <button><EmailIcon /></button>
+                <button
+                  onClick={sendEmailNavigate}
+                  title='Email'
+                  disabled={salonId === 0}
+                  style={{
+                    cursor: salonId === 0 ? "not-allowed" : "cursor"
+                  }}
+                ><EmailIcon /></button>
+                <button
+                  onClick={sendMessageNavigate}
+                  title='Message'
+                  disabled={salonId === 0}
+                  style={{
+                    cursor: salonId === 0 ? "not-allowed" : "cursor"
+                  }}
+                ><MessageIcon /></button>
                 <button onClick={() => setMobileSearchOpen(true)}><SearchIcon /></button>
               </>
             )
