@@ -1290,6 +1290,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 .edit_salon_content_wrapper>div:nth-child(2)>div:nth-child(6) {
@@ -1354,6 +1355,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 .edit_salon_content_wrapper>div:nth-child(2)>div:nth-child(7)>div:nth-child(1) {
@@ -1554,6 +1556,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 
@@ -1651,6 +1654,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 .edit_salon_content_wrapper>div:nth-child(2)>div:nth-child(10) {
@@ -2294,6 +2298,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 
@@ -2386,6 +2391,7 @@
     padding-inline: 1rem;
     border: 0.1rem solid var(--border-secondary);
     font-size: 1.4rem;
+    outline: none;
 }
 
 .salontype_input {

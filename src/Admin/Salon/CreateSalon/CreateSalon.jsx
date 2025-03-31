@@ -146,6 +146,13 @@ const CreateSalon = () => {
   const [servicePriceError, setServicePriceError] = useState("")
   const [serviceEwtError, setServiceEwtError] = useState("")
 
+  const [fblinkError, setFbLinkError] = useState("")
+  const [weblinkError, setWebLinkError] = useState("")
+  const [instalinkError, setInstaLinkError] = useState("")
+  const [twitterlinkError, setTwitterLinkError] = useState("")
+  const [tiktoklinkError, setTiktokLinkError] = useState("")
+
+
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
   }
@@ -1821,7 +1828,7 @@ const CreateSalon = () => {
             <input
               type="text"
               value={webLink}
-              onChange={(e) => setHandler(setWebLink, e.target.value, "webLink")}
+              onChange={(e) => setHandler(setWebLink, e.target.value, "webLink",setWebLinkError)}
               onKeyDown={handleKeyPress}
             />
           </div>
@@ -1831,7 +1838,7 @@ const CreateSalon = () => {
             <input
               type="text"
               value={fbLink}
-              onChange={(e) => setHandler(setFbLink, e.target.value, "fbLink")}
+              onChange={(e) => setHandler(setFbLink, e.target.value, "fbLink", setFbLinkError)}
               onKeyDown={handleKeyPress}
             />
           </div>
@@ -1841,7 +1848,7 @@ const CreateSalon = () => {
             <input
               type="text"
               value={instraLink}
-              onChange={(e) => setHandler(setInstraLink, e.target.value, "instraLink")}
+              onChange={(e) => setHandler(setInstraLink, e.target.value, "instraLink", setInstaLinkError)}
               onKeyDown={handleKeyPress}
             />
           </div>
@@ -1851,7 +1858,7 @@ const CreateSalon = () => {
             <input
               type="text"
               value={twitterLink}
-              onChange={(e) => setHandler(setTwitterLink, e.target.value, "twitterLink")}
+              onChange={(e) => setHandler(setTwitterLink, e.target.value, "twitterLink", setTwitterLinkError)}
               onKeyDown={handleKeyPress}
             />
           </div>
@@ -1861,7 +1868,7 @@ const CreateSalon = () => {
             <input
               type="text"
               value={tiktokLink}
-              onChange={(e) => setHandler(setTiktokLink, e.target.value, "tiktokLink")}
+              onChange={(e) => setHandler(setTiktokLink, e.target.value, "tiktokLink", setTiktokLinkError)}
               onKeyDown={handleKeyPress}
             />
           </div>

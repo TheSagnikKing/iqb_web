@@ -1154,7 +1154,7 @@ const SalonList = () => {
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
-  const [rowsPerPage, SetRowsPerPage] = useState(2)
+  const [rowsPerPage, SetRowsPerPage] = useState(10)
 
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
