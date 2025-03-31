@@ -1780,7 +1780,7 @@
 }
 
 .icon_selected {
-    border: 0.2rem solid var(--light-color-2);
+    border: 0.2rem solid var(--bg-secondary);
 }
 
 .slider_item>img {

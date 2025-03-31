@@ -347,7 +347,7 @@ const PaymentStatus = () => {
             </div>
           ) : (
             <div className={`${style.list_body_container_error}`}>
-              <p>No queue history available</p>
+              <p>No payment history available</p>
             </div>
           )
         }

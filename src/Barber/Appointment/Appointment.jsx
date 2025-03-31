@@ -208,7 +208,7 @@ const Appointment = () => {
                         onClick={() => {
                             setBarberOffdates(false)
                             setAppointmentDates(true)
-                        }}>Appointment Date</button>
+                        }}>Appointment Days</button>
                     <button
                         onClick={() => {
                             setBarberOffdates(true)
@@ -290,7 +290,7 @@ const Appointment = () => {
                     style={{
                         cursor: salonId === 0 ? "not-allowed" : "pointer"
                     }}
-                >submit</button>
+                >Submit</button>
             </div>
         </div>
     )
