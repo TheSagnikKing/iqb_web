@@ -578,6 +578,7 @@ import { adminApproveBarberAction, adminDeleteBarberAction, adminSendBarberEmail
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
 
 const BarberList = () => {
 

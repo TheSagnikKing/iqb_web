@@ -1013,7 +1013,7 @@ const CustomerList = () => {
                       </div>
                       <div><p>{item.email}</p></div>
                       <div><p>{item.gender}</p></div>
-                      <div><p>{item?.mobileCountryCode}{" "}{item?.mobileNumber}</p></div>
+                      <div><p>+{item?.mobileCountryCode}{" "}{item?.mobileNumber}</p></div>
                       <div><p>{item.dateOfBirth.split("T")[0]}</p></div>
                     </div>
                   )

@@ -14,7 +14,7 @@ import { barberForgetPasswordReducer, barberResetPasswordReducer } from "./Barbe
 import { getBarberQueueListHistoryReducer, getBarberQueueListReducer } from "./Barber/Reducers/BarberQueueReducer";
 import { barberSendVerifyEmailReducer, barberSendVerifyMobileReducer, barberSkipProfileReducer, barberUpdatePasswordReducer, barberUpdateProfileReducer, barberVerifiedEmailStatusReducer, barberVerifiedMobileStatusReducer, getAllSalonServicesBarberReducer } from "./Barber/Reducers/BarberProfileReducer";
 import { barberGetAllCustomerListReducer, barberSendCustomerEmailReducer, barberSendCustomerMessageReducer } from "./Barber/Reducers/BarberCustomerReducer";
-import { AppointmentReducer, CancelAppointmentReducer } from "./Barber/Reducers/AppointmentReducer"
+import { AppointmentReducer, CancelAppointmentReducer, ServeAppointmentReducer } from "./Barber/Reducers/AppointmentReducer"
 
 const rootReducer = combineReducers({
 
@@ -102,6 +102,7 @@ const rootReducer = combineReducers({
   getAllSalonServicesBarber: getAllSalonServicesBarberReducer,
   AppointmentBarber: AppointmentReducer,
   CancelAppointment: CancelAppointmentReducer,
+  ServeAppointment: ServeAppointmentReducer
 })
 
 const initialState = {};

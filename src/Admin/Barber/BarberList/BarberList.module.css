@@ -269,6 +269,7 @@
                     align-items: center;
                     justify-content: center;
                     min-width: 25rem;
+                    /* background-color: red; */
 
 
                     &>div {
@@ -302,6 +303,11 @@
                     }
 
 
+                }
+
+                &>div:nth-child(3){
+                    min-width: 20rem;
+                    max-width: 20rem
                 }
 
                 &>div:nth-last-child(2),
@@ -640,6 +646,9 @@
         }
 
         .barber_send_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 1rem;
             width: 100%;
             height: 3.5rem;

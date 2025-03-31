@@ -287,7 +287,7 @@ const SignupEditProfile = () => {
               }}
               readOnly
             />
-            <span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+            {/* <span onClick={() => genderDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span> */}
             <p className={style.error_message}>{genderError}</p>
 
             {genderDrop && <ClickAwayListener onClickAway={() => setGenderDrop(false)}><div>
@@ -331,7 +331,7 @@ const SignupEditProfile = () => {
                 }}
                 readOnly
               />
-              <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+              {/* <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span> */}
               <p className={style.error_message}>{dateOfBirthError}</p>
               {
                 openCalender && <ClickAwayListener onClickAway={handleClickAway}>

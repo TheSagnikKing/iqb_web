@@ -3,11 +3,12 @@ import style from './AppointmentList.module.css'
 import { useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { ClickAwayListener, Modal } from '@mui/material'
-import { CloseIcon } from '../../icons'
+import { CloseIcon, EditIcon } from '../../icons'
 import { useDispatch } from 'react-redux'
-import { AppointmentAction, CancelAppointmentAction } from '../../Redux/Barber/Actions/AppointmentAction'
+import { AppointmentAction, CancelAppointmentAction, ServeAppointmentAction } from '../../Redux/Barber/Actions/AppointmentAction'
 import Skeleton from 'react-loading-skeleton'
 import toast from 'react-hot-toast'
+import { DeleteIcon } from '../../newicons'
 
 const AppointmentList = () => {
 
@@ -41,7 +42,20 @@ const AppointmentList = () => {
     const [subject, setSubject] = useState("")
     const [body, setBody] = useState("")
 
-    // console.log(modalData)
+    const ServeHandler = async (s) => {
+        const servebody = {
+            salonId: salonId,
+            barberId: s?.barberId,
+            _id: s?._id,
+            appointmentDate: s?.appointmentDate
+        }
+
+        const confirm = window.confirm("Are you sure ?")
+
+        if (confirm) {
+            dispatch(ServeAppointmentAction(servebody))
+        }
+    }
 
     const CancelHandler = async () => {
 
@@ -78,12 +92,11 @@ const AppointmentList = () => {
             body
         }
 
-        // console.log(cancelbody)
 
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(CancelAppointmentAction(cancelbody,setCancelAllModalOpen,setOpenModal))
+            dispatch(CancelAppointmentAction(cancelbody, setCancelAllModalOpen, setOpenModal))
         }
     }
 
@@ -128,10 +141,11 @@ const AppointmentList = () => {
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(CancelAppointmentAction(cancelbody,setCancelAllModalOpen,setOpenModal))
+            dispatch(CancelAppointmentAction(cancelbody, setCancelAllModalOpen, setOpenModal))
         }
 
     }
+
 
     const [cancelAllModalOpen, setCancelAllModalOpen] = useState(false)
     const [cancelAllAppoint, setCancelAllAppoint] = useState({})
@@ -205,15 +219,27 @@ const AppointmentList = () => {
                                                                 mins
                                                             </p>
                                                         </div>
-                                                        <button
-                                                            onClick={() => {
-                                                                setModalData(s)
-                                                                setOpenModal(true)
-                                                                setSubject("")
-                                                                setBody("")
-                                                            }}
 
-                                                        >delete</button>
+                                                        <div>
+                                                            <button
+                                                                style={{
+                                                                    background: "#0285c755"
+                                                                }}
+                                                                onClick={() => ServeHandler(s)}
+                                                            ><EditIcon /></button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    setModalData(s)
+                                                                    setOpenModal(true)
+                                                                    setSubject("")
+                                                                    setBody("")
+                                                                }}
+                                                                style={{
+                                                                    background: "#450a0a"
+                                                                }}
+
+                                                            ><DeleteIcon /></button>
+                                                        </div>
                                                     </div>
                                                 )
                                             })
@@ -313,7 +339,7 @@ const AppointmentList = () => {
                         <p style={{
                             fontWeight: 600,
                             marginBottom: "2rem"
-                        }}>All appointments scheduled for <span style={{ textDecoration: "underline", color:"var(--bg-secondary)" }}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
+                        }}>All appointments scheduled for <span style={{ textDecoration: "underline", color: "var(--bg-secondary)" }}>{cancelAllAppoint.appointmentDate}</span> have been selected for cancellation.</p>
 
                         <p>Reason for cancelling appointment</p>
                         <div>

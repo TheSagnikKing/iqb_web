@@ -240,7 +240,6 @@ const Sidebar = () => {
     response: adminGetDefaultSalonResponse
   } = adminGetDefaultSalon
 
-  console.log(adminGetDefaultSalonResponse)
 
   return (
     <main className={`${style.main_container}`}>

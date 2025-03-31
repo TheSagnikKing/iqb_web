@@ -194,32 +194,31 @@
         }
     }
 
-    &>button {
+    &>div:nth-last-child(1){
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 3.5rem;
-        padding-inline: 1.5rem;
         gap: 1rem;
-        border: none;
-        cursor: pointer;
-        transition: var(--btn-transition);
-        border-radius: 2rem;
-        -webkit-border-radius: 2rem;
-        -moz-border-radius: 2rem;
-        -ms-border-radius: 2rem;
-        -o-border-radius: 2rem;
-        -webkit-transition: var(--btn-transition);
-        -moz-transition: var(--btn-transition);
-        -ms-transition: var(--btn-transition);
-        -o-transition: var(--btn-transition);
-        font-family: "AirbnbCereal_Medium";
-        font-size: 1.4rem;
-        color: var(--text-primary);
-        background-color: #450a0a;
 
-        &:hover {
-            background-color: #4f0b0b;
+        &>button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--btn-transition);
+            border-radius: 0.4rem;
+            -webkit-border-radius: 0.4rem;
+            -moz-border-radius: 0.4rem;
+            -ms-border-radius: 0.4rem;
+            -o-border-radius: 0.4rem;
+            -webkit-transition: var(--btn-transition);
+            -moz-transition: var(--btn-transition);
+            -ms-transition: var(--btn-transition);
+            -o-transition: var(--btn-transition);
+            font-family: "AirbnbCereal_Medium";
+            font-size: 1.6rem;
+            color: var(--text-primary);
         }
     }
 }

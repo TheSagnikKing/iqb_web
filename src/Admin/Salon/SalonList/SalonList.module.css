@@ -654,6 +654,9 @@
             -moz-transition: var(--common-btn-transition);
             -ms-transition: var(--common-btn-transition);
             -o-transition: var(--common-btn-transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             &:hover {
                 background-color: var(--bg-secondary-hover);

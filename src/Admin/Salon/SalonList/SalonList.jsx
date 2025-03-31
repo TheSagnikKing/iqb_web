@@ -769,6 +769,7 @@ import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHe
 import { adminDeleteSalonAction, adminUpdateSalonSettingsAction, getAdminSalonListAction } from '../../../Redux/Admin/Actions/SalonAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import Skeleton from 'react-loading-skeleton';
+import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 
 const SalonList = () => {
 
@@ -1298,7 +1299,7 @@ const SalonList = () => {
                                 <div
                                   style={{
                                     position: "absolute",
-                                    zIndex: settingsIndex === index ? 9999 : -100,
+                                    zIndex: settingsIndex === index ? 20 : -100,
                                   }}
                                   className={`${style.settings_container}`}>
                                   <p><Link
