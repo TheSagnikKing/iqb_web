@@ -1988,18 +1988,21 @@ const EditProfile = () => {
                                 <button onClick={() => setOpenEmailModal(false)}><CloseIcon /></button>
                             </div>
                         </Modal>
+                        
+                        {
+                            barberProfile?.AuthType === "local" ? (<div>
+                                <p>Password</p>
+                                <input
+                                    type="password"
+                                    onClick={() => setOpenPasswordModal(true)}
+                                    value={"********"}
+                                    placeholder='' 
+                                    readOnly
+                                    />
+                            </div>) : (null)
+                        }
 
-
-                        <div>
-                            <p>Password</p>
-                            <input
-                                type="password"
-                                onClick={() => setOpenPasswordModal(true)}
-                                value={"********"}
-                                placeholder='' 
-                                readOnly
-                                />
-                        </div>
+                        
 
                         <Modal
                             open={openPasswordModal}

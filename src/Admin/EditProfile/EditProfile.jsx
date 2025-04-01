@@ -1599,6 +1599,8 @@ const EditProfile = () => {
     if (adminProfile?.name && adminProfile?.mobileNumber && adminProfile?.dateOfBirth) progress = 75;
     if (adminProfile?.name && adminProfile?.mobileNumber && adminProfile?.dateOfBirth && adminProfile?.gender) progress = 100;
 
+    // console.log(adminProfile)
+
     return (
         <section className={`${style.section}`}>
             <div>
@@ -1781,15 +1783,20 @@ const EditProfile = () => {
                             </div>
                         </Modal>
 
-                        <div>
-                            <p>Password</p>
-                            <input
-                                type="password"
-                                value={"********"}
-                                onClick={() => setOpenPasswordModal(true)}
-                                readOnly
-                            />
-                        </div>
+                        {
+                            adminProfile?.AuthType === "local" ? (
+                                <div>
+                                    <p>Password</p>
+                                    <input
+                                        type="password"
+                                        value={"********"}
+                                        onClick={() => setOpenPasswordModal(true)}
+                                        readOnly
+                                    />
+                                </div>
+                            ) : (null)
+                        }
+
 
                         <Modal
                             open={openPasswordModal}
