@@ -123,6 +123,8 @@ body {
   --bg-secondary-hover: #e11d48e6;
   --btn-primary-hover: #27272A;
 
+  --bg-dark: blue;
+
   --input-bg-color: #27272A80;
 
   --common-btn-transition: 0.3s all ease;
@@ -157,37 +159,27 @@ body {
 } */
 
 .react-international-phone-input-container {
-  border-radius: var(--input-border-radius) !important;
-  -webkit-border-radius: var(--input-border-radius) !important;
-  -moz-border-radius: var(--input-border-radius) !important;
-  -ms-border-radius: var(--input-border-radius) !important;
-  -o-border-radius: var(--input-border-radius) !important;
+  border-radius: var(--border-radius-primary) !important;
+  -webkit-border-radius: var(--border-radius-primary) !important;
+  -moz-border-radius: var(--border-radius-primary) !important;
+  -ms-border-radius: var(--border-radius-primary) !important;
+  -o-border-radius: var(--border-radius-primary) !important;
 }
 
 .react-international-phone-input-container .react-international-phone-input {
   width: 100%;
-  min-height: 3.5rem !important;
-  background-color: transparent;
-  border: none;
+  background-color: var(--input-bg-color);
+  color: var(--text-primary);
+  outline: none;
   font-size: 1.4rem;
-  border-radius: var(--input-border-radius) !important;
-  -webkit-border-radius: var(--input-border-radius) !important;
-  -moz-border-radius: var(--input-border-radius) !important;
-  -ms-border-radius: var(--input-border-radius) !important;
-  -o-border-radius: var(--input-border-radius) !important;
+  border: 0.1rem solid var(--border-secondary);
+  height: 3.5rem;
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-  background-color: transparent !important;
-  min-height: 3.5rem !important;
-  width: 6rem !important;
-  border: none !important;
-  border-top-left-radius: var(--input-border-radius) !important;
-  border-bottom-left-radius: var(--input-border-radius) !important;
-}
-
-.react-international-phone-country-selector-dropdown {
-  /* width: 30rem !important; */
+  background-color: var(--input-bg-color);
+  height: 3.5rem;
+  border: 0.1rem solid var(--border-secondary);
 }
 
 
@@ -735,6 +727,7 @@ body {
 
 .rmdp-day span {
   font-size: 1.3rem !important;
+
   &:hover {
     background-color: var(--bg-secondary-hover) !important;
   }

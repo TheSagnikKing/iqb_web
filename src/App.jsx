@@ -177,6 +177,12 @@ const App = () => {
     };
   }, [darkmodeOn]);
 
+  // useEffect(() => {
+  //   document.documentElement.style.setProperty(
+  //     "--bg-secondary",
+  //     modecolors.color1
+  //   );
+  // }, [modecolors]);
 
   return (
     <>
