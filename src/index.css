@@ -74,8 +74,8 @@ body {
   --light-loader-bg-color: #ebebeb;
   --light-loader-highlight-color: #f5f5f5;
 
-  --dark-loader-bg-color: #28292a;
-  --dark-loader-highlight-color: #3c4043;
+  --loader-bg-color: #121217;
+  --loader-highlight-color: #2E2E33;
 
 
   /* font sizes */

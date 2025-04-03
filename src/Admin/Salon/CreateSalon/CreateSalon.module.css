@@ -97,7 +97,7 @@
                         }
                     }
 
-                    &>div {
+                    &>div:nth-child(2) {
                         height: 3.5rem;
                         width: 3.5rem;
                         display: flex;
@@ -106,6 +106,7 @@
                         font-size: 1.4rem;
                         color: var(--text-primary);
                         font-family: 'AirbnbCereal_Medium';
+                        
                     }
 
                     .select_dropdown_container {
@@ -114,7 +115,8 @@
                         top: 4rem;
                         right: 0rem;
                         left: 0rem;
-                        height: 15rem;
+                        max-height: 20rem;
+                        overflow: auto;
                         border: 0.1rem solid var(--border-secondary);
                         border-radius: var(--border-radius-primary);
                         -webkit-border-radius: var(--border-radius-primary);
@@ -122,8 +124,108 @@
                         -ms-border-radius: var(--border-radius-primary);
                         -o-border-radius: var(--border-radius-primary);
                         background-color: var(--bg-primary);
-                        padding: 1rem;
+                        padding: 2rem;
                         z-index: 100;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
+
+                        &>button{
+                            width: max-content;
+                            background-color: transparent;
+                            border: none;
+                            outline: none;
+                            cursor: pointer;
+                            color: var(--text-primary);
+                            font-size: 1.4rem;
+                            opacity: 0.8;
+                            transition: all 0.2s ease-in;
+                            -webkit-transition: all 0.2s ease-in;
+                            -moz-transition: all 0.2s ease-in;
+                            -ms-transition: all 0.2s ease-in;
+                            -o-transition: all 0.2s ease-in;
+
+                            &:hover{
+                                opacity: 1;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+
+                    .select_search_dropdown_container{
+                        position: absolute;
+                        width: 100%;
+                        top: 4rem;
+                        right: 0rem;
+                        left: 0rem;
+                        max-height: 30rem;
+                        min-height: 30rem;
+                        overflow: auto;
+                        border: 0.1rem solid var(--border-secondary);
+                        border-radius: var(--border-radius-primary);
+                        -webkit-border-radius: var(--border-radius-primary);
+                        -moz-border-radius: var(--border-radius-primary);
+                        -ms-border-radius: var(--border-radius-primary);
+                        -o-border-radius: var(--border-radius-primary);
+                        background-color: var(--bg-primary);
+                        padding: 2rem;
+                        z-index: 100;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
+
+                        .search_box {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            width: 100%;
+                            border-bottom: 0.1rem solid var(--border-secondary);
+                            cursor: pointer;
+                        }
+
+                        .search_box>input {
+                            height: 4rem;
+                            width: calc(100% - 3rem);
+                            border: none;
+                            background: transparent;
+                            color: var(--text-primary);
+                            font-size: 1.4rem;
+                        }
+                        
+                        .search_box>input:focus {
+                            outline: none;
+                        }
+                        
+                        .search_box>div {
+                            padding: 0.6rem 0.6rem;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                            cursor: pointer;
+                            color: var(--text-primary);
+                        }
+
+                        &>button{
+                            width: max-content;
+                            background-color: transparent;
+                            border: none;
+                            outline: none;
+                            cursor: pointer;
+                            color: var(--text-primary);
+                            font-size: 1.4rem;
+                            opacity: 0.8;
+                            transition: all 0.2s ease-in;
+                            -webkit-transition: all 0.2s ease-in;
+                            -moz-transition: all 0.2s ease-in;
+                            -ms-transition: all 0.2s ease-in;
+                            -o-transition: all 0.2s ease-in;
+
+                            &:hover{
+                                opacity: 1;
+                                font-weight: 500;
+                            }
+                        }
                     }
                 }
             }

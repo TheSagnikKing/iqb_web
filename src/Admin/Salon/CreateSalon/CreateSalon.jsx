@@ -1934,7 +1934,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
 import "react-multi-carousel/lib/styles.css";
-import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
+import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, SearchIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -2099,7 +2099,7 @@ const CreateSalon = () => {
       salonType: value
     }));
     setSalonTypeError("")
-    setSalonTypeDrop(false)
+    setBusinessTypeOpen(false)
   }
 
   const [localsalondata, setLocalSalondata] = useState({})
@@ -2115,7 +2115,7 @@ const CreateSalon = () => {
     setCountryCode(value.countryCode)
     setCountry(value.name)
     setCountryCurrency(value.currency)
-    setCountryDrop(false)
+    setCountryOpen(false)
     setCountryError("")
   }
 
@@ -2164,7 +2164,7 @@ const CreateSalon = () => {
 
   const setCityHandler = (value) => {
     setCity(value.name)
-    setCityDrop(false)
+    setCityOpen(false)
     setCityError("")
   }
 
@@ -2223,7 +2223,7 @@ const CreateSalon = () => {
   const setTimezoneHandler = (value) => {
 
     setTimezone(value)
-    setTimezoneDrop(false)
+    setTimezoneOpen(false)
     setTimezoneError("")
   }
 
@@ -3037,10 +3037,10 @@ const CreateSalon = () => {
 
   //   const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
 
-    // localStorage.setItem("salondata", JSON.stringify({
-    //   ...existingData,
-    //   [localname]: value
-    // }));
+  // localStorage.setItem("salondata", JSON.stringify({
+  //   ...existingData,
+  //   [localname]: value
+  // }));
   // }
 
 
@@ -3071,9 +3071,9 @@ const CreateSalon = () => {
 
   };
 
-  console.log(contactTel)
-  console.log(dialCode)
-  console.log(countryflag)
+  // console.log(contactTel)
+  // console.log(dialCode)
+  // console.log(countryflag)
 
 
   useEffect(() => {
@@ -3152,6 +3152,7 @@ const CreateSalon = () => {
 
   // ========================
 
+
   const steps = [
     {
       label: 'Account Information',
@@ -3165,11 +3166,11 @@ const CreateSalon = () => {
     {
       label: 'Business Information',
       fields: [
-        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type' },
-        { name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address' },
-        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode' },
-        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude' },
-        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude' },
+        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', salonTypeHandler: salonTypeHandler, value: salonType, error: salonTypeError },
+        { name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', onChange: setHandler, value: address, setState: setAddress, setError: setSalonAddressError, error: salonAddressError },
+        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', onChange: setHandler, value: postCode, setState: setPostCode, setError: setPostCodeError, error: postCodeError },
+        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude },
+        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude },
         { name: 'country', label: 'Country', type: 'text', dropdown: true, placeholder: 'Select country' },
         { name: 'city', label: 'City', type: 'text', dropdown: true, placeholder: 'Select city' },
         { name: 'timezone', label: 'Timezone', type: 'text', dropdown: true, placeholder: 'Select timezone' },
@@ -3311,7 +3312,7 @@ const CreateSalon = () => {
             color: '#fff',
           },
         });
-  
+
         return setInvalidNumberError("Invalid Number")
       }
 
@@ -3319,6 +3320,113 @@ const CreateSalon = () => {
     }
 
     if (activeStep === 1) {
+
+      if (!salonType) {
+        toast.error("Please select salon type", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonTypeError("Please select salon type")
+      }
+
+      if (!address) {
+        toast.error("Please enter salon address", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonAddressError("Please enter salon address")
+      }
+
+      if (!postCode) {
+        toast.error("Please enter postcode", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setPostCodeError("Please enter postcode")
+      }
+
+
+      if (!longitude && !latitude) {
+        toast.error("Coordinates is not present", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonCoordinateError("Coordinates is not present")
+      }
+
+      if (postCode.length === 0 || postCode.length > 10) {
+        toast.error("Postcode must be between 0 to 10 charecters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setPostCodeError("Postcode must be between 0 to 10 charecters")
+      }
+
+      if (!country) {
+        toast.error("Please select country", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setCountryError("Please select country")
+      }
+
+      if (!city) {
+        toast.error("Please select city", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setCityError("Please select city")
+      }
+
+      if (!timezone) {
+        toast.error("Please select timezone", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setTimezoneError("Please select timezone")
+      }
+
+
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
 
@@ -3341,7 +3449,6 @@ const CreateSalon = () => {
     });
   };
 
-  const [open, setOpen] = useState(false)
 
   const salonImageslist = [
     {
@@ -3377,6 +3484,11 @@ const CreateSalon = () => {
       url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
     },
   ]
+
+  const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
+  const [countryOpen, setCountryOpen] = useState(false)
+  const [cityOpen, setCityOpen] = useState(false)
+  const [timezoneOpen, setTimezoneOpen] = useState(false)
 
   return (
     <section className={`${style.section}`}>
@@ -3427,15 +3539,13 @@ const CreateSalon = () => {
                         {
                           field.name === "contactTel" ?
                             (<>
-                              {/* <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red" }}> */}
-                                <PhoneInput
-                                  forceDialCode={true}
-                                  defaultCountry={countryflag}
-                                  value={contactTel}
-                                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
-                                />
-                                {invalidNumberError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
-                              {/* </div> */}
+                              <PhoneInput
+                                forceDialCode={true}
+                                defaultCountry={countryflag}
+                                value={contactTel}
+                                onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+                              />
+                              {invalidNumberError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
                             </>) :
                             (
                               <>
@@ -3478,35 +3588,229 @@ const CreateSalon = () => {
                         <label>{field.label}</label>
 
                         {
-                          field.dropdown ? (<div className={`${style.select_container}`} onClick={() => field.name === "businesstype" && setOpen((prev) => !prev)}>
-                            <input
-                              type={field.type}
-                              name={field.name}
-                              value={formData[field.name]}
-                              placeholder={field.placeholder}
-                              onChange={handleChange}
-                            />
-                            <div><DropdownIcon /></div>
+                          field.dropdown ? (
+                            field.name === "businesstype" ? (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setBusinessTypeOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
 
-                            {
-                              field.name === "businesstype" && open ? (
-                                <ClickAwayListener onClickAway={() => setOpen(false)}>
-                                  <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                  {
+                                    businessTypeOpen ? (
+                                      <ClickAwayListener onClickAway={() => setBusinessTypeOpen(false)}>
+                                        <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <button onClick={() => field.salonTypeHandler("Barber Shop")}>Barber Shop</button>
+                                          <button onClick={() => field.salonTypeHandler("Hair Dresser")}>Hair Dresser</button>
+                                        </div></ClickAwayListener>) : null
+                                  }
+                                </div>
+                                {salonTypeError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{salonTypeError}</p> : null}
+                              </>
+                            ) : field.name === "country" ? (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setCountryOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={country}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
 
-                                  </div></ClickAwayListener>) : null
-                            }
+                                  {
+                                    countryOpen ? (
+                                      <ClickAwayListener onClickAway={() => setCountryOpen(false)}>
+                                        <div className={`${style.select_search_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                                            <input
+                                              type="text"
+                                              placeholder='Search Country'
+                                              value={searchCountry}
+                                              onChange={(e) => searchCountryHandler(e.target.value)}
+                                            />
 
-                          </div>) : (<input
-                            type={field.type}
-                            name={field.name}
-                            value={formData[field.name]}
-                            placeholder={field.placeholder}
-                            onChange={handleChange}
-                          />)
+                                            <div><SearchIcon /></div>
+                                          </div>
+                                          {
+                                            getAdminAllCountriesLoading ?
+                                              <Skeleton count={2}
+                                                height={"4rem"}
+                                                width={"100%"}
+                                                baseColor={"var(--loader-bg-color)"}
+                                                highlightColor={"var(--loader-highlight-color)"}
+                                                style={{
+                                                  borderRadius: "0.3rem",
+                                                  marginBottom: "1rem"
+                                                }}
+                                              /> :
+                                              getAdminAllCountriesResolve && copyCountriesdata?.length > 0 ?
+
+                                                copyCountriesdata?.map((c) => (
+                                                  <button key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</button>
+                                                ))
+                                                :
+                                                <div>
+                                                  <p style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "1.4rem" }}>No countries available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
+
+                                </div>
+                                <p style={{ color: "red", fontSize: "1.4rem" }}>{countryError}</p>
+                              </>
+                            ) : field.name === "city" ? (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setCityOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={city}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {
+                                    cityOpen ? (
+                                      <ClickAwayListener onClickAway={() => setCityOpen(false)}>
+                                        <div className={`${style.select_search_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                                            <input
+                                              type="text"
+                                              placeholder='Search City'
+                                              value={searchCity}
+                                              onChange={(e) => searchCityHandler(e.target.value)}
+                                            />
+
+                                            <div><SearchIcon /></div>
+                                          </div>
+
+                                          {
+                                            getAdminAllCitiesLoading ?
+                                              <Skeleton count={2}
+                                                height={"4rem"}
+                                                width={"100%"}
+                                                baseColor={"var(--loader-bg-color)"}
+                                                highlightColor={"var(--loader-highlight-color)"}
+                                                style={{
+                                                  borderRadius: "0.3rem",
+                                                  marginBottom: "1rem"
+                                                }}
+                                              /> :
+                                              getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
+
+                                                copyCitiesData.map((c, index) => (
+                                                  <button key={index} onClick={() => setCityHandler(c)}>{c.name}</button>
+                                                ))
+                                                :
+                                                <div>
+                                                  <p style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "1.4rem" }}>No cities available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
+
+
+                                </div>
+                                {
+                                  !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : cityError && <p style={{ color: "red", fontSize: "1.4rem" }}>{cityError}</p>
+                                }
+                              </>
+                            ) : field.name === "timezone" && (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setTimezoneOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={timezone}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {
+                                    timezoneOpen ? (
+                                      <ClickAwayListener onClickAway={() => setTimezoneOpen(false)}>
+                                        <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          {
+                                            getAdminAllTimezoneLoading ?
+                                              <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
+                                              getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
+
+                                                AllTimezones.map((c) => (
+                                                  <button key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</button>
+                                                ))
+
+                                                :
+                                                <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+                                                  <p style={{ fontSize: "1.4rem" }}>No timezone available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
+
+                                </div>
+                                {
+                                  !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : timezoneError && <p style={{ color: "red", fontSize: "1.4rem" }}>{timezoneError}</p>
+                                }
+                              </>
+                            )
+
+
+                          ) : (
+                            field.name === "address" ? (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={(e) => field.onChange(field.setState, e.target.value, field.name, field.setError)}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "postcode" ? (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (!/^[a-zA-Z0-9]*$/.test(value)) {
+                                      setPostCodeError("Postcode must only contain letters and numbers");
+                                      return
+                                    }
+                                    setHandler(setPostCode, value, "postCode", setPostCodeError)
+                                  }}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : (<>
+                              <input
+                                type={field.type}
+                                name={field.name}
+                                value={field.value}
+                                placeholder={field.placeholder}
+                                readOnly
+                              />
+                              {salonCoordinateError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{salonCoordinateError}</p> : null}
+                            </>)
+
+                          )
                         }
 
                         {field.name === "longitude" && (
-                          <button className={`${style.geolocation_btn}`}>
+                          <button className={`${style.geolocation_btn}`} onClick={geoLocationHandler}>
                             Get geolocation
                           </button>
                         )}
