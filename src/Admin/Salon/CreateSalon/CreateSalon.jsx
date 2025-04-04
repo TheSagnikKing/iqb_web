@@ -2060,7 +2060,6 @@ const CreateSalon = () => {
 
 
   const [salonType, setSalonType] = useState("")
-  const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
   const [salonNameError, setSalonNameError] = useState("")
   const [salonEmailError, setSalonEmailError] = useState("")
@@ -2087,10 +2086,6 @@ const CreateSalon = () => {
   const [tiktoklinkError, setTiktokLinkError] = useState("")
 
 
-  const salonTypeDropHandler = () => {
-    setSalonTypeDrop((prev) => !prev)
-  }
-
   const salonTypeHandler = (value) => {
     setSalonType(value);
 
@@ -2109,7 +2104,6 @@ const CreateSalon = () => {
   const [countryCurrency, setCountryCurrency] = useState("")
 
   const [country, setCountry] = useState("")
-  const [countryDrop, setCountryDrop] = useState(false)
   const [countrycode, setCountryCode] = useState("")
 
   const setCountryHandler = (value) => {
@@ -2162,7 +2156,6 @@ const CreateSalon = () => {
 
 
   const [city, setCity] = useState("")
-  const [cityDrop, setCityDrop] = useState(false)
 
   const setCityHandler = (value) => {
     setCity(value.name)
@@ -2216,11 +2209,7 @@ const CreateSalon = () => {
 
 
   const [timezone, setTimezone] = useState("")
-  const [timezoneDrop, setTimezoneDrop] = useState(false)
 
-  const timezoneDropHandler = () => {
-    setTimezoneDrop((prev) => !prev)
-  }
 
   const setTimezoneHandler = (value) => {
 
@@ -2240,11 +2229,7 @@ const CreateSalon = () => {
 
 
   const [vipService, setVipService] = useState(false)
-  const [vipServiceDrop, setVipServiceDrop] = useState(false)
 
-  const vipServiceDropHandler = () => {
-    setVipServiceDrop((prev) => !prev)
-  }
 
   const vipServiceHandler = (value) => {
     setVipService(value)
@@ -2891,7 +2876,6 @@ const CreateSalon = () => {
   const setHandler = (setState, value, localname, setError) => {
     setError("")
     setState(value);
-    // console.log("Saving to localStorage:", localname, value);
 
     const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
 
@@ -2915,32 +2899,6 @@ const CreateSalon = () => {
     };
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const phoneInput = document.querySelector(
-  //     '.react-international-phone-input-container .react-international-phone-input'
-  //   );
-
-  //   // const phonedropdown = document.querySelector(
-  //   //   '.react-international-phone-country-selector-dropdown'
-  //   // )
-
-  //   // const phonedropfocus = document.querySelector(
-  //   //   '.react-international-phone-country-selector-dropdown__list-item--selected, .react-international-phone-country-selector-dropdown__list-item--focused'
-  //   // )
-
-  //   if (phoneInput) {
-  //     // phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
-  //     // phoneInput.style.color = '';
-  //   }
-
-  //   // if(phonedropdown){
-  //   //   phonedropdown.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
-  //   //   phonedropdown.style.backgroundColor = darkmodeOn ? 'var(--dark-color-2)' : 'var(--light-color-4)';
-  //   // }
-
-  // }, [darkmodeOn])
-
-  // ========================
 
 
   const steps = [
