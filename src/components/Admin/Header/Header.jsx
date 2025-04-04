@@ -840,8 +840,8 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
                   <Skeleton
                     count={3}
                     height={"3.5rem"}
-                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    baseColor={"var(--loader-bg-color)"}
+                    highlightColor={"var(--loader-highlight-color)"}
                     style={{ marginBottom: "1rem" }} />
                 </div>
               ) : SalonList && SalonList.length > 0 ? (

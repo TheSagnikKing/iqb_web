@@ -872,8 +872,8 @@ const SalonAdv = () => {
                   width={"100%"}
                   height={"30vh"}
                   style={{ borderRadius: "0.6rem" }}
-                  baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                  highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                  baseColor={"var(--loader-bg-color)"}
+                  highlightColor={"var(--loader-highlight-color)"}
                 />
               ) : advertisements?.map((adv) => {
                 return (<div className={`${style.carousel_item}`} key={adv._id}>
@@ -895,8 +895,8 @@ const SalonAdv = () => {
                     width={"100%"}
                     height={"30rem"}
                     style={{ borderRadius: "0.6rem" }}
-                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                    baseColor={"var(--loader-bg-color)"}
+                    highlightColor={"var(--loader-highlight-color)"}
                   />
                 ))}
               </> :

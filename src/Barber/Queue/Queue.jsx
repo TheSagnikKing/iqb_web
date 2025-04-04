@@ -385,8 +385,8 @@ const Queue = () => {
               <Skeleton
                 count={6}
                 height={"6.5rem"}
-                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                baseColor={"var(--loader-bg-color)"}
+                highlightColor={"var(--loader-highlight-color)"}
                 style={{ marginBottom: "1rem" }} />
             </div>
           ) : getBarberQueueListResolve && BarberQueueList?.length > 0 ? (

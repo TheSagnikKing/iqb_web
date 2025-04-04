@@ -621,8 +621,8 @@ const Queue = () => {
               <Skeleton
                 count={6}
                 height={"6.5rem"}
-                baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                baseColor={"var(--loader-bg-color)"}
+                highlightColor={"var(--loader-highlight-color)"}
                 style={{ marginBottom: "1rem" }} />
             </div>
           ) : getAllQueueListResolve && queuelist.length > 0 ? (
@@ -776,8 +776,8 @@ const Queue = () => {
             {
               getAdminBarberListLoading ? (<div className={style.barber_dropdown_loading}>
                 <Skeleton count={3} height={"6rem"} style={{ marginBottom: "1rem" }}
-                  baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                  highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                  baseColor={"var(--loader-bg-color)"}
+                  highlightColor={"var(--loader-highlight-color)"}
                 />
               </div>) :
                 getAdminBarberListResolve && copybarberlistdata?.length > 0 ?

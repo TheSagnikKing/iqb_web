@@ -1627,8 +1627,8 @@ const EditProfile = () => {
                                     count={1}
                                     width={"10rem"}
                                     height={"10rem"}
-                                    baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                                    highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                    baseColor={"var(--loader-bg-color)"}
+                                    highlightColor={"var(--loader-highlight-color)"}
                                     style={{ borderRadius: "50%" }} /> : <img src={adminProfile?.profile[0]?.url} alt="profile" />
                             }
 

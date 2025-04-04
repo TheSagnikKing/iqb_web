@@ -833,8 +833,8 @@ const Dashboard = () => {
                       count={3}
                       width={"100%"}
                       height={"4rem"}
-                      baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                      highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                      baseColor={"var(--loader-bg-color)"}
+                      highlightColor={"var(--loader-highlight-color)"}
                       style={{ marginBottom: "1rem" }} />
 
                   </div>
@@ -993,8 +993,8 @@ const Dashboard = () => {
                       count={6}
                       width={"100%"}
                       height={"6rem"}
-                      baseColor={!darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                      highlightColor={!darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                      baseColor={"var(--loader-bg-color)"}
+                      highlightColor={"var(--loader-highlight-color)"}
                       style={{ marginBottom: "1rem" }} />
                   </div>
                 ) : getAllQueueListResolve && queuelist?.length > 0 ? (

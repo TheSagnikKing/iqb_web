@@ -1934,7 +1934,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
 import "react-multi-carousel/lib/styles.css";
-import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, SearchIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
+import { CameraIcon, CloseIcon, DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, SearchIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
+import { EditIcon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -1947,8 +1948,9 @@ import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { ClickAwayListener, Step, StepContent, StepLabel, Stepper } from '@mui/material';
+import { ClickAwayListener, Modal, Step, StepContent, StepLabel, Stepper } from '@mui/material';
 import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
+import Carousel from 'react-multi-carousel';
 
 const CreateSalon = () => {
 
@@ -2246,7 +2248,7 @@ const CreateSalon = () => {
 
   const vipServiceHandler = (value) => {
     setVipService(value)
-    setVipServiceDrop(false)
+    setServiceTypeOpen(false)
   }
 
 
@@ -2482,7 +2484,6 @@ const CreateSalon = () => {
     setVipService(false)
     setServiceDesc("")
     setServiceEWT("")
-
   }
 
   const handleKeyPressAddServices = (e) => {
@@ -2595,202 +2596,6 @@ const CreateSalon = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const createSalonHandler = async () => {
-    if (!salonName) {
-      toast.error("Please enter salon name", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonNameError("Please enter salon name")
-    }
-
-    if (salonName.length === 0 || salonName.length > 20) {
-      toast.error("Salon Name must be between 1 to 20 characters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonNameError("Salon Name must be between 1 to 20 characters");
-    }
-
-    if (!salonEmail) {
-      toast.error("Please enter salon email", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonEmailError("Please enter salon email")
-    }
-
-    if (!emailRegex.test(salonEmail)) {
-      toast.error("Invalid email format", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: "0.3rem",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-      return setSalonEmailError("Invalid email format");
-    }
-
-    if (!salonDesc) {
-      toast.error("Please enter salon description", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonDescError("Please enter salon description")
-    }
-
-    if (salonDesc.length === 0 || salonDesc.length > 35) {
-      toast.error("Salon Description must be between 1 to 35 characters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonDescError("Salon Description must be between 1 to 35 characters");
-    }
-
-    if (!address) {
-      toast.error("Please enter salon address", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonAddressError("Please enter salon address")
-    }
-
-    if (!longitude && !latitude) {
-      toast.error("Coordinates is not present", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonCoordinateError("Coordinates is not present")
-    }
-
-    if (!country) {
-      toast.error("Please select country", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setCountryError("Please select country")
-    }
-
-    if (!city) {
-      toast.error("Please select city", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setCityError("Please select city")
-    }
-
-    if (!timezone) {
-      toast.error("Please select timezone", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setTimezoneError("Please select timezone")
-    }
-
-    if (!postCode) {
-      toast.error("Please enter postcode", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setPostCodeError("Please enter postcode")
-    }
-
-    if (postCode.length === 0 || postCode.length > 10) {
-      toast.error("Postcode must be between 0 to 10 charecters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setPostCodeError("Postcode must be between 0 to 10 charecters")
-    }
-
-    if (!salonType) {
-      toast.error("Please select salon type", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonTypeError("Please select salon type")
-    }
-
-    if (invalidnumber) {
-      toast.error("Invalid Number", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-
-      return setInvalidNumberError("Invalid Number")
-    }
-
 
     const salondata = {
       adminEmail: email,
@@ -3030,19 +2835,6 @@ const CreateSalon = () => {
 
   const [countryflag, setCountryFlag] = useState("gb")
 
-  // const setHandler = (setState, value, localname, setError) => {
-  //   setError("")
-  //   setState(value);
-  //   // console.log("Saving to localStorage:", localname, value);
-
-  //   const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
-
-  // localStorage.setItem("salondata", JSON.stringify({
-  //   ...existingData,
-  //   [localname]: value
-  // }));
-  // }
-
 
   const handlePhoneChange = (phone, meta) => {
     setInvalidNumberError("")
@@ -3071,9 +2863,7 @@ const CreateSalon = () => {
 
   };
 
-  // console.log(contactTel)
-  // console.log(dialCode)
-  // console.log(countryflag)
+
 
 
   useEffect(() => {
@@ -3179,11 +2969,39 @@ const CreateSalon = () => {
     {
       label: 'Select Services',
       fields: [
-        { name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false },
-        { name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false },
-        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true },
-        { name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false },
-        { name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false },
+        { name: 'serviceicon', label: 'Service Icon', error: serviceIconError },
+        {
+          name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false, value: serviceName, onChange: (e) => {
+            setServiceNameError("")
+            setServiceName(e.target.value)
+          }, error: serviceNameError
+        },
+        {
+          name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false, value: serviceDesc, onChange: (e) => {
+            setServiceDescError("")
+            setServiceDesc(e.target.value)
+          }, error: serviceDescError
+        },
+        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true, value: `${vipService ? 'VIP' : 'Regular'}` },
+
+        {
+          name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false, value: servicePrice, onChange: (e) => {
+            setServicePriceError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServicePrice(value);
+            }
+          }, error: servicePriceError
+        },
+        {
+          name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false, value: serviceEWT, onChange: (e) => {
+            setServiceEwtError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServiceEWT(value);
+            }
+          }, error: serviceEwtError
+        },
       ],
     },
     {
@@ -3194,11 +3012,11 @@ const CreateSalon = () => {
     {
       label: 'Social Links',
       fields: [
-        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon /> },
-        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon /> },
-        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon /> },
-        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon /> },
-        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon /> },
+        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon />, value: webLink, onChange: (e) => setHandler(setWebLink, e.target.value, "webLink", setWebLinkError) },
+        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon />, value: fbLink, onChange: (e) => setHandler(setFbLink, e.target.value, "fbLink", setFbLinkError) },
+        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon />, value: instraLink, onChange: (e) => setHandler(setInstraLink, e.target.value, "instraLink", setInstaLinkError) },
+        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon />, value: twitterLink, onChange: (e) => setHandler(setTwitterLink, e.target.value, "twitterLink", setTwitterLinkError) },
+        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon />, value: tiktokLink, onChange: (e) => setHandler(setTiktokLink, e.target.value, "tiktokLink", setTiktokLinkError) },
       ],
     },
   ];
@@ -3206,20 +3024,6 @@ const CreateSalon = () => {
 
   const [activeStep, setActiveStep] = useState(0);
 
-  const [formData, setFormData] = useState({
-    accountInfo: '',
-    projectID: '',
-    ownerName: '',
-    email: '',
-    cardNumber: '',
-    expiryDate: '',
-  });
-
-  console.log(steps)
-
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
 
   const handleNext = () => {
 
@@ -3317,9 +3121,7 @@ const CreateSalon = () => {
       }
 
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-
-    if (activeStep === 1) {
+    } else if (activeStep === 1) {
 
       if (!salonType) {
         toast.error("Please select salon type", {
@@ -3428,67 +3230,23 @@ const CreateSalon = () => {
 
 
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
-
-
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setFormData({
-      accountInfo: '',
-      projectID: '',
-      ownerName: '',
-      email: '',
-      cardNumber: '',
-      expiryDate: '',
-    });
-  };
 
-
-  const salonImageslist = [
-    {
-      id: 1,
-      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
-    },
-    {
-      id: 2,
-      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
-    },
-    {
-      id: 3,
-      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
-    },
-    {
-      id: 4,
-      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
-    },
-    {
-      id: 5,
-      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
-    },
-    {
-      id: 6,
-      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
-    },
-    {
-      id: 7,
-      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
-    },
-    {
-      id: 8,
-      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
-    },
-  ]
 
   const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
   const [countryOpen, setCountryOpen] = useState(false)
   const [cityOpen, setCityOpen] = useState(false)
   const [timezoneOpen, setTimezoneOpen] = useState(false)
+  const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
+
 
   return (
     <section className={`${style.section}`}>
@@ -3564,14 +3322,7 @@ const CreateSalon = () => {
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack}
-                        style={{
-                          cursor: index === 0 ? "not-allowed" : "allowed"
-                        }}
-                        disabled={index === 0}
-                      >
-                        Back
-                      </button>
+                      <div></div>
                       <button onClick={handleNext}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
@@ -3664,7 +3415,7 @@ const CreateSalon = () => {
                                   }
 
                                 </div>
-                                <p style={{ color: "red", fontSize: "1.4rem" }}>{countryError}</p>
+                                {countryError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{countryError}</p> : null}
                               </>
                             ) : field.name === "city" ? (
                               <>
@@ -3745,8 +3496,8 @@ const CreateSalon = () => {
                                               <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
                                               getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
 
-                                                AllTimezones.map((c) => (
-                                                  <button key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</button>
+                                                AllTimezones.map((c, index) => (
+                                                  <button key={index} onClick={() => setTimezoneHandler(c)}>{c}</button>
                                                 ))
 
                                                 :
@@ -3834,27 +3585,88 @@ const CreateSalon = () => {
                 step.label === "Select Services" && (<StepContent>
                   <main className={`${style.service_container}`}>
 
-
                     <div>
                       <div>
                         {step.fields.map((field) => (
                           <div key={field.name} className={`${style.form_group}`}>
                             <label>{field.label}</label>
-                            <input
-                              type={field.type}
-                              name={field.name}
-                              value={formData[field.name]}
-                              placeholder={field.placeholder}
-                              onChange={handleChange}
-                            />
+
+                            {field.name === "serviceicon" ? (
+                              <>
+                                <div className={style.service_icon_container}>
+                                  <Carousel
+                                    responsive={responsive}
+                                    draggable={false}
+                                    swipeable={false}
+                                  >
+                                    {
+                                      SalonIcons?.map((s) => (
+                                        <div key={s._id}
+                                          className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
+                                          onClick={() => logoselectHandler(s)}
+                                          style={{
+                                            border: field.error && "0.1rem solid red"
+                                          }}
+                                        >
+                                          <img src={s.url} alt="" />
+                                        </div>
+                                      ))
+                                    }
+                                  </Carousel>
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "servicetype" ? (
+                              <div
+                                className={`${style.select_container}`}
+                                onClick={() => setServiceTypeOpen((prev) => !prev)}
+                              >
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  readOnly
+                                />
+                                <div><DropdownIcon /></div>
+
+                                {serviceTypeOpen && (
+                                  <ClickAwayListener onClickAway={() => setServiceTypeOpen(false)}>
+                                    <div
+                                      className={`${style.select_dropdown_container}`}
+                                      onClick={(event) => event.stopPropagation()}
+                                    >
+                                      <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button>
+                                    </div>
+                                  </ClickAwayListener>
+                                )}
+                              </div>
+                            ) : (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={field.onChange}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            )}
                           </div>
                         ))}
+
+
+                        <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button>
 
                         <div className={`${style.button_container}`}>
                           <button onClick={handleBack} disabled={index === 0}>
                             Back
                           </button>
-                          <button onClick={handleNext}>
+                          <button onClick={handleNext} disabled={localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices} style={{
+                            cursor: localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices ? "not-allowed" : "pointer"
+                          }}>
                             {index === steps.length - 1 ? 'Finish' : 'Continue'}
                           </button>
                         </div>
@@ -3862,102 +3674,36 @@ const CreateSalon = () => {
                       </div>
 
                       <div>
-                        {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+                        {
+                          localsalondata?.selectedServices?.map((ser, index) => {
                             return (
                               <div className={`${style.service_item}`} key={index}>
                                 <div>
                                   <div>
-                                    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
+                                    <div><img src={ser?.serviceIcon.url || ""} alt="" /></div>
                                     <div>
-                                      <p>Braids & Layers</p>
-                                      <p>Regular</p>
-                                      <p>Today’s salon owners know that everyone wants to look their best.</p>
+                                      <p>{ser.serviceName}</p>
+                                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{ser.serviceDesc}</p>
                                     </div>
                                   </div>
-                                  <button><DeleteIcon/></button>
+                                  <button onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
                                 </div>
-                                <div></div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
                               </div>
                             )
-                          })} */}
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
-                              <div>
-                                <p>Braids & Layers</p>
-                                <p>Regular</p>
-                                <p>Today’s salon owners know that everyone wants to look their best.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://dynamic.brandcrowd.com/asset/logo/4641cc89-eed8-46eb-b525-15da3ea2d021/logo-search-grid-1x?logoTemplateVersion=1&v=638302799045600000" alt="" /></div>
-                              <div>
-                                <p>Style Lounge</p>
-                                <p>VIP</p>
-                                <p>Today’s salon owners know that everyone wants to look their best and many people don’t consider salon services gender-specific. If you want a unisex salon name that reflects an inclusive brand, use these ideas for inspiration.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
-
-
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://marketplace.canva.com/EAFHiAQTPQQ/1/0/1600w/canva-pink-black-hand-drawn-hair-salon-logo-tVTdlo6D5XQ.jpg" alt="" /></div>
-                              <div>
-                                <p>Dueling Scissors</p>
-                                <p>Regular</p>
-                                <p>Today’s salon owners know.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
+                          })
+                        }
 
                       </div>
 
@@ -3975,25 +3721,38 @@ const CreateSalon = () => {
                       <div>
                         <div>
                           <p>Upload your salon's logo</p>
-                          <button>upload</button>
+                          <button onClick={() => handleSalonLogoButtonClick()}>Upload</button>
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleSalonFileInputChange}
+                          />
                         </div>
 
                         <div>
-                          <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-763b440be07bf6efa6f10d4c9e7f77a2_screen.jpg?ts=1686899215" alt="" />
+                          <img src={salonLogo ? salonLogo : "/maskable-icon-512x512.png"} alt="" />
                         </div>
                       </div>
 
                       <div>
                         <div>
                           <p>Please select high-quality images to showcase your salon.</p>
-                          <button>upload</button>
+                          <button onClick={() => handleSalonImageButtonClick()}>upload</button>
+                          <input
+                            type="file"
+                            ref={salonImagefileInputRef}
+                            style={{ display: 'none' }}
+                            multiple
+                            onChange={handleSalonImageFileInputChange}
+                          />
                         </div>
 
                         <div>
                           {
-                            salonImageslist.map((item, index) => {
+                            salonImages.map((item, index) => {
                               return (
-                                <div key={index} ><img src={item.url} /></div>
+                                <div key={index} onClick={() => selectedSalonImageClicked(item)}><img src={item?.blobUrl} /></div>
                               )
                             })
                           }
@@ -4024,9 +3783,9 @@ const CreateSalon = () => {
                           <input
                             type={field.type}
                             name={field.name}
-                            value={formData[field.name]}
+                            value={field.value}
                             placeholder={field.placeholder}
-                            onChange={handleChange}
+                            onChange={field.onChange}
                           />
                         </div>
                       </div>
@@ -4051,12 +3810,56 @@ const CreateSalon = () => {
           <div className={`${style.complete}`}>
             <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Create</span> button to set up your new salon.</p>
             <div>
-              <button onClick={handleReset}>Reset</button>
-              <button>Create</button>
+              <button onClick={handleBack}>
+                Back
+              </button>
+              {
+                createSalonLoading ? <button><ButtonLoader /></button> : <button onClick={createSalonHandler} className={style.create_salon_btn}>Create</button>
+              }
             </div>
           </div>
         )}
       </div>
+
+
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+          <div>
+            <p>Selected Image</p>
+            <button onClick={() => setOpenModal(false)}><CloseIcon /></button>
+          </div>
+
+          <div className={style.modal_content_container}>
+            <div><img src={openBlobSalonImage?.blobUrl} alt="salon image" /></div>
+            <div>
+              <div>
+                <button onClick={handleCurrentEditSalonImageButtonClick}>
+                  {/* <div><EditIcon /></div> */}
+                  Reselect
+
+                  <input
+                    type="file"
+                    ref={currentEditSalonImageInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleEditSelectedImageFileInputChange}
+                  />
+                </button>
+                <button onClick={() => deleteSalonImageHandler(openBlobSalonImage)}>
+                  {/* <div><DeleteIcon /></div> */}
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+
     </section>
   )
 }
