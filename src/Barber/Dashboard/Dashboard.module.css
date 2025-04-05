@@ -447,12 +447,12 @@
 
 .dashboard_body {
     width: 100%;
-    height: calc(100svh - 6rem);
+    height: calc(100vh - 6rem);
     overflow: auto;
 }
 
 .inner_container {
-    height: calc(100svh - 6rem);
+    height: calc(100vh - 6rem);
     display: grid;
     grid-template-columns: 3fr 1.8fr;
     gap: 2rem;
@@ -581,7 +581,7 @@
 
 .barber_report_container {
     min-height: 25rem;
-    height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
+    height: calc(100vh - 6rem - 15svh - 35svh - 4rem - 2rem);
     margin-bottom: 2rem;
     display: grid;
     grid-template-columns: minmax(20rem, 1.5fr) minmax(30rem, 2fr);
@@ -591,7 +591,7 @@
 .barberlist_container {
     min-height: 25rem;
     background-color: var(--light-color-4);
-    height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
+    height: calc(100vh - 6rem - 15svh - 35svh - 4rem - 2rem);
     margin-bottom: 2rem;
     width: 100%;
     border-radius: var(--list-wrapper-border-radius);
@@ -738,7 +738,7 @@
 
 .report_container {
     min-height: 25rem;
-    height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem);
+    height: calc(100vh - 6rem - 15svh - 35svh - 4rem - 2rem);
     padding: 1rem;
     border-radius: var(--list-wrapper-border-radius);
     background-color: var(--light-color-4);
@@ -749,7 +749,7 @@
 
     .r_chart{
         min-height: calc(25rem - 2rem);
-        height: calc(100svh - 6rem - 15svh - 35svh - 4rem - 2rem - 1.6vw);
+        height: calc(100vh - 6rem - 15svh - 35svh - 4rem - 2rem - 1.6vw);
         width: 100%;
 
         &>p:nth-child(1) {
@@ -813,7 +813,7 @@
     -o-border-radius: var(--list-wrapper-border-radius);
     background-color: var(--light-color-4);
     min-height: 66rem;
-    height: calc(100svh - 6rem - 2rem);
+    height: calc(100vh - 6rem - 2rem);
 }
 
 .queue_header {

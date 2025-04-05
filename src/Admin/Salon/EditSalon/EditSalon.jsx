@@ -3096,24 +3096,57 @@ const EditSalon = () => {
     {
       label: 'Business Information',
       fields: [
-        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type' },
-        { name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address' },
-        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode' },
-        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude' },
-        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude' },
-        { name: 'country', label: 'Country', type: 'text', dropdown: true, placeholder: 'Select country' },
-        { name: 'city', label: 'City', type: 'text', dropdown: true, placeholder: 'Select city' },
-        { name: 'timezone', label: 'Timezone', type: 'text', dropdown: true, placeholder: 'Select timezone' },
+        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', value: salonType, readOnly: true },
+        {
+          name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', value: address, onChange: (e) => {
+            setSalonAddressError("")
+            setAddress(e.target.value)
+          }, error: salonAddressError
+        },
+        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', value: postCode, readOnly: true },
+        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude, readOnly: true },
+        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude, readOnly: true },
+        { name: 'country', label: 'Country', type: 'text', dropdown: false, placeholder: 'Select country', value: country, readOnly: true },
+        { name: 'city', label: 'City', type: 'text', dropdown: false, placeholder: 'Select city', value: city, readOnly: true },
+        { name: 'timezone', label: 'Timezone', type: 'text', dropdown: false, placeholder: 'Select timezone', value: timezone, readOnly: true },
       ],
     },
     {
       label: 'Select Services',
       fields: [
-        { name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false },
-        { name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false },
-        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true },
-        { name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false },
-        { name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false },
+        { name: 'serviceicon', label: 'Service Icon', error: serviceIconError },
+        {
+          name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false, value: serviceName, onChange: (e) => {
+            setServiceNameError("")
+            setServiceName(e.target.value)
+          }, error: serviceNameError
+        },
+        {
+          name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false, value: serviceDesc, onChange: (e) => {
+            setServiceDescError("")
+            setServiceDesc(e.target.value)
+          }, error: serviceDescError
+        },
+        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true, value: `${vipService ? 'VIP' : 'Regular'}` },
+
+        {
+          name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false, value: servicePrice, onChange: (e) => {
+            setServicePriceError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServicePrice(value);
+            }
+          }, error: servicePriceError
+        },
+        {
+          name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false, value: serviceEWT, onChange: (e) => {
+            setServiceEwtError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServiceEWT(value);
+            }
+          }, error: serviceEwtError
+        },
       ],
     },
     {
@@ -3350,42 +3383,9 @@ const EditSalon = () => {
     });
   };
 
-  const [open, setOpen] = useState(false)
+  const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
+  const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
 
-  const salonImageslist = [
-    {
-      id: 1,
-      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
-    },
-    {
-      id: 2,
-      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
-    },
-    {
-      id: 3,
-      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
-    },
-    {
-      id: 4,
-      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
-    },
-    {
-      id: 5,
-      url: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?cs=srgb&dl=pexels-delbeautybox-211032-853427.jpg&fm=jpg"
-    },
-    {
-      id: 6,
-      url: "https://cdn1.treatwell.net/images/view/v2.i1814641.w720.h480.x58B950CE/"
-    },
-    {
-      id: 7,
-      url: "https://img.freepik.com/free-photo/interior-latino-hair-salon_23-2150555185.jpg"
-    },
-    {
-      id: 8,
-      url: "https://c0.wallpaperflare.com/preview/732/98/492/beauty-salon-hair-dresser-table-furniture.jpg"
-    },
-  ]
 
   return (
     <section className={`${style.section}`}>
@@ -3478,38 +3478,40 @@ const EditSalon = () => {
                         <label>{field.label}</label>
 
                         {
-                          field.dropdown ? (<div className={`${style.select_container}`} onClick={() => field.name === "businesstype" && setOpen((prev) => !prev)}>
+                          field.dropdown ? (<div className={`${style.select_container}`} onClick={() => setBusinessTypeOpen((prev) => !prev)}>
                             <input
                               type={field.type}
                               name={field.name}
-                              value={formData[field.name]}
+                              value={field.value}
                               placeholder={field.placeholder}
-                              onChange={handleChange}
+                              readOnly={field?.readOnly}
                             />
                             <div><DropdownIcon /></div>
 
                             {
-                              field.name === "businesstype" && open ? (
-                                <ClickAwayListener onClickAway={() => setOpen(false)}>
+                              businessTypeOpen ? (
+                                <ClickAwayListener onClickAway={() => setBusinessTypeOpen(false)}>
                                   <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
-
+                                    <button onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</button>
+                                    <button onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</button>
                                   </div></ClickAwayListener>) : null
                             }
 
                           </div>) : (<input
                             type={field.type}
                             name={field.name}
-                            value={formData[field.name]}
+                            value={field.value}
                             placeholder={field.placeholder}
-                            onChange={handleChange}
+                            readOnly={field?.readOnly}
+                            onChange={field?.onChange}
                           />)
                         }
 
-                        {field.name === "longitude" && (
+                        {/* {field.name === "longitude" && (
                           <button className={`${style.geolocation_btn}`}>
                             Get geolocation
                           </button>
-                        )}
+                        )} */}
 
                       </div>
                     ))}
@@ -3536,15 +3538,73 @@ const EditSalon = () => {
                         {step.fields.map((field) => (
                           <div key={field.name} className={`${style.form_group}`}>
                             <label>{field.label}</label>
-                            <input
-                              type={field.type}
-                              name={field.name}
-                              value={formData[field.name]}
-                              placeholder={field.placeholder}
-                              onChange={handleChange}
-                            />
+                            {field.name === "serviceicon" ? (
+                              <>
+                                <div className={style.service_icon_container}>
+                                  <Carousel
+                                    responsive={responsive}
+                                    draggable={false}
+                                    swipeable={false}
+                                  >
+                                    {
+                                      SalonIcons?.map((s) => (
+                                        <div key={s._id}
+                                          className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
+                                          onClick={() => logoselectHandler(s)}
+                                          style={{
+                                            border: field.error && "0.1rem solid red"
+                                          }}
+                                        >
+                                          <img src={s.url} alt="" />
+                                        </div>
+                                      ))
+                                    }
+                                  </Carousel>
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "servicetype" ? (
+                              <div
+                                className={`${style.select_container}`}
+                                onClick={() => setServiceTypeOpen((prev) => !prev)}
+                              >
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  readOnly
+                                />
+                                <div><DropdownIcon /></div>
+
+                                {serviceTypeOpen && (
+                                  <ClickAwayListener onClickAway={() => setServiceTypeOpen(false)}>
+                                    <div
+                                      className={`${style.select_dropdown_container}`}
+                                      onClick={(event) => event.stopPropagation()}
+                                    >
+                                      <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button>
+                                    </div>
+                                  </ClickAwayListener>
+                                )}
+                              </div>
+                            ) : (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={field.onChange}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            )}
                           </div>
                         ))}
+
+                        <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button>
 
                         <div className={`${style.button_container}`}>
                           <button onClick={handleBack} disabled={index === 0}>
@@ -3558,102 +3618,37 @@ const EditSalon = () => {
                       </div>
 
                       <div>
-                        {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+
+                        {
+                          selectedServices?.map((ser, index) => {
                             return (
                               <div className={`${style.service_item}`} key={index}>
                                 <div>
                                   <div>
-                                    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
+                                    <div><img src={ser?.serviceIcon.url || ""} alt="" /></div>
                                     <div>
-                                      <p>Braids & Layers</p>
-                                      <p>Regular</p>
-                                      <p>Today’s salon owners know that everyone wants to look their best.</p>
+                                      <p>{ser.serviceName}</p>
+                                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{ser.serviceDesc}</p>
                                     </div>
                                   </div>
-                                  <button><DeleteIcon/></button>
+                                  <button onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
                                 </div>
-                                <div></div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
                               </div>
                             )
-                          })} */}
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s" alt="" /></div>
-                              <div>
-                                <p>Braids & Layers</p>
-                                <p>Regular</p>
-                                <p>Today’s salon owners know that everyone wants to look their best.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://dynamic.brandcrowd.com/asset/logo/4641cc89-eed8-46eb-b525-15da3ea2d021/logo-search-grid-1x?logoTemplateVersion=1&v=638302799045600000" alt="" /></div>
-                              <div>
-                                <p>Style Lounge</p>
-                                <p>VIP</p>
-                                <p>Today’s salon owners know that everyone wants to look their best and many people don’t consider salon services gender-specific. If you want a unisex salon name that reflects an inclusive brand, use these ideas for inspiration.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
-
-
-
-                        <div className={`${style.service_item}`}>
-                          <div>
-                            <div>
-                              <div><img src="https://marketplace.canva.com/EAFHiAQTPQQ/1/0/1600w/canva-pink-black-hand-drawn-hair-salon-logo-tVTdlo6D5XQ.jpg" alt="" /></div>
-                              <div>
-                                <p>Dueling Scissors</p>
-                                <p>Regular</p>
-                                <p>Today’s salon owners know.</p>
-                              </div>
-                            </div>
-                            <button><DeleteIcon /></button>
-                          </div>
-                          <div>
-                            <div>
-                              <p>Price</p>
-                              <p>€ 300</p>
-                            </div>
-
-                            <div>
-                              <p>Estimated Time</p>
-                              <p>30 mins</p>
-                            </div>
-                          </div>
-                        </div>
+                          })
+                        }
 
                       </div>
 
@@ -3671,22 +3666,38 @@ const EditSalon = () => {
                       <div>
                         <div>
                           <p>Upload your salon's logo</p>
-                          <button>upload</button>
+                          <button onClick={() => handleSalonLogoButtonClick()}>Upload</button>
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleSalonFileInputChange}
+                          />
                         </div>
 
                         <div>
-                          <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hair-salon-logo-design-template-763b440be07bf6efa6f10d4c9e7f77a2_screen.jpg?ts=1686899215" alt="" />
+                          <img src={salonLogo} alt="" />
                         </div>
                       </div>
 
                       <div>
-                        <p>Please select high-quality images to showcase your salon.</p>
+                        <div>
+                          <p>Please select high-quality images to showcase your salon.</p>
+                          <button onClick={() => handleSalonImageButtonClick()}  disabled={uploadSalonImageLoader}>upload</button>
+                          <input
+                            type="file"
+                            ref={salonImagefileInputRef}
+                            style={{ display: 'none' }}
+                            multiple
+                            onChange={handleSalonImageFileInputChange}
+                          />
+                        </div>
 
                         <div>
                           {
-                            salonImageslist.map((item, index) => {
+                            salonImages.map((item, index) => {
                               return (
-                                <div key={index} ><img src={item.url} /></div>
+                                <div key={index} onClick={() => selectedSalonImageClicked(s)}><img src={item?.url} /></div>
                               )
                             })
                           }

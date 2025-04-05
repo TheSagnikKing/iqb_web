@@ -1,5 +1,5 @@
 .section {
-    height: 100svh;
+    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
 
 
 .admin_signin_right {
-    height: 100svh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,7 +172,7 @@ iframe {
     -ms-border-radius: var(--border-radius-primary);
     -o-border-radius: var(--border-radius-primary);
     background-color: var(--bg-secondary);
-    color: var(--text-primary);
+    /* color: var(--text-primary); */
     border: none;
     outline: none;
     cursor: pointer;
@@ -182,6 +182,7 @@ iframe {
     -ms-transition: var(--common-btn-transition);
     -o-transition: var(--common-btn-transition);
     font-size: 1.4rem;
+    font-weight: 600;
 
     &:hover {
         background-color: var(--bg-secondary-hover);

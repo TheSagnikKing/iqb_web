@@ -1,5 +1,5 @@
 .section {
-    height: 100svh;
+    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .section>div:nth-child(2) {
-    height: 100svh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
