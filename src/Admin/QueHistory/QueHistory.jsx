@@ -252,172 +252,8 @@ const QueHistory = () => {
     ];
 
     const [queuehistoryDataCopy, setQueuehistoryDataCopy] = useState([])
-
-    const [queuehistoryData, setQueuehistoryData] = useState([
-        {
-            "customerName": "John Doe",
-            "gender": "Male",
-            "email": "john.doe@example.com",
-            "dob": "1990-05-15",
-            "mobile": "123-456-7890",
-            "barberName": "Mike Johnson",
-            "qPos": 1,
-            "mins": 30,
-            "customerImage": "https://i.pravatar.cc/150?img=1",
-            "timeJoined": "10:00 AM",
-            "qgCode": "QG001",
-            "type": "Regular",
-            "estimatedTime": "10:30 AM",
-            "price": "30 EUR",
-            "isAdmin": false,
-            "status": "served"
-        },
-        {
-            "customerName": "Emma Smith",
-            "gender": "Female",
-            "email": "emma.smith@example.com",
-            "dob": "1995-08-22",
-            "mobile": "987-654-3210",
-            "barberName": "David Thompson",
-            "qPos": 2,
-            "mins": 40,
-            "customerImage": "https://i.pravatar.cc/150?img=2",
-            "timeJoined": "10:05 AM",
-            "qgCode": "QG002",
-            "type": "Premium",
-            "estimatedTime": "10:45 AM",
-            "price": "50 EUR",
-            "isAdmin": true,
-            "status": "cancelled"
-        },
-        {
-            "customerName": "Liam Johnson",
-            "gender": "Male",
-            "email": "liam.johnson@example.com",
-            "dob": "1988-11-30",
-            "mobile": "456-789-0123",
-            "barberName": "Chris Williams",
-            "qPos": 3,
-            "mins": 35,
-            "customerImage": "https://i.pravatar.cc/150?img=3",
-            "timeJoined": "10:10 AM",
-            "qgCode": "QG003",
-            "type": "Regular",
-            "estimatedTime": "10:45 AM",
-            "price": "35 EUR",
-            "isAdmin": false,
-            "status": "served"
-        },
-        {
-            "customerName": "Sophia Brown",
-            "gender": "Female",
-            "email": "sophia.brown@example.com",
-            "dob": "1992-03-25",
-            "mobile": "321-654-0987",
-            "barberName": "Alex Martinez",
-            "qPos": 4,
-            "mins": 45,
-            "customerImage": "https://i.pravatar.cc/150?img=4",
-            "timeJoined": "10:15 AM",
-            "qgCode": "QG004",
-            "type": "VIP",
-            "estimatedTime": "11:00 AM",
-            "price": "60 EUR",
-            "isAdmin": true,
-            "status": "cancelled"
-        },
-        {
-            "customerName": "Noah Wilson",
-            "gender": "Male",
-            "email": "noah.wilson@example.com",
-            "dob": "2000-07-10",
-            "mobile": "789-123-4560",
-            "barberName": "James Anderson",
-            "qPos": 5,
-            "mins": 25,
-            "customerImage": "https://i.pravatar.cc/150?img=5",
-            "timeJoined": "10:20 AM",
-            "qgCode": "QG005",
-            "type": "Regular",
-            "estimatedTime": "10:45 AM",
-            "price": "25 EUR",
-            "isAdmin": false,
-            "status": "served"
-        },
-        {
-            "customerName": "Olivia Martinez",
-            "gender": "Female",
-            "email": "olivia.martinez@example.com",
-            "dob": "1985-12-19",
-            "mobile": "654-321-7890",
-            "barberName": "Brian Davis",
-            "qPos": 6,
-            "mins": 50,
-            "customerImage": "https://i.pravatar.cc/150?img=6",
-            "timeJoined": "10:25 AM",
-            "qgCode": "QG006",
-            "type": "Premium",
-            "estimatedTime": "11:15 AM",
-            "price": "55 EUR",
-            "isAdmin": true,
-            "status": "served"
-        },
-        {
-            "customerName": "William Davis",
-            "gender": "Male",
-            "email": "william.davis@example.com",
-            "dob": "1998-09-05",
-            "mobile": "147-258-3690",
-            "barberName": "John Rodriguez",
-            "qPos": 7,
-            "mins": 30,
-            "customerImage": "https://i.pravatar.cc/150?img=7",
-            "timeJoined": "10:30 AM",
-            "qgCode": "QG007",
-            "type": "Regular",
-            "estimatedTime": "11:00 AM",
-            "price": "30 EUR",
-            "isAdmin": false,
-            "status": "cancelled"
-        },
-        {
-            "customerName": "Ava Garcia",
-            "gender": "Female",
-            "email": "ava.garcia@example.com",
-            "dob": "1993-04-14",
-            "mobile": "369-147-2580",
-            "barberName": "Ryan Clark",
-            "qPos": 8,
-            "mins": 40,
-            "customerImage": "https://i.pravatar.cc/150?img=8",
-            "timeJoined": "10:35 AM",
-            "qgCode": "QG008",
-            "type": "VIP",
-            "estimatedTime": "11:20 AM",
-            "price": "45 EUR",
-            "isAdmin": true,
-            "status": "served"
-        },
-        {
-            "customerName": "James Rodriguez",
-            "gender": "Male",
-            "email": "james.rodriguez@example.com",
-            "dob": "1996-06-21",
-            "mobile": "852-963-7410",
-            "barberName": "Ethan Scott",
-            "qPos": 9,
-            "mins": 20,
-            "customerImage": "https://i.pravatar.cc/150?img=9",
-            "timeJoined": "10:40 AM",
-            "qgCode": "QG009",
-            "type": "Regular",
-            "estimatedTime": "11:00 AM",
-            "price": "20 EUR",
-            "isAdmin": false,
-            "status": "cancelled"
-        }
-    ]
-    )
+    const [queuehistoryData, setQueuehistoryData] = useState([])
+    const [queueHistoryPaginationData, setQueueHistoryPaginationData] = useState([])
 
     useEffect(() => {
         if (getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0) {
@@ -427,6 +263,7 @@ const QueHistory = () => {
 
     }, [AdminQueueListHistory])
 
+
     const [settingsIndex, setSettingsIndex] = useState("")
 
     const [rowsPerPage, SetRowsPerPage] = useState(10)
@@ -434,50 +271,47 @@ const QueHistory = () => {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [startIndex, setStartIndex] = useState(0)
-    const [endIndex, setEndIndex] = useState(rowsPerPage)
+    const [endIndex, setEndIndex] = useState(0)
     const [sortOrder, setSortOrder] = useState("asc")
     const [sortColumn, setSortColumn] = useState("")
     const [query, setQuery] = useState("")
 
-    const [queueHistoryPaginationData, setQueueHistoryPaginationData] = useState([])
 
-
-    useEffect(() => {
-        if (queuehistoryData.length > 0) {
-            setQueueHistoryPaginationData(queuehistoryData.slice(startIndex, endIndex))
-        }
-    }, [queuehistoryData])
-
-    useEffect(() => {
-        const totalPages = Math.ceil(queuehistoryData.length / rowsPerPage); // Calculate based on filtered data
-        setTotalPages(totalPages);
-
+    const paginationFunction = () => {
+        const totalPages = Math.ceil(queuehistoryDataCopy.length / rowsPerPage);
         const startIndex = (page - 1) * rowsPerPage;
-        const endIndex = Math.min(startIndex + rowsPerPage, queuehistoryData.length);
+        const endIndex = Math.min(startIndex + rowsPerPage, queuehistoryDataCopy.length)
 
+        setQueueHistoryPaginationData(queuehistoryDataCopy.slice(startIndex, endIndex));
+        setTotalPages(totalPages);
         setStartIndex(startIndex);
         setEndIndex(endIndex);
-        setQueueHistoryPaginationData(queuehistoryData.slice(startIndex, endIndex));
-    }, [queuehistoryData, page, rowsPerPage]);
+    }
+
+    useEffect(() => {
+        if (queuehistoryDataCopy.length > 0) {
+            paginationFunction()
+        }
+    }, [queuehistoryDataCopy, page, rowsPerPage])
 
 
     const handleChange = (event, value) => {
         setPage(value);
     }
 
-
     useEffect(() => {
-        let filteredData = queuehistoryDataCopy;
-
-        if (query.trim() !== '') {
-            filteredData = queuehistoryDataCopy.filter((item) =>
+        if (query.trim() !== "") {
+            const filterData = queuehistoryData.filter((item) =>
                 item.customerName.toLowerCase().trim().includes(query.toLowerCase())
             );
+            setQueuehistoryDataCopy(filterData);
+            setPage(1)
+        } else {
+            setQueuehistoryDataCopy(queuehistoryData);
+            setPage(1)
         }
-
-        setQueuehistoryData(filteredData);
-        setPage(1); // Reset page on filter
     }, [query]);
+    
 
     const [selectOpen, setSelectOpen] = useState(false)
 
