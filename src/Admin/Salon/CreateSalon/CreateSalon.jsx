@@ -3294,7 +3294,11 @@ const CreateSalon = () => {
                   <main className={`${style.form_container}`}>
                     {step.fields.map((field) => (
                       <div key={field.name} className={`${style.form_group}`}>
-                        <label>{field.label}</label>
+                        {
+                          field.label === "City" || field.label === "Timezone" ? (
+                            countryCodePresent ? (<label>{field.label}</label>) : (null)
+                          ) : (<label>{field.label}</label>)
+                        }
 
                         {
                           field.dropdown ? (
@@ -3376,7 +3380,8 @@ const CreateSalon = () => {
                                 {countryError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{countryError}</p> : null}
                               </>
                             ) : field.name === "city" ? (
-                              <>
+
+                              countryCodePresent ? (<>
                                 <div className={`${style.select_container}`} onClick={() => setCityOpen((prev) => !prev)}>
                                   <input
                                     type={field.type}
@@ -3432,9 +3437,10 @@ const CreateSalon = () => {
                                 {
                                   !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : cityError && <p style={{ color: "red", fontSize: "1.4rem" }}>{cityError}</p>
                                 }
-                              </>
+                              </>) : (null)
+
                             ) : field.name === "timezone" && (
-                              <>
+                              countryCodePresent ? (<>
                                 <div className={`${style.select_container}`} onClick={() => setTimezoneOpen((prev) => !prev)}>
                                   <input
                                     type={field.type}
@@ -3470,7 +3476,7 @@ const CreateSalon = () => {
                                 {
                                   !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : timezoneError && <p style={{ color: "red", fontSize: "1.4rem" }}>{timezoneError}</p>
                                 }
-                              </>
+                              </>) : (null)
                             )
 
 
@@ -3527,13 +3533,18 @@ const CreateSalon = () => {
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack} disabled={index === 0}>
+                      {/* <button onClick={handleBack} disabled={index === 0}>
                         Back
-                      </button>
+                      </button> */}
+                      <div></div>
                       <button onClick={handleNext}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
                     </div>
+
+                    <button onClick={handleBack} disabled={index === 0}>
+                      Back
+                    </button>
                   </main>
                 </StepContent>)
               }
@@ -3542,7 +3553,6 @@ const CreateSalon = () => {
               {
                 step.label === "Select Services" && (<StepContent>
                   <main className={`${style.service_container}`}>
-
                     <div>
                       <div>
                         {step.fields.map((field) => (
@@ -3616,11 +3626,9 @@ const CreateSalon = () => {
                         ))}
 
 
-                        <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button>
-
                         <div className={`${style.button_container}`}>
-                          <button onClick={handleBack} disabled={index === 0}>
-                            Back
+                          <button onClick={addServiceHandler}>
+                            Add Service
                           </button>
                           <button onClick={handleNext} disabled={localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices} style={{
                             cursor: localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices ? "not-allowed" : "pointer"
@@ -3628,6 +3636,10 @@ const CreateSalon = () => {
                             {index === steps.length - 1 ? 'Finish' : 'Continue'}
                           </button>
                         </div>
+
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
 
                       </div>
 
@@ -3666,7 +3678,6 @@ const CreateSalon = () => {
                       </div>
 
                     </div>
-
 
                   </main>
                 </StepContent>)

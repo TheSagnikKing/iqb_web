@@ -36,6 +36,34 @@
             flex-direction: column;
             gap: 2rem;
             padding-block: 2rem;
+            position: relative;
+
+            &>button {
+                position: absolute;
+                top: -3.5rem;
+                right: 0;
+                height: 3.5rem;
+                padding-inline: 1.5rem;
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+                background-color: var(--bg-secondary);
+                color: var(--text-primary);
+                border: none;
+                outline: none;
+                cursor: pointer;
+                transition: var(--common-btn-transition);
+                -webkit-transition: var(--common-btn-transition);
+                -moz-transition: var(--common-btn-transition);
+                -ms-transition: var(--common-btn-transition);
+                -o-transition: var(--common-btn-transition);
+
+                &:hover {
+                    background-color: var(--bg-secondary-hover);
+                }
+            }
 
             .form_group {
                 display: flex;
@@ -304,6 +332,34 @@
                     display: flex;
                     flex-direction: column;
                     gap: 2rem;
+                    position: relative;
+
+                    &>button {
+                        position: absolute;
+                        top: -3.5rem;
+                        right: 0;
+                        height: 3.5rem;
+                        padding-inline: 1.5rem;
+                        border-radius: var(--border-radius-primary);
+                        -webkit-border-radius: var(--border-radius-primary);
+                        -moz-border-radius: var(--border-radius-primary);
+                        -ms-border-radius: var(--border-radius-primary);
+                        -o-border-radius: var(--border-radius-primary);
+                        background-color: var(--bg-secondary);
+                        color: var(--text-primary);
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+                        transition: var(--common-btn-transition);
+                        -webkit-transition: var(--common-btn-transition);
+                        -moz-transition: var(--common-btn-transition);
+                        -ms-transition: var(--common-btn-transition);
+                        -o-transition: var(--common-btn-transition);
+
+                        &:hover {
+                            background-color: var(--bg-secondary-hover);
+                        }
+                    }
 
                     .form_group {
                         display: flex;
@@ -774,6 +830,7 @@
                         -moz-border-radius: inherit;
                         -ms-border-radius: inherit;
                         -o-border-radius: inherit;
+                        border: 0.1rem solid var(--border-secondary)
                     }
                 }
             }
@@ -1099,7 +1156,7 @@
     padding: 2rem;
     background-color: var(--bg-primary);
     border: 0.1rem solid var(--border-secondary);
-    width: 50%;
+    width: min(95vw, 80rem);
     border-radius: var(--input-border-radius);
     -webkit-border-radius: var(--input-border-radius);
     -moz-border-radius: var(--input-border-radius);
@@ -1190,17 +1247,17 @@
                     -o-transition: var(--common-btn-transition);
                     font-size: 1.4rem;
 
-                    &:hover{
+                    &:hover {
                         opacity: 0.8;
                     }
 
                 }
 
-                &>button:nth-child(1){
+                &>button:nth-child(1) {
                     background-color: #0285c755;
                 }
 
-                &>button:nth-child(2){
+                &>button:nth-child(2) {
                     background-color: #450a0a;
                 }
             }

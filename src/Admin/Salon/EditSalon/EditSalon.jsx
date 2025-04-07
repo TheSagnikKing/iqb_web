@@ -1929,7 +1929,7 @@ import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
-import { ClickAwayListener, Step, StepContent, StepLabel, Stepper } from '@mui/material';
+import { ClickAwayListener, Modal, Step, StepContent, StepLabel, Stepper } from '@mui/material';
 import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
@@ -3157,11 +3157,11 @@ const EditSalon = () => {
     {
       label: 'Social Links',
       fields: [
-        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon /> },
-        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon /> },
-        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon /> },
-        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon /> },
-        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon /> },
+        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon />, value: webLink, onChange: (e) => setWebLink(e.target.value) },
+        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon />, value: fbLink, onChange: (e) => setFbLink(e.target.value) },
+        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon />, value: instraLink, onChange: (e) => setInstraLink(e.target.value) },
+        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon />, value: twitterLink, onChange: (e) => setTwitterLink(e.target.value) },
+        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon />, value: tiktokLink, onChange: (e) => setTiktokLink(e.target.value) },
       ],
     },
   ];
@@ -3451,7 +3451,7 @@ const EditSalon = () => {
                                 placeholder={field.placeholder}
                                 onChange={field.onChange}
                               />
-                              {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
+                              {field?.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field?.error}</p> : null}
                             </>
                           )
                         }
@@ -3459,9 +3459,7 @@ const EditSalon = () => {
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack} disabled={index === 0}>
-                        Back
-                      </button>
+                      <div></div>
                       <button onClick={handleNext}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
@@ -3497,32 +3495,32 @@ const EditSalon = () => {
                                   </div></ClickAwayListener>) : null
                             }
 
-                          </div>) : (<input
-                            type={field.type}
-                            name={field.name}
-                            value={field.value}
-                            placeholder={field.placeholder}
-                            readOnly={field?.readOnly}
-                            onChange={field?.onChange}
-                          />)
+                          </div>) : (<>
+                            <input
+                              type={field.type}
+                              name={field.name}
+                              value={field.value}
+                              placeholder={field.placeholder}
+                              readOnly={field?.readOnly}
+                              onChange={field?.onChange}
+                            />
+                            {field?.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field?.error}</p> : null}
+                          </>
+                          )
                         }
-
-                        {/* {field.name === "longitude" && (
-                          <button className={`${style.geolocation_btn}`}>
-                            Get geolocation
-                          </button>
-                        )} */}
 
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack} disabled={index === 0}>
-                        Back
-                      </button>
+                      <div></div>
                       <button onClick={handleNext}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
                     </div>
+
+                    <button onClick={handleBack} disabled={index === 0}>
+                      Back
+                    </button>
                   </main>
                 </StepContent>)
               }
@@ -3604,16 +3602,20 @@ const EditSalon = () => {
                           </div>
                         ))}
 
-                        <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button>
+                        {/* <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button> */}
 
                         <div className={`${style.button_container}`}>
-                          <button onClick={handleBack} disabled={index === 0}>
-                            Back
+                          <button onClick={addServiceHandler} disabled={index === 0}>
+                            Add Service
                           </button>
-                          <button onClick={handleNext}>
+                          <button onClick={handleNext} disabled={selectedServices?.length === 0} style={{ cursor: selectedServices?.length === 0 ? "not-allowed" : "pointer" }}>
                             {index === steps.length - 1 ? 'Finish' : 'Continue'}
                           </button>
                         </div>
+
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
 
                       </div>
 
@@ -3683,7 +3685,7 @@ const EditSalon = () => {
                       <div>
                         <div>
                           <p>Please select high-quality images to showcase your salon.</p>
-                          <button onClick={() => handleSalonImageButtonClick()}  disabled={uploadSalonImageLoader}>upload</button>
+                          <button onClick={() => handleSalonImageButtonClick()} disabled={uploadSalonImageLoader}>upload</button>
                           <input
                             type="file"
                             ref={salonImagefileInputRef}
@@ -3697,7 +3699,7 @@ const EditSalon = () => {
                           {
                             salonImages.map((item, index) => {
                               return (
-                                <div key={index} onClick={() => selectedSalonImageClicked(s)}><img src={item?.url} /></div>
+                                <div key={index} onClick={() => selectedSalonImageClicked(item)}><img src={item?.url} /></div>
                               )
                             })
                           }
@@ -3728,9 +3730,9 @@ const EditSalon = () => {
                           <input
                             type={field.type}
                             name={field.name}
-                            value={formData[field.name]}
+                            value={field.value}
                             placeholder={field.placeholder}
-                            onChange={handleChange}
+                            onChange={field.onChange}
                           />
                         </div>
                       </div>
@@ -3755,12 +3757,67 @@ const EditSalon = () => {
           <div className={`${style.complete}`}>
             <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Edit</span> button to edit your new salon.</p>
             <div>
-              <button onClick={handleReset}>Reset</button>
-              <button>Create</button>
+              <button onClick={handleBack}>Back</button>
+              {
+                editSalonLoading ? <button style={{
+                  display: "grid",
+                  placeItems: "center"
+                }}
+                ><ButtonLoader /></button> : <button onClick={editSalonHandler}>Edit</button>
+              }
             </div>
           </div>
         )}
       </div>
+
+
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+          <div>
+            <p>Selected Image</p>
+            <button onClick={() => setOpenModal(false)}><CloseIcon /></button>
+          </div>
+
+          <div className={style.modal_content_container}>
+            {
+              handleEditSalonLoader ?
+                <div><Skeleton
+                  width={"100%"}
+                  height={"100%"}
+                  baseColor={"var(--loader-bg-color)"}
+                  highlightColor={"var(--loader-highlight-color)"}
+                /></div> :
+                <div><img src={selectedEditImageObject?.url} alt="salon image" /></div>
+            }
+
+            <div>
+              <div>
+                <button
+                  onClick={() => handleCurrentEditSalonImageButtonClick()}
+                  disabled={handleEditSalonLoader}
+                >
+                  Update
+                  <input
+                    type="file"
+                    ref={currentEditSalonImageInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleEditSelectedImageFileInputChange}
+                  />
+                </button>
+                <button onClick={() => deleteEditImageHandler(selectedEditImageObject)}>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
     </section>
   )
 }
