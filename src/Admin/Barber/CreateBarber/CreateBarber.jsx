@@ -727,9 +727,10 @@ import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import toast from 'react-hot-toast';
-import { Skeleton, Modal } from '@mui/material';
+import { Modal } from '@mui/material';
 import { ClickAwayListener, Step, StepContent, StepLabel, Stepper } from '@mui/material';
 import Calendar from 'react-calendar';
+import Skeleton from 'react-loading-skeleton'
 
 
 import { getCurrentDate } from '../../../utils/Date';
@@ -818,6 +819,7 @@ const CreateBarber = () => {
     setEmail(storedData.email)
     setNickName(storedData.nickName)
     setDateOfBirth(storedData.dateOfBirth)
+    setMobileNumber(storedData.mobileNumber)
   }, []);
 
 
@@ -1007,6 +1009,16 @@ const CreateBarber = () => {
       setCountryCode(country?.dialCode)
       setCountryFlag(country?.iso2)
       setInvalidNumber(false)
+
+
+      const existingData = JSON.parse(localStorage.getItem("barberdata")) || {};
+
+      localStorage.setItem("barberdata", JSON.stringify({
+        ...existingData,
+        ["mobileNumber"]: phone,
+        ["dialCode"]: country?.dialCode,
+        ["countryflag"]: country?.iso2
+      }));
     } else {
       setInvalidNumber(true)
     }
@@ -1037,17 +1049,6 @@ const CreateBarber = () => {
   // const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-
-  useEffect(() => {
-    const phoneInput = document.querySelector(
-      '.react-international-phone-input-container .react-international-phone-input'
-    );
-
-    if (phoneInput) {
-      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
-    }
-  }, [darkmodeOn]);
 
   //Calender Logic
 
@@ -1136,18 +1137,120 @@ const CreateBarber = () => {
   };
 
   const handleNext = () => {
-    //This is doing the form validation before going to next
-    // const currentStepFields = steps[activeStep].fields;
-    // console.log(currentStepFields.name)
-    // const isStepValid = currentStepFields.every((field) => formData[field.name].trim() !== '');
+    if (activeStep === 0) {
+      if (!name) {
+        toast.error("Please enter name", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setNameError("Please enter name")
+      }
 
-    // if (isStepValid) {
-    //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    // } else {
-    //   alert('Please fill in all fields before proceeding.');
-    // }
+      if (name.length === 0 || name.length > 20) {
+        toast.error("Name must be between 1 to 20 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setNameError("Name must be between 1 to 20 characters");
+      }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      if (!email) {
+        toast.error("Please enter email", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setEmailError("Please enter email")
+      }
+
+      if (!emailRegex.test(email)) {
+        toast.error("Invalid email format", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: "0.3rem",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        return setEmailError("Invalid email format");
+      }
+
+      if (!nickName) {
+        toast.error("Please enter nickname", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setNickNameError("Please enter nickname")
+      }
+
+      if (nickName.length === 0 || nickName.length > 20) {
+        toast.error("Nickname must be between 1 to 20 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setNickNameError("Nickname must be between 1 to 20 characters");
+      }
+
+
+      if (invalidnumber) {
+        toast.error("Invalid Number", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+        return setInvalidNumberError("Invalid Number")
+      }
+
+      if (!dateOfBirth) {
+        toast.error("Please select date of birth", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+        return setDateOfBirthError("Please select date of birth")
+      }
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+
+    if (activeStep === 1) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -1168,37 +1271,6 @@ const CreateBarber = () => {
 
   const [open, setOpen] = useState(false)
 
-  const [salonServices, setSalonServices] = useState([
-    {
-      id: 1,
-      name: "Braids & Layers",
-      type: "Regular",
-      description: "Today’s salon owners know that everyone wants to look their best.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAX-3gW6jkfyqli9j8rItCUFOyEqCf57ZTw&s",
-      add: false,
-    },
-    {
-      id: 2,
-      name: "Style Lounge",
-      type: "VIP",
-      description: "Today’s salon owners know that everyone wants to look their best and many people don’t consider salon services gender-specific. If you want a unisex salon name that reflects an inclusive brand, use these ideas for inspiration.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://dynamic.brandcrowd.com/asset/logo/4641cc89-eed8-46eb-b525-15da3ea2d021/logo-search-grid-1x?logoTemplateVersion=1&v=638302799045600000",
-      add: false,
-    },
-    {
-      id: 3,
-      name: "Dueling Scissors",
-      type: "Regular",
-      description: "Today’s salon owners know.",
-      price: "€ 300",
-      estimatedTime: 30,
-      image: "https://marketplace.canva.com/EAFHiAQTPQQ/1/0/1600w/canva-pink-black-hand-drawn-hair-salon-logo-tVTdlo6D5XQ.jpg",
-      add: false,
-    }])
 
   const copySalonServices = [
     {
@@ -1232,57 +1304,7 @@ const CreateBarber = () => {
       add: false,
     }]
 
-  const [barberServices, setBarberServices] = useState([])
 
-  const addBarberServicesHandler = (service) => {
-    setBarberServices((prev) => {
-      const updatedBarberServices = [...prev, service]
-      return updatedBarberServices
-    })
-
-    setSalonServices((prev) => {
-      const updatedSalonServices = prev.map((item) => {
-        return item.id === service.id ? ({ ...item, add: true }) : (item)
-      })
-      return updatedSalonServices
-    })
-  }
-
-  const deleteBarberServicesHandler = (service) => {
-    setBarberServices((prev) => {
-      const updatedBarberServices = prev.filter((item) => {
-        return item.id !== service.id
-      })
-      return updatedBarberServices
-    })
-
-    const prevService = copySalonServices.find((item) => item.id !== service.id)
-
-    setSalonServices((prev) => {
-
-      const updatedSalonServices = prev.map((item) => {
-        return item.id === service.id ? ({ ...item, add: false, estimatedTime: prevService.estimatedTime }) : (item)
-      })
-      return updatedSalonServices
-    })
-  }
-
-  // const handleEWTChange = (serviceId, value) => {
-
-  //   setSalonServices((prev) => {
-  //     const updatedSalonServices = prev.map((item) => {
-  //       return item.id === serviceId ? ({ ...item, estimatedTime: value }) : (item)
-  //     })
-  //     return updatedSalonServices
-  //   })
-
-  //   setBarberServices((prev) => {
-  //     const updatedBarberServices = prev.map((item) => {
-  //       return item.id === serviceId ? ({ ...item, estimatedTime: value }) : (item)
-  //     })
-  //     return updatedBarberServices
-  //   })
-  // }
 
   return (
     <section className={`${style.section}`}>
@@ -1331,22 +1353,40 @@ const CreateBarber = () => {
                         <label>{field.label}</label>
 
                         {
-                          field.name === "mobileNumber" ? (
-                            <input
-                              type={field.type}
-                              name={field.name}
-                              value={""}
-                              placeholder={field.placeholder}
-                              onChange={handleChange}
+                          field.name === "mobileNumber" ? (<>
+                            <PhoneInput
+                              forceDialCode={true}
+                              defaultCountry={countryflag}
+                              value={mobileNumber}
+                              onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                             />
-                          ) : field.name === "dateofbirth" ? (
-                            <input
-                              type={field.type}
-                              name={field.name}
-                              value={""}
-                              placeholder={field.placeholder}
-                              onChange={handleChange}
-                            />
+                            {invalidNumberError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
+                          </>) : field.name === "dateofbirth" ? (
+                            <>
+                              <div className={`${style.select_container}`} onClick={() => setOpenCalender((prev) => !prev)}>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={dateOfBirth}
+                                  placeholder={field.placeholder}
+                                  readOnly
+                                />
+                                <div><DropdownIcon /></div>
+
+                                {
+                                  openCalender ? (
+                                    <ClickAwayListener onClickAway={() => setOpenCalender(false)}>
+                                      <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                        <Calendar
+                                          onChange={onChangeHandler}
+                                          value={value}
+                                          maxDate={new Date(2009, 11, 31)}
+                                        />
+                                      </div></ClickAwayListener>) : null
+                                }
+                              </div>
+                              {dateOfBirthError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{dateOfBirthError}</p> : null}
+                            </>
                           ) : (
                             <>
                               <input
@@ -1364,9 +1404,7 @@ const CreateBarber = () => {
                       </div>
                     ))}
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack} disabled={index === 0}>
-                        Back
-                      </button>
+                      <div></div>
                       <button onClick={handleNext}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
@@ -1381,103 +1419,104 @@ const CreateBarber = () => {
                   <main className={`${style.service_container}`}>
 
                     <div>
-                      <div>
-                        {salonServices.map((service) => (
-                          <div key={service.id} className={style.service_item}>
-                            <div>
-                              <div>
-                                <div><img src={service.image} alt={service.name} /></div>
-                                <div>
-                                  <p>{service.name}</p>
-                                  <p>{service.type}</p>
-                                  <p>{service.description}</p>
-                                </div>
-                              </div>
-                              {service.add ? (
-                                <button
-                                  style={{
-                                    background: "#450a0a",
-                                  }}
-                                  onClick={() => deleteBarberServicesHandler(service)}
-                                ><DeleteIcon /></button>
-                              ) : (
-                                <button
-                                  style={{
-                                    background: "#052e16",
-                                  }}
-                                  onClick={() => addBarberServicesHandler(service)}
-                                ><AddIcon /></button>
-                              )}
+                      {
+                        adminAllSalonServicesLoading ?
+                          (<div>
+                            <Skeleton count={1}
+                              height={"15rem"}
+                              width={"100%"}
+                              baseColor={"var(--loader-bg-color)"}
+                              highlightColor={"var(--loader-highlight-color)"}
+                              style={{
+                                borderRadius: "0.3rem",
+                                marginBottom: "1rem"
+                              }}
+                            />
 
-                            </div>
-                            <div>
+                            <Skeleton count={1}
+                              height={"15rem"}
+                              width={"100%"}
+                              baseColor={"var(--loader-bg-color)"}
+                              highlightColor={"var(--loader-highlight-color)"}
+                              style={{
+                                borderRadius: "0.3rem",
+                                marginBottom: "1rem"
+                              }}
+                            />
+                          </div>) :
+                          adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
+                            (
                               <div>
-                                <p>Price</p>
-                                <p>{service.price}</p>
-                              </div>
-                              <div>
-                                <p>Estimated Time</p>
-                                <div>
-                                  <input
-                                    type="text"
-                                    value={service.estimatedTime}
-                                    onChange={(e) => {
-                                      const value = e.target.value.replace(/[^0-9]/g, '');
-                                      handleEWTChange(service.id, value);
-                                    }}
-                                    maxLength={3}
-                                  />
-                                  <p>mins</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                                {allSalonServices.map((s) => (
+                                  <div key={s._id} className={style.service_item}>
+                                    <div>
+                                      <div>
+                                        <div><img src={s?.serviceIcon?.url} alt={s?.serviceName} /></div>
+                                        <div>
+                                          <p>{s?.serviceName}</p>
+                                          <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                          <p>{s?.serviceDesc}</p>
+                                        </div>
+                                      </div>
 
-                      {/* {
-                        barberServices.length > 0 ? (<div>
-                          {barberServices.map((service) => (
-                            <div key={service.id} className={style.service_item}>
-                              <div>
-                                <div>
-                                  <div><img src={service.image} alt={service.name} /></div>
-                                  <div>
-                                    <p>{service.name}</p>
-                                    <p>{service.type}</p>
-                                    <p>{service.description}</p>
+                                      {
+                                        chooseServices.find((c) => c._id === s._id) ?
+                                          (<button
+                                            style={{
+                                              background: "#450a0a",
+                                            }}
+                                            onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                          (<button
+                                            style={{
+                                              background: "#052e16",
+                                            }}
+                                            onClick={() => chooseServiceHandler(s)}>Add</button>)
+                                      }
+
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <p>Price</p>
+                                        <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                      </div>
+                                      <div>
+                                        <p>Estimated Time</p>
+                                        <div>
+                                          <input
+                                            type="text"
+                                            value={serviceEWTValues[s._id]}
+                                            onChange={(e) => {
+                                              const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
+                                              handleEWTChange(s._id, value);
+                                            }}
+                                            maxLength={3}
+                                          />
+                                          <p>mins</p>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-
+                                ))}
                               </div>
-                              <div>
-                                <div>
-                                  <p>Price</p>
-                                  <p>{service.price}</p>
-                                </div>
-                                <div>
-                                  <p>Estimated Time</p>
-                                  <p>{`${service.estimatedTime} mins`}</p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-
-                        </div>) : (<div className={`${style.empty_barber_services}`}>
-                          <p>Select Barber Services</p>
-                        </div>)
-                      } */}
+                            ) :
+                            (<div style={{ display: "grid", placeItems: "center" }}>
+                              <p style={{ fontSize: "1.4rem" }}>No services available</p>
+                            </div>)
+                      }
+                      <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button>
 
                     </div>
 
                     <div className={`${style.button_container}`}>
-                      <button onClick={handleBack} disabled={index === 0}>
-                        Back
-                      </button>
-                      <button onClick={handleNext}>
+                      <div></div>
+                      <button onClick={handleNext} disabled={chooseServices.length === 0} style={{ cursor: chooseServices.length === 0 ? "not-allowed" : "pointer" }}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </button>
                     </div>
+
+
 
                   </main>
                 </StepContent>)
@@ -1491,8 +1530,16 @@ const CreateBarber = () => {
           <div className={`${style.complete}`}>
             <p>All steps have been successfully completed. Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Create</span> button to add a new barber.</p>
             <div>
-              <button onClick={handleReset}>Reset</button>
-              <button>Create</button>
+              <button onClick={handleBack}>Back</button>
+              {
+                adminCreateBarberLoading ? <button
+                  style={{
+                    display: "grid",
+                    placeItems: "center"
+                  }}><ButtonLoader /></button> : <button onClick={CreateBarberHandler}>
+                  Create
+                </button>
+              }
             </div>
           </div>
         )}

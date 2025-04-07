@@ -7,7 +7,7 @@ import { FiPieChart } from "react-icons/fi";
 import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline, IoSearch } from "react-icons/io5";
 import { LuFilter, LuHistory, LuMailWarning, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { MdAdd, MdLogout, MdOutlineCameraAlt, MdOutlineMailOutline, MdOutlineMessage, MdOutlinePhoneInTalk, MdOutlinePhotoCamera, MdOutlineQueue, MdOutlineSubscriptions, MdPayment } from "react-icons/md";
-import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine  } from "react-icons/ri";
+import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine, RiMenuFill  } from "react-icons/ri";
 import { TbScissors, TbWorldWww } from "react-icons/tb";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
@@ -58,3 +58,4 @@ export const ResetIcon = GrPowerReset
 export const FilterIcon = LuFilter 
 export const ConnectSalonIcon = CiShop 
 export const OtpEmailIcon = LuMailWarning
+export const MobileSiderbarMenuIcon = RiMenuFill 

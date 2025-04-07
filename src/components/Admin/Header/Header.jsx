@@ -544,7 +544,7 @@ import { ClickAwayListener, Modal } from '@mui/material'
 import { MdSunny } from 'react-icons/md'
 import { IoMoon } from 'react-icons/io5'
 import MenuData from '../Menudata.jsx'
-import { LogoutIcon, MoonIcon, ProfileIcon, SearchIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
+import { LogoutIcon, MobileSiderbarMenuIcon, MoonIcon, ProfileIcon, SearchIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
 
 const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
   const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
@@ -961,7 +961,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
       {/* for mobile header */}
 
       <div className={`${style.mobile_container_left}`}>
-        <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
+        <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <MobileSiderbarMenuIcon /> : <MobileSiderbarMenuIcon />}</button>
       </div>
     </header>
   )
