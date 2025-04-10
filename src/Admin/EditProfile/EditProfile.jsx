@@ -1962,7 +1962,7 @@ const EditProfile = () => {
                             </div>
                         </Modal>
 
-                        {
+                        {/* {
                             mobileValue ? (
                                 <div className={style.calender_container}>
                                     <p>Date of Birth</p>
@@ -2001,7 +2001,32 @@ const EditProfile = () => {
                                         </ClickAwayListener>
                                     }
                                 </div>)
-                        }
+                        } */}
+
+                        <div className={style.calender_container}>
+                            <p>Date of Birth</p>
+
+                            <input
+                                type='text'
+                                placeholder='Select Date'
+                                value={dateOfBirth}
+                                onClick={() => setOpenCalender(true)}
+                                readOnly
+                            />
+                            <span onClick={() => setOpenCalender((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+
+                            {
+                                openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                                    <div className={style.calender_drop_container}>
+                                        <Calendar
+                                            onChange={onChangeHandler}
+                                            value={value}
+                                            maxDate={new Date(2009, 11, 31)}
+                                        />
+                                    </div>
+                                </ClickAwayListener>
+                            }
+                        </div>
 
 
                         <div>
@@ -2033,7 +2058,7 @@ const EditProfile = () => {
 
                         <button className={style.profile_btn} onClick={updateAdminProfile}>
                             {
-                                adminUpdateProfileLoading ? (<ButtonLoader />) :
+                                adminUpdateProfileLoading ? (<ButtonLoader/>) :
                                     "Edit profile"
                             }
                         </button>

@@ -1197,10 +1197,10 @@ const EditBarber = () => {
             },
             "& .MuiStepIcon-text": {
               fontSize: "1.4rem",
-              color: "var(--text-primary)",
+              // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              color: "var(--bg-secondary)",
+              // color: "var(--bg-secondary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",

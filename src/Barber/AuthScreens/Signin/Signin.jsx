@@ -206,7 +206,7 @@ const Signin = () => {
             </div>
           </button>
 
-          <p>Don't you have an account ? <Link to="/barbersignup">Sign up</Link></p>
+          <p>Don't you have an account ? <Link to="/barbersignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

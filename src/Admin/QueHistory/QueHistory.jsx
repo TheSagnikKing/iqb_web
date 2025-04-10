@@ -400,7 +400,7 @@ const QueHistory = () => {
                                             <div><p>{item.serviceEWT} mins</p></div>
                                             <div><span>{item?.isAdmin ? (<CheckIcon color={"green"} />) : (<CloseIcon color={"var(--bg-secondary)"} />)}</span></div>
                                             <div><p style={{
-                                                color: item.status === "served" ? "green" : "var(--bg-secondary)"
+                                                color: item.status === "served" ? "green" : "red"
                                             }}>{item.status}</p></div>
 
                                         </div>
@@ -428,7 +428,7 @@ const QueHistory = () => {
                                     color: "var(--text-primary)",
                                     fontSize: "1.4rem",
                                 },
-                                "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important" },
+                                "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important", color: "var(--btn-text-color)" },
                             }}
                         />
                     </div>
@@ -455,6 +455,7 @@ const QueHistory = () => {
                                                         }}
                                                             style={{
                                                                 background: item === rowsPerPage ? "var(--bg-secondary)" : null,
+                                                                color: item === rowsPerPage ? "var(--btn-text-color)" : null,
                                                                 borderBottom: index === [10, 20, 30, 50].length - 1 ? "none" : "0.1rem solid var(--border-secondary)"
                                                             }}
                                                         >{item}</li>

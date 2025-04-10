@@ -116,12 +116,14 @@ body {
   /* dark mode color codes */
 
   --bg-primary: #09090B;
-  --bg-secondary: #CBD5E1;
+  --bg-secondary: #fff;
   --bg-tertiary: #585858;
 
   --bg-hover-primary: #27272A80;
   --bg-secondary-hover: #CBD5E1e6;
   --btn-primary-hover: #27272A;
+
+  --btn-text-color: #000;
 
   --bg-dark: blue;
 
@@ -140,6 +142,7 @@ body {
   --font-primary: 1.4rem;
   --font-secondary: 1.2rem;
   --font-tertiary: 1.6rem;
+
 }
 
 /* body[data-theme="dark"] {
@@ -430,7 +433,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: var(--font-size-2) !important;
-  color: var(--text-primary) !important;
+  /* color: var(--text-primary) !important; */
 }
 
 .fc .fc-button-primary {
@@ -441,7 +444,7 @@ body {
 
   &:hover {
     background-color: var(--bg-secondary-hover);
-    color: var(--text-primary) !important;
+    /* color: var(--text-primary) !important; */
   }
 }
 
@@ -456,7 +459,7 @@ body {
   font-size: var(--font-size-2);
   /* border: 0.1rem solid var(--color-2) !important; */
   border: none;
-  color: var(--text-primary) !important;
+  /* color: var(--text-primary) !important; */
 }
 
 
@@ -464,7 +467,7 @@ body {
 
   .fc-icon-chevron-left::before,
   .fc-icon-chevron-right::before {
-    color: var(--text-primary) !important;
+    /* color: var(--text-primary) !important; */
   }
 
 }
@@ -479,7 +482,7 @@ body {
 
 .fc .fc-button:disabled {
   background-color: var(--btn-primary-hover) !important;
-  color: var(--text-primary) !important;
+  /* color: var(--text-primary) !important; */
 }
 
 .fc-direction-ltr {
@@ -488,7 +491,7 @@ body {
 }
 
 .fc-h-event .fc-event-title {
-  color: var(--text-primary) !important;
+  /* color: var(--text-primary) !important; */
   padding-inline: 0.5rem;
   font-size: 1.2rem;
 }

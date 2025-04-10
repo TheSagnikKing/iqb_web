@@ -2905,20 +2905,20 @@ const CreateSalon = () => {
     {
       label: 'Account Information',
       fields: [
-        { name: 'salonName', label: 'Name', type: 'text', placeholder: 'Enter salon name', onChange: setHandler, value: salonName, setState: setSalonName, setError: setSalonNameError, error: salonNameError },
-        { name: 'salonDesc', label: 'Description', type: 'text', placeholder: 'Enter salon description', onChange: setHandler, value: salonDesc, setState: setSalonDesc, setError: setSalonDescError, error: salonDescError },
-        { name: 'salonEmail', label: 'Email', type: 'text', placeholder: 'Enter salon email', onChange: setHandler, value: salonEmail, setState: setSalonEmail, setError: setSalonEmailError, error: salonEmailError },
-        { name: 'contactTel', label: 'Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
+        { name: 'salonName', label: 'Salon Name', type: 'text', placeholder: 'Enter salon name', onChange: setHandler, value: salonName, setState: setSalonName, setError: setSalonNameError, error: salonNameError },
+        { name: 'salonDesc', label: 'Salon Description', type: 'text', placeholder: 'Enter salon description', onChange: setHandler, value: salonDesc, setState: setSalonDesc, setError: setSalonDescError, error: salonDescError },
+        { name: 'salonEmail', label: 'Salon Email', type: 'text', placeholder: 'Enter salon email', onChange: setHandler, value: salonEmail, setState: setSalonEmail, setError: setSalonEmailError, error: salonEmailError },
+        { name: 'contactTel', label: 'Salon Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
       ],
     },
     {
       label: 'Business Information',
       fields: [
-        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', salonTypeHandler: salonTypeHandler, value: salonType, error: salonTypeError },
-        { name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', onChange: setHandler, value: address, setState: setAddress, setError: setSalonAddressError, error: salonAddressError },
-        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', onChange: setHandler, value: postCode, setState: setPostCode, setError: setPostCodeError, error: postCodeError },
+        { name: 'businesstype', label: 'Salon Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', salonTypeHandler: salonTypeHandler, value: salonType, error: salonTypeError },
+        { name: 'address', label: 'Salon Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', onChange: setHandler, value: address, setState: setAddress, setError: setSalonAddressError, error: salonAddressError },
+        { name: 'postcode', label: 'Salon Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', onChange: setHandler, value: postCode, setState: setPostCode, setError: setPostCodeError, error: postCodeError },
         { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude },
-        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude },
+        { name: 'longitude', label: 'Salon Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude },
         { name: 'country', label: 'Country', type: 'text', dropdown: true, placeholder: 'Select country' },
         { name: 'city', label: 'City', type: 'text', dropdown: true, placeholder: 'Select city' },
         { name: 'timezone', label: 'Timezone', type: 'text', dropdown: true, placeholder: 'Select timezone' },
@@ -3225,10 +3225,10 @@ const CreateSalon = () => {
             },
             "& .MuiStepIcon-text": {
               fontSize: "1.4rem",
-              color: "var(--text-primary)",
+              // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              color: "var(--bg-secondary)",
+              // color: "var(--bg-secondary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",

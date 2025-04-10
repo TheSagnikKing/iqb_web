@@ -122,11 +122,18 @@
         justify-content: center;
         cursor: pointer;
     }
+
+    &>div:nth-last-child(1){
+        color: var(--text-primary);
+        position: absolute;
+        top: 4rem;
+        right: 1rem;
+    }
 }
 
-.section>div:nth-child(2)>div>div:nth-child(3)>div {
+.section>div:nth-child(2)>div>div:nth-child(3)>div:nth-last-child(2) {
     position: absolute;
-    top: 4.5rem;
+    top: 7rem;
     width: 100%;
     height: auto;
     padding: 1rem;
@@ -229,13 +236,21 @@
         justify-content: center;
         cursor: pointer;
     }
+
+    &>div:nth-last-child(1){
+        color: var(--text-primary);
+        position: absolute;
+        top: 4rem;
+        right: 1rem;
+    }
 }
 
 .calender_drop_container {
     position: absolute;
     left: 0;
-    top: 4.5rem;
+    top: 7rem;
     background-color: var(--bg-primary);
+    
 }
 
 /* dark mode  */

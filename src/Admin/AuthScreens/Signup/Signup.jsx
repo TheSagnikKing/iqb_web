@@ -189,7 +189,7 @@ const Signup = () => {
             </div>
           </button>
 
-          <p>Already a member ? <Link to="/adminsignin">Log In</Link></p>
+          <p>Already a member ? <Link to="/adminsignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

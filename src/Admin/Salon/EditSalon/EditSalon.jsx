@@ -3078,32 +3078,32 @@ const EditSalon = () => {
       label: 'Account Information',
       fields: [
         {
-          name: 'name', label: 'Name', type: 'text', placeholder: 'Enter salon name', value: salonName, onChange: (e) => {
+          name: 'name', label: 'Salon Name', type: 'text', placeholder: 'Enter salon name', value: salonName, onChange: (e) => {
             setSalonNameError("")
             setSalonName(e.target.value)
           }, error: salonNameError
         },
         {
-          name: 'description', label: 'Description', type: 'text', placeholder: 'Enter salon description', value: salonDesc, onChange: (e) => {
+          name: 'description', label: 'Salon Description', type: 'text', placeholder: 'Enter salon description', value: salonDesc, onChange: (e) => {
             setSalonDescError("")
             setSalonDesc(e.target.value)
           }, error: salonDescError
         },
-        { name: 'email', label: 'Email', type: 'text', placeholder: 'Enter salon email', value: salonEmail, onChange: (e) => { } },
-        { name: 'contactTel', label: 'Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
+        { name: 'email', label: 'Salon Email', type: 'text', placeholder: 'Enter salon email', value: salonEmail, onChange: (e) => { } },
+        { name: 'contactTel', label: 'Salon Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
       ],
     },
     {
       label: 'Business Information',
       fields: [
-        { name: 'businesstype', label: 'Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', value: salonType, readOnly: true },
+        { name: 'businesstype', label: 'Salon Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', value: salonType, readOnly: true },
         {
-          name: 'address', label: 'Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', value: address, onChange: (e) => {
+          name: 'address', label: 'Salon Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', value: address, onChange: (e) => {
             setSalonAddressError("")
             setAddress(e.target.value)
           }, error: salonAddressError
         },
-        { name: 'postcode', label: 'Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', value: postCode, readOnly: true },
+        { name: 'postcode', label: 'Salon Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', value: postCode, readOnly: true },
         { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude, readOnly: true },
         { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude, readOnly: true },
         { name: 'country', label: 'Country', type: 'text', dropdown: false, placeholder: 'Select country', value: country, readOnly: true },
@@ -3406,10 +3406,10 @@ const EditSalon = () => {
             },
             "& .MuiStepIcon-text": {
               fontSize: "1.4rem",
-              color: "var(--text-primary)",
+              // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              color: "var(--bg-secondary)",
+              // color: "var(--bg-secondary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",

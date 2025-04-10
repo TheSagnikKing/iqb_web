@@ -13,7 +13,7 @@ import { ClickAwayListener } from '@mui/material';
 import { getCurrentDate } from '../../../utils/Date'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import Calendar from 'react-calendar'
-import { DropdownIcon } from '../../../icons'
+import { DropdownIcon } from '../../../newicons'
 
 const SignupEditProfile = () => {
 
@@ -258,7 +258,7 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            {/* <p>Name</p> */}
+            <label for="name">Name</label>
             <input
               placeholder='Enter name'
               type="text"
@@ -276,7 +276,7 @@ const SignupEditProfile = () => {
           </div>
 
           <div>
-            {/* <p>Gender</p> */}
+            <label for="gender">Gender</label>
             <input
               placeholder='Select gender'
               type="text"
@@ -301,67 +301,51 @@ const SignupEditProfile = () => {
               <p onClick={() => setGenderHandler("Female")}>Female</p>
               <p onClick={() => setGenderHandler("Other")}>Other</p>
             </div></ClickAwayListener>}
+
+            <div><DropdownIcon /></div>
           </div>
 
 
+          <div className={style.calender_container}>
+          <label for="dateofBirth">Date of Birth</label>
 
-          {
-            mobileValue ? (<div>
-              {/* <p>Date of Birth</p> */}
-              <input
-                type="date"
-                value={dateOfBirth}
-                onChange={(e) => {
-                  setDateOfBirthError("")
-                  setDateofBirth(e.target.value)
-                }}
-                onKeyDown={handleKeyPress}
-                max={getCurrentDate()}
-                style={{
-                  colorScheme: darkmodeOn ? "dark" : "light",
-                  border: dateOfBirthError && "0.1rem solid red"
-                }}
-              />
-              <p className={style.error_message}>{dateOfBirthError}</p>
-            </div>
-            ) : (<div className={style.calender_container}>
-              {/* <p>Date of Birth</p> */}
-
-              <input
-                type='text'
-                placeholder='Select Date'
-                value={dateOfBirth}
-                onClick={() => setOpenCalender(true)}
-                style={{
-                  border: dateOfBirthError && "0.1rem solid red"
-                }}
-                readOnly
-              />
-              {/* <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span> */}
-              <p className={style.error_message}>{dateOfBirthError}</p>
-              {
-                openCalender && <ClickAwayListener onClickAway={handleClickAway}>
-                  <div className={style.calender_drop_container}>
-                    <Calendar
-                      onChange={onChangeHandler}
-                      value={value}
-                      maxDate={new Date(2009, 11, 31)}
-                    />
-                  </div>
-                </ClickAwayListener>
-              }
-            </div>)
-          }
+            <input
+              type='text'
+              placeholder='Date of birth'
+              value={dateOfBirth}
+              onClick={() => setOpenCalender(true)}
+              style={{
+                border: dateOfBirthError && "0.1rem solid red"
+              }}
+              id="dateofBirth"
+              readOnly
+            />
+            {/* <span onClick={() => setOpenCalender(true)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span> */}
+            <p className={style.error_message}>{dateOfBirthError}</p>
+            {
+              openCalender && <ClickAwayListener onClickAway={handleClickAway}>
+                <div className={style.calender_drop_container}>
+                  <Calendar
+                    onChange={onChangeHandler}
+                    value={value}
+                    maxDate={new Date(2009, 11, 31)}
+                  />
+                </div>
+              </ClickAwayListener>
+            }
+            <div><DropdownIcon /></div>
+          </div>
 
 
           <div>
-            {/* <p>Mobile Number</p> */}
+          <label id="mobileLabel">Mobile Number</label>
             <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`} style={{ border: invalidNumberError && "0.1rem solid red" }}>
               <div style={{
                 background: "var(--bg-color3)",
                 borderRadius: "1rem",
               }}>
                 <PhoneInput
+                  aria-labelledby="mobileLabel"
                   forceDialCode={true}
                   defaultCountry={countryflag}
                   value={mobileNumber}
