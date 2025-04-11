@@ -260,7 +260,7 @@ import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/cons
 import { Link, useNavigate } from 'react-router-dom'
 import { BarberLogoutAction } from '../../../Redux/Barber/Actions/AuthAction'
 import { ClickAwayListener } from '@mui/material';
-import { SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
+import { MobileSiderbarMenuIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
 
 const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
@@ -419,7 +419,7 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
             {/* for mobile header */}
 
             <div className={`${style.mobile_container_left}`}>
-                <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <SidebarOpenIcon /> : <SidebarCloseIcon />}</button>
+                <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <MobileSiderbarMenuIcon /> : <MobileSiderbarMenuIcon />}</button>
             </div>
 
         </header>
