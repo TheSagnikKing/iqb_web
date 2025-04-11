@@ -3228,7 +3228,7 @@ const CreateSalon = () => {
               // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              // color: "var(--bg-secondary)",
+              color: "var(--bg-tertiary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",
@@ -3643,7 +3643,12 @@ const CreateSalon = () => {
 
                       </div>
 
-                      <div>
+                      <div
+                        style={{
+                          display: localsalondata?.selectedServices?.length === 0 ? "none" : "block",
+                          padding: localsalondata?.selectedServices?.length === 0 ? "0rem" : "2rem"
+                        }}
+                      >
                         {
                           localsalondata?.selectedServices?.map((ser, index) => {
                             return (
@@ -3717,7 +3722,12 @@ const CreateSalon = () => {
                           />
                         </div>
 
-                        <div>
+                        <div
+                          style={{
+                            display: salonImages?.length === 0 ? "none" : "block",
+                            padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
+                          }}
+                        >
                           {
                             salonImages.map((item, index) => {
                               return (

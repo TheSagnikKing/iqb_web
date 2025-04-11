@@ -182,7 +182,6 @@ iframe {
     -ms-transition: var(--common-btn-transition);
     -o-transition: var(--common-btn-transition);
     font-size: 1.4rem;
-    font-weight: 600;
 
     &:hover {
         background-color: var(--bg-secondary-hover);

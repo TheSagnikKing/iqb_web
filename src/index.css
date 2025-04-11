@@ -116,11 +116,11 @@ body {
   /* dark mode color codes */
 
   --bg-primary: #09090B;
-  --bg-secondary: #fff;
+  --bg-secondary: #ffffff;
   --bg-tertiary: #585858;
 
   --bg-hover-primary: #27272A80;
-  --bg-secondary-hover: #CBD5E1e6;
+  --bg-secondary-hover:  #ffffffe6;
   --btn-primary-hover: #27272A;
 
   --btn-text-color: #000;

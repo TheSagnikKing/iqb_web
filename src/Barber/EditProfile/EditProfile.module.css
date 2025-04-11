@@ -29,7 +29,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(--text-primary);
+            color: var(-btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;
@@ -104,7 +104,7 @@
                         -ms-border-radius: 50%;
                         -o-border-radius: 50%;
                         background: var(--bg-secondary);
-                        color: var(--text-primary);
+                        color: var(-btn-text-color);
                         font-size: 1.4rem;
                         transition: background-color 0.2s ease-in;
                         -webkit-transition: background-color 0.2s ease-in;
@@ -486,7 +486,7 @@
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
                     background-color: var(--bg-secondary);
-                    color: var(--text-primary);
+                    color: var(-btn-text-color);
                     border: none;
                     outline: none;
                     cursor: pointer;
@@ -537,7 +537,7 @@
         -ms-border-radius: var(--border-radius-primary);
         -o-border-radius: var(--border-radius-primary);
         background-color: var(--bg-secondary);
-        color: var(--text-primary);
+        color: var(-btn-text-color);
         border: none;
         outline: none;
         cursor: pointer;
@@ -911,7 +911,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(--text-primary);
+            color: var(-btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;
@@ -1046,7 +1046,7 @@
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
                 background-color: var(--bg-secondary);
-                color: var(--text-primary);
+                color: var(-btn-text-color);
                 border: none;
                 outline: none;
                 cursor: pointer;

@@ -183,7 +183,7 @@ const Signin = () => {
               placeItems: "center"
             }}
               className={style.signin_btn}
-            ><ButtonLoader /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
+            ><ButtonLoader  /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
           }
 
           <div>

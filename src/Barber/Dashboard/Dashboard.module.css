@@ -37,11 +37,11 @@
                 max-width: 50rem;
                 width: 100%;
                 padding: 2rem;
+                min-height: 50rem;
+                height: 60vh;
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
-                min-height: 50rem;
-                height: 60vh;
                 overflow: auto;
                 background-color: var(--bg-hover-primary);
                 border-radius: var(--border-radius-primary);
@@ -119,14 +119,17 @@
             }
 
             &>div:nth-child(2) {
-                max-width: 50rem;
+                /* max-width: 50rem;
                 width: 100%;
+                padding: 2rem;
+                min-height: 50rem;
+                height: 60vh; */
+                max-width: 50rem;
+                max-height: 60vh;
                 padding: 2rem;
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
-                min-height: 50rem;
-                height: 60vh;
                 overflow: auto;
                 background-color: var(--bg-hover-primary);
                 border-radius: var(--border-radius-primary);
@@ -146,6 +149,7 @@
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
                     min-width: 45.5rem;
+                    margin-bottom: 2rem;
 
                     &>div:nth-child(1) {
                         flex: 1;
@@ -314,7 +318,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(--text-primary);
+            color: var(-btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;
@@ -356,7 +360,7 @@
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
                 background-color: var(--bg-secondary);
-                color: var(--text-primary);
+                color: var(-btn-text-color);
                 border: none;
                 outline: none;
                 cursor: pointer;

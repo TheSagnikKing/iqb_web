@@ -3409,7 +3409,7 @@ const EditSalon = () => {
               // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              // color: "var(--bg-secondary)",
+              color: "var(--bg-tertiary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",
@@ -3619,7 +3619,12 @@ const EditSalon = () => {
 
                       </div>
 
-                      <div>
+                      <div
+                        style={{
+                          display: selectedServices?.length === 0 ? "none" : "block",
+                          padding: selectedServices?.length === 0 ? "0rem" : "2rem"
+                        }}
+                      >
 
                         {
                           selectedServices?.map((ser, index) => {
@@ -3695,7 +3700,12 @@ const EditSalon = () => {
                           />
                         </div>
 
-                        <div>
+                        <div
+                        style={{
+                          display: salonImages?.length === 0 ? "none" : "block",
+                          padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
+                        }}
+                        >
                           {
                             salonImages.map((item, index) => {
                               return (

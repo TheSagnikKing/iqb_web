@@ -97,7 +97,7 @@ const ForgotPassword = () => {
               <button onClick={mailHandler} className={style.forgot_btn}>Send Email</button>
           }
 
-          <Link to="/barbersignin">Back</Link>
+          <Link to="/barbersignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Back</Link>
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

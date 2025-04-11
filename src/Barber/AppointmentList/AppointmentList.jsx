@@ -226,7 +226,7 @@ const AppointmentList = () => {
                                                                     background: "#0285c755"
                                                                 }}
                                                                 onClick={() => ServeHandler(s)}
-                                                            ><EditIcon /></button>
+                                                            >Serve</button>
                                                             <button
                                                                 onClick={() => {
                                                                     setModalData(s)
@@ -238,7 +238,7 @@ const AppointmentList = () => {
                                                                     background: "#450a0a"
                                                                 }}
 
-                                                            ><DeleteIcon /></button>
+                                                            >Delete</button>
                                                         </div>
                                                     </div>
                                                 )

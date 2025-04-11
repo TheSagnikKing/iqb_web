@@ -1328,7 +1328,7 @@ const CreateBarber = () => {
               // color: "var(--text-primary)",
             },
             "& .MuiStepIcon-root.Mui-active": {
-              // color: "var(--bg-secondary)",
+              color: "var(--bg-tertiary)",
             },
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",

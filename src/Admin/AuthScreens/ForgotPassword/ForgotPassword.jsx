@@ -97,7 +97,7 @@ const ForgotPassword = () => {
             }} className={style.forgot_btn}><ButtonLoader /></button> : <button onClick={mailHandler} className={style.forgot_btn}>Send Email</button>
           }
 
-          <Link to="/adminsignin">Back</Link>
+          <Link to="/adminsignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Back</Link>
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

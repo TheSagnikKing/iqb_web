@@ -82,7 +82,7 @@
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
                 background: var(--bg-secondary);
-                color: var(--text-primary);
+                color: var(--btn-text-color);
                 font-size: 1.4rem;
                 transition: background-color 0.2s ease-in;
                 -webkit-transition: background-color 0.2s ease-in;
@@ -172,7 +172,7 @@
                             -moz-border-radius: 0.2rem;
                             -ms-border-radius: 0.2rem;
                             -o-border-radius: 0.2rem;
-                            color: var(--text-primary);
+                            color: var(--btn-text-color);
                             cursor: pointer;
                             font-size: 1.4rem;
                             display: flex;

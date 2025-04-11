@@ -167,7 +167,7 @@ iframe {
     -ms-border-radius: var(--border-radius-primary);
     -o-border-radius: var(--border-radius-primary);
     background-color: var(--bg-secondary);
-    color: var(--text-primary);
+    color: var(--btn-text-color);
     border: none;
     outline: none;
     cursor: pointer;

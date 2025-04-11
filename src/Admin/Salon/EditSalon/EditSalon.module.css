@@ -509,10 +509,13 @@
                 }
 
                 &>div:nth-child(2) {
-                    width: 100%;
+                    /* width: 100%;
                     max-width: 50rem;
                     padding: 2rem;
-                    height: 50rem;
+                    height: 50rem; */
+                    max-width: 50rem;
+                    max-height: 50rem;
+                    padding: 2rem;
                     overflow: auto;
                     display: flex;
                     flex-direction: column;
@@ -537,6 +540,7 @@
                         -ms-border-radius: var(--border-radius-primary);
                         -o-border-radius: var(--border-radius-primary);
                         min-width: 45.5rem;
+                        margin-bottom: 2rem;
 
                         &>div:nth-child(1) {
                             flex: 1;
@@ -877,8 +881,11 @@
                 }
 
                 &>div:nth-child(2) {
-                    height: 30rem;
+                    /* height: 30rem;
                     min-height: 30rem;
+                    padding: 1.5rem; */
+                    max-height: 30rem;
+                    padding: 1.5rem;
                     overflow: auto;
                     background-color: var(--bg-hover-primary);
                     border-radius: var(--border-radius-primary);
@@ -886,7 +893,6 @@
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
-                    padding: 1.5rem;
                     display: flex;
                     gap: 1.5rem;
                     flex-wrap: wrap;
@@ -900,6 +906,7 @@
                         -moz-border-radius: var(--border-radius-primary);
                         -ms-border-radius: var(--border-radius-primary);
                         -o-border-radius: var(--border-radius-primary);
+                        margin-bottom: 1.5rem;
 
                         &>img {
                             width: inherit;

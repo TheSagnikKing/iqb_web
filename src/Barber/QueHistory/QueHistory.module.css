@@ -350,6 +350,7 @@
 
                             &:hover {
                                 background-color: var(--bg-secondary);
+                                color: var(--btn-text-color);
                             }
                         }
                     }

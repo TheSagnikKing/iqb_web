@@ -108,6 +108,10 @@
 
               &:hover {
                 background-color: var(--bg-secondary);
+
+                &>a{
+                  color: var(--btn-text-color);
+                }
               }
 
               &>a {
@@ -147,6 +151,10 @@
 
       .activeMenu {
         background-color: var(--bg-secondary);
+
+        &>a{
+          color: var(--btn-text-color);
+        }
       }
     }
   }

@@ -98,7 +98,7 @@
                 &>button {
                     height: 3.5rem;
                     background-color: var(--bg-secondary);
-                    color: var(--text-primary);
+                    color: var(--btn-text-color);
                     cursor: pointer;
                     transition: var(--btn-transition);
                     -webkit-transition: var(--btn-transition);
@@ -156,7 +156,7 @@
                 &>button {
                     height: 3.5rem;
                     background-color: var(--bg-secondary);
-                    color: var(--text-primary);
+                    color: var(--btn-text-color);
                     cursor: pointer;
                     transition: var(--btn-transition);
                     -webkit-transition: var(--btn-transition);
@@ -324,7 +324,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(--text-primary);
+            color: var(--btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;

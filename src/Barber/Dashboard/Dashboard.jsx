@@ -1675,7 +1675,12 @@ const Dashboard = () => {
                       )
                   }
 
-                  <div>
+                  <div
+                  style={{ 
+                    display: selectedServiceList?.length === 0 ? "none" : "block",
+                    padding: selectedServiceList?.length === 0 ? "0rem" : "2rem"
+                  }}
+                  >
                     {selectedServiceList.map((service) => (
                       <div key={service.serviceId} className={style.service_item}>
                         <div>

@@ -468,7 +468,7 @@ const Queue = () => {
                   color: "var(--text-primary)",
                   fontSize: "1.4rem",
                 },
-                "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important" },
+                "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important", color: "var(--btn-text-color)" },
               }}
             />
           </div>
@@ -495,6 +495,7 @@ const Queue = () => {
                             }}
                               style={{
                                 background: item === rowsPerPage ? "var(--bg-secondary)" : null,
+                                color: item === rowsPerPage ? "var(--btn-text-color)" : null,
                                 borderBottom: index === [10, 20, 30, 50].length - 1 ? "none" : "0.1rem solid var(--border-secondary)"
                               }}
                             >{item}</li>
