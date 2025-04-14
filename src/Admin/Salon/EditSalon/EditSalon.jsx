@@ -3621,8 +3621,8 @@ const EditSalon = () => {
 
                       <div
                         style={{
-                          display: selectedServices?.length === 0 ? "none" : "block",
-                          padding: selectedServices?.length === 0 ? "0rem" : "2rem"
+                          display: selectedServices?.length ? "block" : "none",
+                          padding: selectedServices?.length ? "2rem" : "0rem",
                         }}
                       >
 
@@ -3702,8 +3702,8 @@ const EditSalon = () => {
 
                         <div
                           style={{
-                            display: salonImages?.length === 0 ? "none" : "block",
-                            padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
+                            display: salonImages?.length ? "block" : "none",
+                            padding: salonImages?.length ? "1.5rem" : "0rem"
                           }}
                         >
                           {

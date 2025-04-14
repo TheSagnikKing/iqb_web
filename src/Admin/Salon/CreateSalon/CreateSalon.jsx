@@ -3645,8 +3645,8 @@ const CreateSalon = () => {
 
                       <div
                         style={{
-                          display: localsalondata?.selectedServices?.length === 0 ? "none" : "block",
-                          padding: localsalondata?.selectedServices?.length === 0 ? "0rem" : "2rem"
+                          display: localsalondata?.selectedServices?.length ? "block" : "none",
+                          padding: localsalondata?.selectedServices?.length ? "2rem" : "0rem"
                         }}
                       >
                         {
@@ -3724,8 +3724,8 @@ const CreateSalon = () => {
 
                         <div
                           style={{
-                            display: salonImages?.length === 0 ? "none" : "block",
-                            padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
+                            display: salonImages?.length ? "block" : "none",
+                            padding: salonImages?.length ? "1.5rem" : "0rem",
                           }}
                         >
                           {

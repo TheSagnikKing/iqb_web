@@ -425,7 +425,7 @@ body {
 
   &:hover {
     background-color: var(--bg-secondary-hover);
-    color: var(--text-primary) !important;
+    /* color: var(--btn-text-color) !important; */
   }
 }
 
@@ -458,7 +458,6 @@ body {
   .fc-icon-chevron-right::before {
     color: var(--btn-text-color) !important;
   }
-
 }
 
 .fc-button-group {
