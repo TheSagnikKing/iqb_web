@@ -925,12 +925,13 @@ const Report = () => {
           <div className={`${style.report_footer}`}>
             <p>Report Type -
               {queueType === "queueserved"
-                ? `Queue Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                ? `Queue Served (${((selectedFilter || "")) || (selectedDates.length > 0 && "Range" || "")})` :
                 queueType === "queuecancelled" ?
-                  `Queue Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})` :
+                  `Queue Cancelled (${(selectedFilter || "") || (selectedDates.length > 0 && "Range" || "")})` :
                   appointmentType === "appointmentserved" ?
-                    `Appointment Served (${selectedFilter || selectedDates.length > 0 && "Range"})` :
-                    `Appointment Cancelled (${selectedFilter || selectedDates.length > 0 && "Range"})`}
+                    `Appointment Served (${(selectedFilter || "") || (selectedDates.length > 0 && "Range" || "")})` :
+                    appointmentType === "appointmentcancelled" ?
+                      `Appointment Cancelled (${(selectedFilter || "") || (selectedDates.length > 0 && "Range" || "")})` : ""}
             </p>
             <p>Select - {selectType}</p>
           </div>

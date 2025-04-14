@@ -188,8 +188,6 @@ const Appointment = () => {
         getBarberLeaveDaysFunc()
     }, [])
 
-    console.log("Selected Dates ", selectedDates)
-    console.log("Barber Leave Days ", barberLeaveDaysdata)
 
     const isDisabled = (date) => {
         const formattedDate = date.toLocaleDateString("en-CA").split('T')[0];

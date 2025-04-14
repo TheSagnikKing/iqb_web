@@ -120,7 +120,7 @@ body {
   --bg-tertiary: #585858;
 
   --bg-hover-primary: #27272A80;
-  --bg-secondary-hover:  #ffffffe6;
+  --bg-secondary-hover: #ffffffe6;
   --btn-primary-hover: #27272A;
 
   --btn-text-color: #000;
@@ -403,30 +403,10 @@ body {
 }
 
 .fc .fc-toolbar-title {
-  font-size: clamp(18px, 2vw, 24px);
+  /* font-size: clamp(18px, 2vw, 24px) !important; */
   font-family: 'AirbnbCereal_Medium';
 }
 
-/* 
-.fc .fc-button {
-  height: 3.5rem;
-  width: 3.5rem;
-  outline: none;
-  margin-left: 1rem;
-  border-radius: 0.3rem;
-  -webkit-border-radius: 0.3rem;
-  -moz-border-radius: 0.3rem;
-  -ms-border-radius: 0.3rem;
-  -o-border-radius: 0.3rem;
-  background-color: var(--color-3);
-  color: var(--color-2);
-  border: 0.1rem solid var(--color-2);
-
-  &:hover {
-    background-color: var(--color-2);
-    color: var(--light-color-4);
-  }
-} */
 
 .fc .fc-button-group>.fc-button {
   display: flex;
@@ -438,18 +418,19 @@ body {
 
 .fc .fc-button-primary {
   background-color: var(--bg-secondary);
-  color: var(--text-primary);
+  color: var(--btn-text-color) !important;
   /* border: 0.1rem solid var(--color-2); */
   border: none;
 
+
   &:hover {
     background-color: var(--bg-secondary-hover);
-    /* color: var(--text-primary) !important; */
+    color: var(--text-primary) !important;
   }
 }
 
 .fc .fc-today-button {
-  width: 7rem !important;
+  /* width: 7rem !important;
   border-radius: 0.3rem;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;
@@ -457,17 +438,25 @@ body {
   -o-border-radius: 0.3rem;
   margin-right: -1rem;
   font-size: var(--font-size-2);
-  /* border: 0.1rem solid var(--color-2) !important; */
   border: none;
-  /* color: var(--text-primary) !important; */
+  color: var(--text-primary) !important; */
+
+  &:disabled {
+    background-color: var(--bg-secondary-hover);
+    /* color: var(--btn-text-color) !important; */
+  }
+}
+
+.fc .fc-button:disabled {
+  /* background-color: red !important; */
 }
 
 
-.fc .fc-button:hover {
+.fc .fc-button {
 
   .fc-icon-chevron-left::before,
   .fc-icon-chevron-right::before {
-    /* color: var(--text-primary) !important; */
+    color: var(--btn-text-color) !important;
   }
 
 }
@@ -478,10 +467,12 @@ body {
 
 .fc-today-button {
   margin-right: 0rem !important;
+
+
 }
 
 .fc .fc-button:disabled {
-  background-color: var(--btn-primary-hover) !important;
+  /* background-color: var(--btn-primary-hover) !important; */
   /* color: var(--text-primary) !important; */
 }
 
@@ -502,6 +493,10 @@ body {
   margin-bottom: 0.5rem;
   height: 2rem;
   align-content: center;
+
+  .fc-event-title {
+    color: var(--btn-text-color) !important;
+  }
 }
 
 .fc .fc-scrollgrid-section table,

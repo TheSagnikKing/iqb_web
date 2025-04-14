@@ -152,6 +152,8 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
             payload: data
         })
 
+        window.location.reload()
+
         const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
 
         dispatch({

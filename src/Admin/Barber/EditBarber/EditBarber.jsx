@@ -1192,7 +1192,7 @@ const EditBarber = () => {
             "& .MuiStepIcon-root": {
               width: "2.5rem",
               height: "2.5rem",
-              fontSize: "2rem",
+              // fontSize: "2rem",
               color: "var(--bg-tertiary)",
             },
             "& .MuiStepIcon-text": {

@@ -299,7 +299,10 @@ const SignupEditProfile = () => {
               <p onClick={() => setGenderHandler("Other")}>Other</p>
             </div></ClickAwayListener>}
 
-            <div><DropdownIcon /></div>
+            <div onClick={() => {
+              setGenderError("")
+              genderDropHandler()
+            }}><DropdownIcon /></div>
           </div>
 
 
@@ -332,7 +335,7 @@ const SignupEditProfile = () => {
               </ClickAwayListener>
             }
 
-            <div><DropdownIcon /></div>
+            <div onClick={() => setOpenCalender(true)}><DropdownIcon /></div>
           </div>
 
 

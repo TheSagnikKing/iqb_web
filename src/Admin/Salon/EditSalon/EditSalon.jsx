@@ -2220,7 +2220,7 @@ const EditSalon = () => {
 
   const vipServiceHandler = (value) => {
     setVipService(value)
-    setVipServiceDrop(false)
+    setServiceTypeOpen(false)
   }
 
   const fileInputRef = useRef(null);
@@ -3401,7 +3401,7 @@ const EditSalon = () => {
             "& .MuiStepIcon-root": {
               width: "2.5rem",
               height: "2.5rem",
-              fontSize: "2rem",
+              // fontSize: "2rem",
               color: "var(--bg-tertiary)",
             },
             "& .MuiStepIcon-text": {
@@ -3701,10 +3701,10 @@ const EditSalon = () => {
                         </div>
 
                         <div
-                        style={{
-                          display: salonImages?.length === 0 ? "none" : "block",
-                          padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
-                        }}
+                          style={{
+                            display: salonImages?.length === 0 ? "none" : "block",
+                            padding: salonImages?.length === 0 ? "0rem" : "1.5rem"
+                          }}
                         >
                           {
                             salonImages.map((item, index) => {

@@ -302,12 +302,15 @@ const SignupEditProfile = () => {
               <p onClick={() => setGenderHandler("Other")}>Other</p>
             </div></ClickAwayListener>}
 
-            <div><DropdownIcon /></div>
+            <div onClick={() => {
+              setGenderError("")
+              genderDropHandler()
+            }}><DropdownIcon /></div>
           </div>
 
 
           <div className={style.calender_container}>
-          <label for="dateofBirth">Date of Birth</label>
+            <label for="dateofBirth">Date of Birth</label>
 
             <input
               type='text'
@@ -333,12 +336,12 @@ const SignupEditProfile = () => {
                 </div>
               </ClickAwayListener>
             }
-            <div><DropdownIcon /></div>
+            <div onClick={() => setOpenCalender(true)}><DropdownIcon /></div>
           </div>
 
 
           <div>
-          <label id="mobileLabel">Mobile Number</label>
+            <label id="mobileLabel">Mobile Number</label>
             <div className={`${style.mobile_container} ${darkmodeOn && style.dark}`} style={{ border: invalidNumberError && "0.1rem solid red" }}>
               <div style={{
                 background: "var(--bg-color3)",

@@ -543,7 +543,6 @@ import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAc
 import { ClickAwayListener, Modal } from '@mui/material'
 import { MdSunny } from 'react-icons/md'
 import { IoMoon } from 'react-icons/io5'
-import MenuData from '../Menudata.jsx'
 import { LogoutIcon, MobileSiderbarMenuIcon, MoonIcon, ProfileIcon, SearchIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
 
 const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
@@ -894,20 +893,20 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
       <div>
         {
-           adminProfile?.salonId == 0 ? <div></div> : (<button
+          adminProfile?.salonId == 0 ? <div></div> : (<button
             style={{
-              background: togglecheck  ? "#00A36C" : "rgb(244, 67, 54)",
+              background: togglecheck ? "#00A36C" : "rgb(244, 67, 54)",
             }}
             onClick={salonStatusHandler}
-          >{togglecheck  ? "Online" : "Offline"}</button>)
+          >{togglecheck ? "Online" : "Offline"}</button>)
         }
-        
+
 
         <div><MoonIcon /></div>
 
         <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
           <div onClick={() => setProfileOpen((prev) => !prev)}>
-          <img src={adminProfile?.profile?.[0]?.url} alt="" />
+            <img src={adminProfile?.profile?.[0]?.url} alt="" />
 
             <div
               style={{

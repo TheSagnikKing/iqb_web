@@ -253,7 +253,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./DashboardHeader.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { DropdownIcon, LogoutIcon, MobileCrossIcon, MobileMenuIcon, MoonIcon, Notificationicon, ProfileIcon, Settingsicon, Sunicon } from '../../../icons'
-import { menudata } from '../menudata'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../Redux/Admin/Constants/constants'
