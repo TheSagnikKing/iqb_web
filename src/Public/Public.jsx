@@ -13,9 +13,7 @@ const Public = () => {
   return (
     <section className={`${style.section}`}>
       {/* <img src='https://dashboard.shadcnuikit.com/images/cover.png' alt='images' /> */}
-      <div style={{
-        "backgroundColor": "#09090bf7"
-      }}></div>
+      <div></div>
       <div>
         <div>
           <h2>welcome to iQueueBook</h2>

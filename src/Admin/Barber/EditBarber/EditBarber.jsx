@@ -1055,7 +1055,7 @@ const EditBarber = () => {
           }, error: nickNameError
         },
         { name: 'mobileNumber', label: 'Mobile Number', type: 'text', placeholder: 'Enter barber mobile number' },
-        { name: 'dateofbirth', label: 'Date of Birth', type: 'date', placeholder: 'Enter barber date of birth' },
+        { name: 'dateofbirth', label: 'Date of Birth', type: 'text', placeholder: 'Enter barber date of birth' },
       ],
     },
     {

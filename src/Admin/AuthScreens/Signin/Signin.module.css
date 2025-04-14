@@ -12,7 +12,7 @@
     &>div:nth-child(1) {
         width: 50%;
         height: inherit;
-        background-color: #09090bf7;
+        background-color: var(--bg-secondary);
     }
 }
 

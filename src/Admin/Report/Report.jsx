@@ -1282,7 +1282,7 @@ const Report = () => {
               style={{
                 cursor: adminProfile?.salonId == 0 ? "not-allowed" : "pointer"
               }}
-            >View Report</button>
+            >View Reports</button>
           </div>
 
         </Box>

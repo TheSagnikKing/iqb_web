@@ -234,6 +234,7 @@
     .mobile_report_header {
         display: flex;
         flex-direction: column;
+
         &>div:nth-child(1) {
             display: flex;
             align-items: center;
@@ -275,7 +276,7 @@
                     border: none;
                 }
             }
-        }    
+        }
     }
 
     .modalbox {
@@ -330,7 +331,7 @@
 
         }
 
-        &>div:nth-child(2){
+        &>div:nth-child(2) {
             flex: 1;
             overflow: auto;
 
@@ -342,21 +343,21 @@
                 font-family: "AirbnbCereal_Medium";
                 margin-bottom: 1.5rem;
             }
-    
+
             &>div {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 1.5rem;
                 margin-bottom: 2.5rem;
                 align-content: flex-start;
-    
-    
-    
+
+
+
                 &>div {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
-    
+
                     &>button {
                         width: 1.5rem;
                         height: 1.5rem;
@@ -375,17 +376,17 @@
                         align-items: center;
                         /* background-color: var(--bg-secondary); */
                     }
-    
+
                     &>p {
                         color: var(--text-secondary);
                     }
                 }
             }
-    
+
             .barberlist_container {
                 max-height: 18rem;
                 overflow: auto;
-    
+
                 .barber_item {
                     border: 0.1rem solid var(--border-secondary);
                     padding: 0.5rem 1.5rem;
@@ -400,7 +401,7 @@
                     gap: 1.5rem;
                     background-color: var(--input-bg-color);
                     cursor: pointer;
-    
+
                     &>img {
                         height: 3.5rem;
                         width: 3.5rem;
@@ -410,7 +411,7 @@
                         -ms-border-radius: 50%;
                         -o-border-radius: 50%;
                     }
-    
+
                     &>p {
                         color: var(--text-primary);
                         font-size: 1.4rem;
@@ -418,7 +419,7 @@
                     }
                 }
             }
-    
+
             &>div:nth-last-child(2) {
                 &>button {
                     height: 3.5rem;
@@ -442,7 +443,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-    
+
                     &:hover {
                         background-color: var(--btn-primary-hover);
                         border: none;
@@ -450,7 +451,7 @@
                 }
             }
 
-            &>button:nth-last-child(1){
+            &>button:nth-last-child(1) {
                 /* position: absolute; */
                 /* bottom: 2rem; */
                 /* left: 1.5rem; */
@@ -464,7 +465,7 @@
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
                 background: var(--bg-secondary);
-                color: var(--text-primary);
+                color: var(--btn-text-color);
                 font-size: 1.4rem;
                 transition: background-color 0.2s ease-in;
                 -webkit-transition: background-color 0.2s ease-in;
@@ -485,13 +486,13 @@
         }
     }
 
-    .mobile_report_body{
+    .mobile_report_body {
         flex: 1;
-       
+
         display: flex;
         flex-direction: column;
 
-        .report_body_content{
+        .report_body_content {
             flex: 1;
             overflow: auto;
         }
@@ -514,6 +515,7 @@
     }
 
     .section {
+
         &>div:nth-child(1),
         &>div:nth-child(2) {
             display: none;
@@ -521,14 +523,14 @@
     }
 }
 
-@media screen and (min-width:769px) and (max-width:1140px){
-    .section{
-        &>div:nth-child(2){
-            &>div:nth-child(1){
+@media screen and (min-width:769px) and (max-width:1140px) {
+    .section {
+        &>div:nth-child(2) {
+            &>div:nth-child(1) {
                 flex: 2;
             }
 
-            &>div:nth-child(2){
+            &>div:nth-child(2) {
                 flex: 0.8;
             }
         }

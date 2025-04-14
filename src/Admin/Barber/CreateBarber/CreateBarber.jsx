@@ -1107,7 +1107,7 @@ const CreateBarber = () => {
         { name: 'email', label: 'Email', type: 'text', placeholder: 'Enter barber email', value: email, setState: setEmail, setError: setEmailError, error: emailError },
         { name: 'nickName', label: 'Nick Name', type: 'text', placeholder: 'Enter barber nickname', value: nickName, setState: setNickName, setError: setNickNameError, error: nickNameError },
         { name: 'mobileNumber', label: 'Mobile Number', type: 'text', placeholder: 'Enter barber mobile number' },
-        { name: 'dateofbirth', label: 'Date of Birth', type: 'date', placeholder: 'Enter barber date of birth' },
+        { name: 'dateofbirth', label: 'Date of Birth', type: 'text', placeholder: 'Enter barber date of birth' },
       ],
     },
     {

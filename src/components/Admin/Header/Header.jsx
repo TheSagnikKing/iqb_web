@@ -543,7 +543,8 @@ import { adminSalonStatusAction } from '../../../Redux/Admin/Actions/DashboardAc
 import { ClickAwayListener, Modal } from '@mui/material'
 import { MdSunny } from 'react-icons/md'
 import { IoMoon } from 'react-icons/io5'
-import { LogoutIcon, MobileSiderbarMenuIcon, MoonIcon, ProfileIcon, SearchIcon, SidebarCloseIcon, SidebarOpenIcon } from '../../../newicons'
+import { LogoutIcon, MobileSiderbarMenuIcon, MoonIcon, ProfileIcon, SearchIcon, SidebarCloseIcon, SidebarOpenIcon, Sunicon } from '../../../newicons'
+import { ThemeSelectorReducer } from '../../../Redux/Theme'
 
 const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
   const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
@@ -804,6 +805,25 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
   //   dispatch(AdminLogoutAction(navigate))
   // }
 
+  const currentTheme = useSelector(state => state.ThemeSelector)
+
+
+  const ThemeHandler = () => {
+    if (currentTheme === "Dark") {
+      localStorage.setItem("Theme", "Light")
+      dispatch({
+        type: "SET_THEME",
+        payload: "Light"
+      })
+    } else {
+      localStorage.setItem("Theme", "Dark")
+      dispatch({
+        type: "SET_THEME",
+        payload: "Dark"
+      })
+    }
+  }
+
   return (
     <header className={`${style.header}`}>
       <div className={`${style.large_container_left}`}>
@@ -902,7 +922,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
         }
 
 
-        <div><MoonIcon /></div>
+        <div onClick={ThemeHandler}>{currentTheme === "Light" ? <Sunicon /> : <MoonIcon />}</div>
 
         <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
           <div onClick={() => setProfileOpen((prev) => !prev)}>

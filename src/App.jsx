@@ -177,6 +177,19 @@ const App = () => {
     };
   }, [darkmodeOn]);
 
+  const currentTheme = useSelector(state => state.ThemeSelector)
+
+  useEffect(() => {
+    const body = document.querySelector("body")
+
+    if (currentTheme === "Dark") {
+      body.setAttribute("data-theme", "dark")
+    } else {
+      body.setAttribute("data-theme", "light")
+    }
+  }, [currentTheme])
+
+
   // useEffect(() => {
   //   document.documentElement.style.setProperty(
   //     "--bg-secondary",

@@ -160,37 +160,9 @@ const AppointmentCalender = () => {
     }, [salonId])
 
 
-    const darkMode = useSelector(darkmodeSelector)
-
-    // const darkmodeOn = darkMode === "On"
-     const darkmodeOn = "Off"
-
-    useEffect(() => {
-        const styleElement = document.createElement('style');
-
-        styleElement.textContent = `
-  .fc,
-  .fc *,
-  .fc::after,
-  .fc::before {
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"};
-  }
- 
-  .fc-theme-standard .fc-popover{
-        background: var(--bg-primary) !important;
-  }
-
-`;
-        document.head.appendChild(styleElement);
-
-        return () => {
-            document.head.removeChild(styleElement);
-        };
-    }, [darkmodeOn]);
-
     return (
         <section className={`${style.section}`}>
-        
+
             <div className={`${style.list_container}`}>
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}

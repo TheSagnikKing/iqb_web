@@ -9,7 +9,7 @@
     &>div:nth-child(1) {
         width: 50%;
         height: inherit;
-        background-color: #09090bf7 !important;
+        background-color: var(--bg-secondary) !important;
     }
 
     &>div:nth-child(2) {
@@ -70,9 +70,9 @@
     }
 }
 
-@media screen and (min-width:0px) and (max-width:768px){
-    .section{
-        &>div:nth-child(1){
+@media screen and (min-width:0px) and (max-width:768px) {
+    .section {
+        &>div:nth-child(1) {
             display: none;
         }
     }
