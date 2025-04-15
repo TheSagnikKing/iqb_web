@@ -29,7 +29,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(-btn-text-color);
+            color: var(--btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;
@@ -104,7 +104,7 @@
                         -ms-border-radius: 50%;
                         -o-border-radius: 50%;
                         background: var(--bg-secondary);
-                        color: var(-btn-text-color);
+                        color: var(--btn-text-color);
                         font-size: 1.4rem;
                         transition: background-color 0.2s ease-in;
                         -webkit-transition: background-color 0.2s ease-in;
@@ -324,7 +324,7 @@
 
 
                 .input_type_3 {
-                    border: 0.1rem solid var(--border-secondary);
+                    /* border: 0.1rem solid var(--border-secondary); */
                     border-radius: var(--border-radius-primary);
                     -webkit-border-radius: var(--border-radius-primary);
                     -moz-border-radius: var(--border-radius-primary);
@@ -346,6 +346,7 @@
                         border: none;
                         outline: none;
 
+
                         &::placeholder {
                             color: var(--text-secondary);
                             letter-spacing: 0.01rem;
@@ -363,6 +364,9 @@
                         background-color: transparent;
                         border: none;
                         outline: none;
+                        border-top: 0.1rem solid var(--border-secondary);
+                        border-right: 0.1rem solid var(--border-secondary);
+                        border-bottom: 0.1rem solid var(--border-secondary);
                     }
                 }
 
@@ -486,7 +490,7 @@
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
                     background-color: var(--bg-secondary);
-                    color: var(-btn-text-color);
+                    color: var(--btn-text-color);
                     border: none;
                     outline: none;
                     cursor: pointer;
@@ -537,7 +541,7 @@
         -ms-border-radius: var(--border-radius-primary);
         -o-border-radius: var(--border-radius-primary);
         background-color: var(--bg-secondary);
-        color: var(-btn-text-color);
+        color: var(--btn-text-color);
         border: none;
         outline: none;
         cursor: pointer;
@@ -667,18 +671,20 @@
                     position: absolute;
                     top: 1.5rem;
                     right: 1.5rem;
-                    width: 3rem;
-                    height: 3rem;
-                    border-radius: 50%;
+                    /* width: 3rem;
+                    height: 3rem; */
+                    /* border-radius: 50%;
                     -webkit-border-radius: 50%;
                     -moz-border-radius: 50%;
                     -ms-border-radius: 50%;
-                    -o-border-radius: 50%;
+                    -o-border-radius: 50%; */
+                    padding: 0.5rem 1rem;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: 1.8rem;
-                    color: var(--text-primary);
+                    font-size: 1.4rem;
+                    /* color: var(--text-primary); */
+                    color: #fff;
                     border: none;
                     outline: none;
                     cursor: pointer;
@@ -911,7 +917,7 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             background-color: var(--bg-secondary);
-            color: var(-btn-text-color);
+            color: var(--btn-text-color);
             border: none;
             outline: none;
             cursor: pointer;
@@ -1046,7 +1052,7 @@
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
                 background-color: var(--bg-secondary);
-                color: var(-btn-text-color);
+                color: var(--btn-text-color);
                 border: none;
                 outline: none;
                 cursor: pointer;

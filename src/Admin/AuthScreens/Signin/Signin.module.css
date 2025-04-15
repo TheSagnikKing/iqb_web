@@ -12,7 +12,7 @@
     &>div:nth-child(1) {
         width: 50%;
         height: inherit;
-        background-color: var(--bg-secondary);
+        background: linear-gradient(var(--linear-color-1), var(--linear-color-2));
     }
 }
 
@@ -173,7 +173,7 @@ iframe {
     -ms-border-radius: var(--border-radius-primary);
     -o-border-radius: var(--border-radius-primary);
     background-color: var(--bg-secondary);
-    /* color: var(--text-primary); */
+    color: var(--btn-text-color);
     border: none;
     outline: none;
     cursor: pointer;

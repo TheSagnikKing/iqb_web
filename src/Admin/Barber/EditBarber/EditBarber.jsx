@@ -1205,7 +1205,7 @@ const EditBarber = () => {
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",
               borderRadius: "50%",
-              color: "var(--text-primary)",
+              color: "#fff",
               padding: "0.5rem"
             },
           }}

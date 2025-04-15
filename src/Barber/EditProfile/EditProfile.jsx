@@ -1764,14 +1764,14 @@ const EditProfile = () => {
                                                             background: "#450a0a",
                                                         }}
                                                         onClick={() => deleteServiceHandler(s)}
-                                                    ><DeleteIcon /></button>
+                                                    >Delete</button>
                                                 ) : (
                                                     <button
                                                         style={{
                                                             background: "#052e16",
                                                         }}
                                                         onClick={() => chooseServiceHandler(s)}
-                                                    ><AddIcon /></button>
+                                                    >Add</button>
                                                 )}
 
                                             </div>
@@ -1988,7 +1988,7 @@ const EditProfile = () => {
                                 <button onClick={() => setOpenEmailModal(false)}><CloseIcon /></button>
                             </div>
                         </Modal>
-                        
+
                         {
                             barberProfile?.AuthType === "local" ? (<div>
                                 <p>Password</p>
@@ -1996,13 +1996,13 @@ const EditProfile = () => {
                                     type="password"
                                     onClick={() => setOpenPasswordModal(true)}
                                     value={"********"}
-                                    placeholder='' 
+                                    placeholder=''
                                     readOnly
-                                    />
+                                />
                             </div>) : (null)
                         }
 
-                        
+
 
                         <Modal
                             open={openPasswordModal}

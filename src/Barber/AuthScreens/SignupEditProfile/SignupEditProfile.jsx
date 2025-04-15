@@ -179,16 +179,6 @@ const SignupEditProfile = () => {
 
   const darkmodeOn = darkMode === "On"
 
-  useEffect(() => {
-    const phoneInput = document.querySelector(
-      '.react-international-phone-input-container .react-international-phone-input'
-    );
-
-    if (phoneInput) {
-      phoneInput.style.color = !darkmodeOn ? 'var(--light-color-4)' : 'var(--text-primary)';
-    }
-  }, [darkmodeOn]);
-
   //Calender Logic
 
   const [openCalender, setOpenCalender] = useState(false)

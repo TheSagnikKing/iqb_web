@@ -196,13 +196,14 @@
                 &>p {
                     font-family: "AirbnbCereal_Medium";
                     font-size: 1.4rem;
-                    color: var(--text-primary);
+                    color: #fff;
+                    /* color: var(--text-primary); */
                 }
 
                 &>div {
                     font-family: "AirbnbCereal_Medium";
                     font-size: 1.4rem;
-                    color: var(--text-primary);
+                    color: #fff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -211,7 +212,7 @@
 
 
             .salonadv_task>div:nth-child(2)>button:nth-child(1) {
-                background-color: #0285c755;
+                background-color: #0285c7;
 
                 &:hover {
                     background-color: #0285c766;

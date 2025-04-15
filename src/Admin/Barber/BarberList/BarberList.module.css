@@ -215,11 +215,11 @@
                     left: 0;
                     min-width: 5rem;
                     max-width: 5rem;
-                    transition: background-color 0.2s ease-in;
+                    /* transition: background-color 0.2s ease-in;
                     -webkit-transition: background-color 0.2s ease-in;
                     -moz-transition: background-color 0.2s ease-in;
                     -ms-transition: background-color 0.2s ease-in;
-                    -o-transition: background-color 0.2s ease-in;
+                    -o-transition: background-color 0.2s ease-in; */
 
                     /* &>button {
                         width: 1.5rem;
@@ -305,7 +305,7 @@
 
                 }
 
-                &>div:nth-child(3){
+                &>div:nth-child(3) {
                     min-width: 20rem;
                     max-width: 20rem
                 }
@@ -314,7 +314,7 @@
                 &>div:nth-last-child(3),
                 &>div:nth-last-child(4) {
                     &>button {
-                        color: var(--text-primary);
+                        color: #fff;
                         border: none;
                         outline: none;
                         padding: 0.6rem 1.5rem;
@@ -329,6 +329,7 @@
                 }
 
                 &>div:nth-last-child(1) {
+
 
                     &>div {
                         display: flex;
@@ -669,7 +670,7 @@
             -moz-transition: var(--common-btn-transition);
             -ms-transition: var(--common-btn-transition);
             -o-transition: var(--common-btn-transition);
-        
+
             &:hover {
                 background-color: var(--bg-secondary-hover);
             }

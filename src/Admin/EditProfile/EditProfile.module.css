@@ -326,7 +326,7 @@
 
 
                 .input_type_3 {
-                    border: 0.1rem solid var(--border-secondary);
+                    /* border: 0.1rem solid var(--border-secondary); */
                     border-radius: var(--border-radius-primary);
                     -webkit-border-radius: var(--border-radius-primary);
                     -moz-border-radius: var(--border-radius-primary);
@@ -363,7 +363,10 @@
                         font-size: 2rem;
                         font-family: 'AirbnbCereal_Medium';
                         background-color: transparent;
-                        border: none;
+                        border-top: 0.1rem solid var(--border-secondary);
+                        border-right: 0.1rem solid var(--border-secondary);
+                        border-bottom: 0.1rem solid var(--border-secondary);
+                        border-left: none;
                         outline: none;
                     }
                 }

@@ -223,7 +223,7 @@ const AppointmentList = () => {
                                                         <div>
                                                             <button
                                                                 style={{
-                                                                    background: "#0285c755"
+                                                                    background: "#0285c7"
                                                                 }}
                                                                 onClick={() => ServeHandler(s)}
                                                             >Serve</button>

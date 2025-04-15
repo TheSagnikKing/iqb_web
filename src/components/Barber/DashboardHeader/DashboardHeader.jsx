@@ -338,6 +338,26 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
     const [profileOpen, setProfileOpen] = useState(false)
 
 
+    const currentTheme = useSelector(state => state.ThemeSelector)
+
+
+    const ThemeHandler = () => {
+        if (currentTheme === "Dark") {
+            localStorage.setItem("Theme", "Light")
+            dispatch({
+                type: "SET_THEME",
+                payload: "Light"
+            })
+        } else {
+            localStorage.setItem("Theme", "Dark")
+            dispatch({
+                type: "SET_THEME",
+                payload: "Dark"
+            })
+        }
+    }
+
+
     return (
         <header className={`${style.header}`}>
 
@@ -360,7 +380,7 @@ const DashboardHeader = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar 
                     >{barberProfile?.isClockedIn ? "Clock-In" : "Clock-Out"}</button>
                 </div>
 
-                <div><MoonIcon /></div>
+                <div onClick={ThemeHandler} style={{ cursor: "pointer" }}>{currentTheme === "Light" ? <Sunicon /> : <MoonIcon />}</div>
 
                 <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
                     <div onClick={() => setProfileOpen((prev) => !prev)}>

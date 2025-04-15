@@ -117,7 +117,7 @@
         -o-transition: var(--btn-transition);
         font-family: "AirbnbCereal_Medium";
         font-size: 1.4rem;
-        color: var(--text-primary);
+        color: #fff;
         background-color: #450a0a;
 
         &:hover {
@@ -194,7 +194,7 @@
         }
     }
 
-    &>div:nth-last-child(1){
+    &>div:nth-last-child(1) {
         display: flex;
         gap: 1rem;
 
@@ -219,7 +219,7 @@
             -o-transition: var(--btn-transition);
             font-family: "AirbnbCereal_Medium";
             font-size: 1.6rem;
-            color: var(--text-primary);
+            color: #fff;
         }
     }
 }

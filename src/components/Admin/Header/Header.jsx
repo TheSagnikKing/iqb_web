@@ -916,13 +916,14 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
           adminProfile?.salonId == 0 ? <div></div> : (<button
             style={{
               background: togglecheck ? "#00A36C" : "rgb(244, 67, 54)",
+              color: "#fff"
             }}
             onClick={salonStatusHandler}
           >{togglecheck ? "Online" : "Offline"}</button>)
         }
 
 
-        <div onClick={ThemeHandler}>{currentTheme === "Light" ? <Sunicon /> : <MoonIcon />}</div>
+        <div onClick={ThemeHandler} style={{ cursor: "pointer" }}>{currentTheme === "Light" ? <Sunicon /> : <MoonIcon />}</div>
 
         <ClickAwayListener onClickAway={() => setProfileOpen(false)}>
           <div onClick={() => setProfileOpen((prev) => !prev)}>

@@ -7,7 +7,7 @@
     &>div:nth-child(1) {
         width: 50%;
         height: inherit;
-        background-color: #09090bf7;
+        background: linear-gradient(var(--linear-color-1), var(--linear-color-2));
     }
 }
 

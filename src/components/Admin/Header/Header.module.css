@@ -155,7 +155,7 @@
                 }
             }
 
-            .salonlist_container_loading{
+            .salonlist_container_loading {
                 position: absolute;
                 border: 0.1rem solid var(--border-secondary);
                 border-radius: var(--border-radius-primary);

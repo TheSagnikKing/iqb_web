@@ -3233,7 +3233,7 @@ const CreateSalon = () => {
             "& .MuiStepIcon-root.Mui-completed": {
               background: "green",
               borderRadius: "50%",
-              color: "var(--text-primary)",
+              color: "#fff",
               padding: "0.5rem"
             },
           }}
@@ -3662,7 +3662,7 @@ const CreateSalon = () => {
                                       <p>{ser.serviceDesc}</p>
                                     </div>
                                   </div>
-                                  <button onClick={() => deleteServiceHandler(index)}><DeleteIcon /></button>
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
                                 </div>
                                 <div>
                                   <div>

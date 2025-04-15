@@ -243,7 +243,7 @@
                         -o-transition: var(--btn-transition);
                         font-family: "AirbnbCereal_Medium";
                         font-size: 1.4rem;
-                        color: var(--text-primary);
+                        color: #fff;
                         background-color: #450a0a;
 
                         &:hover {
@@ -269,8 +269,8 @@
                         -o-transition: var(--btn-transition);
                         font-family: "AirbnbCereal_Medium";
                         font-size: 1.4rem;
-                        color: var(--text-primary);
-                        background-color: #0285c755;
+                        color: #fff;
+                        background-color: #0285c7;
                         border-radius: 2rem;
                         -webkit-border-radius: 2rem;
                         -moz-border-radius: 2rem;
