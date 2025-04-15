@@ -1143,6 +1143,7 @@ const Report = () => {
                       <button
                         style={{
                           background: selectedFilter === item.value ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          color: "var(--btn-text-color)"
                         }}
                         onClick={() => {
                           setSelectedDates([])
@@ -1172,6 +1173,7 @@ const Report = () => {
                       <button
                         style={{
                           background: item.value === queueType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          color: "var(--btn-text-color)"
                         }}
                         onClick={() => {
                           setAppointmentType("")
@@ -1194,6 +1196,7 @@ const Report = () => {
                       <button
                         style={{
                           background: item.value === appointmentType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          color: "var(--btn-text-color)"
                         }}
                         onClick={() => {
                           setQueueType("")
@@ -1216,6 +1219,7 @@ const Report = () => {
                       <button
                         style={{
                           background: item.value === selectType ? "var(--bg-secondary)" : "var(--btn-primary-hover)",
+                          color: "var(--btn-text-color)"
                         }}
                         onClick={() => {
                           setSelectType(item.value)
