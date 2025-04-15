@@ -476,6 +476,8 @@ body {
 
 
 .fc .fc-button {
+  padding: 0.2rem 0.2rem !important;
+  font-size: 1.4rem;
 
   .fc-icon-chevron-left::before,
   .fc-icon-chevron-right::before {

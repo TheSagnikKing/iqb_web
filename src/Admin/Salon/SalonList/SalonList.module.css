@@ -557,12 +557,14 @@
     background-color: var(--bg-primary);
     border: 0.1rem solid var(--border-secondary);
     width: min(95vw, 55rem);
+    max-height: 95vh;
     border-radius: var(--list-wrapper-border-radius);
     -webkit-border-radius: var(--list-wrapper-border-radius);
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
     z-index: 1000;
+    overflow: auto;
 
     &>div:nth-child(1) {
         display: flex;
