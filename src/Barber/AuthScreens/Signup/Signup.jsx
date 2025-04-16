@@ -163,6 +163,8 @@ const Signup = () => {
             <p className={style.error_message}>{passwordError}</p>
           </div>
 
+          <p></p>
+
           {
             BarberSignupLoading ? <button style={{
               display: "grid",
@@ -170,7 +172,7 @@ const Signup = () => {
             }} className={style.signup_btn}><ButtonLoader /></button> : <button className={style.signup_btn} onClick={signupClicked}>Signup</button>
           }
 
-          <p></p>
+          <p>Already a member ? <Link to="/barbersignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
 
           <div>
             <div />
@@ -185,7 +187,8 @@ const Signup = () => {
             </div>
           </button>
 
-          <p>Already a member ? <Link to="/barbersignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
+
+
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

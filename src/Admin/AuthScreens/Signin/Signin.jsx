@@ -183,8 +183,10 @@ const Signin = () => {
               placeItems: "center"
             }}
               className={style.signin_btn}
-            ><ButtonLoader  /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
+            ><ButtonLoader /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
           }
+
+          <p>Don't you have an account ? <Link to="/adminsignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
 
           <div>
             <div />
@@ -199,7 +201,7 @@ const Signin = () => {
             </div>
           </button>
 
-          <p>Don't you have an account ? <Link to="/adminsignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
+
 
         </div>
         <button className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></button>

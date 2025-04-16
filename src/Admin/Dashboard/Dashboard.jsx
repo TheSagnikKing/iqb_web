@@ -697,9 +697,9 @@ const Dashboard = () => {
     </>) : <>
 
       <section className={`${style.dashboard_container}`}>
-        <div>
+        {/* <div>
           <h2>Welcome, {adminName ? adminName : "User"}</h2>
-        </div>
+        </div> */}
 
         <div>
           <div>

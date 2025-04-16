@@ -176,6 +176,8 @@ const Signup = () => {
             }} className={style.signup_btn}><ButtonLoader /></button> : <button onClick={signupClicked} className={style.signup_btn}>Signup</button>
           }
 
+          <p>Already a member ? <Link to="/adminsignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
+
           <div>
             <div />
             <p>or</p>
@@ -189,7 +191,7 @@ const Signup = () => {
             </div>
           </button>
 
-          <p>Already a member ? <Link to="/adminsignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
+
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

@@ -143,8 +143,8 @@ const Signin = () => {
 
       <div className={`${style.barber_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-        <h2>Welcome back, Barber</h2>
-        <p>Please signin to your account</p>
+          <h2>Welcome back, Barber</h2>
+          <p>Please signin to your account</p>
 
           <div>
             <input
@@ -192,6 +192,8 @@ const Signin = () => {
             }} className={style.signin_btn}><ButtonLoader /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
           }
 
+          <p>Don't you have an account ? <Link to="/barbersignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
+
           <div>
             <div />
             <p>or</p>
@@ -206,7 +208,7 @@ const Signin = () => {
             </div>
           </button>
 
-          <p>Don't you have an account ? <Link to="/barbersignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
+
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

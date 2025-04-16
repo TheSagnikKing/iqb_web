@@ -655,7 +655,7 @@
 
     /* alt + up */
 
-    &>div:nth-child(1) {
+    /* &>div:nth-child(1) {
         height: 4rem;
         display: flex;
         align-items: center;
@@ -666,11 +666,12 @@
             font-family: "AirbnbCereal_Medium";
             font-size: clamp(18px, 2vw, 24px);
         }
-    }
+    } */
 
-    &>div:nth-child(2) {
+    &>div:nth-child(1) {
         flex: 1;
-        overflow: auto;
+        /* background-color: red; */
+        overflow: visible;
 
         display: flex;
         flex-direction: column;
@@ -698,6 +699,7 @@
                 padding: 2rem;
                 gap: 2rem;
                 flex: 35%;
+                box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 
                 &>div:nth-child(1) {
                     display: flex;
@@ -785,6 +787,7 @@
                 padding: 2rem;
                 gap: 2rem;
                 flex: 35%;
+                box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 
                 &>div:nth-child(1) {
                     display: flex;
@@ -824,6 +827,7 @@
                 padding: 2rem;
                 gap: 2rem;
                 flex: calc(100% - 70%);
+                box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 
                 &>div:nth-child(1) {
                     display: flex;
@@ -959,6 +963,7 @@
                 flex-direction: column;
                 padding: 2rem;
                 gap: 2rem;
+                box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 
                 &>div:nth-child(1) {
                     flex: 1;
@@ -1091,6 +1096,7 @@
                 flex-direction: column;
                 padding: 2rem;
                 gap: 2rem;
+                box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 
                 &>div:nth-child(1) {
                     display: flex;
@@ -1120,8 +1126,9 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
-                        width: 98%;
-                        min-width: 30rem;
+                        width: 100%;
+                        /* width: 98%;
+                        min-width: 30rem; */
 
                         &>div:nth-child(1) {
                             display: flex;
@@ -1206,7 +1213,10 @@
 @media screen and (min-width:0px) and (max-width:768px) {
     .dashboard_container {
 
-        &>div:nth-child(2) {
+        &>div:nth-child(1) {
+
+            flex-direction: column-reverse;
+
             &>div:nth-child(1) {
                 flex-direction: column;
                 height: auto;
@@ -1263,7 +1273,7 @@
             }
 
             &>div:nth-child(2) {
-                flex-direction: column;
+                flex-direction: column-reverse;
                 height: auto;
                 min-height: min-content;
 

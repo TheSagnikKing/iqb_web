@@ -184,7 +184,14 @@ iframe {
     }
 }
 
-.section>div:nth-child(2)>div>div:nth-child(7) {
+
+.section>div:nth-child(2)>div>p:nth-child(7) {
+    font-size: var(--font-size-3);
+    text-align: center;
+    margin-bottom: -1rem;
+}
+
+.section>div:nth-child(2)>div>div:nth-child(8) {
     height: 4rem;
     width: 100%;
     display: flex;
@@ -194,24 +201,18 @@ iframe {
     gap: 1rem;
 }
 
-.section>div:nth-child(2)>div>div:nth-child(7)>div {
+.section>div:nth-child(2)>div>div:nth-child(8)>div {
     height: 0.2rem;
     width: 100%;
     background-color: var(--border-secondary);
 }
 
-.section>div:nth-child(2)>div>div:nth-child(7)>p {
+.section>div:nth-child(2)>div>div:nth-child(8)>p {
     font-size: 1.4rem;
     color: var(--text-primary);
     font-family: 'AirbnbCereal_Medium';
 }
 
-
-.section>div:nth-child(2)>div>p:nth-child(9) {
-    font-size: var(--font-size-3);
-    text-align: center;
-    margin-top: 2rem;
-}
 
 .error_message {
     font-size: 1.2rem !important;
