@@ -759,7 +759,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./SalonList.module.css"
-import { CloseIcon, DropdownIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
+import { AppointmentIcon, CloseIcon, DropdownIcon, OffAppointmentIcon, OfflineIcon, OnlineIcon, QueueIcon, QueueOfflineIcon, QueueOnlineIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Modal, Pagination, Select, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
@@ -770,6 +770,7 @@ import { adminDeleteSalonAction, adminUpdateSalonSettingsAction, getAdminSalonLi
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
 import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
+import { Settingsicon } from '../../../icons';
 
 const SalonList = () => {
 
@@ -1393,6 +1394,44 @@ const SalonList = () => {
             </div>
 
           </div>
+        </div>
+      </div>
+
+      <div className={style.list_container_mobile}>
+        <div className={style.list_mobile_item}>
+          <div>
+            <img src="https://m.media-amazon.com/images/I/710GjkD28nL._AC_UF1000,1000_QL80_.jpg" alt="" width={50} height={50} />
+            <div>
+              <p>Modern Unisex Salon</p>
+              <p>modern@yopmail.com</p>
+              <p>Address</p>
+              <p>+44 1234567890</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div>{true ? <OnlineIcon color={"1ADB6A"} /> : <OfflineIcon color={"FC3232"} />}</div>
+              <p>Online</p>
+            </div>
+
+            <div>
+              <div>{!true ? <AppointmentIcon color={"1ADB6A"} /> : <OffAppointmentIcon color={"FC3232"} />}</div>
+              <p>Appointment</p>
+            </div>
+
+            <div>
+              <div>{true ? <QueueOnlineIcon color={"1ADB6A"} /> : <QueueOfflineIcon color={"FC3232"} />}</div>
+              <p>Queue</p>
+            </div>
+          </div>
+
+          <button><SalonThreeDotsIcon /></button>
+
+          <ul>
+            <li>Edit Salon</li>
+            <li>Appointment Settings</li>
+          </ul>
+
         </div>
       </div>
 
