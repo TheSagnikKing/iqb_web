@@ -571,7 +571,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import style from "./BarberList.module.css"
-import { CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
+import { BarberClockIn, BarberClockOut, CheckAllIcon, CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, OfflineIcon, OnlineIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
 import { ClickAwayListener, FormControl, MenuItem, Modal, Pagination, Select } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { adminApproveBarberAction, adminDeleteBarberAction, adminSendBarberEmailAction, adminSendBarberMessageAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
@@ -579,6 +579,7 @@ import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReduc
 import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { ClockIcon } from '../../../icons';
 
 const BarberList = () => {
 
@@ -929,7 +930,7 @@ const BarberList = () => {
     if (barberlistData.length > 0) {
       setBarberPaginationData(barberlistData.slice(startIndex, endIndex))
     }
-  }, [barberlistData,startIndex,endIndex])
+  }, [barberlistData, startIndex, endIndex])
 
   useEffect(() => {
     const totalPages = Math.ceil(barberlistData.length / rowsPerPage)
@@ -974,11 +975,20 @@ const BarberList = () => {
 
   const [selectOpen, setSelectOpen] = useState(false)
 
+  const [mobileSettingIndex, setMobileSettingIndex] = useState("")
+
   return (
     <section className={`${style.section}`}>
       <div>
         <h2>Barber List</h2>
         <div>
+
+          <button
+            className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
+            onClick={checkAllBarbersHandler}
+            title='Select all barbers'
+          ><CheckAllIcon /></button>
+
           <button
             onClick={sendEmailNavigate}
             title='Email'
@@ -987,6 +997,7 @@ const BarberList = () => {
               cursor: salonId === 0 ? "not-allowed" : "cursor"
             }}
           ><EmailIcon /></button>
+
 
           <Modal
             open={openBarberEmail}
@@ -1181,12 +1192,12 @@ const BarberList = () => {
                   return (
                     <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === barberPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                       <div>
-                        {/* <button><CheckIcon /></button> */}
                         <input
                           type="checkbox"
                           checked={checkedBarbers[item._id] || false}
                           onChange={() => barberEmailCheckedHandler(item)}
                         />
+                        {console.log(checkedBarbers[item._id])}
                       </div>
                       <div>
                         <div>
@@ -1332,7 +1343,111 @@ const BarberList = () => {
         </div>
       </div>
 
-    </section>
+      {
+        getAdminBarberListLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"19.5rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
+          </div>
+        ) : getAdminBarberListResolve && BarberList.length > 0 ? (
+          <div className={style.list_mobile_container}>
+
+            {
+              barberPaginationData?.map((item, index) => {
+                return (
+                  <div
+                    style={{
+                      border: checkedBarbers[item._id] ? "0.1rem solid var(--bg-secondary)" : "0.1rem solid var(--border-secondary)"
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      barberEmailCheckedHandler(item)
+                    }}
+
+                    className={style.list_mobile_item} key={item._id} >
+                    <div>
+                      <img src={item.profile?.[0]?.url} alt="" width={50} height={50} loading='lazy' />
+                      <div>
+                        <p>{item.name}</p>
+                        <p>{item.email}</p>
+                        <p>+{item.mobileCountryCode}{" "}{item.mobileNumber}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleHandler(item)
+                          }}
+                        >{checkMap?.get(`${item.salonId}-${item.barberId}`) ? <OnlineIcon color={"1ADB6A"} /> : <OfflineIcon color={"FC3232"} />}</button>
+                        <p>{checkMap?.get(`${item.salonId}-${item.barberId}`) ? "Online" : "Offline"}</p>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            approveHandler(item)
+                          }}
+                          disabled={adminApproveBarberLoading ? true : false}
+                        >{approveBarberMap?.get(`${item.salonId}-${item.email}`) ? <CheckIcon color={"1ADB6A"} /> : <CloseIcon color={"FC3232"} />}</button>
+                        <p>{approveBarberMap?.get(`${item.salonId}-${item.email}`) ? "Approved" : "Approve"}</p>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleClockHandler(item)
+                          }}
+                        >{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? <BarberClockIn color={"1ADB6A"} /> : <BarberClockOut color={"FC3232"} />}</button>
+                        <p>{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? "Clock-In" : "Clock-Out"}</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMobileSettingIndex(index)
+                      }}><SalonThreeDotsIcon /></button>
+
+                    {
+                      mobileSettingIndex === index ? (
+                        <ClickAwayListener onClickAway={() => setMobileSettingIndex("")}>
+                          <ul>
+                            <li>
+                              <button
+                                onClick={() => editButtonClicked(item)}
+                                disabled={approveBarberMap?.get(`${item.salonId}-${item.email}`) === false}
+                                style={{
+                                  cursor: approveBarberMap?.get(`${item.salonId}-${item.email}`) === false ? "not-allowed" : "pointer"
+                                }}
+                              >Edit barber</button>
+                            </li>
+                          </ul>
+                        </ClickAwayListener>
+                      ) : null
+                    }
+
+                  </div>
+                )
+              })
+            }
+
+          </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No salon list available</p>
+          </div>
+        )
+      }
+
+    </section >
   )
 }
 

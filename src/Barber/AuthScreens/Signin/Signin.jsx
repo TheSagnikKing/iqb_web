@@ -143,7 +143,7 @@ const Signin = () => {
 
       <div className={`${style.barber_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <h2>Welcome back, Barber</h2>
+          <h2>Welcome, Barber</h2>
           <p>Please signin to your account</p>
 
           <div>

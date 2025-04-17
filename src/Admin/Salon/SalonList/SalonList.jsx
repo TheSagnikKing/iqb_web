@@ -1215,6 +1215,8 @@ const SalonList = () => {
 
   const [selectOpen, setSelectOpen] = useState(false)
 
+  const [mobileSettingIndex, setMobileSettingIndex] = useState("")
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -1397,43 +1399,87 @@ const SalonList = () => {
         </div>
       </div>
 
-      <div className={style.list_container_mobile}>
-        <div className={style.list_mobile_item}>
-          <div>
-            <img src="https://m.media-amazon.com/images/I/710GjkD28nL._AC_UF1000,1000_QL80_.jpg" alt="" width={50} height={50} />
-            <div>
-              <p>Modern Unisex Salon</p>
-              <p>modern@yopmail.com</p>
-              <p>Address</p>
-              <p>+44 1234567890</p>
-            </div>
+      {
+        getAdminSalonListLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"19.5rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
           </div>
-          <div>
-            <div>
-              <div>{true ? <OnlineIcon color={"1ADB6A"} /> : <OfflineIcon color={"FC3232"} />}</div>
-              <p>Online</p>
-            </div>
+        ) : getAdminSalonListResolve && SalonList.length > 0 ? (
+          <div className={style.list_container_mobile}>
 
-            <div>
-              <div>{!true ? <AppointmentIcon color={"1ADB6A"} /> : <OffAppointmentIcon color={"FC3232"} />}</div>
-              <p>Appointment</p>
-            </div>
+            {
+              salonPaginationData?.map((item, index) => {
+                return (
+                  <div className={style.list_mobile_item} key={item.salonId}>
+                    <div>
+                      <img src={item.salonLogo?.[0]?.url} alt="" width={50} height={50} />
+                      <div>
+                        <p>{item.salonName}</p>
+                        <p>{item.salonEmail}</p>
+                        <p>{item.address}, {item.city}, {item.country}</p>
+                        <p>+{item.mobileCountryCode} {item.contactTel}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <div>{item.isOnline ? <OnlineIcon color={"1ADB6A"} /> : <OfflineIcon color={"FC3232"} />}</div>
+                        <p>{item.isOnline ? "Online" : "Offline"}</p>
+                      </div>
 
-            <div>
-              <div>{true ? <QueueOnlineIcon color={"1ADB6A"} /> : <QueueOfflineIcon color={"FC3232"} />}</div>
-              <p>Queue</p>
-            </div>
+                      <div>
+                        <div>{item.isAppointments ? <AppointmentIcon color={"1ADB6A"} /> : <OffAppointmentIcon color={"FC3232"} />}</div>
+                        <p>Appointment</p>
+                      </div>
+
+                      <div>
+                        <div>{item.isQueuing ? <QueueOnlineIcon color={"1ADB6A"} /> : <QueueOfflineIcon color={"FC3232"} />}</div>
+                        <p>Queue</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMobileSettingIndex(index)
+                      }}><SalonThreeDotsIcon /></button>
+
+                    {
+                      mobileSettingIndex === index ? (
+                        <ClickAwayListener onClickAway={() => setMobileSettingIndex("")}>
+                          <ul>
+                            <li
+                              onClick={(e) => {
+                                editButtonClicked(item)
+                              }}
+                            >Edit Salon</li>
+                            <li
+                              onClick={(e) => {
+                                salonappointmentClicked(item)
+                              }}
+                            >Appointment Settings</li>
+                          </ul>
+                        </ClickAwayListener>
+                      ) : null
+                    }
+
+                  </div>
+                )
+              })
+            }
+
           </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No salon list available</p>
+          </div>
+        )
+      }
 
-          <button><SalonThreeDotsIcon /></button>
-
-          <ul>
-            <li>Edit Salon</li>
-            <li>Appointment Settings</li>
-          </ul>
-
-        </div>
-      </div>
 
       <Modal
         open={openSalonSettings}
@@ -1581,23 +1627,6 @@ const SalonList = () => {
               alignItems: "center",
               justifyContent: "space-between"
             }}>
-              {/* <button className={style.salon_settings_btn}
-                  // onClick={adminProfile?.vendorAccountDetails?.vendorTransferStatus === "active" ? buyHandler : () => {
-                  //   toast.error("You don't have any Stripe Account. Go to profile and create a stripe account", {
-                  //     duration: 3000,
-                  //     style: {
-                  //       fontSize: "var(--font-size-2)",
-                  //       borderRadius: '0.3rem',
-                  //       background: '#333',
-                  //       color: '#fff',
-                  //     },
-                  //   });
-                  // }}
-
-                  onClick={buyHandler}
-                >
-                  {renew ? "Renewal" : "Buy"}
-                </button> */}
 
               {
                 adminUpdateSalonSettingsLoading ? <button className={style.salon_settings_btn}><ButtonLoader /></button> : <button className={style.salon_settings_btn} onClick={updateSalonAppointment}>Update</button>
@@ -1609,7 +1638,7 @@ const SalonList = () => {
         </div>
       </Modal>
 
-    </section>
+    </section >
   )
 }
 

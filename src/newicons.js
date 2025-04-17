@@ -8,8 +8,8 @@ import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPer
 import { LuFilter, LuHistory, LuMailWarning, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { MdAdd, MdLogout, MdOutlineCameraAlt, MdOutlineMailOutline, MdOutlineMessage, MdOutlinePhoneInTalk, MdOutlinePhotoCamera, MdOutlineQueue, MdOutlineSubscriptions, MdOutlineWifiOff, MdPayment } from "react-icons/md";
 import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine, RiMenuFill } from "react-icons/ri";
-import { TbScissors, TbWorldWww } from "react-icons/tb";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import { TbCopyCheck, TbScissors, TbWorldWww } from "react-icons/tb";
+import { PiClockClockwiseBold, PiClockCounterClockwiseBold, PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
@@ -64,3 +64,6 @@ export const OfflineIcon = MdOutlineWifiOff
 export const OffAppointmentIcon = BsCalendar2X
 export const QueueOnlineIcon = FaUsers
 export const QueueOfflineIcon = FaUsersSlash
+export const BarberClockIn = PiClockClockwiseBold
+export const BarberClockOut = PiClockCounterClockwiseBold
+export const CheckAllIcon = TbCopyCheck

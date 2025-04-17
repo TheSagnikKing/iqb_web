@@ -1088,6 +1088,11 @@ const CustomerList = () => {
         </div>
       </div>
 
+
+      <div className={style.list_mobile_container}>
+        mobile list
+      </div>
+
     </section >
   )
 }

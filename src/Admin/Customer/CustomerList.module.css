@@ -695,6 +695,10 @@
 
 }
 
+.list_container {
+    display: none;
+}
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .section {
         &>div:nth-child(1) {
@@ -816,6 +820,8 @@
     }
 
     .list_container {
+        display: none !important;
+
 
         .pagination_container {
             flex-direction: column;
@@ -834,6 +840,10 @@
                 padding-right: 0rem !important;
             }
         }
+    }
+
+    .list_mobile_container{
+        display: block;
     }
 }
 

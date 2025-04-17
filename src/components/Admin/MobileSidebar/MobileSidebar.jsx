@@ -396,7 +396,7 @@ const MobileSidebar = () => {
             <div className={`${style.aside_container}`}>
               <header>
                 <div>
-                <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
+                  <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
                 </div>
                 {mobileSidebar ? <p>{adminGetDefaultSalonResponse?.salonName}</p> : null}
               </header>
@@ -439,9 +439,9 @@ const MobileSidebar = () => {
                     </li>
                   ))}
                 </ul>
-                
+
                 {
-                  adminProfile?.salonId == 0 ? (null) : ( <div className={`${style.online_container}`}>
+                  adminProfile?.salonId == 0 ? (null) : (<div className={`${style.online_container}`}>
                     <p>{togglecheck ? "Online" : "Offline"}</p>
                     <Switch
                       width={45}
@@ -483,7 +483,7 @@ const MobileSidebar = () => {
                     />
                   </div>)
                 }
-               
+
 
               </nav>
             </div>

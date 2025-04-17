@@ -264,24 +264,24 @@ const Sidebar = () => {
                 {sidebar ? <p>{section.heading}</p> : null}
                 <ul>
                   {section.menuItems.map((item, cIndex) => (
-                      item.show ? (
-                        <li
-                          key={item.id}
-                          className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
-                        >
-                          <Link to={item?.url}>
-                            <span
-                              style={{
-                                marginInline: sidebar ? "0rem" : "auto"
-                              }}
-                            >{item.icon}</span>
-                            {
-                              sidebar ? item.name : null
-                            }
-                          </Link>
-                        </li>
-                      ) : null
-                      
+                    item.show ? (
+                      <li
+                        key={item.id}
+                        className={`${location.pathname.includes(item?.url) ? style.activeMenu : ""}`}
+                      >
+                        <Link to={item?.url}>
+                          <span
+                            style={{
+                              marginInline: sidebar ? "0rem" : "auto"
+                            }}
+                          >{item.icon}</span>
+                          {
+                            sidebar ? item.name : null
+                          }
+                        </Link>
+                      </li>
+                    ) : null
+
                   ))}
                 </ul>
               </li>

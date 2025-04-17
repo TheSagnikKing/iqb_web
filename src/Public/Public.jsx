@@ -16,6 +16,7 @@ const Public = () => {
       <div></div>
       <div>
         <div>
+          <img src="./apple-touch-icon-180x180.png" alt="" height={100} width={100} />
           <h2>welcome to iQueueBook</h2>
 
           <div>
