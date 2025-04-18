@@ -482,7 +482,7 @@ import toast from 'react-hot-toast';
 import Modal from '@mui/material/Modal';
 import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../Redux/Admin/Actions/BarberAction';
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
-import { CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SearchIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
+import { CheckAllIcon, CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SearchIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
 import { ClickAwayListener, Pagination } from '@mui/material';
 
 const CustomerList = () => {
@@ -752,6 +752,8 @@ const CustomerList = () => {
 
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
 
+  const [mobileSettingIndex, setMobileSettingIndex] = useState("")
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -918,6 +920,11 @@ const CustomerList = () => {
             ) : (
               <>
                 <button
+                  className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
+                  onClick={checkAllCustomersHandler}
+                  title='Select all barbers'
+                ><CheckAllIcon /></button>
+                <button
                   onClick={sendEmailNavigate}
                   title='Email'
                   disabled={salonId === 0}
@@ -997,7 +1004,7 @@ const CustomerList = () => {
               {
                 customerPaginationData.map((item, index) => {
                   return (
-                    <div key={item.customerName} style={{ borderBottom: (index === endIndex - 1) || (index === customerPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === customerPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
                       <div>
                         <input
                           type="checkbox"
@@ -1088,10 +1095,72 @@ const CustomerList = () => {
         </div>
       </div>
 
+      {
+        adminGetAllCustomerListLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"10rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
+          </div>
+        ) : adminGetAllCustomerListResolve && AllCustomerList.length > 0 ? (
+          <div className={style.list_mobile_container}>
 
-      <div className={style.list_mobile_container}>
-        mobile list
-      </div>
+            {
+              customerPaginationData.map((item, index) => {
+                return (
+                  <div
+                    style={{
+                      border: checkedCustomers[item._id] ? "0.1rem solid var(--bg-secondary)" : "0.1rem solid var(--border-secondary)"
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      customerEmailCheckedHandler(item)
+                    }}
+                    className={style.list_mobile_item} key={item._id}>
+                    <div>
+                      <img src={item?.profile?.[0]?.url} alt="" width={50} height={50} />
+                      <div>
+                        <p>{item.name}</p>
+                        <p>{item.email}</p>
+                        <p>+{item?.mobileCountryCode}{" "}{item?.mobileNumber}</p>
+                      </div>
+                    </div>
+
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMobileSettingIndex(index)
+                      }}><SalonThreeDotsIcon /></button>
+
+                    {
+                      mobileSettingIndex === index ? (
+                        <ClickAwayListener onClickAway={() => setMobileSettingIndex("")}>
+                          <ul>
+                            <li>Appointment History</li>
+                            <li>Queue History</li>
+                          </ul>
+                        </ClickAwayListener>
+                      ) : null
+                    }
+
+                  </div>
+                )
+              })
+            }
+
+          </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No customers available</p>
+          </div>
+        )
+      }
+
+
 
     </section >
   )

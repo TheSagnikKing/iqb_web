@@ -563,7 +563,8 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-
+    height: 95vh;
+    overflow: auto;
 
     &>div:nth-child(1) {
         display: flex;
