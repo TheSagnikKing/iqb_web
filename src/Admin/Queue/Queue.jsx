@@ -400,8 +400,10 @@ const Queue = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  const [queueItem, setQueueItem] = useState({})
+
   const selectHandler = (b) => {
-    if (b.qPosition !== 1) {
+    if (!mobileWidth && b.qPosition !== 1) {
       return toast.error("Queue position is not 1", {
         duration: 3000,
         style: {
@@ -422,6 +424,8 @@ const Queue = () => {
       services: b.services,
       _id: b._id
     }
+
+    setQueueItem(queueData)
 
     if (confirm) {
       setChoosebarber(b?.barberName)
@@ -446,7 +450,7 @@ const Queue = () => {
 
     if (confirm) {
       // console.log(queueData)
-      dispatch(adminCancelQueueAction(queueData, salonId))
+      dispatch(adminCancelQueueAction(queueData, salonId, setChoosebarbermodalopen, setQueueItem, setChoosebarber, setChoosebarberemail))
     }
 
   }
@@ -534,11 +538,13 @@ const Queue = () => {
   const [queuelistDataCopy, setQueuelistDataCopy] = useState([])
 
   const [queuelistData, setQueuelistData] = useState([])
+  const [mobileQueueList, setMobileQueueList] = useState([])
 
   useEffect(() => {
     if (getAllQueueListResolve && queuelist.length > 0) {
       setQueuelistData(queuelist)
       setQueuelistDataCopy(queuelist)
+      setMobileQueueList(queuelist)
     }
 
   }, [queuelist])
@@ -582,21 +588,56 @@ const Queue = () => {
 
 
   useEffect(() => {
-    let filteredData = queuelistDataCopy;
 
-    if (query.trim() !== '') {
-      filteredData = queuelistDataCopy.filter((item) =>
-        item.customerName.toLowerCase().trim().includes(query.toLowerCase())
-      );
+    if (mobileWidth) {
+      let filteredData = queuelistDataCopy;
+
+      if (query.trim() !== '') {
+        filteredData = queuelistDataCopy.filter((item) =>
+          item.customerName.toLowerCase().trim().includes(query.toLowerCase())
+        );
+      }
+
+      setMobileQueueList(filteredData)
+
+    } else {
+      let filteredData = queuelistDataCopy;
+
+      if (query.trim() !== '') {
+        filteredData = queuelistDataCopy.filter((item) =>
+          item.customerName.toLowerCase().trim().includes(query.toLowerCase())
+        );
+      }
+
+      setQueuelistData(filteredData);
+      setPage(1);
     }
 
-    setQueuelistData(filteredData);
-    setPage(1); // Reset page on filter
   }, [query]);
 
   const [selectOpen, setSelectOpen] = useState(false)
 
   const navigate = useNavigate()
+
+  const [mobileWidth, setMobileWidth] = useState(window.innerWidth <= 430 ? true : false)
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (window.innerWidth <= 430) {
+        setMobileWidth(true)
+      } else {
+        setMobileWidth(false)
+      }
+    }
+    window.addEventListener("resize", resizeHandler)
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler)
+    }
+  }, [])
+
+
+  console.log("Svsdds ", mobileQueueList)
 
   return (
     <section className={`${style.section}`}>
@@ -753,6 +794,53 @@ const Queue = () => {
         </div>
       </div>
 
+
+      {
+        getAllQueueListLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"8rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
+          </div>
+        ) : getAllQueueListResolve && mobileQueueList.length > 0 ? (
+          <div className={style.list_container_mobile}>
+
+            {
+              mobileQueueList?.map((item, index) => {
+                return (
+                  <div
+                    onClick={() => selectHandler(item)}
+                    disabled={adminServeQueueLoading}
+                    className={style.list_mobile_item}
+                    key={item._id}>
+                    <div>
+                      <img src={item?.customerProfile?.[0]?.url} alt="" />
+                      <div>
+                        <p>{item.customerName}</p>
+                        <p>{item.barberName}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p>{item.qPosition === 1 ? "Next" : item.qPosition}</p>
+                      <p>{item?.customerEWT === 0 ? "-" : "Ewt : " + item?.customerEWT + "mins"}</p>
+                    </div>
+                  </div>
+                )
+              })
+            }
+
+          </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No queuelist available</p>
+          </div>
+        )
+      }
+
       <Modal
         open={choosebarbermodalopen.open}
         onClose={() => setChoosebarbermodalopen({
@@ -828,16 +916,51 @@ const Queue = () => {
           </div>
 
           {
-            adminServeQueueLoading ? <button style={{
-              display: "grid",
-              placeItems: "center"
-            }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
+            mobileWidth ? (
+              <div>
+                {
+                  adminServeQueueLoading ? <button style={{
+                    display: "grid",
+                    placeItems: "center",
+                  }}><ButtonLoader /></button> : <button
+                    style={{
+                      background: "#00A36C",
+                      color: "#fff"
+                    }}
+                    onClick={serveQHandler}>Serve</button>
+                }
+
+                {
+                  adminCancelQueueLoading ? <button style={{
+                    display: "grid",
+                    placeItems: "center",
+                  }}><ButtonLoader /></button> : <button
+                    style={{
+                      background: "rgb(244, 67, 54)",
+                      color: "#fff"
+                    }}
+                    onClick={() => cancelQHandler(queueItem)}
+                    disabled={adminCancelQueueLoading}
+                  >Cancel</button>
+                }
+
+              </div>
+            ) : (
+
+              adminServeQueueLoading ? <button style={{
+                display: "grid",
+                placeItems: "center"
+              }}><ButtonLoader /></button> : <button onClick={serveQHandler}>Serve</button>
+
+            )
           }
+
+
 
         </div>
       </Modal>
 
-    </section>
+    </section >
   )
 }
 

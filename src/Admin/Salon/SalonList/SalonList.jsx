@@ -1413,7 +1413,7 @@ const SalonList = () => {
           <div className={style.list_container_mobile}>
 
             {
-              salonPaginationData?.map((item, index) => {
+              SalonList?.map((item, index) => {
                 return (
                   <div className={style.list_mobile_item} key={item.salonId}>
                     <div>

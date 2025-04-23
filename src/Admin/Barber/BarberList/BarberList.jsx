@@ -1357,7 +1357,7 @@ const BarberList = () => {
           <div className={style.list_mobile_container}>
 
             {
-              barberPaginationData?.map((item, index) => {
+              BarberList?.map((item, index) => {
                 return (
                   <div
                     style={{

@@ -1109,7 +1109,7 @@ const CustomerList = () => {
           <div className={style.list_mobile_container}>
 
             {
-              customerPaginationData.map((item, index) => {
+              AllCustomerList?.map((item, index) => {
                 return (
                   <div
                     style={{
