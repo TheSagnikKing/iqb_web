@@ -1374,7 +1374,8 @@ const BarberList = () => {
                       <div>
                         <p>{item.name}</p>
                         <p>{item.email}</p>
-                        <p>+{item.mobileCountryCode}{" "}{item.mobileNumber}</p>
+                        {/* <p>+{item.mobileCountryCode}{" "}{item.mobileNumber}</p> */}
+                        <p>{item?.mobileCountryCode && item?.mobileNumber ? `+${item.mobileCountryCode} ${item.mobileNumber}}` : "Not Provided"}</p>
                       </div>
                     </div>
                     <div>
