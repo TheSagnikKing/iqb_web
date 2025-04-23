@@ -637,7 +637,6 @@ const Queue = () => {
   }, [])
 
 
-  console.log("Svsdds ", mobileQueueList)
 
   return (
     <section className={`${style.section}`}>

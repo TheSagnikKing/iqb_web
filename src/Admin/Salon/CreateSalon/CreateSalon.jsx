@@ -1935,7 +1935,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
 import "react-multi-carousel/lib/styles.css";
 import { CameraIcon, CloseIcon, DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, SearchIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
-import { EditIcon } from '../../../icons';
+import { CrownIcon, EditIcon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -3646,9 +3646,41 @@ const CreateSalon = () => {
                       <div
                         style={{
                           display: localsalondata?.selectedServices?.length ? "block" : "none",
-                          padding: localsalondata?.selectedServices?.length ? "2rem" : "0rem"
+                          padding: localsalondata?.selectedServices?.length ? "1rem" : "0rem"
                         }}
                       >
+
+                        {
+                          localsalondata?.selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={`${style.mobile_service_item}`} key={index}>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <img src={ser?.serviceIcon.url || ""} alt="" />
+                                      {ser.vipService ? <span><CrownIcon /></span> : null}
+                                    </div>
+                                    <p>{ser.serviceName}</p>
+                                    <p>{ser.serviceDesc}</p>
+                                  </div>
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
                         {
                           localsalondata?.selectedServices?.map((ser, index) => {
                             return (

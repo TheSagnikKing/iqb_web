@@ -1919,7 +1919,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, EditIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, CrownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
@@ -3177,8 +3177,6 @@ const EditSalon = () => {
   });
 
 
-  console.log(formData)
-
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -3385,7 +3383,6 @@ const EditSalon = () => {
 
   const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
   const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
-
 
   return (
     <section className={`${style.section}`}>
@@ -3622,14 +3619,49 @@ const EditSalon = () => {
                       <div
                         style={{
                           display: selectedServices?.length ? "block" : "none",
-                          padding: selectedServices?.length ? "2rem" : "0rem",
+                          padding: selectedServices?.length ? "1rem" : "0rem",
                         }}
                       >
 
                         {
                           selectedServices?.map((ser, index) => {
                             return (
-                              <div className={`${style.service_item}`} key={index}>
+                              <div className={style.mobile_service_item} key={index}>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <img src={ser?.serviceIcon.url || ""} alt="" />
+
+                                      {ser.vipService ? <span><CrownIcon /></span> : null}
+                                    </div>
+
+                                    <p>{ser.serviceName}</p>
+                                    <p>{ser.serviceDesc}</p>
+
+                                  </div>
+
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
+                        {
+                          selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={style.service_item} key={index}>
                                 <div>
                                   <div>
                                     <div><img src={ser?.serviceIcon.url || ""} alt="" /></div>
@@ -3657,6 +3689,8 @@ const EditSalon = () => {
                           })
                         }
 
+
+
                       </div>
 
                     </div>
@@ -3669,7 +3703,7 @@ const EditSalon = () => {
               {
                 step.label === "Gallery" && (
                   <StepContent>
-                    <main className={`${style.gallery_container}`}>
+                    <main className={`${style.gallery_container} `}>
                       <div>
                         <div>
                           <p>Upload your salon's logo</p>
@@ -3717,7 +3751,7 @@ const EditSalon = () => {
                       </div>
 
 
-                      <div className={`${style.button_container}`}>
+                      <div className={`${style.button_container} `}>
                         <button onClick={handleBack} disabled={index === 0}>
                           Back
                         </button>
@@ -3732,9 +3766,9 @@ const EditSalon = () => {
 
               {
                 step.label === "Social Links" && (<StepContent>
-                  <main className={`${style.social_link_container}`}>
+                  <main className={`${style.social_link_container} `}>
                     {step.fields.map((field) => (
-                      <div key={field.name} className={`${style.form_group}`}>
+                      <div key={field.name} className={`${style.form_group} `}>
                         <div>
                           <div>{field.icon}</div>
                           <input
@@ -3747,7 +3781,7 @@ const EditSalon = () => {
                         </div>
                       </div>
                     ))}
-                    <div className={`${style.button_container}`}>
+                    <div className={`${style.button_container} `}>
                       <button onClick={handleBack} disabled={index === 0}>
                         Back
                       </button>
@@ -3764,7 +3798,7 @@ const EditSalon = () => {
         </Stepper>
 
         {activeStep === steps.length && (
-          <div className={`${style.complete}`}>
+          <div className={`${style.complete} `}>
             <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Edit</span> button to edit your new salon.</p>
             <div>
               <button onClick={handleBack}>Back</button>
@@ -3787,7 +3821,7 @@ const EditSalon = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark} `}>
           <div>
             <p>Selected Image</p>
             <button onClick={() => setOpenModal(false)}><CloseIcon /></button>

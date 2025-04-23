@@ -95,7 +95,7 @@
                     color: var(--text-secondary);
                 }
 
-                &>button {
+                /* &>button {
                     height: 3.5rem;
                     background-color: var(--bg-secondary);
                     color: var(--btn-text-color);
@@ -112,6 +112,30 @@
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
                     border: none;
+
+                    &:hover {
+                        background-color: var(--bg-secondary-hover);
+                    }
+                } */
+
+                .renew_btn {
+                    height: 3.5rem;
+                    background-color: var(--bg-secondary);
+                    color: var(--btn-text-color);
+                    cursor: pointer;
+                    transition: var(--btn-transition);
+                    -webkit-transition: var(--btn-transition);
+                    -moz-transition: var(--btn-transition);
+                    -ms-transition: var(--btn-transition);
+                    -o-transition: var(--btn-transition);
+                    font-weight: 500;
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    border: none;
+                    font-size: 1.4rem;
 
                     &:hover {
                         background-color: var(--bg-secondary-hover);
@@ -153,7 +177,7 @@
                     text-align: center;
                 }
 
-                &>button {
+                /* &>button {
                     height: 3.5rem;
                     background-color: var(--bg-secondary);
                     color: var(--btn-text-color);
@@ -174,8 +198,32 @@
                     &:hover {
                         background-color: var(--bg-secondary-hover);
                     }
+                } */
+
+                .renew_btn {
+                    height: 3.5rem;
+                    background-color: var(--bg-secondary);
+                    color: var(--btn-text-color);
+                    cursor: pointer;
+                    transition: var(--btn-transition);
+                    -webkit-transition: var(--btn-transition);
+                    -moz-transition: var(--btn-transition);
+                    -ms-transition: var(--btn-transition);
+                    -o-transition: var(--btn-transition);
+                    font-weight: 500;
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    border: none;
+                    font-size: 1.4rem;
+
+                    &:hover {
+                        background-color: var(--bg-secondary-hover);
+                    }
                 }
-                
+
                 &>div {
                     display: flex;
                     align-items: center;
@@ -243,7 +291,7 @@
             font-size: var(--font-size-2);
             margin-bottom: 0rem;
 
-            &:hover{
+            &:hover {
                 background-color: var(--btn-primary-hover);
             }
         }
@@ -285,7 +333,7 @@
             height: 6rem;
             margin-bottom: 2rem;
 
-            &>select{
+            &>select {
                 background-color: var(--input-bg-color);
                 font-size: 1.4rem;
             }
@@ -452,9 +500,16 @@
                 padding-inline: 1rem;
                 border-right: none;
                 border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+                /* background-color: red; */
+                position: relative;
 
                 &>div {
                     width: 100%;
+                    gap: 0.5rem;
+
+                    &>p:nth-child(2) {
+                        text-align: start;
+                    }
 
                     &>div {
                         margin: 0rem;
@@ -466,15 +521,50 @@
                 padding-top: 1rem;
                 padding-inline: 1rem;
                 width: 100%;
+                /* background-color: green; */
+                position: relative;
 
                 &>div {
                     width: 100%;
+                    gap: 0.5rem;
+
+                    &>p:nth-child(2) {
+                        text-align: start;
+                    }
 
                     &>div {
                         margin: 0rem;
                     }
                 }
             }
+        }
+    }
+
+    .mobile_renew_btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 6rem;
+        height: 3.5rem;
+        background-color: var(--bg-secondary);
+        color: var(--btn-text-color);
+        cursor: pointer;
+        transition: var(--btn-transition);
+        -webkit-transition: var(--btn-transition);
+        -moz-transition: var(--btn-transition);
+        -ms-transition: var(--btn-transition);
+        -o-transition: var(--btn-transition);
+        font-weight: 500;
+        border-radius: var(--border-radius-primary);
+        -webkit-border-radius: var(--border-radius-primary);
+        -moz-border-radius: var(--border-radius-primary);
+        -ms-border-radius: var(--border-radius-primary);
+        -o-border-radius: var(--border-radius-primary);
+        border: none;
+        font-size: 1.4rem;
+
+        &:hover {
+            background-color: var(--bg-secondary-hover);
         }
     }
 }

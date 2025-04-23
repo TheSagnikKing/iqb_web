@@ -246,10 +246,10 @@ const PaymentStatus = () => {
   const [paymenthistoryData, setpaymenthistoryData] = useState([])
 
   useEffect(() => {
-    if(paymentStatusdata?.length > 0){
+    if (paymentStatusdata?.length > 0) {
       setpaymenthistoryData(paymentStatusdata)
     }
-  },[paymentStatusdata])
+  }, [paymentStatusdata])
 
   const [settingsIndex, setSettingsIndex] = useState("")
 
@@ -265,10 +265,10 @@ const PaymentStatus = () => {
   const [salonPaymenthistoryPaginationData, setSalonPaymenthistoryPaginationData] = useState([])
 
   useEffect(() => {
-    if(paymenthistoryData.length > 0){
+    if (paymenthistoryData.length > 0) {
       setSalonPaymenthistoryPaginationData(paymenthistoryData.slice(startIndex, endIndex))
     }
-  },[paymenthistoryData])
+  }, [paymenthistoryData])
 
   useEffect(() => {
     const totalPages = Math.ceil(paymenthistoryData.length / rowsPerPage);
@@ -411,6 +411,116 @@ const PaymentStatus = () => {
           </div>
         </div>
       </div>
+
+      {
+        paymentStatusLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"14rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
+          </div>
+        ) : paymentStatusdata?.length > 0 ? (
+          <div className={style.list_container_mobile}>
+
+            {
+              paymentStatusdata?.map((item, index) => {
+                return (
+                  <div className={style.list_mobile_item} key={item._id}>
+                    <div>
+                      <p>{item.products?.[0]?.productName}</p>
+                      <p><span>Transaction ID :</span>&nbsp;{item.paymentIntentId}</p>
+                    </div>
+
+                    <div>
+                      <div>
+                        <div>
+                          <p>Invoice No.</p>
+                          <p>{item.invoiceNumber}</p>
+                        </div>
+
+                        <div>
+                          <p>Validity</p>
+                          <p>{item.purchaseDate} - {item.paymentExpiryDate}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div>
+                          <p>Plan</p>
+                          <p>{item?.timePeriod} Days</p>
+                        </div>
+
+                        <div>
+                          <p>Price</p>
+                          <p>{adminGetDefaultSalon?.response?.currency}{" "}{item.products?.[0]?.productPrice}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
+
+          </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No payment history available</p>
+          </div>
+        )
+      }
+
+      {/* <div className={style.list_container_mobile}>
+
+        <div className={style.list_mobile_item}>
+          <div>
+            <p>Queueing</p>
+            <p><span>Transaction ID : pi_3qysvsdv</span></p>
+          </div>
+
+          <div>
+            <div>
+              <div>
+                <p>Invoice No.</p>
+                <p>IQB-MAR-016</p>
+              </div>
+
+              <div>
+                <p>Validity</p>
+                <p>1 Mar 2025 - 30 Mar 2025</p>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <p>Plan</p>
+                <p>30 Days</p>
+              </div>
+
+              <div>
+                <p>Price</p>
+                <p>$ 120</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> */}
+
+      {/* <div className={style.list_container_mobile_loader}>
+        <Skeleton
+          count={6}
+          height={"14rem"}
+          baseColor={"var(--loader-bg-color)"}
+          highlightColor={"var(--loader-highlight-color)"}
+          style={{ marginBottom: "1rem" }} />
+      </div> */}
+
+      {/* <div className={style.list_container_mobile_error}>
+        <p>No payment history available</p>
+      </div> */}
 
     </section>
   )

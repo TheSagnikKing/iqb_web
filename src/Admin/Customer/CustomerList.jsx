@@ -663,11 +663,13 @@ const CustomerList = () => {
   const [customerlistDataCopy, setCustomerlistDataCopy] = useState([])
 
   const [customerlistData, setCustomerlistData] = useState([])
+  const [mobileCustomerList, setMobileCustomerList] = useState([])
 
   useEffect(() => {
     if (adminGetAllCustomerListResolve && AllCustomerList.length > 0) {
       setCustomerlistData(AllCustomerList)
       setCustomerlistDataCopy(AllCustomerList)
+      setMobileCustomerList(AllCustomerList)
     }
 
   }, [AllCustomerList])
@@ -732,19 +734,35 @@ const CustomerList = () => {
 
 
   useEffect(() => {
-    let filteredData = customerlistDataCopy;
+    if (mobileWidth) {
+      let filteredData = customerlistDataCopy;
 
-    if (query.trim() !== '') {
-      filteredData = customerlistDataCopy.filter((item) => {
-        return (
-          item.name.toLowerCase().trim().includes(query.toLowerCase()) ||
-          item.email.toLowerCase().trim().includes(query.toLowerCase())
-        );
-      });
+      if (query.trim() !== '') {
+        filteredData = customerlistDataCopy.filter((item) => {
+          return (
+            item.name.toLowerCase().trim().includes(query.toLowerCase()) ||
+            item.email.toLowerCase().trim().includes(query.toLowerCase())
+          );
+        });
+      }
+
+      setMobileCustomerList(filteredData)
+    } else {
+      let filteredData = customerlistDataCopy;
+
+      if (query.trim() !== '') {
+        filteredData = customerlistDataCopy.filter((item) => {
+          return (
+            item.name.toLowerCase().trim().includes(query.toLowerCase()) ||
+            item.email.toLowerCase().trim().includes(query.toLowerCase())
+          );
+        });
+      }
+
+      setCustomerlistData(filteredData);
+      setPage(1);
     }
 
-    setCustomerlistData(filteredData);
-    setPage(1);
   }, [query]);
 
 
@@ -753,6 +771,23 @@ const CustomerList = () => {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
 
   const [mobileSettingIndex, setMobileSettingIndex] = useState("")
+
+  const [mobileWidth, setMobileWidth] = useState(window.innerWidth <= 430 ? true : false)
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (window.innerWidth <= 430) {
+        setMobileWidth(true)
+      } else {
+        setMobileWidth(false)
+      }
+    }
+    window.addEventListener("resize", resizeHandler)
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler)
+    }
+  }, [])
 
   return (
     <section className={`${style.section}`}>
@@ -1109,7 +1144,7 @@ const CustomerList = () => {
           <div className={style.list_mobile_container}>
 
             {
-              AllCustomerList?.map((item, index) => {
+              mobileCustomerList?.map((item, index) => {
                 return (
                   <div
                     style={{

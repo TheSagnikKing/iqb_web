@@ -897,6 +897,24 @@ const Subscription = () => {
         // console.log(productInfo)
     }
 
+    const [mobileWidth, setMobileWidth] = useState(window.innerWidth <= 430 ? true : false)
+
+    useEffect(() => {
+        const resizeHandler = () => {
+            if (window.innerWidth <= 430) {
+                setMobileWidth(true)
+            } else {
+                setMobileWidth(false)
+            }
+        }
+        window.addEventListener("resize", resizeHandler)
+
+        return () => {
+            window.removeEventListener("resize", resizeHandler)
+        }
+    }, [])
+
+    console.log(mobileWidth)
 
     return (
         <div className={`${style.section}`}>
@@ -964,9 +982,9 @@ const Subscription = () => {
                                 <div>
 
                                     {
-                                        s?.subscriptions.map((sub) => {
+                                        s?.subscriptions.map((sub, index) => {
                                             return (
-                                                <div>
+                                                <div key={index}>
                                                     <div>
                                                         <div>
                                                             <p>{sub?.name}</p>
@@ -974,25 +992,27 @@ const Subscription = () => {
                                                             {
                                                                 sub?.trial === "Free" ? (
                                                                     <div style={{
-                                                                        height: "3rem",
+                                                                        height: "2.2rem",
                                                                         background: "#0285c755",
                                                                         paddingInline: "1rem",
                                                                         color: "var(--color-2)",
                                                                         display: "flex",
                                                                         justifyContent: "center",
                                                                         alignItems: "center",
-                                                                        borderRadius: "2rem"
+                                                                        borderRadius: "2rem",
+                                                                        fontSize: "1.4rem"
                                                                     }}><p>Free</p></div>
                                                                 ) : sub?.trial === "Paid" ? (
                                                                     <div style={{
-                                                                        height: "3rem",
-                                                                        background: "rgba(0, 255, 0, 0.498)",
+                                                                        height: "2.2rem",
+                                                                        background: "#00A36C",
                                                                         paddingInline: "1rem",
                                                                         color: "var(--color-2)",
                                                                         display: "flex",
                                                                         justifyContent: "center",
                                                                         alignItems: "center",
-                                                                        borderRadius: "2rem"
+                                                                        borderRadius: "2rem",
+                                                                        fontSize: "1.4rem"
                                                                     }}><p>Paid</p></div>
                                                                 ) : null
                                                             }
@@ -1001,6 +1021,8 @@ const Subscription = () => {
                                                         </div>
                                                         <p>{sub?.expirydate === "" ? "select a plan" : sub?.expirydate}</p>
                                                         <button
+                                                            // className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
+                                                            className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
                                                             onClick={() => {
                                                                 setPaymentModalOpen(true)
                                                                 setModalValue({

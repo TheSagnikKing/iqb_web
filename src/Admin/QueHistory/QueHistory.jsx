@@ -162,7 +162,7 @@ import style from "./QueHistory.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { CheckIcon, CloseIcon, DropdownIcon } from '../../newicons';
+import { CheckIcon, CloseIcon, CustomerIcon, DropdownIcon, GroupJoinIcon, KioskIcon, MobileIcon } from '../../newicons';
 import { getAdminQueueListHistoryAction } from '../../Redux/Admin/Actions/QueueAction'
 import { ClickAwayListener, Pagination } from '@mui/material'
 
@@ -254,11 +254,13 @@ const QueHistory = () => {
     const [queuehistoryDataCopy, setQueuehistoryDataCopy] = useState([])
     const [queuehistoryData, setQueuehistoryData] = useState([])
     const [queueHistoryPaginationData, setQueueHistoryPaginationData] = useState([])
+    const [mobileQueueList, setMobileQueueList] = useState([])
 
     useEffect(() => {
         if (getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0) {
             setQueuehistoryData(AdminQueueListHistory)
             setQueuehistoryDataCopy(AdminQueueListHistory)
+            setMobileQueueList(AdminQueueListHistory)
         }
 
     }, [AdminQueueListHistory])
@@ -299,19 +301,52 @@ const QueHistory = () => {
         setPage(value);
     }
 
+    const [mobileWidth, setMobileWidth] = useState(window.innerWidth <= 430 ? true : false)
+
     useEffect(() => {
-        if (query.trim() !== "") {
-            const filterData = queuehistoryData.filter((item) =>
-                item.customerName.toLowerCase().trim().includes(query.toLowerCase())
-            );
-            setQueuehistoryDataCopy(filterData);
-            setPage(1)
-        } else {
-            setQueuehistoryDataCopy(queuehistoryData);
-            setPage(1)
+        const resizeHandler = () => {
+            if (window.innerWidth <= 430) {
+                setMobileWidth(true)
+            } else {
+                setMobileWidth(false)
+            }
         }
+        window.addEventListener("resize", resizeHandler)
+
+        return () => {
+            window.removeEventListener("resize", resizeHandler)
+        }
+    }, [])
+
+
+
+    useEffect(() => {
+
+        if (mobileWidth) {
+            let filteredData = queuehistoryDataCopy;
+
+            if (query.trim() !== '') {
+                filteredData = queuehistoryData.filter((item) =>
+                    item.customerName.toLowerCase().trim().includes(query.toLowerCase())
+                );
+            }
+
+            setMobileQueueList(filteredData)
+        } else {
+            if (query.trim() !== "") {
+                const filterData = queuehistoryData.filter((item) =>
+                    item.customerName.toLowerCase().trim().includes(query.toLowerCase())
+                );
+                setQueuehistoryDataCopy(filterData);
+                setPage(1)
+            } else {
+                setQueuehistoryDataCopy(queuehistoryData);
+                setPage(1)
+            }
+        }
+
     }, [query]);
-    
+
 
     const [selectOpen, setSelectOpen] = useState(false)
 
@@ -475,6 +510,76 @@ const QueHistory = () => {
                     </div>
                 </div>
             </div>
+
+
+            {
+                getAdminQueueListHistoryLoading ? (
+                    <div className={style.list_container_mobile_loader}>
+                        <Skeleton
+                            count={6}
+                            height={"19.5rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                            style={{ marginBottom: "1rem" }}
+                        />
+                    </div>
+                ) : getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0 ? (
+                    <div className={style.list_container_mobile}>
+
+                        {
+                            mobileQueueList?.map((item, index) => {
+                                return (
+                                    <div className={style.list_mobile_item} key={item._id}>
+                                        <div>
+                                            <div>
+                                                <img src={item?.customerProfile?.[0]?.url} alt="" width={50} height={50} />
+                                                <div>
+                                                    <p>{item.customerName}</p>
+                                                    <p>{item.barberName}</p>
+                                                    <p>{item?.services?.map((item) => item.serviceName).join(", ")}</p>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <p>{adminGetDefaultSalon?.response?.currency}{" "}{Array.isArray(item?.services)
+                                                    ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
+                                                    : 0}</p>
+                                                <p>{item.timeJoinedQ}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div>{item.methodUsed ? <MobileIcon color={"1ADB6A"} /> : <KioskIcon color={"FC3232"} />}</div>
+                                                <p>Mode</p>
+                                            </div>
+
+                                            <div>
+                                                <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"1ADB6A"} /> : <GroupJoinIcon color={"FC3232"} />}</div>
+                                                <p>Type</p>
+                                            </div>
+
+                                            <div>
+                                                <div>{item.status === "served" ? <CloseIcon color={"1ADB6A"} /> : <CheckIcon color={"FC3232"} />}</div>
+                                                <p>{item.status === "served" ? "Serve" : "Cancelled"}</p>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                )
+                            })
+                        }
+
+                    </div>
+                ) : (
+                    <div className={style.list_container_mobile_error}>
+                        <p>No queue history available</p>
+                    </div>
+                )
+            }
+
+
 
         </section >
     )

@@ -7,15 +7,16 @@ import { FiPieChart } from "react-icons/fi";
 import { IoArrowDownSharp, IoArrowUpSharp, IoChevronDownOutline, IoPerson, IoPersonCircleOutline, IoSearch } from "react-icons/io5";
 import { LuFilter, LuHistory, LuMailWarning, LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { MdAdd, MdLogout, MdOutlineCameraAlt, MdOutlineMailOutline, MdOutlineMessage, MdOutlinePhoneInTalk, MdOutlinePhotoCamera, MdOutlineQueue, MdOutlineSubscriptions, MdOutlineWifiOff, MdPayment } from "react-icons/md";
-import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine, RiMenuFill } from "react-icons/ri";
+import { RiAdvertisementLine, RiMoonClearFill, RiDeleteBin6Line, RiTwitterXLine, RiMenuFill, RiComputerLine } from "react-icons/ri";
 import { TbCopyCheck, TbScissors, TbWorldWww } from "react-icons/tb";
 import { PiClockClockwiseBold, PiClockCounterClockwiseBold, PiDotsThreeOutlineFill } from "react-icons/pi";
 import { BiLogoTiktok, BiSortAlt2 } from "react-icons/bi";
-import { IoMdCheckmark } from "react-icons/io";
+import { IoIosPeople, IoMdCheckmark } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlineShop } from "react-icons/ai";
 import { GrPowerReset } from "react-icons/gr";
 import { CiShop } from "react-icons/ci";
+import { ImMobile2 } from "react-icons/im";
 
 export const DashboardIcon = FiPieChart
 export const SalonIcon = TbScissors
@@ -67,3 +68,6 @@ export const QueueOfflineIcon = FaUsersSlash
 export const BarberClockIn = PiClockClockwiseBold
 export const BarberClockOut = PiClockCounterClockwiseBold
 export const CheckAllIcon = TbCopyCheck
+export const KioskIcon = RiComputerLine
+export const MobileIcon = ImMobile2
+export const GroupJoinIcon = IoIosPeople
