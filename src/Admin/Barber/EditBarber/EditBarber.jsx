@@ -707,7 +707,7 @@
 
 import React, { useEffect, useState } from 'react';
 import style from "./EditBarber.module.css";
-import { ClockIcon, CloseIcon } from '../../../icons';
+import { ClockIcon, CloseIcon, CrownIcon } from '../../../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminAllSalonServicesAction, adminUpdateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -1011,7 +1011,7 @@ const EditBarber = () => {
     onChange(formattedDate)
     setDateOfBirthError("")
     setDateOfBirth(formattedDate)
-    setOpenCalender(false)
+    // setOpenCalender(false)
   }
 
   const [mobileValue, setMobileValue] = useState(false);
@@ -1189,6 +1189,11 @@ const EditBarber = () => {
           activeStep={activeStep}
           orientation="vertical"
           sx={{
+            "& .MuiStepContent-root": {
+              borderLeft: "1px solid #bdbdbd",
+              paddingRight: "0px"
+            },
+
             "& .MuiStepIcon-root": {
               width: "2.5rem",
               height: "2.5rem",
@@ -1247,8 +1252,10 @@ const EditBarber = () => {
 
                                 {
                                   openCalender ? (
-                                    <ClickAwayListener onClickAway={() => setOpenCalender(false)}>
-                                      <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                    <ClickAwayListener
+                                      onClickAway={() => setOpenCalender(false)}>
+                                      <div
+                                        className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
                                         <Calendar
                                           onChange={onChangeHandler}
                                           value={value}
@@ -1292,89 +1299,124 @@ const EditBarber = () => {
 
                     <div>
 
-                      {
-                        adminAllSalonServicesLoading ?
-                          (<div>
-                            <Skeleton count={1}
-                              height={"15rem"}
-                              width={"100%"}
-                              baseColor={"var(--loader-bg-color)"}
-                              highlightColor={"var(--loader-highlight-color)"}
-                              style={{
-                                borderRadius: "0.3rem",
-                                marginBottom: "1rem"
-                              }}
-                            />
+                      <div>
+                        {
+                          adminAllSalonServicesResolve && allSalonServices?.length ? (
 
-                            <Skeleton count={1}
-                              height={"15rem"}
-                              width={"100%"}
-                              baseColor={"var(--loader-bg-color)"}
-                              highlightColor={"var(--loader-highlight-color)"}
-                              style={{
-                                borderRadius: "0.3rem",
-                                marginBottom: "1rem"
-                              }}
-                            />
-                          </div>) :
-                          adminAllSalonServicesResolve && allSalonServices?.length > 0 ?
-                            (
-                              <div>
-                                {AllSalonServices.map((s) => (
-                                  <div key={s._id} className={style.service_item}>
+                            AllSalonServices?.map((s) => {
+                              return (
+                                <div className={style.mobile_service_item} key={s._id} >
+                                  <div>
                                     <div>
                                       <div>
-                                        <div><img src={s?.serviceIcon?.url} alt={s?.serviceName} /></div>
-                                        <div>
-                                          <p>{s?.serviceName}</p>
-                                          <p>{s?.vipService ? "VIP" : "Regular"}</p>
-                                          <p>{s?.serviceDesc}</p>
-                                        </div>
+                                        <img src={s?.serviceIcon?.url} alt={s?.serviceName} />
+
+                                        {s.vipService ? <span><CrownIcon /></span> : null}
                                       </div>
 
-                                      {
-                                        currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
-                                          (<button
-                                            style={{
-                                              background: "#450a0a",
-                                            }}
-                                            onClick={() => deleteServiceHandler(s)}>Delete</button>) :
-                                          (<button
-                                            style={{
-                                              background: "#052e16",
-                                            }}
-                                            onClick={() => chooseServiceHandler(s)}>Add</button>)
-                                      }
+                                      <p>{s?.serviceName}</p>
+                                      <p>{s?.serviceDesc}</p>
 
                                     </div>
+
+                                    {
+                                      currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
+                                        (<button
+                                          style={{
+                                            background: "#450a0a",
+                                          }}
+                                          onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                        (<button
+                                          style={{
+                                            background: "#052e16",
+                                          }}
+                                          onClick={() => chooseServiceHandler(s)}>Add</button>)
+                                    }
+                                  </div>
+                                  <div>
                                     <div>
+                                      <p>Price</p>
+                                      <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                    </div>
+
+                                    <div>
+                                      <p>Estimated Time</p>
                                       <div>
-                                        <p>Price</p>
-                                        <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
-                                      </div>
-                                      <div>
-                                        <p>Estimated Time</p>
-                                        <div>
-                                          <input
-                                            type="text"
-                                            value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
-                                            onChange={(e) => handleonChange(e, s)}
-                                            maxLength={3}
-                                          />
-                                          <p>mins</p>
-                                        </div>
+                                        <input
+                                          type="text"
+                                          value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
+                                          onChange={(e) => handleonChange(e, s)}
+                                          maxLength={3}
+                                        />
+                                        <p>mins</p>
                                       </div>
                                     </div>
                                   </div>
-                                ))}
-                              </div>
-                            ) :
-                            (<div style={{ display: "grid", placeItems: "center" }}>
-                              <p style={{ fontSize: "1.4rem" }}>No services available</p>
-                            </div>)
-                      }
+                                </div>
+                              )
+                            })
 
-                      <button onClick={handleBack} disabled={index === 0}>
+                          ) : (null)
+                        }
+
+                        {
+                          adminAllSalonServicesResolve && allSalonServices?.length > 0 ? (
+                            AllSalonServices.map((s) => (
+                              <div key={s._id} className={style.service_item}>
+                                <div>
+                                  <div>
+                                    <div><img src={s?.serviceIcon?.url} alt={s?.serviceName} /></div>
+                                    <div>
+                                      <p>{s?.serviceName}</p>
+                                      <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{s?.serviceDesc}</p>
+                                    </div>
+                                  </div>
+
+                                  {
+                                    currentBarberServices.find((c) => c.serviceId === s.serviceId) ?
+                                      (<button
+                                        style={{
+                                          background: "#450a0a",
+                                        }}
+                                        onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                      (<button
+                                        style={{
+                                          background: "#052e16",
+                                        }}
+                                        onClick={() => chooseServiceHandler(s)}>Add</button>)
+                                  }
+
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                  </div>
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <div>
+                                      <input
+                                        type="text"
+                                        value={currentBarberServices?.find((c) => c.serviceId === s.serviceId) ? currentBarberServices?.find((c) => c.serviceId === s.serviceId).barberServiceEWT : s.serviceEWT}
+                                        onChange={(e) => handleonChange(e, s)}
+                                        maxLength={3}
+                                      />
+                                      <p>mins</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          ) : (null)
+                        }
+
+                      </div>
+
+
+                      <button
+                        onClick={handleBack} disabled={index === 0}
+                      >
                         Back
                       </button>
 

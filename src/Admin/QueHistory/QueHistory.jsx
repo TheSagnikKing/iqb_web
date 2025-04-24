@@ -549,18 +549,18 @@ const QueHistory = () => {
                                         </div>
                                         <div>
                                             <div>
-                                                <div>{item.methodUsed ? <MobileIcon color={"1ADB6A"} /> : <KioskIcon color={"FC3232"} />}</div>
+                                                <div>{item.methodUsed === "App" ? <MobileIcon color={"#1ADB6A"} /> : <KioskIcon color={"#1ADB6A"} />}</div>
                                                 <p>Mode</p>
                                             </div>
 
                                             <div>
-                                                <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"1ADB6A"} /> : <GroupJoinIcon color={"FC3232"} />}</div>
+                                                <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"#1ADB6A"} /> : <GroupJoinIcon color={"#1ADB6A"} />}</div>
                                                 <p>Type</p>
                                             </div>
 
                                             <div>
-                                                <div>{item.status === "served" ? <CloseIcon color={"1ADB6A"} /> : <CheckIcon color={"FC3232"} />}</div>
-                                                <p>{item.status === "served" ? "Serve" : "Cancelled"}</p>
+                                                <div>{item.status === "served" ? <CheckIcon color={"#1ADB6A"} /> : <CloseIcon color={"#FC3232"} />}</div>
+                                                <p p > {item.status === "served" ? "Serve" : "Cancelled"}</p>
                                             </div>
                                         </div>
 

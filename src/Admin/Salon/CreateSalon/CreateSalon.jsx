@@ -3217,6 +3217,11 @@ const CreateSalon = () => {
           activeStep={activeStep}
           orientation="vertical"
           sx={{
+            "& .MuiStepContent-root": {
+              borderLeft: "1px solid #bdbdbd",
+              paddingRight: "0px"
+            },
+
             "& .MuiStepIcon-root": {
               width: "2.5rem",
               height: "2.5rem",

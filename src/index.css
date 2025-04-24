@@ -38,6 +38,9 @@ body {
   font-family: 'AirbnbCereal_Semibold', sans-serif;
 }
 
+p {
+  font-size: 1.4rem;
+}
 
 :root {
   font-size: 62.5%;
@@ -528,8 +531,58 @@ body {
   width: 100% !important;
 }
 
+.react-calendar {
+  background-color: var(--bg-primary);
+  border: 0.1rem solid var(--border-secondary);
+  border-radius: var(--border-radius-primary);
+  -webkit-border-radius: var(--border-radius-primary);
+  position: relative;
+  z-index: 100;
+}
 
-.react-calendar__tile--active {
+.react-calendar__tile {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: var(--text-secondary);
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  & abbr[title] {
+    text-decoration: none;
+  }
+}
+
+.react-calendar__tile:disabled {
+  background-color: var(--input-bg-color);
+  color: var(--text-secondary);
+}
+
+.react-calendar__navigation button {
+  color: var(--text-secondary);
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:disabled {
+  background-color: var(--input-bg-color);
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile:hover,
+.react-calendar__tile--now {
+  background-color: var(--bg-secondary) !important;
+  color: var(--btn-text-color);
+}
+
+
+.react-calendar__tile--hasActive {
+  /* background-color: var(--bg-primary) !important; */
+  color: var(--btn-text-color) !important;
+}
+
+/* .react-calendar__tile--active {
   border-radius: 0.4rem;
   -webkit-border-radius: 0.4rem;
   -moz-border-radius: 0.4rem;
@@ -569,128 +622,8 @@ body {
   -o-border-radius: 0.4rem;
   background-color: var(--color-2) !important;
   color: var(--light-color-4) !important;
-}
+} */
 
-/* .rmdp-input {
-  height: 3.5rem !important;
-  padding-inline: 1rem !important;
-  text-align: "center" !important;
-  font-size: 1.4rem !important;
-  width: 20rem;
-  background-color: transparent !important;
-  outline: none !important;
-  border: 0.1rem solid var(--border-secondary) !important;
-  border-radius: var(--border-radius-primary);
-  -webkit-border-radius: var(--border-radius-primary);
-  -moz-border-radius: var(--border-radius-primary);
-  -ms-border-radius: var(--border-radius-primary);
-  -o-border-radius: var(--border-radius-primary);
-  margin: 0px !important;
-  padding: 0px;
-  color: var(--text-secondary) !important;
-}
-
-.rmdp-input::placeholder {
-  font-size: 1.4rem !important;
-  text-transform: uppercase !important;
-  color: var(--text-secondary) !important;
-}
-
-.rmdp-week-day {
-  color: var(--text-primary) !important;
-  font-size: 1.4rem !important;
-  font-weight: 700 !important;
-}
-
-.rmdp-range {
-  background-color: var(--bg-secondary) !important;
-  box-shadow: 0 0 2px var(--text-primary) !important;
-}
-
-.rmdp-day.rmdp-today span {
-  background-color: var(--text-primary) !important;
-  color: var(--bg-secondary) !important;
-}
-
-.rmdp-day span {
-  &:hover {
-    background-color: var(--bg-secondary) !important;
-  }
-}
-
-.rmdp-arrow {
-  border: solid var(--bg-secondary) !important;
-  border-width: 0 2px 2px 0 !important;
-}
-
-.rmdp-arrow-container:hover {
-  background-color: var(--bg-secondary-hover) !important;
-
-  .rmdp-arrow {
-    border: solid var(--text-primary) !important;
-    border-width: 0 2px 2px 0 !important;
-  }
-}
-
-.rmdp-day.rmdp-selected span:not(.highlight):hover{
-  color: var(--text-primary) !important;
-}
-
-.rmdp-ep-shadow:after{
-  display: none;
-}
-
-.rmdp-day.rmdp-selected span:not(.highlight){
-  background-color: var(--bg-secondary) !important;
-  box-shadow: none !important;
-}
-
-.light-theme .rmdp-calendar {
-  background-color: white !important;
-  border: 1px solid #ddd !important;
-}
-
-
-.light-theme .rmdp-header-values {
-  color: #000 !important;
-}
-
-.light-theme .rmdp-month-picker {
-  background-color: #fff !important;
-}
-
-.light-theme .rmdp-year-picker {
-  background-color: #fff !important;
-}
-
-.dark-theme .rmdp-calendar {
-  background-color: var(--bg-primary) !important;
-  border: 0.1rem solid var(--border-secondary) !important;
-}
-
-.dark-theme .rmdp-month-picker {
-  background-color: var(--bg-primary) !important;
-}
-
-.dark-theme .rmdp-year-picker {
-  background-color: var(--bg-primary) !important;
-}
-
-
-
-.dark-theme .rmdp-day {
-  color: var(--text-primary) !important;
-}
-
-.dark-theme .rmdp-header-values {
-  color: var(--text-primary) !important;
-}
-
-
-.rmdp-shadow {
-  box-shadow: none !important;
-}
- */
 
 .rmdp-header-values {
   color: var(--text-primary) !important;

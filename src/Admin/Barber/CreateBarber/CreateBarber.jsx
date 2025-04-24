@@ -717,7 +717,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import style from "./CreateBarber.module.css";
-import { ClockIcon, CloseIcon } from '../../../icons';
+import { ClockIcon, CloseIcon, CrownIcon } from '../../../icons';
 import { AddIcon, DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminAllSalonServicesAction, adminCreateBarberAction } from '../../../Redux/Admin/Actions/BarberAction';
@@ -1317,6 +1317,11 @@ const CreateBarber = () => {
           activeStep={activeStep}
           orientation="vertical"
           sx={{
+            "& .MuiStepContent-root": {
+              borderLeft: "1px solid #bdbdbd",
+              paddingRight: "0px"
+            },
+
             "& .MuiStepIcon-root": {
               width: "2.5rem",
               height: "2.5rem",
@@ -1419,7 +1424,130 @@ const CreateBarber = () => {
                   <main className={`${style.service_container}`}>
 
                     <div>
-                      {
+                      <div>
+                        {
+                          adminAllSalonServicesResolve && allSalonServices?.length > 0 ? (
+
+                            allSalonServices.map((s) => (
+                              <div key={s._id} className={style.service_item}>
+                                <div>
+                                  <div>
+                                    <div><img src={s?.serviceIcon?.url} alt={s?.serviceName} /></div>
+                                    <div>
+                                      <p>{s?.serviceName}</p>
+                                      <p>{s?.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{s?.serviceDesc}</p>
+                                    </div>
+                                  </div>
+
+                                  {
+                                    chooseServices.find((c) => c._id === s._id) ?
+                                      (<button
+                                        style={{
+                                          background: "#450a0a",
+                                        }}
+                                        onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                      (<button
+                                        style={{
+                                          background: "#052e16",
+                                        }}
+                                        onClick={() => chooseServiceHandler(s)}>Add</button>)
+                                  }
+
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                  </div>
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <div>
+                                      <input
+                                        type="text"
+                                        value={serviceEWTValues[s._id]}
+                                        onChange={(e) => {
+                                          const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
+                                          handleEWTChange(s._id, value);
+                                        }}
+                                        maxLength={3}
+                                      />
+                                      <p>mins</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+
+                          ) : (null)
+                        }
+
+                        {
+                          adminAllSalonServicesResolve && allSalonServices?.length > 0 ? (
+
+                            allSalonServices?.map((s) => {
+                              return (
+                                <div className={style.mobile_service_item} key={s._id} >
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <img src={s?.serviceIcon?.url} alt={s?.serviceName} />
+
+                                        {s.vipService ? <span><CrownIcon /></span> : null}
+                                      </div>
+
+                                      <p>{s?.serviceName}</p>
+                                      <p>{s?.serviceDesc}</p>
+
+                                    </div>
+
+                                    {
+                                      chooseServices.find((c) => c._id === s._id) ?
+                                        (<button
+                                          style={{
+                                            background: "#450a0a",
+                                          }}
+                                          onClick={() => deleteServiceHandler(s)}>Delete</button>) :
+                                        (<button
+                                          style={{
+                                            background: "#052e16",
+                                          }}
+                                          onClick={() => chooseServiceHandler(s)}>Add</button>)
+                                    }
+
+                                  </div>
+                                  <div>
+                                    <div>
+                                      <p>Price</p>
+                                      <p>{adminGetDefaultSalonResponse?.currency}{s?.servicePrice}</p>
+                                    </div>
+
+                                    <div>
+                                      <p>Estimated Time</p>
+                                      <div>
+                                        <input
+                                          type="text"
+                                          value={serviceEWTValues[s._id]}
+                                          onChange={(e) => {
+                                            const value = e.target.value.replace(/[^0-9]/g, ''); // Only keep digits
+                                            handleEWTChange(s._id, value);
+                                          }}
+                                          maxLength={3}
+                                        />
+                                        <p>mins</p>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            })
+
+                          ) : (null)
+                        }
+                      </div>
+
+                      {/* {
                         adminAllSalonServicesLoading ?
                           (<div>
                             <Skeleton count={1}
@@ -1502,7 +1630,8 @@ const CreateBarber = () => {
                             (<div style={{ display: "grid", placeItems: "center" }}>
                               <p style={{ fontSize: "1.4rem" }}>No services available</p>
                             </div>)
-                      }
+                      } */}
+
                       <button onClick={handleBack} disabled={index === 0}>
                         Back
                       </button>

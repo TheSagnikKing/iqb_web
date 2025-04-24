@@ -29,7 +29,7 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    &>div:nth-child(1){
+    &>div:nth-child(1) {
         margin-bottom: 1rem;
     }
 
@@ -124,7 +124,7 @@
         cursor: pointer;
     }
 
-    &>div:nth-last-child(1){
+    &>div:nth-last-child(1) {
         color: var(--text-primary);
         position: absolute;
         top: 4rem;
@@ -216,13 +216,13 @@
 }
 
 .mobile_container {
-   background-color: var(--input-bg-color);
-   border: 0.1rem solid var(--border-secondary);
-   border-radius: var(--border-radius-primary);
-   -webkit-border-radius: var(--border-radius-primary);
-   -moz-border-radius: var(--border-radius-primary);
-   -ms-border-radius: var(--border-radius-primary);
-   -o-border-radius: var(--border-radius-primary);
+    background-color: var(--input-bg-color);
+    border: 0.1rem solid var(--border-secondary);
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
 }
 
 .calender_container {
@@ -237,8 +237,8 @@
         justify-content: center;
         cursor: pointer;
     }
-    
-    &>div:nth-last-child(1){
+
+    &>div:nth-last-child(1) {
         color: var(--text-primary);
         position: absolute;
         top: 4rem;
@@ -249,6 +249,7 @@
 .calender_drop_container {
     position: absolute;
     left: 0;
+    right: 0;
     top: 7rem;
     background-color: var(--bg-primary);
 }
@@ -289,7 +290,7 @@
         grid-template-columns: 1fr;
     }
 
-    .section>div:nth-child(1){
+    .section>div:nth-child(1) {
         display: none;
     }
 
@@ -326,4 +327,4 @@
     .section>div:nth-child(2)>div {
         width: 45vw;
     }
-} 
+}

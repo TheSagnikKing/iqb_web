@@ -1240,7 +1240,8 @@
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
                     /* background-color: var(--bg-secondary); */
-                    color: var(--text-primary);
+                    /* color: var(--text-primary); */
+                    color: #fff;
                     border: none;
                     outline: none;
                     cursor: pointer;
@@ -1258,7 +1259,7 @@
                 }
 
                 &>button:nth-child(1) {
-                    background-color: #0285c755;
+                    background-color: #0285c7;
                 }
 
                 &>button:nth-child(2) {

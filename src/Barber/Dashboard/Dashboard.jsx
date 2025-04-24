@@ -654,7 +654,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import style from './Dashboard.module.css'
 import { Carousel } from 'react-responsive-carousel';
-import { AddIcon, ChartIcon1, ChartIcon2, ChartIcon3, CheckIcon, ClockIcon, DeleteIcon } from '../../icons';
+import { AddIcon, ChartIcon1, ChartIcon2, ChartIcon3, CheckIcon, ClockIcon, CrownIcon, DeleteIcon } from '../../icons';
 import { ResponsiveContainer, LineChart, Line, BarChart, Bar } from 'recharts'
 
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
@@ -1216,7 +1216,7 @@ const Dashboard = () => {
                   {
                     connectSalonListLoading ? (
                       <div>
-                        <Skeleton count={4} height={"7rem"} style={{ marginBottom: "2rem" }}
+                        <Skeleton count={4} height={"7rem"} style={{ marginBottom: "1rem" }}
                           baseColor={"var(--loader-bg-color)"}
                           highlightColor={"var(--loader-highlight-color)"} />
                       </div>)
@@ -1226,7 +1226,7 @@ const Dashboard = () => {
                             <div className={`${style.salon_item}`} key={item.salonId}>
                               <img src={item?.salonLogo?.[0]?.url} alt={""} />
                               <div>
-                                <p>{item.salonName}</p>
+                                <p>{item.salonName} sdvdv sdvwev</p>
                                 <p>{item.city}</p>
                               </div>
 
@@ -1244,7 +1244,7 @@ const Dashboard = () => {
                   <div
                     style={{
                       display: selectedServiceList?.length === 0 ? "none" : "block",
-                      padding: selectedServiceList?.length === 0 ? "0rem" : "2rem"
+                      padding: selectedServiceList?.length === 0 ? "0rem" : "1rem"
                     }}
                   >
                     {selectedServiceList.map((service) => (
@@ -1295,6 +1295,64 @@ const Dashboard = () => {
                         </div>
                       </div>
                     ))}
+
+                    {
+                      selectedServiceList?.map((service, index) => {
+                        return (
+                          <div className={style.mobile_service_item} key={service.serviceId}>
+                            <div>
+                              <div>
+                                <div>
+                                  <img src={service?.serviceIcon?.url} alt="" />
+
+                                  {service.vipService ? <span><CrownIcon /></span> : null}
+                                </div>
+
+                                <p>{service.serviceName}</p>
+                                <p>{service.serviceDesc}</p>
+
+                              </div>
+
+                              {barberSelectedServices.some((b) => b._id === service?._id) ? (
+                                <button
+                                  style={{
+                                    background: "#450a0a",
+                                  }}
+                                  onClick={() => deleteServiceHandler(service)}
+                                >Delete</button>
+                              ) : (
+                                <button
+                                  style={{
+                                    background: "#052e16",
+                                  }}
+                                  onClick={() => selectServiceHandler(service)}
+                                >Add</button>
+                              )}
+                            </div>
+                            <div>
+                              <div>
+                                <p>Price</p>
+                                <p>{currentSelectedSalon?.currency}{service?.servicePrice}</p>
+                              </div>
+
+                              <div>
+                                <p>Estimated Time</p>
+                                <div>
+                                  <input
+                                    type="text"
+                                    value={service?.serviceEWT}
+                                    onChange={(e) => handleBarberEwt(service?.serviceId, e.target.value)}
+                                    maxLength={3}
+                                  />
+                                  <p>mins</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+
                   </div>
                 </div>
 

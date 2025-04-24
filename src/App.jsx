@@ -151,32 +151,6 @@ const App = () => {
   }, [darkmodeOn]);
 
 
-  useEffect(() => {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-    .react-calendar{
-    position: relative;
-    z-index: 10 !important;
-    background-color: ${darkmodeOn ? "var(--dark-color-3) !important" : "var(--light-color-4) !important"};
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"}; 
-    }
-
-    .react-calendar button {
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"}
-    }
-
-    .react-calendar__tile:disabled,
-    .react-calendar__navigation button:disabled {
-    background-color: ${darkmodeOn ? "var(--dark-color-2) !important" : "var(--light-color-3) !important"}
-    }
-  `;
-    document.head.appendChild(styleElement);
-
-    return () => {
-      document.head.removeChild(styleElement);
-    };
-  }, [darkmodeOn]);
-
   const currentTheme = useSelector(state => state.ThemeSelector)
 
   useEffect(() => {
