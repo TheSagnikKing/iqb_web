@@ -131,7 +131,7 @@ const Signup = () => {
           <div>
             <input
               type="email"
-              placeholder='Enter Your Email ID'
+              placeholder='Enter your email'
               value={email}
               onChange={(e) => {
                 setEmailError("")
@@ -150,7 +150,7 @@ const Signup = () => {
             >
               <input
                 type={visibleeye ? "text" : "password"}
-                placeholder='Password'
+                placeholder='Enter your password'
                 value={password}
                 onChange={(e) => {
                   setPasswordError("")

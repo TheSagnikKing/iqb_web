@@ -724,3 +724,10 @@ body {
 .rmdp-ep-shadow:after {
   display: none;
 }
+
+
+@supports (-webkit-hyphens: none) {
+  .react-international-phone-input-container .react-international-phone-input {
+    font-size: 1.6rem;
+  }
+}

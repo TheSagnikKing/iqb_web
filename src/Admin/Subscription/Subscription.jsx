@@ -914,7 +914,7 @@ const Subscription = () => {
         }
     }, [])
 
-    console.log(mobileWidth)
+    // console.log(mobileWidth)
 
     return (
         <div className={`${style.section}`}>
@@ -922,141 +922,248 @@ const Subscription = () => {
                 <h2>Subscription</h2>
             </div>
 
+            {
+                getSubscriptionLoading ? (
+                    <div className={`${style.list_body_container_loader}`}>
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
 
-            <div className={`${style.subscription_status_content_wrapper} ${darkmodeOn && style.dark}`}>
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
 
-                {
-                    getSubscriptionLoading ? (
-                        <>
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
 
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
 
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
 
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
+                        <Skeleton
+                            count={1}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                        />
+                    </div>
+                ) :
+                    getSubscriptiondata.length > 0 ?
+                        <div className={`${style.subscription_status_content_wrapper} ${darkmodeOn && style.dark}`}>
+                            {
+                                getSubscriptiondata.map((s, index) => {
+                                    return (
+                                        <div className={`${style.subscription_content_item} ${darkmodeOn && style.dark}`}
+                                            key={s.salonId}
 
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
+                                        >
+                                            <div>
+                                                <img src={s?.salonLogo?.[0]?.url} alt="" />
+                                                <p>{s?.salonName}</p>
+                                            </div>
+                                            <div>
 
-                            <Skeleton
-                                count={1}
-                                height={"25rem"}
-                                baseColor={"var(--loader-bg-color)"}
-                                highlightColor={"var(--loader-highlight-color)"}
-                                style={{ marginBottom: "1rem" }} />
-                        </>
-                    ) : getSubscriptiondata.length > 0 ? (getSubscriptiondata.map((s, index) => {
-                        return (
-                            <div className={`${style.subscription_content_item} ${darkmodeOn && style.dark}`}
-                                key={s.salonId}
-                            >
-                                <div>
-                                    <img src={s?.salonLogo?.[0]?.url} alt="" />
-                                    <p>{s?.salonName}</p>
-                                </div>
-                                <div>
+                                                {
+                                                    s?.subscriptions.map((sub, index) => {
+                                                        return (
+                                                            <div key={index}>
+                                                                <div>
+                                                                    <div>
+                                                                        <p>{sub?.name}</p>
 
-                                    {
-                                        s?.subscriptions.map((sub, index) => {
-                                            return (
-                                                <div key={index}>
-                                                    <div>
-                                                        <div>
-                                                            <p>{sub?.name}</p>
-
-                                                            {
-                                                                sub?.trial === "Free" ? (
-                                                                    <div style={{
-                                                                        height: "2.2rem",
-                                                                        background: "#0285c755",
-                                                                        paddingInline: "1rem",
-                                                                        color: "var(--color-2)",
-                                                                        display: "flex",
-                                                                        justifyContent: "center",
-                                                                        alignItems: "center",
-                                                                        borderRadius: "2rem",
-                                                                        fontSize: "1.4rem"
-                                                                    }}><p>Free</p></div>
-                                                                ) : sub?.trial === "Paid" ? (
-                                                                    <div style={{
-                                                                        height: "2.2rem",
-                                                                        background: "#00A36C",
-                                                                        paddingInline: "1rem",
-                                                                        color: "var(--color-2)",
-                                                                        display: "flex",
-                                                                        justifyContent: "center",
-                                                                        alignItems: "center",
-                                                                        borderRadius: "2rem",
-                                                                        fontSize: "1.4rem"
-                                                                    }}><p>Paid</p></div>
-                                                                ) : null
-                                                            }
-
-
-                                                        </div>
-                                                        <p>{sub?.expirydate === "" ? "select a plan" : sub?.expirydate}</p>
-                                                        <button
-                                                            // className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
-                                                            className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
-                                                            onClick={() => {
-                                                                setPaymentModalOpen(true)
-                                                                setModalValue({
-                                                                    queue: sub?.name === "Queue" ? true : false,
-                                                                    appointment: sub?.name === "Appointment" ? true : false
-                                                                })
-                                                                setCurrentSalonCurrency(s?.currency)
-                                                                setCurrentSalonisoCurrency(s?.isoCurrencyCode)
-                                                                setSelectedSalonId(s?.salonId)
-                                                                setIsQueueClicked(sub?.name === "Queue" ? true : false)
-                                                                setisAppointClicked(sub?.name === "Appointment" ? true : false)
-
-                                                            }}
-                                                        >{sub?.bought === "" ? "Buy" : "Renew"}</button>
-
-                                                    </div>
-                                                </div>
-
-                                            )
-                                        })
-                                    }
+                                                                        {
+                                                                            sub?.trial === "Free" ? (
+                                                                                <div style={{
+                                                                                    height: "2.2rem",
+                                                                                    background: "#0285c755",
+                                                                                    paddingInline: "1rem",
+                                                                                    color: "var(--color-2)",
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    alignItems: "center",
+                                                                                    borderRadius: "2rem",
+                                                                                    fontSize: "1.4rem"
+                                                                                }}><p>Free</p></div>
+                                                                            ) : sub?.trial === "Paid" ? (
+                                                                                <div style={{
+                                                                                    height: "2.2rem",
+                                                                                    background: "#00A36C",
+                                                                                    paddingInline: "1rem",
+                                                                                    color: "var(--color-2)",
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    alignItems: "center",
+                                                                                    borderRadius: "2rem",
+                                                                                    fontSize: "1.4rem"
+                                                                                }}><p>Paid</p></div>
+                                                                            ) : null
+                                                                        }
 
 
-                                </div>
-                            </div>
-                        )
-                    })) : (<div className={`${style.list_body_container_error}`}>
-                        <p>No subscription available</p>
-                    </div>)
+                                                                    </div>
+                                                                    <p>{sub?.expirydate === "" ? "select a plan" : sub?.expirydate}</p>
+                                                                    <button
+                                                                        // className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
+                                                                        className={mobileWidth ? style.mobile_renew_btn : style.renew_btn}
+                                                                        onClick={() => {
+                                                                            setPaymentModalOpen(true)
+                                                                            setModalValue({
+                                                                                queue: sub?.name === "Queue" ? true : false,
+                                                                                appointment: sub?.name === "Appointment" ? true : false
+                                                                            })
+                                                                            setCurrentSalonCurrency(s?.currency)
+                                                                            setCurrentSalonisoCurrency(s?.isoCurrencyCode)
+                                                                            setSelectedSalonId(s?.salonId)
+                                                                            setIsQueueClicked(sub?.name === "Queue" ? true : false)
+                                                                            setisAppointClicked(sub?.name === "Appointment" ? true : false)
 
-                }
+                                                                        }}
+                                                                    >{sub?.bought === "" ? "Buy" : "Renew"}</button>
+
+                                                                </div>
+                                                            </div>
+
+                                                        )
+                                                    })
+                                                }
 
 
-            </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        : (<div className={`${style.list_body_container_error}`}>
+                            <p>No subscription available</p>
+                        </div>)
+
+            }
+
+
+            {
+                getSubscriptionLoading ? (
+                    <div className={`${style.list_container_mobile_loader}`}>
+                        <Skeleton
+                            count={6}
+                            height={"25rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                            style={{ marginBottom: "2rem" }}
+                        />
+                    </div>
+                ) :
+                    getSubscriptiondata.length > 0 ?
+                        <div className={`${style.subscription_status_mobile_content_wrapper} ${darkmodeOn && style.dark}`}>
+                            {
+                                getSubscriptiondata.map((s, index) => {
+                                    return (
+                                        <div className={`${style.subscription_mobile_content_item} ${darkmodeOn && style.dark}`}
+                                            key={s.salonId}
+
+                                        >
+                                            <div>
+                                                <img src={s?.salonLogo?.[0]?.url} alt="" />
+                                                <p>{s?.salonName}</p>
+                                            </div>
+                                            <div>
+
+                                                {
+                                                    s?.subscriptions.map((sub, index) => {
+                                                        return (
+                                                            <div key={index}>
+                                                                <div>
+                                                                    <div>
+                                                                        <p>{sub?.name}</p>
+
+                                                                        {
+                                                                            sub?.trial === "Free" ? (
+                                                                                <div style={{
+                                                                                    height: "2.2rem",
+                                                                                    background: "#0285c755",
+                                                                                    paddingInline: "1rem",
+                                                                                    color: "var(--color-2)",
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    alignItems: "center",
+                                                                                    borderRadius: "2rem",
+                                                                                    fontSize: "1.4rem"
+                                                                                }}><p>Free</p></div>
+                                                                            ) : sub?.trial === "Paid" ? (
+                                                                                <div style={{
+                                                                                    height: "2.2rem",
+                                                                                    background: "#00A36C",
+                                                                                    paddingInline: "1rem",
+                                                                                    color: "var(--color-2)",
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    alignItems: "center",
+                                                                                    borderRadius: "2rem",
+                                                                                    fontSize: "1.4rem"
+                                                                                }}><p>Paid</p></div>
+                                                                            ) : null
+                                                                        }
+
+
+                                                                    </div>
+                                                                    <p>{sub?.expirydate === "" ? "select a plan" : sub?.expirydate}</p>
+                                                                </div>
+                                                                <button
+                                                                    className={style.renew_btn}
+                                                                    onClick={() => {
+                                                                        setPaymentModalOpen(true)
+                                                                        setModalValue({
+                                                                            queue: sub?.name === "Queue" ? true : false,
+                                                                            appointment: sub?.name === "Appointment" ? true : false
+                                                                        })
+                                                                        setCurrentSalonCurrency(s?.currency)
+                                                                        setCurrentSalonisoCurrency(s?.isoCurrencyCode)
+                                                                        setSelectedSalonId(s?.salonId)
+                                                                        setIsQueueClicked(sub?.name === "Queue" ? true : false)
+                                                                        setisAppointClicked(sub?.name === "Appointment" ? true : false)
+
+                                                                    }}
+                                                                >{sub?.bought === "" ? "Buy" : "Renew"}</button>
+
+                                                            </div>
+
+                                                        )
+                                                    })
+                                                }
+
+
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        : (<div className={`${style.list_container_mobile_error}`}>
+                            <p>No subscription available</p>
+                        </div>)
+
+            }
+
 
             <p></p>
             <Modal

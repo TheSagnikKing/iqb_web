@@ -1237,3 +1237,37 @@
         }
     }
 }
+
+
+@supports (-webkit-hyphens: none) {
+    .section {
+        .connect_container {
+            &>div {
+                &>div:nth-child(2) {
+
+                    .service_item,
+                    .mobile_service_item {
+                        &>div:nth-child(2) {
+                            &>div:nth-child(2) {
+                                &>div {
+                                    &>input {
+                                        font-size: 1.6rem;
+                                        transform: scale(0.875);
+                                        width: calc(4rem / 0.875);
+                                        height: calc(2rem / 0.875);
+                                        border-bottom: calc(0.1rem / 0.875) solid var(--border-secondary);
+
+                                        &:focus {
+                                            border-bottom: calc(0.1rem / 0.875) solid var(--text-primary);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

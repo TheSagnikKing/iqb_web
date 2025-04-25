@@ -111,6 +111,8 @@ iframe {
 }
 
 .password_container {
+    width: 100%;
+    height: 3.5rem;
     border: 0.1rem solid var(--border-secondary);
     border-radius: var(--border-radius-primary);
     -webkit-border-radius: var(--border-radius-primary);
@@ -120,12 +122,11 @@ iframe {
     background-color: var(--input-bg-color);
     display: flex;
     align-items: center;
-    justify-content: space-between;
     position: relative;
 
     &>input {
-        width: calc(100% - 3rem);
-        height: 3.5rem;
+        width: calc(100% - 3.5rem);
+        height: inherit;
         padding-inline: 1rem;
         font-size: 1.4rem;
         background: transparent;
@@ -269,6 +270,7 @@ iframe {
     }
 }
 
+
 @media screen and (min-width:0px) and (max-width:430px) {
     .section {
         &>div:nth-child(1) {
@@ -295,6 +297,45 @@ iframe {
     .admin_signin_right {
         &>div:nth-child(1) {
             width: 75%;
+        }
+    }
+}
+
+@supports (-webkit-hyphens: none) {
+    .admin_signin_right {
+        &>div:nth-child(1) {
+            &>div {
+
+                &>input {
+                    font-size: 1.6rem;
+                    transform: scale(0.875);
+                    transform-origin: left top;
+                    width: calc(100% / 0.875);
+                    height: calc(3.5rem/ 0.875);
+                    padding-inline: calc(1rem / 0.875);
+                    border-radius: calc(var(--border-radius-primary) / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                }
+            }
+        }
+    }
+
+    .password_container {
+        transform: scale(0.875);
+        width: calc(100% / 0.875);
+        height: calc(3.5rem/ 0.875);
+        transform-origin: left top;
+        border-radius: calc(var(--border-radius-primary) / 0.875);
+        border: calc(0.1rem / 0.875) solid var(--border-secondary);
+
+        &>input {
+            font-size: 1.6rem;
+        }
+
+        &>div {
+            font-size: 1.6rem;
+            height: calc(3.5rem/ 0.875);
+            width: calc(3.5rem/ 0.875);
         }
     }
 }

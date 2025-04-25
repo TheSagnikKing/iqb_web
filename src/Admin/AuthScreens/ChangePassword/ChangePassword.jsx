@@ -179,7 +179,7 @@ const ChangePassword = () => {
             }} className={style.change_btn}><ButtonLoader /></button> : <button onClick={ChangePasswordHandler} className={style.change_btn}>Change Password</button>
           }
 
-          <Link to="/adminsignin">Back</Link>
+          <Link to="/adminsignin" style={{ color: "var(--text-primary)", textDecoration: "none" }}>Back</Link>
         </div>
       </div>
     </div>

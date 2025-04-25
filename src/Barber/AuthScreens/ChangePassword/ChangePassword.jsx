@@ -163,7 +163,7 @@ const ChangePassword = () => {
               <button onClick={ChangePasswordHandler} className={style.change_btn}>Change Password</button>
           }
 
-          <Link to="/barbersignin">Back</Link>
+          <Link to="/barbersignin" style={{ color: "var(--text-primary)", textDecoration: "none" }}>Back</Link>
         </div>
       </div>
     </div>

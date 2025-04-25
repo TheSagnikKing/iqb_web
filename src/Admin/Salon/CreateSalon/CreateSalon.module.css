@@ -108,10 +108,11 @@
                     align-items: center;
                     justify-content: space-between;
                     position: relative;
+                    height: 3.5rem;
 
                     &>input {
                         width: calc(100% - 3rem);
-                        height: 3.5rem;
+                        height: inherit;
                         padding-inline: 1rem;
                         font-size: 1.4rem;
                         background: transparent;
@@ -405,10 +406,11 @@
                             align-items: center;
                             justify-content: space-between;
                             position: relative;
+                            height: 3.5rem;
 
                             &>input {
                                 width: calc(100% - 3rem);
-                                height: 3.5rem;
+                                height: inherit;
                                 padding-inline: 1rem;
                                 font-size: 1.4rem;
                                 background: transparent;
@@ -690,10 +692,11 @@
                 align-items: center;
                 justify-content: space-between;
                 position: relative;
+                height: 3.5rem;
 
                 &>input {
                     width: calc(100% - 3rem);
-                    height: 3.5rem;
+                    height: inherit;
                     padding-inline: 1rem;
                     font-size: 1.4rem;
                     background: transparent;
@@ -1271,6 +1274,9 @@
 
 }
 
+.mobile_service_item {
+    display: none;
+}
 
 @media screen and (max-width: 768px) {
     .service_item {
@@ -1413,5 +1419,91 @@
                 }
             }
         }
+    }
+}
+
+
+@supports (-webkit-hyphens: none) {
+    .section {
+        .form_main_container {
+            .form_container {
+                .form_group {
+                    &>input {
+                        font-size: 1.6rem;
+                        transform: scale(0.875);
+                        transform-origin: left top;
+                        width: calc(100% / 0.875);
+                        height: calc(3.5rem/ 0.875);
+                        padding-inline: calc(1rem / 0.875);
+                        border-radius: calc(var(--border-radius-primary) / 0.875);
+                        border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                    }
+                }
+            }
+
+            .service_container {
+                &>div:nth-child(1) {
+                    &>div:nth-child(1) {
+                        .form_group {
+                            &>input {
+                                font-size: 1.6rem;
+                                transform: scale(0.875);
+                                transform-origin: left top;
+                                width: calc(100% / 0.875);
+                                height: calc(3.5rem/ 0.875);
+                                padding-inline: calc(1rem / 0.875);
+                                border-radius: calc(var(--border-radius-primary) / 0.875);
+                                border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                            }
+
+                            /* .select_container {
+                                transform: scale(0.875);
+                                width: calc(100% / 0.875);
+                                height: calc(3.5rem/ 0.875);
+                                transform-origin: left top;
+                                border-radius: calc(var(--border-radius-primary) / 0.875);
+
+                                &>input {
+                                    font-size: 1.6rem;
+                                }
+
+                                &>div:nth-child(2) {
+                                    font-size: 1.6rem;
+                                    height: calc(3.5rem/ 0.875);
+                                    width: calc(3.5rem/ 0.875);
+                                }
+                            } */
+                        }
+                    }
+                }
+            }
+
+            .social_link_container {
+                gap: calc(1rem / 0.875);
+                padding-block: calc(2rem / 0.875);
+
+                .form_group {
+                    &>div {
+                        transform: scale(0.875);
+                        width: calc(100% / 0.875);
+                        height: calc(3.5rem/ 0.875);
+                        transform-origin: left top;
+                        border-radius: calc(var(--border-radius-primary) / 0.875);
+                        border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                        gap: calc(1rem / 0.875);
+
+                        &>input {
+                            font-size: 1.6rem;
+                        }
+
+                        &>div {
+                            font-size: 1.6rem;
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }

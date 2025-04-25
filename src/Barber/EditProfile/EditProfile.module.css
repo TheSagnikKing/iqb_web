@@ -1178,3 +1178,66 @@
         }
     }
 }
+
+@supports (-webkit-hyphens: none) {
+    .section {
+        .profile_container {
+            &>div:nth-child(2) {
+                &>div:nth-child(1) {
+                    &>div {
+                        &>input {
+                            font-size: 1.6rem;
+                            transform: scale(0.875);
+                            transform-origin: left top;
+                            width: calc(100% / 0.875);
+                            height: calc(3.5rem/ 0.875);
+                            padding-inline: calc(1rem / 0.875);
+                            border-radius: calc(var(--border-radius-primary) / 0.875);
+                            border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modal_container {
+        .modal_content_container {
+            &>div {
+                &>div {
+                    transform: scale(0.875);
+                    width: calc(100% / 0.875);
+                    height: calc(3.5rem/ 0.875);
+                    transform-origin: left top;
+                    border-radius: calc(var(--border-radius-primary) / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+
+                    &>input {
+                        font-size: 1.6rem;
+                    }
+
+                    &>div {
+                        font-size: 1.6rem;
+                        height: calc(3.5rem/ 0.875);
+                        width: calc(3.5rem/ 0.875);
+                    }
+                }
+            }
+        }
+    }
+
+    .modal_common_container {
+        &>div:nth-child(2) {
+            &>div:nth-child(3) {
+                &>input {
+                    transform: scale(0.875);
+                    width: calc(6rem / 0.875);
+                    height: calc(6rem / 0.875);
+                    font-size: calc(2.6rem / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                    border-radius: calc(var(--list-wrapper-border-radius) / 0.875);
+                }
+            }
+        }
+    }
+}

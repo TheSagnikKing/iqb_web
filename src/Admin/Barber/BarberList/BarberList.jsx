@@ -1410,7 +1410,6 @@ const BarberList = () => {
                         <p>{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? "Clock-In" : "Clock-Out"}</p>
                       </div>
                     </div>
-
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -1443,7 +1442,7 @@ const BarberList = () => {
           </div>
         ) : (
           <div className={style.list_container_mobile_error}>
-            <p>No salon list available</p>
+            <p>No barber list available</p>
           </div>
         )
       }

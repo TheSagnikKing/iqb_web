@@ -563,7 +563,7 @@
     -moz-border-radius: var(--list-wrapper-border-radius);
     -ms-border-radius: var(--list-wrapper-border-radius);
     -o-border-radius: var(--list-wrapper-border-radius);
-    height: 95vh;
+    max-height: 95vh;
     overflow: auto;
 
     &>div:nth-child(1) {
@@ -919,4 +919,38 @@
             }
         }
     }
+}
+
+
+@supports (-webkit-hyphens: none) {
+    .modal_container {
+        .modal_content_container {
+            &>div {
+                &>input {
+                    font-size: 1.6rem;
+                    transform: scale(0.875);
+                    transform-origin: left top;
+                    width: calc(100% / 0.875);
+                    height: calc(3.5rem/ 0.875);
+                    padding-inline: calc(1rem / 0.875);
+                    border-radius: calc(var(--border-radius-primary) / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                }
+
+                &>textarea {
+                    font-size: 1.6rem;
+                    transform: scale(0.875);
+                    transform-origin: left top;
+                    width: calc(100% / 0.875);
+                    min-height: calc(20vh / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                    border-radius: calc(var(--border-radius-primary) / 0.875);
+                    padding: calc(1rem / 0.875);
+                }
+
+            }
+        }
+
+    }
+
 }

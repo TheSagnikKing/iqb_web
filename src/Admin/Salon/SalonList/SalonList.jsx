@@ -1432,12 +1432,12 @@ const SalonList = () => {
                       </div>
 
                       <div>
-                        <div>{item.isAppointments ? <AppointmentIcon color={"1ADB6A"} /> : <OffAppointmentIcon color={"FC3232"} />}</div>
+                        <div onClick={() => navigate("/admin-subscription")}>{item.isAppointments ? <AppointmentIcon color={"1ADB6A"} /> : <OffAppointmentIcon color={"FC3232"} />}</div>
                         <p>Appointment</p>
                       </div>
 
                       <div>
-                        <div>{item.isQueuing ? <QueueOnlineIcon color={"1ADB6A"} /> : <QueueOfflineIcon color={"FC3232"} />}</div>
+                        <div onClick={() => navigate("/admin-subscription")}>{item.isQueuing ? <QueueOnlineIcon color={"1ADB6A"} /> : <QueueOfflineIcon color={"FC3232"} />}</div>
                         <p>Queue</p>
                       </div>
                     </div>

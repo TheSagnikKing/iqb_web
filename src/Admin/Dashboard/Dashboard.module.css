@@ -943,7 +943,7 @@
 
         &>div:nth-child(2) {
             flex: 1;
-            max-height: 45rem;
+            /* max-height: 45rem; */
 
             display: flex;
             gap: 1.5rem;
