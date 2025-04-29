@@ -147,6 +147,8 @@ p {
   --linear-color-1: #283048;
   --linear-color-2: #859398;
 
+  --section-bg-color: var(--bg-primary);
+
 }
 
 body[data-theme="light"] {
@@ -168,6 +170,8 @@ body[data-theme="light"] {
 
   --linear-color-1: #757f9a;
   --linear-color-2: #d7dde8;
+
+  --section-bg-color: #f7f7f7;
 }
 
 body {

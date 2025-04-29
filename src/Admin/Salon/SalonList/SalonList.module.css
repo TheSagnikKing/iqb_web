@@ -710,7 +710,7 @@
     .list_container_mobile {
         display: block;
         flex: 1;
-        overflow: auto;
+        /* overflow: auto; */
 
         .list_mobile_item {
             /* background-color: #fff; */
