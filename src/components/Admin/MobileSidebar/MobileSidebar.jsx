@@ -377,6 +377,18 @@ const MobileSidebar = () => {
     },
   ]
 
+  // useEffect(() => {
+  //   if (mobileSidebar) {
+  //     document.body.style.overflow = 'hidden'; // Disable scroll
+  //   } else {
+  //     document.body.style.overflow = ''; // Re-enable scroll
+  //   }
+
+  //   return () => {
+  //     document.body.style.overflow = ''; // Clean up on unmount
+  //   };
+  // }, [mobileSidebar]);
+
 
   // const [online, setOnline] = useState(false)
 
@@ -399,6 +411,7 @@ const MobileSidebar = () => {
                   <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
                 </div>
                 {mobileSidebar ? <p>{adminGetDefaultSalonResponse?.salonName}</p> : null}
+
               </header>
 
               <nav>
@@ -484,7 +497,7 @@ const MobileSidebar = () => {
                   </div>)
                 }
 
-
+                <p className={style.version_text}> v 1.0.1</p>
               </nav>
             </div>
           </ClickAwayListener>

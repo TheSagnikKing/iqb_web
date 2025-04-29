@@ -3804,7 +3804,7 @@ const EditSalon = () => {
 
         {activeStep === steps.length && (
           <div className={`${style.complete} `}>
-            <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Edit</span> button to edit your new salon.</p>
+            <p>All steps have been successfully completed. Please click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Update</span> button to save your changes.</p>
             <div>
               <button onClick={handleBack}>Back</button>
               {
@@ -3812,7 +3812,7 @@ const EditSalon = () => {
                   display: "grid",
                   placeItems: "center"
                 }}
-                ><ButtonLoader /></button> : <button onClick={editSalonHandler}>Edit</button>
+                ><ButtonLoader /></button> : <button onClick={editSalonHandler}>Update</button>
               }
             </div>
           </div>

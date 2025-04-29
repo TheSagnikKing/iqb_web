@@ -7,7 +7,7 @@
     padding: 20px;
     gap: 1.5rem;
     background-color: #f9f9f9;
-    min-height: 100vh;
+    min-height: 100svh;
     font-family: Arial, sans-serif;
 }
 
@@ -159,8 +159,8 @@
 }
 
 
-@media screen and (min-width:0px) and (max-width:430px){
-    .mobile_cus_container input{
+@media screen and (min-width:0px) and (max-width:430px) {
+    .mobile_cus_container input {
         width: 90vw;
     }
 }

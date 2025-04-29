@@ -1,8 +1,9 @@
-/* .offline_container {
+.offline_container {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     display: grid;
     align-items: center;
+    background-color: var(--bg-primary);
 
     &>div {
         height: auto;
@@ -12,6 +13,7 @@
             font-weight: bolder;
             text-align: center;
             margin-bottom: 2rem;
+            color: var(--text-primary);
         }
 
         &>p {
@@ -57,8 +59,8 @@
     }
 }
 
-.error_boundary_route_container{
-    height: 100vh;
+.error_boundary_route_container {
+    height: 100svh;
     width: 100%;
     padding: 2rem;
     background-color: var(--light-color-4);
@@ -82,19 +84,19 @@
 }
 
 .error_boundary_container.dark,
-.error_boundary_route_container.dark{
+.error_boundary_route_container.dark {
     background-color: var(--dark-color-2);
 
-    &>div{
-        &>div{
+    &>div {
+        &>div {
             color: var(--light-color-4);
         }
     }
-} */
- 
+}
 
-.error_boundary_container{
-    height: calc(100vh - 6rem);
+
+.error_boundary_container {
+    height: calc(100svh - 6rem);
     width: 100%;
     padding: 2rem;
     background-color: var(--bg-primary);
@@ -119,8 +121,8 @@
 }
 
 
-.error_boundary_route_container{
-    height: 100vh;
+.error_boundary_route_container {
+    height: 100svh;
     width: 100%;
     padding: 2rem;
     background-color: var(--bg-primary);

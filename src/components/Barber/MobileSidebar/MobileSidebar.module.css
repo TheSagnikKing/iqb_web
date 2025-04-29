@@ -1,7 +1,7 @@
 @media screen and (min-width: 0px) and (max-width: 1140px) {
   .mobile_container {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: var(--bg-primary);
     position: relative;
   }
@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: #27272A80 !important;
     z-index: 9999;
   }
@@ -109,7 +109,7 @@
               &:hover {
                 background-color: var(--bg-secondary);
 
-                &>a{
+                &>a {
                   color: var(--btn-text-color);
                 }
               }
@@ -152,7 +152,7 @@
       .activeMenu {
         background-color: var(--bg-secondary);
 
-        &>a{
+        &>a {
           color: var(--btn-text-color);
         }
       }

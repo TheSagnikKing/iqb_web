@@ -968,9 +968,10 @@ const Dashboard = () => {
     barberProfile?.user[0]?.isApproved ?
       <>
         <section className={`${style.dashboard_container}`}>
-          <div>
+          {/* <div>
             <h2>Welcome, {barberName ? barberName : "User"}</h2>
-          </div>
+          </div> */}
+          <div style={{ display: "none" }}></div>
 
           <div>
             <div>

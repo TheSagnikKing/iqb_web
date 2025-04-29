@@ -1,6 +1,6 @@
 .section {
     background-color: transparent;
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -62,7 +62,7 @@
         line-height: inherit;
         font-family: "AirbnbCereal_Medium";
         font-size: 1.4rem;
-        padding: 1rem 0.5rem; 
+        padding: 1rem 0.5rem;
         border: 0.1rem solid var(--border-secondary);
 
         &:hover {
@@ -127,7 +127,7 @@
 }
 
 .reset_days {
-    width:max-content;
+    width: max-content;
     height: 3.5rem;
     padding-inline: 1rem;
     border-radius: var(--border-radius-primary);

@@ -1,6 +1,6 @@
 .section {
     background-color: transparent;
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -36,8 +36,8 @@
     overflow: auto;
 
     &::-webkit-scrollbar {
-        width: 0.6rem; 
-        height: 0.6rem; 
+        width: 0.6rem;
+        height: 0.6rem;
     }
 }
 
@@ -186,8 +186,8 @@
         -o-border-radius: var(--border-radius-primary);
         font-size: 1.4rem;
 
-        &:hover{
-           background-color: #0285c766;
+        &:hover {
+            background-color: #0285c766;
         }
     }
 }

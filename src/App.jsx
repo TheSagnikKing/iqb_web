@@ -188,13 +188,15 @@ const App = () => {
             <React.Suspense fallback={<div
               style={{
                 width: "100vw",
-                height: "100vh",
+                height: "100svh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 // background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
                 background: "var(--bg-primary)"
-              }}><Loader /></div>}>
+              }}>
+              <Loader />
+            </div>}>
               <Routes>
 
                 {/* Admin Auth Screens */}

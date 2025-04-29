@@ -1439,7 +1439,7 @@ const EditBarber = () => {
 
         {activeStep === steps.length && (
           <div className={`${style.complete}`}>
-            <p>All steps have been successfully completed. Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Edit</span> button to edit your barber.</p>
+            <p>All steps have been successfully completed. Please click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Update</span> button to save your changes.</p>
             <div>
               <button onClick={handleBack}>
                 Back
@@ -1450,7 +1450,7 @@ const EditBarber = () => {
                     display: "grid",
                     placeItems: "center"
                   }}><ButtonLoader /></button> : <button onClick={EditBarberHandler}>
-                  Edit
+                  Update
                 </button>
               }
 

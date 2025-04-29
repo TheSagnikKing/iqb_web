@@ -2059,7 +2059,7 @@ const EditProfile = () => {
                         <button className={style.profile_btn} onClick={updateAdminProfile}>
                             {
                                 adminUpdateProfileLoading ? (<ButtonLoader/>) :
-                                    "Edit profile"
+                                    "Update"
                             }
                         </button>
 

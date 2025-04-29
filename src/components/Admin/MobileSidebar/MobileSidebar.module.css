@@ -1,7 +1,7 @@
 @media screen and (min-width: 0px) and (max-width: 1140px) {
   .mobile_container {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: var(--bg-primary);
     position: relative;
   }
@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: #27272A80 !important;
     z-index: 9900;
   }
@@ -22,8 +22,13 @@
     background-color: var(--bg-primary);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     border-right: 0.1rem solid var(--border-secondary);
+    overflow: auto;
+    /* padding-bottom: 3rem; */
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
 
     &>header {
       height: 6rem;
@@ -67,7 +72,7 @@
 
     &>nav {
       flex: 1;
-      overflow: auto;
+      /* overflow: auto; */
 
       &>ul {
         /* border: 0.1rem solid red; */
@@ -161,6 +166,12 @@
     }
   }
 
+  .version_text {
+    text-align: center;
+    padding-block: 2rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
 
 
   .chooseSalon_modal {

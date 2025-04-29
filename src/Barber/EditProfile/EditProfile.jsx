@@ -2261,7 +2261,7 @@ const EditProfile = () => {
                         <button className={style.profile_btn} onClick={updateBarberProfile}>
                             {
                                 barberUpdateProfileLoading ? (<ButtonLoader />) :
-                                    "Edit profile"
+                                    "Update"
                             }
                         </button>
 

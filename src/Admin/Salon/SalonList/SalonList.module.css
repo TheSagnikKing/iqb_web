@@ -1,6 +1,6 @@
 .section {
-    background-color: transparent;
-    height: calc(100vh - 6rem);
+    /* background-color: #f7f7f7; */
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -713,6 +713,7 @@
         overflow: auto;
 
         .list_mobile_item {
+            /* background-color: #fff; */
             position: relative;
             height: 19.5rem;
             border-radius: var(--border-radius-primary);
@@ -722,10 +723,11 @@
             -o-border-radius: var(--border-radius-primary);
             border: 0.1rem solid var(--border-secondary);
             background-color: var(--bg-hover-primary);
+            /* box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px; */
             padding-inline: 1rem;
             display: flex;
             flex-direction: column;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
 
             &>div:nth-child(1) {
                 flex: 2;

@@ -1,6 +1,6 @@
 .section {
     background-color: transparent;
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -28,6 +28,8 @@
     .form_main_container {
         flex: 1;
         overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
 
         .form_container {
             max-width: 67rem;

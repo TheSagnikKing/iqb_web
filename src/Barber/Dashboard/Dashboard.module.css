@@ -1,6 +1,6 @@
 .section {
     background-color: transparent;
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -379,7 +379,7 @@
 
 
 .dashboard_container {
-    height: calc(100vh - 6rem);
+    height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
