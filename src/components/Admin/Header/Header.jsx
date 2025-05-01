@@ -982,6 +982,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
       <div className={`${style.mobile_container_left}`}>
         <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <MobileSiderbarMenuIcon /> : <MobileSiderbarMenuIcon />}</button>
+        <h2>IQB</h2>
       </div>
     </header>
   )

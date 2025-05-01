@@ -1,173 +1,15 @@
-// import React, { useEffect, useRef, useState } from 'react'
-// import style from "./QueHistory.module.css"
-// import Skeleton from 'react-loading-skeleton'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-// import { CheckIcon, CloseIcon, CrownIcon, SearchIcon } from '../../icons'
-// import { getAdminQueueListHistoryAction } from '../../Redux/Admin/Actions/QueueAction'
-
-// const QueHistory = () => {
-
-//     const darkMode = useSelector(darkmodeSelector)
-
-//     const darkmodeOn = darkMode === "On"
-
-//     const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
-
-//     const dispatch = useDispatch()
-
-//     const queuelistcontrollerRef = useRef(new AbortController());
-
-//     useEffect(() => {
-//         const controller = new AbortController();
-//         queuelistcontrollerRef.current = controller;
-
-//         dispatch(getAdminQueueListHistoryAction(salonId, controller.signal));
-
-//         return () => {
-//             if (queuelistcontrollerRef.current) {
-//                 queuelistcontrollerRef.current.abort();
-//             }
-//         };
-//     }, [salonId, dispatch]);
-
-
-//     const getAdminQueueListHistory = useSelector(state => state.getAdminQueueListHistory)
-
-//     const {
-//         loading: getAdminQueueListHistoryLoading,
-//         resolve: getAdminQueueListHistoryResolve,
-//         queueListHistory: AdminQueueListHistory
-//     } = getAdminQueueListHistory
-
-//     const [copyAdminQueueHistory, setCopyAdminQueueHistory] = useState([])
-
-//     useEffect(() => {
-//         if (AdminQueueListHistory) {
-//             setCopyAdminQueueHistory(AdminQueueListHistory)
-//         }
-//     }, [AdminQueueListHistory])
-
-//     const [search, setSearch] = useState('')
-
-//     const searchCustomHandler = (value) => {
-//         setSearch(value);
-//         const searchValue = value.toLowerCase().trim();
-
-//         if (!searchValue) {
-//             setCopyAdminQueueHistory(AdminQueueListHistory);
-//         } else {
-//             const filteredArray = AdminQueueListHistory?.filter((queue) => {
-//                 return (
-//                     queue.barberName.toLowerCase().includes(searchValue) ||
-//                     queue.customerName.toLowerCase().includes(searchValue)
-//                 )
-//             });
-//             setCopyAdminQueueHistory(filteredArray);
-//         }
-//     };
-
-
-//     const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
-
-//     const {
-//       response: adminGetDefaultSalonResponse
-//     } = adminGetDefaultSalon
-
-//     return (
-//         <div className={`${style.quehistory_wrapper} ${darkmodeOn && style.dark}`}>
-//             <div>
-//                 <p>Queue History</p>
-
-//                 <div className={`${style.customer_search} ${darkmodeOn && style.dark}`}>
-//                     <input
-//                         type="text"
-//                         placeholder='Search Queue'
-//                         value={search}
-//                         onChange={(e) => searchCustomHandler(e.target.value)}
-//                     />
-
-//                     <div><SearchIcon /></div>
-//                 </div>
-
-//             </div>
-
-//             <div className={`${style.quehistory_wrapper_content}`}>
-
-//                 {
-//                     getAdminQueueListHistoryLoading ? (<div className={style.quehistory_wrapper_content_body}>
-//                         <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }}
-//                             baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-//                             highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
-//                     </div>) :
-//                         getAdminQueueListHistoryResolve && copyAdminQueueHistory?.length > 0 ? (
-//                             <>
-//                                 <div className={`${style.quehistory_wrapper_content_body} ${darkmodeOn && style.dark}`}>
-//                                     <div>
-//                                         <p>#</p>
-//                                         <p>Name</p>
-//                                         <p>Barber Name</p>
-//                                         <p>Time Joined Q</p>
-//                                         <div><p>Qg Code</p></div>
-//                                         <div><p>EWT</p></div>
-//                                         <div><p>Price</p></div>
-//                                         <div><p>Type</p></div>
-//                                         <div><p>isAdmin</p></div>
-//                                         <div><p>Status</p></div>
-//                                     </div>
-
-//                                     {copyAdminQueueHistory?.map((b, index) => (
-//                                         <div
-//                                             className={`${style.barber_queue_history_content_body_item} ${darkmodeOn && style.dark}`}
-//                                             key={b?._id}
-//                                             style={{
-//                                                 borderBottom: copyAdminQueueHistory.length - 1 === index && "none"
-//                                             }}
-//                                         >
-//                                             <p>{b?.qPosition}</p>
-//                                             <p>{b?.customerName}</p>
-//                                             <p>{b?.barberName}</p>
-//                                             <p>{b?.timeJoinedQ}</p>
-//                                             <div><p>{b?.qgCode}</p></div>
-//                                             <div><p>{b?.serviceEWT} mins</p></div>
-//                                             <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{b?.services.reduce((sum, service) => sum + service.servicePrice, 0)}</p></div>
-//                                             <div><p>{b?.serviceType === "Regular" ? "-" : <CrownIcon />}</p></div>
-//                                             <div>
-//                                                 {
-//                                                     b?.isAdmin ? (<p style={{ color: "green" }}><CheckIcon /></p>) : (<p style={{ fontSize: "2rem", fontWeight: "700", color: "red" }}><CloseIcon /></p>)
-//                                                 }
-//                                             </div>
-//                                             <div><p style={{ color: b?.status == "served" ? "green" : "red" }}>{b?.status}</p></div>
-//                                         </div>
-//                                     ))}
-//                                 </div>
-//                             </>
-//                         ) : (
-//                             <div className={`${style.quehistory_wrapper_content_body_error} ${darkmodeOn && style.dark}`}>
-//                                 <p>No Queue history available</p>
-//                             </div>
-//                         )
-//                 }
-
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default QueHistory
-
-
 import React, { useEffect, useRef, useState } from 'react'
-import style from "./QueHistory.module.css"
+import style from "./AppointmentHistory.module.css"
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { AppointmentIcon, CheckIcon, CloseIcon, CustomerIcon, DropdownIcon, GroupJoinIcon, KioskIcon, MobileIcon, ResetIcon, SearchIcon } from '../../newicons';
-import { getAdminQueueListHistoryAction } from '../../Redux/Admin/Actions/QueueAction'
+import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
+import { AppointmentIcon, CheckIcon, CloseIcon, CustomerIcon, DropdownIcon, GroupJoinIcon, KioskIcon, MobileIcon, ResetIcon, SearchIcon } from '../../../newicons';
+
 import { ClickAwayListener, Pagination } from '@mui/material'
 import { Calendar } from 'react-multi-date-picker'
 import toast from 'react-hot-toast'
 import { useLocation } from 'react-router-dom'
+import { getAdminAppointmentHistoryAction } from '../../../Redux/Admin/Actions/AppointmentAction'
 
 const QueHistory = () => {
 
@@ -185,39 +27,39 @@ const QueHistory = () => {
     })
 
     useEffect(() => {
-        const QueueHistoryBarber = localStorage.getItem("QueueHistoryBarber")
-            ? JSON.parse(localStorage.getItem("QueueHistoryBarber"))
+        const AppointmentHistoryBarber = localStorage.getItem("AppointmentHistoryBarber")
+            ? JSON.parse(localStorage.getItem("AppointmentHistoryBarber"))
             : null;
 
-        const QueueHistoryCustomer = localStorage.getItem("QueueHistoryCustomer")
-            ? JSON.parse(localStorage.getItem("QueueHistoryCustomer"))
+        const AppointmentHistoryCustomer = localStorage.getItem("AppointmentHistoryCustomer")
+            ? JSON.parse(localStorage.getItem("AppointmentHistoryCustomer"))
             : null;
 
-        if (QueueHistoryBarber) {
+        if (AppointmentHistoryBarber) {
             setBarberData({
-                barberName: QueueHistoryBarber?.name,
-                barberEmail: QueueHistoryBarber?.email,
-                barberId: QueueHistoryBarber?.barberId,
-                barber: QueueHistoryBarber?.barber
+                barberName: AppointmentHistoryBarber?.name,
+                barberEmail: AppointmentHistoryBarber?.email,
+                barberId: AppointmentHistoryBarber?.barberId,
+                barber: AppointmentHistoryBarber?.barber
             });
         }
 
-        if (QueueHistoryCustomer) {
+        if (AppointmentHistoryCustomer) {
             setCustomerData({
-                customerName: QueueHistoryCustomer?.name,
-                customerEmail: QueueHistoryCustomer?.email,
-                customer: QueueHistoryCustomer?.customer
+                customerName: AppointmentHistoryCustomer?.name,
+                customerEmail: AppointmentHistoryCustomer?.email,
+                customer: AppointmentHistoryCustomer?.customer
             });
         }
 
         return () => {
-            localStorage.removeItem("QueueHistoryBarber")
-            localStorage.removeItem("QueueHistoryCustomer")
+            localStorage.removeItem("AppointmentHistoryBarber")
+            localStorage.removeItem("AppointmentHistoryCustomer")
         }
     }, []);
 
-    // console.log("Barber Data ", barberData)
-    // console.log("Customer Data ", customerData)
+    console.log("Barber Data ", barberData)
+    console.log("Customer Data ", customerData)
 
 
     const darkMode = useSelector(darkmodeSelector)
@@ -267,32 +109,32 @@ const QueHistory = () => {
                     },
                 });
             } else {
-                dispatch(getAdminQueueListHistoryAction(salonId, startDate, endDate, barberData?.barberId, customerData?.customerEmail, controller.signal));
+                dispatch(getAdminAppointmentHistoryAction(salonId, startDate, endDate, barberData?.barberId, customerData?.customerEmail, controller.signal));
             }
 
         } else if (selectedDates.length === 0) {
-            dispatch(getAdminQueueListHistoryAction(salonId, "", "", barberData?.barberId, customerData?.customerEmail, controller.signal));
+            dispatch(getAdminAppointmentHistoryAction(salonId, "", "", barberData?.barberId, customerData?.customerEmail, controller.signal));
         }
 
         return abortIfPending;
     }, [salonId, dispatch, selectedDates, barberData, customerData]);
 
 
-    const getAdminQueueListHistory = useSelector(state => state.getAdminQueueListHistory)
+    const getAdminAppointmentHistory = useSelector(state => state.getAdminAppointmentHistory)
 
     const {
-        loading: getAdminQueueListHistoryLoading,
-        resolve: getAdminQueueListHistoryResolve,
-        queueListHistory: AdminQueueListHistory
-    } = getAdminQueueListHistory
+        loading: getAdminAppointmentHistoryLoading,
+        resolve: getAdminAppointmentHistoryResolve,
+        appointmentHistory: AdminAppointmentHistory
+    } = getAdminAppointmentHistory
 
-    const [copyAdminQueueHistory, setCopyAdminQueueHistory] = useState([])
+    const [copyAdminAppointmentHistory, setcopyAdminAppointmentHistory] = useState([])
 
     useEffect(() => {
-        if (AdminQueueListHistory) {
-            setCopyAdminQueueHistory(AdminQueueListHistory)
+        if (AdminAppointmentHistory) {
+            setcopyAdminAppointmentHistory(AdminAppointmentHistory)
         }
-    }, [AdminQueueListHistory])
+    }, [AdminAppointmentHistory])
 
     const [search, setSearch] = useState('')
 
@@ -301,15 +143,15 @@ const QueHistory = () => {
         const searchValue = value.toLowerCase().trim();
 
         if (!searchValue) {
-            setCopyAdminQueueHistory(AdminQueueListHistory);
+            setcopyAdminAppointmentHistory(AdminAppointmentHistory);
         } else {
-            const filteredArray = AdminQueueListHistory?.filter((queue) => {
+            const filteredArray = AdminAppointmentHistory?.filter((queue) => {
                 return (
                     queue.barberName.toLowerCase().includes(searchValue) ||
                     queue.customerName.toLowerCase().includes(searchValue)
                 )
             });
-            setCopyAdminQueueHistory(filteredArray);
+            setcopyAdminAppointmentHistory(filteredArray);
         }
     };
 
@@ -325,31 +167,32 @@ const QueHistory = () => {
     // ==========================================================
 
     const headRows = [
-        { id: 1, heading: "QPos", key: "qpos" },
+        { id: 1, heading: "BarberID", key: "qpos" },
         { id: 2, heading: "Name", key: "customerName" },
         { id: 3, heading: "Barber Name", key: "barberName" },
-        { id: 4, heading: "Time Joined", key: "timejoined" },
-        { id: 5, heading: "Qg Code", key: "qgcode" },
+        { id: 4, heading: "Start Time", key: "startTime" },
+        { id: 5, heading: "End Time", key: "endTime" },
         { id: 6, heading: "Price", key: "price" },
-        { id: 7, heading: "Type", key: "type" },
-        { id: 8, heading: "Est. Time", key: "estimatedtime" },
-        { id: 9, heading: "isAdmin", key: "isAdmin" },
-        { id: 10, heading: "Status", key: "status" },
+        { id: 7, heading: "Date", key: "date" },
+        // { id: 7, heading: "Type", key: "type" },
+        // { id: 8, heading: "Est. Time", key: "estimatedtime" },
+        // { id: 9, heading: "isAdmin", key: "isAdmin" },
+        { id: 8, heading: "Status", key: "status" },
     ];
 
-    const [queuehistoryDataCopy, setQueuehistoryDataCopy] = useState([])
-    const [queuehistoryData, setQueuehistoryData] = useState([])
-    const [queueHistoryPaginationData, setQueueHistoryPaginationData] = useState([])
+    const [appointmenthistoryDataCopy, setappointmenthistoryDataCopy] = useState([])
+    const [appointmenthistoryData, setappointmenthistoryData] = useState([])
+    const [appointmentHistoryPaginationData, setappointmentHistoryPaginationData] = useState([])
     const [mobileQueueList, setMobileQueueList] = useState([])
 
     useEffect(() => {
-        if (getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0) {
-            setQueuehistoryData(AdminQueueListHistory)
-            setQueuehistoryDataCopy(AdminQueueListHistory)
-            setMobileQueueList(AdminQueueListHistory)
+        if (getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0) {
+            setappointmenthistoryData(AdminAppointmentHistory)
+            setappointmenthistoryDataCopy(AdminAppointmentHistory)
+            setMobileQueueList(AdminAppointmentHistory)
         }
 
-    }, [AdminQueueListHistory])
+    }, [AdminAppointmentHistory])
 
 
     const [settingsIndex, setSettingsIndex] = useState("")
@@ -366,21 +209,21 @@ const QueHistory = () => {
 
 
     const paginationFunction = () => {
-        const totalPages = Math.ceil(queuehistoryDataCopy.length / rowsPerPage);
+        const totalPages = Math.ceil(appointmenthistoryDataCopy.length / rowsPerPage);
         const startIndex = (page - 1) * rowsPerPage;
-        const endIndex = Math.min(startIndex + rowsPerPage, queuehistoryDataCopy.length)
+        const endIndex = Math.min(startIndex + rowsPerPage, appointmenthistoryDataCopy.length)
 
-        setQueueHistoryPaginationData(queuehistoryDataCopy.slice(startIndex, endIndex));
+        setappointmentHistoryPaginationData(appointmenthistoryDataCopy.slice(startIndex, endIndex));
         setTotalPages(totalPages);
         setStartIndex(startIndex);
         setEndIndex(endIndex);
     }
 
     useEffect(() => {
-        if (queuehistoryDataCopy.length > 0) {
+        if (appointmenthistoryDataCopy.length > 0) {
             paginationFunction()
         }
-    }, [queuehistoryDataCopy, page, rowsPerPage])
+    }, [appointmenthistoryDataCopy, page, rowsPerPage])
 
 
     const handleChange = (event, value) => {
@@ -409,10 +252,10 @@ const QueHistory = () => {
     useEffect(() => {
 
         if (mobileWidth) {
-            let filteredData = queuehistoryDataCopy;
+            let filteredData = appointmenthistoryDataCopy;
 
             if (query.trim() !== '') {
-                filteredData = queuehistoryData.filter((item) =>
+                filteredData = appointmenthistoryData.filter((item) =>
                     item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
                     item.barberName.toLowerCase().trim().includes(query.toLowerCase())
                 );
@@ -421,14 +264,14 @@ const QueHistory = () => {
             setMobileQueueList(filteredData)
         } else {
             if (query.trim() !== "") {
-                const filterData = queuehistoryData.filter((item) =>
+                const filterData = appointmenthistoryData.filter((item) =>
                     item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
                     item.barberName.toLowerCase().trim().includes(query.toLowerCase())
                 );
-                setQueuehistoryDataCopy(filterData);
+                setappointmenthistoryDataCopy(filterData);
                 setPage(1)
             } else {
-                setQueuehistoryDataCopy(queuehistoryData);
+                setappointmenthistoryDataCopy(appointmenthistoryData);
                 setPage(1)
             }
         }
@@ -447,11 +290,11 @@ const QueHistory = () => {
     }
 
     const resetHandler = () => {
-        dispatch(getAdminQueueListHistoryAction(salonId, "", "",));
+        dispatch(getAdminAppointmentHistoryAction(salonId, "", "",));
         setSelectedDates([])
         setQuery("")
-        localStorage.removeItem("QueueHistoryBarber")
-        localStorage.removeItem("QueueHistoryCustomer")
+        localStorage.removeItem("AppointmentHistoryBarber")
+        localStorage.removeItem("AppointmentHistoryCustomer")
         setBarberData({
             barberName: "",
             barberEmail: "",
@@ -468,7 +311,7 @@ const QueHistory = () => {
     return (
         <section className={`${style.section}`}>
             <div>
-                <h2>Queue History </h2>
+                <h2>Appointment History </h2>
                 <div>
 
                     <button onClick={resetHandler}><ResetIcon /></button>
@@ -510,7 +353,7 @@ const QueHistory = () => {
             </div>
 
             <div className={`${style.mobile_header}`}>
-                <h2>Queue History</h2>
+                <h2>Apointment History</h2>
                 <div>
                     {
                         mobileSearchOpen ? (
@@ -573,7 +416,7 @@ const QueHistory = () => {
             <div className={`${style.list_container}`}>
 
                 {
-                    getAdminQueueListHistoryLoading ? (
+                    getAdminAppointmentHistoryLoading ? (
                         <div className={`${style.list_body_container_loader}`}>
                             <Skeleton
                                 count={6}
@@ -582,7 +425,7 @@ const QueHistory = () => {
                                 highlightColor={"var(--loader-highlight-color)"}
                                 style={{ marginBottom: "1rem" }} />
                         </div>
-                    ) : getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0 ? (
+                    ) : getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0 ? (
                         <div className={`${style.list_body_container}`}>
 
                             <div className={`${style.headRow}`}>
@@ -613,10 +456,10 @@ const QueHistory = () => {
                             </div>
 
                             {
-                                queueHistoryPaginationData.map((item, index) => {
+                                appointmentHistoryPaginationData.map((item, index) => {
                                     return (
-                                        <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === queueHistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                                            <div><p>{item.qPosition}</p></div>
+                                        <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === appointmentHistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                                            <div><p>{item.barberId}</p></div>
                                             <div>
                                                 <div>
                                                     <div><img src={item?.customerProfile?.[0]?.url} alt="" /></div>
@@ -629,15 +472,16 @@ const QueHistory = () => {
                                                     <p>{item.barberName}</p>
                                                 </div>
                                             </div>
-                                            <div><p>{item.timeJoinedQ}</p></div>
-                                            <div><p>{item.qgCode}</p></div>
+                                            <div><p>{item.startTime}</p></div>
+                                            <div><p>{item.endTime}</p></div>
                                             {/* <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{item?.services.reduce((sum, service) => sum + service?.servicePrice, 0)}</p></div> */}
                                             <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{Array.isArray(item?.services)
                                                 ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
                                                 : 0}</p></div>
-                                            <div><p>{item.serviceType}</p></div>
+                                            {/* <div><p>{item.serviceType}</p></div>
                                             <div><p>{item.serviceEWT} mins</p></div>
-                                            <div><span>{item?.isAdmin ? (<CheckIcon color={"green"} />) : (<CloseIcon color={"var(--bg-secondary)"} />)}</span></div>
+                                            <div><span>{item?.isAdmin ? (<CheckIcon color={"green"} />) : (<CloseIcon color={"var(--bg-secondary)"} />)}</span></div> */}
+                                            <div><p>{item.appointmentDate?.split("T")[0]}</p></div>
                                             <div><p style={{
                                                 color: item.status === "served" ? "green" : "red"
                                             }}>{item.status}</p></div>
@@ -649,7 +493,7 @@ const QueHistory = () => {
                         </div>
                     ) : (
                         <div className={`${style.list_body_container_error}`}>
-                            <p>No queue history available</p>
+                            <p>No appointment history available</p>
                         </div>
                     )
                 }
@@ -717,7 +561,7 @@ const QueHistory = () => {
 
 
             {
-                getAdminQueueListHistoryLoading ? (
+                getAdminAppointmentHistoryLoading ? (
                     <div className={style.list_container_mobile_loader}>
                         <Skeleton
                             count={6}
@@ -727,7 +571,7 @@ const QueHistory = () => {
                             style={{ marginBottom: "1rem" }}
                         />
                     </div>
-                ) : getAdminQueueListHistoryResolve && AdminQueueListHistory.length > 0 ? (
+                ) : getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0 ? (
                     <div className={style.list_container_mobile}>
                         {barberData?.barber ? <p style={{ marginBottom: "2rem" }}>Barber - {barberData?.barberName}</p> : null}
                         {customerData?.customer ? <p style={{ marginBottom: "2rem" }}>Customer - {customerData?.customerName}</p> : null}
@@ -749,11 +593,11 @@ const QueHistory = () => {
                                                 <p>{adminGetDefaultSalon?.response?.currency}{" "}{Array.isArray(item?.services)
                                                     ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
                                                     : 0}</p>
-                                                <p>{item.timeJoinedQ}</p>
+                                                <p>{item?.appointmentDate?.split(["T"])[0]}</p>
                                             </div>
                                         </div>
                                         <div>
-                                            <div>
+                                            {/* <div>
                                                 <div>{item.methodUsed === "App" ? <MobileIcon color={"#1ADB6A"} /> : <KioskIcon color={"#1ADB6A"} />}</div>
                                                 <p>Mode</p>
                                             </div>
@@ -761,7 +605,7 @@ const QueHistory = () => {
                                             <div>
                                                 <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"#1ADB6A"} /> : <GroupJoinIcon color={"#1ADB6A"} />}</div>
                                                 <p>Type</p>
-                                            </div>
+                                            </div> */}
 
                                             <div>
                                                 <div>{item.status === "served" ? <CheckIcon color={"#1ADB6A"} /> : <CloseIcon color={"#FC3232"} />}</div>
@@ -779,7 +623,7 @@ const QueHistory = () => {
                     </div>
                 ) : (
                     <div className={style.list_container_mobile_error}>
-                        <p>No queue history available</p>
+                        <p>No appointment history available</p>
                     </div>
                 )
             }

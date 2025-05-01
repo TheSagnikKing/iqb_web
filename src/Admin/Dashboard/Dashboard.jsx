@@ -841,7 +841,13 @@ const Dashboard = () => {
                         </BarChart>
                       </ResponsiveContainer>
                     ) : (
-                      <p>No report data available</p>
+                      <p
+                        style={{
+                          color: "var(--text-primary)",
+                          fontSize: "1.6rem",
+                          fontFamily: 'AirbnbCereal_Medium'
+                        }}
+                      >No report data available</p>
                     )
                   }
                 </div>
@@ -922,7 +928,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
 
   )

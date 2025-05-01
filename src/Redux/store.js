@@ -16,6 +16,7 @@ import { barberSendVerifyEmailReducer, barberSendVerifyMobileReducer, barberSkip
 import { barberGetAllCustomerListReducer, barberSendCustomerEmailReducer, barberSendCustomerMessageReducer } from "./Barber/Reducers/BarberCustomerReducer";
 import { AppointmentReducer, CancelAppointmentReducer, ServeAppointmentReducer } from "./Barber/Reducers/AppointmentReducer"
 import { ThemeSelectorReducer } from "./Theme";
+import { getAdminAppointmentHistoryReducer } from "./Admin/Reducers/AppointmentReducer";
 
 const rootReducer = combineReducers({
 
@@ -71,6 +72,7 @@ const rootReducer = combineReducers({
   adminSendVerifyMobile: adminSendVerifyMobileReducer,
   adminSendBarberMessage: adminSendBarberMessageReducer,
   getAdminQueueListHistory: getAdminQueueListHistoryReducer,
+  getAdminAppointmentHistory: getAdminAppointmentHistoryReducer,
 
   //Barber Reducers
   BarberLoggedInMiddleware: BarberLoggedInMiddlewareReducer,

@@ -148,12 +148,16 @@ export const adminCancelQueueAction = (canceldata, salonId, setChoosebarbermodal
     }
 }
 
-export const getAdminQueueListHistoryAction = (salonId, signal) => async (dispatch) => {
+export const getAdminQueueListHistoryAction = (salonId, startDate, endDate, barberId, customerEmail, signal) => async (dispatch) => {
     try {
         dispatch({ type: GET_QUEUE_HISTORY_REQ })
 
         const { data } = await api.post("/api/queueHistory/getQueueHistoryBySalonId", {
             salonId,
+            from: startDate,
+            to: endDate,
+            barberId: barberId,
+            customerEmail: customerEmail
         }, { signal })
 
         dispatch({

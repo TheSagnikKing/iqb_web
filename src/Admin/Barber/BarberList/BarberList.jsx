@@ -977,6 +977,16 @@ const BarberList = () => {
 
   const [mobileSettingIndex, setMobileSettingIndex] = useState("")
 
+  const queuehistoryhandler = (item) => {
+    localStorage.setItem("QueueHistoryBarber", JSON.stringify({ ...item, barber: true }))
+    navigate("/admin-quehistory")
+  }
+
+  const appointmenthistoryhandler = (item) => {
+    localStorage.setItem("AppointmentHistoryBarber", JSON.stringify({ ...item, barber: true }))
+    navigate("/admin-appointmenthistory")
+  }
+
   return (
     <section className={`${style.section}`}>
       <div>
@@ -1263,7 +1273,11 @@ const BarberList = () => {
                                       cursor: approveBarberMap?.get(`${item.salonId}-${item.email}`) === false ? "not-allowed" : "pointer"
                                     }}
                                   >Edit barber</button>
+
+                                  <button onClick={() => queuehistoryhandler(item)}>Queue History</button>
+                                  <button onClick={() => appointmenthistoryhandler(item)}>Appointment History</button>
                                 </div>
+
                               </ClickAwayListener>)
                           }
 
@@ -1428,6 +1442,12 @@ const BarberList = () => {
                                   cursor: approveBarberMap?.get(`${item.salonId}-${item.email}`) === false ? "not-allowed" : "pointer"
                                 }}
                               >Edit barber</button>
+                            </li>
+                            <li>
+                              <button onClick={() => queuehistoryhandler(item)}>Queue History</button>
+                            </li>
+                            <li>
+                              <button onClick={() => appointmenthistoryhandler(item)}>Appointment History</button>
                             </li>
                           </ul>
                         </ClickAwayListener>

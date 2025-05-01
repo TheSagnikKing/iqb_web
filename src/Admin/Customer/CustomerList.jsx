@@ -484,6 +484,7 @@ import { adminSendBarberEmailAction, adminSendBarberMessageAction } from '../../
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader';
 import { CheckAllIcon, CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, SalonThreeDotsIcon, SearchIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../newicons';
 import { ClickAwayListener, Pagination } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerList = () => {
 
@@ -658,6 +659,7 @@ const CustomerList = () => {
     { id: 4, heading: "Gender", key: "gender" },
     { id: 5, heading: "Mobile Number", key: "mobileNumber" },
     { id: 6, heading: "Date Of Birth", key: "dateOfBirth" },
+    { id: 7, heading: "", key: "" },
   ];
 
   const [customerlistDataCopy, setCustomerlistDataCopy] = useState([])
@@ -788,6 +790,20 @@ const CustomerList = () => {
       window.removeEventListener("resize", resizeHandler)
     }
   }, [])
+
+  const navigate = useNavigate()
+
+  const customerhistoryhandler = (item) => {
+    localStorage.setItem("QueueHistoryCustomer", JSON.stringify({ ...item, customer: true }))
+    navigate("/admin-quehistory")
+  }
+
+  const customerappointmenthistoryhandler = (item) => {
+    localStorage.setItem("AppointmentHistoryCustomer", JSON.stringify({ ...item, customer: true }))
+    navigate("/admin-appointmenthistory")
+  }
+
+  const [settingsIndex, setSettingsIndex] = useState("")
 
   return (
     <section className={`${style.section}`}>
@@ -1057,6 +1073,39 @@ const CustomerList = () => {
                       <div><p>{item.gender}</p></div>
                       <div><p>+{item?.mobileCountryCode}{" "}{item?.mobileNumber}</p></div>
                       <div><p>{item.dateOfBirth.split("T")[0]}</p></div>
+                      <div>
+                        <div
+                          style={{
+                            position: settingsIndex === index ? "relative" : "initial",
+                            backgroundColor: settingsIndex === index ? "var(--btn-primary-hover)" : null,
+                            borderRadius: settingsIndex === index ? "var(--border-radius-primary)" : null,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSettingsIndex(index);
+                          }}>
+                          <SalonThreeDotsIcon />
+
+                          {
+                            settingsIndex === index && (
+                              <ClickAwayListener onClickAway={() => setSettingsIndex(null)}>
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    zIndex: settingsIndex === index ? 9999 : -100,
+                                  }}
+                                  className={`${style.settings_container}`}>
+
+                                  <button onClick={() => customerappointmenthistoryhandler(item)}>Appointment History</button>
+                                  <button onClick={() => customerhistoryhandler(item)}>Queue History</button>
+                                </div>
+
+                              </ClickAwayListener>)
+                          }
+
+                        </div>
+
+                      </div>
                     </div>
                   )
                 })
@@ -1175,8 +1224,8 @@ const CustomerList = () => {
                       mobileSettingIndex === index ? (
                         <ClickAwayListener onClickAway={() => setMobileSettingIndex("")}>
                           <ul>
-                            <li>Appointment History</li>
-                            <li>Queue History</li>
+                            <li onClick={() => customerappointmenthistoryhandler(item)}>Appointment History</li>
+                            <li onClick={() => customerhistoryhandler(item)}>Queue History</li>
                           </ul>
                         </ClickAwayListener>
                       ) : null

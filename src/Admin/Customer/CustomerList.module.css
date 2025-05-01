@@ -395,6 +395,30 @@
 
                     }
                 }
+
+                .settings_container {
+                    right: 0rem;
+                    top: 3.5rem;
+                    background-color: var(--bg-primary);
+                    border-radius: var(--border-radius-primary);
+                    -webkit-border-radius: var(--border-radius-primary);
+                    -moz-border-radius: var(--border-radius-primary);
+                    -ms-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary);
+                    border: 0.1rem solid var(--border-secondary);
+                    width: 16rem;
+
+                    &>button {
+                        width: 100%;
+                        color: var(--text-primary);
+                        background-color: transparent;
+                        font-size: 1.4rem;
+                        outline: none;
+                        border: none;
+                        height: 3.5rem;
+                    }
+
+                }
             }
         }
 
@@ -545,6 +569,8 @@
                     }
                 }
             }
+
+
         }
     }
 }
@@ -757,25 +783,6 @@
                         border: none;
                     }
                 }
-
-                /* &>input {
-                    height: 3.5rem;
-                    border: 0.1rem solid var(--border-secondary);
-                    background: transparent;
-                    border-radius: var(--border-radius-primary);
-                    -webkit-border-radius: var(--border-radius-primary);
-                    -moz-border-radius: var(--border-radius-primary);
-                    -ms-border-radius: var(--border-radius-primary);
-                    -o-border-radius: var(--border-radius-primary);
-                    padding-inline: 1rem;
-                    color: var(--text-primary);
-                    font-size: 1.4rem;
-                    outline: none;
-
-                    &::placeholder {
-                        color: var(--text-secondary);
-                    }
-                } */
 
                 &>div {
                     border: 0.1rem solid var(--border-secondary);

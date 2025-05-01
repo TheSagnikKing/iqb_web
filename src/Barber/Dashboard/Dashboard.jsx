@@ -971,7 +971,7 @@ const Dashboard = () => {
           {/* <div>
             <h2>Welcome, {barberName ? barberName : "User"}</h2>
           </div> */}
-          <div style={{ display: "none" }}></div>
+          {/* <div style={{ display: "none" }}></div> */}
 
           <div>
             <div>
@@ -1112,11 +1112,24 @@ const Dashboard = () => {
                   </div>
 
                   <div>
-                    <ResponsiveContainer width="100%" height="90%">
-                      <BarChart width={150} height={40} data={reportData?.appointment?.last7daysCount}>
-                        <Bar dataKey="TotalAppoinment" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
-                      </BarChart>
-                    </ResponsiveContainer>
+                    {
+                      !reportData?.appointment?.last7daysCount.length > 0 ? (
+                        <ResponsiveContainer width="100%" height="90%">
+                          <BarChart width={150} height={40} data={reportData?.appointment?.last7daysCount}>
+                            <Bar dataKey="TotalAppoinment" fill="var(--bg-secondary)" radius={[3, 3, 3, 3]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <p
+                          style={{
+                            color: "var(--text-primary)",
+                            fontSize: "1.6rem",
+                            fontFamily: 'AirbnbCereal_Medium'
+                          }}
+                        >No report data available</p>
+                      )
+                    }
+
                   </div>
                 </div>
 

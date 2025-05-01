@@ -200,8 +200,17 @@ const Sidebar = () => {
           url: "/admin-appointments",
           show: adminProfile?.isAppointments
         },
+
         {
           id: 4,
+          name: "Appointments History",
+          icon: <QueueHistoryIcon />,
+          url: "/admin-appointmenthistory",
+          show: adminProfile?.isAppointments
+        },
+
+        {
+          id: 5,
           name: "Reports",
           icon: <ReportIcon />,
           url: "/admin-reports",

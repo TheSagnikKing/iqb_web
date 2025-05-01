@@ -690,6 +690,7 @@ body {
 .rmdp-day.rmdp-today span {
   background-color: var(--bg-secondary) !important;
   border: 0.1rem solid #fff;
+  color: var(--btn-text-color) !important;
 }
 
 .rmdp-day span {
@@ -697,6 +698,7 @@ body {
 
   &:hover {
     background-color: var(--bg-secondary-hover) !important;
+    color: var(--btn-text-color) !important;
   }
 }
 

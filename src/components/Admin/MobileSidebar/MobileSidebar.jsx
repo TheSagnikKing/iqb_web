@@ -338,6 +338,13 @@ const MobileSidebar = () => {
         },
         {
           id: 4,
+          name: "Appointments History",
+          icon: <QueueHistoryIcon />,
+          url: "/admin-appointmenthistory",
+          show: adminProfile?.isAppointments
+        },
+        {
+          id: 5,
           name: "Reports",
           icon: <ReportIcon />,
           url: "/admin-reports",
@@ -497,7 +504,7 @@ const MobileSidebar = () => {
                   </div>)
                 }
 
-                <p className={style.version_text}> v 1.0.1</p>
+                <p className={style.version_text}> v 1.0.2</p>
               </nav>
             </div>
           </ClickAwayListener>
