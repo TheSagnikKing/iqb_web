@@ -224,6 +224,15 @@ const SignupEditProfile = () => {
     };
   }, []);
 
+
+  const phoneRef = useRef()
+
+  useEffect(() => {
+    if (phoneRef.current) {
+      phoneRef.current.style.backgroundColor = "var(--input-bg-color)";
+    }
+  }, [])
+
   return (
     <main className={`${style.section} ${darkmodeOn && style.dark}`}>
       {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
@@ -339,6 +348,7 @@ const SignupEditProfile = () => {
                   forceDialCode={true}
                   defaultCountry={countryflag}
                   value={mobileNumber}
+                  ref={phoneRef}
                   onKeyDown={handleKeyPress}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                 />

@@ -357,7 +357,7 @@ const MobileSidebar = () => {
       menuItems: [
         {
           id: 1,
-          name: "Subscription",
+          name: "Subscriptions",
           icon: <QueueIcon />,
           url: "/admin-subscription",
           show: true
@@ -504,7 +504,7 @@ const MobileSidebar = () => {
                   </div>)
                 }
 
-                <p className={style.version_text}> v 1.0.2</p>
+                <p className={style.version_text}> v 1.0.4</p>
               </nav>
             </div>
           </ClickAwayListener>

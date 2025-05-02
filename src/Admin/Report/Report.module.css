@@ -1,5 +1,4 @@
 .section {
-    background-color: transparent;
     height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
@@ -52,7 +51,7 @@
                 -moz-border-radius: var(--border-radius-primary);
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
-                background: var(--bg-hover-primary);
+                background: var(--bg-primary);
                 border: 0.1rem solid var(--border-secondary);
                 color: var(--text-primary);
                 font-size: 1.4rem;
@@ -256,7 +255,7 @@
                 -moz-border-radius: var(--border-radius-primary);
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
-                background: var(--bg-hover-primary);
+                background: var(--bg-primary);
                 border: 0.1rem solid var(--border-secondary);
                 color: var(--text-primary);
                 font-size: 1.4rem;

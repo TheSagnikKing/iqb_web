@@ -1716,6 +1716,14 @@ const EditProfile = () => {
     if (barberProfile?.name && barberProfile?.mobileNumber && barberProfile?.dateOfBirth) progress = 75;
     if (barberProfile?.name && barberProfile?.mobileNumber && barberProfile?.dateOfBirth && barberProfile?.gender) progress = 100;
 
+    const phoneRef = useRef()
+
+    useEffect(() => {
+        if (phoneRef.current) {
+            phoneRef.current.style.backgroundColor = "var(--input-bg-color)"; 
+        }
+    }, [])
+
     return (
         <section className={`${style.section}`}>
             <div>
@@ -2101,6 +2109,7 @@ const EditProfile = () => {
                                         forceDialCode={true}
                                         defaultCountry={countryflag}
                                         value={mobileNumber}
+                                        ref={phoneRef}
                                         onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                                     />
                                 </div>

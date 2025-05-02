@@ -121,7 +121,7 @@ import { darkmodeSelector } from '../../Redux/Admin/Reducers/AdminHeaderReducer'
 import { CrownIcon } from '../../icons'
 import { getBarberQueueListHistoryAction } from '../../Redux/Barber/Actions/BarberQueueAction'
 
-import { CheckIcon, CloseIcon, DropdownIcon } from '../../newicons';
+import { CheckIcon, CloseIcon, CustomerIcon, DropdownIcon, GroupJoinIcon, KioskIcon, MobileIcon } from '../../newicons';
 import { ClickAwayListener, Pagination } from '@mui/material';
 
 const QueHistory = () => {
@@ -179,11 +179,13 @@ const QueHistory = () => {
     const [queuehistoryDataCopy, setQueuehistoryDataCopy] = useState([])
 
     const [queuehistoryData, setQueuehistoryData] = useState([])
+    const [mobileQueueList, setMobileQueueList] = useState([])
 
     useEffect(() => {
         if (getBarberQueueListHistoryResolve && BarberQueueListHistory.length > 0) {
             setQueuehistoryData(BarberQueueListHistory)
             setQueuehistoryDataCopy(BarberQueueListHistory)
+            setMobileQueueList(BarberQueueListHistory)
         }
 
     }, [BarberQueueListHistory])
@@ -225,18 +227,51 @@ const QueHistory = () => {
         setPage(value);
     }
 
+    const [mobileWidth, setMobileWidth] = useState(window.innerWidth <= 430 ? true : false)
 
     useEffect(() => {
-        let filteredData = queuehistoryDataCopy;
+        const resizeHandler = () => {
+            if (window.innerWidth <= 430) {
+                setMobileWidth(true)
+            } else {
+                setMobileWidth(false)
+            }
+        }
+        window.addEventListener("resize", resizeHandler)
 
-        if (query.trim() !== '') {
-            filteredData = queuehistoryDataCopy.filter((item) =>
-                item.customerName.toLowerCase().trim().includes(query.toLowerCase())
-            );
+        return () => {
+            window.removeEventListener("resize", resizeHandler)
+        }
+    }, [])
+
+    useEffect(() => {
+
+        if (mobileWidth) {
+            let filteredData = queuehistoryDataCopy;
+
+            if (query.trim() !== '') {
+                filteredData = queuehistoryDataCopy.filter((item) =>
+                    item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
+                    item.barberName.toLowerCase().trim().includes(query.toLowerCase())
+                );
+            }
+
+            setMobileQueueList(filteredData);
+
+        } else {
+            let filteredData = queuehistoryDataCopy;
+
+            if (query.trim() !== '') {
+                filteredData = queuehistoryDataCopy.filter((item) =>
+                    item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
+                    item.barberName.toLowerCase().trim().includes(query.toLowerCase())
+                );
+            }
+
+            setQueuehistoryData(filteredData);
+            setPage(1); // Reset page on filter
         }
 
-        setQueuehistoryData(filteredData);
-        setPage(1); // Reset page on filter
     }, [query]);
 
     const [selectOpen, setSelectOpen] = useState(false)
@@ -250,7 +285,7 @@ const QueHistory = () => {
 
                     <input
                         type='text'
-                        placeholder='Search Customer'
+                        placeholder='Search'
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
@@ -398,6 +433,72 @@ const QueHistory = () => {
                     </div>
                 </div>
             </div>
+
+            {
+                getBarberQueueListHistoryLoading ? (
+                    <div className={style.list_container_mobile_loader}>
+                        <Skeleton
+                            count={6}
+                            height={"19.5rem"}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"}
+                            style={{ marginBottom: "1rem" }}
+                        />
+                    </div>
+                ) : getBarberQueueListHistoryResolve && QueuehistoryPaginationData?.length > 0 ? (
+                    <div className={style.list_container_mobile}>
+                        {
+                            mobileQueueList?.map((item, index) => {
+                                return (
+                                    <div className={style.list_mobile_item} key={item._id}>
+                                        <div>
+                                            <div>
+                                                <img src={item?.customerProfile?.[0]?.url} alt="" width={50} height={50} />
+                                                <div>
+                                                    <p>{item.customerName}</p>
+                                                    <p>{item.barberName}</p>
+                                                    <p>{item?.services?.map((item) => item.serviceName).join(", ")}</p>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <p>{barberProfile?.currency}{" "}{Array.isArray(item?.services)
+                                                    ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
+                                                    : 0}</p>
+                                                <p>{item.timeJoinedQ}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div>{item.methodUsed === "App" ? <MobileIcon color={"#1ADB6A"} /> : <KioskIcon color={"#1ADB6A"} />}</div>
+                                                <p>Mode</p>
+                                            </div>
+
+                                            <div>
+                                                <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"#1ADB6A"} /> : <GroupJoinIcon color={"#1ADB6A"} />}</div>
+                                                <p>Type</p>
+                                            </div>
+
+                                            <div>
+                                                <div>{item.status === "served" ? <CheckIcon color={"#1ADB6A"} /> : <CloseIcon color={"#FC3232"} />}</div>
+                                                <p> {item.status === "served" ? "Served" : "Cancelled"}</p>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                )
+                            })
+                        }
+
+                    </div>
+                ) : (
+                    <div className={style.list_container_mobile_error}>
+                        <p>No queue history available</p>
+                    </div>
+                )
+            }
 
         </section>
     )

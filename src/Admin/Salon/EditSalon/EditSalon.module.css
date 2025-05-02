@@ -88,7 +88,7 @@
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
-                    background-color: var(--input-bg-color);
+                    background-color: var(--bg-primary);
                     color: var(--text-primary);
                     outline: none;
 
@@ -105,7 +105,7 @@
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
-                    background-color: var(--input-bg-color);
+                    background-color: var(--bg-primary);
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -384,7 +384,7 @@
                             -moz-border-radius: var(--border-radius-primary);
                             -ms-border-radius: var(--border-radius-primary);
                             -o-border-radius: var(--border-radius-primary);
-                            background-color: var(--input-bg-color);
+                            background-color: var(--bg-primary);
                             color: var(--text-primary);
                             outline: none;
 
@@ -401,7 +401,7 @@
                             -moz-border-radius: var(--border-radius-primary);
                             -ms-border-radius: var(--border-radius-primary);
                             -o-border-radius: var(--border-radius-primary);
-                            background-color: var(--input-bg-color);
+                            background-color: var(--bg-primary);
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
@@ -688,7 +688,7 @@
                 -moz-border-radius: var(--border-radius-primary);
                 -ms-border-radius: var(--border-radius-primary);
                 -o-border-radius: var(--border-radius-primary);
-                background-color: var(--input-bg-color);
+                background-color: var(--bg-primary);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -975,7 +975,7 @@
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
-                    background-color: var(--input-bg-color);
+                    background-color: var(--bg-primary);
                     display: flex;
                     align-items: center;
                     gap: 1rem;
@@ -1000,7 +1000,7 @@
                         -moz-border-radius: var(--border-radius-primary);
                         -ms-border-radius: var(--border-radius-primary);
                         -o-border-radius: var(--border-radius-primary);
-                        background-color: var(--input-bg-color);
+                        background-color: var(--bg-primary);
                         color: var(--text-primary);
                         outline: none;
 
@@ -1019,7 +1019,7 @@
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
                     -o-border-radius: var(--border-radius-primary);
-                    background-color: var(--input-bg-color);
+                    background-color: var(--bg-primary);
                     display: flex;
                     align-items: center;
                     justify-content: space-between;

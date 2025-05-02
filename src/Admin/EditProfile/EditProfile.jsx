@@ -1601,6 +1601,14 @@ const EditProfile = () => {
 
     // console.log(adminProfile)
 
+    const phoneRef = useRef()
+
+    useEffect(() => {
+        if (phoneRef.current) {
+            phoneRef.current.style.backgroundColor = "var(--input-bg-color)";
+        }
+    }, [])
+
     return (
         <section className={`${style.section}`}>
             <div>
@@ -1895,6 +1903,7 @@ const EditProfile = () => {
                                         forceDialCode={true}
                                         defaultCountry={countryflag}
                                         value={mobileNumber}
+                                        ref={phoneRef}
                                         onChange={(phone, meta) => handlePhoneChange(phone, meta, "mobileNumber")}
                                     />
                                 </div>
@@ -2058,7 +2067,7 @@ const EditProfile = () => {
 
                         <button className={style.profile_btn} onClick={updateAdminProfile}>
                             {
-                                adminUpdateProfileLoading ? (<ButtonLoader/>) :
+                                adminUpdateProfileLoading ? (<ButtonLoader />) :
                                     "Update"
                             }
                         </button>

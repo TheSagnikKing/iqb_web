@@ -1,5 +1,4 @@
 .section {
-    background-color: transparent;
     height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
@@ -19,6 +18,7 @@
             color: var(--text-primary);
             line-height: inherit;
             font-family: "AirbnbCereal_Medium";
+            font-size: clamp(18px, 2vw, 24px);
 
             &>span {
                 color: var(--text-secondary);

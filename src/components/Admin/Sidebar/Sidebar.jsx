@@ -128,6 +128,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import Header from '../Header/Header.jsx';
 import { AdvertisementIcon, AppointmentIcon, BarberIcon, CustomerIcon, DashboardIcon, MdPaymentIcon, QueueHistoryIcon, QueueIcon, ReportIcon, SalonIcon } from '../../../newicons.js';
 import { useSelector } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
 
 
 const Sidebar = () => {
@@ -223,7 +224,7 @@ const Sidebar = () => {
       menuItems: [
         {
           id: 1,
-          name: "Subscription",
+          name: "Subscriptions",
           icon: <QueueIcon />,
           url: "/admin-subscription",
           show: true
@@ -258,9 +259,26 @@ const Sidebar = () => {
         }}
       >
         <header>
-          <div>
-            <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
-          </div>
+          {
+            adminGetDefaultSalonLoading ? (
+              <div>
+                <Skeleton
+                  baseColor={"var(--loader-bg-color)"}
+                  highlightColor={"var(--loader-highlight-color)"}
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    borderRadius: "50%"
+                  }}
+                />
+              </div>
+            ) : (
+              <div>
+                <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
+              </div>
+            )
+          }
+
           {
             sidebar ? (<p>{adminGetDefaultSalonResponse?.salonName}</p>) : null
           }

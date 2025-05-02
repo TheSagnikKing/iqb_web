@@ -136,7 +136,7 @@ p {
   --text-secondary: #F4F4F5B2;
 
   --border-primary: #F4F4F5B2;
-  --border-secondary: hsl(240, 3.7%, 15.9%);
+  --border-secondary: #252526;
 
   --border-radius-primary: 0.4rem;
 
@@ -147,8 +147,8 @@ p {
   --linear-color-1: #283048;
   --linear-color-2: #859398;
 
-  --section-bg-color: var(--bg-primary);
-
+  --section-bg-color: #1e1e1e;
+  --cmmn-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
 body[data-theme="light"] {
@@ -161,7 +161,7 @@ body[data-theme="light"] {
   --text-secondary: gray;
   --btn-text-color: #fff;
   --input-bg-color: #efefef;
-  --border-secondary: #d3d3d3;
+  --border-secondary: #e7e7e7;
 
   --loader-bg-color: #ebebeb;
   --loader-highlight-color: #f5f5f5;
@@ -200,7 +200,7 @@ body {
 
 .react-international-phone-input-container .react-international-phone-input {
   width: 100%;
-  background-color: var(--input-bg-color);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   outline: none;
   font-size: 1.4rem;
@@ -209,7 +209,7 @@ body {
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-  background-color: var(--input-bg-color);
+  background-color: var(--bg-primary);
   height: 3.5rem;
   border: 0.1rem solid var(--border-secondary);
 }
@@ -433,10 +433,14 @@ body {
 }
 
 .fc .fc-toolbar-title {
-  /* font-size: clamp(18px, 2vw, 24px) !important; */
+  font-size: clamp(18px, 2vw, 24px) !important;
   font-family: 'AirbnbCereal_Medium';
 }
 
+.fc-scrollgrid-liquid {
+  background-color: var(--bg-primary);
+  box-shadow: var(--cmmn-box-shadow);
+}
 
 .fc .fc-button-group>.fc-button {
   display: flex;
@@ -663,7 +667,7 @@ body {
   text-align: "center" !important;
   font-size: 1.4rem !important;
   width: 19rem;
-  background-color: var(--input-bg-color) !important;
+  background: var(--bg-primary) !important;
   outline: none !important;
   border: 0.1rem solid var(--border-secondary) !important;
   border-radius: var(--border-radius-primary);

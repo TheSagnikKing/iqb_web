@@ -2,7 +2,7 @@
   .mobile_container {
     width: 100vw;
     height: 100svh;
-    background-color: var(--bg-primary);
+    background-color: var(--section-bg-color);
     position: relative;
   }
 
@@ -17,7 +17,7 @@
   }
 
   .aside_container {
-    width: min(24rem, 60vw);
+    width: min(25rem, 65vw);
     height: inherit;
     background-color: var(--bg-primary);
     display: flex;

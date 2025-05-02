@@ -746,7 +746,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
   }, [adminGetDefaultSalonResponse])
 
 
-  const [togglecheck, setTogglecheck] = useState(false);
+  const [togglecheck, setTogglecheck] = useState("");
 
   const salonStatusHandler = () => {
     const newCheckValue = !togglecheck;
@@ -913,7 +913,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
       <div>
         {
-          adminProfile?.salonId == 0 ? <div></div> : (<button
+          adminProfile?.salonId == 0 || togglecheck === "" ? <div></div> : (<button
             style={{
               background: togglecheck ? "#00A36C" : "rgb(244, 67, 54)",
               color: "#fff"
@@ -982,7 +982,7 @@ const Header = ({ sidebar, setSidebar, mobileSidebar, setMobileSidebar }) => {
 
       <div className={`${style.mobile_container_left}`}>
         <button onClick={() => setMobileSidebar((prev) => !prev)}>{mobileSidebar ? <MobileSiderbarMenuIcon /> : <MobileSiderbarMenuIcon />}</button>
-        <h2>IQB</h2>
+        <h3>IQB</h3>
       </div>
     </header>
   )

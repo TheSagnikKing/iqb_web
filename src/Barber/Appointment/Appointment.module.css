@@ -44,7 +44,7 @@
     -moz-border-radius: 1rem;
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
-    background-color: var(--input-bg-color);
+    background-color: var(--bg-primary);
 
     &>button {
         width: 100%;
@@ -52,7 +52,7 @@
         border: none;
         font-weight: 500;
         cursor: pointer;
-        background: var(--bg-primary);
+        background: var(--input-bg-color);
         border-radius: 0.6rem;
         -webkit-border-radius: 0.6rem;
         -moz-border-radius: 0.6rem;
@@ -79,7 +79,7 @@
     align-items: center;
     gap: 2rem;
     margin-bottom: 2rem;
-    background-color: var(--input-bg-color);
+    background-color: var(--bg-primary);
     padding: 1.5rem;
     max-width: 35rem;
     border-radius: var(--border-radius-primary);

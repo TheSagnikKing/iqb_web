@@ -919,7 +919,7 @@ const Subscription = () => {
     return (
         <div className={`${style.section}`}>
             <div>
-                <h2>Subscription</h2>
+                <h2>Subscriptions</h2>
             </div>
 
             {

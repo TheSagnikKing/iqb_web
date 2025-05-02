@@ -1,10 +1,10 @@
 .section {
-    background-color: transparent;
     height: calc(100svh - 6rem);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    overflow: auto;
 
     &>div:nth-child(1) {
         height: 4rem;
@@ -27,7 +27,7 @@
             &>input {
                 height: 3.5rem;
                 border: 0.1rem solid var(--border-secondary);
-                background: transparent;
+                background: var(--bg-primary);
                 border-radius: var(--border-radius-primary);
                 -webkit-border-radius: var(--border-radius-primary);
                 -moz-border-radius: var(--border-radius-primary);
@@ -55,7 +55,8 @@
         -moz-border-radius: var(--border-radius-primary);
         -ms-border-radius: var(--border-radius-primary);
         -o-border-radius: var(--border-radius-primary);
-
+        background-color: var(--bg-primary);
+        box-shadow: var(--cmmn-box-shadow);
 
         .list_body_container {
             flex-grow: 1;
@@ -736,7 +737,7 @@
     .list_container_mobile {
         display: block;
         flex: 1;
-        overflow: auto;
+        /* overflow: auto; */
 
         .list_mobile_item {
             height: 8rem;
@@ -746,7 +747,8 @@
             -ms-border-radius: var(--border-radius-primary);
             -o-border-radius: var(--border-radius-primary);
             border: 0.1rem solid var(--border-secondary);
-            background-color: var(--bg-hover-primary);
+            background: var(--bg-primary);
+            box-shadow: var(--cmmn-box-shadow);
             padding-inline: 1rem;
             display: flex;
             align-items: center;

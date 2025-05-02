@@ -609,7 +609,7 @@ const QueHistory = () => {
 
                                             <div>
                                                 <div>{item.status === "served" ? <CheckIcon color={"#1ADB6A"} /> : <CloseIcon color={"#FC3232"} />}</div>
-                                                <p p > {item.status === "served" ? "Serve" : "Cancelled"}</p>
+                                                <p p > {item.status === "served" ? "Served" : "Cancelled"}</p>
                                             </div>
                                         </div>
 

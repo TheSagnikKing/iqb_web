@@ -225,6 +225,14 @@ const SignupEditProfile = () => {
     };
   }, []);
 
+  const phoneRef = useRef()
+
+  useEffect(() => {
+    if (phoneRef.current) {
+      phoneRef.current.style.backgroundColor = "var(--input-bg-color)";
+    }
+  }, [])
+
 
   return (
     <main className={`${style.section} ${darkmodeOn && style.dark}`}>
@@ -342,6 +350,7 @@ const SignupEditProfile = () => {
                   forceDialCode={true}
                   defaultCountry={countryflag}
                   value={mobileNumber}
+                  ref={phoneRef}
                   onChange={(phone, meta) => handlePhoneChange(phone, meta)}
                   onKeyDown={handleKeyPress}
                 />

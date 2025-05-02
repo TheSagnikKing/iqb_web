@@ -47,9 +47,10 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
 
 }
 
-export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => async (dispatch) => {
+export const barberServeQueueAction = (barberqueuedata, salonId, barberId, setBarberServeLoading, setOpenModal) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_BARBER_SERVED_QUEUE_REQ })
+        setBarberServeLoading(true)
 
         const { data } = await api.post("/api/queue/barberServedQueue", barberqueuedata)
 
@@ -68,6 +69,11 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
             },
         });
 
+        setBarberServeLoading(false)
+        setOpenModal({
+            open: false,
+            data: {}
+        })
 
         const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {
             salonId,
@@ -80,6 +86,8 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
         })
 
     } catch (error) {
+
+        setBarberServeLoading(false)
 
         if (error?.response?.status === 500) {
             dispatch({
@@ -117,9 +125,10 @@ export const barberServeQueueAction = (barberqueuedata, salonId, barberId) => as
     }
 }
 
-export const barberCancelQueueAction = (canceldata, salonId, barberId) => async (dispatch) => {
+export const barberCancelQueueAction = (canceldata, salonId, barberId, setBarberCancelLoading, setOpenModal) => async (dispatch) => {
     try {
         dispatch({ type: BARBER_CANCEL_QUEUE_REQ })
+        setBarberCancelLoading(true)
 
         const { data } = await api.post(`/api/queue/cancelQ`, canceldata)
 
@@ -138,6 +147,12 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
             },
         });
 
+        setBarberCancelLoading(false)
+        setOpenModal({
+            open: false,
+            data: {}
+        })
+
 
         const { data: queuelistdata } = await api.post("/api/queue/getQlistByBarberId", {
             salonId,
@@ -150,6 +165,7 @@ export const barberCancelQueueAction = (canceldata, salonId, barberId) => async 
         })
 
     } catch (error) {
+        setBarberCancelLoading(false)
 
         if (error?.response?.status === 500) {
             dispatch({
