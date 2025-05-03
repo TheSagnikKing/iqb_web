@@ -11,6 +11,12 @@
   padding: 0px;
   box-sizing: border-box;
   /* font-family: "Poppins", sans-serif; */
+
+  /* Font smoothing and anti-aliasing */
+  -webkit-font-smoothing: antialiased;  /* for Webkit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale;  /* for Firefox on macOS */
+  text-rendering: optimizeLegibility;  /* improves legibility */
+  font-smoothing: antialiased; /* General text smoothing for some browsers */
 }
 
 
