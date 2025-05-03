@@ -1535,7 +1535,9 @@ const SalonList = () => {
               />
 
               {endTimeDrop && (
-                <ClickAwayListener onClickAway={() => setEndTimeHandler(false)}>
+                <ClickAwayListener 
+                onClickAway={() => setEndTimeDrop(false)}
+                >
                   <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
                     {timeOptions.map((option) => (
                       <p key={option.value} onClick={() => setEndTimeHandler(option.value)}>
@@ -1559,7 +1561,7 @@ const SalonList = () => {
               />
 
               {intervalTimeDrop &&
-                <ClickAwayListener onClickAway={() => setIntervalTimeHandler(false)}>
+                <ClickAwayListener onClickAway={() => setIntervalTimeDrop(false)}>
                   <div className={`${style.time_drop_container} ${darkmodeOn && style.dark}`}>
                     {intervalTimemin.map((option) => (
                       <p key={option} value={option} onClick={() => setIntervalTimeHandler(option)}>

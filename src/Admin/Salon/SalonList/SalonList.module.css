@@ -487,16 +487,13 @@
 
         &:hover {
             line-height: 4rem;
-            /* background-color: var(--light-color-2); */
             margin-bottom: 1rem;
-            /* padding-inline: 1rem; */
             color: var(--text-primary);
             border-radius: var(--input-border-radius);
             -webkit-border-radius: var(--input-border-radius);
             -moz-border-radius: var(--input-border-radius);
             -ms-border-radius: var(--input-border-radius);
             -o-border-radius: var(--input-border-radius);
-            color: var(--light-color-4);
             cursor: pointer;
         }
     }

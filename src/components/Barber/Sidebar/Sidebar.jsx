@@ -180,7 +180,7 @@ const Sidebar = () => {
           },
           {
             id: 4,
-            name: "Appointment",
+            name: "Barber Off Days",
             icon: <AppointmentIcon />,
             url: "/barber-appointment"
           },

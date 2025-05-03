@@ -910,7 +910,7 @@
             }
 
             &>div:nth-child(2) {
-                max-height: 45rem;
+                /* max-height: 45rem; */
                 flex: 30%;
                 display: flex;
                 flex-direction: column;
@@ -937,7 +937,8 @@
                 }
 
                 &>div:nth-child(2) {
-                    flex: 1;
+                    flex-grow: 1;
+                    flex-basis: 0;
                     display: flex;
                     flex-direction: column;
                     overflow: auto;
