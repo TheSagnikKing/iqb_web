@@ -86,7 +86,7 @@ const MobileSidebar = () => {
         },
         {
           id: 4,
-          name: "Appointment",
+          name: "Barber Off Days",
           icon: <AppointmentIcon />,
           url: "/barber-appointment"
         },
@@ -119,12 +119,19 @@ const MobileSidebar = () => {
           <ClickAwayListener onClickAway={() => setMobileSidebar(false)}>
             <div className={`${style.aside_container}`}>
               <header>
-                <div>
-                  <img
-                    src={barberProfile?.salonlogo?.[0]?.url}
-                    alt=""
-                  />
-                </div>
+                <Link
+                  to={"/barber-dashboard"}
+                  onClick={() => {
+                    setMobileSidebar(false);
+                  }}
+                >
+                  <div>
+                    <img
+                      src={barberProfile?.salonlogo?.[0]?.url}
+                      alt=""
+                    />
+                  </div>
+                </Link>
                 {mobileSidebar ? <p>{barberProfile?.salonName}</p> : null}
               </header>
 
@@ -174,7 +181,7 @@ const MobileSidebar = () => {
                     onColor="#00A36C"
                     readOnly
                     checked={barberProfile?.isOnline}
-                    onChange={() => {}}
+                    onChange={() => { }}
                   />
                 </div>
 
@@ -188,7 +195,7 @@ const MobileSidebar = () => {
                     onColor="#00A36C"
                     readOnly
                     checked={barberProfile?.isClockedIn}
-                    onChange={() => {}}
+                    onChange={() => { }}
                   />
                 </div>
               </nav>

@@ -213,6 +213,8 @@
 
         .mobile_container_left {
             display: flex;
+            align-items: center;
+            gap: 2rem;
 
             &>button:nth-child(1) {
                 display: flex;

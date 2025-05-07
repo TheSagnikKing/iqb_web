@@ -250,10 +250,7 @@ const AppointmentList = () => {
                             )
                         })
                     ) : (
-                        <div style={{
-                            display: "grid", placeItems: "center", width: "100%", fontSize: "var(--font-size-3)",
-                            fontWeight: "500"
-                        }}><p>No Appointment available</p></div>
+                        <div className={style.list_container_error}><p>No appointment available</p></div>
                     )
                 }
 

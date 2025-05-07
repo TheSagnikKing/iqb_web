@@ -273,9 +273,11 @@ const Sidebar = () => {
                 />
               </div>
             ) : (
-              <div>
-                <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
-              </div>
+              <Link to={"/admin-dashboard"}>
+                <div>
+                  <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
+                </div>
+              </Link>
             )
           }
 

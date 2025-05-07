@@ -414,9 +414,16 @@ const MobileSidebar = () => {
           <ClickAwayListener onClickAway={() => setMobileSidebar(false)}>
             <div className={`${style.aside_container}`}>
               <header>
-                <div>
-                  <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
-                </div>
+                <Link
+                  to={"/admin-dashboard"}
+                  onClick={() => {
+                    setMobileSidebar(false);
+                  }}
+                >
+                  <div>
+                    <img src={adminGetDefaultSalonResponse?.salonLogo?.[0]?.url} alt="" />
+                  </div>
+                </Link>
                 {mobileSidebar ? <p>{adminGetDefaultSalonResponse?.salonName}</p> : null}
 
               </header>

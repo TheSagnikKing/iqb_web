@@ -1720,7 +1720,7 @@ const EditProfile = () => {
 
     useEffect(() => {
         if (phoneRef.current) {
-            phoneRef.current.style.backgroundColor = "var(--input-bg-color)"; 
+            phoneRef.current.style.backgroundColor = "var(--input-bg-color)";
         }
     }, [])
 
@@ -1888,7 +1888,7 @@ const EditProfile = () => {
                             barberProfile?.mobileNumber ? (
                                 <div>
                                     <span><ContactTel /></span>
-                                    <p>{barberProfile?.mobileCountryCode}{" "}{barberProfile?.mobileNumber}</p>
+                                    <p>+{barberProfile?.mobileCountryCode}{" "}{barberProfile?.mobileNumber}</p>
                                 </div>
                             ) : (null)
                         }

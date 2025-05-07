@@ -13,10 +13,14 @@
   /* font-family: "Poppins", sans-serif; */
 
   /* Font smoothing and anti-aliasing */
-  -webkit-font-smoothing: antialiased;  /* for Webkit (Chrome, Safari) */
-  -moz-osx-font-smoothing: grayscale;  /* for Firefox on macOS */
-  text-rendering: optimizeLegibility;  /* improves legibility */
-  font-smoothing: antialiased; /* General text smoothing for some browsers */
+  -webkit-font-smoothing: antialiased;
+  /* for Webkit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale;
+  /* for Firefox on macOS */
+  text-rendering: optimizeLegibility;
+  /* improves legibility */
+  font-smoothing: antialiased;
+  /* General text smoothing for some browsers */
 }
 
 
@@ -459,7 +463,6 @@ body {
 .fc .fc-button-primary {
   background-color: var(--bg-secondary);
   color: var(--btn-text-color) !important;
-  /* border: 0.1rem solid var(--color-2); */
   border: none;
 
 
@@ -480,6 +483,8 @@ body {
   font-size: var(--font-size-2);
   border: none;
   color: var(--text-primary) !important; */
+
+  width: 5.5rem !important;
 
   &:disabled {
     background-color: var(--bg-secondary-hover);
@@ -508,8 +513,6 @@ body {
 
 .fc-today-button {
   margin-right: 0rem !important;
-
-
 }
 
 .fc .fc-button:disabled {
@@ -588,7 +591,7 @@ body {
 .react-calendar__tile:hover,
 .react-calendar__tile--now {
   background-color: var(--bg-secondary) !important;
-  color: var(--btn-text-color);
+  color: var(--btn-text-color) !important;
 }
 
 

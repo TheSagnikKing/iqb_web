@@ -154,12 +154,11 @@
 
 .highlighted_date {
     background-color: #0867ff54;
-    color: white !important;
-    border-radius: 50%;
+    /* border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    -o-border-radius: 50%; */
 }
 
 .leave_dates {

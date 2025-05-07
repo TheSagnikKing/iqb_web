@@ -192,6 +192,19 @@
     }
 }
 
+.list_container_error {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>p {
+        color: var(--text-primary);
+        font-size: 1.6rem;
+        font-family: 'AirbnbCereal_Medium';
+    }
+}
+
 /* dark mode */
 
 .appointment_wrapper.dark {

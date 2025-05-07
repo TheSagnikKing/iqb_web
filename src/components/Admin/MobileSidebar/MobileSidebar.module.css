@@ -37,7 +37,7 @@
       align-items: center;
       gap: 1rem;
 
-      &>div {
+      & div {
         width: 3.5rem;
         height: 3.5rem;
         border-radius: 50%;

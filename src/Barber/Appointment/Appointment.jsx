@@ -226,7 +226,7 @@ const Appointment = () => {
                                         <input
                                             type="checkbox"
                                             style={{
-                                                accentColor: "var(--bg-secondary)"
+                                                accentColor: "blue"
                                             }}
                                             onChange={() => checkdayHandler(d)}
                                             checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}

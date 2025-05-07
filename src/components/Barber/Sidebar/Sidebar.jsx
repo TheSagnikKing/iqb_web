@@ -152,47 +152,47 @@ const Sidebar = () => {
 
 
   const sideMenuData = [
-      {
-        heading: "Dashboards",
-        menuItems: [
-          {
-            id: 1,
-            name: "Dashboard",
-            icon: <DashboardIcon />,
-            url: "/barber-dashboard"
-          },
-        ]
-      },
-      {
-        heading: "Apps",
-        menuItems: [
-          {
-            id: 2,
-            name: "Queue List",
-            icon: <QueueIcon />,
-            url: "/barber-queue"
-          },
-          {
-            id: 3,
-            name: "Queue History",
-            icon: <QueueHistoryIcon />,
-            url: "/barber-quehistory"
-          },
-          {
-            id: 4,
-            name: "Barber Off Days",
-            icon: <AppointmentIcon />,
-            url: "/barber-appointment"
-          },
-          {
-            id: 5,
-            name: "Appointment List",
-            icon: <Admincustomericon />,
-            url: "/barber-appointlist"
-          },
-        ]
-      },
-    ]
+    {
+      heading: "Dashboards",
+      menuItems: [
+        {
+          id: 1,
+          name: "Dashboard",
+          icon: <DashboardIcon />,
+          url: "/barber-dashboard"
+        },
+      ]
+    },
+    {
+      heading: "Apps",
+      menuItems: [
+        {
+          id: 2,
+          name: "Queue List",
+          icon: <QueueIcon />,
+          url: "/barber-queue"
+        },
+        {
+          id: 3,
+          name: "Queue History",
+          icon: <QueueHistoryIcon />,
+          url: "/barber-quehistory"
+        },
+        {
+          id: 4,
+          name: "Barber Off Days",
+          icon: <AppointmentIcon />,
+          url: "/barber-appointment"
+        },
+        {
+          id: 5,
+          name: "Appointment List",
+          icon: <Admincustomericon />,
+          url: "/barber-appointlist"
+        },
+      ]
+    },
+  ]
 
   const location = useLocation()
 
@@ -207,9 +207,11 @@ const Sidebar = () => {
         }}
       >
         <header>
-          <div>
-            <img src={barberProfile?.salonlogo?.[0]?.url} alt="" />
-          </div>
+          <Link to="/barber-dashboard">
+            <div>
+              <img src={barberProfile?.salonlogo?.[0]?.url} alt="" />
+            </div>
+          </Link>
           {
             sidebar ? (<p>{barberProfile?.salonName}</p>) : null
           }
