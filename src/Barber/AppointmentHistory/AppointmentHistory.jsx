@@ -1,79 +1,51 @@
 import React, { useEffect, useRef, useState } from 'react'
-import style from "./AppointmentHistory.module.css"
-import Skeleton from 'react-loading-skeleton'
-import { useDispatch, useSelector } from 'react-redux'
-import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
-import { AppointmentIcon, CheckIcon, CloseIcon, CustomerIcon, DropdownIcon, GroupJoinIcon, KioskIcon, MobileIcon, ResetIcon, SearchIcon } from '../../../newicons';
-
+import style from './AppointmentHistory.module.css'
+import { AppointmentIcon, CheckIcon, CloseIcon, DropdownIcon, ResetIcon } from '../../newicons'
 import { ClickAwayListener, Pagination } from '@mui/material'
 import { Calendar } from 'react-multi-date-picker'
+import { SearchIcon } from '../../icons'
+import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBarberAppointmentHistoryAction } from '../../Redux/Barber/Actions/AppointmentAction'
 import toast from 'react-hot-toast'
-import { useLocation } from 'react-router-dom'
-import { getAdminAppointmentHistoryAction } from '../../../Redux/Admin/Actions/AppointmentAction'
 
-const QueHistory = () => {
+const AppointmentHistory = () => {
 
-    const [barberData, setBarberData] = useState({
-        barberName: "",
-        barberEmail: "",
-        barberId: "",
-        barber: false
-    })
+    const salonId = useSelector(state => state.BarberLoggedInMiddleware?.barberSalonId)
+    const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
 
-    const [customerData, setCustomerData] = useState({
-        customerName: "",
-        customerEmail: "",
-        customer: false
-    })
+    const [query, setQuery] = useState("")
+    const [calendarOpen, setCalendarOpen] = useState(false)
+    const [selectOpen, setSelectOpen] = useState(false)
 
-    useEffect(() => {
-        const AppointmentHistoryBarber = localStorage.getItem("AppointmentHistoryBarber")
-            ? JSON.parse(localStorage.getItem("AppointmentHistoryBarber"))
-            : null;
+    const [selectedDates, setSelectedDates] = useState([])
+    const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+    const [mobileCalendarOpen, setMobileCalendarOpen] = useState(false);
 
-        const AppointmentHistoryCustomer = localStorage.getItem("AppointmentHistoryCustomer")
-            ? JSON.parse(localStorage.getItem("AppointmentHistoryCustomer"))
-            : null;
+    const handleDateChange = (dates) => {
+        const formatedDates = dates.map((date) => date.format("YYYY-MM-DD"))
+        setSelectedDates(formatedDates)
+    }
 
-        if (AppointmentHistoryBarber) {
-            setBarberData({
-                barberName: AppointmentHistoryBarber?.name,
-                barberEmail: AppointmentHistoryBarber?.email,
-                barberId: AppointmentHistoryBarber?.barberId,
-                barber: AppointmentHistoryBarber?.barber
-            });
-        }
+    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
 
-        if (AppointmentHistoryCustomer) {
-            setCustomerData({
-                customerName: AppointmentHistoryCustomer?.name,
-                customerEmail: AppointmentHistoryCustomer?.email,
-                customer: AppointmentHistoryCustomer?.customer
-            });
-        }
+    const {
+        response: adminGetDefaultSalonResponse
+    } = adminGetDefaultSalon
 
-        return () => {
-            localStorage.removeItem("AppointmentHistoryBarber")
-            localStorage.removeItem("AppointmentHistoryCustomer")
-        }
-    }, []);
-
-    // console.log("Barber Data ", barberData)
-    // console.log("Customer Data ", customerData)
-
-
-    const darkMode = useSelector(darkmodeSelector)
-
-    const darkmodeOn = darkMode === "On"
-
-    const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
+    const headRows = [
+        { id: 1, heading: "Name", key: "customerName" },
+        { id: 2, heading: "Barber Name", key: "barberName" },
+        { id: 3, heading: "Start Time", key: "startTime" },
+        { id: 4, heading: "End Time", key: "endTime" },
+        { id: 5, heading: "Price", key: "price" },
+        { id: 6, heading: "Date", key: "date" },
+        { id: 7, heading: "Status", key: "status" },
+    ];
 
     const dispatch = useDispatch()
 
     const queuelistcontrollerRef = useRef(new AbortController());
-
-    const [selectedDates, setSelectedDates] = useState([])
-
 
     useEffect(() => {
         const controller = new AbortController();
@@ -109,73 +81,27 @@ const QueHistory = () => {
                     },
                 });
             } else {
-                dispatch(getAdminAppointmentHistoryAction(salonId, startDate, endDate, barberData?.barberId, customerData?.customerEmail, controller.signal));
+                dispatch(getBarberAppointmentHistoryAction(salonId, startDate, endDate, barberId, controller.signal));
             }
 
         } else if (selectedDates.length === 0) {
-            dispatch(getAdminAppointmentHistoryAction(salonId, "", "", barberData?.barberId, customerData?.customerEmail, controller.signal));
+            dispatch(getBarberAppointmentHistoryAction(salonId, "", "", barberId, controller.signal));
         }
+
 
         return abortIfPending;
-    }, [salonId, dispatch, selectedDates, barberData, customerData]);
+    }, [dispatch, selectedDates, salonId])
 
-
-    const getAdminAppointmentHistory = useSelector(state => state.getAdminAppointmentHistory)
-
-    const {
-        loading: getAdminAppointmentHistoryLoading,
-        resolve: getAdminAppointmentHistoryResolve,
-        appointmentHistory: AdminAppointmentHistory
-    } = getAdminAppointmentHistory
-
-    const [copyAdminAppointmentHistory, setcopyAdminAppointmentHistory] = useState([])
-
-    useEffect(() => {
-        if (AdminAppointmentHistory) {
-            setcopyAdminAppointmentHistory(AdminAppointmentHistory)
-        }
-    }, [AdminAppointmentHistory])
-
-    const [search, setSearch] = useState('')
-
-    const searchCustomHandler = (value) => {
-        setSearch(value);
-        const searchValue = value.toLowerCase().trim();
-
-        if (!searchValue) {
-            setcopyAdminAppointmentHistory(AdminAppointmentHistory);
-        } else {
-            const filteredArray = AdminAppointmentHistory?.filter((queue) => {
-                return (
-                    queue.barberName.toLowerCase().includes(searchValue) ||
-                    queue.customerName.toLowerCase().includes(searchValue)
-                )
-            });
-            setcopyAdminAppointmentHistory(filteredArray);
-        }
-    };
-
-
-    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+    const getBarberAppointmentHistory = useSelector(state => state.getBarberAppointmentHistory)
 
     const {
-        response: adminGetDefaultSalonResponse
-    } = adminGetDefaultSalon
+        loading: getBarberAppointmentHistoryLoading,
+        resolve: getBarberAppointmentHistoryResolve,
+        appointmentHistory: BarberAppointmentHistory
+    } = getBarberAppointmentHistory
 
-    // console.log(adminGetDefaultSalonResponse)
+    // console.log(BarberAppointmentHistory)
 
-    // ==========================================================
-
-    const headRows = [
-        { id: 1, heading: "BarberID", key: "qpos" },
-        { id: 2, heading: "Name", key: "customerName" },
-        { id: 3, heading: "Barber Name", key: "barberName" },
-        { id: 4, heading: "Start Time", key: "startTime" },
-        { id: 5, heading: "End Time", key: "endTime" },
-        { id: 6, heading: "Price", key: "price" },
-        { id: 7, heading: "Date", key: "date" },
-        { id: 8, heading: "Status", key: "status" },
-    ];
 
     const [appointmenthistoryDataCopy, setappointmenthistoryDataCopy] = useState([])
     const [appointmenthistoryData, setappointmenthistoryData] = useState([])
@@ -183,16 +109,13 @@ const QueHistory = () => {
     const [mobileQueueList, setMobileQueueList] = useState([])
 
     useEffect(() => {
-        if (getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0) {
-            setappointmenthistoryData(AdminAppointmentHistory)
-            setappointmenthistoryDataCopy(AdminAppointmentHistory)
-            setMobileQueueList(AdminAppointmentHistory)
+        if (getBarberAppointmentHistoryResolve && BarberAppointmentHistory.length > 0) {
+            setappointmenthistoryData(BarberAppointmentHistory)
+            setappointmenthistoryDataCopy(BarberAppointmentHistory)
+            setMobileQueueList(BarberAppointmentHistory)
         }
 
-    }, [AdminAppointmentHistory])
-
-
-    const [settingsIndex, setSettingsIndex] = useState("")
+    }, [BarberAppointmentHistory])
 
     const [rowsPerPage, SetRowsPerPage] = useState(10)
 
@@ -202,8 +125,6 @@ const QueHistory = () => {
     const [endIndex, setEndIndex] = useState(0)
     const [sortOrder, setSortOrder] = useState("asc")
     const [sortColumn, setSortColumn] = useState("")
-    const [query, setQuery] = useState("")
-
 
     const paginationFunction = () => {
         const totalPages = Math.ceil(appointmenthistoryDataCopy.length / rowsPerPage);
@@ -215,6 +136,7 @@ const QueHistory = () => {
         setStartIndex(startIndex);
         setEndIndex(endIndex);
     }
+
 
     useEffect(() => {
         if (appointmenthistoryDataCopy.length > 0) {
@@ -253,8 +175,7 @@ const QueHistory = () => {
 
             if (query.trim() !== '') {
                 filteredData = appointmenthistoryData.filter((item) =>
-                    item.customerName.toLowerCase().trim().includes(query.toLowerCase()) ||
-                    item.barberName.toLowerCase().trim().includes(query.toLowerCase())
+                    item.customerName.toLowerCase().trim().includes(query.toLowerCase())
                 );
             }
 
@@ -276,33 +197,8 @@ const QueHistory = () => {
     }, [query]);
 
 
-    const [selectOpen, setSelectOpen] = useState(false)
-
-    const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-    const [mobileCalendarOpen, setMobileCalendarOpen] = useState(false);
-    const [calendarOpen, setCalendarOpen] = useState(false)
-    const handleDateChange = (dates) => {
-        const formatedDates = dates.map((date) => date.format("YYYY-MM-DD"))
-        setSelectedDates(formatedDates)
-    }
-
     const resetHandler = () => {
-        dispatch(getAdminAppointmentHistoryAction(salonId, "", "",));
-        setSelectedDates([])
-        setQuery("")
-        localStorage.removeItem("AppointmentHistoryBarber")
-        localStorage.removeItem("AppointmentHistoryCustomer")
-        setBarberData({
-            barberName: "",
-            barberEmail: "",
-            barberId: ""
-        })
-        setCustomerData({
-            customerName: "",
-            customerEmail: "",
-            customer: false
-        })
-
+        dispatch(getBarberAppointmentHistoryAction(salonId, "", "", barberId));
     }
 
     return (
@@ -342,7 +238,7 @@ const QueHistory = () => {
 
                     <input
                         type='text'
-                        placeholder='Search'
+                        placeholder='Search Customer'
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
@@ -358,7 +254,7 @@ const QueHistory = () => {
                                 <div className={`${style.input_type_2}`}>
                                     <input
                                         type='text'
-                                        placeholder='Search'
+                                        placeholder='Search Customer'
                                         value={query}
                                         onChange={(e) => setQuery(e.target.value)}
                                     />
@@ -413,7 +309,7 @@ const QueHistory = () => {
             <div className={`${style.list_container}`}>
 
                 {
-                    getAdminAppointmentHistoryLoading ? (
+                    getBarberAppointmentHistoryLoading ? (
                         <div className={`${style.list_body_container_loader}`}>
                             <Skeleton
                                 count={6}
@@ -422,7 +318,7 @@ const QueHistory = () => {
                                 highlightColor={"var(--loader-highlight-color)"}
                                 style={{ marginBottom: "1rem" }} />
                         </div>
-                    ) : getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0 ? (
+                    ) : getBarberAppointmentHistoryResolve && BarberAppointmentHistory.length > 0 ? (
                         <div className={`${style.list_body_container}`}>
 
                             <div className={`${style.headRow}`}>
@@ -456,7 +352,7 @@ const QueHistory = () => {
                                 appointmentHistoryPaginationData.map((item, index) => {
                                     return (
                                         <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === appointmentHistoryPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
-                                            <div><p>{item.barberId}</p></div>
+                                            {/* <div><p>{item.barberId}</p></div> */}
                                             <div>
                                                 <div>
                                                     <div><img src={item?.customerProfile?.[0]?.url} alt="" /></div>
@@ -476,8 +372,8 @@ const QueHistory = () => {
                                                 ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
                                                 : 0}</p></div>
                                             {/* <div><p>{item.serviceType}</p></div>
-                                            <div><p>{item.serviceEWT} mins</p></div>
-                                            <div><span>{item?.isAdmin ? (<CheckIcon color={"green"} />) : (<CloseIcon color={"var(--bg-secondary)"} />)}</span></div> */}
+                                                        <div><p>{item.serviceEWT} mins</p></div>
+                                                        <div><span>{item?.isAdmin ? (<CheckIcon color={"green"} />) : (<CloseIcon color={"var(--bg-secondary)"} />)}</span></div> */}
                                             <div><p>{item.appointmentDate?.split("T")[0]}</p></div>
                                             <div><p style={{
                                                 color: item.status === "served" ? "green" : "red"
@@ -558,7 +454,7 @@ const QueHistory = () => {
 
 
             {
-                getAdminAppointmentHistoryLoading ? (
+                getBarberAppointmentHistoryLoading ? (
                     <div className={style.list_container_mobile_loader}>
                         <Skeleton
                             count={6}
@@ -568,10 +464,8 @@ const QueHistory = () => {
                             style={{ marginBottom: "1rem" }}
                         />
                     </div>
-                ) : getAdminAppointmentHistoryResolve && AdminAppointmentHistory.length > 0 ? (
+                ) : getBarberAppointmentHistoryResolve && BarberAppointmentHistory.length > 0 ? (
                     <div className={style.list_container_mobile}>
-                        {barberData?.barber ? <p style={{ marginBottom: "2rem" }}>Barber - {barberData?.barberName}</p> : null}
-                        {customerData?.customer ? <p style={{ marginBottom: "2rem" }}>Customer - {customerData?.customerName}</p> : null}
                         {
                             mobileQueueList?.map((item, index) => {
                                 return (
@@ -595,14 +489,14 @@ const QueHistory = () => {
                                         </div>
                                         <div>
                                             {/* <div>
-                                                <div>{item.methodUsed === "App" ? <MobileIcon color={"#1ADB6A"} /> : <KioskIcon color={"#1ADB6A"} />}</div>
-                                                <p>Mode</p>
-                                            </div>
-
-                                            <div>
-                                                <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"#1ADB6A"} /> : <GroupJoinIcon color={"#1ADB6A"} />}</div>
-                                                <p>Type</p>
-                                            </div> */}
+                                                            <div>{item.methodUsed === "App" ? <MobileIcon color={"#1ADB6A"} /> : <KioskIcon color={"#1ADB6A"} />}</div>
+                                                            <p>Mode</p>
+                                                        </div>
+            
+                                                        <div>
+                                                            <div>{item.joinedQType === "Single-Join" ? <CustomerIcon color={"#1ADB6A"} /> : <GroupJoinIcon color={"#1ADB6A"} />}</div>
+                                                            <p>Type</p>
+                                                        </div> */}
 
                                             <div>
                                                 <div>{item.status === "served" ? <CheckIcon color={"#1ADB6A"} /> : <CloseIcon color={"#FC3232"} />}</div>
@@ -625,11 +519,8 @@ const QueHistory = () => {
                 )
             }
 
-
-
-        </section >
+        </section>
     )
 }
 
-export default QueHistory
-
+export default AppointmentHistory

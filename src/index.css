@@ -19,8 +19,6 @@
   /* for Firefox on macOS */
   text-rendering: optimizeLegibility;
   /* improves legibility */
-  font-smoothing: antialiased;
-  /* General text smoothing for some browsers */
 }
 
 
@@ -735,13 +733,53 @@ body {
   border-width: 0 2px 2px 0 !important;
 }
 
+.rmdp-arrow-container.rmdp-left {
+  position: relative;
+
+  &>i {
+    display: none !important;
+  }
+
+  &::after {
+    content: "<";
+    position: absolute;
+    top: -2%;
+    left: 25%;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+  }
+
+  &:hover::after {
+    color: var(--btn-text-color);
+  }
+}
+
+
+.rmdp-arrow-container.rmdp-right {
+  position: relative;
+
+  &>i {
+    display: none !important;
+  }
+
+  &::after {
+    content: ">";
+    position: absolute;
+    top: -2%;
+    right: 25%;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+  }
+
+  &:hover::after {
+    color: var(--btn-text-color);
+  }
+}
+
+
 .rmdp-arrow-container:hover {
   background-color: var(--bg-secondary-hover) !important;
 
-  .rmdp-arrow {
-    border: solid var(--btn-text-color) !important;
-    border-width: 0 2px 2px 0 !important;
-  }
 }
 
 .rmdp-ep-shadow:after {

@@ -738,7 +738,7 @@
         }
 
         .mobile_header {
-            min-height: 4rem;
+            /* min-height: 4rem; */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -760,11 +760,11 @@
                 &>button {
                     height: 3.5rem;
                     width: 3.5rem;
-                    border-radius: var(--border-radius-primary);
+                    /* border-radius: var(--border-radius-primary);
                     -webkit-border-radius: var(--border-radius-primary);
                     -moz-border-radius: var(--border-radius-primary);
                     -ms-border-radius: var(--border-radius-primary);
-                    -o-border-radius: var(--border-radius-primary);
+                    -o-border-radius: var(--border-radius-primary); */
                     background-color: var(--bg-primary);
                     border: 0.1rem solid var(--border-secondary);
                     color: var(--text-primary);

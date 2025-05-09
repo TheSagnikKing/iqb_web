@@ -47,6 +47,7 @@ const AppointmentList = React.lazy(() => import("./Admin/Appointment/Appointment
 const AdminBookAppointments = React.lazy(() => import("./Admin/BookAppointment/CreateAppointment/CreateAppointment"))
 const AdminBookEditAppointments = React.lazy(() => import("./Admin/BookAppointment/EditAppointment/EditAppointment"))
 const AdminSubscription = React.lazy(() => import("./Admin/Subscription/Subscription"))
+const BarberAppointmentHistory = React.lazy(() => import("./Barber/AppointmentHistory/AppointmentHistory"))
 
 const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 const PaymentStatus = React.lazy(() => import("./Admin/Payment/PaymentStatus/PaymentStatus"))
@@ -476,6 +477,17 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
+
+                    <Route
+                      path="/barber-appointmenthistory"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <BarberAppointmentHistory />
+                        </ErrorBoundary>
+                      }
+                    />
+
+
                   </Route>
                 </Route>
 

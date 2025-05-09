@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { CANCEL_APPOINT_FAIL, CANCEL_APPOINT_REQ, CANCEL_APPOINT_SUCCESS, GET_BARBER_APPOINT_LIST_FAIL, GET_BARBER_APPOINT_LIST_REQ, GET_BARBER_APPOINT_LIST_SUCCESS, SERVE_APPOINT_FAIL, SERVE_APPOINT_REQ, SERVE_APPOINT_SUCCESS } from "../Constants/constants";
+import { CANCEL_APPOINT_FAIL, CANCEL_APPOINT_REQ, CANCEL_APPOINT_SUCCESS, GET_APPOINTMENT_HISTORY_FAIL, GET_APPOINTMENT_HISTORY_REQ, GET_APPOINTMENT_HISTORY_SUCCESS, GET_BARBER_APPOINT_LIST_FAIL, GET_BARBER_APPOINT_LIST_REQ, GET_BARBER_APPOINT_LIST_SUCCESS, SERVE_APPOINT_FAIL, SERVE_APPOINT_REQ, SERVE_APPOINT_SUCCESS } from "../Constants/constants";
 
 export const AppointmentAction = (appointdata) => async (dispatch) => {
     try {
@@ -42,7 +42,7 @@ export const AppointmentAction = (appointdata) => async (dispatch) => {
 }
 
 
-export const CancelAppointmentAction = (canceldata,setCancelAllModalOpen,setOpenModal) => async (dispatch) => {
+export const CancelAppointmentAction = (canceldata, setCancelAllModalOpen, setOpenModal) => async (dispatch) => {
     try {
         dispatch({ type: CANCEL_APPOINT_REQ })
 
@@ -185,4 +185,52 @@ export const ServeAppointmentAction = (servedata) => async (dispatch) => {
             },
         });
     }
+}
+
+
+export const getBarberAppointmentHistoryAction = (salonId, startDate, endDate, barberId, signal) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_APPOINTMENT_HISTORY_REQ })
+
+        const { data } = await api.post("/api/appointmentHistory/getAppointmentHistoryByBarberIdSalonId", {
+            salonId,
+            barberId,
+            from: startDate,
+            to: endDate,
+        }, { signal })
+
+        dispatch({
+            type: GET_APPOINTMENT_HISTORY_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_APPOINTMENT_HISTORY_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+        if (error.name !== 'CanceledError') {
+            dispatch({
+                type: GET_APPOINTMENT_HISTORY_FAIL,
+                payload: error?.response?.data
+            });
+        }
+    }
+
 }

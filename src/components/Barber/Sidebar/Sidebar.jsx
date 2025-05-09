@@ -190,6 +190,12 @@ const Sidebar = () => {
           icon: <Admincustomericon />,
           url: "/barber-appointlist"
         },
+        {
+          id: 6,
+          name: "Appointment History",
+          icon: <QueueHistoryIcon />,
+          url: "/barber-appointmenthistory"
+        },
       ]
     },
   ]

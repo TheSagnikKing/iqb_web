@@ -923,7 +923,7 @@ const Queue = () => {
                     placeItems: "center",
                   }}><ButtonLoader /></button> : <button
                     style={{
-                      background: "#00A36C",
+                      background: "#0285c7",
                       color: "#fff"
                     }}
                     onClick={serveQHandler}>Serve</button>
@@ -935,7 +935,7 @@ const Queue = () => {
                     placeItems: "center",
                   }}><ButtonLoader /></button> : <button
                     style={{
-                      background: "rgb(244, 67, 54)",
+                      background: "#450a0a",
                       color: "#fff"
                     }}
                     onClick={() => cancelQHandler(queueItem)}

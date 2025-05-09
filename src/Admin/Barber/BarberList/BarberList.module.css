@@ -699,6 +699,8 @@
 
     .section {
         &>div:nth-child(1) {
+            min-height: auto;
+
             &>div {
                 &>button:nth-child(1) {
                     display: block;

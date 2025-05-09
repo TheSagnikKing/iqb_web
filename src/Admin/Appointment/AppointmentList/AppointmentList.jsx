@@ -6,6 +6,8 @@ import api from "../../../Redux/api/Api"
 import "react-calendar/dist/Calendar.css";
 import Skeleton from 'react-loading-skeleton'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { DropdownIcon } from '../../../newicons'
 
 const AppointmentList = () => {
 
@@ -45,6 +47,14 @@ const AppointmentList = () => {
     }, [selectedDate])
 
     const navigate = useNavigate()
+
+
+    const [expanded, setExpanded] = useState(false);
+
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+
 
     return (
         <div className={`${style.section} ${darkmodeOn && style.dark}`}>
@@ -135,6 +145,98 @@ const AppointmentList = () => {
                 }
 
             </div>
+
+
+            {
+                loading ? (
+                    <div className={`${style.appointment_mobile_content_wrapper_loading} ${darkmodeOn && style.dark}`}>
+                        <Skeleton
+                            count={4}
+                            style={{ height: "9rem", marginBottom: "1rem" }}
+                            baseColor={"var(--loader-bg-color)"}
+                            highlightColor={"var(--loader-highlight-color)"} />
+                    </div>
+                ) : appointmentList?.response?.length > 0 ? (
+                    <div className={`${style.appointment_mobile_content_wrapper} ${darkmodeOn && style.dark}`} >
+                        {
+                            appointmentList?.response?.map((appoint, index) => {
+                                return (
+                                    <Accordion key={appoint.barberId} expanded={expanded === `panel${appoint.barberId}`} onChange={handleChange(`panel${appoint.barberId}`)}>
+                                        <AccordionSummary
+                                            expandIcon={<DropdownIcon color='var(--text-primary)' />}
+                                            aria-controls="panel1bh-content"
+                                            id="panel1bh-header"
+                                            sx={{
+                                                backgroundColor: "var(--bg-primary)",
+                                                borderBottom: "0.1rem solid var(--border-secondary)"
+                                            }}
+                                        >
+                                            <div style={{
+                                                height: '4.5rem',
+                                                width: '4.5rem',
+                                                border: '0.1rem solid rgba(0, 0, 0, 0.2)',
+                                                borderRadius: '50%',
+                                                marginRight: "2rem"
+                                            }}>
+                                                <img style={{ width: "inherit", height: "inherit", borderRadius: "inherit" }} src={appoint.barberProfile?.[0]?.url} alt="profile" />
+                                            </div>
+                                            <Typography component="span" sx={{ alignContent: "center", marginRight: "2rem", fontSize: "1.4rem", fontFamily: "AirbnbCereal_Medium", color: "var(--text-primary)" }}>
+                                                {appoint.barbername}
+                                            </Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails
+                                            sx={{
+                                                padding: "0px",
+                                            }}
+                                        >
+
+                                            {
+                                                appoint.appointments.map((cus, index) => {
+                                                    return (
+                                                        <div
+                                                            className={`${style.appointment_body_customer_mobile_item} ${darkmodeOn ? style.dark : ''}`}
+                                                            key={index}
+                                                            style={{ borderBottom: index === appoint.appointments.length - 1 && "none" }}
+                                                        >
+                                                            <div>
+                                                                <div>
+                                                                    <img src={cus.customerProfile?.[0]?.url} alt="" />
+                                                                </div>
+                                                                <div>
+                                                                    <p>{cus.customerName}</p>
+                                                                    <p>
+                                                                        {cus.startTime} - {cus.endTime}
+                                                                    </p>
+                                                                    <p>
+                                                                        Ewt -{' '}
+                                                                        {cus.services.reduce(
+                                                                            (total, service) => total + service.barberServiceEWT,
+                                                                            0
+                                                                        )}{' '}
+                                                                        mins
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+
+                                        </AccordionDetails>
+                                    </Accordion>
+                                )
+                            })
+                        }
+
+                    </div>
+                ) : (
+                    <div className={`${style.appointment_mobile_content_wrapper_error} ${darkmodeOn && style.dark}`}>
+                        <p>No appointment available</p>
+                    </div>
+                )
+            }
+
         </div >
     )
 }
