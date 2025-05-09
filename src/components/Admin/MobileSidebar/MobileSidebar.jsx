@@ -511,7 +511,7 @@ const MobileSidebar = () => {
                   </div>)
                 }
 
-                <p className={style.version_text}> v 1.0.4</p>
+                <p className={style.version_text}> v 1.0.5</p>
               </nav>
             </div>
           </ClickAwayListener>

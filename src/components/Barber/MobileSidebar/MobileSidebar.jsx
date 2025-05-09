@@ -65,7 +65,9 @@ const MobileSidebar = () => {
           id: 1,
           name: "Dashboard",
           icon: <DashboardIcon />,
-          url: "/barber-dashboard"
+          url: "/barber-dashboard",
+          subdomain: "admin",
+          exacturl: true
         },
       ]
     },
@@ -100,7 +102,7 @@ const MobileSidebar = () => {
           id: 6,
           name: "Appointment History",
           icon: <QueueHistoryIcon />,
-          url: "/barber-appointmenthistory"
+          url: "/barber-apphistory"
         },
       ]
     },
