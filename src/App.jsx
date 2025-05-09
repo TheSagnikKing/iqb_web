@@ -91,6 +91,21 @@ const App = () => {
 
   const darkmodeOn = darkMode === "On"
 
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+
+    // choose colors that match your theme
+    const lightColor = "#ffffff";
+    const darkColor = "#121212";
+    meta.setAttribute("content", "red");
+  }, []);
+
+
 
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
