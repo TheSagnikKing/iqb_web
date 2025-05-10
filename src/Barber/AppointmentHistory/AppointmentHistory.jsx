@@ -201,6 +201,8 @@ const AppointmentHistory = () => {
         dispatch(getBarberAppointmentHistoryAction(salonId, "", "", barberId));
     }
 
+    const barberProfile = useSelector(state => state.BarberLoggedInMiddleware?.entiredata?.user?.[0])
+
     return (
         <section className={`${style.section}`}>
             <div>
@@ -368,7 +370,7 @@ const AppointmentHistory = () => {
                                             <div><p>{item.startTime}</p></div>
                                             <div><p>{item.endTime}</p></div>
                                             {/* <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{item?.services.reduce((sum, service) => sum + service?.servicePrice, 0)}</p></div> */}
-                                            <div><p>{adminGetDefaultSalon?.response?.currency}{" "}{Array.isArray(item?.services)
+                                            <div><p>{barberProfile?.currency}{" "}{Array.isArray(item?.services)
                                                 ? item.services.reduce((sum, service) => sum + (service.servicePrice || 0), 0)
                                                 : 0}</p></div>
                                             {/* <div><p>{item.serviceType}</p></div>

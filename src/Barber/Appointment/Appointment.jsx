@@ -200,7 +200,98 @@ const Appointment = () => {
                 <h2>Appointment</h2>
             </div>
 
-            <div className={`${style.barber_appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
+            <div className={style.barber_appointment_content_wrapper}>
+                <div>
+                    <p>Appointment Off Days</p>
+                    <div className={style.heading}>
+                        <p>#</p>
+                        <p>Days</p>
+                    </div>
+                    {
+                        days.map((d) => {
+                            return (
+                                <div key={d.id} className={style.value}>
+                                    <input
+                                        type="checkbox"
+                                        style={{
+                                            accentColor: "blue"
+                                        }}
+                                        onChange={() => checkdayHandler(d)}
+                                        checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
+                                        disabled={getSalonoffDays.includes(d.day)}
+                                    />
+                                    <p>{d.day}</p>
+                                </div>
+                            )
+                        })
+                    }
+
+                    <button
+                        className={style.submit}
+                        onClick={submitHandler}
+                        disabled={salonId === 0}
+                        style={{
+                            cursor: salonId === 0 ? "not-allowed" : "pointer"
+                        }}
+                    >Save</button>
+
+                </div>
+
+                <div>
+                    <p>Barber Off Days</p>
+                    <div className={style.leave_value_body}>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: "2rem"
+                        }}>
+                            <p>Select Off Days</p>
+                            <button
+                                className={style.reset_days}
+                                onClick={() => offDayHandler([])}
+                                disabled={salonId === 0}
+                                style={{
+                                    cursor: salonId === 0 ? "not-allowed" : "pointer"
+                                }}
+                            >Reset Off Days</button>
+                        </div>
+                        {
+                            <div style={{ marginBottom: "2rem" }}>
+                                <Calendar
+                                    onClickDay={onClickDay}
+                                    // tileClassName={({ date }) =>
+                                    //     isSelected(date) ? style.highlighted_date : ""
+                                    // }
+
+                                    minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
+                                    tileClassName={({ date }) => {
+                                        if (isSelected(date)) {
+                                            return style.highlighted_date;
+                                        } else if (isDisabled(date)) {
+                                            return style.leave_dates;
+                                        }
+                                        return null;
+                                    }}
+
+                                // tileDisabled={({ date }) => isDisabled(date)}
+                                />
+                            </div>
+                        }
+
+                        <button
+                            className={style.submit}
+                            onClick={() => offDayHandler(selectedDates)}
+                            disabled={salonId === 0}
+                            style={{
+                                cursor: salonId === 0 ? "not-allowed" : "pointer"
+                            }}
+                        >Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <div className={`${style.barber_appointment_content_mobile_wrapper} ${darkmodeOn && style.dark}`}>
                 <div className={style.button_group}>
                     <button
                         onClick={() => {
@@ -288,7 +379,7 @@ const Appointment = () => {
                     style={{
                         cursor: salonId === 0 ? "not-allowed" : "pointer"
                     }}
-                >Submit</button>
+                >Save</button>
             </div>
         </div>
     )
