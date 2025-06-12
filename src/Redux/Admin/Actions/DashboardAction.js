@@ -49,12 +49,12 @@ export const getAllQueueListAction = (salonId, signal) => async (dispatch) => {
     try {
         dispatch({ type: GET_ALL_QUEUELIST_REQ })
 
-        const { data } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`, { signal })
+        // const { data } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`, { signal })
 
-        dispatch({
-            type: GET_ALL_QUEUELIST_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: GET_ALL_QUEUELIST_SUCCESS,
+        //     payload: data
+        // })
     } catch (error) {
 
         if (error?.response?.status === 500) {

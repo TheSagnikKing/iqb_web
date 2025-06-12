@@ -462,8 +462,13 @@ import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction
 import { AppointmentIcon } from '../../newicons';
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import api from '../../Redux/api/Api';
+// import { useSocket } from '../../context/SocketContext';
 
 const Dashboard = () => {
+
+  // const { socket } = useSocket()
+
+  // console.log("The socket value is ", socket)
 
   const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
 

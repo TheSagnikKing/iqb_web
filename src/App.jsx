@@ -64,6 +64,7 @@ import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
 import Dummy from './Admin/Dummy';
+import { SocketProvider } from './context/SocketContext';
 // import Appointment from './Admin/Appointment/Appointment';
 
 const MobileCus = React.lazy(() => import("../src/mobileCus/MobileCust"))
@@ -221,7 +222,7 @@ const App = () => {
                       path="/admin-dashboard"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminDashboard />
+                          <SocketProvider><AdminDashboard /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -313,7 +314,7 @@ const App = () => {
                       path="/admin-queue"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminQueue />
+                          <SocketProvider><AdminQueue /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -399,7 +400,6 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-
                   </Route>
                 </Route>
 

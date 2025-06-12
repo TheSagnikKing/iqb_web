@@ -363,8 +363,13 @@ import { ClickAwayListener, Modal, Pagination } from '@mui/material'
 import { getAdminBarberListAction } from '../../Redux/Admin/Actions/BarberAction'
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader'
 import { DropdownIcon } from '../../newicons'
+import { useSocket } from '../../context/SocketContext'
 
 const Queue = () => {
+
+  // const { socket } = useSocket()
+
+  // console.log("The socket value is ", socket)
 
   const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
   const adminEmail = useSelector(state => state.AdminLoggedInMiddleware.adminEmail)
