@@ -400,6 +400,8 @@ const Queue = () => {
   } = getAllQueueList
 
 
+  // console.log("queuelist ", queuelist)
+
 
   const darkMode = useSelector(darkmodeSelector)
 
@@ -546,7 +548,7 @@ const Queue = () => {
   const [mobileQueueList, setMobileQueueList] = useState([])
 
   useEffect(() => {
-    if (getAllQueueListResolve && queuelist.length > 0) {
+    if (getAllQueueListResolve && queuelist?.length > 0) {
       setQueuelistData(queuelist)
       setQueuelistDataCopy(queuelist)
       setMobileQueueList(queuelist)
@@ -569,17 +571,17 @@ const Queue = () => {
   const [queuePaginationData, setQueuePaginationData] = useState([])
 
   useEffect(() => {
-    if (queuelistData.length > 0) {
-      setQueuePaginationData(queuelistData.slice(startIndex, endIndex))
+    if (queuelistData?.length > 0) {
+      setQueuePaginationData(queuelistData?.slice(startIndex, endIndex))
     }
   }, [queuelistData])
 
   useEffect(() => {
-    const totalPages = Math.ceil(queuelistData.length / rowsPerPage); // Calculate based on filtered data
+    const totalPages = Math.ceil(queuelistData?.length / rowsPerPage); // Calculate based on filtered data
     setTotalPages(totalPages);
 
     const startIndex = (page - 1) * rowsPerPage;
-    const endIndex = Math.min(startIndex + rowsPerPage, queuelistData.length);
+    const endIndex = Math.min(startIndex + rowsPerPage, queuelistData?.length);
 
     setStartIndex(startIndex);
     setEndIndex(endIndex);
@@ -598,7 +600,7 @@ const Queue = () => {
       let filteredData = queuelistDataCopy;
 
       if (query.trim() !== '') {
-        filteredData = queuelistDataCopy.filter((item) =>
+        filteredData = queuelistDataCopy?.filter((item) =>
           item.customerName.toLowerCase().trim().includes(query.toLowerCase())
         );
       }
@@ -609,7 +611,7 @@ const Queue = () => {
       let filteredData = queuelistDataCopy;
 
       if (query.trim() !== '') {
-        filteredData = queuelistDataCopy.filter((item) =>
+        filteredData = queuelistDataCopy?.filter((item) =>
           item.customerName.toLowerCase().trim().includes(query.toLowerCase())
         );
       }
@@ -670,7 +672,7 @@ const Queue = () => {
                 highlightColor={"var(--loader-highlight-color)"}
                 style={{ marginBottom: "1rem" }} />
             </div>
-          ) : getAllQueueListResolve && queuelist.length > 0 ? (
+          ) : getAllQueueListResolve && queuelist?.length > 0 ? (
             <div className={`${style.list_body_container}`}>
 
               <div className={`${style.headRow}`}>
@@ -809,7 +811,7 @@ const Queue = () => {
               highlightColor={"var(--loader-highlight-color)"}
               style={{ marginBottom: "1rem" }} />
           </div>
-        ) : getAllQueueListResolve && mobileQueueList.length > 0 ? (
+        ) : getAllQueueListResolve && mobileQueueList?.length > 0 ? (
           <div className={style.list_container_mobile}>
 
             {

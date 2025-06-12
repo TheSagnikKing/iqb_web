@@ -12,17 +12,10 @@ export function useSocket() {
 
 export function SocketProvider({ children }) {
 
-    // const [socket, setSocket] = useState(null);
-
     const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // const newSocket = socketIOClient("https://iqb-final.onrender.com", {
-        //     query: {
-        //         LoggedInUserId: LoggedinUser?._id
-        //     }
-        // });
 
         const newSocket = socketIOClient("https://iqb-final.onrender.com")
 
@@ -34,16 +27,21 @@ export function SocketProvider({ children }) {
 
         // 🔹 Listen for real-time queue updates
         newSocket.on("queueUpdated", (updatedQueue) => {
-            console.log("🔄 Queue updated:", updatedQueue);
-
+            
+            dispatch({
+                type: GET_ALL_QUEUELIST_SUCCESS,
+                payload: {
+                    success: true,
+                    status: 200,
+                    message: "Queue list retrived sucessfully",
+                    response: updatedQueue
+                }
+            })
         });
-
-        // setSocket(newSocket);
 
         return () => newSocket.disconnect();
 
-
-    }, [salonId]);
+    }, [salonId, dispatch]);
 
     return (
         <SocketContext.Provider value={{}} >
