@@ -147,19 +147,19 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
 
         const { data } = await api.post(`/api/salon/changeSalonOnlineStatus`, salonStatusdata)
 
-        dispatch({
-            type: SALON_ONLINE_STATUS_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: SALON_ONLINE_STATUS_SUCCESS,
+        //     payload: data
+        // })
 
-        window.location.reload()
+        // window.location.reload()
 
-        const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
+        // const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
 
-        dispatch({
-            type: GET_ADMIN_BARBERLIST_SUCCESS,
-            payload: barberlist
-        })
+        // dispatch({
+        //     type: GET_ADMIN_BARBERLIST_SUCCESS,
+        //     payload: barberlist
+        // })
     } catch (error) {
 
         if (error?.response?.status === 500) {

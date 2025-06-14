@@ -217,7 +217,7 @@ const App = () => {
                 {/* Admin Main Pages  */}
 
                 <Route element={<ProtectedAdminRoute />}>
-                  <Route element={isMobile ? <AdminMobileSidebar /> : <AdminSidebar />}>
+                  <Route element={isMobile ? <SocketProvider><AdminMobileSidebar /></SocketProvider> : <SocketProvider><AdminSidebar /></SocketProvider>}>
                     <Route
                       path="/admin-dashboard"
                       element={
@@ -422,7 +422,7 @@ const App = () => {
                       path="/barber-dashboard"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberDashboard />
+                          <SocketProvider><BarberDashboard /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -455,7 +455,7 @@ const App = () => {
                       path="/barber-queue"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberQueueList />
+                          <SocketProvider><BarberQueueList /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
