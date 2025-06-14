@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient from 'socket.io-client';
-import { GET_ALL_QUEUELIST_SUCCESS, SALON_ONLINE_STATUS_SUCCESS } from '../Redux/Admin/Constants/constants';
+import { ADMIN_GET_DEFAULT_SALON_SUCCESS, GET_ALL_QUEUELIST_SUCCESS, SALON_ONLINE_STATUS_SUCCESS } from '../Redux/Admin/Constants/constants';
 import { GET_QUEUELIST_BARBERID_SUCCESS } from '../Redux/Barber/Constants/constants';
 
 const SocketContext = createContext();
@@ -12,6 +12,12 @@ export function useSocket() {
 
 
 export function SocketProvider({ children }) {
+
+    const adminGetDefaultSalon = useSelector(state => state.adminGetDefaultSalon)
+
+    const {
+        response: adminGetDefaultSalonResponse
+    } = adminGetDefaultSalon
 
     const salonId = useSelector(state => state.AdminLoggedInMiddleware.adminSalonId)
 
@@ -53,21 +59,18 @@ export function SocketProvider({ children }) {
 
             // Listen for status update from server
             newSocket.on("salonStatusUpdate", (data) => {
-                console.log("💡 Received salon status update:", data);
-                // if (data.salonId === salonId) {
-                //     setIsOnline(data.isOnline);
-                // }
-
                 dispatch({
-                    type: SALON_ONLINE_STATUS_SUCCESS,
+                    type: ADMIN_GET_DEFAULT_SALON_SUCCESS,
                     payload: {
                         success: true,
                         status: 200,
-                        message: "The salon is currently online",
-                        response: data.response
+                        message: "Salon found successfully",
+                        response: {
+                            ...data?.response,
+                            isOnline: data?.response?.isOnline
+                        }
                     }
                 })
-
             });
         }
 
