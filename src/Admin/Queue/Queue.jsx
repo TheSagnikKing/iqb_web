@@ -410,17 +410,17 @@ const Queue = () => {
   const [queueItem, setQueueItem] = useState({})
 
   const selectHandler = (b) => {
-    if (!mobileWidth && b.qPosition !== 1) {
-      return toast.error("Queue position is not 1", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-    }
+    // if (!mobileWidth && b.qPosition !== 1) {
+    //   return toast.error("Queue position is not 1", {
+    //     duration: 3000,
+    //     style: {
+    //       fontSize: "var(--font-size-2)",
+    //       borderRadius: '0.3rem',
+    //       background: '#333',
+    //       color: '#fff',
+    //     },
+    //   });
+    // }
 
     const confirm = window.confirm("Are you Sure ?")
 
