@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_EDIT_SALON_FAIL, ADMIN_EDIT_SALON_REQ, ADMIN_EDIT_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, ADMIN_GET_DEFAULT_SALON_SUCCESS, ADMIN_GET_SALON_IMAGES_FAIL, ADMIN_GET_SALON_IMAGES_REQ, ADMIN_GET_SALON_IMAGES_SUCCESS, ADMIN_GET_SALON_LOGO_FAIL, ADMIN_GET_SALON_LOGO_REQ, ADMIN_GET_SALON_LOGO_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_UPDATE_SALON_SETTINGS_FAIL, ADMIN_UPDATE_SALON_SETTINGS_REQ, ADMIN_UPDATE_SALON_SETTINGS_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS } from "../Constants/constants"
+import { ADMIN_CREATE_SALON_FAIL, ADMIN_CREATE_SALON_REQ, ADMIN_CREATE_SALON_SUCCESS, ADMIN_DELETE_SALON_FAIL, ADMIN_DELETE_SALON_REQ, ADMIN_DELETE_SALON_SUCCESS, ADMIN_EDIT_SALON_FAIL, ADMIN_EDIT_SALON_REQ, ADMIN_EDIT_SALON_SUCCESS, ADMIN_GETALLSALON_ICONS_FAIL, ADMIN_GETALLSALON_ICONS_REQ, ADMIN_GETALLSALON_ICONS_SUCCESS, ADMIN_GET_ALL_CITIES_FAIL, ADMIN_GET_ALL_CITIES_REQ, ADMIN_GET_ALL_CITIES_SUCCESS, ADMIN_GET_ALL_COUNTRIES_FAIL, ADMIN_GET_ALL_COUNTRIES_REQ, ADMIN_GET_ALL_COUNTRIES_SUCCESS, ADMIN_GET_ALL_TIMEZONES_FAIL, ADMIN_GET_ALL_TIMEZONES_REQ, ADMIN_GET_ALL_TIMEZONES_SUCCESS, ADMIN_GET_DEFAULT_SALON_SUCCESS, ADMIN_GET_SALON_IMAGES_FAIL, ADMIN_GET_SALON_IMAGES_REQ, ADMIN_GET_SALON_IMAGES_SUCCESS, ADMIN_GET_SALON_LOGO_FAIL, ADMIN_GET_SALON_LOGO_REQ, ADMIN_GET_SALON_LOGO_SUCCESS, ADMIN_LOGGED_IN_MIDDLEWARE_SUCCESS, ADMIN_UPDATE_SALON_SETTINGS_FAIL, ADMIN_UPDATE_SALON_SETTINGS_REQ, ADMIN_UPDATE_SALON_SETTINGS_SUCCESS, GET_ADMIN_SALONLIST_FAIL, GET_ADMIN_SALONLIST_REQ, GET_ADMIN_SALONLIST_SUCCESS, GET_ALL_SALON_CATEGORIES_FAIL, GET_ALL_SALON_CATEGORIES_REQ, GET_ALL_SALON_CATEGORIES_SUCCESS } from "../Constants/constants"
 
 export const getAdminSalonListAction = (email, signal) => async (dispatch) => {
     try {
@@ -429,8 +429,8 @@ export const adminUpdateSalonSettingsAction = (appointmentdata, setOpenSalonSett
         })
 
 
-        const { data:defaultsalondata } = await api.post(`/api/admin/getDefaultSalonByAdmin`, {
-            adminEmail:email
+        const { data: defaultsalondata } = await api.post(`/api/admin/getDefaultSalonByAdmin`, {
+            adminEmail: email
         })
 
         dispatch({
@@ -574,6 +574,59 @@ export const getAdminSalonLogoAction = (salonId) => async (dispatch) => {
         if (error.name !== 'CanceledError') {
             dispatch({
                 type: ADMIN_GET_SALON_LOGO_FAIL,
+                payload: error?.response?.data
+            });
+
+            toast.error(error?.response?.data?.message, {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+        }
+
+    }
+}
+
+
+export const getAllSalonCategoriesAction = (signal) => async (dispatch) => {
+    try {
+        dispatch({ type: GET_ALL_SALON_CATEGORIES_REQ })
+
+        const { data } = await api.get(`/api/salon/getAllCategories`, { signal })
+
+        dispatch({
+            type: GET_ALL_SALON_CATEGORIES_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+
+        if (error?.response?.status === 500) {
+            dispatch({
+                type: GET_ALL_SALON_CATEGORIES_FAIL,
+                payload: "Something went wrong !"
+            });
+
+            toast.error("Something went wrong !", {
+                duration: 3000,
+                style: {
+                    fontSize: "var(--font-size-2)",
+                    borderRadius: '0.3rem',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
+
+            return;
+        }
+
+
+        if (error.name !== 'CanceledError') {
+            dispatch({
+                type: GET_ALL_SALON_CATEGORIES_FAIL,
                 payload: error?.response?.data
             });
 

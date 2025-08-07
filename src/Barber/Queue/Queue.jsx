@@ -51,17 +51,17 @@ const Queue = () => {
   const [barberCancelLoading, setBarberCancelLoading] = useState(false)
 
   const serveQHandler = (b) => {
-    if (b.qPosition !== 1) {
-      return toast.error("Queue position is not 1", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-    }
+    // if (b.qPosition !== 1) {
+    //   return toast.error("Queue position is not 1", {
+    //     duration: 3000,
+    //     style: {
+    //       fontSize: "var(--font-size-2)",
+    //       borderRadius: '0.3rem',
+    //       background: '#333',
+    //       color: '#fff',
+    //     },
+    //   });
+    // }
 
     const confirm = window.confirm("Are you Sure ?")
 

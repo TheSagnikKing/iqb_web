@@ -5,7 +5,7 @@ import { CameraIcon, CloseIcon, DeleteIcon, DropdownIcon, FacebookIcon, Instagra
 import { CrownIcon, EditIcon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAllSalonCategoriesAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
@@ -46,6 +46,31 @@ const CreateSalon = () => {
     resolve: getAdminAllSalonIconResolve,
     response: SalonIcons
   } = getAdminAllSalonIcon
+
+
+  const SalonCategoriesRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonIconControllerRef.current = controller;
+
+    dispatch(getAllSalonCategoriesAction(controller.signal));
+
+    return () => {
+      if (SalonCategoriesRef.current) {
+        SalonCategoriesRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const getAllSalonCategories = useSelector(state => state.getAllSalonCategories)
+
+  const {
+    loading: getAllSalonCategoriesLoading,
+    resolve: getAllSalonCategoriesResolve,
+    response: salonCategories
+  } = getAllSalonCategories
+
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -145,6 +170,7 @@ const CreateSalon = () => {
   const [serviceDescError, setServiceDescError] = useState("")
   const [servicePriceError, setServicePriceError] = useState("")
   const [serviceEwtError, setServiceEwtError] = useState("")
+  const [serviceCategoryNameError, setServiceCategoryNameError] = useState("")
 
   const [fblinkError, setFbLinkError] = useState("")
   const [weblinkError, setWebLinkError] = useState("")
@@ -303,6 +329,14 @@ const CreateSalon = () => {
     setServiceTypeOpen(false)
   }
 
+
+  const [serviceCategoryName, setServiceCategoryName] = useState("")
+
+  const serviceCategoryNameHandler = (value) => {
+    setServiceCategoryNameError("")
+    setServiceCategoryName(value?.serviceCategoryName)
+    setServiceCategoryOpen(false)
+  }
 
   const [salonLogo, setSalonLogo] = useState("")
 
@@ -481,6 +515,19 @@ const CreateSalon = () => {
       return setServiceDescError("Service description must be between 1 to 50 charecters")
     }
 
+    if (!serviceCategoryName) {
+      toast.error("Please select service category", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceCategoryNameError("Please enter service category")
+    }
+
     if (!servicePrice) {
       toast.error("Please enter service price", {
         duration: 3000,
@@ -516,7 +563,8 @@ const CreateSalon = () => {
       servicePrice: Number(servicePrice),
       vipService,
       serviceDesc,
-      serviceEWT: Number(serviceEWT)
+      serviceEWT: Number(serviceEWT),
+      serviceCategoryName
     }
 
     setSelectedServices([...selectedServices, service])
@@ -536,6 +584,7 @@ const CreateSalon = () => {
     setVipService(false)
     setServiceDesc("")
     setServiceEWT("")
+    setServiceCategoryName("")
   }
 
   const handleKeyPressAddServices = (e) => {
@@ -556,6 +605,7 @@ const CreateSalon = () => {
     setVipService(currentService.vipService);
     setServiceDesc(currentService.serviceDesc);
     setServiceEWT(currentService.serviceEWT);
+    setServiceCategoryName(currentService.serviceCategoryName)
 
     const updatedServices = [...localsalondata.selectedServices];
     updatedServices.splice(index, 1);
@@ -678,7 +728,7 @@ const CreateSalon = () => {
       code: countrycode
     }
 
-    // console.log("Salondata ", salondata)
+    // console.log("Create Salon ", salondata)
 
     const files = await Promise.all(
       salonImages?.map(async (imgObject) => {
@@ -699,7 +749,6 @@ const CreateSalon = () => {
     setUploadSalonImages(files)
 
     dispatch(adminCreateSalonAction(salondata, navigate))
-
 
   }
 
@@ -966,8 +1015,6 @@ const CreateSalon = () => {
     };
   }, [dispatch]);
 
-
-
   const steps = [
     {
       label: 'Account Information',
@@ -1008,6 +1055,7 @@ const CreateSalon = () => {
           }, error: serviceDescError
         },
         { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true, value: `${vipService ? 'VIP' : 'Regular'}` },
+        { name: 'serviceCategory', label: 'Service Category', type: 'text', placeholder: "Select Service Category", dropdown: true, value: serviceCategoryName, error: serviceCategoryNameError },
 
         {
           name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false, value: servicePrice, onChange: (e) => {
@@ -1271,7 +1319,7 @@ const CreateSalon = () => {
   const [cityOpen, setCityOpen] = useState(false)
   const [timezoneOpen, setTimezoneOpen] = useState(false)
   const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
-
+  const [serviceCategoryOpen, setServiceCategoryOpen] = useState(false)
 
   return (
     <section className={`${style.section}`}>
@@ -1682,18 +1730,69 @@ const CreateSalon = () => {
                                   </ClickAwayListener>
                                 )}
                               </div>
-                            ) : (
+                            ) : field.name === "serviceCategory" ? (
                               <>
-                                <input
-                                  type={field.type}
-                                  name={field.name}
-                                  value={field.value}
-                                  placeholder={field.placeholder}
-                                  onChange={field.onChange}
-                                />
+                                <div
+                                  className={`${style.select_container}`}
+                                  onClick={() => setServiceCategoryOpen((prev) => !prev)}
+                                >
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {serviceCategoryOpen && (
+                                    <ClickAwayListener onClickAway={() => setServiceCategoryOpen(false)}>
+                                      <div
+                                        className={`${style.select_dropdown_container}`}
+                                        onClick={(event) => event.stopPropagation()}
+                                      >
+                                        {/* <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button> */}
+                                        {
+                                          salonCategories?.map((item) => {
+                                            return (
+                                              <button
+                                                onClick={() => serviceCategoryNameHandler(item)}
+                                                key={item?._id}
+                                                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+                                              >
+                                                <img
+                                                  src={item?.serviceCategoryImage?.url}
+                                                  alt={item?.serviceCategoryName}
+                                                  style={{ width: "2.4rem", height: "2.4rem", objectFit: "cover", borderRadius: "50%", border: "0.1rem solid #efefef" }}
+                                                />
+                                                {item?.serviceCategoryName}
+                                              </button>
+
+                                            )
+                                          })
+                                        }
+                                      </div>
+                                    </ClickAwayListener>
+                                  )}
+
+                                </div>
                                 {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
                               </>
-                            )}
+                            )
+                              :
+                              (
+                                <>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    onChange={field.onChange}
+                                  />
+                                  {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                                </>
+                              )}
                           </div>
                         ))}
 
@@ -1734,6 +1833,8 @@ const CreateSalon = () => {
                                     </div>
                                     <p>{ser.serviceName}</p>
                                     <p>{ser.serviceDesc}</p>
+                                    <p>{ser.serviceCategory}</p>
+                                    <p>{ser.serviceCategoryName}</p>
                                   </div>
                                   <button onClick={() => deleteServiceHandler(index)}>Delete</button>
                                 </div>
@@ -1764,6 +1865,7 @@ const CreateSalon = () => {
                                       <p>{ser.serviceName}</p>
                                       <p>{ser.vipService ? "VIP" : "Regular"}</p>
                                       <p>{ser.serviceDesc}</p>
+                                      <p>{ser.serviceCategoryName}</p>
                                     </div>
                                   </div>
                                   <button onClick={() => deleteServiceHandler(index)}>Delete</button>
@@ -1943,7 +2045,7 @@ const CreateSalon = () => {
       </Modal>
 
 
-    </section>
+    </section >
   )
 }
 
