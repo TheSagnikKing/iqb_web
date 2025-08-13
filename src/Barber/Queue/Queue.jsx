@@ -45,6 +45,9 @@ const Queue = () => {
 
   const darkMode = useSelector(darkmodeSelector)
 
+
+  console.log("BarberQueueList ", BarberQueueList)
+
   const darkmodeOn = darkMode === "On"
 
   const [barberServeLoading, setBarberServeLoading] = useState(false)

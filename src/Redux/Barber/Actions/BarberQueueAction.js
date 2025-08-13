@@ -11,10 +11,12 @@ export const getBarberQueueListAction = (salonId, barberId, signal) => async (di
             barberId
         }, { signal })
 
-        // dispatch({
-        //     type: GET_QUEUELIST_BARBERID_SUCCESS,
-        //     payload: data
-        // })
+        // Here comment this code when doing socket this dispatch
+
+        dispatch({
+            type: GET_QUEUELIST_BARBERID_SUCCESS,
+            payload: data
+        })
 
     } catch (error) {
 
