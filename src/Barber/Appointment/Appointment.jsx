@@ -202,7 +202,7 @@ const Appointment = () => {
 
             <div className={style.barber_appointment_content_wrapper}>
                 <div>
-                    <p>Appointment Off Days</p>
+                    <p>Choose appointment days</p>
                     <div className={style.heading}>
                         <p>#</p>
                         <p>Days</p>
