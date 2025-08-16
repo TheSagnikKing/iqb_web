@@ -575,6 +575,17 @@
 
         }
     }
+
+    .count_badge {
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background: var(--bg-secondary);
+        color: var(--btn-text-color);
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        margin-left: 1rem;
+    }
 }
 
 

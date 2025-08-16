@@ -949,7 +949,10 @@ const CustomerList = () => {
       </div>
 
       <div className={`${style.mobile_header}`}>
-        <h2>Customer List</h2>
+        <h2>
+          Customer List
+          <span className={style.count_badge}>{mobileCustomerList?.length ?? 0}</span>
+        </h2>
         <div>
           {
             mobileSearchOpen ? (

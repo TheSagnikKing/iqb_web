@@ -76,17 +76,17 @@ export function SocketProvider({ children }) {
 
         if (barberSalonId && barberId) {
             // 🔹 Listen for real-time barber queuelist updates
-            // newSocket.on("barberQueueUpdated", (updatedQueue) => {
-            //     dispatch({
-            //         type: GET_QUEUELIST_BARBERID_SUCCESS,
-            //         payload: {
-            //             success: true,
-            //             status: 200,
-            //             message: "Queue list found for the specified barber",
-            //             queueList: updatedQueue
-            //         }
-            //     })
-            // });
+            newSocket.on("barberQueueUpdated", (updatedQueue) => {
+                dispatch({
+                    type: GET_QUEUELIST_BARBERID_SUCCESS,
+                    payload: {
+                        success: true,
+                        status: 200,
+                        message: "Queue list found for the specified barber",
+                        queueList: updatedQueue?.queueList
+                    }
+                })
+            });
         }
 
 

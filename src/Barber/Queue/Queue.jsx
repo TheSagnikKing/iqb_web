@@ -167,7 +167,7 @@ const Queue = () => {
   const [mobileQueueList, setMobileQueueList] = useState([])
 
   useEffect(() => {
-    if (getBarberQueueListResolve && BarberQueueList.length > 0) {
+    if (getBarberQueueListResolve && BarberQueueList?.length > 0) {
       setqueuelistData(BarberQueueList)
       setQueuelistDataCopy(BarberQueueList)
       setMobileQueueList(BarberQueueList)
