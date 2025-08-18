@@ -46,7 +46,7 @@ const Queue = () => {
   const darkMode = useSelector(darkmodeSelector)
 
 
-  console.log("BarberQueueList ", BarberQueueList)
+  // console.log("BarberQueueList ", BarberQueueList)
 
   const darkmodeOn = darkMode === "On"
 
