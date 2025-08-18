@@ -17,147 +17,6 @@ import { useEffect, useState } from "react";
 const MenuData = () => {
     const adminProfile = useSelector(state => state.AdminLoggedInMiddleware.entiredata.user[0])
 
-    // console.log(adminProfile?.isQueueing)
-    // console.log(adminProfile?.isAppointments)
-
-
-    // const [menuItems, setMenuItems] = useState([
-    //     {
-    //         id: 1,
-    //         title: "Dashboard",
-    //         icon: <Admindashboardicon />,
-    //         url: "/admin-dashboard",
-    //         show: true
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Salons",
-    //         icon: <Adminsalonicon />,
-    //         url: "/admin-salon",
-    //         show: true
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Barbers",
-    //         icon: <Adminbarbericon />,
-    //         url: "/admin-barber",
-    //         show: true
-    //     },
-    //     {
-    //         id: 4,
-    //         title: "Customers",
-    //         icon: <Admincustomericon />,
-    //         url: "/admin-customer",
-    //         show: true
-    //     },
-    //     {
-    //         id: 5,
-    //         title: "Advertisements",
-    //         icon: <Adminadvertisementicon />,
-    //         url: "/admin-advertise",
-    //         show: true
-    //     },
-    //     {
-    //         id: 6,
-    //         title: "Queuelist",
-    //         icon: <Adminqueueicon />,
-    //         url: "/admin-queue",
-    //         show: true
-    //     },
-    //     {
-    //         id: 7,
-    //         title: "Queue History",
-    //         icon: <HistoryIcon />,
-    //         url: "/admin-quehistory",
-    //         show: true
-    //     },
-    //     {
-    //         id: 8,
-    //         title: "Appointments",
-    //         icon: <Adminappointmenticon />,
-    //         url: "/admin-appointments",
-    //         show: true
-    //     },
-    //     {
-    //         id: 9,
-    //         title: "Book Appointments",
-    //         icon: <Adminqueueicon />,
-    //         url: "/admin-book-appointments",
-    //         show: true
-    //     },
-    // ])
-
-
-    // useEffect(() => {
-    //     if (adminProfile) {
-    //         setMenuItems([
-    //             {
-    //                 id: 1,
-    //                 title: "Dashboard",
-    //                 icon: <Admindashboardicon />,
-    //                 url: "/admin-dashboard",
-    //                 show: true
-    //             },
-    //             {
-    //                 id: 2,
-    //                 title: "Salons",
-    //                 icon: <Adminsalonicon />,
-    //                 url: "/admin-salon",
-    //                 show: true
-    //             },
-    //             {
-    //                 id: 3,
-    //                 title: "Barbers",
-    //                 icon: <Adminbarbericon />,
-    //                 url: "/admin-barber",
-    //                 show: true
-    //             },
-    //             {
-    //                 id: 4,
-    //                 title: "Customers",
-    //                 icon: <Admincustomericon />,
-    //                 url: "/admin-customer",
-    //                 show: true
-    //             },
-    //             {
-    //                 id: 5,
-    //                 title: "Advertisements",
-    //                 icon: <Adminadvertisementicon />,
-    //                 url: "/admin-advertise",
-    //                 show: true
-    //             },
-    //             {
-    //                 id: 6,
-    //                 title: "Queuelist",
-    //                 icon: <Adminqueueicon />,
-    //                 url: "/admin-queue",
-    //                 show: adminProfile?.isQueueing
-    //             },
-    //             {
-    //                 id: 7,
-    //                 title: "Queue History",
-    //                 icon: <HistoryIcon />,
-    //                 url: "/admin-quehistory",
-    //                 show: adminProfile?.isQueueing
-    //             },
-    //             {
-    //                 id: 8,
-    //                 title: "Appointments",
-    //                 icon: <Adminappointmenticon />,
-    //                 url: "/admin-appointments",
-    //                 show: adminProfile?.isAppointments
-    //             },
-    //             {
-    //                 id: 9,
-    //                 title: "Book Appointments",
-    //                 icon: <Adminqueueicon />,
-    //                 url: "/admin-book-appointments",
-    //                 show: adminProfile?.isAppointments
-    //             },
-    //         ])
-    //     }
-    // }, [adminProfile])
-
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
@@ -221,20 +80,27 @@ const MenuData = () => {
                 },
                 {
                     id: 9,
+                    title: "Appointment History",
+                    icon: <Adminappointmenticon />,
+                    url: "/admin-appointmenthistory",
+                    show: adminProfile?.isAppointments
+                },
+                {
+                    id: 10,
                     title: "Book Appointments",
                     icon: <Adminqueueicon />,
                     url: "/admin-book-appointments",
                     show: adminProfile?.isAppointments
                 },
                 {
-                    id: 10,
+                    id: 11,
                     title: "Reports",
                     icon: <Adminqueueicon />,
                     url: "/admin-reports",
                     show: true
                 },
                 {
-                    id: 11,
+                    id: 12,
                     title: "Subscription",
                     icon: <Subscription />,
                     url: "/admin-subscription",

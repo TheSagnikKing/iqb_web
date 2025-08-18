@@ -2,20 +2,20 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./EditSalon.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, EditIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, ClockIcon, CloseIcon, CrownIcon, EditIcon, Uploadicon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminEditSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAdminSalonImagesAction, getAdminSalonLogoAction, getAllSalonCategoriesAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
 import toast from 'react-hot-toast';
 import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
+import { ClickAwayListener, Modal, Step, StepContent, StepLabel, Stepper } from '@mui/material';
+import { DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
-
-import { ClickAwayListener, Modal } from '@mui/material';
 import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
 
 const EditSalon = () => {
@@ -92,6 +92,31 @@ const EditSalon = () => {
     response: SalonIcons
   } = getAdminAllSalonIcon
 
+  const SalonCategoriesRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonIconControllerRef.current = controller;
+
+    dispatch(getAllSalonCategoriesAction(controller.signal));
+
+    return () => {
+      if (SalonCategoriesRef.current) {
+        SalonCategoriesRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const getAllSalonCategories = useSelector(state => state.getAllSalonCategories)
+
+  const {
+    loading: getAllSalonCategoriesLoading,
+    resolve: getAllSalonCategoriesResolve,
+    response: salonCategories
+  } = getAllSalonCategories
+
+  // console.log("Edit Salon ", salonCategories)
+
   const [latitude, setLatitude] = useState(currentSalon?.location.coordinates.latitude);
   const [longitude, setLongitude] = useState(currentSalon?.location.coordinates.longitude);
   const [error, setError] = useState(null);
@@ -141,6 +166,13 @@ const EditSalon = () => {
   const [serviceEWT, setServiceEWT] = useState("")
   const [serviceCode, setServiceCode] = useState("")
   const [serviceId, setServiceId] = useState(0)
+  const [serviceCategoryName, setServiceCategoryName] = useState("")
+
+  const serviceCategoryNameHandler = (value) => {
+    setServiceCategoryNameError("")
+    setServiceCategoryName(value?.serviceCategoryName)
+    setServiceCategoryOpen(false)
+  }
 
   const responsive = {
     superLargeDesktop: {
@@ -181,6 +213,7 @@ const EditSalon = () => {
   const [serviceDescError, setServiceDescError] = useState("")
   const [servicePriceError, setServicePriceError] = useState("")
   const [serviceEwtError, setServiceEwtError] = useState("")
+  const [serviceCategoryNameError, setServiceCategoryNameError] = useState("")
 
   const salonTypeDropHandler = () => {
     setSalonTypeDrop((prev) => !prev)
@@ -303,7 +336,7 @@ const EditSalon = () => {
 
   const vipServiceHandler = (value) => {
     setVipService(value)
-    setVipServiceDrop(false)
+    setServiceTypeOpen(false)
   }
 
   const fileInputRef = useRef(null);
@@ -561,6 +594,19 @@ const EditSalon = () => {
       return setServiceDescError("Service description must be between 1 to 50 charecters")
     }
 
+    if (!serviceCategoryName) {
+      toast.error("Please select service category", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceCategoryNameError("Please enter service category")
+    }
+
     if (!servicePrice) {
       toast.error("Please enter service price", {
         duration: 3000,
@@ -598,7 +644,8 @@ const EditSalon = () => {
       serviceDesc,
       serviceEWT: Number(serviceEWT),
       serviceId,
-      serviceCode
+      serviceCode,
+      serviceCategoryName
     }
 
     setSelectedServices([...selectedServices, service])
@@ -634,6 +681,7 @@ const EditSalon = () => {
     setServiceEWT(currentService.serviceEWT)
     setServiceCode(currentService.serviceCode)
     setServiceId(currentService.serviceId)
+    setServiceCategoryName(currentService.serviceCategoryName)
 
     const updatedServices = [...selectedServices];
     updatedServices.splice(index, 1);
@@ -1154,684 +1202,803 @@ const EditSalon = () => {
   };
 
 
-  useEffect(() => {
-    const phoneInput = document.querySelector(
-      '.react-international-phone-input-container .react-international-phone-input'
-    );
+  // =======================================
 
-    // const phonedropdown = document.querySelector(
-    //   '.react-international-phone-country-selector-dropdown'
-    // )
+  const steps = [
+    {
+      label: 'Account Information',
+      fields: [
+        {
+          name: 'name', label: 'Salon Name', type: 'text', placeholder: 'Enter salon name', value: salonName, onChange: (e) => {
+            setSalonNameError("")
+            setSalonName(e.target.value)
+          }, error: salonNameError
+        },
+        {
+          name: 'description', label: 'Salon Description', type: 'text', placeholder: 'Enter salon description', value: salonDesc, onChange: (e) => {
+            setSalonDescError("")
+            setSalonDesc(e.target.value)
+          }, error: salonDescError
+        },
+        { name: 'email', label: 'Salon Email', type: 'text', placeholder: 'Enter salon email', value: salonEmail, onChange: (e) => { } },
+        { name: 'contactTel', label: 'Salon Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
+      ],
+    },
+    {
+      label: 'Business Information',
+      fields: [
+        { name: 'businesstype', label: 'Salon Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', value: salonType, readOnly: true },
+        {
+          name: 'address', label: 'Salon Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', value: address, onChange: (e) => {
+            setSalonAddressError("")
+            setAddress(e.target.value)
+          }, error: salonAddressError
+        },
+        { name: 'postcode', label: 'Salon Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', value: postCode, readOnly: true },
+        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude, readOnly: true },
+        { name: 'longitude', label: 'Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude, readOnly: true },
+        { name: 'country', label: 'Country', type: 'text', dropdown: false, placeholder: 'Select country', value: country, readOnly: true },
+        { name: 'city', label: 'City', type: 'text', dropdown: false, placeholder: 'Select city', value: city, readOnly: true },
+        { name: 'timezone', label: 'Timezone', type: 'text', dropdown: false, placeholder: 'Select timezone', value: timezone, readOnly: true },
+      ],
+    },
+    {
+      label: 'Select Services',
+      fields: [
+        { name: 'serviceicon', label: 'Service Icon', error: serviceIconError },
+        {
+          name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false, value: serviceName, onChange: (e) => {
+            setServiceNameError("")
+            setServiceName(e.target.value)
+          }, error: serviceNameError
+        },
+        {
+          name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false, value: serviceDesc, onChange: (e) => {
+            setServiceDescError("")
+            setServiceDesc(e.target.value)
+          }, error: serviceDescError
+        },
+        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true, value: `${vipService ? 'VIP' : 'Regular'}` },
+        { name: 'serviceCategory', label: 'Service Category', type: 'text', placeholder: "Select Service Category", dropdown: true, value: serviceCategoryName, error: serviceCategoryNameError },
 
-    // const phonedropfocus = document.querySelector(
-    //   '.react-international-phone-country-selector-dropdown__list-item--selected, .react-international-phone-country-selector-dropdown__list-item--focused'
-    // )
+        {
+          name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false, value: servicePrice, onChange: (e) => {
+            setServicePriceError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServicePrice(value);
+            }
+          }, error: servicePriceError
+        },
+        {
+          name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false, value: serviceEWT, onChange: (e) => {
+            setServiceEwtError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServiceEWT(value);
+            }
+          }, error: serviceEwtError
+        },
+      ],
+    },
+    {
+      label: 'Gallery',
+      fields: [
+      ],
+    },
+    {
+      label: 'Social Links',
+      fields: [
+        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon />, value: webLink, onChange: (e) => setWebLink(e.target.value) },
+        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon />, value: fbLink, onChange: (e) => setFbLink(e.target.value) },
+        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon />, value: instraLink, onChange: (e) => setInstraLink(e.target.value) },
+        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon />, value: twitterLink, onChange: (e) => setTwitterLink(e.target.value) },
+        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon />, value: tiktokLink, onChange: (e) => setTiktokLink(e.target.value) },
+      ],
+    },
+  ];
 
-    if (phoneInput) {
-      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+  const [activeStep, setActiveStep] = useState(0);
+  const [formData, setFormData] = useState({
+    accountInfo: '',
+    projectID: '',
+    ownerName: '',
+    email: '',
+    cardNumber: '',
+    expiryDate: '',
+  });
+
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleNext = () => {
+    if (activeStep === 0) {
+      if (!salonName) {
+        toast.error("Please enter salon name", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonNameError("Please enter salon name")
+      }
+
+      if (salonName.length === 0 || salonName.length > 20) {
+        toast.error("Salon Name must be between 1 to 20 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonNameError("Salon Name must be between 1 to 20 characters");
+      }
+
+      if (!salonDesc) {
+        toast.error("Please enter salon description", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonDescError("Please enter salon description")
+      }
+
+      if (salonDesc.length === 0 || salonDesc.length > 35) {
+        toast.error("Salon Description must be between 1 to 35 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonDescError("Salon Description must be between 1 to 35 characters");
+      }
+
+
+      if (invalidnumber) {
+        toast.error("Invalid Number", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+        return setInvalidNumberError("Invalid Number")
+      }
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else if (activeStep === 1) {
+
+      if (!salonType) {
+        toast.error("Please select salon type", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonTypeError("Please select salon type")
+      }
+
+      if (!address) {
+        toast.error("Please enter salon address", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonAddressError("Please enter salon address")
+      }
+
+      // if (!postCode) {
+      //   toast.error("Please enter postcode", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setPostCodeError("Please enter postcode")
+      // }
+
+
+      // if (!longitude && !latitude) {
+      //   toast.error("Coordinates is not present", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setSalonCoordinateError("Coordinates is not present")
+      // }
+
+      // if (postCode.length === 0 || postCode.length > 10) {
+      //   toast.error("Postcode must be between 0 to 10 charecters", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setPostCodeError("Postcode must be between 0 to 10 charecters")
+      // }
+
+      // if (!country) {
+      //   toast.error("Please select country", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setCountryError("Please select country")
+      // }
+
+      // if (!city) {
+      //   toast.error("Please select city", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setCityError("Please select city")
+      // }
+
+      // if (!timezone) {
+      //   toast.error("Please select timezone", {
+      //     duration: 3000,
+      //     style: {
+      //       fontSize: "var(--font-size-2)",
+      //       borderRadius: '0.3rem',
+      //       background: '#333',
+      //       color: '#fff',
+      //     },
+      //   });
+      //   return setTimezoneError("Please select timezone")
+      // }
+
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
+  };
 
-    // if(phonedropdown){
-    //   phonedropdown.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
-    //   phonedropdown.style.backgroundColor = darkmodeOn ? 'var(--dark-color-2)' : 'var(--light-color-4)';
-    // }
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-  }, [darkmodeOn])
+  const handleReset = () => {
+    setActiveStep(0);
+    setFormData({
+      accountInfo: '',
+      projectID: '',
+      ownerName: '',
+      email: '',
+      cardNumber: '',
+      expiryDate: '',
+    });
+  };
+
+  const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
+  const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
+  const [serviceCategoryOpen, setServiceCategoryOpen] = useState(false)
 
   return (
-    <div className={`${style.edit_salon_wrapper} ${darkmodeOn && style.dark}`}>
-      <div><p>Edit Salon</p></div>
-      <div className={`${style.edit_salon_content_wrapper} ${darkmodeOn && style.dark}`}>
-        <div>
-          <div>
-            <div>
-              {
-                salonImages?.[0] && <img src={salonImages?.[0]?.url} alt="cover-img" />
-              }
-            </div>
-
-            <div className={`${style.edit_salon_logo_container} ${darkmodeOn && style.dark}`}>
-              {
-                editSalonLogoLoader ?
-                  <div>
-                    <Skeleton
-                      height={"13rem"}
-                      width={"13rem"}
-                      style={{ borderRadius: "50%" }}
-                    /></div> :
-                  <div>
-                    <img src={`${salonLogo}`} alt="" />
-                    <div>
-                      <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
-                      <input
-                        type="file"
-                        ref={fileInputRef}
-                        style={{ display: 'none' }}
-                        onChange={handleSalonFileInputChange}
-                      />
-                    </div>
-                  </div>
-              }
-
-            </div>
-
-            <div>
-              <p>{salonName}</p>
-              <p><span>{city}</span>{city && ",  "}<span>{country}</span></p>
-            </div>
-          </div>
-
-          <div>
-            <p>Gallery</p>
-            <button
-              className={style.salon_upload_button}
-              onClick={() => handleSalonImageButtonClick()}
-              disabled={uploadSalonImageLoader}
-            >
-
-              {
-                uploadSalonImageLoader ? (<ButtonLoader />) : (<><p>Upload</p>
-                  <div><Uploadicon /></div>
-
-                  <input
-                    type="file"
-                    ref={salonImagefileInputRef}
-                    style={{ display: 'none' }}
-                    multiple
-                    onChange={handleSalonImageFileInputChange}
-                  /></>)
-              }
-
-
-            </button>
-          </div>
-
-          <div>
-            {
-              salonImages.map((s, index) => (
-                <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s.url} alt="" /></div>
-              ))
-            }
-          </div>
-
-        </div>
-
-        <div>
-          <div>
-            <p>Name</p>
-            <input
-              type="text"
-              value={salonName}
-              onChange={(e) => {
-                setSalonNameError("")
-                setSalonName(e.target.value)
-              }}
-              onKeyDown={handleKeyPress}
-              style={{ border: salonNameError && "0.1rem solid red" }}
-            />
-            <p className={style.error_message}>{salonNameError}</p>
-          </div>
-
-          <div>
-            <p>Email</p>
-            <input
-              type="text"
-              value={salonEmail}
-              readOnly
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Description</p>
-            <input
-              type="text"
-              value={salonDesc}
-              onChange={(e) => {
-                setSalonDescError("")
-                setSalonDesc(e.target.value)
-              }}
-              onKeyDown={handleKeyPress}
-              style={{ border: salonDescError && "0.1rem solid red" }}
-            />
-            <p className={style.error_message}>{salonDescError}</p>
-          </div>
-
-          <div>
-            <p>Address</p>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => {
-                setSalonAddressError("")
-                setAddress(e.target.value)
-              }}
-              onKeyDown={handleKeyPress}
-              style={{ border: salonAddressError && "0.1rem solid red" }}
-            />
-            <p className={style.error_message}>{salonAddressError}</p>
-          </div>
-
-          <div>
-            <div>
-              <p>Latitude</p>
-              <input
-                type="number"
-                value={latitude}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-
-            <div>
-              <p>Longitude</p>
-              <input
-                type="number"
-                value={longitude}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button onClick={geoLocationHandler}>Get Geolocation</button>
-          </div>
-
-          <div>
-            <div>
-              <p>Country</p>
-              <input
-                type="text"
-                value={country}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-
-            <div>
-              <p>City</p>
-              <input
-                type="text"
-                value={city}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-          </div>
-
-          <div>
-            <div>
-              <p>Time Zone</p>
-              <input
-                type="text"
-                value={timezone}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-
-            <div>
-              <p>Post Code</p>
-              <input
-                type="text"
-                value={postCode}
-                readOnly
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-          </div>
-
-          <div />
-
-          <div>
-            <p>Type of business</p>
-            <input
-              type="text"
-              value={`${salonType ? `${salonType}` : ''}`}
-              onClick={() => salonTypeDropHandler()}
-              className={style.salontype_input}
-              readOnly
-            />
-
-            <span onClick={() => salonTypeDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-
-            {salonTypeDrop &&
-              <ClickAwayListener onClickAway={() => setSalonTypeDrop(false)}>
-                <div>
-                  <p onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</p>
-                  <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
-                </div>
-              </ClickAwayListener>}
-          </div>
-
-          <div>
-            <p>Mobile Number</p>
-            <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red" }}>
-                <PhoneInput
-                  forceDialCode={true}
-                  defaultCountry={countryflag}
-                  value={contactTel}
-                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
-                />
-              </div>
-            </div>
-            <p className={style.error_message}>{invalidNumberError}</p>
-          </div>
-
-          <div className={style.add_services_drop}>
-            <button onClick={addservicedropHandler} className={style.addservices_btn}>Select Services</button>
-          </div>
-
-          {
-            openServices &&
-            <main className={`${style.add_services_drop_container} ${darkmodeOn && style.dark}`}>
-              <p>Choose your service icon:</p>
-              <div>
-                <div>
-                  {
-                    getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
-                      <div className={style.create_salon_carousel_loader}>
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "1rem"
-                          }}
-                        />
-                      </div> :
-                      !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
-                        <Carousel
-                          responsive={responsive}
-                          draggable={false}
-                          swipeable={false}
-                        >
-                          {
-                            SalonIcons?.map((s) => (
-                              <div key={s._id}
-                                className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
-                                onClick={() => logoselectHandler(s)}
-                                style={{
-                                  border: serviceIconError && "0.1rem solid red"
-                                }}
-                              >
-                                <img src={s.url} alt="" />
-                              </div>
-                            ))
-                          }
-                        </Carousel> :
-                        !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
-                          <p>No Salon Icons Available</p> :
-                          !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
-                          <p>No Salon Icons Available</p>
-                  }
-
-                </div>
-              </div>
-
-              <div>
-                <p>Service Name</p>
-                <input
-                  type="text"
-                  value={serviceName}
-                  onChange={(e) => {
-                    setServiceNameError("")
-                    setServiceName(e.target.value)
-                  }}
-                  onKeyDown={handleKeyPressAddServices}
-                  style={{ border: serviceNameError && "0.1rem solid red" }}
-                />
-                <p className={style.error_message}>{serviceNameError}</p>
-              </div>
-
-              <div>
-                <p>Service Description</p>
-                <input
-                  type="text"
-                  value={serviceDesc}
-                  onChange={(e) => {
-                    setServiceDescError("")
-                    setServiceDesc(e.target.value)
-                  }}
-                  onKeyDown={handleKeyPressAddServices}
-                  style={{ border: serviceDescError && "0.1rem solid red" }}
-                />
-                <p className={style.error_message}>{serviceDescError}</p>
-              </div>
-
-              <div>
-                <p>Service Type (*VIP services have top priority in queue)</p>
-                <input
-                  type="text"
-                  value={`${vipService ? 'VIP' : 'Regular'}`}
-                  onClick={() => vipServiceDropHandler()}
-                  readOnly
-                />
-
-                <span onClick={() => vipServiceDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-
-                {vipServiceDrop &&
-                  <ClickAwayListener onClickAway={() => setVipServiceDrop(false)}>
-                    <div className={style.service_type_dropdown_container}>
-                      <p onClick={() => vipServiceHandler(false)}>Regular</p>
-                      <p onClick={() => vipServiceHandler(true)}>VIP</p>
-                    </div>
-                  </ClickAwayListener>}
-              </div>
-
-              <div>
-                <div>
-                  <p>Service Price</p>
-                  <input
-                    type="text"
-                    value={servicePrice}
-                    onChange={(e) => {
-                      setServicePriceError("")
-                      const value = e.target.value;
-                      if (/^\d*$/.test(value)) {
-                        setServicePrice(value);
-                      }
-                    }}
-                    onKeyDown={handleKeyPressAddServices}
-                    style={{ border: servicePriceError && "0.1rem solid red" }}
-                  />
-                  <p className={style.error_message}>{servicePriceError}</p>
-                </div>
-
-                <div>
-                  <p>Est Wait Tm(mins)</p>
-                  <input
-                    type="text"
-                    value={serviceEWT}
-                    onChange={(e) => {
-                      setServiceEwtError("")
-                      const value = e.target.value;
-                      if (/^\d*$/.test(value)) {
-                        setServiceEWT(value);
-                      }
-                    }}
-                    onKeyDown={handleKeyPressAddServices}
-                    style={{ border: serviceEwtError && "0.1rem solid red" }}
-                  />
-                  <p className={style.error_message}>{serviceEwtError}</p>
-                </div>
-              </div>
-
-              <div>
-                <button onClick={addServiceHandler} className={style.add_service_btn}>Add Service</button>
-              </div>
-
-              <div className={`${style.service_container} ${darkmodeOn && style.dark}`}>
-
-                {
-                  selectedServices?.map((ser, index) => {
-                    return (
-                      <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={index}>
-                        <div className={`${style.service_item_top}`}>
-                          <div><img src={ser?.serviceIcon?.url ? ser?.serviceIcon?.url : ""} alt="service icon" /></div>
-                          <div>
-                            <p>{ser?.serviceName}</p>
-                            <p>{ser?.vipService ? "VIP" : "Regular"}</p>
-                            <p>{ser?.serviceDesc}</p>
-                          </div>
-                        </div>
-
-                        <div className={`${style.service_item_bottom}`}>
-                          <div>
-                            <div>
-                              <p>Service Price</p>
-                              <p>{countryCurrency}{" "} {ser.servicePrice}</p>
-                            </div>
-                          </div>
-
-                          <div>
-                            <div>
-                              <p>Est Wait Time</p>
-                              <div>
-                                <div><ClockIcon /></div>
-                                <p>{ser.serviceEWT} mins</p>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-
-
-                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}>Delete</button>
-                      </div>
-                    )
-                  })
-                }
-
-              </div>
-            </main>
-          }
-
-
-          <div className={`${style.salon_logo_wrapper} ${darkmodeOn && style.dark}`}>
-            <p>Select Salon Logo</p>
-            <div>
-              <button onClick={() => handleSalonLogoButtonClick()}>
-                Upload
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleSalonFileInputChange}
-                />
-              </button>
-
-              <div>{uploadSalonLogo?.name}</div>
-            </div>
-          </div>
-
-          <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
-            <div>
-              <p style={{
-                fontSize: "var(--font-size-3)",
-                fontWeight: "600"
-              }}>Select Images</p>
-
-              <button onClick={() => handleSalonImageButtonClick()}
-                style={{ fontSize: "var(--font-size-3)" }}>
-                Upload
-                <input
-                  type="file"
-                  ref={salonImagefileInputRef}
-                  style={{ display: 'none' }}
-                  multiple
-                  onChange={handleSalonImageFileInputChange}
-                />
-              </button>
-            </div>
-
-
-            <div>
-              <p style={{
-                fontSize: "var(--font-size-3)",
-                fontWeight: "600"
-              }}>Update Images</p>
-
-              <button onClick={() => setOpenMobileUpdateModal(true)} style={{ fontSize: "var(--font-size-3)" }}>
-                Update
-              </button>
-            </div>
-
-          </div>
-
-          <div>
-            <p>Web Link</p>
-            <input
-              type="text"
-              value={webLink}
-              onChange={(e) => setWebLink(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Facebook Link</p>
-            <input
-              type="text"
-              value={fbLink}
-              onChange={(e) => setFbLink(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Instagram Link</p>
-            <input
-              type="text"
-              value={instraLink}
-              onChange={(e) => setInstraLink(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Twitter Link</p>
-            <input
-              type="text"
-              value={twitterLink}
-              onChange={(e) => setTwitterLink(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Tiktok Link</p>
-            <input
-              type="text"
-              value={tiktokLink}
-              onChange={(e) => setTiktokLink(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            {
-              editSalonLoading ? <button style={{
-                display: "grid",
-                placeItems: "center"
-              }}
-                className={style.edit_salon_btn}
-              ><ButtonLoader /></button> : <button onClick={editSalonHandler} className={style.edit_salon_btn}>Update</button>
-            }
-
-          </div>
-
-        </div>
+    <section className={`${style.section}`}>
+      <div>
+        <h2>Edit Salon</h2>
       </div>
 
-      <Modal
-        open={openMobileUpdateModal}
-        onClose={() => setOpenMobileUpdateModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className={`${style.mobile_modal_container} ${darkmodeOn && style.dark}`}>
-          <div>
-            <p>Images</p>
-            <button onClick={() => setOpenMobileUpdateModal(false)}><CloseIcon /></button>
-          </div>
+      <div className={`${style.form_main_container}`}>
+        <Stepper
+          activeStep={activeStep}
+          orientation="vertical"
+          sx={{
+            "& .MuiStepContent-root": {
+              borderLeft: "1px solid #bdbdbd",
+              paddingRight: "0px"
+            },
 
-          <div className={style.mobile_modal_content_container}>
-            {
-              salonImages?.map((s) => (
-                <div className={`${style.salon_image_update_item} ${darkmodeOn && style.dark}`} key={s._id}>
-                  {
-                    mobileEditSelectedimageLoader === s._id ?
-                      <div><Skeleton width={"100%"} height={"100%"} /></div> :
-                      <div>
-                        <img src={s.url} alt="image" />
+            "& .MuiStepIcon-root": {
+              width: "2.5rem",
+              height: "2.5rem",
+              // fontSize: "2rem",
+              color: "var(--bg-tertiary)",
+            },
+            "& .MuiStepIcon-text": {
+              fontSize: "1.4rem",
+              // color: "var(--text-primary)",
+            },
+            "& .MuiStepIcon-root.Mui-active": {
+              color: "var(--bg-tertiary)",
+            },
+            "& .MuiStepIcon-root.Mui-completed": {
+              background: "green",
+              borderRadius: "50%",
+              color: "#fff",
+              padding: "0.5rem"
+            },
+          }}
+
+        >
+          {steps.map((step, index) => (
+            <Step key={step.label}>
+              <StepLabel>
+                <span className={`${style.stepper_heading}`}>{step.label}</span>
+              </StepLabel>
+
+              {
+                step.label === "Account Information" && (<StepContent>
+                  <main className={`${style.form_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        <label>{field.label}</label>
+
+                        {
+                          field.name === "contactTel" ? (<>
+                            <PhoneInput
+                              forceDialCode={true}
+                              defaultCountry={countryflag}
+                              value={contactTel}
+                              onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+                            />
+                            {invalidNumberError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
+                          </>) : (
+                            <>
+                              <input
+                                type={field.type}
+                                name={field.name}
+                                value={field.value}
+                                placeholder={field.placeholder}
+                                onChange={field.onChange}
+                              />
+                              {field?.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field?.error}</p> : null}
+                            </>
+                          )
+                        }
+
                       </div>
-                  }
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      <div></div>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+                  </main>
+                </StepContent>)
+              }
 
-                  <div>
-                    <button onClick={() => mobiledeleteImage(s)}>
-                      <div><DeleteIcon /></div>
-                      <p>Delete</p>
+              {
+                step.label === "Business Information" && (<StepContent>
+                  <main className={`${style.form_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        <label>{field.label}</label>
+
+                        {
+                          field.dropdown ? (<div className={`${style.select_container}`} onClick={() => setBusinessTypeOpen((prev) => !prev)}>
+                            <input
+                              type={field.type}
+                              name={field.name}
+                              value={field.value}
+                              placeholder={field.placeholder}
+                              readOnly={field?.readOnly}
+                            />
+                            <div><DropdownIcon /></div>
+
+                            {
+                              businessTypeOpen ? (
+                                <ClickAwayListener onClickAway={() => setBusinessTypeOpen(false)}>
+                                  <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                    <button onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</button>
+                                    <button onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</button>
+                                  </div></ClickAwayListener>) : null
+                            }
+
+                          </div>) : (<>
+                            <input
+                              type={field.type}
+                              name={field.name}
+                              value={field.value}
+                              placeholder={field.placeholder}
+                              readOnly={field?.readOnly}
+                              onChange={field?.onChange}
+                            />
+                            {field?.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field?.error}</p> : null}
+                          </>
+                          )
+                        }
+
+                      </div>
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      <div></div>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+
+                    <button onClick={handleBack} disabled={index === 0}>
+                      Back
                     </button>
+                  </main>
+                </StepContent>)
+              }
 
-                    <button
-                      disabled={mobileEditSelectedimageLoader === s._id}
-                      onClick={() => handleCurrentMobileEditSalonImageButtonClick(s)}>
-                      <div><EditIcon /></div>
-                      <p>Update</p>
 
-                      <input
-                        type="file"
-                        ref={mobileEditSalonImageInputRef}
-                        style={{ display: 'none' }}
-                        onChange={(e) => mobileEditSelectedImageFileInputChange(e)}
-                      />
-                    </button>
+              {
+                step.label === "Select Services" && (<StepContent>
+                  <main className={`${style.service_container}`}>
 
-                  </div>
-                </div>
-              ))
-            }
+                    <div>
+                      <div>
+                        {step.fields.map((field) => (
+                          <div key={field.name} className={`${style.form_group}`}>
+                            <label>{field.label}</label>
+                            {field.name === "serviceicon" ? (
+                              <>
+                                <div className={style.service_icon_container}>
+                                  <Carousel
+                                    responsive={responsive}
+                                    draggable={false}
+                                    swipeable={false}
+                                  >
+                                    {
+                                      SalonIcons?.map((s) => (
+                                        <div key={s._id}
+                                          className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
+                                          onClick={() => logoselectHandler(s)}
+                                          style={{
+                                            border: field.error && "0.1rem solid red"
+                                          }}
+                                        >
+                                          <img src={s.url} alt="" />
+                                        </div>
+                                      ))
+                                    }
+                                  </Carousel>
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "servicetype" ? (
+                              <div
+                                className={`${style.select_container}`}
+                                onClick={() => setServiceTypeOpen((prev) => !prev)}
+                              >
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  readOnly
+                                />
+                                <div><DropdownIcon /></div>
+
+                                {serviceTypeOpen && (
+                                  <ClickAwayListener onClickAway={() => setServiceTypeOpen(false)}>
+                                    <div
+                                      className={`${style.select_dropdown_container}`}
+                                      onClick={(event) => event.stopPropagation()}
+                                    >
+                                      <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button>
+                                    </div>
+                                  </ClickAwayListener>
+                                )}
+                              </div>
+                            ) : field.name === "serviceCategory" ? (
+                              <>
+                                <div
+                                  className={`${style.select_container}`}
+                                  onClick={() => setServiceCategoryOpen((prev) => !prev)}
+                                >
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {serviceCategoryOpen && (
+                                    <ClickAwayListener onClickAway={() => setServiceCategoryOpen(false)}>
+                                      <div
+                                        className={`${style.select_dropdown_container}`}
+                                        onClick={(event) => event.stopPropagation()}
+                                      >
+                                        {
+                                          salonCategories?.map((item) => {
+                                            return (
+                                              <button
+                                                onClick={() => serviceCategoryNameHandler(item)}
+                                                key={item?._id}
+                                                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+                                              >
+                                                <img
+                                                  src={item?.serviceCategoryImage?.url}
+                                                  alt={item?.serviceCategoryName}
+                                                  style={{ width: "2.4rem", height: "2.4rem", objectFit: "cover", borderRadius: "50%", border: "0.1rem solid #efefef" }}
+                                                />
+                                                {item?.serviceCategoryName}
+                                              </button>
+
+                                            )
+                                          })
+                                        }
+                                      </div>
+                                    </ClickAwayListener>
+                                  )}
+
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={field.onChange}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            )}
+                          </div>
+                        ))}
+
+                        {/* <button className={style.add_service_btn} onClick={addServiceHandler}>Add Service</button> */}
+
+                        <div className={`${style.button_container}`}>
+                          <button onClick={addServiceHandler} disabled={index === 0}>
+                            Add Service
+                          </button>
+                          <button onClick={handleNext} disabled={selectedServices?.length === 0} style={{ cursor: selectedServices?.length === 0 ? "not-allowed" : "pointer" }}>
+                            {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                          </button>
+                        </div>
+
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
+
+                      </div>
+
+                      <div
+                        style={{
+                          display: selectedServices?.length ? "block" : "none",
+                          padding: selectedServices?.length ? "1rem" : "0rem",
+                        }}
+                      >
+
+                        {
+                          selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={style.mobile_service_item} key={index}>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <img src={ser?.serviceIcon.url || ""} alt="" />
+
+                                      {ser.vipService ? <span><CrownIcon /></span> : null}
+                                    </div>
+
+                                    <p>{ser.serviceName}</p>
+                                    <p>{ser.serviceDesc}</p>
+                                    <p>{ser.serviceCategoryName}</p>
+                                  </div>
+
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
+                        {
+                          selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={style.service_item} key={index}>
+                                <div>
+                                  <div>
+                                    <div><img src={ser?.serviceIcon.url || ""} alt="" /></div>
+                                    <div>
+                                      <p>{ser.serviceName}</p>
+                                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{ser.serviceDesc}</p>
+                                      <p>{ser.serviceCategoryName}</p>
+                                    </div>
+                                  </div>
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
+
+
+                      </div>
+
+                    </div>
+
+
+                  </main>
+                </StepContent>)
+              }
+
+              {
+                step.label === "Gallery" && (
+                  <StepContent>
+                    <main className={`${style.gallery_container} `}>
+                      <div>
+                        <div>
+                          <p>Upload your salon's logo</p>
+                          <button onClick={() => handleSalonLogoButtonClick()}>Upload</button>
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleSalonFileInputChange}
+                          />
+                        </div>
+
+                        <div>
+                          <img src={salonLogo} alt="" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div>
+                          <p>Please select high-quality images to showcase your salon.</p>
+                          <button onClick={() => handleSalonImageButtonClick()} disabled={uploadSalonImageLoader}>upload</button>
+                          <input
+                            type="file"
+                            ref={salonImagefileInputRef}
+                            style={{ display: 'none' }}
+                            multiple
+                            onChange={handleSalonImageFileInputChange}
+                          />
+                        </div>
+
+                        <div
+                          style={{
+                            display: salonImages?.length ? "block" : "none",
+                            padding: salonImages?.length ? "1.5rem" : "0rem"
+                          }}
+                        >
+                          {
+                            salonImages.map((item, index) => {
+                              return (
+                                <div key={index} onClick={() => selectedSalonImageClicked(item)}><img src={item?.url} /></div>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+
+
+                      <div className={`${style.button_container} `}>
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
+                        <button onClick={handleNext}>
+                          {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                        </button>
+                      </div>
+                    </main>
+                  </StepContent>
+                )
+              }
+
+              {
+                step.label === "Social Links" && (<StepContent>
+                  <main className={`${style.social_link_container} `}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group} `}>
+                        <div>
+                          <div>{field.icon}</div>
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={field.value}
+                            placeholder={field.placeholder}
+                            onChange={field.onChange}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    <div className={`${style.button_container} `}>
+                      <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+                  </main>
+                </StepContent>)
+              }
+
+            </Step>
+          ))}
+        </Stepper>
+
+        {activeStep === steps.length && (
+          <div className={`${style.complete} `}>
+            <p>All steps have been successfully completed. Please click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Update</span> button to save your changes.</p>
+            <div>
+              <button onClick={handleBack}>Back</button>
+              {
+                editSalonLoading ? <button style={{
+                  display: "grid",
+                  placeItems: "center"
+                }}
+                ><ButtonLoader /></button> : <button onClick={editSalonHandler}>Update</button>
+              }
+            </div>
           </div>
-        </div>
-      </Modal>
+        )}
+      </div>
+
 
       <Modal
         open={openModal}
@@ -1839,7 +2006,7 @@ const EditSalon = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={`${style.modal_container} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.modal_container} ${darkmodeOn && style.dark} `}>
           <div>
             <p>Selected Image</p>
             <button onClick={() => setOpenModal(false)}><CloseIcon /></button>
@@ -1848,7 +2015,12 @@ const EditSalon = () => {
           <div className={style.modal_content_container}>
             {
               handleEditSalonLoader ?
-                <div><Skeleton width={"100%"} height={"100%"} /></div> :
+                <div><Skeleton
+                  width={"100%"}
+                  height={"100%"}
+                  baseColor={"var(--loader-bg-color)"}
+                  highlightColor={"var(--loader-highlight-color)"}
+                /></div> :
                 <div><img src={selectedEditImageObject?.url} alt="salon image" /></div>
             }
 
@@ -1858,9 +2030,7 @@ const EditSalon = () => {
                   onClick={() => handleCurrentEditSalonImageButtonClick()}
                   disabled={handleEditSalonLoader}
                 >
-                  <div><EditIcon /></div>
-                  <p>Update</p>
-
+                  Update
                   <input
                     type="file"
                     ref={currentEditSalonImageInputRef}
@@ -1869,8 +2039,7 @@ const EditSalon = () => {
                   />
                 </button>
                 <button onClick={() => deleteEditImageHandler(selectedEditImageObject)}>
-                  <div><DeleteIcon /></div>
-                  <p>Delete</p>
+                  Delete
                 </button>
               </div>
             </div>
@@ -1878,10 +2047,8 @@ const EditSalon = () => {
         </div>
       </Modal>
 
-    </div>
+    </section >
   )
 }
 
 export default EditSalon
-
-

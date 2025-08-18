@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from "./CreateSalon.module.css"
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CameraIcon, ClockIcon, CloseIcon, DeleteIcon, DropdownIcon, EditIcon, SearchIcon, Uploadicon } from '../../../icons';
+import { CameraIcon, CloseIcon, DeleteIcon, DropdownIcon, FacebookIcon, InstagramIcon, SearchIcon, TiktokIcon, WebsiteIcon, XIcon } from '../../../newicons';
+import { CrownIcon, EditIcon } from '../../../icons';
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction } from '../../../Redux/Admin/Actions/SalonAction';
+import { adminCreateSalonAction, getAdminAllCitiesAction, getAdminAllCountriesAction, getAdminAllSalonIconAction, getAdminAllTimezoneAction, getAllSalonCategoriesAction } from '../../../Redux/Admin/Actions/SalonAction';
 import api from '../../../Redux/api/Api';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader';
@@ -15,8 +15,9 @@ import { PhoneInput } from 'react-international-phone';
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer';
 
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { ClickAwayListener, Modal } from '@mui/material';
+import { ClickAwayListener, Modal, Step, StepContent, StepLabel, Stepper } from '@mui/material';
 import { adminGetDefaultSalonAction } from '../../../Redux/Admin/Actions/AdminHeaderAction';
+import Carousel from 'react-multi-carousel';
 
 const CreateSalon = () => {
 
@@ -45,6 +46,31 @@ const CreateSalon = () => {
     resolve: getAdminAllSalonIconResolve,
     response: SalonIcons
   } = getAdminAllSalonIcon
+
+
+  const SalonCategoriesRef = useRef(new AbortController());
+
+  useEffect(() => {
+    const controller = new AbortController();
+    SalonIconControllerRef.current = controller;
+
+    dispatch(getAllSalonCategoriesAction(controller.signal));
+
+    return () => {
+      if (SalonCategoriesRef.current) {
+        SalonCategoriesRef.current.abort();
+      }
+    };
+  }, [dispatch]);
+
+  const getAllSalonCategories = useSelector(state => state.getAllSalonCategories)
+
+  const {
+    loading: getAllSalonCategoriesLoading,
+    resolve: getAllSalonCategoriesResolve,
+    response: salonCategories
+  } = getAllSalonCategories
+
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -126,7 +152,6 @@ const CreateSalon = () => {
 
 
   const [salonType, setSalonType] = useState("")
-  const [salonTypeDrop, setSalonTypeDrop] = useState(false)
 
   const [salonNameError, setSalonNameError] = useState("")
   const [salonEmailError, setSalonEmailError] = useState("")
@@ -145,10 +170,14 @@ const CreateSalon = () => {
   const [serviceDescError, setServiceDescError] = useState("")
   const [servicePriceError, setServicePriceError] = useState("")
   const [serviceEwtError, setServiceEwtError] = useState("")
+  const [serviceCategoryNameError, setServiceCategoryNameError] = useState("")
 
-  const salonTypeDropHandler = () => {
-    setSalonTypeDrop((prev) => !prev)
-  }
+  const [fblinkError, setFbLinkError] = useState("")
+  const [weblinkError, setWebLinkError] = useState("")
+  const [instalinkError, setInstaLinkError] = useState("")
+  const [twitterlinkError, setTwitterLinkError] = useState("")
+  const [tiktoklinkError, setTiktokLinkError] = useState("")
+
 
   const salonTypeHandler = (value) => {
     setSalonType(value);
@@ -160,7 +189,7 @@ const CreateSalon = () => {
       salonType: value
     }));
     setSalonTypeError("")
-    setSalonTypeDrop(false)
+    setBusinessTypeOpen(false)
   }
 
   const [localsalondata, setLocalSalondata] = useState({})
@@ -168,7 +197,6 @@ const CreateSalon = () => {
   const [countryCurrency, setCountryCurrency] = useState("")
 
   const [country, setCountry] = useState("")
-  const [countryDrop, setCountryDrop] = useState(false)
   const [countrycode, setCountryCode] = useState("")
 
   const setCountryHandler = (value) => {
@@ -176,7 +204,7 @@ const CreateSalon = () => {
     setCountryCode(value.countryCode)
     setCountry(value.name)
     setCountryCurrency(value.currency)
-    setCountryDrop(false)
+    setCountryOpen(false)
     setCountryError("")
   }
 
@@ -221,11 +249,10 @@ const CreateSalon = () => {
 
 
   const [city, setCity] = useState("")
-  const [cityDrop, setCityDrop] = useState(false)
 
   const setCityHandler = (value) => {
     setCity(value.name)
-    setCityDrop(false)
+    setCityOpen(false)
     setCityError("")
   }
 
@@ -275,16 +302,12 @@ const CreateSalon = () => {
 
 
   const [timezone, setTimezone] = useState("")
-  const [timezoneDrop, setTimezoneDrop] = useState(false)
 
-  const timezoneDropHandler = () => {
-    setTimezoneDrop((prev) => !prev)
-  }
 
   const setTimezoneHandler = (value) => {
 
     setTimezone(value)
-    setTimezoneDrop(false)
+    setTimezoneOpen(false)
     setTimezoneError("")
   }
 
@@ -299,17 +322,21 @@ const CreateSalon = () => {
 
 
   const [vipService, setVipService] = useState(false)
-  const [vipServiceDrop, setVipServiceDrop] = useState(false)
 
-  const vipServiceDropHandler = () => {
-    setVipServiceDrop((prev) => !prev)
-  }
 
   const vipServiceHandler = (value) => {
     setVipService(value)
-    setVipServiceDrop(false)
+    setServiceTypeOpen(false)
   }
 
+
+  const [serviceCategoryName, setServiceCategoryName] = useState("")
+
+  const serviceCategoryNameHandler = (value) => {
+    setServiceCategoryNameError("")
+    setServiceCategoryName(value?.serviceCategoryName)
+    setServiceCategoryOpen(false)
+  }
 
   const [salonLogo, setSalonLogo] = useState("")
 
@@ -488,6 +515,19 @@ const CreateSalon = () => {
       return setServiceDescError("Service description must be between 1 to 50 charecters")
     }
 
+    if (!serviceCategoryName) {
+      toast.error("Please select service category", {
+        duration: 3000,
+        style: {
+          fontSize: "var(--font-size-2)",
+          borderRadius: '0.3rem',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return setServiceCategoryNameError("Please enter service category")
+    }
+
     if (!servicePrice) {
       toast.error("Please enter service price", {
         duration: 3000,
@@ -523,7 +563,8 @@ const CreateSalon = () => {
       servicePrice: Number(servicePrice),
       vipService,
       serviceDesc,
-      serviceEWT: Number(serviceEWT)
+      serviceEWT: Number(serviceEWT),
+      serviceCategoryName
     }
 
     setSelectedServices([...selectedServices, service])
@@ -543,7 +584,7 @@ const CreateSalon = () => {
     setVipService(false)
     setServiceDesc("")
     setServiceEWT("")
-
+    setServiceCategoryName("")
   }
 
   const handleKeyPressAddServices = (e) => {
@@ -564,6 +605,7 @@ const CreateSalon = () => {
     setVipService(currentService.vipService);
     setServiceDesc(currentService.serviceDesc);
     setServiceEWT(currentService.serviceEWT);
+    setServiceCategoryName(currentService.serviceCategoryName)
 
     const updatedServices = [...localsalondata.selectedServices];
     updatedServices.splice(index, 1);
@@ -656,202 +698,6 @@ const CreateSalon = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const createSalonHandler = async () => {
-    if (!salonName) {
-      toast.error("Please enter salon name", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonNameError("Please enter salon name")
-    }
-
-    if (salonName.length === 0 || salonName.length > 20) {
-      toast.error("Salon Name must be between 1 to 20 characters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonNameError("Salon Name must be between 1 to 20 characters");
-    }
-
-    if (!salonEmail) {
-      toast.error("Please enter salon email", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonEmailError("Please enter salon email")
-    }
-
-    if (!emailRegex.test(salonEmail)) {
-      toast.error("Invalid email format", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: "0.3rem",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-      return setSalonEmailError("Invalid email format");
-    }
-
-    if (!salonDesc) {
-      toast.error("Please enter salon description", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonDescError("Please enter salon description")
-    }
-
-    if (salonDesc.length === 0 || salonDesc.length > 35) {
-      toast.error("Salon Description must be between 1 to 35 characters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonDescError("Salon Description must be between 1 to 35 characters");
-    }
-
-    if (!address) {
-      toast.error("Please enter salon address", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonAddressError("Please enter salon address")
-    }
-
-    if (!longitude && !latitude) {
-      toast.error("Coordinates is not present", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonCoordinateError("Coordinates is not present")
-    }
-
-    if (!country) {
-      toast.error("Please select country", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setCountryError("Please select country")
-    }
-
-    if (!city) {
-      toast.error("Please select city", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setCityError("Please select city")
-    }
-
-    if (!timezone) {
-      toast.error("Please select timezone", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setTimezoneError("Please select timezone")
-    }
-
-    if (!postCode) {
-      toast.error("Please enter postcode", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setPostCodeError("Please enter postcode")
-    }
-
-    if (postCode.length === 0 || postCode.length > 10) {
-      toast.error("Postcode must be between 0 to 10 charecters", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setPostCodeError("Postcode must be between 0 to 10 charecters")
-    }
-
-    if (!salonType) {
-      toast.error("Please select salon type", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-      return setSalonTypeError("Please select salon type")
-    }
-
-    if (invalidnumber) {
-      toast.error("Invalid Number", {
-        duration: 3000,
-        style: {
-          fontSize: "var(--font-size-2)",
-          borderRadius: '0.3rem',
-          background: '#333',
-          color: '#fff',
-        },
-      });
-
-      return setInvalidNumberError("Invalid Number")
-    }
-
 
     const salondata = {
       adminEmail: email,
@@ -882,7 +728,7 @@ const CreateSalon = () => {
       code: countrycode
     }
 
-    // console.log("Salondata ", salondata)
+    // console.log("Create Salon ", salondata)
 
     const files = await Promise.all(
       salonImages?.map(async (imgObject) => {
@@ -903,7 +749,6 @@ const CreateSalon = () => {
     setUploadSalonImages(files)
 
     dispatch(adminCreateSalonAction(salondata, navigate))
-
 
   }
 
@@ -1091,6 +936,7 @@ const CreateSalon = () => {
 
   const [countryflag, setCountryFlag] = useState("gb")
 
+
   const handlePhoneChange = (phone, meta) => {
     setInvalidNumberError("")
     const { country, inputValue } = meta;
@@ -1102,11 +948,22 @@ const CreateSalon = () => {
       setDialCode(country?.dialCode)
       setCountryFlag(country?.iso2)
       setInvalidNumber(false)
+
+      const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
+
+      localStorage.setItem("salondata", JSON.stringify({
+        ...existingData,
+        ["contactTel"]: phone,
+        ["dialCode"]: country?.dialCode,
+        ["countryflag"]: country?.iso2
+      }));
+
     } else {
       setInvalidNumber(true)
     }
 
   };
+
 
 
 
@@ -1126,12 +983,15 @@ const CreateSalon = () => {
     setSalonType(storedData.salonType)
     setLatitude(storedData.latitude)
     setLongitude(storedData.longitude)
+
+    setContactTel(storedData.contactTel)
+    setDialCode(storedData.dialCode)
+    setCountryFlag(storedData.countryflag)
   }, [selectedServices]);
 
   const setHandler = (setState, value, localname, setError) => {
     setError("")
     setState(value);
-    // console.log("Saving to localStorage:", localname, value);
 
     const existingData = JSON.parse(localStorage.getItem("salondata")) || {};
 
@@ -1155,730 +1015,995 @@ const CreateSalon = () => {
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    const phoneInput = document.querySelector(
-      '.react-international-phone-input-container .react-international-phone-input'
-    );
+  const steps = [
+    {
+      label: 'Account Information',
+      fields: [
+        { name: 'salonName', label: 'Salon Name', type: 'text', placeholder: 'Enter salon name', onChange: setHandler, value: salonName, setState: setSalonName, setError: setSalonNameError, error: salonNameError },
+        { name: 'salonDesc', label: 'Salon Description', type: 'text', placeholder: 'Enter salon description', onChange: setHandler, value: salonDesc, setState: setSalonDesc, setError: setSalonDescError, error: salonDescError },
+        { name: 'salonEmail', label: 'Salon Email', type: 'text', placeholder: 'Enter salon email', onChange: setHandler, value: salonEmail, setState: setSalonEmail, setError: setSalonEmailError, error: salonEmailError },
+        { name: 'contactTel', label: 'Salon Mobile Number', type: 'text', placeholder: 'Enter salon mobile number' },
+      ],
+    },
+    {
+      label: 'Business Information',
+      fields: [
+        { name: 'businesstype', label: 'Salon Business Type', type: 'text', dropdown: true, placeholder: 'Select business type', salonTypeHandler: salonTypeHandler, value: salonType, error: salonTypeError },
+        { name: 'address', label: 'Salon Address', type: 'text', dropdown: false, placeholder: 'Enter salon address', onChange: setHandler, value: address, setState: setAddress, setError: setSalonAddressError, error: salonAddressError },
+        { name: 'postcode', label: 'Salon Post Code', type: 'text', dropdown: false, placeholder: 'Enter salon postcode', onChange: setHandler, value: postCode, setState: setPostCode, setError: setPostCodeError, error: postCodeError },
+        { name: 'lattitude', label: 'Latitude', type: 'text', dropdown: false, placeholder: 'Lattiude', value: latitude },
+        { name: 'longitude', label: 'Salon Longitude', type: 'text', dropdown: false, placeholder: 'Longitude', value: longitude },
+        { name: 'country', label: 'Country', type: 'text', dropdown: true, placeholder: 'Select country' },
+        { name: 'city', label: 'City', type: 'text', dropdown: true, placeholder: 'Select city' },
+        { name: 'timezone', label: 'Timezone', type: 'text', dropdown: true, placeholder: 'Select timezone' },
+      ],
+    },
+    {
+      label: 'Select Services',
+      fields: [
+        { name: 'serviceicon', label: 'Select Service Icon', error: serviceIconError },
+        {
+          name: 'servicename', label: 'Service Name', type: 'text', placeholder: "Enter your service name", dropdown: false, value: serviceName, onChange: (e) => {
+            setServiceNameError("")
+            setServiceName(e.target.value)
+          }, error: serviceNameError
+        },
+        {
+          name: 'servicedescription', label: 'Service Description', type: 'text', placeholder: "Enter your service description", dropdown: false, value: serviceDesc, onChange: (e) => {
+            setServiceDescError("")
+            setServiceDesc(e.target.value)
+          }, error: serviceDescError
+        },
+        { name: 'servicetype', label: 'Service Type (*VIP services have top priority in queue)', type: 'text', placeholder: "Select Service Type", dropdown: true, value: `${vipService ? 'VIP' : 'Regular'}` },
+        { name: 'serviceCategory', label: 'Service Category', type: 'text', placeholder: "Select Service Category", dropdown: true, value: serviceCategoryName, error: serviceCategoryNameError },
 
-    // const phonedropdown = document.querySelector(
-    //   '.react-international-phone-country-selector-dropdown'
-    // )
+        {
+          name: 'serviceprice', label: 'Service Price', type: 'text', placeholder: "Enter your service price", dropdown: false, value: servicePrice, onChange: (e) => {
+            setServicePriceError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServicePrice(value);
+            }
+          }, error: servicePriceError
+        },
+        {
+          name: 'serviceewt', label: 'Service Estimated Time (mins)', type: 'text', placeholder: "Enter your service estimated time", dropdown: false, value: serviceEWT, onChange: (e) => {
+            setServiceEwtError("")
+            const value = e.target.value;
+            if (/^\d*$/.test(value)) {
+              setServiceEWT(value);
+            }
+          }, error: serviceEwtError
+        },
+      ],
+    },
+    {
+      label: 'Gallery',
+      fields: [
+      ],
+    },
+    {
+      label: 'Social Links',
+      fields: [
+        { name: "website", type: 'text', placeholder: 'Website URL', icon: <WebsiteIcon />, value: webLink, onChange: (e) => setHandler(setWebLink, e.target.value, "webLink", setWebLinkError) },
+        { name: "facebook", type: 'text', placeholder: 'Facebook URL', icon: <FacebookIcon />, value: fbLink, onChange: (e) => setHandler(setFbLink, e.target.value, "fbLink", setFbLinkError) },
+        { name: "instagram", type: 'text', placeholder: 'Instagram URL', icon: <InstagramIcon />, value: instraLink, onChange: (e) => setHandler(setInstraLink, e.target.value, "instraLink", setInstaLinkError) },
+        { name: "x", type: 'text', placeholder: 'X URL', icon: <XIcon />, value: twitterLink, onChange: (e) => setHandler(setTwitterLink, e.target.value, "twitterLink", setTwitterLinkError) },
+        { name: "titkok", type: 'text', placeholder: 'Tiktok URL', icon: <TiktokIcon />, value: tiktokLink, onChange: (e) => setHandler(setTiktokLink, e.target.value, "tiktokLink", setTiktokLinkError) },
+      ],
+    },
+  ];
 
-    // const phonedropfocus = document.querySelector(
-    //   '.react-international-phone-country-selector-dropdown__list-item--selected, .react-international-phone-country-selector-dropdown__list-item--focused'
-    // )
 
-    if (phoneInput) {
-      phoneInput.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
+  const [activeStep, setActiveStep] = useState(0);
+
+
+  const handleNext = () => {
+
+    if (activeStep === 0) {
+      if (!salonName) {
+        toast.error("Please enter salon name", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonNameError("Please enter salon name")
+      }
+
+      if (salonName.length === 0 || salonName.length > 20) {
+        toast.error("Salon Name must be between 1 to 20 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonNameError("Salon Name must be between 1 to 20 characters");
+      }
+
+      if (!salonDesc) {
+        toast.error("Please enter salon description", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonDescError("Please enter salon description")
+      }
+
+      if (salonDesc.length === 0 || salonDesc.length > 35) {
+        toast.error("Salon Description must be between 1 to 35 characters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonDescError("Salon Description must be between 1 to 35 characters");
+      }
+
+      if (!salonEmail) {
+        toast.error("Please enter salon email", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonEmailError("Please enter salon email")
+      }
+
+      if (!emailRegex.test(salonEmail)) {
+        toast.error("Invalid email format", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: "0.3rem",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        return setSalonEmailError("Invalid email format");
+      }
+
+      if (invalidnumber) {
+        toast.error("Invalid Number", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+
+        return setInvalidNumberError("Invalid Number")
+      }
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else if (activeStep === 1) {
+
+      if (!salonType) {
+        toast.error("Please select salon type", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonTypeError("Please select salon type")
+      }
+
+      if (!address) {
+        toast.error("Please enter salon address", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonAddressError("Please enter salon address")
+      }
+
+      if (!postCode) {
+        toast.error("Please enter postcode", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setPostCodeError("Please enter postcode")
+      }
+
+
+      if (!longitude && !latitude) {
+        toast.error("Coordinates is not present", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setSalonCoordinateError("Coordinates is not present")
+      }
+
+      if (postCode.length === 0 || postCode.length > 10) {
+        toast.error("Postcode must be between 0 to 10 charecters", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setPostCodeError("Postcode must be between 0 to 10 charecters")
+      }
+
+      if (!country) {
+        toast.error("Please select country", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setCountryError("Please select country")
+      }
+
+      if (!city) {
+        toast.error("Please select city", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setCityError("Please select city")
+      }
+
+      if (!timezone) {
+        toast.error("Please select timezone", {
+          duration: 3000,
+          style: {
+            fontSize: "var(--font-size-2)",
+            borderRadius: '0.3rem',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+        return setTimezoneError("Please select timezone")
+      }
+
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
+  };
 
-    // if(phonedropdown){
-    //   phonedropdown.style.color = darkmodeOn ? 'var(--light-color-4)' : 'var(--light-color-2)';
-    //   phonedropdown.style.backgroundColor = darkmodeOn ? 'var(--dark-color-2)' : 'var(--light-color-4)';
-    // }
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-  }, [darkmodeOn])
+
+
+  const [businessTypeOpen, setBusinessTypeOpen] = useState(false)
+  const [countryOpen, setCountryOpen] = useState(false)
+  const [cityOpen, setCityOpen] = useState(false)
+  const [timezoneOpen, setTimezoneOpen] = useState(false)
+  const [serviceTypeOpen, setServiceTypeOpen] = useState(false)
+  const [serviceCategoryOpen, setServiceCategoryOpen] = useState(false)
 
   return (
-    <div className={`${style.create_salon_wrapper} ${darkmodeOn && style.dark}`}>
-      <div><p>Create Salon</p></div>
-      <div className={`${style.create_salon_content_wrapper} ${darkmodeOn && style.dark}`}>
-        <div>
-          <div>
-            <div>
+    <section className={`${style.section}`}>
+      <div>
+        <h2>Create Salon</h2>
+      </div>
+
+      <div className={`${style.form_main_container}`}>
+        <Stepper
+          activeStep={activeStep}
+          orientation="vertical"
+          sx={{
+            "& .MuiStepContent-root": {
+              borderLeft: "1px solid #bdbdbd",
+              paddingRight: "0px"
+            },
+
+            "& .MuiStepIcon-root": {
+              width: "2.5rem",
+              height: "2.5rem",
+              // fontSize: "2rem",
+              color: "var(--bg-tertiary)",
+            },
+            "& .MuiStepIcon-text": {
+              fontSize: "1.4rem",
+              // color: "var(--text-primary)",
+            },
+            "& .MuiStepIcon-root.Mui-active": {
+              color: "var(--bg-tertiary)",
+            },
+            "& .MuiStepIcon-root.Mui-completed": {
+              background: "green",
+              borderRadius: "50%",
+              color: "#fff",
+              padding: "0.5rem"
+            },
+          }}
+
+        >
+          {steps.map((step, index) => (
+            <Step key={step.label}>
+              <StepLabel>
+                <span className={`${style.stepper_heading}`}>{step.label}</span>
+              </StepLabel>
+
               {
-                salonImages?.[0] && <img src={salonImages?.[0]?.blobUrl} alt="cover-img" />
-              }
-            </div>
+                step.label === "Account Information" && (<StepContent>
+                  <main className={`${style.form_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        <label>{field.label}</label>
 
-            <div className={`${style.create_salon_logo_container} ${darkmodeOn && style.dark}`}>
-              <div>
-                <img src={`${salonLogo}`} alt="s" />
-                <div>
-                  <button onClick={() => handleSalonLogoButtonClick()} className={style.upload_profile_logo_btn}><CameraIcon /></button>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: 'none' }}
-                    onChange={handleSalonFileInputChange}
-                  />
-                </div>
-              </div>
-            </div>
+                        {
+                          field.name === "contactTel" ?
+                            (<>
+                              <PhoneInput
+                                forceDialCode={true}
+                                defaultCountry={countryflag}
+                                value={contactTel}
+                                onChange={(phone, meta) => handlePhoneChange(phone, meta)}
+                              />
+                              {invalidNumberError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{invalidNumberError}</p> : null}
+                            </>) :
+                            (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={(e) => field.onChange(field.setState, e.target.value, field.name, field.setError)}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            )
+                        }
 
-            <div>
-              <p>{salonName}</p>
-              <p><span>{city}</span>{city && ",  "}<span>{country}</span></p>
-            </div>
-          </div>
-
-          <div>
-            <p>Gallery</p>
-            <button
-              className={style.salon_upload_button}
-              onClick={() => handleSalonImageButtonClick()}
-            >
-
-              <p>Upload</p>
-              <div><Uploadicon /></div>
-
-              <input
-                type="file"
-                ref={salonImagefileInputRef}
-                style={{ display: 'none' }}
-                multiple
-                onChange={handleSalonImageFileInputChange}
-              />
-            </button>
-          </div>
-
-          <div>
-            {
-              salonImages.map((s, index) => (
-                <div key={index} onClick={() => selectedSalonImageClicked(s)} style={{ cursor: "pointer" }}><img src={s?.blobUrl} alt="" /></div>
-              ))
-            }
-          </div>
-
-        </div>
-
-        <div>
-          <div>
-            <p>Name</p>
-
-            <input
-              type="text"
-              value={salonName}
-              onChange={(e) => {
-                setHandler(setSalonName, e.target.value, "salonName", setSalonNameError)
-              }}
-              onKeyDown={handleKeyPress}
-              style={{
-                border: salonNameError ? "0.1rem solid red" : "none"
-              }}
-            />
-            <p className={style.error_message}>{salonNameError}</p>
-          </div>
-
-          <div>
-            <p>Email</p>
-            <input
-              type="text"
-              value={salonEmail}
-              onChange={(e) => setHandler(setSalonEmail, e.target.value, "salonEmail", setSalonEmailError)}
-              onKeyDown={handleKeyPress}
-              style={{
-                border: salonEmailError ? "0.1rem solid red" : "none"
-              }}
-            />
-            <p className={style.error_message}>{salonEmailError}</p>
-          </div>
-
-          <div>
-            <p>Description</p>
-            <input
-              type="text"
-              value={salonDesc}
-              onChange={(e) => setHandler(setSalonDesc, e.target.value, "salonDesc", setSalonDescError)}
-              onKeyDown={handleKeyPress}
-              style={{
-                border: salonDescError ? "0.1rem solid red" : "none"
-              }}
-            />
-            <p className={style.error_message}>{salonDescError}</p>
-          </div>
-
-          <div>
-            <p>Address</p>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setHandler(setAddress, e.target.value, "address", setSalonAddressError)}
-              onKeyDown={handleKeyPress}
-              style={{
-                border: salonAddressError ? "0.1rem solid red" : "none"
-              }}
-            />
-            <p className={style.error_message}>{salonAddressError}</p>
-          </div>
-
-          <div>
-            <div>
-              <p>Latitude</p>
-              <input
-                type="text"
-                value={latitude}
-                readOnly
-                style={{ outline: "none", border: salonCoordinateError ? "0.1rem solid red" : "none" }}
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-
-            <div>
-              <p>Longitude</p>
-              <input
-                type="text"
-                value={longitude}
-                readOnly
-                style={{ outline: "none", border: salonCoordinateError ? "0.1rem solid red" : "none" }}
-                onKeyDown={handleKeyPress}
-              />
-            </div>
-            <p className={style.error_message}>{salonCoordinateError}</p>
-          </div>
-
-          <div>
-            <button onClick={geoLocationHandler}>Get Geolocation</button>
-          </div>
-
-          <div>
-            <div>
-              <p>Country</p>
-              <input
-                type="text"
-                value={country}
-                onClick={() => setCountryDrop(true)}
-                readOnly
-                style={{
-                  border: countryError ? "0.1rem solid red" : "none"
-                }}
-              />
-              <span onClick={() => setCountryDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-              <p className={style.error_message}>{countryError}</p>
-              {countryDrop &&
-                <ClickAwayListener onClickAway={() => setCountryDrop(false)}>
-                  <div>
-                    <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
-                      <input
-                        type="text"
-                        placeholder='Search Country'
-                        value={searchCountry}
-                        onChange={(e) => searchCountryHandler(e.target.value)}
-                      />
-
-                      <div><SearchIcon /></div>
-                    </div>
-                    {
-                      getAdminAllCountriesLoading ?
-                        <Skeleton count={2}
-                          height={"4rem"}
-                          width={"100%"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "0.3rem",
-                            marginBottom: "1rem"
-                          }}
-                        /> :
-                        getAdminAllCountriesResolve && copyCountriesdata?.length > 0 ?
-
-                          copyCountriesdata?.map((c) => (
-                            <p key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</p>
-                          ))
-                          :
-                          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                            <p style={{ fontSize: "var(--font-size-3)" }}>No countries available</p>
-                          </div>
-                    }
-                  </div>
-                </ClickAwayListener>}
-
-            </div>
-
-            <div>
-              <p>City</p>
-              <input
-                type="text"
-                value={city}
-                onClick={() => setCityDrop(true)}
-                readOnly
-                style={{ border: (!countryCodePresent || cityError) ? "0.1rem solid red" : undefined }}
-              />
-              <span onClick={() => setCityDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-              {
-                !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{cityError}</p>
-              }
-
-              {cityDrop &&
-                <ClickAwayListener onClickAway={() => setCityDrop(false)}>
-                  <div>
-                    <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
-                      <input
-                        type="text"
-                        placeholder='Search City'
-                        value={searchCity}
-                        onChange={(e) => searchCityHandler(e.target.value)}
-                      />
-
-                      <div><SearchIcon /></div>
-                    </div>
-                    {
-                      getAdminAllCitiesLoading ?
-                        <Skeleton count={2}
-                          height={"4rem"}
-                          width={"100%"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "0.3rem",
-                            marginBottom: "1rem"
-                          }}
-                        /> :
-                        getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
-
-                          copyCitiesData.map((c, index) => (
-                            <p key={index} onClick={() => setCityHandler(c)}>{c.name}</p>
-                          ))
-                          :
-                          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                            <p style={{ fontSize: "var(--font-size-3)" }}>No city available</p>
-                          </div>
-                    }
-                  </div>
-                </ClickAwayListener>}
-            </div>
-          </div>
-
-          <div>
-            <div>
-              <p>Timezone</p>
-              <input
-                type="text"
-                value={timezone}
-                onClick={() => timezoneDropHandler()}
-                readOnly
-                style={{ border: (!countryCodePresent || timezoneError) ? "0.1rem solid red" : undefined }}
-              />
-              <span onClick={() => setTimezoneDrop((prev) => !prev)} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-              {
-                !countryCodePresent ? <p className={style.error_message}>Please select country</p> : <p className={style.error_message}>{timezoneError}</p>
-              }
-
-              {timezoneDrop && <ClickAwayListener onClickAway={() => setTimezoneDrop(false)}><div>
-                {
-                  getAdminAllTimezoneLoading ?
-                    <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
-                    getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
-
-                      AllTimezones.map((c) => (
-                        <p key={c._id} onClick={() => setTimezoneHandler(c)}>{c}</p>
-                      ))
-
-                      :
-                      <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
-                        <p style={{ fontSize: "var(--font-size-3)" }}>No timezone available</p>
                       </div>
-                }
-              </div></ClickAwayListener>}
-            </div>
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      <div></div>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+                  </main>
+                </StepContent>)
+              }
 
-            <div>
-              <p>Post Code</p>
-              <input
-                type="text"
-                value={postCode}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (!/^[a-zA-Z0-9]*$/.test(value)) {
-                    setPostCodeError("Postcode must only contain letters and numbers");
-                    return
-                  }
-                  setHandler(setPostCode, value, "postCode", setPostCodeError)
-                }}
-                onKeyDown={handleKeyPress}
-                style={{ border: postCodeError && "0.1rem solid red" }}
-              />
-              <p className={style.error_message}>{postCodeError}</p>
-            </div>
-          </div>
+              {
+                step.label === "Business Information" && (<StepContent>
+                  <main className={`${style.form_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        {
+                          field.label === "City" || field.label === "Timezone" ? (
+                            countryCodePresent ? (<label>{field.label}</label>) : (null)
+                          ) : (<label>{field.label}</label>)
+                        }
 
-          <div />
+                        {
+                          field.dropdown ? (
+                            field.name === "businesstype" ? (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setBusinessTypeOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
 
-          <div>
-            <p>Type of business</p>
-            <input
-              type="text"
-              value={`${salonType ? `${salonType}` : ''}`}
-              onClick={() => salonTypeDropHandler()}
-              className='salontype_input'
-              readOnly
-              style={{ border: salonTypeError && "0.1rem solid red" }}
-            />
-            <span onClick={() => salonTypeDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
+                                  {
+                                    businessTypeOpen ? (
+                                      <ClickAwayListener onClickAway={() => setBusinessTypeOpen(false)}>
+                                        <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <button onClick={() => field.salonTypeHandler("Barber Shop")}>Barber Shop</button>
+                                          <button onClick={() => field.salonTypeHandler("Hair Dresser")}>Hair Dresser</button>
+                                        </div></ClickAwayListener>) : null
+                                  }
+                                </div>
+                                {salonTypeError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{salonTypeError}</p> : null}
+                              </>
+                            ) : field.name === "country" ? (
+                              <>
+                                <div className={`${style.select_container}`} onClick={() => setCountryOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={country}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
 
-            {salonTypeDrop &&
-              <ClickAwayListener onClickAway={() => setSalonTypeDrop(false)}>
-                <div>
-                  <p onClick={() => salonTypeHandler("Barber Shop")}>Barber Shop</p>
-                  <p onClick={() => salonTypeHandler("Hair Dresser")}>Hair Dresser</p>
-                </div>
-              </ClickAwayListener>}
-            <p className={style.error_message}>{salonTypeError}</p>
-          </div>
+                                  {
+                                    countryOpen ? (
+                                      <ClickAwayListener onClickAway={() => setCountryOpen(false)}>
+                                        <div className={`${style.select_search_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                                            <input
+                                              type="text"
+                                              placeholder='Search Country'
+                                              value={searchCountry}
+                                              onChange={(e) => searchCountryHandler(e.target.value)}
+                                            />
 
-          <div>
-            <p>Mobile Number</p>
-            <div className={`${style.salon_mobile_input} ${darkmodeOn && style.dark}`}>
-              <div onKeyDown={handleKeyPress} style={{ border: invalidNumberError && "0.1rem solid red" }}>
-                <PhoneInput
-                  forceDialCode={true}
-                  defaultCountry={countryflag}
-                  value={contactTel}
-                  onChange={(phone, meta) => handlePhoneChange(phone, meta)}
-                />
+                                            <div><SearchIcon /></div>
+                                          </div>
+                                          {
+                                            getAdminAllCountriesLoading ?
+                                              <Skeleton count={2}
+                                                height={"4rem"}
+                                                width={"100%"}
+                                                baseColor={"var(--loader-bg-color)"}
+                                                highlightColor={"var(--loader-highlight-color)"}
+                                                style={{
+                                                  borderRadius: "0.3rem",
+                                                  marginBottom: "1rem"
+                                                }}
+                                              /> :
+                                              getAdminAllCountriesResolve && copyCountriesdata?.length > 0 ?
 
-              </div>
+                                                copyCountriesdata?.map((c) => (
+                                                  <button key={c._id} onClick={() => setCountryHandler(c)}>{c.name}</button>
+                                                ))
+                                                :
+                                                <div>
+                                                  <p style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "1.4rem" }}>No countries available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
 
-            </div>
-            <p className={style.error_message}>{invalidNumberError}</p>
-          </div>
+                                </div>
+                                {countryError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{countryError}</p> : null}
+                              </>
+                            ) : field.name === "city" ? (
 
-          <div className={style.add_services_drop}>
-            <button onClick={addservicedropHandler} className={style.addservices_btn}>Select Services</button>
-          </div>
+                              countryCodePresent ? (<>
+                                <div className={`${style.select_container}`} onClick={() => setCityOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={city}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
 
-          {
-            openServices &&
-            <main className={`${style.add_services_drop_container} ${darkmodeOn && style.dark}`}>
-              <p>Choose your service icon</p>
-              <div>
-                <div>
-                  {
-                    getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve ?
-                      <div className={style.create_salon_carousel_loader}>
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
+                                  {
+                                    cityOpen ? (
+                                      <ClickAwayListener onClickAway={() => setCityOpen(false)}>
+                                        <div className={`${style.select_search_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          <div className={`${style.search_box} ${darkmodeOn && style.dark}`}>
+                                            <input
+                                              type="text"
+                                              placeholder='Search City'
+                                              value={searchCity}
+                                              onChange={(e) => searchCityHandler(e.target.value)}
+                                            />
+
+                                            <div><SearchIcon /></div>
+                                          </div>
+
+                                          {
+                                            getAdminAllCitiesLoading ?
+                                              <Skeleton count={2}
+                                                height={"4rem"}
+                                                width={"100%"}
+                                                baseColor={"var(--loader-bg-color)"}
+                                                highlightColor={"var(--loader-highlight-color)"}
+                                                style={{
+                                                  borderRadius: "0.3rem",
+                                                  marginBottom: "1rem"
+                                                }}
+                                              /> :
+                                              getAdminAllCitiesResolve && copyCitiesData?.length > 0 ?
+
+                                                copyCitiesData.map((c, index) => (
+                                                  <button key={index} onClick={() => setCityHandler(c)}>{c.name}</button>
+                                                ))
+                                                :
+                                                <div>
+                                                  <p style={{ position: "absolute", top: "60%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "1.4rem" }}>No cities available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
+
+
+                                </div>
+                                {
+                                  !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : cityError && <p style={{ color: "red", fontSize: "1.4rem" }}>{cityError}</p>
+                                }
+                              </>) : (null)
+
+                            ) : field.name === "timezone" && (
+                              countryCodePresent ? (<>
+                                <div className={`${style.select_container}`} onClick={() => setTimezoneOpen((prev) => !prev)}>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={timezone}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {
+                                    timezoneOpen ? (
+                                      <ClickAwayListener onClickAway={() => setTimezoneOpen(false)}>
+                                        <div className={`${style.select_dropdown_container}`} onClick={(event) => event.stopPropagation()} >
+                                          {
+                                            getAdminAllTimezoneLoading ?
+                                              <div style={{ height: "100%", width: "100%", display: "grid", placeItems: "center" }}><ButtonLoader color={"#000"} /></div> :
+                                              getAdminAllTimezoneResolve && AllTimezones?.length > 0 ?
+
+                                                AllTimezones.map((c, index) => (
+                                                  <button key={index} onClick={() => setTimezoneHandler(c)}>{c}</button>
+                                                ))
+
+                                                :
+                                                <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+                                                  <p style={{ fontSize: "1.4rem" }}>No timezone available</p>
+                                                </div>
+                                          }
+                                        </div></ClickAwayListener>) : null
+                                  }
+
+                                </div>
+                                {
+                                  !countryCodePresent ? <p style={{ color: "red", fontSize: "1.4rem" }}>Please select country</p> : timezoneError && <p style={{ color: "red", fontSize: "1.4rem" }}>{timezoneError}</p>
+                                }
+                              </>) : (null)
+                            )
+
+
+                          ) : (
+                            field.name === "address" ? (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={(e) => field.onChange(field.setState, e.target.value, field.name, field.setError)}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "postcode" ? (
+                              <>
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (!/^[a-zA-Z0-9]*$/.test(value)) {
+                                      setPostCodeError("Postcode must only contain letters and numbers");
+                                      return
+                                    }
+                                    setHandler(setPostCode, value, "postCode", setPostCodeError)
+                                  }}
+                                />
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : (<>
+                              <input
+                                type={field.type}
+                                name={field.name}
+                                value={field.value}
+                                placeholder={field.placeholder}
+                                readOnly
+                              />
+                              {salonCoordinateError ? <p style={{ color: "red", fontSize: "1.4rem" }}>{salonCoordinateError}</p> : null}
+                            </>)
+
+                          )
+                        }
+
+                        {field.name === "longitude" && (
+                          <button className={`${style.geolocation_btn}`} onClick={geoLocationHandler}>
+                            Get geolocation
+                          </button>
+                        )}
+
+                      </div>
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      {/* <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button> */}
+                      <div></div>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+
+                    <button onClick={handleBack} disabled={index === 0}>
+                      Back
+                    </button>
+                  </main>
+                </StepContent>)
+              }
+
+
+              {
+                step.label === "Select Services" && (<StepContent>
+                  <main className={`${style.service_container}`}>
+                    <div>
+                      <div>
+                        {step.fields.map((field) => (
+                          <div key={field.name} className={`${style.form_group}`}>
+                            <label>{field.label}</label>
+
+                            {field.name === "serviceicon" ? (
+                              <>
+                                <div className={style.service_icon_container}>
+                                  <Carousel
+                                    responsive={responsive}
+                                    draggable={false}
+                                    swipeable={false}
+                                  >
+                                    {
+                                      SalonIcons?.map((s) => (
+                                        <div key={s._id}
+                                          className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
+                                          onClick={() => logoselectHandler(s)}
+                                          style={{
+                                            border: field.error && "0.1rem solid red"
+                                          }}
+                                        >
+                                          <img src={s.url} alt="" />
+                                        </div>
+                                      ))
+                                    }
+                                  </Carousel>
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            ) : field.name === "servicetype" ? (
+                              <div
+                                className={`${style.select_container}`}
+                                onClick={() => setServiceTypeOpen((prev) => !prev)}
+                              >
+                                <input
+                                  type={field.type}
+                                  name={field.name}
+                                  value={field.value}
+                                  placeholder={field.placeholder}
+                                  readOnly
+                                />
+                                <div><DropdownIcon /></div>
+
+                                {serviceTypeOpen && (
+                                  <ClickAwayListener onClickAway={() => setServiceTypeOpen(false)}>
+                                    <div
+                                      className={`${style.select_dropdown_container}`}
+                                      onClick={(event) => event.stopPropagation()}
+                                    >
+                                      <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button>
+                                    </div>
+                                  </ClickAwayListener>
+                                )}
+                              </div>
+                            ) : field.name === "serviceCategory" ? (
+                              <>
+                                <div
+                                  className={`${style.select_container}`}
+                                  onClick={() => setServiceCategoryOpen((prev) => !prev)}
+                                >
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    readOnly
+                                  />
+                                  <div><DropdownIcon /></div>
+
+                                  {serviceCategoryOpen && (
+                                    <ClickAwayListener onClickAway={() => setServiceCategoryOpen(false)}>
+                                      <div
+                                        className={`${style.select_dropdown_container}`}
+                                        onClick={(event) => event.stopPropagation()}
+                                      >
+                                        {/* <button onClick={() => vipServiceHandler(false)}>Regular</button>
+                                      <button onClick={() => vipServiceHandler(true)}>VIP</button> */}
+                                        {
+                                          salonCategories?.map((item) => {
+                                            return (
+                                              <button
+                                                onClick={() => serviceCategoryNameHandler(item)}
+                                                key={item?._id}
+                                                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+                                              >
+                                                <img
+                                                  src={item?.serviceCategoryImage?.url}
+                                                  alt={item?.serviceCategoryName}
+                                                  style={{ width: "2.4rem", height: "2.4rem", objectFit: "cover", borderRadius: "50%", border: "0.1rem solid #efefef" }}
+                                                />
+                                                {item?.serviceCategoryName}
+                                              </button>
+
+                                            )
+                                          })
+                                        }
+                                      </div>
+                                    </ClickAwayListener>
+                                  )}
+
+                                </div>
+                                {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                              </>
+                            )
+                              :
+                              (
+                                <>
+                                  <input
+                                    type={field.type}
+                                    name={field.name}
+                                    value={field.value}
+                                    placeholder={field.placeholder}
+                                    onChange={field.onChange}
+                                  />
+                                  {field.error ? <p style={{ color: "red", fontSize: "1.4rem" }}>{field.error}</p> : null}
+                                </>
+                              )}
+                          </div>
+                        ))}
+
+
+                        <div className={`${style.button_container}`}>
+                          <button onClick={addServiceHandler}>
+                            Add Service
+                          </button>
+                          <button onClick={handleNext} disabled={localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices} style={{
+                            cursor: localsalondata?.selectedServices?.length === 0 || !localsalondata?.selectedServices ? "not-allowed" : "pointer"
+                          }}>
+                            {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                          </button>
+                        </div>
+
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
+
+                      </div>
+
+                      <div
+                        style={{
+                          display: localsalondata?.selectedServices?.length ? "block" : "none",
+                          padding: localsalondata?.selectedServices?.length ? "1rem" : "0rem"
+                        }}
+                      >
+
+                        {
+                          localsalondata?.selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={`${style.mobile_service_item}`} key={index}>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <img src={ser?.serviceIcon.url || ""} alt="" />
+                                      {ser.vipService ? <span><CrownIcon /></span> : null}
+                                    </div>
+                                    <p>{ser.serviceName}</p>
+                                    <p>{ser.serviceDesc}</p>
+                                    <p>{ser.serviceCategory}</p>
+                                    <p>{ser.serviceCategoryName}</p>
+                                  </div>
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
+                        {
+                          localsalondata?.selectedServices?.map((ser, index) => {
+                            return (
+                              <div className={`${style.service_item}`} key={index}>
+                                <div>
+                                  <div>
+                                    <div><img src={ser?.serviceIcon.url || ""} alt="" /></div>
+                                    <div>
+                                      <p>{ser.serviceName}</p>
+                                      <p>{ser.vipService ? "VIP" : "Regular"}</p>
+                                      <p>{ser.serviceDesc}</p>
+                                      <p>{ser.serviceCategoryName}</p>
+                                    </div>
+                                  </div>
+                                  <button onClick={() => deleteServiceHandler(index)}>Delete</button>
+                                </div>
+                                <div>
+                                  <div>
+                                    <p>Price</p>
+                                    <p>{countryCurrency}{" "} {ser.servicePrice}</p>
+                                  </div>
+
+                                  <div>
+                                    <p>Estimated Time</p>
+                                    <p>{ser.serviceEWT} mins</p>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+
+                      </div>
+
+                    </div>
+
+                  </main>
+                </StepContent>)
+              }
+
+              {
+                step.label === "Gallery" && (
+                  <StepContent>
+                    <main className={`${style.gallery_container}`}>
+                      <div>
+                        <div>
+                          <p>Upload your salon's logo</p>
+                          <button onClick={() => handleSalonLogoButtonClick()}>Upload</button>
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleSalonFileInputChange}
+                          />
+                        </div>
+
+                        <div>
+                          <img src={salonLogo ? salonLogo : "/maskable-icon-512x512.png"} alt="" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div>
+                          <p>Please select high-quality images to showcase your salon.</p>
+                          <button onClick={() => handleSalonImageButtonClick()}>upload</button>
+                          <input
+                            type="file"
+                            ref={salonImagefileInputRef}
+                            style={{ display: 'none' }}
+                            multiple
+                            onChange={handleSalonImageFileInputChange}
+                          />
+                        </div>
+
+                        <div
                           style={{
-                            borderRadius: "6px"
+                            display: salonImages?.length ? "block" : "none",
+                            padding: salonImages?.length ? "1.5rem" : "0rem",
                           }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                        <Skeleton count={1}
-                          height={"9rem"}
-                          width={"9rem"}
-                          baseColor={darkmodeOn ? "var(--darkmode-loader-bg-color)" : "var(--light-loader-bg-color)"}
-                          highlightColor={darkmodeOn ? "var(--darkmode-loader-highlight-color)" : "var(--light-loader-highlight-color)"}
-                          style={{
-                            borderRadius: "6px"
-                          }}
-                        />
-                      </div> :
-                      !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length > 0 ?
-                        <Carousel
-                          responsive={responsive}
-                          draggable={false}
-                          swipeable={false}
                         >
                           {
-                            SalonIcons?.map((s) => (
-                              <div key={s._id}
-                                className={`${style.slider_item} ${selectedLogo?.url === s.url && style.icon_selected} ${darkmodeOn && style.dark}`}
-                                onClick={() => logoselectHandler(s)}
-                                style={{
-                                  border: serviceIconError && "0.1rem solid red"
-                                }}
-                              >
-                                <img src={s.url} alt="" />
-                              </div>
-                            ))
+                            salonImages.map((item, index) => {
+                              return (
+                                <div key={index} onClick={() => selectedSalonImageClicked(item)}><img src={item?.blobUrl} /></div>
+                              )
+                            })
                           }
-                        </Carousel> :
-                        !getAdminAllSalonIconLoading && getAdminAllSalonIconResolve && SalonIcons?.length == 0 ?
-                          <p>No Salon Icons Available</p> :
-                          !getAdminAllSalonIconLoading && !getAdminAllSalonIconResolve &&
-                          <p>No Salon Icons Available</p>
-                  }
-
-                </div>
-                <p className={style.error_message}>{serviceIconError}</p>
-              </div>
-
-              <div>
-                <p>Service Name</p>
-                <input
-                  type="text"
-                  value={serviceName}
-                  onChange={(e) => {
-                    setServiceNameError("")
-                    setServiceName(e.target.value)
-                  }}
-                  onKeyDown={handleKeyPressAddServices}
-                  style={{ border: serviceNameError && "0.1rem solid red" }}
-                />
-                <p className={style.error_message}>{serviceNameError}</p>
-              </div>
-
-              <div>
-                <p>Service Description</p>
-                <input
-                  type="text"
-                  value={serviceDesc}
-                  onChange={(e) => {
-                    setServiceDescError("")
-                    setServiceDesc(e.target.value)
-                  }}
-                  onKeyDown={handleKeyPressAddServices}
-                  style={{ border: serviceDescError && "0.1rem solid red" }}
-                />
-                <p className={style.error_message}>{serviceDescError}</p>
-              </div>
-
-              <div>
-                <p>Service Type (*VIP services have top priority in queue)</p>
-                <input
-                  type="text"
-                  value={`${vipService ? 'VIP' : 'Regular'}`}
-                  onClick={() => vipServiceDropHandler()}
-                  readOnly
-                />
-                <span onClick={() => vipServiceDropHandler()} className={`${style.dropicon} ${darkmodeOn && style.dark}`}><DropdownIcon /></span>
-                {vipServiceDrop &&
-                  <ClickAwayListener onClickAway={() => setVipServiceDrop(false)}>
-                    <div className={style.service_type_dropdown_container}>
-                      <p onClick={() => vipServiceHandler(false)}>Regular</p>
-                      <p onClick={() => vipServiceHandler(true)}>VIP</p>
-                    </div>
-                  </ClickAwayListener>}
-              </div>
-
-              <div>
-                <div>
-                  <p>Service Price</p>
-                  <input
-                    type="text"
-                    value={servicePrice}
-                    onChange={(e) => {
-                      setServicePriceError("")
-                      const value = e.target.value;
-                      if (/^\d*$/.test(value)) {
-                        setServicePrice(value);
-                      }
-                    }}
-                    onKeyDown={handleKeyPressAddServices}
-                    style={{ border: servicePriceError && "0.1rem solid red" }}
-                  />
-                  <p className={style.error_message}>{servicePriceError}</p>
-                </div>
-
-                <div>
-                  <p>Est Wait Tm(mins)</p>
-                  <input
-                    type="text"
-                    value={serviceEWT}
-                    onChange={(e) => {
-                      setServiceEwtError("")
-                      const value = e.target.value;
-                      if (/^\d*$/.test(value)) {
-                        setServiceEWT(value);
-                      }
-                    }}
-                    onKeyDown={handleKeyPressAddServices}
-                    style={{ border: serviceEwtError && "0.1rem solid red" }}
-                  />
-                  <p className={style.error_message}>{serviceEwtError}</p>
-                </div>
-              </div>
-
-              <div>
-                <button onClick={addServiceHandler} className={style.add_service_btn}>Add Service</button>
-              </div>
-
-              <div className={`${style.service_container} ${darkmodeOn && style.dark}`}>
-                {
-                  localsalondata?.selectedServices?.map((ser, index) => {
-                    return (
-                      <div className={`${style.service_item} ${darkmodeOn && style.dark}`} key={index}>
-                        <div className={`${style.service_item_top}`}>
-                          <div><img src={ser.serviceIcon.url ? ser.serviceIcon.url : ""} alt="service icon" /></div>
-                          <div>
-                            <p>{ser.serviceName}</p>
-                            <p>{ser.vipService ? "VIP" : "Regular"}</p>
-                            <p>{ser.serviceDesc}</p>
-                          </div>
                         </div>
-
-                        <div className={`${style.service_item_bottom}`}>
-                          <div>
-                            <div>
-                              <p>Service Price</p>
-                              <p>{countryCurrency}{" "} {ser.servicePrice}</p>
-                            </div>
-                          </div>
-
-                          <div>
-                            <div>
-                              <p>Est Wait Time</p>
-                              <div>
-                                <div><ClockIcon /></div>
-                                <p>{ser.serviceEWT} mins</p>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-
-
-                        <button className={`${style.service_delete_icon}`} onClick={() => deleteServiceHandler(index)}>Delete</button>
                       </div>
-                    )
-                  })
-                }
 
 
-              </div>
-            </main>
-          }
+                      <div className={`${style.button_container}`}>
+                        <button onClick={handleBack} disabled={index === 0}>
+                          Back
+                        </button>
+                        <button onClick={handleNext}>
+                          {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                        </button>
+                      </div>
+                    </main>
+                  </StepContent>
+                )
+              }
 
-          <div className={`${style.salon_logo_wrapper} ${darkmodeOn && style.dark}`}>
-            <p>Select Logo</p>
+              {
+                step.label === "Social Links" && (<StepContent>
+                  <main className={`${style.social_link_container}`}>
+                    {step.fields.map((field) => (
+                      <div key={field.name} className={`${style.form_group}`}>
+                        <div>
+                          <div>{field.icon}</div>
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={field.value}
+                            placeholder={field.placeholder}
+                            onChange={field.onChange}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    <div className={`${style.button_container}`}>
+                      <button onClick={handleBack} disabled={index === 0}>
+                        Back
+                      </button>
+                      <button onClick={handleNext}>
+                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                      </button>
+                    </div>
+                  </main>
+                </StepContent>)
+              }
+
+            </Step>
+          ))}
+        </Stepper>
+
+        {activeStep === steps.length && (
+          <div className={`${style.complete}`}>
+            <p>All steps have been successfully completed! Click the <span style={{ color: "var(--bg-secondary)", fontWeight: "bold" }}>Create</span> button to set up your new salon.</p>
             <div>
-              <button onClick={() => handleSalonLogoButtonClick()}>
-                Upload
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleSalonFileInputChange}
-                />
+              <button onClick={handleBack}>
+                Back
               </button>
-
-              <div><p>{uploadSalonLogo?.name}</p></div>
+              {
+                createSalonLoading ? <button><ButtonLoader /></button> : <button onClick={createSalonHandler} className={style.create_salon_btn}>Create</button>
+              }
             </div>
           </div>
-
-
-          <div className={`${style.salon_images_wrapper} ${darkmodeOn && style.dark}`}>
-            <div>
-              <p style={{
-                fontSize: "var(--font-size-3)",
-                fontWeight: "600"
-              }}>Select Images</p>
-
-              <button onClick={() => handleSalonImageButtonClick()}
-                style={{ fontSize: "var(--font-size-3)" }}>
-                Upload
-                <input
-                  type="file"
-                  ref={salonImagefileInputRef}
-                  style={{ display: 'none' }}
-                  multiple
-                  onChange={handleSalonImageFileInputChange}
-                />
-              </button>
-            </div>
-
-            <div>
-              <p>{salonImages?.map((s) => s.name).join(',')}</p>
-            </div>
-          </div>
-
-          <div>
-            <p>Web Link</p>
-            <input
-              type="text"
-              value={webLink}
-              onChange={(e) => setHandler(setWebLink, e.target.value, "webLink")}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Facebook Link</p>
-            <input
-              type="text"
-              value={fbLink}
-              onChange={(e) => setHandler(setFbLink, e.target.value, "fbLink")}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Instagram Link</p>
-            <input
-              type="text"
-              value={instraLink}
-              onChange={(e) => setHandler(setInstraLink, e.target.value, "instraLink")}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Twitter Link</p>
-            <input
-              type="text"
-              value={twitterLink}
-              onChange={(e) => setHandler(setTwitterLink, e.target.value, "twitterLink")}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            <p>Tiktok Link</p>
-            <input
-              type="text"
-              value={tiktokLink}
-              onChange={(e) => setHandler(setTiktokLink, e.target.value, "tiktokLink")}
-              onKeyDown={handleKeyPress}
-            />
-          </div>
-
-          <div>
-            {
-              createSalonLoading ? <button className={style.create_salon_btn} style={{
-                display: "grid",
-                placeItems: "center"
-              }}><ButtonLoader /></button> : <button onClick={createSalonHandler} className={style.create_salon_btn}>Create</button>
-            }
-          </div>
-
-        </div>
+        )}
       </div>
 
 
@@ -1899,8 +2024,8 @@ const CreateSalon = () => {
             <div>
               <div>
                 <button onClick={handleCurrentEditSalonImageButtonClick}>
-                  <div><EditIcon /></div>
-                  <p>Reselect</p>
+                  {/* <div><EditIcon /></div> */}
+                  Reselect
 
                   <input
                     type="file"
@@ -1910,8 +2035,8 @@ const CreateSalon = () => {
                   />
                 </button>
                 <button onClick={() => deleteSalonImageHandler(openBlobSalonImage)}>
-                  <div><DeleteIcon /></div>
-                  <p>Remove</p>
+                  {/* <div><DeleteIcon /></div> */}
+                  Delete
                 </button>
               </div>
             </div>
@@ -1919,11 +2044,9 @@ const CreateSalon = () => {
         </div>
       </Modal>
 
-    </div>
+
+    </section >
   )
 }
 
 export default CreateSalon
-
-
-

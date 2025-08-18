@@ -56,7 +56,7 @@ export const adminGetDefaultSalonReducer = (state = {}, action) => {
 
 
 const initialState = {
-    darkmode: localStorage.getItem("dark") || "On"
+    darkmode: localStorage.getItem("dark") || "Off"
 }
 
 export const colorReducer = (state = initialState, action) => {

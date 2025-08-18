@@ -12,12 +12,12 @@ const Appointment = () => {
     const barberId = useSelector(state => state.BarberLoggedInMiddleware?.barberId)
 
     const [getSalonoffDays, setGetSalonoffDays] = useState([])
-    
+
     useEffect(() => {
-        if(salonId !== 0){
-            const fetchSalonOffDaysHandler = async() => {
+        if (salonId !== 0) {
+            const fetchSalonOffDaysHandler = async () => {
                 try {
-                    const {data} = await api.post("/api/salonSettings/getSalonoffDays", {salonId})
+                    const { data } = await api.post("/api/salonSettings/getSalonoffDays", { salonId })
                     setGetSalonoffDays(data?.response)
                 } catch (error) {
                     toast.error(error?.response?.data?.message, {
@@ -34,7 +34,7 @@ const Appointment = () => {
 
             fetchSalonOffDaysHandler()
         }
-    },[salonId])
+    }, [salonId])
 
     const darkMode = useSelector(darkmodeSelector)
 
@@ -188,8 +188,6 @@ const Appointment = () => {
         getBarberLeaveDaysFunc()
     }, [])
 
-    console.log("Selected Dates ", selectedDates)
-    console.log("Barber Leave Days ", barberLeaveDaysdata)
 
     const isDisabled = (date) => {
         const formattedDate = date.toLocaleDateString("en-CA").split('T')[0];
@@ -197,23 +195,114 @@ const Appointment = () => {
     };
 
     return (
-        <div className={`${style.barber_appointment_wrapper} ${darkmodeOn && style.dark}`}>
+        <div className={`${style.section}`}>
             <div>
-                <p>Appointment</p>
+                <h2>Appointment</h2>
             </div>
 
-            <div className={`${style.barber_appointment_content_wrapper} ${darkmodeOn && style.dark}`}>
+            <div className={style.barber_appointment_content_wrapper}>
+                <div>
+                    <p>Choose appointment days</p>
+                    <div className={style.heading}>
+                        <p>#</p>
+                        <p>Days</p>
+                    </div>
+                    {
+                        days.map((d) => {
+                            return (
+                                <div key={d.id} className={style.value}>
+                                    <input
+                                        type="checkbox"
+                                        style={{
+                                            accentColor: "blue"
+                                        }}
+                                        onChange={() => checkdayHandler(d)}
+                                        checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
+                                        disabled={getSalonoffDays.includes(d.day)}
+                                    />
+                                    <p>{d.day}</p>
+                                </div>
+                            )
+                        })
+                    }
+
+                    <button
+                        className={style.submit}
+                        onClick={submitHandler}
+                        disabled={salonId === 0}
+                        style={{
+                            cursor: salonId === 0 ? "not-allowed" : "pointer"
+                        }}
+                    >Save</button>
+
+                </div>
+
+                <div>
+                    <p>Barber Off Days</p>
+                    <div className={style.leave_value_body}>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: "2rem"
+                        }}>
+                            <p>Select Off Days</p>
+                            <button
+                                className={style.reset_days}
+                                onClick={() => offDayHandler([])}
+                                disabled={salonId === 0}
+                                style={{
+                                    cursor: salonId === 0 ? "not-allowed" : "pointer"
+                                }}
+                            >Reset Off Days</button>
+                        </div>
+                        {
+                            <div style={{ marginBottom: "2rem" }}>
+                                <Calendar
+                                    onClickDay={onClickDay}
+                                    // tileClassName={({ date }) =>
+                                    //     isSelected(date) ? style.highlighted_date : ""
+                                    // }
+
+                                    minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
+                                    tileClassName={({ date }) => {
+                                        if (isSelected(date)) {
+                                            return style.highlighted_date;
+                                        } else if (isDisabled(date)) {
+                                            return style.leave_dates;
+                                        }
+                                        return null;
+                                    }}
+
+                                // tileDisabled={({ date }) => isDisabled(date)}
+                                />
+                            </div>
+                        }
+
+                        <button
+                            className={style.submit}
+                            onClick={() => offDayHandler(selectedDates)}
+                            disabled={salonId === 0}
+                            style={{
+                                cursor: salonId === 0 ? "not-allowed" : "pointer"
+                            }}
+                        >Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <div className={`${style.barber_appointment_content_mobile_wrapper} ${darkmodeOn && style.dark}`}>
                 <div className={style.button_group}>
-                    <p
+                    <button
                         onClick={() => {
                             setBarberOffdates(false)
                             setAppointmentDates(true)
-                        }}>Appointment Date</p>
-                    <p
+                        }}>Appointment Days</button>
+                    <button
                         onClick={() => {
                             setBarberOffdates(true)
                             setAppointmentDates(false)
-                        }}>Barber Off Days</p>
+                        }}>Barber Off Days</button>
                 </div>
                 {
                     appointmentdates && <div className={style.value_body}>
@@ -227,6 +316,9 @@ const Appointment = () => {
                                     <div key={d.id} className={style.value}>
                                         <input
                                             type="checkbox"
+                                            style={{
+                                                accentColor: "blue"
+                                            }}
                                             onChange={() => checkdayHandler(d)}
                                             checked={!getSalonoffDays.includes(d.day) && selectedDays.includes(d.day)}
                                             disabled={getSalonoffDays.includes(d.day)}
@@ -247,15 +339,23 @@ const Appointment = () => {
                             alignItems: "center"
                         }}>
                             <p>Select Off Days</p>
-                            <button className={style.reset_days} onClick={() => offDayHandler([])}>Reset Off Days</button>
+                            <button
+                                className={style.reset_days}
+                                onClick={() => offDayHandler([])}
+                                disabled={salonId === 0}
+                                style={{
+                                    cursor: salonId === 0 ? "not-allowed" : "pointer"
+                                }}
+                            >Reset Off Days</button>
                         </div>
                         {
-                            <div>
+                            <div style={{ marginBottom: "2rem" }}>
                                 <Calendar
                                     onClickDay={onClickDay}
                                     // tileClassName={({ date }) =>
                                     //     isSelected(date) ? style.highlighted_date : ""
                                     // }
+
                                     minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
                                     tileClassName={({ date }) => {
                                         if (isSelected(date)) {
@@ -272,7 +372,14 @@ const Appointment = () => {
                         }
                     </div>
                 }
-                <button className={style.submit} onClick={appointmentdates ? submitHandler : () => offDayHandler(selectedDates)}>submit</button>
+                <button
+                    className={style.submit}
+                    onClick={appointmentdates ? submitHandler : () => offDayHandler(selectedDates)}
+                    disabled={salonId === 0}
+                    style={{
+                        cursor: salonId === 0 ? "not-allowed" : "pointer"
+                    }}
+                >Save</button>
             </div>
         </div>
     )

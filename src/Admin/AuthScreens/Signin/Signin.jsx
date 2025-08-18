@@ -130,20 +130,19 @@ const Signin = () => {
   });
 
   return (
-    <main className={`${style.admin_signin_container} ${darkmodeOn && style.dark}`}>
-      <div className={style.admin_signin_left}>
-        <img src="./signin_un.png" alt="admin_Signin" />
-      </div>
+    <main className={`${style.section} ${darkmodeOn && style.dark}`}>
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
       <div className={`${style.admin_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Sign In to your Admin Account</p>
-          <p>Welcome back Admin! please enter your details</p>
+          <h2>Welcome, Admin</h2>
+          <p>Please signin to your account</p>
 
           <div>
             <input
               type="email"
-              placeholder='Enter Your Email ID'
+              placeholder='Enter your email'
               value={email}
               onChange={(e) => {
                 setEmailError("")
@@ -161,7 +160,7 @@ const Signin = () => {
               style={{ border: passwordError ? "0.1rem solid red" : undefined }}>
               <input
                 type={visibleeye ? "text" : "password"}
-                placeholder='Password'
+                placeholder='Enter your password'
                 value={password}
                 onChange={(e) => {
                   setPasswordError("")
@@ -187,6 +186,8 @@ const Signin = () => {
             ><ButtonLoader /></button> : <button onClick={signinClicked} className={style.signin_btn}>Signin</button>
           }
 
+          <p>Don't you have an account ? <Link to="/adminsignup" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Sign up</Link></p>
+
           <div>
             <div />
             <p>or</p>
@@ -200,7 +201,7 @@ const Signin = () => {
             </div>
           </button>
 
-          <p>Don't you have an account ? <Link to="/adminsignup">Sign up</Link></p>
+
 
         </div>
         <button className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></button>

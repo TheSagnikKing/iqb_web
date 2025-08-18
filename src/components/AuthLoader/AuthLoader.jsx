@@ -7,7 +7,7 @@ const AuthLoader = () => {
 
   const darkMode = useSelector(darkmodeSelector)
 
-  const darkmodeOn = darkMode === "On"
+  const darkmodeOn = !(darkMode === "On")
   
   return (
     <div className={`authloader ${darkmodeOn && "dark"}`}>

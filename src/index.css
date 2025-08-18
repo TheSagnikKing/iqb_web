@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 @import 'react-loading-skeleton/dist/skeleton.css';
 @import "react-responsive-carousel/lib/styles/carousel.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 @import 'normalize.css';
 @import 'react-international-phone/style.css';
 @import 'react-calendar/dist/Calendar.css';
@@ -10,9 +10,45 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+
+  /* Font smoothing and anti-aliasing */
+  -webkit-font-smoothing: antialiased;
+  /* for Webkit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale;
+  /* for Firefox on macOS */
+  text-rendering: optimizeLegibility;
+  /* improves legibility */
 }
 
+
+@font-face {
+  font-family: 'AirbnbCereal_Light';
+  src: url('/fonts/AirbnbCereal_W_Lt.otf');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal_Medium';
+  src: url('/fonts/AirbnbCereal_W_Md.otf');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal_Semibold';
+  src: url('/fonts/AirbnbCereal_W_Bk.otf');
+}
+
+@font-face {
+  font-family: 'AirbnbCereal_Bold';
+  src: url('/fonts/AirbnbCereal_W_Bd.otf');
+}
+
+body {
+  font-family: 'AirbnbCereal_Semibold', sans-serif;
+}
+
+p {
+  font-size: 1.4rem;
+}
 
 :root {
   font-size: 62.5%;
@@ -46,11 +82,9 @@
 
   /* loader colors */
 
-  --light-loader-bg-color: #ebebeb;
-  --light-loader-highlight-color: #f5f5f5;
 
-  --dark-loader-bg-color: #28292a;
-  --dark-loader-highlight-color: #3c4043;
+  --loader-bg-color: #121217;
+  --loader-highlight-color: #2E2E33;
 
 
   /* font sizes */
@@ -84,14 +118,75 @@
   --cmmn-box-shadow-y: 0rem 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
   --cmmn-box-shadow-x: 0.1rem 0rem 0.6rem rgba(0, 0, 0, 0.2);
 
+
+
+  /* lastest design color codes */
+
+  /* dark mode color codes */
+
+  --bg-primary: #09090B;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #585858;
+
+  --bg-hover-primary: #27272A80;
+  --bg-secondary-hover: #ffffffe6;
+  --btn-primary-hover: #27272A;
+
+  --btn-text-color: #000;
+
+  --bg-dark: blue;
+
+  --input-bg-color: #27272A80;
+
+  --common-btn-transition: 0.3s all ease;
+
+  --text-primary: #F4F4F5;
+  --text-secondary: #F4F4F5B2;
+
+  --border-primary: #F4F4F5B2;
+  --border-secondary: #252526;
+
+  --border-radius-primary: 0.4rem;
+
+  --font-primary: 1.4rem;
+  --font-secondary: 1.2rem;
+  --font-tertiary: 1.6rem;
+
+  --linear-color-1: #283048;
+  --linear-color-2: #859398;
+
+  --section-bg-color: #1e1e1e;
+  --cmmn-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+body[data-theme="light"] {
+  --bg-primary: #fff;
+  --bg-secondary: #09090B;
+  --bg-secondary-hover: #09090Be6;
+  --bg-hover-primary: #efefef;
+
+  --text-primary: #09090B;
+  --text-secondary: gray;
+  --btn-text-color: #fff;
+  --input-bg-color: #efefef;
+  --border-secondary: #e7e7e7;
+
+  --loader-bg-color: #ebebeb;
+  --loader-highlight-color: #f5f5f5;
+
+  --btn-primary-hover: #d3d3d3;
+
+  --linear-color-1: #757f9a;
+  --linear-color-2: #d7dde8;
+
+  --section-bg-color: #f7f7f7;
 }
 
 body {
   font-size: 1.6rem;
 }
 
-
-.carousel * {
+/* .carousel * {
   border-radius: 0.6rem;
   -webkit-border-radius: 0.6rem;
   -moz-border-radius: 0.6rem;
@@ -101,40 +196,30 @@ body {
 
 .carousel .control-dots .dot {
   background: var(--color-2);
-}
+} */
 
 .react-international-phone-input-container {
-  border-radius: var(--input-border-radius) !important;
-  -webkit-border-radius: var(--input-border-radius) !important;
-  -moz-border-radius: var(--input-border-radius) !important;
-  -ms-border-radius: var(--input-border-radius) !important;
-  -o-border-radius: var(--input-border-radius) !important;
+  border-radius: var(--border-radius-primary) !important;
+  -webkit-border-radius: var(--border-radius-primary) !important;
+  -moz-border-radius: var(--border-radius-primary) !important;
+  -ms-border-radius: var(--border-radius-primary) !important;
+  -o-border-radius: var(--border-radius-primary) !important;
 }
 
 .react-international-phone-input-container .react-international-phone-input {
   width: 100%;
-  min-height: 4rem !important;
-  background-color: transparent;
-  border: none;
-  font-size: var(--font-size-3);
-  border-radius: var(--input-border-radius) !important;
-  -webkit-border-radius: var(--input-border-radius) !important;
-  -moz-border-radius: var(--input-border-radius) !important;
-  -ms-border-radius: var(--input-border-radius) !important;
-  -o-border-radius: var(--input-border-radius) !important;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  outline: none;
+  font-size: 1.4rem;
+  border: 0.1rem solid var(--border-secondary);
+  height: 3.5rem;
 }
 
 .react-international-phone-input-container .react-international-phone-country-selector-button {
-  background-color: transparent !important;
-  min-height: 4rem !important;
-  width: 6rem !important;
-  border: none !important;
-  border-top-left-radius: var(--input-border-radius) !important;
-  border-bottom-left-radius: var(--input-border-radius) !important;
-}
-
-.react-international-phone-country-selector-dropdown {
-  /* width: 30rem !important; */
+  background-color: var(--bg-primary);
+  height: 3.5rem;
+  border: 0.1rem solid var(--border-secondary);
 }
 
 
@@ -272,6 +357,7 @@ body {
   }
 }
 
+
 .route_error_container_content>div:nth-child(2)>img {
   width: 100%;
   height: 100%;
@@ -309,13 +395,12 @@ body {
 
 
 *::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  width: 0.3rem;
+  height: 0.3rem;
 }
 
-*:hover::-webkit-scrollbar {
-  width: 0.6rem;
-  height: 0.7rem;
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 *:hover::-webkit-scrollbar-track {
@@ -323,7 +408,7 @@ body {
 }
 
 *:hover::-webkit-scrollbar-thumb {
-  background: #0867ff48;
+  background: var(--bg-secondary) !important;
   border-radius: var(--list-wrapper-border-radius);
   -webkit-border-radius: var(--list-wrapper-border-radius);
   -moz-border-radius: var(--list-wrapper-border-radius);
@@ -332,7 +417,7 @@ body {
 }
 
 *:hover::-webkit-scrollbar-thumb:hover {
-  background: rgb(0, 98, 255);
+  /* background-color: transparent !important; */
 }
 
 *:hover::-webkit-scrollbar-corner {
@@ -340,57 +425,53 @@ body {
 }
 
 
+.fc,
+.fc *,
+.fc::after,
+.fc::before {
+  color: var(--text-primary);
+}
+
+.fc-theme-standard .fc-popover {
+  background: var(--bg-primary) !important;
+}
+
 .fc .fc-toolbar.fc-header-toolbar {
   margin-bottom: 1rem;
 }
 
 .fc .fc-toolbar-title {
-  font-size: var(--font-size-1);
-  font-weight: 600;
+  font-size: clamp(18px, 2vw, 24px) !important;
+  font-family: 'AirbnbCereal_Medium';
 }
 
-/* 
-.fc .fc-button {
-  height: 3.5rem;
-  width: 3.5rem;
-  outline: none;
-  margin-left: 1rem;
-  border-radius: 0.3rem;
-  -webkit-border-radius: 0.3rem;
-  -moz-border-radius: 0.3rem;
-  -ms-border-radius: 0.3rem;
-  -o-border-radius: 0.3rem;
-  background-color: var(--color-3);
-  color: var(--color-2);
-  border: 0.1rem solid var(--color-2);
-
-  &:hover {
-    background-color: var(--color-2);
-    color: var(--light-color-4);
-  }
-} */
+.fc-scrollgrid-liquid {
+  background-color: var(--bg-primary);
+  box-shadow: var(--cmmn-box-shadow);
+}
 
 .fc .fc-button-group>.fc-button {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: var(--font-size-2) !important;
-  color: var(--color-2) !important;
+  /* color: var(--text-primary) !important; */
 }
 
 .fc .fc-button-primary {
-  background-color: var(--color-3);
-  color: var(--color-2);
-  border: 0.1rem solid var(--color-2);
+  background-color: var(--bg-secondary);
+  color: var(--btn-text-color) !important;
+  border: none;
+
 
   &:hover {
-    background-color: var(--color-2);
-    color: var(--light-color-4) !important;
+    background-color: var(--bg-secondary-hover);
+    /* color: var(--btn-text-color) !important; */
   }
 }
 
 .fc .fc-today-button {
-  width: 7rem !important;
+  /* width: 7rem !important;
   border-radius: 0.3rem;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;
@@ -398,42 +479,129 @@ body {
   -o-border-radius: 0.3rem;
   margin-right: -1rem;
   font-size: var(--font-size-2);
-  border: 0.1rem solid var(--color-2) !important;
-  color: var(--color-2) !important;
-}
+  border: none;
+  color: var(--text-primary) !important; */
 
-.fc .fc-button:hover {
+  width: 5.5rem !important;
 
-  .fc-icon-chevron-left::before,
-  .fc-icon-chevron-right::before {
-    color: var(--light-color-4) !important;
+  &:disabled {
+    background-color: var(--bg-secondary-hover);
+    /* color: var(--btn-text-color) !important; */
   }
-
 }
 
 .fc .fc-button:disabled {
-  background-color: var(--color-2) !important;
-  color: var(--light-color-4) !important;
+  /* background-color: red !important; */
+}
+
+
+.fc .fc-button {
+  padding: 0.2rem 0.2rem !important;
+  font-size: 1.4rem;
+
+  .fc-icon-chevron-left::before,
+  .fc-icon-chevron-right::before {
+    color: var(--btn-text-color) !important;
+  }
+}
+
+.fc-button-group {
+  gap: 1rem;
+}
+
+.fc-today-button {
+  margin-right: 0rem !important;
+}
+
+.fc .fc-button:disabled {
+  /* background-color: var(--btn-primary-hover) !important; */
+  /* color: var(--text-primary) !important; */
 }
 
 .fc-direction-ltr {
   height: calc(var(--list-wrapper-height) - 4rem);
+  /* background-color: red; */
 }
 
 .fc-h-event .fc-event-title {
-  color: var(--light-color-4) !important;
+  /* color: var(--text-primary) !important; */
   padding-inline: 0.5rem;
   font-size: 1.2rem;
 }
 
 .fc-h-event {
-  background-color: var(--color-2);
+  background-color: var(--bg-secondary);
+  border: none;
   margin-bottom: 0.5rem;
   height: 2rem;
   align-content: center;
+
+  .fc-event-title {
+    color: var(--btn-text-color) !important;
+  }
 }
 
-.react-calendar__tile--active {
+.fc .fc-scrollgrid-section table,
+.fc .fc-daygrid-body {
+  width: 100% !important;
+}
+
+.react-calendar {
+  background-color: var(--bg-primary) !important;
+  border: 0.1rem solid var(--border-secondary) !important;
+  border-radius: var(--border-radius-primary) !important;
+  -webkit-border-radius: var(--border-radius-primary) !important;
+  position: relative !important;
+  z-index: 100 !important;
+  -moz-border-radius: var(--border-radius-primary) !important;
+  -ms-border-radius: var(--border-radius-primary) !important;
+  -o-border-radius: var(--border-radius-primary) !important;
+}
+
+.react-calendar__tile {
+  font-size: 1.2rem !important;
+  color: var(--text-primary) !important;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: var(--text-secondary) !important;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  & abbr[title] {
+    text-decoration: none !important;
+    color: var(--text-primary) !important;
+  }
+}
+
+.react-calendar__tile:disabled {
+  background-color: var(--input-bg-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.react-calendar__navigation button {
+  color: var(--text-secondary) !important;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:disabled {
+  background-color: var(--input-bg-color) !important;
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile:hover,
+.react-calendar__tile--now {
+  background-color: var(--bg-secondary) !important;
+  color: var(--btn-text-color) !important;
+}
+
+
+.react-calendar__tile--hasActive {
+  /* background-color: var(--bg-primary) !important; */
+  color: var(--btn-text-color) !important;
+}
+
+/* .react-calendar__tile--active {
   border-radius: 0.4rem;
   -webkit-border-radius: 0.4rem;
   -moz-border-radius: 0.4rem;
@@ -473,77 +641,154 @@ body {
   -o-border-radius: 0.4rem;
   background-color: var(--color-2) !important;
   color: var(--light-color-4) !important;
+} */
+
+
+.rmdp-header-values {
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.rmdp-day {
+  color: var(--text-primary) !important;
+}
+
+.rmdp-year-picker {
+  background-color: var(--bg-primary) !important;
+}
+
+.rmdp-month-picker {
+  background-color: var(--bg-primary) !important;
+}
+
+
+.rmdp-calendar {
+  padding: 0.5rem !important;
+  background-color: var(--bg-primary) !important;
+  border: 0.2rem solid var(--border-secondary) !important;
+}
+
+.rmdp-shadow {
+  box-shadow: none !important;
 }
 
 .rmdp-input {
-  height: 3rem !important;
+  height: 3.5rem !important;
   padding-inline: 1rem !important;
   text-align: "center" !important;
   font-size: 1.4rem !important;
-  width: 20rem;
+  width: 19rem;
+  background: var(--bg-primary) !important;
+  outline: none !important;
+  border: 0.1rem solid var(--border-secondary) !important;
+  border-radius: var(--border-radius-primary);
+  -webkit-border-radius: var(--border-radius-primary);
+  -moz-border-radius: var(--border-radius-primary);
+  -ms-border-radius: var(--border-radius-primary);
+  -o-border-radius: var(--border-radius-primary);
+  margin: 0px !important;
+  padding: 0px;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+
+  &::placeholder {
+    font-size: 1.2rem !important;
+    text-transform: uppercase !important;
+    color: var(--text-secondary) !important;
+  }
 }
 
-.rmdp-input::placeholder {
-  font-size: 1.2rem !important;
-  text-transform: uppercase !important;
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: var(--bg-secondary-hover) !important;
+}
+
+.rmdp-day.rmdp-today span {
+  background-color: var(--bg-secondary) !important;
+  border: 0.1rem solid #fff;
+  color: var(--btn-text-color) !important;
+}
+
+.rmdp-day span {
+  font-size: 1.3rem !important;
+
+  &:hover {
+    background-color: var(--bg-secondary-hover) !important;
+    color: var(--btn-text-color) !important;
+  }
+}
+
+.rmdp-range {
+  background-color: #e11d47b4 !important;
+  box-shadow: 0 0 2px var(--text-primary) !important;
+}
+
+.rmdp-week-day {
+  color: var(--text-primary) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+}
+
+.rmdp-arrow {
+  border: solid var(--bg-secondary) !important;
+  border-width: 0 2px 2px 0 !important;
+}
+
+.rmdp-arrow-container.rmdp-left {
+  position: relative;
+
+  &>i {
+    display: none !important;
+  }
+
+  &::after {
+    content: "<";
+    position: absolute;
+    top: -2%;
+    left: 25%;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+  }
+
+  &:hover::after {
+    color: var(--btn-text-color);
+  }
 }
 
 
-/* Light Mode */
-.light-theme .rmdp-calendar {
-  background-color: white !important;
-  /* color: black !important; */
-  border: 1px solid #ddd !important;
+.rmdp-arrow-container.rmdp-right {
+  position: relative;
+
+  &>i {
+    display: none !important;
+  }
+
+  &::after {
+    content: ">";
+    position: absolute;
+    top: -2%;
+    right: 25%;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+  }
+
+  &:hover::after {
+    color: var(--btn-text-color);
+  }
 }
 
 
-/* .light-theme .rmdp-day {
-  color: #000 !important;
-} */
+.rmdp-arrow-container:hover {
+  background-color: var(--bg-secondary-hover) !important;
 
-.light-theme .rmdp-header-values {
-  color: #000 !important;
 }
 
-.light-theme .rmdp-month-picker {
-  background-color: #fff !important;
-}
-
-.light-theme .rmdp-year-picker {
-  background-color: #fff !important;
-}
-
-/* Dark Mode */
-.dark-theme .rmdp-calendar {
-  background-color: #222 !important;
-  /* color: white !important; */
-  border: 1px solid #444 !important;
-}
-
-.dark-theme .rmdp-month-picker {
-  background-color: #222 !important;
-}
-
-.dark-theme .rmdp-year-picker {
-  background-color: #222 !important;
+.rmdp-ep-shadow:after {
+  display: none;
 }
 
 
-
-.dark-theme .rmdp-day {
-  color: #fff !important;
-}
-
-.dark-theme .rmdp-header-values {
-  color: #fff !important;
-}
-
-
-.rmdp-shadow {
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) !important;
-}
-
-
-.dark-input .rmdp-input {
-  /* background-color: red !important; */
+@supports (-webkit-hyphens: none) {
+  .react-international-phone-input-container .react-international-phone-input {
+    font-size: 1.6rem;
+  }
 }

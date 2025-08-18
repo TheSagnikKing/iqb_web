@@ -51,43 +51,10 @@ const AppointmentCalender = () => {
     }, [salonId])
 
 
-    const darkMode = useSelector(darkmodeSelector)
-
-    const darkmodeOn = darkMode === "On"
-
-    useEffect(() => {
-        const styleElement = document.createElement('style');
-
-        styleElement.textContent = `
-  .fc,
-  .fc *,
-  .fc::after,
-  .fc::before {
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"};
-  }
- 
-.fc-theme-standard .fc-popover {
-        background-color: ${darkmodeOn ? "var(--dark-color-3)" : "var(--light-color-3)"};
-}
-
-   .fc-icon-chevron-left::before,
-    .fc-icon-chevron-right::before {
-    color: ${darkmodeOn ? "var(--light-color-4)" : "var(--color-2)"}};
-    }
-`;
-        document.head.appendChild(styleElement);
-
-        return () => {
-            document.head.removeChild(styleElement);
-        };
-    }, [darkmodeOn]);
-
     return (
-        <main className={`${style.appoint_cal_wrapper} ${darkmodeOn && style.dark}`}>
-            {/* <div>
-                <p>Appointment</p>
-            </div> */}
-            <div className={style.appoint_content_wrapper}>
+        <section className={`${style.section}`}>
+
+            <div className={`${style.list_container}`}>
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView='dayGridMonth'
@@ -101,7 +68,7 @@ const AppointmentCalender = () => {
                     dayMaxEvents={true}
                 />
             </div>
-        </main>
+        </section>
     )
 }
 

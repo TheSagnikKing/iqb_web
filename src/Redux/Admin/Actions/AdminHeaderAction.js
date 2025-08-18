@@ -116,7 +116,7 @@ export const adminGetDefaultSalonAction = (adminEmail, signal, adminSetSalon) =>
                     color: '#fff',
                 },
             });
- 
+
         }
 
     }

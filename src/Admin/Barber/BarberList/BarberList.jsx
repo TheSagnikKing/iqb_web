@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import style from "./BarberList.module.css"
-import { useNavigate } from 'react-router-dom'
-import { EmailIcon, MessageIcon, CloseIcon } from '../../../icons'
-import Skeleton from 'react-loading-skeleton'
-import { useDispatch, useSelector } from 'react-redux'
+import { BarberClockIn, BarberClockOut, CheckAllIcon, CheckIcon, CloseIcon, DropdownIcon, EmailIcon, MessageIcon, OfflineIcon, OnlineIcon, SalonThreeDotsIcon, SortDownIcon, SortUpDownArrowIcon, SortUpIcon } from '../../../newicons';
+import { ClickAwayListener, FormControl, MenuItem, Modal, Pagination, Select } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import { adminApproveBarberAction, adminDeleteBarberAction, adminSendBarberEmailAction, adminSendBarberMessageAction, changeAdminBarberClockStatusAction, changeAdminBarberOnlineStatusAction, getAdminBarberListAction } from '../../../Redux/Admin/Actions/BarberAction'
 import { darkmodeSelector } from '../../../Redux/Admin/Reducers/AdminHeaderReducer'
-import toast from 'react-hot-toast'
-import { Modal } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
 import ButtonLoader from '../../../components/ButtonLoader/ButtonLoader'
+import { ClockIcon } from '../../../icons';
 
 const BarberList = () => {
 
@@ -317,22 +317,126 @@ const BarberList = () => {
     loading: adminSendBarberMessageLoading
   } = adminSendBarberMessage
 
+  // console.log(BarberList)
+
+  // ================================
+
+  const headRows = [
+    { id: 1, heading: "", key: "" },
+    { id: 2, heading: "Name", key: "name" },
+    { id: 3, heading: "Email", key: "email" },
+    { id: 4, heading: "isOnline", key: "isOnline" },
+    { id: 5, heading: "isClockin", key: "isClockedIn" },
+    { id: 6, heading: "isApprove", key: "isApproved" },
+    { id: 7, heading: "", key: "" },
+  ];
+
+
+  const [barberlistData, setBarberlistData] = useState([])
+
+  useEffect(() => {
+    if (getAdminBarberListResolve && BarberList.length > 0) {
+      setBarberlistData(BarberList)
+    }
+
+  }, [BarberList])
+
+
+  const [settingsIndex, setSettingsIndex] = useState("")
+
+  const [rowsPerPage, SetRowsPerPage] = useState(10)
+
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [startIndex, setStartIndex] = useState(0)
+  const [endIndex, setEndIndex] = useState(rowsPerPage)
+  const [sortOrder, setSortOrder] = useState("asc")
+  const [sortColumn, setSortColumn] = useState("")
+
+  const [barberPaginationData, setBarberPaginationData] = useState([])
+
+  useEffect(() => {
+    if (barberlistData.length > 0) {
+      setBarberPaginationData(barberlistData.slice(startIndex, endIndex))
+    }
+  }, [barberlistData, startIndex, endIndex])
+
+  useEffect(() => {
+    const totalPages = Math.ceil(barberlistData.length / rowsPerPage)
+    setTotalPages(totalPages)
+    setStartIndex((page - 1) * rowsPerPage)
+    setEndIndex(page * rowsPerPage)
+  }, [rowsPerPage, page, barberlistData])
+
+  useEffect(() => {
+    setBarberPaginationData(barberlistData.slice(startIndex, endIndex))
+  }, [barberlistData])
+
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  }
+
+  const sortFunction = (columnKey) => {
+    setSortOrder((prev) => (sortColumn === columnKey && prev === 'asc' ? 'desc' : 'asc'));
+    setSortColumn(columnKey);
+  };
+
+  useEffect(() => {
+    if (!sortColumn) return;
+
+    const sortedList = [...barberlistData].sort((a, b) => {
+      const valueA = a[sortColumn];
+      const valueB = b[sortColumn];
+
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        return sortOrder === "asc"
+          ? valueA.localeCompare(valueB)
+          : valueB.localeCompare(valueA);
+      } else {
+        return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+      }
+    });
+
+    setBarberlistData(sortedList);
+    // setPage(1); 
+  }, [sortColumn, sortOrder]);
+
+  const [selectOpen, setSelectOpen] = useState(false)
+
+  const [mobileSettingIndex, setMobileSettingIndex] = useState("")
+
+  const queuehistoryhandler = (item) => {
+    localStorage.setItem("QueueHistoryBarber", JSON.stringify({ ...item, barber: true }))
+    navigate("/admin-quehistory")
+  }
+
+  const appointmenthistoryhandler = (item) => {
+    localStorage.setItem("AppointmentHistoryBarber", JSON.stringify({ ...item, barber: true }))
+    navigate("/admin-appointmenthistory")
+  }
 
   return (
-    <div className={`${style.admin_barber_wrapper} ${darkmodeOn && style.dark}`}>
+    <section className={`${style.section}`}>
       <div>
-        <p>Barber List</p>
+        <h2>Barber List</h2>
         <div>
-          <button className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
+
+          <button
+            className={`${style.barber_send_btn} ${darkmodeOn && style.dark}`}
+            onClick={checkAllBarbersHandler}
+            title='Select all barbers'
+          ><CheckAllIcon /></button>
+
+          <button
             onClick={sendEmailNavigate}
             title='Email'
             disabled={salonId === 0}
             style={{
               cursor: salonId === 0 ? "not-allowed" : "cursor"
             }}
-          >
-            <div><EmailIcon /></div>
-          </button>
+          ><EmailIcon /></button>
+
 
           <Modal
             open={openBarberEmail}
@@ -406,10 +510,7 @@ const BarberList = () => {
               cursor: salonId === 0 ? "not-allowed" : "cursor"
             }}
             title='Message'
-          >
-            <div><MessageIcon /></div>
-          </button>
-
+          ><MessageIcon /></button>
 
           <Modal
             open={openBarberMessage}
@@ -463,105 +564,341 @@ const BarberList = () => {
             </div>
           </Modal>
 
-          <button onClick={createbarberClicked} className={`${style.create_barber_btn}`}
+          <button
             disabled={salonId === 0}
             style={{
               cursor: salonId === 0 ? "not-allowed" : "cursor"
             }}
-          >
-            <p>Create</p>
-            <div>+</div>
-          </button>
+
+            onClick={() => navigate("/admin-barber/createbarber")}>Create</button>
         </div>
       </div>
 
-      <div className={`${style.admin_barber_content_wrapper} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.list_container}`}>
+
         {
           getAdminBarberListLoading ? (
-            <div className={style.admin_barber_content_body}>
-              <Skeleton count={6} height={"6rem"} style={{ marginBottom: "1rem" }} 
-              baseColor={darkmodeOn ? "var(--dark-loader-bg-color)" : "var(--light-loader-bg-color)"}
-              highlightColor={darkmodeOn ? "var(--dark-loader-highlight-color)" : "var(--light-loader-highlight-color)"} />
+            <div className={`${style.list_body_container_loader}`}>
+              <Skeleton
+                count={6}
+                height={"6.5rem"}
+                baseColor={"var(--loader-bg-color)"}
+                highlightColor={"var(--loader-highlight-color)"}
+                style={{ marginBottom: "1rem" }} />
             </div>
-          ) : getAdminBarberListResolve && BarberList?.length > 0 ? (
-            <div className={`${style.admin_barber_content_body} ${darkmodeOn && style.dark}`}>
-              <div>
-                <div>
-                  <input
-                    type="checkbox"
-                    onChange={checkAllBarbersHandler}
-                    checked={checkAllBarbers}
-                  />
-                </div>
-                <p>Name</p>
-                <p>Email</p>
-                <div><p>isOnline</p></div>
-                <div><p>isClockIn</p></div>
-                <div><p>isApprove</p></div>
-                <div><p>Edit</p></div>
-                {/* <p>Delete</p> */}
+          ) : getAdminBarberListResolve && BarberList.length > 0 ? (
+            <div className={`${style.list_body_container}`}>
+
+              <div className={`${style.headRow}`}>
+
+                {
+                  headRows.map((item, index) => {
+                    return (
+                      <div key={item.id}>
+                        {
+                          item.key === "" && index === 0 ? (
+                            <input
+                              type="checkbox"
+                              onChange={checkAllBarbersHandler}
+                              checked={checkAllBarbers}
+                            />
+                          ) : (
+                            <button
+                              className={`${item.key === "name" ? style.name_head_btn : ""}`}
+                              onClick={() => sortFunction(item.key)}>
+                              {item.key === "name" ? (
+                                <>
+                                  <span></span>
+                                  {item.heading}
+                                </>
+                              ) : (
+                                item.heading
+                              )}
+
+                              <span>{item.key && (sortColumn === item.key ? (sortOrder === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : <SortUpDownArrowIcon />)}</span>
+                            </button>
+                          )
+                        }
+
+                      </div>
+                    )
+                  })
+                }
               </div>
 
-              {BarberList?.map((b, index) => (
-                <div className={style.admin_barber_content_body_item}
-                  key={b._id}
-                  style={{
-                    borderBottom: BarberList?.length - 1 === index && "none"
-                  }}
-                >
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={checkedBarbers[b._id] || false}
-                      onChange={() => barberEmailCheckedHandler(b)}
-                    />
+              {
+                barberPaginationData.map((item, index) => {
+                  return (
+                    <div key={item._id} style={{ borderBottom: (index === endIndex - 1) || (index === barberPaginationData.length - 1) ? null : "0.1rem solid var(--border-secondary)" }}>
+                      <div>
+                        <input
+                          type="checkbox"
+                          checked={checkedBarbers[item._id] || false}
+                          onChange={() => barberEmailCheckedHandler(item)}
+                        />
+                        {console.log(checkedBarbers[item._id])}
+                      </div>
+                      <div>
+                        <div>
+                          <div><img src={item.profile?.[0]?.url} alt="" /></div>
+                          <p>{item.name}</p>
+                        </div>
+                      </div>
+                      <div><p>{item.email}</p></div>
+
+                      <div>
+                        <button
+                          onClick={() => toggleHandler(item)}
+                          style={{
+                            backgroundColor: checkMap?.get(`${item.salonId}-${item.barberId}`) ? "#052E16" : "#450a0a"
+                          }}
+                        >{checkMap?.get(`${item.salonId}-${item.barberId}`) ? "Online" : "Offline"}</button>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={() => toggleClockHandler(item)}
+                          style={{
+                            backgroundColor: checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? "#052E16" : "#450a0a"
+                          }}
+                        >{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? "Clock-In" : "Clock-Out"}</button>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={() => approveHandler(item)}
+                          disabled={adminApproveBarberLoading ? true : false}
+                          style={{
+                            backgroundColor: approveBarberMap?.get(`${item.salonId}-${item.email}`) ? "#052E16" : "#450a0a"
+                          }}>{approveBarberMap?.get(`${item.salonId}-${item.email}`) ? "Approved" : "Approve"}
+                        </button>
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            position: settingsIndex === index ? "relative" : "initial",
+                            backgroundColor: settingsIndex === index ? "var(--btn-primary-hover)" : null,
+                            borderRadius: settingsIndex === index ? "var(--border-radius-primary)" : null,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSettingsIndex(index);
+                          }}>
+                          <SalonThreeDotsIcon />
+
+                          {
+                            settingsIndex === index && (
+                              <ClickAwayListener onClickAway={() => setSettingsIndex(null)}>
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    zIndex: settingsIndex === index ? 9999 : -100,
+                                  }}
+                                  className={`${style.settings_container}`}>
+                                  <button
+                                    onClick={() => editButtonClicked(item)}
+                                    disabled={approveBarberMap?.get(`${item.salonId}-${item.email}`) === false}
+                                    style={{
+                                      cursor: approveBarberMap?.get(`${item.salonId}-${item.email}`) === false ? "not-allowed" : "pointer"
+                                    }}
+                                  >Edit barber</button>
+
+                                  <button onClick={() => queuehistoryhandler(item)}>Queue History</button>
+                                  <button onClick={() => appointmenthistoryhandler(item)}>Appointment History</button>
+                                </div>
+
+                              </ClickAwayListener>)
+                          }
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                  )
+                })
+              }
+            </div>
+          ) : (
+            <div className={`${style.list_body_container_error}`}>
+              <p>No barbers available</p>
+            </div>
+          )
+        }
+
+        <div className={`${style.pagination_container}`}>
+          <div></div>
+          <div>
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handleChange}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "var(--text-primary)",
+                  fontSize: "1.4rem",
+                },
+                "& .Mui-selected": { backgroundColor: "var(--bg-secondary) !important", color: "var(--btn-text-color)" },
+              }}
+            />
+          </div>
+          <div>
+            <div>
+              <p>Rows Per Page</p>
+
+              <ClickAwayListener onClickAway={() => setSelectOpen(false)}>
+                <div className={`${style.select_container}`}>
+                  <div onClick={() => setSelectOpen((prev) => !prev)}>
+                    <input type="text" value={rowsPerPage} readOnly />
+                    <div><DropdownIcon /></div>
                   </div>
 
-                  <p>{b?.name.length > 18 ? b?.name.slice(0, 18) + "..." : b?.name}</p>
-                  <p>{b?.email.length > 18 ? b?.email.slice(0, 18) + "..." : b?.email}</p>
+                  {
+                    selectOpen ? (<ul>
+                      {
+                        [10, 20, 30, 50].map((item, index) => {
+                          return (
+                            <li key={item} onClick={() => {
+                              setPage(1)
+                              SetRowsPerPage(item)
+                              setSelectOpen(false)
+                            }}
+                              style={{
+                                background: item === rowsPerPage ? "var(--bg-secondary)" : null,
+                                color: item === rowsPerPage ? "var(--btn-text-color)" : null,
+                                borderBottom: index === [10, 20, 30, 50].length - 1 ? "none" : "0.1rem solid var(--border-secondary)"
+                              }}
+                            >{item}</li>
+                          )
+                        })
+                      }
 
-                  <div>
-                    <button
-                      onClick={() => toggleHandler(b)}
-                      className={checkMap?.get(`${b.salonId}-${b.barberId}`) ? style.barber_online_btn_active : style.barber_online_btn_inactive}
-                    >{checkMap?.get(`${b.salonId}-${b.barberId}`) ? "Online" : "Offline"}</button>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() => toggleClockHandler(b)}
-                      className={checkMapClock?.get(`${b.salonId}-${b.barberId}`) ? style.barber_clock_btn_active : style.barber_clock_btn_inactive}
-                    >{checkMapClock?.get(`${b.salonId}-${b.barberId}`) ? "Clock-In" : "Clock-Out"}</button>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() => approveHandler(b)}
-                      className={approveBarberMap?.get(`${b.salonId}-${b.email}`) ? style.barber_approve_btn_active : style.barber_approve_btn_inactive}
-                      disabled={adminApproveBarberLoading ? true : false}
-                    >{approveBarberMap?.get(`${b.salonId}-${b.email}`) ? "Approved" : "Approve"}</button>
-                  </div>
-
-                  <div><button onClick={() => editButtonClicked(b)}
-                    disabled={approveBarberMap?.get(`${b.salonId}-${b.email}`) === false}
-                    style={{
-                      cursor: approveBarberMap?.get(`${b.salonId}-${b.email}`) === false && "not-allowed"
-                    }}
-                  >Edit</button></div>
-                  {/* <div><button onClick={() => deleteButtonClicked(b)}>Delete</button></div> */}
-
+                    </ul>) : (null)
+                  }
                 </div>
-              ))}
+              </ClickAwayListener>
 
             </div>
-          ) : (<div className={`${style.barber_content_body_error} ${darkmodeOn && style.dark}`}>
-            <p>Barbers not available</p>
-          </div>)
-        }
+            <div>
+              <p>{startIndex} - {endIndex}{" "} of {totalPages}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-    </div>
+      {
+        getAdminBarberListLoading ? (
+          <div className={style.list_container_mobile_loader}>
+            <Skeleton
+              count={6}
+              height={"19.5rem"}
+              baseColor={"var(--loader-bg-color)"}
+              highlightColor={"var(--loader-highlight-color)"}
+              style={{ marginBottom: "1rem" }} />
+          </div>
+        ) : getAdminBarberListResolve && BarberList.length > 0 ? (
+          <div className={style.list_mobile_container}>
+
+            {
+              BarberList?.map((item, index) => {
+                return (
+                  <div
+                    style={{
+                      border: checkedBarbers[item._id] ? "0.1rem solid var(--bg-secondary)" : "0.1rem solid var(--border-secondary)"
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      barberEmailCheckedHandler(item)
+                    }}
+
+                    className={style.list_mobile_item} key={item._id} >
+                    <div>
+                      <img src={item.profile?.[0]?.url} alt="" width={50} height={50} loading='lazy' />
+                      <div>
+                        <p>{item.name}</p>
+                        <p>{item.email}</p>
+                        {/* <p>+{item.mobileCountryCode}{" "}{item.mobileNumber}</p> */}
+                        <p>{item?.mobileCountryCode && item?.mobileNumber ? `+${item.mobileCountryCode} ${item.mobileNumber}` : "Not Provided"}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleHandler(item)
+                          }}
+                        >{checkMap?.get(`${item.salonId}-${item.barberId}`) ? <OnlineIcon color={"1ADB6A"} /> : <OfflineIcon color={"FC3232"} />}</button>
+                        <p>{checkMap?.get(`${item.salonId}-${item.barberId}`) ? "Online" : "Offline"}</p>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            approveHandler(item)
+                          }}
+                          disabled={adminApproveBarberLoading ? true : false}
+                        >{approveBarberMap?.get(`${item.salonId}-${item.email}`) ? <CheckIcon color={"1ADB6A"} /> : <CloseIcon color={"FC3232"} />}</button>
+                        <p>{approveBarberMap?.get(`${item.salonId}-${item.email}`) ? "Approved" : "Approve"}</p>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleClockHandler(item)
+                          }}
+                        >{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? <BarberClockIn color={"1ADB6A"} /> : <BarberClockOut color={"FC3232"} />}</button>
+                        <p>{checkMapClock?.get(`${item.salonId}-${item.barberId}`) ? "Clock-In" : "Clock-Out"}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMobileSettingIndex(index)
+                      }}><SalonThreeDotsIcon /></button>
+
+                    {
+                      mobileSettingIndex === index ? (
+                        <ClickAwayListener onClickAway={() => setMobileSettingIndex("")}>
+                          <ul>
+                            <li>
+                              <button
+                                onClick={() => editButtonClicked(item)}
+                                disabled={approveBarberMap?.get(`${item.salonId}-${item.email}`) === false}
+                                style={{
+                                  cursor: approveBarberMap?.get(`${item.salonId}-${item.email}`) === false ? "not-allowed" : "pointer"
+                                }}
+                              >Edit barber</button>
+                            </li>
+                            <li>
+                              <button onClick={() => queuehistoryhandler(item)}>Queue History</button>
+                            </li>
+                            <li>
+                              <button onClick={() => appointmenthistoryhandler(item)}>Appointment History</button>
+                            </li>
+                          </ul>
+                        </ClickAwayListener>
+                      ) : null
+                    }
+
+                  </div>
+                )
+              })
+            }
+
+          </div>
+        ) : (
+          <div className={style.list_container_mobile_error}>
+            <p>No barber list available</p>
+          </div>
+        )
+      }
+
+    </section >
   )
 }
 
 export default BarberList
+

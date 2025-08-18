@@ -41,11 +41,13 @@ const BarberCustomer = React.lazy(() => import("./Barber/Customers/Customers"))
 const BarberQueueList = React.lazy(() => import("./Barber/Queue/Queue"))
 const BarberQueHistory = React.lazy(() => import("./Barber/QueHistory/QueHistory"))
 const AdminQueHistory = React.lazy(() => import("./Admin/QueHistory/QueHistory"))
+const AdminAppointmentHistory = React.lazy(() => import("./Admin/Appointment/AppointmentHistory/AppointmentHistory"))
 const AppointmentCalender = React.lazy(() => import("./Admin/Appointment/AppointCalender/AppointmentCalender"))
 const AppointmentList = React.lazy(() => import("./Admin/Appointment/AppointmentList/AppointmentList"))
 const AdminBookAppointments = React.lazy(() => import("./Admin/BookAppointment/CreateAppointment/CreateAppointment"))
 const AdminBookEditAppointments = React.lazy(() => import("./Admin/BookAppointment/EditAppointment/EditAppointment"))
 const AdminSubscription = React.lazy(() => import("./Admin/Subscription/Subscription"))
+const BarberAppointmentHistory = React.lazy(() => import("./Barber/AppointmentHistory/AppointmentHistory"))
 
 const BarberAppointment = React.lazy(() => import("./Barber/Appointment/Appointment"))
 const PaymentStatus = React.lazy(() => import("./Admin/Payment/PaymentStatus/PaymentStatus"))
@@ -62,6 +64,7 @@ import { darkmodeSelector } from './Redux/Admin/Reducers/AdminHeaderReducer';
 import ErrorPage from './ErrorPage/ErrorPage';
 import { ExclamationIcon, WifiIcon } from './icons';
 import Dummy from './Admin/Dummy';
+import { SocketProvider } from './context/SocketContext';
 // import Appointment from './Admin/Appointment/Appointment';
 
 const MobileCus = React.lazy(() => import("../src/mobileCus/MobileCust"))
@@ -122,6 +125,7 @@ const App = () => {
     );
   };
 
+
   const ErrorFallback = ({ error }) => {
     return (
       <main className={`error_boundary_container ${darkmodeOn && "dark"}`}>
@@ -138,8 +142,8 @@ const App = () => {
     // This sets globally 
     const styleElement = document.createElement("style");
     styleElement.textContent = `
-      p, h1, h2, h3, h4, h5, i, input, textarea, input::placeholder, textarea::placeholder, select {
-        color: ${darkmodeOn ? "var(--dark-color-4)" : "var(--light-color-2)"};
+      p, h1, h2, h3, h4, h5, i, input, textarea, input::placeholder, textarea::placeholder, select, label {
+        color: ${darkmodeOn ? "var(--dark-color-4)" : "var(--text-primary)"};
       }
     `;
     document.head.appendChild(styleElement);
@@ -150,32 +154,25 @@ const App = () => {
   }, [darkmodeOn]);
 
 
+  const currentTheme = useSelector(state => state.ThemeSelector)
+
   useEffect(() => {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-    .react-calendar{
-    position: relative;
-    z-index: 10 !important;
-    background-color: ${darkmodeOn ? "var(--dark-color-3) !important" : "var(--light-color-4) !important"};
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"}; 
+    const body = document.querySelector("body")
+
+    if (currentTheme === "Dark") {
+      body.setAttribute("data-theme", "dark")
+    } else {
+      body.setAttribute("data-theme", "light")
     }
+  }, [currentTheme])
 
-    .react-calendar button {
-    color: ${darkmodeOn ? "var(--light-color-4) !important" : "var(--light-color-2) !important"}
-    }
 
-    .react-calendar__tile:disabled,
-    .react-calendar__navigation button:disabled {
-    background-color: ${darkmodeOn ? "var(--dark-color-2) !important" : "var(--light-color-3) !important"}
-    }
-  `;
-    document.head.appendChild(styleElement);
-
-    return () => {
-      document.head.removeChild(styleElement);
-    };
-  }, [darkmodeOn]);
-
+  // useEffect(() => {
+  //   document.documentElement.style.setProperty(
+  //     "--bg-secondary",
+  //     modecolors.color1
+  //   );
+  // }, [modecolors]);
 
   return (
     <>
@@ -198,8 +195,11 @@ const App = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
-              }}><Loader /></div>}>
+                // background: darkmodeOn ? "var(--dark-color-2)" : "var(--light-color-4)"
+                background: "var(--bg-primary)"
+              }}>
+              <Loader />
+            </div>}>
               <Routes>
 
                 {/* Admin Auth Screens */}
@@ -217,12 +217,12 @@ const App = () => {
                 {/* Admin Main Pages  */}
 
                 <Route element={<ProtectedAdminRoute />}>
-                  <Route element={isMobile ? <AdminMobileSidebar /> : <AdminSidebar />}>
+                  <Route element={isMobile ? <SocketProvider><AdminMobileSidebar /></SocketProvider> : <SocketProvider><AdminSidebar /></SocketProvider>}>
                     <Route
                       path="/admin-dashboard"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminDashboard />
+                          <SocketProvider><AdminDashboard /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -314,7 +314,7 @@ const App = () => {
                       path="/admin-queue"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <AdminQueue />
+                          <SocketProvider><AdminQueue /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -336,6 +336,16 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
+
+                    <Route
+                      path="/admin-appointmenthistory"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <AdminAppointmentHistory />
+                        </ErrorBoundary>
+                      }
+                    />
+
 
                     <Route
                       path="/admin-appointments-list"
@@ -390,7 +400,6 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
-
                   </Route>
                 </Route>
 
@@ -413,7 +422,7 @@ const App = () => {
                       path="/barber-dashboard"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberDashboard />
+                          <SocketProvider><BarberDashboard /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -446,7 +455,7 @@ const App = () => {
                       path="/barber-queue"
                       element={
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <BarberQueueList />
+                          <SocketProvider><BarberQueueList /></SocketProvider>
                         </ErrorBoundary>
                       }
                     />
@@ -468,6 +477,17 @@ const App = () => {
                         </ErrorBoundary>
                       }
                     />
+
+                    <Route
+                      path="/barber-apphistory"
+                      element={
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <BarberAppointmentHistory />
+                        </ErrorBoundary>
+                      }
+                    />
+
+
                   </Route>
                 </Route>
 

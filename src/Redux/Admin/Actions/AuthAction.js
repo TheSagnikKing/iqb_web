@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import api from "../../api/Api";
-import { ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_FAIL, ADMIN_GOOGLE_SIGNUP_REQ, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_EDIT_FAIL, ADMIN_SIGNUP_EDIT_REQ, ADMIN_SIGNUP_EDIT_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS } from "../Constants/constants";
+import { ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_FAIL, ADMIN_GOOGLE_SIGNUP_REQ, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_EDIT_FAIL, ADMIN_SIGNUP_EDIT_REQ, ADMIN_SIGNUP_EDIT_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS, GET_ALL_ADVERTISEMENT_SUCCESS } from "../Constants/constants";
 
 // export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
 //     try {
@@ -413,6 +413,19 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
         //     type: ADMIN_LOGOUT_SUCCESS,
         //     payload: data
         // })
+
+        dispatch({
+            type: GET_ALL_ADVERTISEMENT_SUCCESS,
+            payload: { advertisements: [] }
+        })
+
+        dispatch({
+            type: "ADMIN_SET_SALON",
+            payload: {
+                currentActiveSalon: "",
+                chooseSalonId: 0
+            }
+        })
 
         localStorage.setItem("userAdminLoggedIn", "")
         localStorage.setItem("userBarberLoggedIn", "")

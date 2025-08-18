@@ -3,16 +3,17 @@
     height: 100svh;
     display: grid;
     align-items: center;
+    background-color: var(--bg-primary);
 
     &>div {
         height: auto;
-        /* border: 1px solid var(--light-color-2); */
 
         &>div {
             font-size: 4rem;
             font-weight: bolder;
             text-align: center;
             margin-bottom: 2rem;
+            color: var(--text-primary);
         }
 
         &>p {
@@ -58,7 +59,7 @@
     }
 }
 
-.error_boundary_route_container{
+.error_boundary_route_container {
     height: 100svh;
     width: 100%;
     padding: 2rem;
@@ -83,12 +84,64 @@
 }
 
 .error_boundary_container.dark,
-.error_boundary_route_container.dark{
+.error_boundary_route_container.dark {
     background-color: var(--dark-color-2);
 
-    &>div{
-        &>div{
+    &>div {
+        &>div {
             color: var(--light-color-4);
+        }
+    }
+}
+
+
+.error_boundary_container {
+    height: calc(100svh - 6rem);
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>div {
+        text-align: center;
+
+        &>div {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            color: var(--text-primary);
+        }
+
+        &>p {
+            font-size: var(--font-tertiary);
+            color: var(--text-primary);
+        }
+    }
+}
+
+
+.error_boundary_route_container {
+    height: 100svh;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>div {
+        text-align: center;
+
+        &>div {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            color: var(--text-primary);
+        }
+
+        &>p {
+            font-size: var(--font-tertiary);
+            color: var(--text-primary);
         }
     }
 }

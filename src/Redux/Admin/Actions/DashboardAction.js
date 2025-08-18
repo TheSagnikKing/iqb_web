@@ -51,10 +51,10 @@ export const getAllQueueListAction = (salonId, signal) => async (dispatch) => {
 
         const { data } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`, { signal })
 
-        dispatch({
-            type: GET_ALL_QUEUELIST_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: GET_ALL_QUEUELIST_SUCCESS,
+        //     payload: data
+        // })
     } catch (error) {
 
         if (error?.response?.status === 500) {
@@ -147,17 +147,19 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
 
         const { data } = await api.post(`/api/salon/changeSalonOnlineStatus`, salonStatusdata)
 
-        dispatch({
-            type: SALON_ONLINE_STATUS_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: SALON_ONLINE_STATUS_SUCCESS,
+        //     payload: data
+        // })
 
-        const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
+        // window.location.reload()
 
-        dispatch({
-            type: GET_ADMIN_BARBERLIST_SUCCESS,
-            payload: barberlist
-        })
+        // const { data: barberlist } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonStatusdata?.salonId}`)
+
+        // dispatch({
+        //     type: GET_ADMIN_BARBERLIST_SUCCESS,
+        //     payload: barberlist
+        // })
     } catch (error) {
 
         if (error?.response?.status === 500) {
@@ -173,6 +175,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
                     borderRadius: '0.3rem',
                     background: '#333',
                     color: '#fff',
+                    zIndex: 9999
                 },
             });
 
@@ -193,6 +196,7 @@ export const adminSalonStatusAction = (salonStatusdata, setTogglecheck, newCheck
                 borderRadius: '0.3rem',
                 background: '#333',
                 color: '#fff',
+                zIndex: 9999
             },
         });
     }

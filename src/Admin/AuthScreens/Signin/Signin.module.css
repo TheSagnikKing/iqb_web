@@ -1,25 +1,21 @@
-.admin_signin_container {
-    height: 100svh;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-.admin_signin_left {
+.section {
     height: 100svh;
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-right: 0.1rem solid rgba(0, 0, 0, 0.2);
-    display: none;
 
-    &>img {
-        width: 90%;
-        height: 60%;
+    /* &>img {
+        width: 50%;
+        height: inherit;
+    } */
+
+    &>div:nth-child(1) {
+        width: 50%;
+        height: inherit;
+        background: linear-gradient(var(--linear-color-1), var(--linear-color-2));
     }
-
 }
+
 
 .admin_signin_right {
     height: 100svh;
@@ -27,41 +23,51 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 100%;
+    flex: 1;
+    background-color: var(--bg-primary);
+    overflow: auto;
 
     &>div:nth-child(1) {
-        width: 30%;
+        width: 50%;
+        max-width: 40rem;
         height: auto;
         display: flex;
         flex-direction: column;
-        gap: 2.5rem;
+        gap: 1.5rem;
+
+        &>h2 {
+            color: var(--text-primary);
+            line-height: inherit;
+            font-family: "AirbnbCereal_Medium";
+        }
 
 
         &>p {
-            font-size: var(--font-size-1);
-            font-weight: 600;
-        }
-
-        &>p:nth-child(2) {
-            font-size: var(--font-size-3);
-            font-weight: 500;
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         &>div {
             &>input {
-                height: 4rem;
                 width: 100%;
-                background-color: var(--light-color-3);
-                font-size: var(--font-size-3);
-                font-weight: 500;
-                border: none;
-                outline: none;
+                height: 3.5rem;
                 padding-inline: 1rem;
-                border-radius: var(--input-border-radius);
-                -webkit-border-radius: var(--input-border-radius);
-                -moz-border-radius: var(--input-border-radius);
-                -ms-border-radius: var(--input-border-radius);
-                -o-border-radius: var(--input-border-radius);
+                font-size: 1.4rem;
+                border: 0.1rem solid var(--border-secondary);
+                border-radius: var(--border-radius-primary);
+                -webkit-border-radius: var(--border-radius-primary);
+                -moz-border-radius: var(--border-radius-primary);
+                -ms-border-radius: var(--border-radius-primary);
+                -o-border-radius: var(--border-radius-primary);
+                background-color: var(--input-bg-color);
+                color: var(--text-primary);
+                outline: none;
+
+                &::placeholder {
+                    color: var(--text-secondary);
+                    letter-spacing: 0.01rem;
+                }
             }
         }
     }
@@ -72,29 +78,31 @@
     position: absolute;
     top: 3rem;
     left: 3rem;
-    padding: 0.6em 0.6em;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
+    background: var(--bg-hover-primary);
+    border: 0.1rem solid var(--border-secondary);
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    transition: background-color 0.2s ease-in;
+    -webkit-transition: background-color 0.2s ease-in;
+    -moz-transition: background-color 0.2s ease-in;
+    -ms-transition: background-color 0.2s ease-in;
+    -o-transition: background-color 0.2s ease-in;
     cursor: pointer;
-    border: 0.1rem solid var(--color-2);
-    color: var(--color-2);
-    background-color: var(--color-3);
-    font-size: var(--font-size-3);
-    transition: var(--btn-transition);
-    -webkit-transition: var(--btn-transition);
-    -moz-transition: var(--btn-transition);
-    -ms-transition: var(--btn-transition);
-    -o-transition: var(--btn-transition);
+    outline: none;
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:hover {
-        background-color: var(--color-2);
-        color: var(--light-color-4);
+        background-color: var(--btn-primary-hover);
+        border: none;
     }
 }
 
@@ -103,90 +111,92 @@ iframe {
 }
 
 .password_container {
-    height: 4rem;
     width: 100%;
-    background-color: var(--light-color-3);
-    font-size: var(--font-size-3);
-    font-weight: 500;
-    border: none;
-    outline: none;
-    border-radius: var(--input-border-radius);
-    -webkit-border-radius: var(--input-border-radius);
-    -moz-border-radius: var(--input-border-radius);
-    -ms-border-radius: var(--input-border-radius);
-    -o-border-radius: var(--input-border-radius);
-    position: relative;
-}
-
-.password_container>div {
-    width: 4rem;
-    height: 4rem;
+    height: 3.5rem;
+    border: 0.1rem solid var(--border-secondary);
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
+    background-color: var(--input-bg-color);
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: var(--font-size-3);
-    position: absolute;
-    right: 0rem;
-    top: 0rem;
+    position: relative;
+
+    &>input {
+        width: calc(100% - 3.5rem);
+        height: inherit;
+        padding-inline: 1rem;
+        font-size: 1.4rem;
+        background: transparent;
+        color: var(--text-primary);
+        border: none;
+        outline: none;
+
+        &::placeholder {
+            color: var(--text-secondary);
+            letter-spacing: 0.01rem;
+        }
+    }
+
+    &>div {
+        height: 3.5rem;
+        width: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        font-family: 'AirbnbCereal_Medium';
+    }
 }
 
-.password_container>input {
-    width: calc(100% - 4rem);
-    height: 100%;
-    border: none;
-    outline: none;
-    padding-inline: 1rem;
-    background: transparent;
-    border-top-left-radius: var(--input-border-radius);
-    border-bottom-left-radius: var(--input-border-radius);
-    font-size: var(--font-size-3);
-    font-weight: 500;
-}
-
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(5) {
+.section>div:nth-child(2)>div>div:nth-child(5) {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 
     &>p {
-        font-size: var(--font-size-2);
-        cursor: pointer;
-        font-weight: 500;
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        font-family: 'AirbnbCereal_Medium';
     }
 }
 
 
 .signin_btn {
-    height: 4rem;
-    width: 100%;
-    border: 0.1rem solid var(--color-2);
-    color: var(--color-2);
-    background-color: var(--color-3);
+    height: 3.5rem;
+    padding-inline: 1.5rem;
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
+    background-color: var(--bg-secondary);
+    color: var(--btn-text-color);
+    border: none;
     outline: none;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--input-border-radius);
-    -webkit-border-radius: var(--input-border-radius);
-    -moz-border-radius: var(--input-border-radius);
-    -ms-border-radius: var(--input-border-radius);
-    -o-border-radius: var(--input-border-radius);
-    transition: var(--btn-transition);
-    -webkit-transition: var(--btn-transition);
-    -moz-transition: var(--btn-transition);
-    -ms-transition: var(--btn-transition);
-    -o-transition: var(--btn-transition);
-    font-size: var(--font-size-3);
+    transition: var(--common-btn-transition);
+    -webkit-transition: var(--common-btn-transition);
+    -moz-transition: var(--common-btn-transition);
+    -ms-transition: var(--common-btn-transition);
+    -o-transition: var(--common-btn-transition);
+    font-size: 1.4rem;
 
     &:hover {
-        background-color: var(--color-2);
-        color: var(--light-color-4);
+        background-color: var(--bg-secondary-hover);
     }
 }
 
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7) {
+.section>div:nth-child(2)>div>p:nth-child(7) {
+    font-size: var(--font-size-3);
+    text-align: center;
+    margin-bottom: -1rem;
+}
+
+.section>div:nth-child(2)>div>div:nth-child(8) {
     height: 4rem;
     width: 100%;
     display: flex;
@@ -196,24 +206,18 @@ iframe {
     gap: 1rem;
 }
 
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>div {
-    height: 0.1rem;
+.section>div:nth-child(2)>div>div:nth-child(8)>div {
+    height: 0.2rem;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    margin-top: -1rem;
+    background-color: var(--border-secondary);
 }
 
-.admin_signin_container>div:nth-child(2)>div>div:nth-child(7)>p {
-    font-size: var(--font-size-3);
-    font-weight: 500;
+.section>div:nth-child(2)>div>div:nth-child(8)>p {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    font-family: 'AirbnbCereal_Medium';
 }
 
-
-.admin_signin_container>div:nth-child(2)>div>p:nth-child(9) {
-    font-size: var(--font-size-3);
-    text-align: center;
-    margin-top: 2rem;
-}
 
 .error_message {
     font-size: 1.2rem !important;
@@ -223,25 +227,25 @@ iframe {
 }
 
 .google_btn {
-    height: 4rem;
+    height: 3.5rem;
     width: 100%;
     display: grid;
     place-items: center;
     padding-inline: 1rem;
-    border: 0.1rem solid rgba(0, 0, 0, 0.2);
-    background-color: var(--light-color-4);
+    border: 0.1rem solid var(--border-secondary);
+    background-color: var(--bg-hover-primary);
     cursor: pointer;
     outline: none;
-    border-radius: var(--input-border-radius);
-    -webkit-border-radius: var(--input-border-radius);
-    -moz-border-radius: var(--input-border-radius);
-    -ms-border-radius: var(--input-border-radius);
-    -o-border-radius: var(--input-border-radius);
-    transition: var(--btn-transition);
-    -webkit-transition: var(--btn-transition);
-    -moz-transition: var(--btn-transition);
-    -ms-transition: var(--btn-transition);
-    -o-transition: var(--btn-transition);
+    border-radius: var(--border-radius-primary);
+    -webkit-border-radius: var(--border-radius-primary);
+    -moz-border-radius: var(--border-radius-primary);
+    -ms-border-radius: var(--border-radius-primary);
+    -o-border-radius: var(--border-radius-primary);
+    transition: var(--common-btn-transition);
+    -webkit-transition: var(--common-btn-transition);
+    -moz-transition: var(--common-btn-transition);
+    -ms-transition: var(--common-btn-transition);
+    -o-transition: var(--common-btn-transition);
     margin-top: -1rem;
 
     &>div {
@@ -250,8 +254,8 @@ iframe {
         gap: 2rem;
 
         &>div {
-            width: 2rem;
-            height: 2rem;
+            width: 1.5rem;
+            height: 1.5rem;
 
             &>img {
                 width: 100%;
@@ -260,59 +264,18 @@ iframe {
         }
 
         &>p {
-            font-size: var(--font-size-3);
-        }
-    }
-
-    &:hover {
-        background-color: var(--light-color-3);
-    }
-}
-
-/* dark mode on */
-
-.admin_signin_container.dark {
-    background-color: var(--dark-color-2);
-}
-
-.admin_signin_right.dark {
-    &>div:nth-child(1) {
-        &>div {
-            &>input {
-                background-color: var(--dark-color-3);
-            }
+            font-size: 1.4rem;
+            color: var(--text-primary);
         }
     }
 }
 
-.password_container.dark {
-    background-color: var(--dark-color-3);
-
-    &>div {
-        color: var(--light-color-4);
-    }
-}
-
-.admin_signin_container.dark>div:nth-child(2)>div>div:nth-child(7)>div {
-    background-color: rgba(255, 255, 255, 0.6);
-}
-
-.google_btn.dark {
-    background-color: var(--dark-color-1);
-    border: 0.1rem solid rgba(255, 255, 255, 0.2);
-
-    &:hover {
-        background-color: var(--dark-color-3);
-    }
-}
 
 @media screen and (min-width:0px) and (max-width:430px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
+    .section {
+        &>div:nth-child(1) {
+            display: none;
+        }
     }
 
     .admin_signin_right {
@@ -320,52 +283,59 @@ iframe {
             width: 85vw;
         }
     }
-
-    .homeicon {
-        top: 3svh;
-        left: 5vw;
-    }
 }
 
 @media screen and (min-width:431px) and (max-width:768px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
-    }
-
-    .admin_signin_right {
+    .section {
         &>div:nth-child(1) {
-            width: 65vw;
-        }
-    }
-
-
-}
-
-@media screen and (min-width:769px) and (max-width:1000px) {
-    .admin_signin_container {
-        grid-template-columns: 1fr;
-    }
-
-    .admin_signin_left {
-        display: none;
-    }
-
-    .admin_signin_right {
-        &>div:nth-child(1) {
-            width: 45vw;
+            display: none;
         }
     }
 }
 
-@media screen and (min-width:1001px) and (max-width:1250px) {
-
+@media screen and (min-width:769px) and (max-width:1140px) {
     .admin_signin_right {
         &>div:nth-child(1) {
-            width: 30%;
+            width: 75%;
+        }
+    }
+}
+
+@supports (-webkit-hyphens: none) {
+    .admin_signin_right {
+        &>div:nth-child(1) {
+            &>div {
+
+                &>input {
+                    font-size: 1.6rem;
+                    transform: scale(0.875);
+                    transform-origin: left top;
+                    width: calc(100% / 0.875);
+                    height: calc(3.5rem/ 0.875);
+                    padding-inline: calc(1rem / 0.875);
+                    border-radius: calc(var(--border-radius-primary) / 0.875);
+                    border: calc(0.1rem / 0.875) solid var(--border-secondary);
+                }
+            }
+        }
+    }
+
+    .password_container {
+        transform: scale(0.875);
+        width: calc(100% / 0.875);
+        height: calc(3.5rem/ 0.875);
+        transform-origin: left top;
+        border-radius: calc(var(--border-radius-primary) / 0.875);
+        border: calc(0.1rem / 0.875) solid var(--border-secondary);
+
+        &>input {
+            font-size: 1.6rem;
+        }
+
+        &>div {
+            font-size: 1.6rem;
+            height: calc(3.5rem/ 0.875);
+            width: calc(3.5rem/ 0.875);
         }
     }
 }

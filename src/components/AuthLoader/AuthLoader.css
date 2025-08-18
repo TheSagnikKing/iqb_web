@@ -26,7 +26,7 @@
   .jimu-primary-loading:before,
   .jimu-primary-loading:after,
   .jimu-primary-loading {
-    background: #076fe5;
+    background: var(--bg-secondary);
     -webkit-animation: loading-keys-app-loading 0.8s infinite ease-in-out;
     animation: loading-keys-app-loading 0.8s infinite ease-in-out;
     width: 13.6px;
@@ -49,13 +49,13 @@
     80%,
     100% {
       opacity: .75;
-      box-shadow: 0 0 #076fe5;
+      box-shadow: 0 0 var(--bg-secondary);
       height: 32px;
     }
   
     40% {
       opacity: 1;
-      box-shadow: 0 -8px #076fe5;
+      box-shadow: 0 -8px var(--bg-secondary);
       height: 40px;
     }
   }
@@ -66,17 +66,17 @@
     80%,
     100% {
       opacity: .75;
-      box-shadow: 0 0 #076fe5;
+      box-shadow: 0 0 var(--bg-secondary);
       height: 32px;
     }
   
     40% {
       opacity: 1;
-      box-shadow: 0 -8px #076fe5;
+      box-shadow: 0 -8px var(--bg-secondary);
       height: 40px;
     }
   }
 
   .authloader.dark{
-    background-color: var(--dark-color-2);
+    background-color: var(--bg-primary);
   }

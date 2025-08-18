@@ -119,20 +119,19 @@ const Signup = () => {
   });
 
   return (
-    <main className={`${style.barber_signup_container} ${darkmodeOn && style.dark}`}>
-      <div className={style.barber_signup_left}>
-        <img src="./signup_un.png" alt="barber_signup" />
-      </div>
+    <main className={`${style.section} ${darkmodeOn && style.dark}`}>
+      {/* <img src="https://dashboard.shadcnuikit.com/images/cover.png" alt="admin_Signin" /> */}
+      <div></div>
 
-      <div className={`${style.barber_signup_right} ${darkmodeOn && style.dark}`}>
+      <div className={`${style.barber_signin_right} ${darkmodeOn && style.dark}`}>
         <div>
-          <p>Sign Up to your Barber Account</p>
-          <p>Welcome back Barber! please enter your details</p>
+          <h2>Register, Barber</h2>
+          <p>Please create new barber account</p>
 
           <div>
             <input
               type="email"
-              placeholder='Enter Your Email ID'
+              placeholder='Enter your email'
               value={email}
               onChange={(e) => {
                 setEmailError("")
@@ -151,7 +150,7 @@ const Signup = () => {
             >
               <input
                 type={visibleeye ? "text" : "password"}
-                placeholder='Password'
+                placeholder='Enter your password'
                 value={password}
                 onChange={(e) => {
                   setPasswordError("")
@@ -164,6 +163,8 @@ const Signup = () => {
             <p className={style.error_message}>{passwordError}</p>
           </div>
 
+          <p></p>
+
           {
             BarberSignupLoading ? <button style={{
               display: "grid",
@@ -171,7 +172,7 @@ const Signup = () => {
             }} className={style.signup_btn}><ButtonLoader /></button> : <button className={style.signup_btn} onClick={signupClicked}>Signup</button>
           }
 
-          <p></p>
+          <p>Already a member ? <Link to="/barbersignin" style={{ color: "var(--text-primary)", fontWeight: "bolder", textDecoration: "none" }}>Log In</Link></p>
 
           <div>
             <div />
@@ -186,7 +187,8 @@ const Signup = () => {
             </div>
           </button>
 
-          <p>Already a member ? <Link to="/barbersignin">Log In</Link></p>
+
+
         </div>
         <div className={style.homeicon} onClick={() => navigate("/")}><HomeIcon /></div>
       </div>

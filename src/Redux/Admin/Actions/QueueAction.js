@@ -74,7 +74,7 @@ export const adminServeQueueAction = (barberqueuedata, salonId, setChoosebarberm
     }
 }
 
-export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) => {
+export const adminCancelQueueAction = (canceldata, salonId, setChoosebarbermodalopen, setQueueItem, setChoosebarber, setChoosebarberemail) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_CANCEL_QUEUE_REQ })
 
@@ -94,6 +94,14 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
                 color: '#fff',
             },
         });
+
+        setChoosebarbermodalopen({
+            open: false,
+            data: {}
+        })
+        setQueueItem({})
+        setChoosebarber("")
+        setChoosebarberemail("")
 
         const { data: queuelistdata } = await api.get(`/api/queue/getQListBySalonId?salonId=${salonId}`)
 
@@ -140,12 +148,16 @@ export const adminCancelQueueAction = (canceldata, salonId) => async (dispatch) 
     }
 }
 
-export const getAdminQueueListHistoryAction = (salonId, signal) => async (dispatch) => {
+export const getAdminQueueListHistoryAction = (salonId, startDate, endDate, barberId, customerEmail, signal) => async (dispatch) => {
     try {
         dispatch({ type: GET_QUEUE_HISTORY_REQ })
 
         const { data } = await api.post("/api/queueHistory/getQueueHistoryBySalonId", {
             salonId,
+            from: startDate,
+            to: endDate,
+            barberId: barberId,
+            customerEmail: customerEmail
         }, { signal })
 
         dispatch({

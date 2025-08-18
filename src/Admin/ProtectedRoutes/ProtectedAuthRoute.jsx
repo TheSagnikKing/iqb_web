@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const ProtectedAuthRoute = () => {
-
+  
     const AdminLoggedin = localStorage.getItem("userAdminLoggedIn")
     const BarberLoggedin = localStorage.getItem("userBarberLoggedIn")
 
